@@ -1,0 +1,17 @@
+# Netlify deployment configuration for knobe.org
+# No build step — pure static HTML served from the site/ directory.
+
+[build]
+  publish = "site"
+
+# Serve sealed KNOBE files as readable plain text in the browser.
+# Without this, unknown extensions can be served as application/octet-stream.
+[[headers]]
+  for = "/*.knobe.md"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+
+[[headers]]
+  for = "/test-vectors/*.knobe.md"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
