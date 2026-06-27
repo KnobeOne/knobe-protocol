@@ -237,6 +237,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <a href="#format">Format</a>
       <a href="#problem">Problem</a>
       <a href="#carry">What must not get lost</a>
+      <a href="lens.html">Lens</a>
       <a href="#verify">Verify</a>
       <a href="#sits">Related work</a>
       <a href="#downloads">Downloads</a>
@@ -362,7 +363,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <div class="shead">Proof</div>
     <h2>Verify any KNOBE</h2>
     <p>You do not need to understand the code to verify a KNOBE. The verifier reports a small set of human-readable states, and integrity is not truth — a match proves the sealed record has not changed, not that its contents are correct.</p>
-    <p><code>lens.py</code> is the reference verifier: a single standard-library Python file with no external dependencies. It runs locally — it does not upload your file, call an AI model, or contact a server. It extracts the payload, computes the canonical hash, and reports an integrity <em>status</em> and a <em>conformance</em> level. No server. No AI. No certificate authority. Pure math. It is the engine for builders and auditors today; a non-technical Lens experience, where you drop a file in and verify it in your browser, is coming soon.</p>
+    <p><code>lens.py</code> is the reference verifier: a single standard-library Python file with no external dependencies. It runs locally — it does not upload your file, call an AI model, or contact a server. It extracts the payload, computes the canonical hash, and reports an integrity <em>status</em> and a <em>conformance</em> level. No server. No AI. No certificate authority. Pure math. It is the engine for builders and auditors today. If you prefer to verify without a terminal, <a href="lens.html" class="inline">KNOBE Lens</a> runs the same algorithm in your browser — drag in a file and get a result locally, with no upload and no server.</p>
     <button class="runbtn" id="runVerify" aria-label="Run the verification demo">▸ Run verification</button>
     <div class="term copywrap" id="verifyTerm" role="group" aria-label="Verifier output for interview-04.knobe.md">
       <button class="copybtn" data-copy="python3 lens.py interview-04.knobe.md">copy cmd</button>
