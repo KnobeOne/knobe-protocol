@@ -141,12 +141,46 @@ strong{font-weight:600;color:var(--ink)}
 @media(max-width:560px){.notlist{grid-template-columns:1fr}}
 
 .dls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
-.dl{display:block;background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:16px 18px;text-decoration:none;transition:all .15s}
-.dl:hover{border-color:var(--moss);background:#eef2ec}
-.dl .dt{font-weight:bold;color:var(--ink);font-size:.98rem;margin-bottom:3px}
-.dl .dd{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;color:var(--ink-faint)}
+.dl{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .15s}
+a.dl{display:block;padding:16px 18px;text-decoration:none}
+a.dl:hover{border-color:var(--moss);background:#eef2ec}
+div.dl:hover{border-color:var(--moss)}
+.dl .dt{font-weight:bold;color:var(--ink);font-size:.98rem}
+.dl .dd{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;color:var(--ink-faint);margin-top:2px}
 .dl .dh{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.66rem;color:var(--moss);margin-top:7px;word-break:break-all}
+.kp-btn{display:block;width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:14px 18px 12px;font-family:inherit;font-size:inherit;line-height:inherit;transition:background .15s}
+.kp-btn:hover{background:#eef2ec}
+.kp-btn-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:2px}
+.kp-read-badge{font-family:-apple-system,system-ui,sans-serif;font-size:.67rem;color:var(--moss);font-weight:500;opacity:.85}
+.kp-bar{padding:5px 18px 7px;border-top:1px solid var(--line);background:var(--paper);display:flex;justify-content:flex-end}
+.kp-bar-raw{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;color:var(--ink-faint);text-decoration:none}
+.kp-bar-raw:hover{color:var(--moss)}
 @media(max-width:560px){.dls{grid-template-columns:1fr}}
+
+/* Preview modal */
+.kp-overlay{position:fixed;inset:0;z-index:200;background:rgba(10,20,15,.72);display:flex;align-items:flex-start;justify-content:center;padding:5vh 20px 40px;overflow-y:auto}
+.kp-overlay[hidden]{display:none!important}
+.kp-panel{background:var(--paper);border-radius:8px;max-width:720px;width:100%;display:flex;flex-direction:column;max-height:88vh;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.28)}
+.kp-head{display:flex;align-items:center;justify-content:space-between;padding:15px 24px;border-bottom:1px solid var(--line);flex-shrink:0;gap:16px}
+.kp-title{font-family:Georgia,serif;font-size:1rem;font-weight:bold;color:var(--ink)}
+.kp-close{background:none;border:none;cursor:pointer;font-size:1.15rem;color:var(--ink-faint);padding:3px 8px;border-radius:4px;line-height:1;transition:all .15s;flex-shrink:0}
+.kp-close:hover{color:var(--ink);background:var(--paper-warm)}
+.kp-body{padding:26px 30px;overflow-y:auto;flex:1;font-family:Georgia,serif;line-height:1.8;font-size:.97rem;color:var(--ink)}
+.kp-body h1{font-size:1.45rem;font-weight:normal;margin:0 0 20px;border-bottom:1px solid var(--line);padding-bottom:12px;letter-spacing:-.01em}
+.kp-body h2{font-size:1.1rem;font-weight:bold;margin:28px 0 9px;color:var(--moss-deep)}
+.kp-body h3{font-size:1rem;font-weight:bold;margin:20px 0 7px}
+.kp-body p{margin:0 0 15px}
+.kp-body ul,.kp-body ol{padding-left:24px;margin:0 0 15px}
+.kp-body li{margin-bottom:5px}
+.kp-body hr{border:none;border-top:1px solid var(--line);margin:26px 0}
+.kp-body code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.84em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
+.kp-body pre{background:var(--code-bg);color:var(--code-ink);padding:16px 20px;border-radius:6px;overflow-x:auto;font-size:.8rem;line-height:1.65;margin:0 0 15px}
+.kp-body pre code{background:none;padding:0}
+.kp-foot{padding:11px 24px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;background:var(--paper-warm);gap:14px}
+.kp-foot-note{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;color:var(--ink-faint)}
+.kp-foot-dl{font-family:-apple-system,system-ui,sans-serif;font-size:.76rem;font-weight:500;color:var(--moss);text-decoration:none;border:1px solid var(--line);padding:5px 12px;border-radius:3px;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.kp-foot-dl:hover{border-color:var(--moss)}
+@media(max-width:560px){.kp-overlay{padding:0;align-items:flex-end}.kp-panel{border-radius:8px 8px 0 0;max-height:92dvh}.kp-body{padding:20px 22px}.kp-foot{flex-direction:column;align-items:flex-start;gap:8px}}
 
 .road{display:flex;gap:0;margin:20px 0;font-family:-apple-system,system-ui,sans-serif}
 .road-item{flex:1;text-align:center;padding:0 6px;position:relative}
@@ -427,9 +461,30 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <h2>Download and verify</h2>
     <p>The white paper, Seed, and worked adaptation are themselves sealed <code>.knobe.md</code> files. Drop any of them into <code>lens.py</code> and verify the payload hash — the protocol demonstrates itself.</p>
     <div class="dls">
-      <a href="knobe-v1-white-paper.knobe.md" class="dl"><div class="dt">White paper</div><div class="dd">KNOBE Protocol v1, the full argument and specification</div><div class="dh">payload_hash: 86e9d761bf4c0f83…</div></a>
-      <a href="knobe-seed-v1.0.knobe.md" class="dl"><div class="dt">The Seed</div><div class="dd">A self-attesting helper KNOBE that teaches the protocol and carries build recipes</div><div class="dh">payload_hash: 837c9e1d67c4889f…</div></a>
-      <a href="knobe-v1-plain-language-summary.knobe.md" class="dl"><div class="dt">Worked adaptation</div><div class="dd">A plain-language simplification bound to the white paper by hash, with the adapter credited</div><div class="dh">payload_hash: 562876b0a2b15591…</div></a>
+      <div class="dl">
+        <button class="kp-btn" data-src="knobe-v1-white-paper.knobe.md" data-title="White paper">
+          <div class="kp-btn-head"><span class="dt">White paper</span><span class="kp-read-badge">Read ▸</span></div>
+          <div class="dd">KNOBE Protocol v1, the full argument and specification</div>
+          <div class="dh">payload_hash: 86e9d761bf4c0f83…</div>
+        </button>
+        <div class="kp-bar"><a href="knobe-v1-white-paper.knobe.md" class="kp-bar-raw">↓ raw .knobe.md</a></div>
+      </div>
+      <div class="dl">
+        <button class="kp-btn" data-src="knobe-seed-v1.0.knobe.md" data-title="The Seed">
+          <div class="kp-btn-head"><span class="dt">The Seed</span><span class="kp-read-badge">Read ▸</span></div>
+          <div class="dd">A self-attesting helper KNOBE that teaches the protocol and carries build recipes</div>
+          <div class="dh">payload_hash: 837c9e1d67c4889f…</div>
+        </button>
+        <div class="kp-bar"><a href="knobe-seed-v1.0.knobe.md" class="kp-bar-raw">↓ raw .knobe.md</a></div>
+      </div>
+      <div class="dl">
+        <button class="kp-btn" data-src="knobe-v1-plain-language-summary.knobe.md" data-title="Worked adaptation">
+          <div class="kp-btn-head"><span class="dt">Worked adaptation</span><span class="kp-read-badge">Read ▸</span></div>
+          <div class="dd">A plain-language simplification bound to the white paper by hash, with the adapter credited</div>
+          <div class="dh">payload_hash: 562876b0a2b15591…</div>
+        </button>
+        <div class="kp-bar"><a href="knobe-v1-plain-language-summary.knobe.md" class="kp-bar-raw">↓ raw .knobe.md</a></div>
+      </div>
       <a href="lens.py" class="dl"><div class="dt">lens.py + test vectors</div><div class="dd">The reference verifier and six conformance files</div><div class="dh">CC BY 4.0 · reference implementation</div></a>
     </div>
   </div>
@@ -502,6 +557,20 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </dl>
   </div>
 </section>
+
+<div id="kPreview" class="kp-overlay" role="dialog" aria-modal="true" aria-labelledby="kpTitle" hidden>
+  <div class="kp-panel">
+    <div class="kp-head">
+      <span id="kpTitle" class="kp-title"></span>
+      <button id="kpClose" class="kp-close" aria-label="Close preview">✕</button>
+    </div>
+    <div class="kp-body" id="kpBody"></div>
+    <div class="kp-foot">
+      <span class="kp-foot-note">Human-readable body of a <code>.knobe.md</code> file. Payload and hash not shown.</span>
+      <a id="kpDl" href="#" class="kp-foot-dl">↓ .knobe.md</a>
+    </div>
+  </div>
+</div>
 
 <footer>
   <div class="wrap">
@@ -597,6 +666,73 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     function upd(){ var best='KNOBE v1 · verify locally'; states.forEach(function(s){ var el=document.getElementById(s.id); if(el && el.getBoundingClientRect().top < window.innerHeight*0.5) best=s.t; }); if(t) t.textContent=best; }
     window.addEventListener('scroll', upd, {passive:true}); upd();
   }
+})();
+</script>
+<script>
+/* KNOBE preview panel */
+(function(){
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function inl(s){
+    return s.replace(/`([^`]+)`/g,function(_,c){ return '<code>'+esc(c)+'</code>'; })
+            .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+            .replace(/\*([^*]+)\*/g,'<em>$1</em>');
+  }
+  function mdToHtml(md){
+    var lines=md.split('\n'),out=[],inCode=false,inUl=false,inOl=false;
+    function closeList(){ if(inUl){out.push('</ul>');inUl=false;} if(inOl){out.push('</ol>');inOl=false;} }
+    lines.forEach(function(line){
+      if(/^```/.test(line)){ closeList(); if(inCode){out.push('</code></pre>');inCode=false;}else{out.push('<pre><code>');inCode=true;} return; }
+      if(inCode){ out.push(esc(line)); return; }
+      if(/^### /.test(line)){ closeList(); out.push('<h3>'+inl(esc(line.slice(4)))+'</h3>'); return; }
+      if(/^## /.test(line)){ closeList(); out.push('<h2>'+inl(esc(line.slice(3)))+'</h2>'); return; }
+      if(/^# /.test(line)){ closeList(); out.push('<h1>'+inl(esc(line.slice(2)))+'</h1>'); return; }
+      if(/^---+$/.test(line.trim())){ closeList(); out.push('<hr>'); return; }
+      var ulm=line.match(/^[-*] (.*)$/); if(ulm){ if(!inUl){out.push('<ul>');inUl=true;} out.push('<li>'+inl(esc(ulm[1]))+'</li>'); return; }
+      var olm=line.match(/^\d+\. (.*)$/); if(olm){ if(!inOl){out.push('<ol>');inOl=true;} out.push('<li>'+inl(esc(olm[1]))+'</li>'); return; }
+      closeList();
+      if(line.trim()==='') out.push('');
+      else out.push('<p>'+inl(esc(line))+'</p>');
+    });
+    closeList();
+    return out.join('\n');
+  }
+  function parseKnobe(text){
+    var body=text;
+    if(text.startsWith('---')){
+      var end=text.indexOf('\n---',3);
+      if(end!==-1) body=text.slice(end+4);
+    }
+    var sigIdx=body.indexOf('-----BEGIN KNOBE B64-----');
+    if(sigIdx!==-1) body=body.slice(0,sigIdx);
+    return body.trim();
+  }
+  var overlay=document.getElementById('kPreview');
+  var titleEl=document.getElementById('kpTitle');
+  var bodyEl=document.getElementById('kpBody');
+  var dlEl=document.getElementById('kpDl');
+  if(!overlay) return;
+  function openPreview(src,title){
+    titleEl.textContent=title;
+    bodyEl.innerHTML='<p style="color:var(--ink-faint);font-family:-apple-system,system-ui,sans-serif;font-size:.9rem">Loading…</p>';
+    dlEl.href=src; dlEl.textContent='↓ '+src.split('/').pop();
+    overlay.removeAttribute('hidden');
+    document.body.style.overflow='hidden';
+    fetch(src).then(function(r){return r.text();}).then(function(txt){
+      bodyEl.innerHTML=mdToHtml(parseKnobe(txt));
+    }).catch(function(){
+      bodyEl.innerHTML='<p style="color:var(--warn)">Could not load file.</p>';
+    });
+  }
+  function closePreview(){
+    overlay.setAttribute('hidden','');
+    document.body.style.overflow='';
+  }
+  document.querySelectorAll('.kp-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){ openPreview(btn.getAttribute('data-src'),btn.getAttribute('data-title')); });
+  });
+  var cl=document.getElementById('kpClose'); if(cl) cl.addEventListener('click',closePreview);
+  overlay.addEventListener('click',function(e){ if(e.target===overlay) closePreview(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!overlay.hasAttribute('hidden')) closePreview(); });
 })();
 </script>
 </body>
