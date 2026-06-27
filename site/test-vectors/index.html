@@ -47,6 +47,17 @@
     padding-top: 18px;
   }
   footer a { color: var(--muted); }
+
+  /* Global site nav — consistent across knobe.org */
+  nav { position: sticky; top: 0; z-index: 50; background: rgba(246,244,239,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  nav .inner { max-width: 880px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+  nav .brand { font-weight: 700; font-size: 1.05rem; color: var(--ink); text-decoration: none; }
+  nav .brand .v { color: var(--muted); font-weight: 400; font-size: .8rem; }
+  nav .navlinks { display: flex; gap: 18px; font-size: .82rem; }
+  nav .navlinks a { color: var(--muted); text-decoration: none; transition: color .15s; }
+  nav .navlinks a:hover { color: var(--accent); }
+  nav .navlinks a.here { color: var(--accent); border-bottom: 1px solid var(--accent); }
+  @media (max-width: 680px) { nav .navlinks { display: none; } }
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -59,8 +70,23 @@
 </head>
 <body>
 
+<nav>
+  <div class="inner">
+    <a href="/" class="brand">KNOBE <span class="v">Protocol v1</span></a>
+    <div class="navlinks">
+      <a href="/">Start</a>
+      <a href="/spec">Spec</a>
+      <a href="/lens">Lens</a>
+      <a href="/grove/">Grove</a>
+      <a href="/test-vectors/" class="here" aria-current="page">Examples</a>
+      <a href="/education-profile">Education</a>
+      <a href="/about">About</a>
+      <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
+    </div>
+  </div>
+</nav>
+
 <header>
-  <a href="..">← knobe.org</a>
   <h1>Conformance Test Vectors — KNOBE Protocol v1</h1>
   <p class="sub">Nine files for verifying a KNOBE v1 implementation against the <a href="../spec.html">normative specification</a>.</p>
 </header>
