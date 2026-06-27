@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KNOBE — Who I am, and why I built this</title>
-<meta name="description" content="David Kyle on why he built the KNOBE protocol: a thirty-year throughline from how people cross borders to how knowledge crosses the gap between humans and machines, and a commitment to keeping the protocol open.">
+<title>KNOBE — About the protocol</title>
+<meta name="description" content="KNOBE Protocol v1 is authored and stewarded by David Kyle at the University of California, Davis, and released under CC BY 4.0. The protocol stands or falls on its specification, test vectors, reference verifier, and independent implementations.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -30,7 +30,6 @@ header.top{padding:74px 0 18px}
 .eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:22px}
 h1{font-size:2.1rem;line-height:1.25;font-weight:normal;letter-spacing:-.01em;margin-bottom:10px}
 h1 em{font-style:italic;color:var(--moss-deep)}
-.byline{font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;color:var(--ink-faint);margin-bottom:8px}
 
 main{padding:20px 0 30px}
 main p{margin-bottom:18px;font-size:1.05rem}
@@ -71,8 +70,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <a href="index.html" class="brand">KNOBE <span class="v">Protocol v1</span></a>
     <div class="navlinks">
       <a href="index.html#format">Format</a>
+      <a href="lens.html">Lens</a>
       <a href="index.html#verify">Verify</a>
-      <a href="index.html#sits">Where it sits</a>
       <a href="index.html#downloads">Downloads</a>
       <a href="about.html" class="here">About</a>
     </div>
@@ -81,59 +80,47 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <header class="top">
   <div class="wrap">
-    <div class="eyebrow">About · the steward</div>
-    <h1>Who I am, and why I built <em>this</em>.</h1>
-    <div class="byline">David Kyle · University of California, Davis</div>
+    <div class="eyebrow">About KNOBE</div>
+    <h1>Knowledge keeps moving after its context has been <em>stripped away</em>.</h1>
   </div>
 </header>
 
 <main>
   <div class="wrap">
-    <p class="lead">I didn't set out to build a protocol. I spent thirty years following a single question: how meaning crosses a gap between people who don't share the same world, and it led me here.</p>
+    <p class="lead">KNOBE began from a simple problem: knowledge keeps moving after its context has been stripped away.</p>
 
-    <p style="font-size:.95rem;color:var(--ink-faint)">This page is not the specification and not the proof. It is the path that led me to build one. The protocol stands or falls on its open spec, its test vectors, and independent implementations, not on my story.</p>
+    <p>The protocol is an attempt to make that loss visible and, where possible, prevent it. A KNOBE is a plain-text knowledge object that carries declared source context, transformation history, use conditions, fidelity limits, accessibility lineage, and a local verification seal.</p>
 
-    <p>I'm a sociologist. For most of my career I studied how people and ideas move across borders: migration, human smuggling, the way a person imagines and inhabits a future before they ever enact it. I called that last one <em class="kw">cognitive migration</em>: the crossing you make in your head before you make it with your feet. Across all of it, the structural problem is the same: something has to travel from one world to another, and the context that made it make sense rarely survives the trip.</p>
+    <p>KNOBE does not ask the receiver to trust the author. It gives the receiver something to inspect.</p>
 
-    <p>Then machine reasoning moved into the middle of ordinary knowledge work. I'd been writing for years about what I call the <em class="kw">Blingularity</em>: the quiet moment when machine reasoning saturates ordinary cognition, not with a bang but by becoming invisible plumbing. And I noticed the same old problem wearing new clothes. Your work passes through a model and comes out the other side with the words intact and the context gone. A summary loses the thing that made the original trustworthy. An adaptation gets cut loose from its source and from the person who made it. The fragment survives; what it meant does not.</p>
+    <div class="pull">The project sits between education, research infrastructure, accessibility work, and AI-mediated knowledge exchange.</div>
 
-    <div class="pull">I wanted a way to make knowledge legible across the gap, in both directions, so that what travels arrives with enough context to be understood correctly on the other side.</div>
+    <p>Its premise is modest but demanding: if knowledge is going to move through people, platforms, and machines, the conditions for interpreting it should be able to move with it.</p>
 
-    <p>That is the whole idea: mutual legibility. Not a grand theory, just a plain wish. I wanted the next reader, or the next machine, or the next human reading what a machine produced, to be able to see where a thing came from, what was done to it, what it could and couldn't be trusted for, and who did the work. I wanted that to be true without anyone needing permission, a platform, or an account. Just a file you can open and check.</p>
+    <p>KNOBE Protocol v1 is authored and stewarded by David Kyle at the University of California, Davis, and released under CC BY 4.0. The protocol stands or falls on its specification, test vectors, reference verifier, and independent implementations.</p>
 
-    <p>What surprised me was how far that simple wish reached once I followed it. The moment knowledge objects can carry their own context, a lot of long-standing problems look different. A student's work can show what the student wrote and what the AI suggested. A legal reference can carry its source context instead of being reconstructed from memory or generated on demand. A clinical note or care plan can carry the context a later reviewer needs. In memory-care settings, a person's own preferences could be preserved with clear provenance, so that later decisions begin from what was actually recorded rather than from competing recollections. None of these were on my mind when I started. They fell out of the one idea.</p>
+    <h2>Governance</h2>
 
-    <p>And it matters as much to people who don't use AI as to people who do. A KNOBE works the same whether the work inside it was made with a model, with some help from one, or with none at all. It records what actually happened. The point was never to take a side in the argument about AI. The point was to make whatever happened legible to whoever comes next.</p>
-
-    <h2>Governance and operating principles</h2>
-
-    <p>Until a formal advisory board is constituted (a near-term priority, not an afterthought) I am the sole steward of the KNOBE protocol. That is a transitional condition, not a design goal. The protocol is built to outlast any single steward's priorities, and bringing in a diverse, independent board is part of making that real.</p>
-
-    <p>Trust in an open protocol should not rest on who the steward is. It should rest on the constraints the steward accepts in public. Here are mine, consistent with what KNOBE itself values:</p>
+    <p>Until a formal advisory board is constituted (a near-term priority), David Kyle is the sole steward of the KNOBE protocol. That is a transitional condition, not a design goal. Trust in an open protocol should not rest on who the steward is — it should rest on the constraints the steward accepts in public.</p>
 
     <div class="commit">
       <ul>
         <li>The protocol is open under CC BY 4.0 and will stay that way. It will not be enclosed, gated, or quietly converted into something you need to pay to read or verify.</li>
-        <li>Verification will always be possible with no server, no account, and no permission from me or anyone else. The reference verifier is a single standard-library Python file with no external dependencies. That is a design constraint, not a feature I can trade away.</li>
-        <li>I will not represent the protocol as doing more than it does. Integrity is not truth. It does not open the AI black box. I would rather under-claim and be trusted than over-claim and be right once.</li>
-        <li>Where commercial tooling is being built on top of the protocol, the boundary between the open layer and the application layer will be kept visible. The open protocol will never depend on any commercial implementation.</li>
+        <li>Verification will always be possible with no server, no account, and no permission from anyone. The reference verifier is a single standard-library Python file with no external dependencies. That is a design constraint, not a feature that can be traded away.</li>
+        <li>The protocol will not be represented as doing more than it does. Integrity is not truth. It does not open the AI black box.</li>
+        <li>Where commercial tooling is built on top of the protocol, the boundary between the open layer and the application layer will be kept visible. The open protocol will never depend on any commercial implementation.</li>
         <li>This comes from a research program, not a growth target. The measure of success is whether it stays useful and stays honest.</li>
       </ul>
     </div>
 
-    <p>I should say plainly what's proven and what isn't. The protocol is real, frozen, and verifiable today. The domain applications are early: some are working pilots, some are designs I believe in and haven't yet tested at scale. A growing team at UC Davis is now involved in design, piloting, technical architecture, and development. The campus accessibility director and the instructor shaping the instructional pilots are collaborators, not case studies. I've tried hard, with help from people far more skeptical than me, to be honest about which is which. If you find a place where we've drifted, tell us. That's not a courtesy; it's how this is supposed to work.</p>
+    <p>More will be said later. For now, start with the file.</p>
 
-    <h2>What I'm hoping for</h2>
-
-    <p>I'm a musician when I'm not doing this (keyboards, mostly improvisational). The thing I love about playing with other people is that nobody's in charge of the whole and it still coheres, because everyone can hear what everyone else is doing. That's the feeling I want for a protocol: legible enough that people who never met can build on each other's work without stepping on it.</p>
-
-    <p>So this is an invitation more than a launch. I'm looking for the people willing and able to test this first: to implement it from the spec, to try to break the canonicalization, to use it in a real classroom or clinic or archive and tell us where it bends. And I'm looking for people who felt the same problem before they had a name for it, who care about keeping knowledge legible across the gaps it has to cross. If that's you, I'd like to hear from you.</p>
+    <p style="font-style:italic;color:var(--ink-faint);font-size:.95rem">The object should carry more than the author's explanation of it.</p>
 
     <div class="invite">
       <p style="margin-bottom:0;font-size:1.05rem;color:var(--ink-soft)">Write to us. Tell us what you're building, what you'd test, or what you think we've gotten wrong.</p>
       <div class="cta-row">
         <a href="mailto:djkyle@ucdavis.edu" class="btn btn-primary">djkyle@ucdavis.edu</a>
-        <a href="index.html#build" class="btn btn-ghost">Build against v1</a>
         <a href="index.html" class="btn btn-ghost">Back to the protocol</a>
       </div>
     </div>
