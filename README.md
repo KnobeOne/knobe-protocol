@@ -37,14 +37,14 @@ A `verified` result proves the payload is byte-identical to what was hashed at s
 ```
 .
 ├── spec.html              The normative v1 specification
-├── lens.py                Python reference verifier (70 lines, no dependencies)
+├── lens.py                Python reference verifier, no external dependencies
 ├── test-vectors/          Nine conformance vectors for testing implementations
 └── examples/              Sealed example KNOBEs (white paper, education chain, etc.)
 ```
 
 ## Implementing a verifier
 
-The reference verifier `lens.py` is 70 lines of standard Python with no external dependencies. To build a conformant verifier in another language:
+The reference verifier `lens.py` is a standard-library Python file with no external dependencies. To build a conformant verifier in another language:
 
 1. Read [`spec.html`](spec.html) — particularly §3.3 (Payload block), §5 (Canonical hash rule), §6 (Body hash), §7 (Verification states)
 2. Reproduce the canonical hash algorithm: sort keys recursively, NFC-normalize all keys and string values, no whitespace between tokens, literal UTF-8, SHA-256
