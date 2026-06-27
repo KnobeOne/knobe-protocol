@@ -1,0 +1,22 @@
+# knobe-protocol (public) — .gitignore
+# OS / tooling cruft
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+*.log
+
+# Defense-in-depth: keep secrets and data/document exports out of the public repo.
+# (The curated release holds none of these; this prevents a stray file from the
+#  working tree being committed by accident.)
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pdf
+*.docx
+*.xlsx
+*.csv
+*.zip
+*.tar.gz

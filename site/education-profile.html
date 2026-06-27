@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE Education Profile v1 — Non-normative guidance for course use</title>
+<meta name="description" content="Non-normative guidance for using KNOBE Protocol v1 in educational settings: recommended field values, privacy defaults, attribution roles, fidelity limit templates, and UI label translations for instructors and students.">
+<style>
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;
+  --code-bg:#10231a;--code-ink:#cfe6d6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding:0 28px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:bold;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.brand .v{color:var(--ink-faint);font-weight:normal;font-size:.8rem}
+.navlinks{display:flex;gap:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
+.navlinks a{color:var(--ink-soft);text-decoration:none}
+.navlinks a:hover,.navlinks a.here{color:var(--moss)}
+@media(max-width:680px){.navlinks{display:none}}
+
+header{padding:64px 0 36px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
+h1{font-size:2rem;font-weight:normal;letter-spacing:-.01em;margin-bottom:10px}
+.meta{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);line-height:1.9}
+.meta span{margin-right:18px}
+.nonnorm-badge{display:inline-block;background:var(--amber);color:var(--paper);font-family:-apple-system,system-ui,sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:3px;vertical-align:middle}
+
+.toc{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:32px 0}
+.toc-title{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.toc ol{padding-left:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;line-height:2}
+.toc a{color:var(--ink-soft);text-decoration:none}
+.toc a:hover{color:var(--moss)}
+
+main{padding:40px 0 60px}
+h2{font-size:1.4rem;font-weight:normal;color:var(--ink);margin:48px 0 14px;padding-top:8px;border-top:1px solid var(--line);letter-spacing:-.01em}
+h2 .sec{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint);margin-right:10px;font-weight:normal}
+h3{font-size:1.05rem;font-weight:bold;margin:26px 0 8px}
+h4{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;font-weight:600;color:var(--moss-deep);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.05em}
+p{margin-bottom:14px;font-size:1rem}
+p.lead{font-size:1.08rem;color:var(--ink-soft)}
+ul,ol{margin:10px 0 14px 22px}
+li{margin-bottom:6px;font-size:.98rem}
+strong{font-weight:600}
+em.kw{font-style:italic;color:var(--moss-deep)}
+a.inline{color:var(--moss);text-decoration:underline;text-underline-offset:2px}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.87em;background:var(--paper-warm);padding:1px 5px;border-radius:3px;color:var(--moss-deep)}
+pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;overflow-x:auto;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;line-height:1.75;color:var(--code-ink)}
+
+.nonnorm{border-left:3px solid var(--amber);background:#fdf8f0;padding:14px 18px;margin:16px 0;border-radius:0 4px 4px 0;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
+
+.field-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0}
+.field-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
+.field-table td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.field-table tr:last-child td{border-bottom:none}
+.field-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
+.field-table td:nth-child(2){font-size:.88rem}
+.field-table td:nth-child(3){font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint)}
+
+.label-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0}
+.label-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.label-table td{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.label-table tr:last-child td{border-bottom:none}
+.label-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep)}
+.label-table td:nth-child(2){font-weight:600;color:var(--ink);font-family:-apple-system,system-ui,sans-serif}
+.label-table td:nth-child(3){color:var(--ink-soft);font-family:-apple-system,system-ui,sans-serif;font-size:.88rem}
+
+.dl-card{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:22px 26px;margin:20px 0}
+.dl-card .dt{font-weight:bold;font-size:1rem;margin-bottom:4px}
+.dl-card .dd{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin-bottom:12px}
+.dl-card .dh{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.68rem;color:var(--moss);word-break:break-all;margin-bottom:14px}
+.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;font-weight:500;text-decoration:none;padding:9px 18px;border-radius:3px;background:var(--moss-deep);color:var(--paper);display:inline-block;transition:background .15s}
+.btn:hover{background:var(--moss)}
+
+footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--moss)}
+footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:20px;font-size:.95rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="index.html" class="brand">KNOBE <span class="v">Protocol v1</span></a>
+    <div class="navlinks">
+      <a href="index.html">Overview</a>
+      <a href="spec.html">Spec</a>
+      <a href="education-profile.html" class="here">Education</a>
+      <a href="index.html#downloads">Downloads</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Domain profile · Education</div>
+    <h1>KNOBE Education Profile v1 <span class="nonnorm-badge">Non-normative</span></h1>
+    <div class="meta">
+      <span>Based on KNOBE Protocol v1.0</span>
+      <span>2026-06-21</span>
+      <span>Guidance, not protocol</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="lead">This page is non-normative guidance for using KNOBE in educational settings. Nothing here changes the protocol. If this document conflicts with the <a class="inline" href="spec.html">normative specification</a>, the specification governs.</p>
+
+    <div class="nonnorm">
+      <strong>Who this is for.</strong> Instructors, students, ed-tech builders, librarians, and course designers who want to use KNOBE to document student work, course materials, AI use disclosure, and accessibility adaptations. The first planned KNOBE instructional pilots are being developed with collaborators at UC Davis across multiple large courses with a range of AI use policies.
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#why">Why KNOBE in education</a></li>
+        <li><a href="#defaults">Recommended field defaults</a></li>
+        <li><a href="#privacy">Privacy level guidance</a></li>
+        <li><a href="#attribution">Attribution roles</a></li>
+        <li><a href="#fidelity">Fidelity limit templates</a></li>
+        <li><a href="#use">Use condition templates</a></li>
+        <li><a href="#labels">UI label translations</a></li>
+        <li><a href="#example">Worked examples</a></li>
+      </ol>
+    </div>
+
+    <h2 id="why"><span class="sec">§1</span>Why KNOBE in education</h2>
+
+    <p>Three problems converge in the AI-era classroom. AI tools make it difficult to distinguish what a student wrote from what a model suggested. Accessibility adaptations (captions, simplifications, translations) circulate detached from their sources, with the adapter's labor invisible. And course materials assembled with care inside one platform rarely survive a transition to another institution, another LMS, or another decade.</p>
+
+    <p>KNOBE addresses all three at the artifact layer, without requiring institutional adoption of a new system. A <code>.knobe.md</code> file is readable in any text editor, verifiable with a small Python script, and carries what the next reader needs: who wrote it, what AI contributed, what it can and cannot be trusted for, and what the author asks of the person receiving it.</p>
+
+    <p>The most educationally important fields are not the hash. They are <code>fidelity_limits</code>, <code>use_conditions</code>, and <code>accessibility</code>. These fields give a knowledge object a built-in account of its own interpretive conditions: what it is, what it is not, and whose labor made it what it is.</p>
+
+    <h2 id="defaults"><span class="sec">§2</span>Recommended field defaults for course use</h2>
+
+    <table class="field-table">
+      <thead><tr><th>Field</th><th>Recommended default</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>quarantine_status</td><td><code>"quarantine"</code></td><td>Always the default. Instructors or systems mark trusted after review.</td></tr>
+        <tr><td>privacy_level</td><td><code>"internal"</code></td><td>For most student work. See §3 for full guidance.</td></tr>
+        <tr><td>identity_status</td><td><code>"declared"</code></td><td>Correct for v1. Attribution is self-reported.</td></tr>
+        <tr><td>license</td><td><code>"All rights reserved"</code></td><td>Default for student work. Instructors may use CC licenses for OERs.</td></tr>
+        <tr><td>content_type</td><td>See below</td><td>Match to the artifact type.</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Recommended content_type values for course artifacts</h4>
+    <table class="field-table">
+      <thead><tr><th>Artifact</th><th>content_type</th></tr></thead>
+      <tbody>
+        <tr><td>Student essay, project, reflection</td><td><code>original</code></td></tr>
+        <tr><td>Course reader, curated collection</td><td><code>collection</code></td></tr>
+        <tr><td>Summary or condensed version of a reading</td><td><code>compression</code></td></tr>
+        <tr><td>Plain-language or simplified adaptation</td><td><code>adaptation</code></td></tr>
+        <tr><td>Caption, transcript, or translation</td><td><code>adaptation</code></td></tr>
+        <tr><td>Instructor notes synthesizing multiple sources</td><td><code>synthesis</code></td></tr>
+        <tr><td>Annotated primary source</td><td><code>annotation</code></td></tr>
+        <tr><td>Teaching or bootstrapping artifact</td><td><code>seed</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="privacy"><span class="sec">§3</span>Privacy level guidance</h2>
+
+    <p>The protocol's open vocabulary for <code>privacy_level</code> is: <code>public</code>, <code>internal</code>, <code>sensitive</code>, <code>restricted</code>. In educational contexts, these map as follows.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Value</th><th>Course meaning</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><code>public</code></td><td>Open educational resource; intended for circulation beyond the course.</td><td>Public syllabus, OER reading, published course note.</td></tr>
+        <tr><td><code>internal</code></td><td>Course-only material; not for redistribution outside the enrolled group.</td><td>Most student assignments, instructor notes, draft readings.</td></tr>
+        <tr><td><code>sensitive</code></td><td>Contains personal reflection, identifiable detail, or sensitive context. Handle with care even within the course.</td><td>Student personal reflection, peer-review comment, accessibility accommodation context, interview excerpt.</td></tr>
+        <tr><td><code>restricted</code></td><td>FERPA-protected, IRB-governed, or institutionally confidential. Do not share without explicit authorization.</td><td>Identifiable student record, IRB-governed research data, confidential advising note.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="nonnorm">
+      <strong>FERPA note.</strong> Student education records are subject to FERPA regardless of what a KNOBE's <code>privacy_level</code> says. The field declares intent and context; it does not substitute for institutional policy. When in doubt, use <code>sensitive</code> or <code>restricted</code> and consult your institution's privacy office.
+    </div>
+
+    <div class="nonnorm">
+      <strong>IRB note.</strong> Research data collected under IRB protocols should carry <code>restricted</code> and a note in <code>use_conditions</code> identifying the protocol and its sharing constraints.
+    </div>
+
+    <h2 id="attribution"><span class="sec">§4</span>Attribution roles</h2>
+
+    <p>The protocol requires an <code>attribution.sources</code> array with at least one entry. Each source should include <code>author</code> and <code>contribution</code>. For educational workflows, adding a <code>role</code> field to each source entry makes attribution records interoperable across tools. The following roles are recommended for course use.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Role value</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>student_author</code></td><td>The student who wrote the work. Primary rights-bearing contributor.</td></tr>
+        <tr><td><code>instructor_prompt</code></td><td>The instructor who designed the assignment or provided the framing prompt. Rights-bearing for the prompt itself; not for the student's response.</td></tr>
+        <tr><td><code>ai_assistant</code></td><td>An AI model that contributed to the work. Always <code>"rights_bearing": false</code>. Contribution should describe specifically what the model did and did not do.</td></tr>
+        <tr><td><code>peer_feedback</code></td><td>A peer reviewer or editor whose input shaped the work.</td></tr>
+        <tr><td><code>source_text</code></td><td>A reading, dataset, or primary source the work draws on. Use <code>parents</code> to link by hash when the source is itself a KNOBE.</td></tr>
+        <tr><td><code>adapter</code></td><td>A person who produced an accessibility adaptation (caption, simplification, translation). Combine with the <code>accessibility</code> field.</td></tr>
+        <tr><td><code>accessibility_reviewer</code></td><td>A person who reviewed or approved an adaptation for quality and accuracy.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>AI contribution disclosure</h3>
+
+    <p>For AI-assisted student work, the <code>contribution</code> field of an <code>ai_assistant</code> source entry should be specific enough that a reader can understand what the AI did and what the student did independently. Vague disclosure ("used AI for help") is less useful than specific disclosure ("AI suggested an alternative thesis framing in exchange 2; student revised and kept a version of it" or "AI used only to check spelling after drafting was complete").</p>
+
+    <p>The goal is not surveillance. It is the same legibility the protocol asks for everywhere: the next reader should be able to understand what they are looking at.</p>
+
+    <h2 id="fidelity"><span class="sec">§5</span>Fidelity limit templates</h2>
+
+    <p>The <code>fidelity_limits</code> field is the most educationally important optional field. It tells a reader what the artifact is fit for and what must not be inferred from it. In a course context, this prevents summaries from being mistaken for readings, drafts from being mistaken for finished work, and AI-assisted notes from being mistaken for the student's independent comprehension.</p>
+
+    <h4>Template: student reflection or essay</h4>
+<pre>{
+  "fidelity_limits": {
+    "represents": "a course reflection / first draft / final essay",
+    "trust_as": "the student's own argument and voice at this stage of development",
+    "do_not_infer": [
+      "that this represents the student's final or settled view",
+      "that claims are fully researched or cited unless the work explicitly does so",
+      "that AI contribution extended beyond what is described in attribution"
+    ]
+  }
+}</pre>
+
+    <h4>Template: reading summary or compression</h4>
+<pre>{
+  "fidelity_limits": {
+    "represents": "a compression of [source title], approximately [X]% of original length",
+    "trust_as": "an accurate summary of the source's main argument",
+    "do_not_infer": [
+      "that this captures all nuance, qualification, or evidence in the original",
+      "that quotations in this summary are accurate — check against the original",
+      "that this summary should substitute for reading the original"
+    ]
+  }
+}</pre>
+
+    <h4>Template: AI-generated or AI-assisted material</h4>
+<pre>{
+  "fidelity_limits": {
+    "represents": "material [drafted / assisted / reviewed] with AI contribution as described in attribution",
+    "trust_as": "[what it can be trusted for, e.g., 'a useful starting point for further development']",
+    "do_not_infer": [
+      "that AI-generated claims have been independently verified",
+      "that citations, if any, have been checked against the cited sources",
+      "that the AI contribution is limited beyond what is described"
+    ]
+  }
+}</pre>
+
+    <h2 id="use"><span class="sec">§6</span>Use condition templates</h2>
+
+    <p>The <code>use_conditions</code> field carries the originator's declared terms for how the next person may use the object. In a course, this is where instructors and students can set expectations about redistribution, citation, and sharing, without those expectations being separated from the artifact as it moves.</p>
+
+    <h4>Template: student work (course-private)</h4>
+<pre>{
+  "use_conditions": {
+    "license": "All rights reserved",
+    "permitted": [
+      "instructor review and grading",
+      "anonymous use in course-design discussion with identifying details removed"
+    ],
+    "requested_preservations": [
+      "do not redistribute outside the course without student consent",
+      "do not remove the AI contribution disclosure",
+      "preserve fidelity limits if quoting or summarizing"
+    ],
+    "consent_note": "FERPA applies. This is student work submitted under course privacy expectations."
+  }
+}</pre>
+
+    <h4>Template: open educational resource</h4>
+<pre>{
+  "use_conditions": {
+    "license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/",
+    "permitted": [
+      "redistribute and adapt with attribution",
+      "use in other courses with credit to the original author"
+    ],
+    "requested_preservations": [
+      "preserve attribution and source link",
+      "note any adaptations made"
+    ]
+  }
+}</pre>
+
+    <h2 id="labels"><span class="sec">§7</span>UI label translations</h2>
+
+    <p>Protocol field names are precise but not always the right language for a student or instructor interface. The following translations are recommended for education-facing tools. The protocol field names remain unchanged in the payload; these labels apply only at the display layer.</p>
+
+    <table class="label-table">
+      <thead><tr><th>Protocol field</th><th>Student / instructor label</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>quarantine_status: quarantine</td><td>Needs review</td><td>"Quarantine" can sound punitive in a classroom context.</td></tr>
+        <tr><td>quarantine_status: trusted</td><td>Reviewed and trusted</td><td>Set by instructor or governed system after review.</td></tr>
+        <tr><td>fidelity_limits</td><td>What this can and cannot be used for</td><td>Or: "What to know before reusing this."</td></tr>
+        <tr><td>use_conditions</td><td>Rules for reuse</td><td>Or: "Sharing and citation terms."</td></tr>
+        <tr><td>transformation_history</td><td>What changed, and when</td><td>Or: "Edit history."</td></tr>
+        <tr><td>parents</td><td>What this came from</td><td>Or: "Source materials."</td></tr>
+        <tr><td>accessibility</td><td>Adaptation record</td><td>Or: "Accessibility versions."</td></tr>
+        <tr><td>attribution.sources</td><td>Who contributed, and how</td><td>Show AI contributors clearly with their role.</td></tr>
+        <tr><td>privacy_level: internal</td><td>Course only</td><td>Not for redistribution outside the enrolled group.</td></tr>
+        <tr><td>privacy_level: sensitive</td><td>Handle with care</td><td>Contains personal or sensitive content.</td></tr>
+        <tr><td>payload_hash: verified</td><td>Record intact</td><td>Follow with "Integrity is not the same as accuracy — read carefully."</td></tr>
+        <tr><td>payload_hash: failed</td><td>Record may have changed</td><td>Avoid "tampered" — changes may be legitimate. Prompt inspection.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="example"><span class="sec">§8</span>Worked examples</h2>
+
+    <div class="nonnorm"><strong>Note.</strong> Each example is a separate <code>.knobe.md</code> file. The hashes shown are payload hashes — they prove the structured record is intact, not proof of identity, timestamp, or institutional approval. Integrity is not truth.</div>
+
+    <p>The three examples below form a verifiable lineage: the instructor creates an assignment KNOBE, assigns a reading KNOBE, and the student submits a reflection KNOBE that carries both as parents by hash. Download any of them and verify with <code>lens.py</code>. The chain from reading to assignment to student response is sealed across artifacts and checkable without a database, platform, or institutional system.</p>
+
+    <div class="dl-card">
+      <div class="dt">Example 1 — Assigned Reading</div>
+      <div class="dd">An instructor-sealed version of the course reading. Carries <code>quarantine_status: trusted</code> (the instructor has reviewed it), use conditions limiting redistribution, and the hash that student submissions reference as a parent.</div>
+      <div class="dh">payload_hash: 6014b58eb6ff572fe844d3893971743979a5bbd1b6058b51cc59c892a7dfb54e</div>
+      <a href="knobe-education-reading.knobe.md" class="btn">Download</a>
+    </div>
+
+    <div class="dl-card">
+      <div class="dt">Example 2 — Instructor Assignment</div>
+      <div class="dd">The assignment specification as a sealed KNOBE. Carries the AI use policy, submission format, and evaluation criteria inside the payload, so students who reference the assignment in their submission are linking to a verifiable, unaltered specification.</div>
+      <div class="dh">payload_hash: 7c2cb52737909933cd45b52d0e70146c2530d10c421e49627606e6688d9b18e9</div>
+      <a href="knobe-education-assignment.knobe.md" class="btn">Download</a>
+    </div>
+
+    <div class="dl-card">
+      <div class="dt">Example 3 — Student AI-Assisted Reflection</div>
+      <div class="dd">A student reflection on the assigned reading. AI consulted once for terminology; all prose written by the student. Parents reference both the reading and the assignment by hash. Carries <code>assignment_context</code>, <code>education_review</code>, full attribution, fidelity limits, and course-private use conditions.</div>
+      <div class="dh">payload_hash: 8a0d690ce4d129c862df075d97a38ab4d0f66492578e15c6f927ac5cd45601fc</div>
+      <a href="knobe-education-example.knobe.md" class="btn">Download</a>
+    </div>
+
+    <h3>Education profile fields in these examples</h3>
+
+    <p>Two profile-specific payload fields appear in the assignment and reflection examples. These are not part of the core v1 protocol but are recommended for educational tools building on KNOBE.</p>
+
+    <p><strong><code>assignment_context</code></strong> — carried by the student reflection, links the submission to its course and assignment specification:</p>
+<pre>{
+  "assignment_context": {
+    "course": "SOC 150 — Knowledge in the AI Era",
+    "assignment_type": "reading_reflection",
+    "assignment_knobe_hash": "7c2cb527…",
+    "ai_policy": "limited_with_disclosure"
+  }
+}</pre>
+
+    <p><strong><code>education_review</code></strong> — tracks submission and review status separately from the protocol's <code>quarantine_status</code>, which handles receiver trust rather than workflow state:</p>
+<pre>{
+  "education_review": {
+    "submission_status": "submitted",
+    "review_status": "pending_instructor_review"
+  }
+}</pre>
+
+    <p><strong><code>assignment_context</code></strong> inside the instructor assignment KNOBE carries AI policy at the source, so that any student reflection which references the assignment by hash inherits a verifiable record of what policy applied when the work was done.</p>
+
+    <h3>What the lineage demonstrates</h3>
+
+    <p>Opening the reflection KNOBE's <code>parents</code> array reveals two entries, each with a payload hash. Verify both hashes against the reading and assignment KNOBEs above and they match. The chain — instructor creates reading, instructor specifies assignment, student responds to both — is sealed and checkable without any database, platform, or institutional system. The artifacts carry their own provenance.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fclaim">KNOBE preserves objecthood under compression.</div>
+    <div class="frow">
+      <div>KNOBE Protocol v1 · Education Profile · Non-normative<br>David Kyle · University of California, Davis</div>
+      <div style="text-align:right">
+        <a href="spec.html">Normative spec</a> · <a href="index.html">Overview</a> · <a href="about.html">About</a><br>
+        <a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

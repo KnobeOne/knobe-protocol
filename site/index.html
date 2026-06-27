@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE Protocol v1 — A protocol for knowledge objects that keep their context when they move</title>
+<meta name="description" content="KNOBE is an open, plain-text protocol. A .knobe.md file is readable markdown plus a machine-readable, hash-sealed payload carrying attribution, source context, transformation history, fidelity limits, use conditions, and accessibility-adaptation lineage — so a knowledge object can be interpreted correctly by the next human or machine that receives it.">
+<style>
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;
+  --code-bg:#10231a;--code-ink:#cfe6d6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding:0 28px}
+.wide{max-width:920px}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.88em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:14px 28px}
+.brand{font-weight:bold;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.brand .v{color:var(--ink-faint);font-weight:normal;font-size:.8rem}
+.navlinks{display:flex;gap:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
+.navlinks a{color:var(--ink-soft);text-decoration:none;transition:color .15s}
+.navlinks a:hover{color:var(--moss)}
+@media(max-width:760px){.navlinks{display:none}}
+
+header.hero{padding:80px 0 56px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:24px}
+h1.claim{font-size:2.35rem;line-height:1.22;font-weight:normal;letter-spacing:-.01em;margin-bottom:24px}
+h1.claim em{font-style:italic;color:var(--moss-deep)}
+.sub{font-size:1.12rem;color:var(--ink-soft);max-width:644px;margin-bottom:24px}
+.refrain{font-size:1.05rem;color:var(--moss-deep);font-style:italic;margin:24px 0 32px;padding-left:18px;border-left:2px solid var(--moss)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;font-weight:500;text-decoration:none;padding:11px 20px;border-radius:3px;transition:all .15s;display:inline-block}
+.btn-primary{background:var(--moss-deep);color:var(--paper)}
+.btn-primary:hover{background:var(--moss)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink-soft);background:transparent}
+.btn-ghost:hover{border-color:var(--moss);color:var(--moss)}
+.hero-meta{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint);margin-top:30px;letter-spacing:.02em}
+.starthere{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint)}
+.starthere a{color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--line)}
+.starthere a:hover{color:var(--moss);border-color:var(--moss)}
+
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+.shead{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
+h2{font-size:1.6rem;font-weight:normal;line-height:1.3;margin-bottom:18px;letter-spacing:-.01em}
+h3{font-size:1.1rem;font-weight:bold;margin:26px 0 9px}
+p{margin-bottom:16px}
+p.lead{font-size:1.1rem;color:var(--ink-soft)}
+a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+em.kw{font-style:italic;color:var(--moss-deep)}
+strong{font-weight:600;color:var(--ink)}
+
+.filestruct{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:20px 0;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;line-height:1.7;overflow-x:auto;white-space:pre}
+.fs-delim{color:#6b8a76}.fs-c1{color:#d9a85a}.fs-c2{color:#7ed99a}.fs-c3{color:#8fb8e8}.fs-comment{color:#4a6555;font-style:italic}
+.filefoot{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint);text-align:center;margin-top:12px}
+
+.layers{border:1px solid var(--line);border-radius:6px;overflow:hidden;margin:8px 0 0}
+.layer{padding:14px 20px;border-bottom:1px solid var(--line)}
+.layer:last-child{border-bottom:none}
+.layer .ll{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.layer .ld{font-size:.9rem;color:var(--ink-soft)}
+.l1{background:#f3ede0}.l1 .ll{color:var(--amber)}
+.l2{background:#eef2ec}.l2 .ll{color:var(--moss)}
+.l3{background:#e9efe9}.l3 .ll{color:var(--moss-deep)}
+
+.chain{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:24px 0 14px}
+.chain-step{background:var(--paper-warm);border:1px solid var(--line);border-radius:4px;padding:12px 10px;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem}
+.chain-step .cs-title{font-weight:600;color:var(--ink);margin-bottom:8px}
+.chain-step .cs-dots{display:flex;gap:4px;flex-wrap:wrap}
+.cdot{width:8px;height:8px;border-radius:50%;transition:opacity .6s,background .6s,border-color .6s}
+.cdot.on{background:var(--moss)}
+.cdot.off{background:transparent;border:1px solid var(--line)}
+.cdot.fading{opacity:0}
+.chain-caption{font-family:-apple-system,system-ui,sans-serif;font-size:.76rem;color:var(--ink-faint)}
+.replay{font-family:-apple-system,system-ui,sans-serif;font-size:.74rem;color:var(--moss);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
+.replay:hover{color:var(--moss-deep)}
+@media(max-width:560px){.chain{grid-template-columns:1fr 1fr}}
+
+.credstrip{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:18px 22px;margin:8px 0;font-family:-apple-system,system-ui,sans-serif}
+.credstrip .ct{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+.credstrip .cl{display:flex;gap:8px 20px;flex-wrap:wrap;font-size:.86rem;color:var(--ink-soft)}
+.credstrip .cl span::before{content:'— ';color:var(--line)}
+
+.term{background:var(--code-bg);border-radius:6px;padding:18px 22px;margin:20px 0;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.78rem;line-height:1.85;overflow-x:auto}
+.term .tl{color:#6b8a76}.term .tv{color:var(--code-ink)}.term .tm{color:#7ed99a}
+.term .tp{color:#3d5447}.term .tc{color:#a8c9b4}.term .tn{color:#6b8a76;font-style:italic}
+
+.states{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;margin:18px 0}
+.state-row{display:grid;grid-template-columns:210px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
+.state-row:last-child{border-bottom:none}
+.state-name{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.77rem;color:var(--moss-deep);font-weight:500}
+.state-desc{color:var(--ink-soft)}
+@media(max-width:560px){.state-row{grid-template-columns:1fr;gap:3px}}
+
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.tc-card{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+.tc-card h3{margin-top:0;font-size:1rem}
+.tc-card p{font-size:.9rem;color:var(--ink-soft);margin-bottom:0}
+.tc-card .tcl{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+.tc-card.ctrl .tcl{color:var(--amber)}
+.tc-card.resp .tcl{color:var(--moss)}
+@media(max-width:560px){.twocol{grid-template-columns:1fr}}
+
+.fields{margin:18px 0}
+.field{border-left:2px solid var(--line);padding:4px 0 4px 16px;margin:14px 0}
+.field .fn{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.82rem;color:var(--moss-deep);font-weight:500}
+.field .fd{font-size:.92rem;color:var(--ink-soft);margin-top:3px}
+
+.mgcard{background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:22px 24px;margin:8px 0}
+.mgcard .mgnote{font-size:.92rem;color:var(--ink-soft);font-style:italic;margin-bottom:14px}
+
+.implpanel{background:var(--code-bg);border-radius:8px;padding:26px 28px;margin:8px 0}
+.implpanel h3{color:var(--code-ink);margin-top:0;font-family:-apple-system,system-ui,sans-serif;font-size:1rem}
+.implpanel p{color:#9bb5a4;font-size:.88rem;font-family:-apple-system,system-ui,sans-serif}
+.impl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:16px 0}
+.impl-grid a{display:block;background:rgba(255,255,255,.04);border:1px solid #2a4435;border-radius:4px;padding:12px 14px;text-decoration:none;transition:all .15s}
+.impl-grid a:hover{border-color:var(--moss);background:rgba(126,217,154,.08)}
+.impl-grid .it{color:var(--code-ink);font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;font-weight:500}
+.impl-grid .id{color:#6b8a76;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.68rem;margin-top:3px}
+@media(max-width:560px){.impl-grid{grid-template-columns:1fr}}
+
+.whofor{display:grid;grid-template-columns:1fr 1fr;gap:14px 28px;margin:18px 0;font-size:.92rem}
+.whofor div strong{color:var(--moss-deep)}
+.whofor div p{font-size:.86rem;color:var(--ink-soft);margin:2px 0 0}
+@media(max-width:560px){.whofor{grid-template-columns:1fr}}
+
+.sits{font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;margin:18px 0}
+.sits-row{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+.sits-row:last-child{border-bottom:none}
+.sits-name{font-weight:600;color:var(--ink)}
+.sits-desc{color:var(--ink-soft)}
+@media(max-width:560px){.sits-row{grid-template-columns:1fr;gap:3px}}
+
+.notlist{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-faint);margin:16px 0}
+.notlist div::before{content:'—  ';color:var(--line)}
+@media(max-width:560px){.notlist{grid-template-columns:1fr}}
+
+.dls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+.dl{display:block;background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:16px 18px;text-decoration:none;transition:all .15s}
+.dl:hover{border-color:var(--moss);background:#eef2ec}
+.dl .dt{font-weight:bold;color:var(--ink);font-size:.98rem;margin-bottom:3px}
+.dl .dd{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;color:var(--ink-faint)}
+.dl .dh{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.66rem;color:var(--moss);margin-top:7px;word-break:break-all}
+@media(max-width:560px){.dls{grid-template-columns:1fr}}
+
+.road{display:flex;gap:0;margin:20px 0;font-family:-apple-system,system-ui,sans-serif}
+.road-item{flex:1;text-align:center;padding:0 6px;position:relative}
+.road-item .rn{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;color:var(--moss);margin-bottom:5px}
+.road-item .rt{font-size:.8rem;color:var(--ink-soft)}
+.road-item:not(:last-child)::after{content:'→';position:absolute;right:-6px;top:0;color:var(--line)}
+
+.faq details{border-bottom:1px solid var(--line);padding:12px 0}
+.faq summary{cursor:pointer;font-weight:bold;font-size:.98rem;color:var(--ink);list-style:none}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::before{content:'+  ';color:var(--moss);font-family:monospace}
+.faq details[open] summary::before{content:'–  '}
+.faq details p{margin:10px 0 4px;font-size:.92rem;color:var(--ink-soft)}
+
+.gov dt{font-weight:bold;margin-top:18px;margin-bottom:4px;font-size:.98rem}
+.gov dd{color:var(--ink-soft);font-size:.95rem;margin-bottom:4px}
+
+footer{padding:46px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--moss)}
+footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:22px;font-size:.95rem}
+.seal-line{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.68rem;color:var(--line);margin-top:22px;word-break:break-all}
+
+#vrail{position:fixed;right:16px;bottom:16px;z-index:60;background:rgba(16,35,26,.85);color:#7a9486;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.64rem;padding:6px 11px;border-radius:4px;border:1px solid rgba(42,68,53,.7);transition:opacity .3s;letter-spacing:.02em;opacity:.8}
+#vrail:hover{opacity:1}
+#vrail .vr-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#5a9a72;margin-right:6px;vertical-align:middle}
+@media(max-width:620px){#vrail{display:none}}
+
+.filestruct .fs-layer{display:block;border-radius:3px;padding:0 4px;margin:0 -4px;cursor:pointer;transition:background .15s}
+.filestruct .fs-layer:hover,.filestruct .fs-layer.lit{background:rgba(126,217,154,.1)}
+.layers .layer.lit{box-shadow:inset 3px 0 0 var(--moss)}
+.fs-hint{font-family:-apple-system,system-ui,sans-serif;font-size:.74rem;color:var(--ink-faint);text-align:center;margin-top:8px}
+
+.runbtn{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;font-weight:500;color:var(--code-ink);background:rgba(126,217,154,.12);border:1px solid #2a4435;border-radius:4px;padding:7px 15px;cursor:pointer;transition:all .15s;margin-bottom:14px}
+.runbtn:hover{background:rgba(126,217,154,.2);border-color:var(--moss)}
+.runbtn:disabled{opacity:.5;cursor:default}
+
+.copywrap{position:relative}
+.copybtn{position:absolute;top:8px;right:8px;font-family:-apple-system,system-ui,sans-serif;font-size:.68rem;color:#9bb5a4;background:rgba(255,255,255,.06);border:1px solid #2a4435;border-radius:3px;padding:3px 9px;cursor:pointer;transition:all .15s;z-index:2}
+.copybtn:hover{color:var(--code-ink);border-color:var(--moss)}
+.copybtn.copied{color:#7ed99a;border-color:#7ed99a}
+
+@media(prefers-reduced-motion:reduce){.cdot{transition:none}#vrail{transition:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap wide">
+    <a href="#top" class="brand">KNOBE <span class="v">Protocol v1</span></a>
+    <div class="navlinks">
+      <a href="#format">Format</a>
+      <a href="#problem">Problem</a>
+      <a href="#carry">What it carries</a>
+      <a href="#verify">Verify</a>
+      <a href="#sits">Where it sits</a>
+      <a href="#downloads">Downloads</a>
+      <a href="education-profile.html">Education</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<a id="top"></a>
+<div id="vrail"><span class="vr-dot"></span><span class="vr-text">KNOBE v1 · verify locally</span></div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Open protocol · Plain text · Local verification · v1 frozen</div>
+    <h1 class="claim">A protocol for knowledge objects that keep their <em>context</em> when they move.</h1>
+    <p class="sub">When a document passes to the next person, the next tool, or an AI agent, the words usually arrive — but the things that made them interpretable often do not: where they came from, what was adapted from what, what the author asked, how far they can be trusted. KNOBE keeps that context inside the object, in plain text, so it travels with the words.</p>
+    <div class="refrain">KNOBE preserves objecthood under compression.</div>
+    <p class="sub" style="font-size:.92rem;color:var(--ink-faint);margin-top:-16px;margin-bottom:28px">By objecthood: a document remains attached to the context that governs its responsible interpretation — source, transformations, permissions, fidelity limits, adaptation history.</p>
+    <div class="cta-row">
+      <a href="#format" class="btn btn-primary">See the format</a>
+      <a href="#verify" class="btn btn-ghost">Verify a KNOBE</a>
+      <a href="#downloads" class="btn btn-ghost">Read the white paper</a>
+    </div>
+    <div class="starthere">
+      <span>Start here:</span>
+      <a href="#build">I'm a developer →</a>
+      <a href="#grove">I want to create one →</a>
+      <a href="#accessibility">I work in accessibility →</a>
+    </div>
+    <div class="hero-meta">CC BY 4.0 · authored and stewarded at UC Davis</div>
+  </div>
+</header>
+
+<section id="plain-terms" style="background:var(--paper-warm);border-bottom:1px solid var(--line)">
+  <div class="wrap">
+    <div class="shead">In plain terms</div>
+    <p class="lead" style="max-width:660px">Right now, AI handles knowledge like a port worker unloading containers with no shipping labels — cargo gets dumped on the dock, origin unknown, destination unknown, rules forgotten. Whatever is in the container gets used anyway.</p>
+    <p style="max-width:660px;margin-top:16px;color:var(--ink-soft);line-height:1.75">KNOBE is the shipping label that travels inside the cargo itself. When the object arrives — at a person, a tool, or an AI agent — the label is still there: where it came from, who made it, what conditions governed it, what it can and cannot be used for. A digital passport that shows where the document has been and what rules traveled with it, without stopping it from moving.</p>
+    <p style="max-width:660px;margin-top:20px;color:var(--ink-faint);font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;font-style:italic">Here is what that looks like technically — and why it matters.</p>
+  </div>
+</section>
+
+<section id="problem">
+  <div class="wrap">
+    <div class="shead">The problem</div>
+    <h2>When this reaches the next person, what comes with it — and what gets left behind?</h2>
+    <p class="lead">Knowledge objects move. The context that makes them interpretable usually doesn't.</p>
+    <p>A graduate student records an oral history. The transcript carries consent terms, a do-not-quote request, and contextual notes. A semester later, an excerpt is pasted into an AI assistant to draft an abstract. The abstract is summarized for a newsletter. A sentence from the newsletter appears in a grant report.</p>
+    <div class="chain">
+      <div class="chain-step"><div class="cs-title">transcript</div><div class="cs-dots"><span class="cdot on"></span><span class="cdot on"></span><span class="cdot on"></span><span class="cdot on"></span></div></div>
+      <div class="chain-step"><div class="cs-title">AI abstract</div><div class="cs-dots"><span class="cdot off"></span><span class="cdot on"></span><span class="cdot off"></span><span class="cdot on"></span></div></div>
+      <div class="chain-step"><div class="cs-title">newsletter</div><div class="cs-dots"><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span></div></div>
+      <div class="chain-step"><div class="cs-title">grant report</div><div class="cs-dots"><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span></div></div>
+    </div>
+    <p class="chain-caption">Every step was reasonable. By the fourth, the words still circulate — but the consent terms, the do-not-quote request, and the notes that governed them are gone, and no one downstream knows they ever existed. <button class="replay" id="chainReplay">Replay ↻</button></p>
+    <div class="credstrip" style="margin-top:18px"><div class="ct">What failed</div><div style="font-size:.92rem;color:var(--ink-soft);font-family:Georgia,serif">The words survived. The consent terms and interpretive conditions that governed them did not.</div></div>
+    <p style="margin-top:26px">We call this <em class="kw">context survivorship bias</em>: the fragment that survives transit is mistaken for the full knowledge object, while the context that made it interpretable disappears. Compression is not the enemy — summary, quotation, translation, and adaptation all depend on it. The problem is compression <em>without portable interpretive obligation</em>. A KNOBE keeps that obligation attached to the object, so the next reader, the next tool, or the next agent can see how the object should be interpreted.</p>
+  </div>
+</section>
+
+<section id="format">
+  <div class="wrap">
+    <div class="shead">The artifact</div>
+    <h2>One file, three layers</h2>
+    <p>A KNOBE is a single plain-text file. A human reads it in any editor. A machine decodes its payload. A verifier checks its payload hash. Here is the whole structure:</p>
+    <div class="copywrap"><button class="copybtn" data-copy="---&#10;title: &quot;Oral history — interview 04&quot;&#10;spec_version: &quot;1.0&quot;&#10;---&#10;&#10;# Oral history — interview 04&#10;The human-readable document. Free-form markdown.&#10;&#10;-----BEGIN KNOBE B64-----&#10;{base64-encoded sealed JSON payload}&#10;-----END KNOBE B64-----">copy skeleton</button>
+    <div class="filestruct"><span class="fs-layer" data-layer="1"><span class="fs-delim">---</span>
+<span class="fs-c1">title: "Oral history — interview 04"</span>
+<span class="fs-c1">spec_version: "1.0"</span>
+<span class="fs-delim">---</span></span>
+
+<span class="fs-layer" data-layer="2"><span class="fs-c2"># Oral history — interview 04</span>
+<span class="fs-c2">The human-readable document. Free-form markdown.</span>
+<span class="fs-c2">Opens in any editor, AI assistant, or browser.</span></span>
+
+<span class="fs-layer" data-layer="3"><span class="fs-c3">-----BEGIN KNOBE B64-----</span>
+<span class="fs-c3">eyJzcGVjX3ZlcnNpb24iOiIxLjAiLCJ0aXRsZSI6Ik9yYWwg…</span>  <span class="fs-comment"># attribution, sources,</span>
+<span class="fs-c3">dХJhbnNmb3JtYXRpb24sIGZpZGVsaXR5LCBzZWFs…</span>          <span class="fs-comment"># fidelity limits, seal</span>
+<span class="fs-c3">-----END KNOBE B64-----</span></span></div></div>
+    <div class="fs-hint">Hover or tap a layer to see what it carries.</div>
+    <div class="layers">
+      <div class="layer l1" data-layer="1"><div class="ll">layer 1 · yaml frontmatter</div><div class="ld">Human-scannable metadata: title, author, license, date.</div></div>
+      <div class="layer l2" data-layer="2"><div class="ll">layer 2 · markdown body</div><div class="ld">The document itself. No schema. No special software required to read it.</div></div>
+      <div class="layer l3" data-layer="3"><div class="ll">layer 3 · base64 json payload</div><div class="ld">Attribution, source context, transformation history, fidelity limits, use conditions, accessibility lineage, and a SHA-256 integrity hash.</div></div>
+    </div>
+    <div class="filefoot">Yes, it includes metadata. The claim is structural: the metadata travels <em>inside</em> the object, stays inspectable, is hash-sealed, and behaves consistently across tools. A database tag stays in the database. A platform field stays in the platform. A KNOBE carries its context with the object itself.</div>
+  </div>
+</section>
+
+<section id="carry">
+  <div class="wrap">
+    <div class="shead">What it carries</div>
+    <h2>More than provenance: context the next reader can act on</h2>
+    <p>Most provenance formats answer <em>where did this come from</em>. A KNOBE also carries fields written for whoever — or whatever — receives it next. These are optional, but they are the point: they let an object be interpreted correctly across a gap between parties who do not share the same access to it.</p>
+    <div class="fields">
+      <div class="field"><div class="fn">fidelity_limits</div><div class="fd">How far the object can be trusted as a representation of its source — what it is fit for, and what must not be inferred from it. A summary that dropped caveats says so, so a downstream reader does not over-read it.</div></div>
+      <div class="field"><div class="fn">use_conditions</div><div class="fd">The originator's declared terms, carried forward: permitted and disallowed uses, required preservations, consent and quotation constraints. A condition set at sealing stays legible to a receiver who never met the author.</div></div>
+      <div class="field"><div class="fn">accessibility</div><div class="fd">Adaptation lineage. When a captioned, translated, or simplified version is made from a source, this binds the adaptation to its source by hash and credits the adapter — so the adaptation stays tied to what it was made from, and to whose labor made it.</div></div>
+    </div>
+    <p>These fields inform; they do not enforce. A receiver may ignore them, but the object has still made its interpretive conditions visible. This is the difference between a knowledge object and an orphaned fragment: an orphaned fragment may still be quoted, summarized, or fed to a model, but it can no longer answer where it came from, what changed, or what it should be trusted for.</p>
+  </div>
+</section>
+
+<section id="integrity">
+  <div class="wrap">
+    <div class="shead">Integrity, not truth</div>
+    <h2>The seal reports. The receiver decides.</h2>
+    <p>KNOBE uses standard SHA-256 hashing. There is no cryptographic novelty here, and no claim that a hash can solve trust. The hash proves one narrow thing: <strong>the sealed payload has not changed since sealing.</strong> It does not prove the content is true, the author is who they say, attribution is honest, consent was obtained, or the object is safe to use. A liar can seal a lie; the seal then proves only that the lie has not changed.</p>
+    <p>This limit is a design principle, not a flaw to hide. It marks a distinction the rest of the protocol depends on:</p>
+    <div class="twocol">
+      <div class="tc-card ctrl"><div class="tcl">control infrastructure</div><h3>Decides for you</h3><p>Blocks, permits, denies, enforces, locks, or fails closed. The system makes the call.</p></div>
+      <div class="tc-card resp"><div class="tcl">responsibility infrastructure</div><h3>Informs your decision</h3><p>Makes the relevant conditions visible so a human or institution can decide what to do next. KNOBE is this kind.</p></div>
+    </div>
+    <p>The protocol is designed to remain readable by the least-powerful participant in the exchange — which is why it requires no certificate, no registry, no platform, and no authority to verify. Every new or external KNOBE carries a declared trust status — and the protocol's recommended posture is <em class="kw">quarantine-first</em>: treat external objects as untrusted until reviewed, regardless of whether they verify. A KNOBE can verify and still remain in quarantine. Verification means the payload is intact, not that the object is true, safe, or appropriate. The green check is where inspection begins, not where it ends.</p>
+  </div>
+</section>
+
+<section id="verify">
+  <div class="wrap">
+    <div class="shead">Proof</div>
+    <h2>Verify any KNOBE</h2>
+    <p>The reference verifier, <code>lens.py</code>, is about 70 lines of Python with no imports beyond the standard library. It extracts the payload, computes the canonical payload hash, and reports one of four states. No server. No AI. No certificate authority. Pure math.</p>
+    <button class="runbtn" id="runVerify">▸ Run verification</button>
+    <div class="term copywrap" id="verifyTerm">
+      <button class="copybtn" data-copy="python3 lens.py interview-04.knobe.md">copy cmd</button>
+      <div><span class="tp">$</span> <span class="tc">python3 lens.py interview-04.knobe.md</span></div>
+      <div id="verifyOut">
+      <div style="margin-top:8px"><span class="tl">title:             </span><span class="tv">Oral history — interview 04</span></div>
+      <div><span class="tl">quarantine_status: </span><span class="tv">quarantine</span></div>
+      <div><span class="tl">status:            </span><span class="tm">verified</span></div>
+      <div><span class="tl">body_hash:         </span><span class="tm">match</span></div>
+      <div style="margin-top:8px"><span class="tn">integrity verified. Integrity is not truth — inspect before trusting.</span></div>
+      </div>
+    </div>
+    <div class="states">
+      <div class="state-row"><span class="state-name">verified</span><span class="state-desc">Payload matches. Body matches, or no body hash present.</span></div>
+      <div class="state-row"><span class="state-name">verified-body-modified</span><span class="state-desc">Payload matches; the optional body hash does not. Structurally valid; inspect the body. A body is often legitimately changed — a typo fixed, alt text added, a passage translated — so this is a signal, not a verdict of tampering.</span></div>
+      <div class="state-row"><span class="state-name">failed</span><span class="state-desc">Payload hash mismatch. The structured record changed.</span></div>
+      <div class="state-row"><span class="state-name">unreadable</span><span class="state-desc">No payload block, or it could not be decoded or parsed.</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="accessibility">
+  <div class="wrap">
+    <div class="shead">The first proving ground</div>
+    <h2>Accessibility is not a metaphor here</h2>
+    <p>The KNOBE instructional approach will be piloted in multiple large courses at UC Davis, ranging from 100 to 500 students, developed with a deaf instructor and a campus accessibility director as collaborators. The pilots span a deliberate diversity of AI tool use: from courses where AI is disallowed entirely to those allowing limited, self-attested use with an emphasis on the learning journey. Accessibility is not an add-on use case for KNOBE; it is the first proving ground, with its own ethical stakes — and it reveals the general problem most clearly.</p>
+    <p>When materials are captioned, translated, simplified, or remediated, the adaptation is knowledge work. It carries labor, judgment, and responsibility. But adaptations usually circulate severed from their sources: the adapted object travels without the original, without the adapter's contribution recorded, without a clear account of what changed or what fidelity limits remain. The labor disappears, and the link to the source disappears with it.</p>
+    <p>A KNOBE keeps the adaptation bound to its source by hash and credits the adapter in the record. This page links to a worked example: a plain-language simplification of the white paper that records what it was adapted from, who adapted it, and what it does and does not preserve. It is the vision in miniature — knowledge made legible across a gap between parties who do not share the same access to it, with the labor of making that crossing possible kept visible.</p>
+    <div class="cta-row" style="margin-top:8px">
+      <a href="knobe-v1-plain-language-summary.knobe.md" class="btn btn-ghost">See the worked adaptation</a>
+    </div>
+  </div>
+</section>
+
+<section id="grove">
+  <div class="wrap">
+    <div class="shead">First encounter</div>
+    <h2>Make your first KNOBE</h2>
+    <div class="mgcard">
+      <div class="mgnote">Magic Grove is a first encounter surface for KNOBE. It is not the protocol and not a required tool. It is a guided, no-AI authoring experience that helps a person create a valid <code>.knobe.md</code> file without reading the specification first.</div>
+      <p style="margin-bottom:16px;font-size:.95rem;color:var(--ink-soft)">It asks a few questions about a document, project, source, or idea you want to carry forward, using the sequoia's anatomy as a frame. At the end you download a sealed file you can verify with <code>lens.py</code> — and you were building it the whole time.</p>
+      <div style="font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint);margin-bottom:16px;letter-spacing:.04em">Roots → Trunk → Canopy → Seal &nbsp;·&nbsp; no AI · no login · produces <code>.knobe.md</code></div>
+      <a href="grove" class="btn btn-primary">Open the Magic Grove</a>
+    </div>
+  </div>
+</section>
+
+<section id="build">
+  <div class="wrap">
+    <div class="shead">For implementers</div>
+    <h2>Build against KNOBE v1</h2>
+    <p>The protocol's success depends on independent implementation. Everything needed to build a compatible Lens, Crystallizer, or other tool is here. <strong>v1 file semantics are frozen</strong>: extensions may add optional fields, but they will not reinterpret valid v1 files. Seed stage means early public release, not unstable syntax.</p>
+    <div class="implpanel">
+      <h3>Implementation kit</h3>
+      <p>Reproduce the six test vectors and your implementation matches the v1 reference conformance set.</p>
+      <div class="impl-grid">
+        <a href="spec.html"><div class="it">Specification</div><div class="id">frozen v1 contract</div></a>
+        <a href="test-vectors/"><div class="it">Test vectors</div><div class="id">6 files, known results</div></a>
+        <a href="knobe-seed-v1.0.knobe.md"><div class="it">Sample KNOBE (Seed)</div><div class="id">a full valid artifact</div></a>
+        <a href="lens.py"><div class="it">lens.py</div><div class="id">reference verifier ~70 lines</div></a>
+      </div>
+      <div style="color:#7ed99a;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.74rem;margin-top:6px">canonical hash: sorted keys · no whitespace · literal UTF-8 · SHA-256</div>
+    </div>
+    <p style="font-size:.9rem;color:var(--ink-faint);font-family:-apple-system,system-ui,sans-serif;margin-top:14px">A public source repository and a preprint DOI are linked from the specification page.</p>
+  </div>
+</section>
+
+<section id="agents">
+  <div class="wrap">
+    <div class="shead">For agent builders</div>
+    <h2>Agent harness engineering, not prompt engineering</h2>
+    <p>Prompt engineering governs what you ask an agent. Agent harness engineering is the broader discipline — execution policy, tool permissions, memory architecture, observability: the conditions around the agent. KNOBE is part of that vision, but it came at the problem from the artifact side. Rather than engineering the system, it engineers what the object carries through any system — the context-harness concern: not how agents are built, but what artifacts bring to the encounter. Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</p>
+    <div class="twocol">
+      <div class="tc-card"><div class="tcl" style="color:var(--ink-faint)">harness infrastructure</div><h3>Controls the encounter</h3><p>Execution policy, tool permissions, observability, memory — the conditions around the agent.</p></div>
+      <div class="tc-card"><div class="tcl" style="color:var(--moss)">KNOBE · object layer</div><h3>Preserves the object</h3><p>Attribution, transformation history, fidelity limits — carried by the artifact across encounters.</p></div>
+    </div>
+    <p>The harness controls the encounter. The KNOBE preserves the object across encounters. If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits. It does not open the model's reasoning. It solves context survival across AI-mediated exchange, not AI interpretability.</p>
+  </div>
+</section>
+
+<section id="sits">
+  <div class="wrap">
+    <div class="shead">Where it sits</div>
+    <h2>Honest about the neighbors</h2>
+    <p>KNOBE did not invent the knowledge object, the self-verifying file, or the idea that metadata should travel with content. The field is converging from several directions at once — which is the strongest evidence the problem is real. KNOBE's contribution is a specific design point, not a new primitive.</p>
+    <div class="sits">
+      <div class="sits-row"><span class="sits-name">Google OKF</span><span class="sits-desc">Organizes portable markdown knowledge for human-agent exchange. KNOBE preserves the interpretive obligations of an object as it moves through such exchanges. A KNOBE can be authored OKF-compatible; the two are complementary layers.</span></div>
+      <div class="sits-row"><span class="sits-name">C2PA</span><span class="sits-desc">Content provenance and integrity for media, bound to signing authorities and X.509 certificates. KNOBE is plain-text, document-centric, and authority-free; the certificate-backed guarantees live in an optional application tier, not the open protocol.</span></div>
+      <div class="sits-row"><span class="sits-name">Nanopublications</span><span class="sits-desc">Granular, citable, provenance-rich knowledge units for the Semantic Web, in RDF. KNOBE is for the human web: one readable markdown file, no RDF and no infrastructure required.</span></div>
+      <div class="sits-row"><span class="sits-name">RO-Crate / PROV</span><span class="sits-desc">Package research artifacts and model provenance for FAIRness and reproducibility. KNOBE's narrower concern is whether a single object carries enough declared context to be interpreted responsibly by the next human or machine.</span></div>
+      <div class="sits-row"><span class="sits-name">Git / OpenTimestamps</span><span class="sits-desc">Content-addressed versioning and authority-free timestamping. Infrastructure KNOBE can compose with — Git's integrity lives in the repository; KNOBE's seal travels inside the object, whether or not a repo is present.</span></div>
+    </div>
+    <p>The neighboring systems make artifacts findable, attributable, reproducible, attestable, or agent-readable. KNOBE's narrower concern is whether the object carries enough declared context to be interpreted responsibly by the next human or machine that receives it — in plain text, outside any walled garden. A walled garden can offer legibility to those inside it. KNOBE is for the harder case: legibility that survives leaving the garden, readable by the least-powerful participant, not only by the platform with the best tooling.</p>
+  </div>
+</section>
+
+<section id="downloads">
+  <div class="wrap">
+    <div class="shead">Downloads</div>
+    <h2>Download and verify</h2>
+    <p>The white paper, Seed, and worked adaptation are themselves sealed <code>.knobe.md</code> files. Drop any of them into <code>lens.py</code> and verify the payload hash — the protocol demonstrates itself.</p>
+    <div class="dls">
+      <a href="knobe-v1-white-paper.knobe.md" class="dl"><div class="dt">White paper</div><div class="dd">KNOBE Protocol v1, the full argument and specification</div><div class="dh">payload_hash: 86e9d761bf4c0f83…</div></a>
+      <a href="knobe-seed-v1.0.knobe.md" class="dl"><div class="dt">The Seed</div><div class="dd">A self-attesting helper KNOBE that teaches the protocol and carries build recipes</div><div class="dh">payload_hash: 837c9e1d67c4889f…</div></a>
+      <a href="knobe-v1-plain-language-summary.knobe.md" class="dl"><div class="dt">Worked adaptation</div><div class="dd">A plain-language simplification bound to the white paper by hash, with the adapter credited</div><div class="dh">payload_hash: 562876b0a2b15591…</div></a>
+      <a href="lens.py" class="dl"><div class="dt">lens.py + test vectors</div><div class="dd">The reference verifier and six conformance files</div><div class="dh">CC BY 4.0 · reference implementation</div></a>
+    </div>
+  </div>
+</section>
+
+<section id="fullnot">
+  <div class="wrap">
+    <div class="shead">Honest limits</div>
+    <h2>What KNOBE is not</h2>
+    <div class="notlist">
+      <div>a platform</div><div>a system of record</div>
+      <div>DRM or a smart contract</div><div>a truth machine</div>
+      <div>a replacement for institutional systems</div><div>identity verification</div>
+      <div>a way to open the AI black box</div><div>finished</div>
+    </div>
+    <p>KNOBE does not solve hallucination, copyright, authorship, or governance. Attribution and identity are declared in v1, not cryptographically proven. KNOBEs do not execute: a <code>.knobe.md</code> is inert plain text. It carries obligations; it does not enforce them. And it applies equally to work done with AI, with some AI, or with none — the format records what actually happened, whatever that was.</p>
+  </div>
+</section>
+
+<section id="roadmap">
+  <div class="wrap">
+    <div class="shead">Tools</div>
+    <h2>The grove grows</h2>
+    <p>A <em class="kw">grove</em> is a collection of interoperable KNOBEs sharing provenance conventions, trust posture, and transformation norms. The Seed can start one. These tools tend it.</p>
+    <div class="road">
+      <div class="road-item"><div class="rn">01</div><div class="rt">Lens<br>view &amp; verify</div></div>
+      <div class="road-item"><div class="rn">02</div><div class="rt">Crystallizer<br>author &amp; seal</div></div>
+      <div class="road-item"><div class="rn">03</div><div class="rt">Mix<br>combine with lineage</div></div>
+      <div class="road-item"><div class="rn">04</div><div class="rt">Desk<br>local workspace</div></div>
+      <div class="road-item"><div class="rn">05</div><div class="rt">Studio<br>integrated</div></div>
+    </div>
+    <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)">Lens and the Magic Grove (a Crystallizer) are available now. The rest are in development. The verified-identity, ledger-anchoring, and enforcement capabilities of a credentialed environment belong to Studio, not to the open protocol.</p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="shead">Questions</div>
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details open><summary>Is this just metadata?</summary><p>It includes metadata, but the claim is structural: the metadata travels inside the object as plain text, stays human-readable and inspectable, is hash-sealed, and behaves consistently across any tool. A vector-database tag or a course-system field stays behind when the file moves. A KNOBE's payload moves with it — including the fields written for the receiver, like fidelity limits and adaptation lineage.</p></details>
+      <details><summary>Isn't this just a nanopublication, OKF with a hash, or Git?</summary><p>No. Nanopublications make granular claims citable and provenance-rich in the Semantic Web. OKF organizes markdown knowledge so humans and agents can exchange it. Git verifies and versions content in a repository. KNOBE is a different design point: one ordinary readable object that carries declared interpretive obligations — permissions, fidelity limits, transformations, accessibility adaptations — and reports whether that context still matches, without requiring a repository, registry, certificate authority, or platform.</p></details>
+      <details><summary>What does the hash prove?</summary><p>That the payload is unaltered since sealing. Nothing else. Not accuracy, not honesty, not safety. A liar can seal a lie; the seal then faithfully proves the lie has not been edited. Verification is where inspection begins.</p></details>
+      <details><summary>Does it make AI reasoning legible?</summary><p>No, and it does not claim to. KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits, adaptation history. It does not open the model's internal reasoning; that is a different problem. KNOBE solves context survival across AI-mediated exchange, not AI interpretability.</p></details>
+      <details><summary>Does this require AI?</summary><p>No. KNOBE applies to work done with AI, with some AI, or with none. The planned pilots span a range: some courses disallow AI entirely, others allow limited self-attested use. The Magic Grove builds a KNOBE with no AI at all. The format records what actually happened in whatever workflow occurred.</p></details>
+      <details><summary>Does it replace the course system, ethics board, or repository?</summary><p>No. It is a system of context, not a system of record. It carries attribution and interpretive obligation between the systems you already have, and lowers the cost of moving between them.</p></details>
+      <details><summary>Is quarantine part of the file or the tool?</summary><p>Both. A KNOBE carries a declared <code>quarantine_status</code> field in its payload — it can say <code>quarantine</code>, <code>trusted</code>, or <code>rejected</code>. But quarantine-first is also a recommended implementation posture: any external KNOBE should be treated as untrusted until reviewed, regardless of what the field says. Verification confirms the payload is intact; it does not clear the object for use. The receiver — human, institution, or governed system — makes that call.</p></details>
+      <details><summary>What does "seed stage" mean?</summary><p>v1 file semantics are frozen — the spec will not break existing files. The ecosystem around KNOBE is not finished. Extensions may add optional fields; breaking changes require a v2.0 declaration. We are inviting testing, critique, and independent implementation.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="governance">
+  <div class="wrap">
+    <div class="shead">Governance</div>
+    <h2>An open protocol, stewarded in the open</h2>
+    <dl class="gov">
+      <dt>Open and staying open</dt>
+      <dd>KNOBE Protocol v1 is authored and stewarded by David Kyle, University of California, Davis, with a growing team of researchers, designers, and practitioners at UC Davis contributing to its design, piloting, and development. It is released under CC BY 4.0 and will remain open. Anyone may implement, extend, or build on it; the protocol itself will not be enclosed.</dd>
+      <dt>v1 is frozen</dt>
+      <dd>The canonical hash rule, marker format, required fields, three-layer structure, and verification semantics will not change in v1.x. Backward-compatible additions may be issued as v1.x updates. Breaking changes require a v2.0 declaration. Files sealed under v1.0 remain valid under any v1.x verifier.</dd>
+      <dt>Semantics follow the sealed version</dt>
+      <dd>A verifier must apply the verification semantics of the spec version a file was sealed under. A future verifier may report additional advisory information, but must not reinterpret a previously valid KNOBE as failed.</dd>
+      <dt>How the spec changes</dt>
+      <dd>Proposed changes, bug reports, and implementation questions are submitted through the public source repository. The steward reviews proposals, maintains a public comment period for substantive changes, and issues decisions with documented rationale.</dd>
+      <dt>The team</dt>
+      <dd>KNOBE is being developed with a growing team at UC Davis spanning research, accessibility, software development, and education technology. Joshua Hori, software engineer and education technology researcher, leads the technical architecture and development. The instructional pilots, spanning courses of 100 to 500 students with a range of AI use policies, are being developed in collaboration with a deaf instructor and the campus accessibility director. If you are working on related problems and want to be part of what's being built, write to us.</dd>
+      <dt>Advisory board</dt>
+      <dd>An advisory board is forming. We are looking for people with experience in independent protocol implementation, educational technology, accessibility, open infrastructure, and institutional knowledge governance. Write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with a brief note on your perspective and relevant work. There is no deadline; this is an ongoing invitation.</dd>
+    </dl>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="fclaim">KNOBE preserves objecthood under compression.</div>
+    <div class="frow">
+      <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis</div>
+      <div style="text-align:right"><a href="about.html">About</a> · <a href="#downloads">White paper</a> · <a href="spec.html">Spec</a> · <a href="grove">Grove</a> · <a href="test-vectors/">Test vectors</a><br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a></div>
+    </div>
+    <div class="seal-line">white-paper payload_hash: 86e9d761bf4c0f83c024bf526301f035141d95e92fa763db7e7a615c95c952c6</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function syncLayer(n, on){
+    document.querySelectorAll('.fs-layer[data-layer="'+n+'"], .layer[data-layer="'+n+'"]').forEach(function(el){ el.classList.toggle('lit', on); });
+  }
+  document.querySelectorAll('.fs-layer, .layer[data-layer]').forEach(function(el){
+    var n = el.getAttribute('data-layer');
+    el.addEventListener('mouseenter', function(){ syncLayer(n, true); });
+    el.addEventListener('mouseleave', function(){ syncLayer(n, false); });
+    el.addEventListener('click', function(){ [1,2,3].forEach(function(k){ syncLayer(k,false); }); syncLayer(n,true); });
+  });
+
+  var chain = document.querySelector('.chain');
+  function playChain(){
+    if(!chain) return;
+    var steps = chain.querySelectorAll('.chain-step');
+    steps.forEach(function(step){ step.querySelectorAll('.cdot').forEach(function(d){ d.classList.remove('fading'); d.className='cdot on'; }); });
+    if(reduce){ applyFinal(); return; }
+    var loss=[[],[0,2],[0,1,2,3],[0,1,2,3]];
+    steps.forEach(function(step,si){
+      var dots=step.querySelectorAll('.cdot');
+      setTimeout(function(){
+        loss[si].forEach(function(di){ if(dots[di]) dots[di].classList.add('fading'); });
+        setTimeout(function(){ loss[si].forEach(function(di){ if(dots[di]) dots[di].className='cdot off'; }); },600);
+      }, 600*si);
+    });
+  }
+  function applyFinal(){
+    var steps=chain.querySelectorAll('.chain-step'); var loss=[[],[0,2],[0,1,2,3],[0,1,2,3]];
+    steps.forEach(function(step,si){ var dots=step.querySelectorAll('.cdot'); loss[si].forEach(function(di){ if(dots[di]) dots[di].className='cdot off'; }); });
+  }
+  if(chain && 'IntersectionObserver' in window){
+    var seen=false;
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting && !seen){ seen=true; playChain(); } }); }, {threshold:.5}).observe(chain);
+  } else { applyFinal(); }
+  var rb=document.getElementById('chainReplay'); if(rb) rb.addEventListener('click', playChain);
+
+  var runBtn=document.getElementById('runVerify'), out=document.getElementById('verifyOut');
+  if(runBtn && out){
+    var lines=[
+      '<div style="margin-top:8px"><span class="tl">title:             </span><span class="tv">Oral history — interview 04</span></div>',
+      '<div><span class="tl">spec_version:      </span><span class="tv">1.0</span></div>',
+      '<div><span class="tl">quarantine_status: </span><span class="tv">quarantine</span></div>',
+      '<div><span class="tl">computed_hash:     </span><span class="tv">a6c5de4313586170c7600cb9065a858d…</span></div>',
+      '<div><span class="tl">stored_hash:       </span><span class="tv">a6c5de4313586170c7600cb9065a858d…</span></div>',
+      '<div><span class="tl">status:            </span><span class="tm">verified</span></div>',
+      '<div><span class="tl">body_hash:         </span><span class="tm">match</span></div>',
+      '<div style="margin-top:8px"><span class="tn">integrity verified. Integrity is not truth — inspect before trusting.</span></div>'
+    ];
+    runBtn.addEventListener('click', function(){
+      runBtn.disabled=true; out.innerHTML='';
+      if(reduce){ out.innerHTML=lines.join(''); runBtn.disabled=false; runBtn.textContent='▸ Run again'; return; }
+      var i=0;(function next(){ if(i>=lines.length){ runBtn.disabled=false; runBtn.textContent='▸ Run again'; return; } out.insertAdjacentHTML('beforeend',lines[i]); i++; setTimeout(next,180); })();
+    });
+  }
+
+  document.querySelectorAll('.copybtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var text=btn.getAttribute('data-copy').replace(/&#10;/g,'\n').replace(/&quot;/g,'"');
+      var done=function(){ var l=btn.textContent; btn.textContent='copied ✓'; btn.classList.add('copied'); setTimeout(function(){ btn.textContent=l; btn.classList.remove('copied'); },1400); };
+      if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done,done); }
+      else { var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select(); try{document.execCommand('copy');}catch(e){} document.body.removeChild(ta); done(); }
+    });
+  });
+
+  var rail=document.getElementById('vrail');
+  if(rail){
+    var states=[
+      {id:'format',t:'artifact: .knobe.md'},
+      {id:'problem',t:'context survivorship bias'},
+      {id:'carry',t:'carries interpretation, not only provenance'},
+      {id:'verify',t:'status: verified'},
+      {id:'accessibility',t:'first proving ground'},
+      {id:'sits',t:'honest about the neighbors'},
+      {id:'fullnot',t:'integrity \u2260 truth'},
+      {id:'governance',t:'open · CC BY 4.0'}
+    ];
+    var t=rail.querySelector('.vr-text');
+    function upd(){ var best='KNOBE v1 · verify locally'; states.forEach(function(s){ var el=document.getElementById(s.id); if(el && el.getBoundingClientRect().top < window.innerHeight*0.5) best=s.t; }); if(t) t.textContent=best; }
+    window.addEventListener('scroll', upd, {passive:true}); upd();
+  }
+})();
+</script>
+</body>
+</html>

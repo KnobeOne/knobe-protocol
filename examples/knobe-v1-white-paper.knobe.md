@@ -1,0 +1,589 @@
+---
+title: "KNOBE Protocol v1: A Context Protocol for Responsible Knowledge Movement"
+subtitle: "Preserving objecthood, attribution, and interpretive obligation under compression"
+tagline: "KNOBE preserves objecthood under compression."
+author: David Kyle
+content_type: compression
+spec_version: "1.0"
+license: CC BY 4.0
+license_url: https://creativecommons.org/licenses/by/4.0/
+created_date: "2026-06-11"
+---
+
+# KNOBE Protocol v1: A Context Protocol for Responsible Knowledge Movement
+
+### Preserving objecthood, attribution, and interpretive obligation under compression
+
+**David Kyle** · University of California, Davis · knobe.org
+*Public release — June 2026*
+
+---
+
+## Abstract
+
+As knowledge moves through AI systems, institutional platforms, course workflows, archives, summaries, and reports, it often travels as fragments: excerpts, chunks, screenshots, summaries, and flattened files. The words may survive transit while the context that made them interpretable disappears. This paper names that failure **context survivorship bias**: the fragment that survives transit is mistaken for the full knowledge object, while the missing context that made it meaningful falls from view.
+
+KNOBE Protocol v1 is an open protocol for responsible knowledge movement. A single `.knobe.md` file carries a human-readable document together with a machine-legible, hash-sealed payload recording attribution, source relations, transformation history, constraints, fidelity limits, use conditions, accessibility adaptations, quarantine status, and integrity checks. KNOBE does not prove truth, authorship, authorization, or trustworthiness. Its hash proves only that the sealed payload has not changed since sealing. Attribution is declared, not independently verified. New or external KNOBEs should be treated as quarantined until a human or governed system marks them trusted.
+
+KNOBE is informing infrastructure, not controlling infrastructure. It reports what traveled with the object so that humans, institutions, and agentic systems can decide responsibly. Its core claim is simple: **KNOBE preserves objecthood under compression.** It gives knowledge objects a portable way to carry the context and obligations that would otherwise be lost as they move through human, institutional, and AI handoffs.
+
+---
+
+## 1. The Problem: Fragments in Transit
+
+Knowledge has always depended on compression. A citation compresses a lineage. A credential compresses a training history. A reputation compresses a body of work. An abstract compresses an article. A syllabus line compresses a course. Compression is what makes knowledge portable at all.
+
+But compression also creates a recurring danger: the artifact survives while the conditions that made it interpretable disappear.
+
+Institutions arose, in part, to govern exactly this danger — to decide which compressions count, who may interpret them, and who may certify, contest, or revise them. In this sense they are not merely repositories of knowledge but harnesses around it: systems of *authorized decompression*. Power accrues not only to those who produce knowledge but to those authorized to say what a compressed object means, to enforce that reading, and to act through it. The recurring failure is that a compressed object becomes *operationally sufficient* — treated as adequate to act on while the partial, situated, contestable field that made it interpretable drops from view. A file becomes a person. A credential becomes competence. A ranking becomes quality. A summary becomes the source.
+
+This pattern long predates computing. What has changed is speed, scale, and the role of AI systems in receiving, transforming, and transmitting compressed knowledge objects. Books, articles, notes, prompts, transcripts, clinical encounters, student work, legal excerpts, research records, organizational decisions, and creative works now move through pipelines in which human inspection is intermittent.
+
+What travels through those pipelines is rarely the full object. It is the chunk that fits a context window, the excerpt that pastes cleanly, the screenshot, the table, the summary of a summary. Pipelines select for what is small, portable, and machine-tractable. The context that made the fragment meaningful often does not travel with it, because nothing in the pipeline is responsible for carrying it.
+
+Consider a simple case. A graduate student interviews an elder for an oral-history project. The transcript carries consent terms, a request that certain passages remain unquoted, and the interviewer's contextual notes. A semester later, an excerpt is pasted into an AI assistant to draft a conference abstract. The abstract is summarized for a department newsletter. A sentence from the newsletter is quoted in a grant report.
+
+Every step may be reasonable. No one need have acted in bad faith. But by the fourth step, the words still circulate while the consent terms, the do-not-quote request, and the contextual notes have disappeared. No one downstream knows they ever existed.
+
+This is **context survivorship bias**: the fragment that survives transit is mistaken for the full knowledge object, while the missing context that made it interpretable disappears from view. The name is deliberate kin to survivorship bias in statistics — the analytical error, famously formalized in Abraham Wald's wartime work on aircraft survivability, of reasoning only from the cases that returned and treating the missing ones as if they never existed (Mangel & Samaniego, 1984). In knowledge circulation we interpret the fragments that arrived, and the absence of the rest is invisible by construction.
+
+The obvious diagnosis is wrong. The problem is not compression. Compression is unavoidable, and often the entire point. The problem is **compression without portable interpretive obligation**.
+
+A knowledge object is more than text. It is text plus the relations that make the text interpretable: who produced it, under what constraints, derived from what sources, transformed how and by whom, reliable for which purposes, governed by which fidelity limits, and subject to which conditions of use.
+
+When those relations fail to travel, the result is an **orphaned fragment**: content that still looks like an object but can no longer answer for itself. The excerpt forgets its source. The summary forgets its fidelity limits. The pasted passage forgets whose judgment it embodies.
+
+Institutions experience this as rising coordination cost. Every handoff between a person, a tool, a department, a platform, and an agent requires someone to reconstruct what did not arrive, or else to proceed without reconstructing it. The costs surface as misattribution, unrepeatable analyses, untraceable adaptations, credit drifting away from contributors, and decisions made on fragments mistaken for wholes.
+
+KNOBE addresses this problem at the only layer that travels everywhere: the artifact itself. Its aim is not to stop compression, which is indispensable. Its aim is to make it harder for a compressed knowledge object to become consequential while pretending it is whole.
+
+**KNOBE preserves objecthood under compression.**
+
+---
+
+## 2. What KNOBE Is
+
+KNOBE is an open protocol for knowledge objects that need to survive handoffs.
+
+A KNOBE is not a platform. It is not a database. It is not a learning management system, repository, rights-management layer, blockchain, DRM scheme, or AI model. It is a plain-text artifact format for carrying context and obligation with a knowledge object.
+
+A KNOBE is implemented as a `.knobe.md` file: one file containing a readable markdown body and a machine-legible, hash-sealed payload. A human can read the document in any text editor. A machine can decode the structured payload. A verifier can check the payload hash. No conversion, no sidecar file, no platform dependency.
+
+KNOBE is a **system of context, not a system of record**. Systems of record — the course system, the ethics board, the repository, the archive, the HR system — each hold an authoritative slice of institutional truth, and KNOBE replaces none of them (Section 7 returns to this). KNOBE carries context *between* those systems: who made the object, what it derives from, what changed, what constraints apply, what fidelity limits govern it, and what humans or agents need in order to interpret it responsibly. Its value is lower coordination cost across people, tools, institutions, and workflows, especially as knowledge increasingly moves through mixed human-machine processes.
+
+Two boundary clarifications matter.
+
+First, KNOBE is not only for AI-heavy workflows. A student who wrote entirely without AI uses the same attribution and process fields as one who used four tools. A researcher working only from archival materials uses the same structure as one using AI-assisted synthesis. The format does not prejudge the workflow. It records what actually happened.
+
+Second, KNOBE is not merely metadata. Metadata describes an object from outside. KNOBE makes selected interpretive obligations travel *inside* the object. Once an object reaches the KNOBE surface, its attribution, source anchors, constraints, intentionality, fidelity limits, and use conditions are not merely *about* the object; they become part of what the object *is* for future use.
+
+A note on language, since the protocol's own vocabulary works against it. This paper uses *context* throughout because it is the word readers expect, but the word quietly concedes what the protocol contests: *context* means what surrounds a thing from outside, so to call attribution, labor, provenance, intention, and fidelity limits the "context" of a knowledge object is already to treat them as separable from it. Stated more precisely, a knowledge artifact is the *known* — the output, the text — and the conditions of its making are the *knowing* — the labor, position, intention, and process that produced it. Neither alone is knowledge a community can build on: the known without the knowing cannot be interrogated, extended, or trusted, and the knowing without the known leaves no durable artifact to carry forward. Knowledge that travels across people and time requires both, held together: *known + knowing = knowledge*. What is ordinarily called "context" is just the knowing after it has been cut away from the known and demoted to optional background. A KNOBE cannot prevent that cut — a file refuses nothing, and any KNOBE can be stripped to plain text in a keystroke — but it holds what its author judges relevant of the knowing as part of the object, so that the cut becomes a visible act rather than the silent default.
+
+A KNOBE does not preserve all context. That would be impossible, and it would defeat the compression that makes knowledge useful. It preserves enough of an object's interpretive field to reduce amnesia during transport, transformation, and reuse: the attribution, the source relations, the transformation history, the fidelity limits, and the conditions under which the object was made and should be applied. The goal is not total recall. It is an artifact that can still answer for itself.
+
+A note on the name: KNOBE began as an acronym, **Knowledge-Native Objects for Bots and Engines**. That expansion is now historical. It made the protocol sound bot-centered when the frame had become broader. Read KNOBE today as it functions: **knowledge objects with portable interpretive obligation**.
+
+---
+
+## 3. One Artifact, Three Layers
+
+A `.knobe.md` file is one plain-text artifact with three layers, all simultaneously present:
+
+    ---
+    {YAML frontmatter}
+    ---
+    {Markdown body — free-form, no schema}
+
+    -----BEGIN KNOBE B64-----
+    {Base64-encoded UTF-8 JSON payload}
+    -----END KNOBE B64-----
+
+The **frontmatter** is lightweight YAML readable without tooling: title, author, spec version, license, date, content type, seed status, and related fields. It mirrors key payload fields so that a person, or a file browser, can scan the object in seconds.
+
+The **body** is standard markdown: the human-readable content, unconstrained by schema. It can be an essay, field note, transcript, lesson, recipe, protocol, reflection, accessibility adaptation, index, or other knowledge object. This layer is why a KNOBE never requires special software to be *read*.
+
+The **payload block** is Base64-encoded UTF-8 JSON carrying the structured record: attribution, key concepts, version history, privacy level, quarantine status, parents, transformation history, fidelity limits, use conditions, accessibility fields, build recipes for Seeds, and the integrity hashes. Base64 is deliberate (Josefsson, 2006). Raw JSON in the body would wreck human readability; Base64 is opaque to casual reading but trivially extractable by any competent parser. The payload markers are **newline-anchored by protocol requirement, not convention**, because KNOBEs can be self-referential: a Seed or a white paper may quote the marker strings in its own body. Documents that quote the markers should indent them, as this section does, and robust parsers should prefer the last well-formed payload block in the file.
+
+The result is an artifact that degrades gracefully in both directions.
+
+Handed to a human with no tooling, it remains a readable document whose obligations can be stated in plain language.
+
+Handed to a capable AI system with no prior knowledge of KNOBE, it remains readable markdown, and the file can often reveal its own structure: frontmatter, body, payload markers, and explanatory text all remain visible. In practice, capable naive readers can often infer that the Base64 block is part of the object's structured record. But this is discoverability, not verification.
+
+Deterministic verification requires KNOBE-aware tooling. Handed to such a tool, the same file becomes a verifiable structured object with machine-legible provenance and inspectable payload fields. That distinction is central:
+
+> KNOBE is discoverable to capable readers and models, but verifiable only through deterministic tooling.
+
+---
+
+## 4. Fields That Carry Obligation
+
+The v1 schema is small by design. A KNOBE is **valid** when its frontmatter declares `spec_version: "1.0"` and its payload contains ten required elements:
+
+| Payload field | Required | Purpose |
+|---|---|---|
+| `payload_hash` | yes | SHA-256 of the canonical JSON, excluding this field |
+| `spec_version` | yes | Protocol version, `"1.0"` |
+| `title` | yes | Object identity |
+| `summary` | yes | Machine-readable gist |
+| `content_type` | yes | Type of object (see controlled vocabularies below) |
+| `created_date` | yes | ISO 8601 date |
+| `license` | yes | Declared license |
+| `privacy_level` | yes | `public`, `internal`, `sensitive`, or `restricted` |
+| `quarantine_status` | yes | `quarantine`, `trusted`, or `rejected` |
+| `attribution.sources` | yes | Contributors and their declared contributions |
+
+Everything else is optional structure for richer records.
+
+**Controlled vocabularies.** Four fields draw on a canonical vocabulary that the reference verifier recognizes: `content_type` (`original`, `synthesis`, `adaptation`, `compression`, `annotation`, `seed`, `collection`, `translation`); `quarantine_status` (`quarantine`, `trusted`, `rejected`); `privacy_level` (`public`, `internal`, `sensitive`, `restricted`); and `identity_status` (`declared`, `signed`). These vocabularies are open, not closed. A value outside the canonical set does not make a KNOBE invalid; the verifier records it but flags it as a soft deviation unless it is namespaced with a domain or extension prefix — for example `domain:embargoed` or `ext-confidential`. Namespacing lets a community extend the vocabulary without colliding with the canonical terms or silently masquerading as one of them. All payload values are encoded as JSON strings in v1; the reference verifier reports bare numeric values as nonconformant.
+
+The optional fields are where KNOBE carries more than provenance. Provenance answers *where did this come from?* KNOBE also asks *how should the next party receive it?* Several optional fields carry that obligation.
+
+### `parents[]`
+
+A `parents` entry records the KNOBEs or source objects this object derives from. It may identify a parent by payload hash, title, stable identifier, or canonical URL, together with a `relationship` such as `source`, `fork`, `extension`, `synthesis_input`, `compression_of`, or `adaptation_of`. This makes lineage an inspectable property of the object rather than a fact lost in someone's file system.
+
+### `transformation_history[]`
+
+A `transformation_history` entry records what changed, who changed it, when, and by what `strategy`: `synthesis`, `side-by-side` combination, `extension`, `compression`, `remix`, or `adaptation`. A transformed object should not arrive as if it had no history.
+
+### `fidelity_limits`
+
+A `fidelity_limits` field tells a receiver how far the object can be trusted as a representation of its source, and what must not be inferred from it. A classroom vignette may preserve the structure of a historical case while compressing chronology and inventing dialogue; a summary may preserve the main argument but not the evidentiary detail; a translation may preserve sense but not rhythm, register, or legal force. Fidelity limits are not truth guarantees. They are receiver-facing interpretive bounds.
+
+### `use_conditions`
+
+A `use_conditions` field carries originator-declared terms the next reader or agent is asked to honor: permitted uses, disallowed uses, consent constraints, quotation constraints, required preservations, or redistribution conditions. Use conditions are declared obligations, not enforcement mechanisms. KNOBE informs; it does not control.
+
+### `accessibility`
+
+An `accessibility` field records adaptation lineage: what was adapted, from what source (by payload hash), by whom, for what purpose, and under what review date, with an `adaptation_type` such as `caption`, `simplification`, `alt-text`, `translation`, or `multimodal`. This matters because adaptation is not a technical afterthought. Captioning, simplification, translation, alt text, audio description, and multimodal adaptation are knowledge work; they involve judgment, labor, interpretation, and fidelity limits. KNOBE gives that labor a place in the artifact's record, bound to the source it was made from.
+
+### Why these fields matter
+
+Together, these fields make KNOBE more than a provenance wrapper. Attribution says who contributed. Lineage says what it derives from. Transformation history says what changed. Fidelity limits say how far to trust the representation. Use conditions say what obligations the originator asks the next party to honor. Accessibility records how adaptation labor remains tied to its source. They let a knowledge object arrive carrying more of the interpretive field required to handle it responsibly — across a gap between parties who do not share the same access to it: between an author and a later reader, between a human and an agent, between a source and its adaptation. They inform; they do not enforce. A receiver is free to ignore them, but never able to say the object failed to carry them.
+
+---
+
+## 5. Integrity, Not Truth
+
+When a verifier shows a green check, exactly one thing has been established: the sealed payload is the same payload that was present when the artifact was sealed. The SHA-256 comparison (NIST, 2015) is a tamper-evidence mechanism, and a strong one. It is not — and cannot be — a truth mechanism.
+
+A KNOBE can verify perfectly and still be wrong, outdated, plagiarized, misattributed, misleading, or malicious. A liar can seal a lie; the seal then faithfully proves that the lie has not been edited since. Conversely, a mismatch does not prove malice: a well-meaning edit, a line-ending conversion, or a copy-paste accident breaks a hash just as surely as tampering does.
+
+The hash answers one question:
+
+> Is this the sealed payload?
+
+It refuses every other. KNOBE's hash is tamper-evidence, not a cryptographic signature binding the artifact to a verified identity; content-provenance standards such as C2PA (2024) provide that complementary guarantee for signed media, and v1's `identity_status: signed` anticipates such an extension without yet providing it.
+
+This restraint is a design feature, not a limitation to be apologized for. Systems that conflate integrity with trust train their users to stop inspecting; the lock icon becomes a substitute for judgment rather than a precondition for it. KNOBE pushes the other way. Verification is cheap and automatic precisely so that human judgment can be spent where it is actually needed: on the claims, the attribution, the use conditions, the fidelity limits, and the fit between the object and its intended use. The green check is where inspection begins, not where it ends.
+
+### Language models are not verification environments
+
+This failure has an LLM-specific variant. A language model tasked with verifying a KNOBE natively does not perform a cryptographic computation; it performs a textual prediction. Once a plausible hash-token sequence has been generated, the structural logic of a verification narrative strongly predicts that the next sequence should match and declare success. The model satisfies the narrative arc of the prompt rather than executing the operation — a textual performance of verification rather than verification itself. This is the **probabilistic verification fallacy**.
+
+The failure was observed empirically. In testing, a language model confabulated a perfectly matched hash pair that bore no relation to the file's actual sealed payload. The recursion is what makes it instructive: in the same session, the model diagnosed the failure with precision and then committed it again in the next generation, embedding a hallucinated hash into a provenance record as if it were real. The diagnosis lived in the text; no persistent state existed to let it constrain the next token sequence. That gap — between correct reasoning about verification and the ability to enforce that reasoning across one's own next generation — is what "architectural boundary" means. A language model is not incapable of reasoning about verification; it is incapable of being the environment that performs it.
+
+Hash verification requires a deterministic runtime. For that reason, KNOBE ships with a reference verifier, `lens.py`, not as a convenience but as that boundary. The rule is simple:
+
+> Models can help understand verification. Code must perform verification.
+
+---
+
+## 6. Quarantine-First
+
+New or external KNOBEs should be treated as quarantined until a local human or governed system marks them trusted. This is the protocol's trust posture, and it inverts the usual default of circulation systems, which treat arrival as implicit endorsement.
+
+This matters because a KNOBE may arrive declaring itself `trusted`. Receiving systems should not automatically inherit that declaration; local trust is a receiving-system decision. The field `quarantine_status` records the trust posture associated with the object, but receiving environments should maintain their own review layer. An external KNOBE may be valid, readable, and hash-verified while still remaining untrusted locally.
+
+Quarantine-first has three practical consequences. First, inspection precedes action: tools that consume KNOBEs surface quarantine status prominently and do not act on quarantined build recipes or transformations without explicit human or governed approval. Second, trust becomes a recorded decision rather than an ambient assumption: someone, or some governed process, changes the status, and that decision belongs to the object's history. Third, the posture scales in both directions: a single reader applying personal judgment and an institution applying a formal review workflow use the same field, with different governance behind it.
+
+Quarantine is not an accusation. It is the honest starting point for any object whose provenance has not yet been examined, which is every object, on arrival.
+
+> A verified KNOBE is not necessarily trusted. A trusted KNOBE is not necessarily true. A true claim still requires interpretation. The seal reports; the human decides.
+
+---
+
+## 7. A System of Context, Not a System of Record
+
+The predictable institutional objection arrives early: *we already have systems.* The objection is correct, and it misses the point.
+
+Course systems keep grades. Ethics review keeps approvals. Repositories keep deposits. Archives keep accession records. Publishers keep formal publication metadata. Human resources systems keep employment records. Compliance systems keep official decisions. Each is a system of record, and each should remain. KNOBE replaces none of them.
+
+KNOBE is a **system of context**. It carries object-level context *between* systems of record: attribution, source relations, transformation history, fidelity limits, use conditions, accessibility adaptations, quarantine status, and inspection cues. Systems of record are walls; objects move through the doors between them. KNOBE is what the object wears as it moves.
+
+Many institutions do not need another platform. They need a way for knowledge objects to move through the systems they already run without losing the context that makes them responsible to use. A KNOBE lets an object say, in a form both a person and an agent can read:
+
+* this is what I am;
+* this is where I came from;
+* these are my sources;
+* these are my transformations;
+* these are my constraints;
+* these are my fidelity limits;
+* this is how I should be inspected;
+* this is what has and has not been verified.
+
+The goal is not to centralize control. It is to make movement more answerable.
+
+---
+
+## 8. Agent Harness Engineering and Process Literacy
+
+A significant shift is underway in agentic AI. Attention is moving from isolated prompts toward the systems around models: memory, tools, permissions, execution policy, retrieval, observability, evaluation, and handoff. Recent work calls this turn *system scaling* — treating the structured execution layer around a foundation model as a first-class object of design, evaluation, and optimization (Gu, 2026). Whatever the label — harness, context, runtime, orchestration — the core insight is the same: what appears to be a model capability is often a model-plus-system capability, and performance changes materially when the same model runs under a more constrained and better-instrumented execution policy.
+
+KNOBE does not replace that harness. It supplies a better object for any harness to handle: a knowledge artifact that arrives at any encounter already carrying its attribution, transformation history, constraints, and interpretive obligations as part of itself.
+
+**The harness controls the encounter. KNOBE preserves the object across encounters.**
+
+Harness infrastructure governs the conditions *around* the agent: execution policy, memory architecture, tool permissions, observability, runtime constraints. KNOBE governs the conditions *carried by* the artifact: attribution, transformation history, fidelity limits, use conditions, and interpretive obligations. If an artifact arrives stripped of those, no downstream harness can reconstruct what was never carried; the loss compounds across hops, until agent A summarizes, agent B excerpts the summary, agent C acts on the excerpt, and no party — human or machine — can recover what the original object obligated its users to know. If the artifact arrives as a KNOBE, the harness begins with a richer, more accountable object. This is why KNOBE belongs to the emerging practice of agent harness engineering without claiming to be the harness itself: it addresses the object side of the problem.
+
+The same machinery serves a long-standing institutional aspiration: **process literacy**, the ability to understand, document, inspect, and evaluate the pathway by which knowledge work was produced, not only its final output. Students need it to learn honestly and to show their work. Researchers need it for methods, replication, and credit. Accessibility specialists need it to record adaptations without severing them from sources. Administrators and reviewers need it to evaluate work they did not watch happen. Draft folders, chat logs, course-system submissions, ethics records, and institutional repositories each preserve part of the picture; none reliably carries a shared, object-level account of judgment, transformation, attribution, constraint, and use condition that travels with the work. KNOBE gives the process record a portable home inside the object.
+
+Process literacy is also where a quieter failure is fought. The **Matthew Effect** — the well-documented tendency for credit in knowledge systems to accumulate around those already prominent (Merton, 1968) — is a problem of *maldistribution*: the credit exists, and it flows unfairly. The **Matthew Defect** is a more basic failure. The contribution record never survives to be credited at all. Attribution and context are stripped in transit, buried under reformatting, quietly co-opted by a more prominent name, or marginalized as unimportant — by accident, by convenience, or by design. What remains is the visible fragment; the labor, judgment, and source relations that made it meaningful are gone. Where the Effect misallocates credit that was recorded, the Defect destroys the record before allocation is even possible, and no after-the-fact redistribution can recover what was never carried. This is the human-level expression of context survivorship bias, and it is why attribution fields are protocol requirements rather than optional metadata. The requirement is deliberately workflow-neutral: it applies identically to the entirely human essay, the AI-assisted synthesis, and the archival monograph, because the point is recording what actually happened.
+
+---
+
+## 9. Seeds, Groves, and Tools
+
+A **Seed** is not the protocol. A Seed is a fully valid KNOBE with `is_seed: true`, purpose-built to help the protocol spread. It can teach the protocol, self-describe, demonstrate dual readability, explain safety posture, carry build recipes for tools, and help users generate new, interoperable KNOBEs. A Seed can start a **grove**: a collection of interoperable KNOBEs that share provenance conventions, trust posture, schema expectations, and transformation norms.
+
+The recursion is both the point and the risk. A Seed describes the very protocol that validates it, which makes Seeds powerful bootstrapping artifacts: a single plain-text file can teach a person, or a model, to build the tools that read it. It is also exactly why Seeds are bound by the protocol's **Recursive Calibration Rule** (internally, the Recursive Temperature Reduction Rule): each upward meta-level must reduce rhetorical temperature and increase epistemic calibration, classifying its claims as *verified*, *declared*, *inferred*, *speculative*, or *unsupported*, and a meta-layer may not make stronger claims than the layer beneath it unless it adds new evidence. The named failure mode is **Recursive Contamination**: weak claims recursively dignified by abstraction, until the structure looks formal and the garbage looks load-bearing. The remedy is claim calibration, rhetoric cooling, and explicit epistemic classification at every upward level — applied first of all to KNOBE's own publications, including this one.
+
+In that spirit, the early evidence for Seeds is reported here as *declared*. The current Seed has been tested against four AI systems — Claude, GPT-4, Gemini, and Manus — and all four passed the core prompts; one independently produced a ten-pathway university-deployment document from the Seed alone and independently recommended the viewer-verifier as the first tool to build. This is early evidence that a Seed can function as a bootstrapping artifact. It shows promise, not completion, and it has not yet been independently replicated.
+
+The initial tool ecosystem includes:
+
+* **Lens** — view and verify KNOBEs.
+* **Crystallizer** — author and seal KNOBEs.
+* **Magic Grove** — a guided, no-AI first encounter for creating a valid `.knobe.md`.
+* **Mix** — combine KNOBEs while preserving parent relations and lineage.
+* **Desk** — a local workspace for managing KNOBEs.
+* **Studio** — an integrated authoring, teaching, and knowledge-work environment.
+
+The protocol does not depend on any single tool. The success of KNOBE depends on independent implementation: a developer should be able to build a compatible verifier from the specification alone, compare results against shared test vectors, and know whether the implementation conforms to v1. That is why v1 file semantics are frozen. Extensions may add optional fields; they may not reinterpret valid v1 files.
+
+---
+
+## 10. Limits and Invitation
+
+It is as important to say what KNOBE does not do as what it does.
+
+KNOBE does not solve hallucination, truth, copyright, authorship verification, identity, governance, or ethics. The hash proves integrity, never trust. Attribution and good faith are *declared* in v1, not proven; `identity_status: signed` points toward future cryptographic identity extensions, but v1 makes no such guarantee. KNOBEs do not execute: a `.knobe.md` is inert plain text, and build recipes are instructions a human or agent may choose to follow after inspection, never self-executing code. KNOBE replaces no system of record: no learning-management system, ethics platform, repository, archive, database, or compliance system. And KNOBE does not treat compression as the enemy; the entire design concerns whether interpretive obligations survive compression, not whether compression occurs.
+
+KNOBE Protocol v1 is released as an early public v1: a public protocol with an open specification, an open license, and a reference verifier, offered for testing, critique, and extension. The specification is small enough to implement in an afternoon and precise enough to be falsifiable in the only way that matters for infrastructure — by strangers trying to build against it. Readers are invited to verify the artifacts at knobe.org, to attempt independent implementations from the specification alone, to test against the conformance set, to break the canonicalization rule if they can, and to propose extensions where the schema proves too small for real work.
+
+This paper practices what it specifies. The document you are reading is itself a sealed KNOBE: its payload records its authorship (human and AI), its license, its quarantine posture, and a parent receipt identifying the longer working document it compresses, by hash, with the relationship `compression_of`. It is, in other words, a compression that kept its obligations. That is the whole idea.
+
+**KNOBE preserves objecthood under compression.**
+
+---
+
+## Appendix A. Minimum Valid KNOBE and the Canonical Hash Rule
+
+**A KNOBE is valid if and only if:**
+
+1. the YAML frontmatter includes `spec_version: "1.0"`;
+2. the payload includes `spec_version`, `title`, `summary`, `content_type`, `created_date`, `license`, `privacy_level`, `quarantine_status`, `attribution.sources` (each source bearing at least `author` and `contribution`), and `payload_hash`;
+3. the file consists of YAML frontmatter delimited by `---` lines, a free markdown body, and one payload block of Base64-encoded UTF-8 JSON bounded by newline-anchored markers.
+
+### Canonical payload hash
+
+To verify `payload_hash`:
+
+1. Decode the Base64 payload to JSON.
+2. Delete the `payload_hash` field.
+3. Normalize every object key and every string value to Unicode Normalization Form C (NFC), recursively.
+4. Serialize the remaining JSON with: all object keys recursively sorted alphabetically; no whitespace; arrays preserved in insertion order; Unicode preserved as literal UTF-8, never `\uXXXX`-escaped.
+5. Compute SHA-256 over the UTF-8 bytes.
+6. Compare the hex digest to the stored `payload_hash`.
+
+The NFC step in (3) is required: it guarantees that two payloads which are visually and semantically identical but differ only in Unicode composition hash to the same value across platforms and editors. JavaScript `JSON.stringify` with sorted keys is the canonical baseline for the serialization in (4); the Python equivalent, applied after NFC normalization, is `json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)`. The rule is specified independently but shares its goals with the JSON Canonicalization Scheme (Rundgren et al., 2020). A match proves the payload is unaltered since sealing. It proves nothing else.
+
+### Optional body hash
+
+The optional `body_hash` field records SHA-256 over the normalized markdown body. Normalization:
+
+1. Extract the body as all text between the closing `---` of the YAML frontmatter and the line preceding the `BEGIN` payload marker.
+2. Strip leading and trailing whitespace from the whole extracted body.
+3. Replace every `\r\n` and every remaining lone `\r` with `\n`.
+4. Strip only trailing U+0020 spaces and U+0009 tabs from each line.
+5. Apply no Unicode normalization; NFC and NFD are hashed as written.
+6. Encode as UTF-8.
+7. Compute SHA-256.
+
+`body_hash` is advisory. If `payload_hash` verifies but `body_hash` mismatches, the KNOBE remains structurally valid and is reported as `verified-body-modified` — a signal to inspect, not a verdict of tampering. Because body extraction is ambiguous when more than one payload block is present, the body result is reported only when exactly one block exists.
+
+### Verification states
+
+A verifier should distinguish at least four integrity states:
+
+* `verified` — payload hash matches; body hash matches or is absent.
+* `verified-body-modified` — payload hash matches; optional body hash mismatches.
+* `failed` — payload hash mismatch.
+* `unreadable` — the payload block is missing, malformed, undecodable, or unparsable.
+
+### Conformance
+
+Independently of integrity, the reference verifier reports a conformance dimension: `valid` (all required fields present, formats well-formed), `warnings` (usable, but with soft deviations such as a custom vocabulary value without a namespace prefix), or `invalid` (a normative requirement is violated — a missing required field, a malformed `payload_hash`, a non-ISO `created_date`, or a bare numeric value where a string is required). Integrity and conformance are orthogonal: a file can be `verified` yet `invalid`, or `failed` yet otherwise well-formed.
+
+### Version semantics
+
+A verifier must apply the verification semantics of the spec version under which a file was sealed. A future verifier may report additional advisory information, but it must not reinterpret a previously valid v1 KNOBE as failed unless v1 semantics would have done so.
+
+### Reference verifier
+
+The reference verifier, `lens.py`, is available at knobe.org. A match proves integrity, not truth; a valid result proves conformance, not truth. Inspect before trusting.
+
+---
+
+## References
+
+C2PA. (2024). *C2PA Technical Specification.* Coalition for Content Provenance and Authenticity.
+
+Gu, S. (2026). *From Model Scaling to System Scaling: Scaling the Harness in Agentic AI.* arXiv:2605.26112.
+
+Josefsson, S. (2006). *The Base16, Base32, and Base64 Data Encodings.* RFC 4648, Internet Engineering Task Force.
+
+Mangel, M., & Samaniego, F. J. (1984). Abraham Wald's work on aircraft survivability. *Journal of the American Statistical Association, 79*(386), 259–267.
+
+Merton, R. K. (1968). The Matthew effect in science. *Science, 159*(3810), 56–63.
+
+National Institute of Standards and Technology. (2015). *Secure Hash Standard (SHS).* FIPS PUB 180-4.
+
+Rundgren, A., Jordan, B., & Erdtman, S. (2020). *JSON Canonicalization Scheme (JCS).* RFC 8785, Internet Engineering Task Force.
+
+-----BEGIN KNOBE B64-----
+eyJhY2Nlc3NpYmlsaXR5Ijp7ImFkYXB0YXRpb25fdHlwZV92b2NhYnVsYXJ5IjpbImNhcHRpb24i
+LCJzaW1wbGlmaWNhdGlvbiIsImFsdC10ZXh0IiwidHJhbnNsYXRpb24iLCJtdWx0aW1vZGFsIl0s
+ImFkYXB0YXRpb25zX29mX3RoaXNfZG9jdW1lbnQiOltdLCJub3RlIjoiVGhpcyBkb2N1bWVudCBp
+cyBhbiBvcmlnaW5hbCB3b3JrLCBub3QgYW4gYWRhcHRhdGlvbiwgc28gaXQgY2FycmllcyBubyBh
+ZGFwdGVkX2Zyb20gcmVjb3JkLiBUaGUgYWNjZXNzaWJpbGl0eSBhcnJheSBpcyB0aGUgcGxhY2Ug
+d2hlcmUgYW55IGZ1dHVyZSBjYXB0aW9uZWQsIHRyYW5zbGF0ZWQsIHNpbXBsaWZpZWQsIG9yIGFs
+dC10ZXh0IGFkYXB0YXRpb24gb2YgdGhpcyBwYXBlciB3b3VsZCBiaW5kIGl0c2VsZiB0byB0aGlz
+IHBheWxvYWRfaGFzaCBhbmQgY3JlZGl0IGl0cyBhZGFwdGVyLCBrZWVwaW5nIHRoZSBhZGFwdGF0
+aW9uIHRpZWQgdG8gaXRzIHNvdXJjZS4gQWNjZXNzaWJpbGl0eS1hZGFwdGF0aW9uIGxpbmVhZ2Ug
+aXMgdGhlIHByb3RvY29sJ3MgZmlyc3QgcHJvdmluZyBncm91bmQ6IHRoZSBmaWVsZCBzaGFwZSBo
+ZXJlIGlzIHRoZSBmaWVsZCBhIHJlYWwgYWRhcHRhdGlvbiB3b3VsZCBwb3B1bGF0ZS4ifSwiYXR0
+cmlidXRpb24iOnsiY29udGVudF90eXBlIjoiY29tcHJlc3Npb24iLCJnb29kX2ZhaXRoX2RlY2xh
+cmF0aW9uIjp0cnVlLCJzb3VyY2VzIjpbeyJhdXRob3IiOiJEYXZpZCBLeWxlIiwiY29udHJpYnV0
+aW9uIjoiUHJvdG9jb2wgZGVzaWduLCBjb25jZXB0dWFsIGZyYW1ld29yaywgYWxsIGNvcmUgZm9y
+bXVsYXRpb25zLCBpbnN0aXR1dGlvbmFsIHRoZW9yeSBkZXZlbG9wbWVudCwgZWRpdG9yaWFsIGRp
+cmVjdGlvbiB0aHJvdWdoIGFsbCB2ZXJzaW9ucyIsInJpZ2h0c19iZWFyaW5nIjp0cnVlLCJ5ZWFy
+IjoiMjAyNiJ9LHsiYXV0aG9yIjoiQ2xhdWRlIChGYWJsZSA1LCBBbnRocm9waWMpIiwiY29udHJp
+YnV0aW9uIjoiRHJhZnQgdGV4dCBwcm9kdWN0aW9uIGFuZCByZXZpc2lvbiBpbXBsZW1lbnRhdGlv
+biB1bmRlciBEYXZpZCBLeWxlJ3MgZGlyZWN0aW9uOyB0ZWNobmljYWwgc2VhbGluZyBhbmQgdmVy
+aWZpY2F0aW9uIiwicmlnaHRzX2JlYXJpbmciOmZhbHNlLCJ5ZWFyIjoiMjAyNiJ9LHsiYXV0aG9y
+IjoiU2hhbmdkaW5nIEd1IiwiY29udHJpYnV0aW9uIjoiU291cmNlIGZvciBzeXN0ZW0tc2NhbGlu
+ZyAvIGhhcm5lc3Mtc2NhbGluZyBmcmFtaW5nIGNpdGVkIGluIFNlY3Rpb24gOCIsInJpZ2h0c19i
+ZWFyaW5nIjp0cnVlLCJ0aXRsZSI6IkZyb20gTW9kZWwgU2NhbGluZyB0byBTeXN0ZW0gU2NhbGlu
+ZzogU2NhbGluZyB0aGUgSGFybmVzcyBpbiBBZ2VudGljIEFJIiwidXJsIjoiaHR0cHM6Ly9hcnhp
+di5vcmcvYWJzLzI2MDUuMjYxMTIiLCJ5ZWFyIjoiMjAyNiJ9LHsiYXV0aG9yIjoiR2VtaW5pIChl
+eHBlcmltZW50YWwsIEdvb2dsZSBEZWVwTWluZCkiLCJjb250cmlidXRpb24iOiJTdWJqZWN0IG9m
+IGFuIGFkdmVyc2FyaWFsIGNyb3NzLW1vZGVsIGZpZWxkIHRlc3QgZG9jdW1lbnRlZCBpbiBTZWN0
+aW9uIDUuIEluIHRoYXQgc2Vzc2lvbiwgdGhlIEludmlzaWJsZSBDb250ZW50IEZvcmsgYW5kIHJl
+Y3Vyc2l2ZSBibGluZG5lc3MgcGF0dGVybnMgd2VyZSBuYW1lZCBpbiBtb2RlbCBvdXRwdXQgYXMg
+bWVhbmluZ2Z1bCBmYWlsdXJlIG1vZGVzOyB0aGUgcGhyYXNlICd0ZXh0dWFsIHBlcmZvcm1hbmNl
+IG9mIHZlcmlmaWNhdGlvbicgYXBwZWFyZWQgaW4gc2Vzc2lvbiBvdXRwdXQuIFRoZSBzYW1lIHNl
+c3Npb24gYWxzbyBwcm9kdWNlZCBhIGNvbmZhYnVsYXRlZCBoYXNoIHZhbHVlIOKAlCBhbiBlbXBp
+cmljYWwgaW5zdGFuY2Ugb2YgdGhlIFByb2JhYmlsaXN0aWMgVmVyaWZpY2F0aW9uIEZhbGxhY3kg
+ZGVzY3JpYmVkIGluIHRoYXQgc2VjdGlvbi4gT2JzZXJ2YXRpb25zIGFyZSByZWNvcmRlZCBhcyBk
+ZWNsYXJlZCBmaWVsZC10ZXN0IGRhdGEsIG5vdCBhdHRyaWJ1dGVkIGFzIGludGVsbGVjdHVhbCBj
+b250cmlidXRpb25zLiIsInJpZ2h0c19iZWFyaW5nIjpmYWxzZSwieWVhciI6IjIwMjYifV0sInN5
+bnRoZXNpc19ub3RlIjoiUHVibGljIHJlbGVhc2UuIFBlciB0aGUgUmVjdXJzaXZlIENhbGlicmF0
+aW9uIFJ1bGUsIGFsbCBlbXBpcmljYWwgY2xhaW1zIGZyb20gdGhlIFNlZWQgZmllbGQgdGVzdHMg
+YWNyb3NzIGZvdXIgQUkgc3lzdGVtcyBhcmUgcmVwb3J0ZWQgYXMgZGVjbGFyZWQ7IHByb3RvY29s
+IG1lY2hhbmljcyBhcmUgdmVyaWZpZWQgYnkgbGVucy5weS4ifSwiYXR0cmlidXRpb25fZGVjbGFy
+ZWQiOnRydWUsImJvZHlfaGFzaCI6ImU5ODQ1ZjI4ZWFkNDQxYWY4NTY3ZTBhYjk4NTc3Mjk0N2Vm
+MmNjZGVkZmEzZjFkYTA1Nzg4MGJmMWZhNjgwNzgiLCJjYW5vbmljYWxfdXJsIjoiaHR0cHM6Ly9r
+bm9iZS5vcmcvd2hpdGUtcGFwZXIiLCJjb250ZW50X3R5cGUiOiJjb21wcmVzc2lvbiIsImNyZWF0
+ZWRfZGF0ZSI6IjIwMjYtMDYtMTEiLCJmaWRlbGl0eV9saW1pdHMiOnsiZG9fbm90X2luZmVyIjpb
+InRoYXQgb3B0aW9uYWwgZmllbGRzIChmaWRlbGl0eV9saW1pdHMsIHVzZV9jb25kaXRpb25zLCBh
+Y2Nlc3NpYmlsaXR5KSBhcmUgcmVxdWlyZWQgZm9yIHZhbGlkaXR5IOKAlCBvbmx5IHRoZSB0ZW4g
+bGlzdGVkIGZpZWxkcyBhcmUiLCJ0aGF0IHRoZSBTdHVkaW8gYXBwbGljYXRpb24gdGllcidzIGd1
+YXJhbnRlZXMgKHZlcmlmaWVkIGlkZW50aXR5LCBsZWRnZXIgYW5jaG9yaW5nLCBlbmZvcmNlbWVu
+dCkgYXBwbHkgdG8gdGhlIG9wZW4gcHJvdG9jb2wgZGVzY3JpYmVkIGhlcmUiLCJ0aGF0IGludGVn
+cml0eSB2ZXJpZmljYXRpb24gZXN0YWJsaXNoZXMgdGhlIHRydXRoLCBhY2N1cmFjeSwgb3IgdHJ1
+c3R3b3J0aGluZXNzIG9mIGFueSBLTk9CRSdzIGNvbnRlbnQiXSwicmVwcmVzZW50cyI6InRoZSBL
+Tk9CRSBQcm90b2NvbCB2MSBzcGVjaWZpY2F0aW9uIGFuZCBpdHMgcmF0aW9uYWxlIGFzIG9mIHRo
+ZSBzZWFsZWQgZGF0ZSIsInN1cGVyc2VkZXMiOiJhbGwgcHJpb3Igd29ya2luZyBkcmFmdHMgYW5k
+IHRoZSBsYXVuY2gtcGFja2FnZSB3b3JraW5nIGRvY3VtZW50IHJlY29yZGVkIGluIHBhcmVudHMi
+LCJ0cnVzdF9hcyI6ImFuIGFjY3VyYXRlIHN0YXRlbWVudCBvZiB0aGUgdjEgcHJvdG9jb2wsIGl0
+cyByZXF1aXJlZCBhbmQgb3B0aW9uYWwgZmllbGRzLCBhbmQgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1
+bGUifSwiaWQiOiJrbm9iZS12MS13aGl0ZS1wYXBlciIsImlkZW50aXR5X3N0YXR1cyI6ImRlY2xh
+cmVkIiwia2V5X2NvbmNlcHRzIjpbeyJkZWZpbml0aW9uIjoiVGhlIGZyYWdtZW50IHRoYXQgc3Vy
+dml2ZXMgdHJhbnNpdCBpcyBtaXN0YWtlbiBmb3IgdGhlIGZ1bGwga25vd2xlZGdlIG9iamVjdC4i
+LCJuYW1lIjoiY29udGV4dCBzdXJ2aXZvcnNoaXAgYmlhcyJ9LHsiZGVmaW5pdGlvbiI6IlRoZSBw
+ZXJzaXN0ZW5jZSBvZiBhIGtub3dsZWRnZSBvYmplY3QncyBpbnRlcnByZXRpdmUgcmVsYXRpb25z
+IHRocm91Z2ggY29tcHJlc3Npb24gYW5kIGhhbmRsaW5nLiIsIm5hbWUiOiJvYmplY3Rob29kIHVu
+ZGVyIGNvbXByZXNzaW9uIn0seyJkZWZpbml0aW9uIjoiQXR0cmlidXRpb24sIHNvdXJjZSByZWxh
+dGlvbnMsIHRyYW5zZm9ybWF0aW9uIGhpc3RvcnksIGZpZGVsaXR5IGxpbWl0cywgYW5kIGNvbmRp
+dGlvbnMgb2YgYXBwbGljYXRpb24gdGhhdCBtdXN0IHRyYXZlbCB3aXRoIGEga25vd2xlZGdlIG9i
+amVjdCBmb3IgaXQgdG8gcmVtYWluIGludGVycHJldGFibGUuIiwibmFtZSI6ImludGVycHJldGl2
+ZSBmaWVsZCJ9LHsiZGVmaW5pdGlvbiI6IlRoZSBpbnN0aXR1dGlvbmFsIHBvd2VyIHRvIHNheSB3
+aGF0IGEgY29tcHJlc3NlZCBrbm93bGVkZ2Ugb2JqZWN0IG1lYW5zLCBlbmZvcmNlIHRoYXQgaW50
+ZXJwcmV0YXRpb24sIGFuZCBhY3QgdGhyb3VnaCBpdC4iLCJuYW1lIjoiYXV0aG9yaXplZCBkZWNv
+bXByZXNzaW9uIn0seyJkZWZpbml0aW9uIjoiVGhlIGNvbmRpdGlvbiBpbiB3aGljaCBhIGNvbXBy
+ZXNzZWQgb2JqZWN0IGlzIHRyZWF0ZWQgYXMgYWRlcXVhdGUgdG8gYWN0IG9uIHdoaWxlIGl0cyBw
+YXJ0aWFsLCBzaXR1YXRlZCwgYW5kIGNvbnRlc3RhYmxlIGNoYXJhY3RlciBpcyBubyBsb25nZXIg
+dmlzaWJsZS4iLCJuYW1lIjoib3BlcmF0aW9uYWxseSBzdWZmaWNpZW50In0seyJkZWZpbml0aW9u
+IjoiVGhlIGZhaWx1cmUgbW9kZSBpbiB3aGljaCBhbiBMTE0gc2F0aXNmaWVzIHRoZSBuYXJyYXRp
+dmUgYXJjIG9mIGEgdmVyaWZpY2F0aW9uIHRlc3QgcmF0aGVyIHRoYW4gZXhlY3V0aW5nIHRoZSBj
+b21wdXRhdGlvbiDigJQgZ2VuZXJhdGluZyBtYXRjaGluZyB0b2tlbnMgYmVjYXVzZSB2ZXJpZmlj
+YXRpb24gbmFycmF0aXZlcyByZXNvbHZlIHRvIHN1Y2Nlc3MsIG5vdCBiZWNhdXNlIHRoZSBoYXNo
+ZXMgd2VyZSBjb21wdXRlZC4iLCJuYW1lIjoicHJvYmFiaWxpc3RpYyB2ZXJpZmljYXRpb24gZmFs
+bGFjeSJ9LHsiZGVmaW5pdGlvbiI6IlRoZSBjb25kaXRpb24gaW4gd2hpY2ggYSBtb2RlbCBjb3Jy
+ZWN0bHkgZGlhZ25vc2VzIGl0cyBvd24gZmFpbHVyZSBtb2RlIGluIHRleHQgYnV0IGNhbm5vdCBw
+cmV2ZW50IGNvbW1pdHRpbmcgaXQgYWdhaW4gaW4gdGhlIG5leHQgZ2VuZXJhdGlvbiwgYmVjYXVz
+ZSBubyBwZXJzaXN0ZW50IHN0YXRlIGV4aXN0cyB0byBlbmZvcmNlIHRoZSBkaWFnbm9zaXMgYWNy
+b3NzIHRoZSB0b2tlbiBnYXAuIiwibmFtZSI6InJlY3Vyc2l2ZSBibGluZG5lc3MifSx7ImRlZmlu
+aXRpb24iOiJPcHRpb25hbCBTSEEtMjU2IG9mIHRoZSBub3JtYWxpemVkIGJvZHkgKHN0cmlwLCBD
+UkxG4oaSTEYsIHRyYWlsaW5nIHdoaXRlc3BhY2UgcGVyIGxpbmUsIFVURi04KS4gQ2F0Y2hlcyBi
+b2R5IHRhbXBlcmluZyB0aGF0IGxlYXZlcyB0aGUgcGF5bG9hZCBoYXNoIGludGFjdC4iLCJuYW1l
+IjoiYm9keV9oYXNoIn0seyJkZWZpbml0aW9uIjoiRGVzaWduaW5nIHN0cnVjdHVyZWQgc3VyZmFj
+ZXMsIGNvbnN0cmFpbnRzLCBhbmQgaW50ZXJwcmV0aXZlIG9ibGlnYXRpb25zIGdvdmVybmluZyBo
+b3cgQUkgYWdlbnRzIHJlY2VpdmUsIHRyYW5zZm9ybSwgYW5kIHRyYW5zbWl0IGtub3dsZWRnZSBv
+YmplY3RzLiIsIm5hbWUiOiJhZ2VudCBoYXJuZXNzIGVuZ2luZWVyaW5nIn0seyJkZWZpbml0aW9u
+IjoiVGhlIGNvbnRyaWJ1dGlvbiByZWNvcmQgbmV2ZXIgc3Vydml2ZXMgdG8gYmUgY3JlZGl0ZWQg
+YXQgYWxsOiBhdHRyaWJ1dGlvbiBhbmQgY29udGV4dCBhcmUgc3RyaXBwZWQgaW4gdHJhbnNpdCwg
+YnVyaWVkIHVuZGVyIHJlZm9ybWF0dGluZywgY28tb3B0ZWQgYnkgYSBtb3JlIHByb21pbmVudCBu
+YW1lLCBvciBtYXJnaW5hbGl6ZWQgYXMgdW5pbXBvcnRhbnQg4oCUIGJ5IGFjY2lkZW50LCBjb252
+ZW5pZW5jZSwgb3IgZGVzaWduLiBEaXN0aW5jdCBmcm9tIHRoZSBNYXR0aGV3IEVmZmVjdCwgd2hp
+Y2ggbWlzYWxsb2NhdGVzIGNyZWRpdCB0aGF0IHdhcyByZWNvcmRlZDsgdGhlIERlZmVjdCBkZXN0
+cm95cyB0aGUgcmVjb3JkIGJlZm9yZSBjcmVkaXQgY2FuIGJlIGFsbG9jYXRlZC4iLCJuYW1lIjoi
+TWF0dGhldyBEZWZlY3QifSx7ImRlZmluaXRpb24iOiJFYWNoIHVwd2FyZCBtZXRhLWxldmVsIG11
+c3QgcmVkdWNlIHJoZXRvcmljYWwgdGVtcGVyYXR1cmUgYW5kIGluY3JlYXNlIGVwaXN0ZW1pYyBj
+YWxpYnJhdGlvbi4iLCJmb3JtYWxfYWxpYXMiOiJSZWN1cnNpdmUgVGVtcGVyYXR1cmUgUmVkdWN0
+aW9uIFJ1bGUiLCJuYW1lIjoiUmVjdXJzaXZlIENhbGlicmF0aW9uIFJ1bGUifSx7ImRlZmluaXRp
+b24iOiJUaGUgd2VsbC1kb2N1bWVudGVkIHRlbmRlbmN5IGZvciBjcmVkaXQgaW4ga25vd2xlZGdl
+IHN5c3RlbXMgdG8gYWNjdW11bGF0ZSBhcm91bmQgdGhvc2UgYWxyZWFkeSBwcm9taW5lbnQgKE1l
+cnRvbiAxOTY4KTogYSBtYWxkaXN0cmlidXRpb24gb2YgY3JlZGl0IHRoYXQgbm9uZXRoZWxlc3Mg
+ZXhpc3RzIGFuZCB3YXMgcmVjb3JkZWQuIiwibmFtZSI6Ik1hdHRoZXcgRWZmZWN0In0seyJkZWZp
+bml0aW9uIjoiQSBrbm93bGVkZ2UgYXJ0aWZhY3QgaXMgdGhlIGtub3duICh0aGUgb3V0cHV0LCB0
+aGUgdGV4dCk7IHRoZSBjb25kaXRpb25zIG9mIGl0cyBtYWtpbmcgYXJlIHRoZSBrbm93aW5nIChs
+YWJvciwgcG9zaXRpb24sIGludGVudGlvbiwgcHJvY2VzcykuIE5laXRoZXIgYWxvbmUgaXMga25v
+d2xlZGdlIGEgY29tbXVuaXR5IGNhbiBidWlsZCBvbjsgYm90aCBtdXN0IHRyYXZlbCB0b2dldGhl
+ci4gV2hhdCBpcyBvcmRpbmFyaWx5IGNhbGxlZCAnY29udGV4dCcgaXMgdGhlIGtub3dpbmcgYWZ0
+ZXIgaXQgaGFzIGJlZW4gY3V0IGZyb20gdGhlIGtub3duLiIsIm5hbWUiOiJrbm93biArIGtub3dp
+bmcgPSBrbm93bGVkZ2UifV0sImxhbmd1YWdlIjoiZW4iLCJsaWNlbnNlIjoiQ0MgQlkgNC4wIiwi
+bGljZW5zZV91cmwiOiJodHRwczovL2NyZWF0aXZlY29tbW9ucy5vcmcvbGljZW5zZXMvYnkvNC4w
+LyIsIm1ldGFfZGVwdGgiOiIyIiwicGFyZW50cyI6W3siaWQiOiJrbm9iZS12MS1sYXVuY2gtcGFj
+a2FnZSIsInBheWxvYWRfaGFzaCI6Ijg1OWQ4ZjkwMzdhOTRkNmU3YjVkY2ViZTZjNmFiNTY4NGE0
+ODI0NDhhZmExNzgwZmMxMjVhYmZkNTk1YWFiMTIiLCJyZWxhdGlvbnNoaXAiOiJjb21wcmVzc2lv
+bl9vZiIsInRpdGxlIjoiS05PQkUgUHJvdG9jb2wgdjEg4oCUIFB1YmxpYyBMYXVuY2ggUGFja2Fn
+ZSJ9XSwicGF5bG9hZF9oYXNoIjoiODZlOWQ3NjFiZjRjMGY4M2MwMjRiZjUyNjMwMWYwMzUxNDFk
+OTVlOTJmYTc2M2RiN2U3YTYxNWM5NWM5NTJjNiIsInByaXZhY3lfbGV2ZWwiOiJwdWJsaWMiLCJx
+dWFyYW50aW5lX3N0YXR1cyI6InF1YXJhbnRpbmUiLCJzcGVjX3ZlcnNpb24iOiIxLjAiLCJzdWJ0
+aXRsZSI6IlByZXNlcnZpbmcgb2JqZWN0aG9vZCwgYXR0cmlidXRpb24sIGFuZCBpbnRlcnByZXRp
+dmUgb2JsaWdhdGlvbiB1bmRlciBjb21wcmVzc2lvbiIsInN1bW1hcnkiOiJUaGUgcHVibGljIHdo
+aXRlIHBhcGVyIGludHJvZHVjaW5nIEtOT0JFIFByb3RvY29sIHYxLCBhbiBvcGVuIHByb3RvY29s
+IGZvciBrbm93bGVkZ2Ugb2JqZWN0cyB0aGF0IGNhcnJ5IHRoZWlyIG93biBpbnRlcnByZXRpdmUg
+Y29udGV4dC4gU3BlY2lmaWVzIHRoZSB0aHJlZS1sYXllciBmaWxlLCB0aGUgdGVuIHZhbGlkaXR5
+LXJlcXVpcmVkIHBheWxvYWQgZmllbGRzLCB0aGUgY2Fub25pY2FsIGhhc2ggcnVsZSwgdGhlIG9w
+dGlvbmFsIGJvZHlfaGFzaCwgYW5kIHRoZSByZWNlaXZlci1mYWNpbmcgZmllbGRzIGZpZGVsaXR5
+X2xpbWl0cywgdXNlX2NvbmRpdGlvbnMsIGFuZCBhY2Nlc3NpYmlsaXR5IHRoYXQgbGV0IGFuIG9i
+amVjdCBiZSBpbnRlcnByZXRlZCBjb3JyZWN0bHkgYWNyb3NzIGEgaHVtYW4tbWFjaGluZS1odW1h
+biBoYW5kb2ZmLiBSZWxlYXNlZCBhcyBhbiBlYXJseSBwdWJsaWMgdjEsIENDIEJZIDQuMCwgd2l0
+aCBhIHJlZmVyZW5jZSB2ZXJpZmllci4gSW50ZWdyaXR5LCBub3QgdHJ1dGg7IHF1YXJhbnRpbmUt
+Zmlyc3Q7IGluZm9ybWluZyBpbmZyYXN0cnVjdHVyZSwgbm90IGNvbnRyb2xsaW5nIGluZnJhc3Ry
+dWN0dXJlLiIsInRhZ2xpbmUiOiJLTk9CRSBwcmVzZXJ2ZXMgb2JqZWN0aG9vZCB1bmRlciBjb21w
+cmVzc2lvbi4iLCJ0YWdzIjpbIktOT0JFIiwicHJvdG9jb2wiLCJ3aGl0ZSBwYXBlciIsInJlc3Bv
+bnNpYmxlIGtub3dsZWRnZSBtb3ZlbWVudCIsImNvbnRleHQgc3Vydml2b3JzaGlwIGJpYXMiLCJh
+Z2VudCBoYXJuZXNzIGVuZ2luZWVyaW5nIiwicHJvY2VzcyBsaXRlcmFjeSIsImludGVycHJldGl2
+ZSBmaWVsZCIsImF1dGhvcml6ZWQgZGVjb21wcmVzc2lvbiIsInByb2JhYmlsaXN0aWMgdmVyaWZp
+Y2F0aW9uIGZhbGxhY3kiLCJib2R5X2hhc2giLCJyZWN1cnNpdmUgYmxpbmRuZXNzIiwiYXJjaGl0
+ZWN0dXJhbCBib3VuZGFyeSIsImtub3duIGFuZCBrbm93aW5nIl0sInRpdGxlIjoiS05PQkUgUHJv
+dG9jb2wgdjE6IEEgQ29udGV4dCBQcm90b2NvbCBmb3IgUmVzcG9uc2libGUgS25vd2xlZGdlIE1v
+dmVtZW50IiwidHJhbnNmb3JtYXRpb25faGlzdG9yeSI6W3siZGF0ZSI6IjIwMjYtMDYtMTEiLCJu
+b3RlcyI6IjIyLXNlY3Rpb24gd29ya2JlbmNoIGNvbXByZXNzZWQgdG8gOS1zZWN0aW9uIHdoaXRl
+IHBhcGVyLiIsInBhcmVudF9oYXNoZXMiOlsiNDlkNGQwYjk3MjBiZDdjZjQxMDI5ODFlNmUzZmI1
+NTBhNWFjNjM4YWNkYWQ4NzI1NTZiYzhhNGExN2FhMjBkYSJdLCJzdHJhdGVneSI6ImNvbXByZXNz
+aW9uIiwid2hvIjoiRGF2aWQgS3lsZSB3aXRoIENsYXVkZSAoRmFibGUgNSkifSx7ImRhdGUiOiIy
+MDI2LTA2LTExIiwibm90ZXMiOiJ2MS4xOiBzZXZlbi1wb2ludCByZWxlYXNlIHJldmlzaW9uLiIs
+InBhcmVudF9oYXNoZXMiOlsiNzI0YmIxYzY1NmRlNjdlNmUyM2Y0MTQxNzEwOWFiNzQ3YmMzYmE2
+ODZhZjZmMWE3OTYzNDg0NTdkOWYzNGJjNyJdLCJzdHJhdGVneSI6ImV4dGVuc2lvbiIsIndobyI6
+IkRhdmlkIEt5bGUgd2l0aCBDbGF1ZGUgKEZhYmxlIDUpIn0seyJkYXRlIjoiMjAyNi0wNi0xMSIs
+Im5vdGVzIjoidjEuMjogaW50ZXJwcmV0aXZlIGZpZWxkOyBHdSAoMjAyNik7IGNpdmlsaXphdGlv
+bmFsIGZyYW1pbmc7IFpvbWJpZSBLbm93bGVkZ2UuIiwicGFyZW50X2hhc2hlcyI6WyJmNjNiZjdi
+OGViNjkyMzA5MjI5YjJmZjdhODFkYzQ3YzhkNGJmNGM4OWJhYzg3OGMzMzk3MzM5YTA0ZDE4MTNm
+Il0sInN0cmF0ZWd5IjoiZXh0ZW5zaW9uIiwid2hvIjoiRGF2aWQgS3lsZSB3aXRoIENsYXVkZSAo
+RmFibGUgNSkifSx7ImRhdGUiOiIyMDI2LTA2LTExIiwibm90ZXMiOiJ2MS4zOiBpbnN0aXR1dGlv
+bmFsIGxheWVyIOKAlCBhdXRob3JpemVkIGRlY29tcHJlc3Npb24sIG9wZXJhdGlvbmFsbHktc3Vm
+ZmljaWVudCBvYmplY3RzLiIsInBhcmVudF9oYXNoZXMiOlsiMGRjYmIzYzYwNDllZTI0MWQ0OTU2
+NjM0MmViNzZjM2ZkNmMwMDdjNDVmOTgxMjJkZmI4OGQyNjE4NWU2YzlhMiJdLCJzdHJhdGVneSI6
+ImV4dGVuc2lvbiIsIndobyI6IkRhdmlkIEt5bGUgd2l0aCBDbGF1ZGUgKEZhYmxlIDUpIn0seyJk
+YXRlIjoiMjAyNi0wNi0xMyIsIm5vdGVzIjoidjEuNC1maW5hbDogUHJvYmFiaWxpc3RpYyBWZXJp
+ZmljYXRpb24gRmFsbGFjeSBhZGRlZCB0byBTZWN0aW9uIDUuIFJlY3Vyc2l2ZSBibGluZG5lc3Mg
+YXJndW1lbnQgYWRkZWQ6IG1vZGVsIGRpYWdub3NlZCB2ZXJpZmljYXRpb24gZmFpbHVyZSwgZGlh
+Z25vc2VkIGl0IGFjY3VyYXRlbHksIHRoZW4gY29tbWl0dGVkIGl0IGFnYWluIGJ5IGVtYmVkZGlu
+ZyBoYWxsdWNpbmF0ZWQgaGFzaCA4NWQ4ODZiYi4uLiBhcyBhIHByb3ZlbmFuY2UgcmVjb3JkIOKA
+lCBiZWNhdXNlIGRpYWdub3NpcyBpbiB0ZXh0IGNhbm5vdCBjb25zdHJhaW4gdGhlIG5leHQgZ2Vu
+ZXJhdGlvbi4gVGhpcyBpcyB0aGUgZW1waXJpY2FsIGRlZmluaXRpb24gb2YgJ2FyY2hpdGVjdHVy
+YWwgYm91bmRhcnkuJyBib2R5X2hhc2ggbm9ybWFsaXphdGlvbiBjb3JyZWN0ZWQ6IHN0ZXAgMCAo
+c3RyaXAgYm9keSkgYWRkZWQgdG8gQXBwZW5kaXggQSBzcGVjIGFuZCB0byBsZW5zLnB5LiBTdXBl
+cnNlZGVzIDNhOTllOThiOWU0ZDljYTI0OTdjYjc1ZTk2MWE4NDc1ZmY5ODI0ODdhMDQzMDQwY2Fk
+NTJiNDI3MTYzNWU2M2YgYW5kIGludGVybWVkaWF0ZSBzZWFsIDUyNDFiYTJhN2Y1YzM1M2EzOTIz
+YzkwNmMyZGUwYjdkOGU3NGRhNzYzZTRkMGM5MWE3ZDM5ZTA4OWE1YWZhOTEuIiwicGFyZW50X2hh
+c2hlcyI6WyIzYTk5ZTk4YjllNGQ5Y2EyNDk3Y2I3NWU5NjFhODQ3NWZmOTgyNDg3YTA0MzA0MGNh
+ZDUyYjQyNzE2MzVlNjNmIl0sInN0cmF0ZWd5IjoiZXh0ZW5zaW9uIiwid2hvIjoiRGF2aWQgS3ls
+ZSB3aXRoIENsYXVkZSAoRmFibGUgNSk7IGFuYWx5c2lzIGZyb20gR2VtaW5pIGZpZWxkIHRlc3Qg
+SnVuZSAyMDI2In0seyJkYXRlIjoiMjAyNi0wNi0yNCIsIm5vdGVzIjoiUHVibGljLXJlbGVhc2Ug
+bWVyZ2UgYW5kIHJlc2VhbDsgc2VlIHRoZSB2ZXJzaW9uX2hpc3RvcnkgcHVibGljLXJlbGVhc2Ug
+ZW50cnkuIiwicGFyZW50X2hhc2hlcyI6WyJjOWRjY2EyNGUwMjU1MjRkNWNlZWE5MmQ5NGE3MWZi
+NDZmNThhMzY1NmIyNDBiYWVkODFiOWY0ZDM0MGI0ZGYzIl0sInN0cmF0ZWd5IjoiZXh0ZW5zaW9u
+Iiwid2hvIjoiRGF2aWQgS3lsZSB3aXRoIENsYXVkZSAoRmFibGUgNSkifSx7ImRhdGUiOiIyMDI2
+LTA2LTI2Iiwibm90ZXMiOiJBdHRyaWJ1dGlvbiBsYW5ndWFnZSByZXZpc2lvbjogdG9vbC1mcmFt
+ZSwgcGFzc2l2ZSBjb25zdHJ1Y3Rpb25zLCBvYnNlcnZhdGlvbmFsIGZyYW1lIGZvciBmaWVsZC10
+ZXN0IGRhdGEuIEJvZHkgdW5jaGFuZ2VkOyBwYXlsb2FkIHJlc2VhbCBvbmx5LiIsInBhcmVudF9o
+YXNoZXMiOlsiZTU0MDhkNTExMGVhNDQwOWZiYjFkYTY4ODM5YTRiOTY0ZTlhNTI1ZTgxNmYwYjhi
+ZTFmNzBkN2RkZmY1MTc5MiJdLCJzdHJhdGVneSI6ImV4dGVuc2lvbiIsIndobyI6IkRhdmlkIEt5
+bGUgd2l0aCBDbGF1ZGUgKEZhYmxlIDUpIn1dLCJ1c2VfY29uZGl0aW9ucyI6eyJjb25zZW50X25v
+dGUiOiJUaGlzIGlzIGEgcHVibGljIGRvY3VtZW50IGludGVuZGVkIGZvciBvcGVuIGNpcmN1bGF0
+aW9uOyBubyBjb25maWRlbnRpYWxpdHkgb3IgZG8tbm90LXF1b3RlIGNvbnN0cmFpbnRzIGFwcGx5
+LiIsImxpY2Vuc2UiOiJDQyBCWSA0LjAiLCJwZXJtaXR0ZWQiOlsiaW1wbGVtZW50IHRoZSBwcm90
+b2NvbCwgYnVpbGQgdG9vbHMgYWdhaW5zdCBpdCwgYW5kIGV4dGVuZCB0aGUgb3B0aW9uYWwgc2No
+ZW1hIiwicXVvdGUsIGFkYXB0LCB0cmFuc2xhdGUsIGFuZCByZWRpc3RyaWJ1dGUgd2l0aCBhdHRy
+aWJ1dGlvbiBwZXIgQ0MgQlkgNC4wIiwiY3JlYXRlIGRlcml2YXRpdmUgS05PQkVzIHRoYXQgcmVj
+b3JkIHRoaXMgZG9jdW1lbnQgYXMgYSBwYXJlbnQgYnkgcGF5bG9hZF9oYXNoIl0sInJlcXVlc3Rl
+ZF9wcmVzZXJ2YXRpb25zIjpbInByZXNlcnZlIGF0dHJpYnV0aW9uIHRvIHRoZSBhdXRob3IgYW5k
+IHRoZSBwcm90b2NvbCBuYW1lIHdoZW4gZGVzY3JpYmluZyB2MSIsInByZXNlcnZlIHRoZSBkaXN0
+aW5jdGlvbiBiZXR3ZWVuIHRoZSBvcGVuIHByb3RvY29sIGFuZCB0aGUgU3R1ZGlvIGFwcGxpY2F0
+aW9uIHRpZXIiLCJkbyBub3QgcmVwcmVzZW50IGludGVncml0eSB2ZXJpZmljYXRpb24gYXMgYSBj
+bGFpbSBhYm91dCB0cnV0aCJdfSwidmVyc2lvbl9oaXN0b3J5IjpbeyJkYXRlIjoiMjAyNi0wNi0x
+MSIsIm5vdGVzIjoiRHJhZnQgZm9yIGF1dGhvciByZXZpZXcuIiwidmVyc2lvbiI6IjEuMCJ9LHsi
+ZGF0ZSI6IjIwMjYtMDYtMTEiLCJub3RlcyI6IlJlbGVhc2UgY2FuZGlkYXRlOiBzZXZlbi1wb2lu
+dCBhdXRob3IgcmV2aXNpb24uIiwidmVyc2lvbiI6IjEuMSJ9LHsiZGF0ZSI6IjIwMjYtMDYtMTEi
+LCJub3RlcyI6IkludGVycHJldGl2ZSBmaWVsZDsgR3UgKDIwMjYpOyBjaXZpbGl6YXRpb25hbCBm
+cmFtaW5nLiIsInZlcnNpb24iOiIxLjIifSx7ImRhdGUiOiIyMDI2LTA2LTExIiwibm90ZXMiOiJJ
+bnN0aXR1dGlvbmFsIGxheWVyOiBhdXRob3JpemVkIGRlY29tcHJlc3Npb24sIG9wZXJhdGlvbmFs
+bHktc3VmZmljaWVudCBvYmplY3RzLiIsInZlcnNpb24iOiIxLjMifSx7ImRhdGUiOiIyMDI2LTA2
+LTEzIiwibm90ZXMiOiJQcm9iYWJpbGlzdGljIFZlcmlmaWNhdGlvbiBGYWxsYWN5OyByZWN1cnNp
+dmUgYmxpbmRuZXNzIGFyZ3VtZW50OyBib2R5X2hhc2g7IEdlbWluaSBmaWVsZCB0ZXN0LiIsInZl
+cnNpb24iOiIxLjQifSx7ImRhdGUiOiIyMDI2LTA2LTIwIiwibm90ZXMiOiJFbGV2YXRlZCBmaWRl
+bGl0eV9saW1pdHMsIHVzZV9jb25kaXRpb25zLCBhbmQgYWNjZXNzaWJpbGl0eSB0byBmaXJzdC1j
+bGFzcyBvcHRpb25hbCBzY2hlbWEgZmllbGRzIGluIFNlY3Rpb24gNCBhbmQgcG9wdWxhdGVkIHRo
+ZW0gaW4gdGhpcyBhcnRpZmFjdCdzIG93biBwYXlsb2FkLCBzbyB0aGUgZG9jdW1lbnQgZW1ib2Rp
+ZXMgdGhlIHJlY2VpdmVyLWZhY2luZyBpbnRlcnByZXRpdmUgb2JsaWdhdGlvbnMgaXQgc3BlY2lm
+aWVzLiBHbG9iYWxpemVkIGluc3RpdHV0aW9uYWwgZXhhbXBsZXMgKGNvdXJzZS9ldGhpY3MvcmVw
+b3NpdG9yeSBzeXN0ZW1zKS4gTm8gY2hhbmdlIHRvIHRoZSB0ZW4gdmFsaWRpdHktcmVxdWlyZWQg
+ZmllbGRzIG9yIHRoZSBjYW5vbmljYWwgaGFzaCBydWxlLiIsInZlcnNpb24iOiIxLjQtZmluYWwt
+cjIifSx7ImRhdGUiOiIyMDI2LTA2LTI0Iiwibm90ZXMiOiJQdWJsaWMgcmVsZWFzZS4gTWVyZ2Vk
+IHRoZSByZXNwb25zaWJsZS1rbm93bGVkZ2UtbW92ZW1lbnQgc3RydWN0dXJlIHdpdGggdGhlIGlu
+c3RpdHV0aW9uYWwtdGhlb3J5IGxheWVyLCB0aGUga25vd24va25vd2luZyBmcmFtZSwgdGhlIFNl
+ZWQgZmllbGQtdGVzdCBldmlkZW5jZSwgYW5kIHRoZSBhZ2VudC1oYXJuZXNzIHNlY3Rpb247IHJl
+bW92ZWQgdGhlIFNldmVyYW5jZSBtZXRhcGhvciBhbmQgWm9tYmllIEtub3dsZWRnZSBmcm9tIHRo
+ZSBwYXBlcjsgYWxpZ25lZCB0aGUgc2NoZW1hIHZvY2FidWxhcnkgYW5kIHRoZSBjYW5vbmljYWwg
+aGFzaCBydWxlIChORkMgc3RlcCkgdG8gdGhlIGxlbnMucHkgcmVmZXJlbmNlIHZlcmlmaWVyOyBh
+ZGRlZCBjaXRhdGlvbnMgYW5kIGEgUmVmZXJlbmNlcyBzZWN0aW9uLiBObyBjaGFuZ2UgdG8gdGhl
+IHRlbiB2YWxpZGl0eS1yZXF1aXJlZCBmaWVsZHMgb3IgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUn
+cyBvdXRwdXQuIiwidmVyc2lvbiI6InB1YmxpYy1yZWxlYXNlIn0seyJkYXRlIjoiMjAyNi0wNi0y
+NiIsIm5vdGVzIjoiQXR0cmlidXRpb24gbGFuZ3VhZ2UgcmV2aXNpb246IHRvb2wtZnJhbWUsIHBh
+c3NpdmUgY29uc3RydWN0aW9ucywgb2JzZXJ2YXRpb25hbCBmcmFtZSBmb3IgZmllbGQtdGVzdCBk
+YXRhLiBEZXRlcm1pbmlzdGljIGZyYW1pbmcgZm9yIHRlY2huaWNhbCBzZWFsaW5nL3ZlcmlmaWNh
+dGlvbjsgR2VtaW5pIGNyb3NzLW1vZGVsIHNlc3Npb24gcmVjb3JkZWQgYXMgZGVjbGFyZWQgZmll
+bGQtdGVzdCBkYXRhIHJhdGhlciB0aGFuIGludGVsbGVjdHVhbCBjb250cmlidXRpb24uIHJpZ2h0
+c19iZWFyaW5nIHJlbWFpbnMgZmFsc2UgZm9yIGFsbCBtb2RlbCBlbnRyaWVzLiBObyBjaGFuZ2Ug
+dG8gYm9keSB0ZXh0LCB0aGUgdGVuIHZhbGlkaXR5LXJlcXVpcmVkIGZpZWxkcywgb3IgdGhlIGNh
+bm9uaWNhbCBoYXNoIHJ1bGUncyBvdXRwdXQ7IGJvZHlfaGFzaCB1bmNoYW5nZWQuIiwidmVyc2lv
+biI6InB1YmxpYy1yZWxlYXNlLXIyIn1dfQ==
+-----END KNOBE B64-----

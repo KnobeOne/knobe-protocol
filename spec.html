@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE Protocol v1 — Specification</title>
+<meta name="description" content="Normative specification for KNOBE Protocol v1. Defines the three-layer file format, ten required payload fields, canonical hash rule, four verification states, and versioning contract.">
+<style>
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;
+  --code-bg:#10231a;--code-ink:#cfe6d6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding:0 28px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:bold;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.brand .v{color:var(--ink-faint);font-weight:normal;font-size:.8rem}
+.navlinks{display:flex;gap:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
+.navlinks a{color:var(--ink-soft);text-decoration:none}
+.navlinks a:hover,.navlinks a.here{color:var(--moss)}
+@media(max-width:680px){.navlinks{display:none}}
+
+header{padding:64px 0 36px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
+h1{font-size:2rem;font-weight:normal;letter-spacing:-.01em;margin-bottom:10px}
+.meta{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);line-height:1.9}
+.meta span{margin-right:18px}
+.status-badge{display:inline-block;background:var(--moss-deep);color:var(--paper);font-family:-apple-system,system-ui,sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:3px;vertical-align:middle}
+
+.toc{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:32px 0}
+.toc-title{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.toc ol{padding-left:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;line-height:2}
+.toc a{color:var(--ink-soft);text-decoration:none}
+.toc a:hover{color:var(--moss)}
+
+main{padding:40px 0 60px}
+h2{font-size:1.4rem;font-weight:normal;color:var(--ink);margin:48px 0 14px;padding-top:8px;border-top:1px solid var(--line);letter-spacing:-.01em}
+h2 .sec{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint);margin-right:10px;font-weight:normal}
+h3{font-size:1.05rem;font-weight:bold;margin:26px 0 8px;color:var(--ink)}
+h4{font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;font-weight:600;color:var(--moss-deep);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.05em}
+p{margin-bottom:14px;font-size:1rem}
+p.lead{font-size:1.08rem;color:var(--ink-soft)}
+ul,ol{margin:10px 0 14px 22px}
+li{margin-bottom:6px;font-size:.98rem}
+strong{font-weight:600}
+em.kw{font-style:italic;color:var(--moss-deep)}
+a.inline{color:var(--moss);text-decoration:underline;text-underline-offset:2px}
+
+.must{color:#8b2c00;font-weight:600;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;letter-spacing:.04em}
+.should{color:var(--amber);font-weight:600;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;letter-spacing:.04em}
+.may{color:var(--moss);font-weight:600;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;letter-spacing:.04em}
+
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.87em;background:var(--paper-warm);padding:1px 5px;border-radius:3px;color:var(--moss-deep)}
+pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;overflow-x:auto;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;line-height:1.75;color:var(--code-ink)}
+pre .c{color:#4a6555;font-style:italic}
+pre .k{color:#d9a85a}
+pre .s{color:#7ed99a}
+pre .n{color:#8fb8e8}
+
+.norm{border-left:3px solid var(--moss-deep);background:var(--paper-warm);padding:14px 18px;margin:16px 0;border-radius:0 4px 4px 0}
+.norm p{margin-bottom:0;font-size:.95rem}
+
+.field-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0}
+.field-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
+.field-table td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.field-table tr:last-child td{border-bottom:none}
+.field-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
+.field-table td:nth-child(2){font-family:-apple-system,system-ui,sans-serif;color:var(--ink-faint);font-size:.8rem}
+
+.state-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0}
+.state-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.state-table td{padding:11px 16px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.state-table tr:last-child td{border-bottom:none}
+.state-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.82rem;color:var(--moss-deep);font-weight:500;white-space:nowrap}
+
+.algo{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;line-height:1.9;color:#9bb5a4}
+.algo .step{display:flex;gap:14px}
+.algo .sn{color:var(--moss);font-family:'SF Mono',ui-monospace,Menlo,monospace;min-width:20px;padding-top:1px}
+.algo .sc{color:var(--code-ink)}
+.algo .ss{font-size:.78rem;color:#4a6555;font-style:italic;margin-left:34px}
+
+.conformance{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:22px 26px;margin:20px 0}
+.conformance h3{margin-top:0;font-size:1rem}
+.conformance ul{margin-top:10px}
+
+footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--moss)}
+footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:20px;font-size:.95rem}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="index.html" class="brand">KNOBE <span class="v">Protocol v1</span></a>
+    <div class="navlinks">
+      <a href="index.html">Overview</a>
+      <a href="spec.html" class="here">Spec</a>
+      <a href="education-profile.html">Education</a>
+      <a href="index.html#downloads">Downloads</a>
+      <a href="about.html">About</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Normative specification</div>
+    <h1>KNOBE Protocol v1 <span class="status-badge">Frozen</span></h1>
+    <div class="meta">
+      <span>Version 1.0</span>
+      <span>Issued 2026-06-21</span>
+      <span>License: CC BY 4.0</span>
+      <span>Steward: David Kyle, UC Davis</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="lead" style="margin-top:8px">This document is the normative specification for KNOBE Protocol v1. It defines what a conforming file must contain, how integrity is computed and verified, and what a conforming verifier must report. The white paper provides motivation and context; this document provides the contract.</p>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#status">Status and versioning</a></li>
+        <li><a href="#overview">File overview</a></li>
+        <li><a href="#structure">File structure</a></li>
+        <li><a href="#payload">Payload fields</a></li>
+        <li><a href="#hash">Canonical hash rule</a></li>
+        <li><a href="#body-hash">Body hash (optional)</a></li>
+        <li><a href="#verification">Verification states</a></li>
+        <li><a href="#vocab">Open vocabularies</a></li>
+        <li><a href="#versioning">Versioning semantics</a></li>
+        <li><a href="#conformance">Conformance</a></li>
+        <li><a href="#limits">Honest limits</a></li>
+      </ol>
+    </div>
+
+    <!-- §1 -->
+    <h2 id="status"><span class="sec">§1</span>Status and versioning</h2>
+
+    <p>KNOBE Protocol v1.0 is frozen. The file format, required fields, canonical hash rule, and verification semantics defined here will not change in any v1.x release. Backward-compatible additions (new optional payload fields, new open-vocabulary values) may be issued as v1.x updates. Any change that would cause a currently valid KNOBE to fail verification under a conforming v1.x verifier constitutes a breaking change and requires a v2.0 declaration.</p>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> A verifier claiming conformance with KNOBE v1 <span class="must">MUST</span> apply the verification semantics of the <code>spec_version</code> value sealed in the file, not the version of the verifier itself. A v1.x verifier <span class="must">MUST NOT</span> reinterpret a file sealed under v1.0 as failed.</p>
+    </div>
+
+    <p>The key words <strong>MUST</strong>, <strong>MUST NOT</strong>, <strong>SHOULD</strong>, <strong>SHOULD NOT</strong>, and <strong>MAY</strong> are used as defined in RFC 2119.</p>
+
+    <!-- §2 -->
+    <h2 id="overview"><span class="sec">§2</span>File overview</h2>
+
+    <p>A KNOBE is a single plain-text file, conventionally named with the suffix <code>.knobe.md</code>. It consists of three layers:</p>
+
+    <ul>
+      <li><strong>YAML frontmatter:</strong> human-scannable metadata delimited by <code>---</code> markers.</li>
+      <li><strong>Markdown body:</strong> the human-readable content. Free-form; no schema.</li>
+      <li><strong>Base64 JSON payload:</strong> a machine-readable record delimited by BEGIN/END markers, carrying structured provenance, interpretive context, and an integrity hash.</li>
+    </ul>
+
+    <p>A file is valid at the protocol layer when its payload decodes, parses, contains the ten required fields, and its <code>payload_hash</code> matches the computed canonical hash. Validity does not imply truth, accuracy, or trustworthiness of the content.</p>
+
+    <!-- §3 -->
+    <h2 id="structure"><span class="sec">§3</span>File structure</h2>
+
+    <h3>3.1 YAML frontmatter</h3>
+
+    <p>The file <span class="must">MUST</span> begin with a YAML frontmatter block delimited by lines containing exactly <code>---</code>. At minimum, <code>spec_version</code> <span class="must">MUST</span> appear in the frontmatter. All other frontmatter fields are optional; they serve human scanners and are not part of the integrity-sealed record.</p>
+
+<pre>---
+title: "Example KNOBE"
+spec_version: "1.0"
+---</pre>
+
+    <h3>3.2 Markdown body</h3>
+
+    <p>The body <span class="may">MAY</span> be any valid UTF-8 text. It is not validated by a conforming verifier except when an optional <code>body_hash</code> is present in the payload (see §6). A body is not required; a KNOBE with an empty body is valid.</p>
+
+    <h3>3.3 Payload block</h3>
+
+    <p>The payload block <span class="must">MUST</span> appear after the body. Its delimiters are:</p>
+
+<pre>-----BEGIN KNOBE B64-----
+{base64-encoded JSON}
+-----END KNOBE B64-----</pre>
+
+    <p>The content between the delimiters is standard Base64 (RFC 4648 §4) encoding of a UTF-8 JSON object. Line breaks within the Base64 block <span class="must">MUST</span> be ignored by decoders. If multiple payload blocks are present, verifiers <span class="must">MUST</span> use the last one to compute verification state, and <span class="must">MUST</span> surface a warning to the receiver containing the total count of blocks and the index of the block evaluated (e.g., "evaluated block 2 of 2"). A conforming file <span class="should">SHOULD</span> contain exactly one payload block; multiple blocks can occur legitimately (email quoting, archive concatenation, copy-paste) but can also indicate shadow-payload injection. The warning is interpretation, not just information: it tells the receiver that the file's structure is anomalous.</p>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> The payload <span class="must">MUST</span> be a JSON object (not an array or scalar). <span class="must">MUST</span> be encoded as UTF-8. <span class="must">MUST NOT</span> require a BOM.</p>
+    </div>
+
+    <!-- §4 -->
+    <h2 id="payload"><span class="sec">§4</span>Payload fields</h2>
+
+    <h3>4.1 Required fields</h3>
+
+    <p>The following ten fields <span class="must">MUST</span> be present in the payload. A payload missing any of them is invalid at the protocol layer regardless of whether its hash matches.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>spec_version</td><td>string</td><td>The protocol version under which this file was sealed. <code>"1.0"</code> for this specification.</td></tr>
+        <tr><td>title</td><td>string</td><td>Human-readable title of the knowledge object.</td></tr>
+        <tr><td>summary</td><td>string</td><td>One-paragraph description of the object's content and purpose.</td></tr>
+        <tr><td>content_type</td><td>string</td><td>Declared content category. See §8 for open vocabulary.</td></tr>
+        <tr><td>created_date</td><td>string</td><td>ISO 8601 date of original creation (<code>YYYY-MM-DD</code>).</td></tr>
+        <tr><td>license</td><td>string</td><td>Declared license identifier (e.g. <code>"CC BY 4.0"</code>).</td></tr>
+        <tr><td>privacy_level</td><td>string</td><td>Declared privacy posture. See §8.</td></tr>
+        <tr><td>quarantine_status</td><td>string</td><td>Declared trust posture. See §8. New/external KNOBEs SHOULD default to <code>"quarantine"</code>.</td></tr>
+        <tr><td>attribution</td><td>object</td><td>Must contain a <code>sources</code> array with at least one entry. Each source entry SHOULD include <code>author</code> and <code>contribution</code>. AI contributors SHOULD carry <code>"rights_bearing": false</code>.</td></tr>
+        <tr><td>payload_hash</td><td>string</td><td>SHA-256 hex digest of the canonical JSON payload (excluding this field). Format: exactly 64 lowercase hexadecimal characters. See §5.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4.2 Receiver-facing optional fields</h3>
+
+    <p>These optional fields carry interpretive context written for the receiver: the next human or agent to encounter the object. They are not required for validity but are central to the protocol's purpose.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Field</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>fidelity_limits</td><td>How far the object may be trusted as a representation of its source. Suggested sub-fields: <code>represents</code>, <code>trust_as</code>, <code>do_not_infer</code> (array).</td></tr>
+        <tr><td>use_conditions</td><td>Originator-declared terms for downstream use. Suggested sub-fields: <code>license</code>, <code>permitted</code> (array), <code>requested_preservations</code> (array), <code>consent_note</code>.</td></tr>
+        <tr><td>accessibility</td><td>Adaptation lineage. Each entry SHOULD include <code>adapted_from</code> (source payload_hash), <code>adaptation_type</code>, <code>adaptation_contributor</code>, <code>review_date</code>.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>4.3 Additional optional fields</h3>
+
+    <table class="field-table">
+      <thead><tr><th>Field</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>body_hash</td><td>SHA-256 of the normalized body text. See §6.</td></tr>
+        <tr><td>parents</td><td>Array of objects linking to source KNOBEs by payload_hash. Each entry SHOULD include <code>payload_hash</code>, <code>title</code>, and <code>relationship</code>. Any <code>payload_hash</code> value MUST follow the format constraint in §4.1: exactly 64 lowercase hexadecimal characters.</td></tr>
+        <tr><td>transformation_history</td><td>Array of transformation receipts. Each entry SHOULD include <code>date</code>, <code>who</code>, <code>strategy</code>, <code>notes</code>.</td></tr>
+        <tr><td>identity_status</td><td>Declared identity posture. See §8. <code>"declared"</code> means attribution is self-reported; <code>"signed"</code> is a forward placeholder for cryptographic signing in future tiers.</td></tr>
+        <tr><td>key_concepts</td><td>Array of <code>{"name": "...", "definition": "..."}</code> objects.</td></tr>
+        <tr><td>version_history</td><td>Array of <code>{"version": "...", "date": "...", "notes": "..."}</code> objects.</td></tr>
+        <tr><td>is_seed</td><td>Boolean. <code>true</code> indicates this KNOBE is intended as a teaching or bootstrapping artifact.</td></tr>
+        <tr><td>language</td><td>BCP 47 language tag (e.g. <code>"en"</code>).</td></tr>
+        <tr><td>tags</td><td>Array of lowercase strings.</td></tr>
+        <tr><td>subtitle</td><td>String. Secondary title.</td></tr>
+        <tr><td>id</td><td>String. Stable local identifier for this object.</td></tr>
+        <tr><td>canonical_url</td><td>String. Authoritative URL if published.</td></tr>
+        <tr><td>license_url</td><td>String. URL to the full license text.</td></tr>
+        <tr><td>build_recipes</td><td>Array of instructions for constructing derivative KNOBEs. Informative only in v1; not normative.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="norm">
+      <p><span class="must">MUST NOT</span> Implementations <span class="must">MUST NOT</span> fail verification because an unrecognized field is present. Unrecognized fields <span class="must">MUST</span> be treated as opaque and preserved.</p>
+    </div>
+
+    <!-- §5 -->
+    <h2 id="hash"><span class="sec">§5</span>Canonical hash rule</h2>
+
+    <p>The <code>payload_hash</code> is computed by applying the following algorithm to the payload object:</p>
+
+    <div class="algo">
+      <div class="step"><span class="sn">1.</span><span class="sc">Decode the Base64 payload block to bytes and parse as UTF-8 JSON.</span></div>
+      <div class="step"><span class="sn">2.</span><span class="sc">Remove the <code>payload_hash</code> field from the resulting object.</span></div>
+      <div class="step"><span class="sn">3.</span><span class="sc">Serialize the object to canonical JSON:</span></div>
+      <div class="ss">— All object keys sorted alphabetically, recursively at every nesting depth.</div>
+      <div class="ss">— All JSON object keys and string values normalized to Unicode Normalization Form C (NFC) before serialization.</div>
+      <div class="ss">— No whitespace between tokens (separators <code>","</code> and <code>":"</code>).</div>
+      <div class="ss">— Arrays preserved in insertion order; their elements are not reordered.</div>
+      <div class="ss">— All string content encoded as literal UTF-8; <span class="must">MUST NOT</span> use <code>\uXXXX</code> escapes for characters that can be represented directly.</div>
+      <div class="step"><span class="sn">4.</span><span class="sc">Encode the canonical JSON string as UTF-8 bytes.</span></div>
+      <div class="step"><span class="sn">5.</span><span class="sc">Compute SHA-256 of those bytes. The hex digest is the <code>payload_hash</code>.</span></div>
+    </div>
+
+    <h3>Interoperability constraints</h3>
+
+    <p>Two constraints close cross-language canonicalization gaps that would otherwise allow conforming Python and JavaScript implementations to compute different hashes for visually-identical payloads.</p>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> All numeric payload values <span class="must">MUST</span> be represented as JSON strings (e.g., <code>"week": "6"</code>, not <code>"week": 6</code>). This bypasses divergent JSON number serialization between host languages — <code>json.dumps(1.0)</code> in Python produces <code>"1.0"</code> while <code>JSON.stringify(1.0)</code> in JavaScript produces <code>"1"</code>, which would yield different canonical hashes for identical-looking payloads. JSON <code>true</code>, <code>false</code>, and <code>null</code> are permitted scalar values; this restriction applies only to numeric values.</p>
+    </div>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> All JSON object keys and string values in the payload <span class="must">MUST</span> be normalized to Unicode Normalization Form C (NFC) before UTF-8 encoding and hashing. Without this, a precomposed character (e.g., <code>é</code> = U+00E9) and a decomposed equivalent (e.g., <code>e</code> + U+0301) would produce different byte sequences and different hashes despite identical visual representation. NFC is the default form produced by most platforms; the constraint is explicit so that implementations cannot silently diverge.</p>
+    </div>
+
+    <h3>Reference implementations</h3>
+
+    <p><strong>Python 3:</strong></p>
+<pre>import json, hashlib, unicodedata
+
+def nfc(x):
+    if isinstance(x, str): return unicodedata.normalize("NFC", x)
+    if isinstance(x, dict): return {nfc(k): nfc(v) for k, v in x.items()}
+    if isinstance(x, list): return [nfc(v) for v in x]
+    return x
+
+obj = {k: v for k, v in payload.items() if k != "payload_hash"}
+obj = nfc(obj)
+canon = json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+payload_hash = hashlib.sha256(canon.encode("utf-8")).hexdigest()</pre>
+
+    <p><strong>JavaScript:</strong></p>
+<pre>function nfc(x) {
+  if (typeof x === "string") return x.normalize("NFC");
+  if (Array.isArray(x)) return x.map(nfc);
+  if (x !== null && typeof x === "object") {
+    const out = {};
+    for (const k of Object.keys(x)) out[k.normalize("NFC")] = nfc(x[k]);
+    return out;
+  }
+  return x;
+}
+function canonicalize(obj) {
+  if (obj === null || typeof obj !== "object") return JSON.stringify(obj);
+  if (Array.isArray(obj)) return "[" + obj.map(canonicalize).join(",") + "]";
+  const keys = Object.keys(obj).sort();
+  const pairs = keys.map(k =&gt; JSON.stringify(k) + ":" + canonicalize(obj[k]));
+  return "{" + pairs.join(",") + "}";
+}
+<span class="c">// Strip payload_hash at top level only, normalize, then canonicalize.</span>
+const { payload_hash, ...rest } = payload;
+const canon = canonicalize(nfc(rest));
+<span class="c">// Then SHA-256 canon as UTF-8 bytes.</span></pre>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> Implementations <span class="must">MUST</span> produce identical hex digests for identical payloads regardless of host language or platform. This written specification is normative. The Python reference implementation in <code>lens.py</code> is canonical for resolving serialization ambiguity under §5 only; it does not override explicit normative text elsewhere in this specification.</p>
+    </div>
+
+    <!-- §6 -->
+    <h2 id="body-hash"><span class="sec">§6</span>Body hash (optional)</h2>
+
+    <p>The optional <code>body_hash</code> payload field seals the markdown body at the time the KNOBE is created. When present, a conforming verifier checks it and reports accordingly (see §7). A mismatch does not cause a <code>failed</code> result; it produces <code>verified-body-modified</code>.</p>
+
+    <h3>Body normalization</h3>
+
+    <p>The body is extracted as the text immediately following the second line containing exactly <code>---</code> (the closing delimiter of the YAML frontmatter), down to the <code>-----BEGIN KNOBE B64-----</code> marker. This rule is explicit because markdown bodies frequently contain <code>---</code> as a horizontal rule; counting <code>---</code> lines rather than searching for the first match prevents misidentifying a body horizontal rule as the frontmatter terminator. If a verifier cannot locate two <code>---</code> lines before the <code>-----BEGIN KNOBE B64-----</code> marker, it <span class="must">MUST</span> report <code>unreadable</code> rather than attempt body hash computation. Before hashing, apply the following normalization in order:</p>
+
+    <div class="algo">
+      <div class="step"><span class="sn">1.</span><span class="sc">Strip leading and trailing whitespace from the entire body string.</span></div>
+      <div class="step"><span class="sn">2.</span><span class="sc">Replace all CRLF (<code>\r\n</code>) and lone CR (<code>\r</code>) sequences with LF (<code>\n</code>).</div>
+      <div class="step"><span class="sn">3.</span><span class="sc">Strip U+0020 (space) and U+0009 (tab) from the end of each line. <span class="must">MUST NOT</span> strip other whitespace characters.</span></div>
+      <div class="step"><span class="sn">4.</span><span class="sc">No Unicode normalization is applied.</span></div>
+      <div class="step"><span class="sn">5.</span><span class="sc">Encode the result as UTF-8 and compute SHA-256.</span></div>
+    </div>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> When multiple payload blocks are present in a file (see §3.3), body extraction is ambiguous — the body could plausibly be extracted down to the first BEGIN marker or down to the last. Conforming verifiers <span class="must">MUST NOT</span> attempt body verification in this case. The <code>body_verified</code> output <span class="must">MUST</span> be reported as <code>omitted</code> regardless of whether the evaluated payload block contains a <code>body_hash</code> field. The multi-block warning required by §3.3 communicates the structural anomaly; body verification semantics are not preserved across that anomaly.</p>
+    </div>
+
+    <!-- §7 -->
+    <h2 id="verification"><span class="sec">§7</span>Verification states</h2>
+
+    <p>A conforming verifier <span class="must">MUST</span> report exactly one of the following four states.</p>
+
+    <table class="state-table">
+      <thead><tr><th>State</th><th>Conditions</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>verified</td>
+          <td>Payload decodes and parses. All required fields present. <code>payload_hash</code> matches computed hash. <code>body_hash</code> absent or matching.</td>
+          <td>The sealed payload record is intact. If a body hash was present, the body is also intact.</td>
+        </tr>
+        <tr>
+          <td>verified-body-modified</td>
+          <td>Payload hash matches. <code>body_hash</code> is present and does not match the normalized body.</td>
+          <td>The structured payload record is intact. The markdown body has changed since sealing. This is not automatically a sign of tampering; bodies are often legitimately edited. Inspect before relying.</td>
+        </tr>
+        <tr>
+          <td>failed</td>
+          <td>Payload decodes and parses, but the computed canonical hash does not match <code>payload_hash</code>.</td>
+          <td>The structured record has been altered since sealing.</td>
+        </tr>
+        <tr>
+          <td>unreadable</td>
+          <td>No payload block found, or the block cannot be decoded or parsed as JSON.</td>
+          <td>The file does not contain a verifiable KNOBE payload.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> A verifier <span class="must">MUST NOT</span> report <code>failed</code> solely because <code>body_hash</code> is present and does not match. Body-hash mismatch always yields <code>verified-body-modified</code>, never <code>failed</code>.</p>
+    </div>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> A <code>verified</code> or <code>verified-body-modified</code> result proves integrity of the sealed payload. It does not prove the content is accurate, the attribution is honest, the consent was obtained, or the object is appropriate for any use. Verifiers <span class="should">SHOULD</span> communicate this distinction to users.</p>
+    </div>
+
+    <h3>Two-layered verification</h3>
+
+    <p>KNOBE verification is two-layered. The primary <code>status</code> output reports sealed payload integrity. The secondary <code>body_verified</code> output reports whether the human-readable markdown body was sealed and, if so, whether it still matches. The two layers are reported independently so that receivers can tell what was actually checked. A result of <code>status: verified · body_verified: omitted</code> is not contradictory: it means the payload is intact and no body integrity claim was sealed by the author.</p>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> In addition to the verification state, verifiers <span class="must">MUST</span> report a <code>body_verified</code> output with one of three values: <code>yes</code> (body_hash was present and matched), <code>modified</code> (body_hash was present and did not match), or <code>omitted</code> (no body_hash was sealed in the payload). A bare <code>verified</code> result without this output is ambiguous: it does not tell the receiver whether the body was actually checked. Omitted body hashes are the receiver's signal that body integrity was never sealed by the author; an adversary could rewrite the markdown body without detection in this case.</p>
+    </div>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> The <code>body_verified</code> output is constrained by the primary verification state:</p>
+      <ul style="margin-top:8px;font-size:.95rem">
+        <li>When <code>status</code> is <code>verified</code>, <code>body_verified</code> may be <code>yes</code> or <code>omitted</code>; it <span class="must">MUST NOT</span> be <code>modified</code>.</li>
+        <li>When <code>status</code> is <code>verified-body-modified</code>, <code>body_verified</code> <span class="must">MUST</span> be <code>modified</code>.</li>
+        <li>When <code>status</code> is <code>failed</code> or <code>unreadable</code>, <code>body_verified</code> <span class="must">MUST</span> be <code>omitted</code>, because a compromised or unreadable payload cannot provide a trustworthy <code>body_hash</code> field to check against. The verifier <span class="must">MUST NOT</span> evaluate the body against a hash extracted from an untrusted payload.</li>
+      </ul>
+    </div>
+
+    <h3>Conformance, distinct from integrity</h3>
+
+    <p>The four verification states report <em>integrity</em>: whether the sealed payload is byte-identical to what was hashed at sealing. They do not, by themselves, report <em>conformance</em>: whether the payload structure and field values satisfy the schema and constraints in this specification. A file can have a hash that matches its payload (integrity is <code>verified</code>) and still violate the spec — for example, <code>created_date: "yesterday"</code> instead of an ISO date, or a numeric value where the spec requires a string, or a malformed parent hash.</p>
+
+    <p>Verifiers <span class="must">MUST</span> report conformance as a separate dimension from integrity. This preserves the elegant four-state integrity model while allowing schema validation to be reported honestly without collapsing the two layers.</p>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> In addition to <code>status</code> and <code>body_verified</code>, verifiers <span class="must">MUST</span> report a <code>conformance</code> output with one of three values:</p>
+      <ul style="margin-top:8px;font-size:.95rem">
+        <li><code>valid</code> — All required fields are present, all field formats and types match the schema, all open-vocabulary values are syntactically well-formed, and no normative MUSTs are violated.</li>
+        <li><code>warnings</code> — All required fields are present and the file is usable, but the verifier detected non-fatal issues (e.g., custom vocabulary values without namespace prefixes, fields with unrecognized but well-formed values, soft-spec deviations).</li>
+        <li><code>invalid</code> — The verifier detected one or more violations of normative MUSTs (e.g., missing required field, malformed <code>payload_hash</code>, numeric value in payload, malformed <code>created_date</code>, malformed parent hash). The file may still verify cryptographically, but does not conform to this specification.</li>
+      </ul>
+    </div>
+
+    <div class="norm">
+      <p><span class="must">MUST</span> When <code>conformance</code> is <code>warnings</code> or <code>invalid</code>, verifiers <span class="must">MUST</span> surface a list of the specific issues detected. The list format is implementation-defined; the requirement is that issues are individually identifiable to the receiver, not aggregated into an opaque count.</p>
+    </div>
+
+    <p>The independence of <code>status</code> and <code>conformance</code> is deliberate. A file with <code>status: verified · conformance: invalid</code> tells the receiver: the sealed bytes are intact, but the author or sealing tool did not follow the spec. That is a useful distinction; the protocol does not silently collapse it into <code>failed</code>, which would conflate cryptographic tampering with schema noncompliance.</p>
+
+    <h3>Quarantine semantics</h3>
+
+    <p>Verification state is independent of <code>quarantine_status</code>. A KNOBE may be <code>verified</code> and still carry <code>quarantine_status: "quarantine"</code>. Verification tells the receiver whether the payload is intact; it does not authorize use. Implementations <span class="should">SHOULD</span> treat any external or newly received KNOBE as quarantined regardless of its declared status until a human or governed system reviews it.</p>
+
+    <!-- §8 -->
+    <h2 id="vocab"><span class="sec">§8</span>Open vocabularies</h2>
+
+    <p>The following fields use open vocabularies. The values listed here are canonical and recommended. Implementations <span class="may">MAY</span> define additional values. Verifiers <span class="must">MUST NOT</span> fail a file because an unrecognized vocabulary value is present.</p>
+
+    <div class="norm">
+      <p><span class="should">SHOULD</span> Custom vocabulary values <span class="should">SHOULD</span> use a recognizable namespace or prefix convention (e.g., <code>ucdavis:irb-cleared</code>, <code>ext-trusted-by-foundation</code>) to distinguish them from canonical spec values. Verifiers and UI implementations <span class="should">SHOULD</span> render canonical and custom vocabulary values distinguishably to mitigate UI spoofing — a value like <code>quarantine_status: "trusted-by-IRB"</code> may otherwise be mistaken by a casual reader for an authoritative protocol-level designation when it is in fact self-declared.</p>
+    </div>
+
+    <h4>content_type</h4>
+    <p><code>original</code> · <code>synthesis</code> · <code>adaptation</code> · <code>compression</code> · <code>annotation</code> · <code>seed</code> · <code>collection</code> · <code>translation</code></p>
+
+    <h4>quarantine_status</h4>
+    <p><code>quarantine</code> (default for new/external) · <code>trusted</code> · <code>rejected</code></p>
+    <p style="margin-top:8px;color:var(--ink-soft);font-size:.92rem;font-style:italic"><code>quarantine_status</code> is a declared sender-side or originator-side trust posture. Receivers <span class="must">MUST NOT</span> treat <code>quarantine_status: "trusted"</code> as local authorization unless it is established by their own review process or a governed trust registry. A malicious author can declare any value here; the field communicates the originator's posture, not a receiver's clearance.</p>
+
+    <h4>privacy_level</h4>
+    <p><code>public</code> · <code>internal</code> · <code>sensitive</code> · <code>restricted</code></p>
+    <p style="margin-top:8px;color:var(--ink-soft);font-size:.92rem;font-style:italic"><code>privacy_level</code> is declarative. It does not override law, policy, consent, IRB conditions, FERPA, HIPAA, or institutional classification. A file may declare <code>public</code> and still contain regulated content; the field records the originator's posture, not legal or institutional authorization. Downstream systems with privacy obligations <span class="must">MUST</span> apply their own classification policy regardless of the declared value.</p>
+
+    <h4>identity_status</h4>
+    <p><code>declared</code> (self-reported; default in v1) · <code>signed</code> (placeholder for future cryptographic signing)</p>
+
+    <h4>accessibility.adaptation_type</h4>
+    <p><code>caption</code> · <code>simplification</code> · <code>alt-text</code> · <code>translation</code> · <code>multimodal</code></p>
+
+    <h4>parents.relationship</h4>
+    <p><code>adaptation_of</code> · <code>compression_of</code> · <code>synthesis_input</code> · <code>derived_from</code> · <code>responds_to</code> · <code>supersedes</code></p>
+
+    <!-- §9 -->
+    <h2 id="versioning"><span class="sec">§9</span>Versioning semantics</h2>
+
+    <p>The <code>spec_version</code> field in the sealed payload records the protocol version under which the file was sealed. Verification semantics follow the sealed version, not the verifier version.</p>
+
+    <ul>
+      <li>A v1.x verifier <span class="must">MUST</span> verify v1.0 files using v1.0 semantics.</li>
+      <li>A v1.x update <span class="must">MUST NOT</span> introduce a new required field or change the canonical hash algorithm.</li>
+      <li>A v1.x update <span class="may">MAY</span> add new optional fields and new open-vocabulary values.</li>
+      <li>A v1.x verifier encountering a <code>spec_version</code> it does not recognize <span class="should">SHOULD</span> report this clearly rather than silently applying its own semantics.</li>
+      <li>v2.0 would constitute a new protocol and would not be backward-compatible with v1.x files.</li>
+    </ul>
+
+    <!-- §10 -->
+    <h2 id="conformance"><span class="sec">§10</span>Conformance</h2>
+
+    <div class="conformance">
+      <h3>A conforming KNOBE file MUST:</h3>
+      <ul>
+        <li>Be valid UTF-8 plain text.</li>
+        <li>Begin with a YAML frontmatter block including <code>spec_version</code>.</li>
+        <li>Contain a Base64 JSON payload block with the BEGIN/END markers specified in §3.3.</li>
+        <li>Include all ten required payload fields (§4.1).</li>
+        <li>Have a <code>payload_hash</code> that matches the canonical hash computed by the algorithm in §5.</li>
+        <li>Have an <code>attribution.sources</code> array with at least one entry.</li>
+      </ul>
+    </div>
+
+    <div class="conformance">
+      <h3>A conforming verifier MUST:</h3>
+      <ul>
+        <li>Report exactly one of the four states defined in §7.</li>
+        <li>Apply the canonical hash algorithm defined in §5 exactly as specified.</li>
+        <li>Apply verification semantics of the <code>spec_version</code> sealed in the file.</li>
+        <li>Not fail a file for containing unrecognized payload fields.</li>
+        <li>Not report <code>failed</code> solely on the basis of a <code>body_hash</code> mismatch.</li>
+        <li>Communicate that a verified result proves integrity, not truth.</li>
+      </ul>
+    </div>
+
+    <p>The reference verifier <code>lens.py</code> is the canonical implementation for resolving serialization ambiguity under §5. This written specification remains normative in all other respects. Test vectors for all four states are available in the <a class="inline" href="test-vectors/">test-vectors/</a> directory. An implementation that produces the expected state for all six conformance vectors is considered conforming.</p>
+
+    <!-- §11 -->
+    <h2 id="limits"><span class="sec">§11</span>Honest limits</h2>
+
+    <p>This specification defines a format and a verification algorithm. It does not provide:</p>
+
+    <ul>
+      <li><strong>Identity verification.</strong> Attribution and identity are declared in v1, not cryptographically proven. <code>identity_status: "signed"</code> is a forward placeholder.</li>
+      <li><strong>Timestamps.</strong> <code>created_date</code> is self-reported. The protocol provides no proof of when a file was sealed. Ledger anchoring (available in application tiers) can provide existence-at-a-time proof; the open protocol cannot.</li>
+      <li><strong>Trust.</strong> A <code>verified</code> result means the payload is intact since sealing. It does not mean the content is accurate, the attribution is honest, or the object is appropriate for any purpose.</li>
+      <li><strong>Enforcement.</strong> The protocol declares interpretive obligations (fidelity limits, use conditions, quarantine status). It does not enforce them. A receiver is free to ignore declared conditions; the protocol cannot prevent this.</li>
+      <li><strong>Lineage truth.</strong> The protocol verifies that a lineage claim is intact at the time of sealing; it does not verify that claimed parent objects exist or actually possess the cited payload hashes. An author can list any string as a parent hash. A graph-traversal application attempting to resolve the parent chain will surface the error (parent not found, or parent hash mismatch); the open protocol layer does not perform that traversal.</li>
+      <li><strong>Automatic verification.</strong> Verification is the receiver's responsibility, not the protocol's. The substrate KNOBE lives in — text editors, AI assistants, ingestion pipelines, ordinary markdown tools — does not check seals by default. A KNOBE with a broken or missing payload will be opened, displayed, summarised, and indexed by most consumers without any warning. This is a property of the substrate, not a defect of the protocol: the same characteristics that make KNOBE portable across these tools are the ones that make verification optional rather than enforced. Tools that want fail-closed behaviour on broken KNOBEs must integrate <code>lens.py</code> or an equivalent verifier at the point of ingestion.</li>
+      <li><strong>AI interpretability.</strong> KNOBE carries human-supplied context around AI-mediated knowledge work. It does not expose a model's internal reasoning.</li>
+    </ul>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fclaim">KNOBE preserves objecthood under compression.</div>
+    <div class="frow">
+      <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis</div>
+      <div style="text-align:right">
+        <a href="index.html">Overview</a> · <a href="education-profile.html">Education profile</a> · <a href="test-vectors/">Test vectors</a> · <a href="lens.py">lens.py</a><br>
+        <a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

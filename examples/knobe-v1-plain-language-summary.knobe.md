@@ -1,0 +1,114 @@
+---
+title: "KNOBE Protocol v1 — Plain-Language Summary"
+subtitle: "A simplified-language adaptation, bound to its source"
+author: David Kyle
+content_type: adaptation
+spec_version: "1.0"
+license: CC BY 4.0
+created_date: "2026-06-20"
+adapted_from: "86e9d761bf4c0f83c024bf526301f035141d95e92fa763db7e7a615c95c952c6"
+---
+
+# KNOBE Protocol v1 — Plain-Language Summary
+
+*A simplified-language adaptation of the KNOBE Protocol v1 white paper, made for readers who want the core ideas without the technical detail. This is an adaptation. It is bound to its source by hash, and the person who made it is credited in the payload.*
+
+---
+
+## What problem does KNOBE solve?
+
+When a document moves from one place to another — into an email, an AI assistant, a summary, a report — the words usually arrive, but the things that made them make sense often do not. Who made it. What it was based on. What may and may not be done with it. What it does and does not claim. Those things tend to live around the file, not inside it, so they get left behind.
+
+KNOBE puts that context inside the file, in plain text, so it travels with the words.
+
+## What is a KNOBE?
+
+A KNOBE is one plain-text file. A person can read it in any editor. A machine can read a sealed record at the bottom of the file that lists where the file came from, who made it, what it can be trusted for, and a check that proves the record has not been changed.
+
+## What does the check prove?
+
+Only that the record has not changed since it was sealed. It does not prove the content is true, fair, or correct. A sealed file can still be wrong. The check tells you the record is intact. You still have to read it and judge it.
+
+## Why does this matter for accessibility?
+
+When someone captions a video, translates a document, or simplifies hard text — like this summary — that work is real labor, and the new version is made from a source. Too often the adaptation travels on its own, cut off from what it was made from, with no record of who made it. KNOBE keeps the adaptation tied to its source and credits the person who did the work. This file is an example: it is bound to the white paper it summarizes, and its adapter is named in the record below.
+
+## What KNOBE does not do
+
+It does not lock the file, hide it, or stop anyone from using it. It does not prove who you are. It does not open up what an AI did inside its own reasoning. It carries the human side of the context, plainly, and reports whether that context has changed.
+
+---
+
+*This is a simplified-language adaptation. The full white paper is the authoritative source. Verify this file, and its link to its source, with the reference verifier at knobe.org.*
+
+-----BEGIN KNOBE B64-----
+eyJhY2Nlc3NpYmlsaXR5IjpbeyJhZGFwdGF0aW9uX2NvbnRyaWJ1dG9yIjoiRGF2aWQgS3lsZSAo
+ZGlyZWN0aW9uKTsgQ2xhdWRlL0ZhYmxlIDUgKGRyYWZ0aW5nKSIsImFkYXB0YXRpb25fdHlwZSI6
+InNpbXBsaWZpY2F0aW9uIiwiYWRhcHRlZF9mcm9tIjoiMTI3ZGM3YjJkNGE4NjUzZWExMDNhYTRk
+ODE5Y2Q5OTRiZjc3YWM1Y2Y1MTc5YzNhZDI4ZDg4OWNhYzYxZmIyYiIsIm5vdGUiOiJQbGFpbi1s
+YW5ndWFnZSBzaW1wbGlmaWNhdGlvbi4gUHJlc2VydmVzIHRoZSBjb3JlIGNsYWltcyBhbmQgdGhl
+IGludGVncml0eS1ub3QtdHJ1dGggcHJpbmNpcGxlOyBvbWl0cyB0aGUgY2Fub25pY2FsIGhhc2gg
+cnVsZSBkZXRhaWwsIHRoZSBhZ2VudC1oYXJuZXNzIHNlY3Rpb24sIGFuZCB0aGUgc2NoZW1hIHRh
+YmxlLiBTZWUgZmlkZWxpdHlfbGltaXRzLiIsInJldmlld19kYXRlIjoiMjAyNi0wNi0yMCJ9XSwi
+YXR0cmlidXRpb24iOnsiZ29vZF9mYWl0aF9kZWNsYXJhdGlvbiI6dHJ1ZSwic291cmNlcyI6W3si
+YXV0aG9yIjoiRGF2aWQgS3lsZSIsImNvbnRyaWJ1dGlvbiI6IkF1dGhvciBvZiB0aGUgc291cmNl
+IHdoaXRlIHBhcGVyOyBkaXJlY3RlZCB0aGlzIGFkYXB0YXRpb24iLCJyaWdodHNfYmVhcmluZyI6
+dHJ1ZSwieWVhciI6IjIwMjYifSx7ImF1dGhvciI6IkNsYXVkZSAoRmFibGUgNSwgQW50aHJvcGlj
+KSIsImNvbnRyaWJ1dGlvbiI6IlNpbXBsaWZpZWQtbGFuZ3VhZ2UgYWRhcHRhdGlvbiBwcm9kdWNl
+ZCB1bmRlciBEYXZpZCBLeWxlJ3MgZGlyZWN0aW9uIiwicmlnaHRzX2JlYXJpbmciOmZhbHNlLCJ5
+ZWFyIjoiMjAyNiJ9XX0sImJvZHlfaGFzaCI6Ijg1NWQxODIzNGM5YjQ1ODRjMzY3ZGZkN2MxZDIx
+NjIxZWNmZjM4YzcwZDMyZTBjZGNlYzRiYzkzMWE0MmU5MDYiLCJjYW5vbmljYWxfdXJsIjoiaHR0
+cHM6Ly9rbm9iZS5vcmcvcGxhaW4tbGFuZ3VhZ2Utc3VtbWFyeSIsImNvbnRlbnRfdHlwZSI6ImFk
+YXB0YXRpb24iLCJjcmVhdGVkX2RhdGUiOiIyMDI2LTA2LTIwIiwiZmlkZWxpdHlfbGltaXRzIjp7
+ImRvX25vdF9pbmZlciI6WyJ0aGF0IHRoaXMgY29udGFpbnMgdGhlIGZ1bGwgc3BlY2lmaWNhdGlv
+biDigJQgaXQgZGVsaWJlcmF0ZWx5IG9taXRzIHRoZSBjYW5vbmljYWwgaGFzaCBydWxlLCB0aGUg
+c2NoZW1hIHRhYmxlLCBhbmQgdGhlIGFnZW50LWhhcm5lc3MgYXJndW1lbnQiLCJ0aGF0IHNpbXBs
+aWZpY2F0aW9uIGltcGxpZXMgdGhlIG9taXR0ZWQgbWF0ZXJpYWwgaXMgdW5pbXBvcnRhbnQiLCJh
+bnkgdGVjaG5pY2FsIGltcGxlbWVudGF0aW9uIGRldGFpbCDigJQgaW1wbGVtZW50ZXJzIG11c3Qg
+dXNlIHRoZSB3aGl0ZSBwYXBlciBhbmQgQXBwZW5kaXggQSJdLCJyZXByZXNlbnRzIjoidGhlIGNv
+cmUgaWRlYXMgb2YgdGhlIEtOT0JFIFByb3RvY29sIHYxIHdoaXRlIHBhcGVyIGluIHBsYWluIGxh
+bmd1YWdlIiwic3VwZXJzZWRlcyI6Im5vdGhpbmc7IHRoZSB3aGl0ZSBwYXBlciByZW1haW5zIGF1
+dGhvcml0YXRpdmUiLCJ0cnVzdF9hcyI6ImFuIGFjY3VyYXRlIGJ1dCBwYXJ0aWFsIGludHJvZHVj
+dGlvbiB0byBLTk9CRSdzIHB1cnBvc2UgYW5kIHBvc3R1cmUifSwiaWQiOiJrbm9iZS12MS1wbGFp
+bi1sYW5ndWFnZS1zdW1tYXJ5IiwiaWRlbnRpdHlfc3RhdHVzIjoiZGVjbGFyZWQiLCJsYW5ndWFn
+ZSI6ImVuIiwibGljZW5zZSI6IkNDIEJZIDQuMCIsImxpY2Vuc2VfdXJsIjoiaHR0cHM6Ly9jcmVh
+dGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LzQuMC8iLCJwYXJlbnRzIjpbeyJjYW5vbmljYWxf
+dXJsIjoiaHR0cHM6Ly9rbm9iZS5vcmcvd2hpdGUtcGFwZXIiLCJpZCI6Imtub2JlLXYxLXdoaXRl
+LXBhcGVyIiwicGF5bG9hZF9oYXNoIjoiODZlOWQ3NjFiZjRjMGY4M2MwMjRiZjUyNjMwMWYwMzUx
+NDFkOTVlOTJmYTc2M2RiN2U3YTYxNWM5NWM5NTJjNiIsInJlbGF0aW9uc2hpcCI6ImFkYXB0YXRp
+b25fb2YiLCJ0aXRsZSI6IktOT0JFIFByb3RvY29sIHYxIFdoaXRlIFBhcGVyIn1dLCJwYXlsb2Fk
+X2hhc2giOiI1NjI4NzZiMGEyYjE1NTkxNmYyZDRlODQ0YWM2YWE5Nzg2OWM0MTJlMmEwMzBiNTYy
+Mzg0MWQ0MDQwMTQ5ZWRiIiwicHJpdmFjeV9sZXZlbCI6InB1YmxpYyIsInF1YXJhbnRpbmVfc3Rh
+dHVzIjoicXVhcmFudGluZSIsInNwZWNfdmVyc2lvbiI6IjEuMCIsInN1bW1hcnkiOiJBIHNpbXBs
+aWZpZWQtbGFuZ3VhZ2UgYWRhcHRhdGlvbiBvZiB0aGUgS05PQkUgUHJvdG9jb2wgdjEgd2hpdGUg
+cGFwZXIsIG1hZGUgZm9yIHJlYWRlcnMgd2hvIHdhbnQgdGhlIGNvcmUgaWRlYXMgd2l0aG91dCB0
+ZWNobmljYWwgZGV0YWlsLiBEZW1vbnN0cmF0ZXMgdGhlIGFjY2Vzc2liaWxpdHktYWRhcHRhdGlv
+biBsaW5lYWdlIGZpZWxkczogaXQgaXMgYm91bmQgdG8gaXRzIHNvdXJjZSB3aGl0ZSBwYXBlciBi
+eSBwYXlsb2FkX2hhc2ggYW5kIGNyZWRpdHMgaXRzIGFkYXB0ZXIuIiwidGFncyI6WyJrbm9iZSIs
+ImFjY2Vzc2liaWxpdHkiLCJhZGFwdGF0aW9uIiwicGxhaW4tbGFuZ3VhZ2UiLCJzaW1wbGlmaWNh
+dGlvbiIsIndvcmtlZC1leGFtcGxlIl0sInRpdGxlIjoiS05PQkUgUHJvdG9jb2wgdjEg4oCUIFBs
+YWluLUxhbmd1YWdlIFN1bW1hcnkiLCJ0cmFuc2Zvcm1hdGlvbl9oaXN0b3J5IjpbeyJkYXRlIjoi
+MjAyNi0wNi0yMCIsIm5vdGVzIjoiU2ltcGxpZmllZC1sYW5ndWFnZSBhZGFwdGF0aW9uIG9mIHRo
+ZSB3aGl0ZSBwYXBlciBmb3IgcmVhZGVycyB3aG8gd2FudCBjb3JlIGlkZWFzIHdpdGhvdXQgdGVj
+aG5pY2FsIGRldGFpbC4gU291cmNlIGJvdW5kIGJ5IHBheWxvYWRfaGFzaC4iLCJwYXJlbnRfaGFz
+aGVzIjpbIjEyN2RjN2IyZDRhODY1M2VhMTAzYWE0ZDgxOWNkOTk0YmY3N2FjNWNmNTE3OWMzYWQy
+OGQ4ODljYWM2MWZiMmIiXSwic3RyYXRlZ3kiOiJhZGFwdGF0aW9uIiwid2hvIjoiRGF2aWQgS3ls
+ZSB3aXRoIENsYXVkZSAoRmFibGUgNSkifSx7ImRhdGUiOiIyMDI2LTA2LTI2Iiwibm90ZXMiOiJB
+dHRyaWJ1dGlvbiBsYW5ndWFnZSByZXZpc2lvbjogdG9vbC1mcmFtZSwgcGFzc2l2ZSBjb25zdHJ1
+Y3Rpb25zLiBSZS1ib3VuZCBwYXJlbnQgdG8gdGhlIHJlbGVhc2VkIHdoaXRlIHBhcGVyIHBheWxv
+YWRfaGFzaC4gQm9keSB1bmNoYW5nZWQ7IHBheWxvYWQgcmVzZWFsIG9ubHkuIiwicGFyZW50X2hh
+c2hlcyI6WyI4NmU5ZDc2MWJmNGMwZjgzYzAyNGJmNTI2MzAxZjAzNTE0MWQ5NWU5MmZhNzYzZGI3
+ZTdhNjE1Yzk1Yzk1MmM2Il0sInN0cmF0ZWd5IjoiYWRhcHRhdGlvbiIsIndobyI6IkRhdmlkIEt5
+bGUgd2l0aCBDbGF1ZGUgKEZhYmxlIDUpIn1dLCJ1c2VfY29uZGl0aW9ucyI6eyJjb25zZW50X25v
+dGUiOiJQdWJsaWMgYWRhcHRhdGlvbiBpbnRlbmRlZCBmb3Igb3BlbiBjaXJjdWxhdGlvbi4iLCJs
+aWNlbnNlIjoiQ0MgQlkgNC4wIiwicGVybWl0dGVkIjpbInJlZGlzdHJpYnV0ZSBhbmQgZnVydGhl
+ciBhZGFwdCB3aXRoIGF0dHJpYnV0aW9uIiwidXNlIGluIHRlYWNoaW5nIGFuZCBvdXRyZWFjaCJd
+LCJyZXF1ZXN0ZWRfcHJlc2VydmF0aW9ucyI6WyJrZWVwIHRoZSBsaW5rIHRvIHRoZSBzb3VyY2Ug
+d2hpdGUgcGFwZXIgYnkgaGFzaCB3aGVuIHJlZGlzdHJpYnV0aW5nIiwiY3JlZGl0IHRoZSBhZGFw
+dGVyIHdoZW4gZnVydGhlciBhZGFwdGluZyIsImRvIG5vdCBwcmVzZW50IHRoaXMgc3VtbWFyeSBh
+cyB0aGUgY29tcGxldGUgc3BlY2lmaWNhdGlvbiJdfSwidmVyc2lvbl9oaXN0b3J5IjpbeyJkYXRl
+IjoiMjAyNi0wNi0yNiIsIm5vdGVzIjoiQXR0cmlidXRpb24gbGFuZ3VhZ2UgcmV2aXNpb246IHRv
+b2wtZnJhbWUsIHBhc3NpdmUgY29uc3RydWN0aW9ucy4gUmUtYm91bmQgcGFyZW50IHRvIHRoZSBy
+ZWxlYXNlZCB3aGl0ZSBwYXBlciBwYXlsb2FkX2hhc2guIEJvZHkgdW5jaGFuZ2VkOyBwYXlsb2Fk
+IHJlc2VhbCBvbmx5LiIsInZlcnNpb24iOiJwdWJsaWMtcmVsZWFzZSJ9XX0=
+-----END KNOBE B64-----

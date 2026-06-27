@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE Protocol v1 — Dublin 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,serif;background:#06120a;color:#dff0e8;min-height:100vh;display:flex;flex-direction:column}
+#deck{flex:1;display:flex;flex-direction:column;max-width:960px;margin:0 auto;width:100%;padding:0}
+
+/* nav bar */
+#topbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:#0a1c0e;border-bottom:1px solid #1a3820}
+.seg-btns{display:flex;gap:6px}
+.seg-btn{font-family:Georgia,serif;font-size:12px;padding:4px 10px;border:1px solid #2a4830;background:transparent;color:#7eaa8a;cursor:pointer;border-radius:3px;transition:all .2s}
+.seg-btn.active,.seg-btn:hover{background:#1a3820;color:#a8e8b8;border-color:#3a6845}
+#slide-counter{font-family:'Courier New',monospace;font-size:11px;color:#4a7055;letter-spacing:.05em}
+#notes-toggle{font-family:Georgia,serif;font-size:11px;padding:4px 8px;border:1px solid #2a4830;background:transparent;color:#4a7055;cursor:pointer;border-radius:3px}
+#notes-toggle:hover{color:#7eaa8a;border-color:#3a6845}
+
+/* slide stage */
+#stage{flex:1;position:relative;overflow:hidden;min-height:500px}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;justify-content:center;align-items:center;padding:48px 64px;text-align:center;opacity:0;transition:opacity .3s}
+.slide.active{display:flex;opacity:1}
+
+/* segment accent bars */
+.slide::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.seg-0::before{background:linear-gradient(90deg,#2a4830,#3a6845)}
+.seg-1::before{background:linear-gradient(90deg,#b87820,#f0a830)}
+.seg-2::before{background:linear-gradient(90deg,#0f6e56,#1d9e75)}
+.seg-3::before{background:linear-gradient(90deg,#639922,#8fc934)}
+.seg-4::before{background:linear-gradient(90deg,#534ab7,#7f77dd)}
+
+/* segment label */
+.seg-label{position:absolute;top:18px;left:24px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;opacity:.5;font-family:'Courier New',monospace}
+
+/* typography */
+.eyebrow{font-size:11px;letter-spacing:.15em;text-transform:uppercase;font-family:'Courier New',monospace;margin-bottom:20px}
+.eyebrow.amber{color:#f0a830}
+.eyebrow.teal{color:#1d9e75}
+.eyebrow.green{color:#8fc934}
+.eyebrow.purple{color:#7f77dd}
+.eyebrow.gray{color:#4a7055}
+
+h1.hero{font-size:3rem;font-weight:400;line-height:1.15;color:#dff0e8;max-width:700px}
+h2.hero{font-size:2.2rem;font-weight:400;line-height:1.2;color:#dff0e8;max-width:680px}
+h3.slide-title{font-size:1.5rem;font-weight:400;color:#a8e8b8;margin-bottom:1rem}
+.tagline{font-size:1.15rem;color:#7eaa8a;margin-top:1.5rem;line-height:1.6}
+.refrain{font-size:2rem;font-weight:400;color:#a8e8b8;line-height:1.3;font-style:italic}
+.meta{font-family:'Courier New',monospace;font-size:.8rem;color:#3a6845;margin-top:1rem;letter-spacing:.05em}
+
+/* chain diagram */
+.chain{display:flex;align-items:center;gap:0;margin:2rem 0;width:100%}
+.chain-node{flex:1;background:#0f2414;border:1px solid #1a3820;border-radius:4px;padding:10px 8px;font-size:.75rem;color:#7eaa8a;position:relative}
+.chain-node .node-title{font-family:'Courier New',monospace;font-size:.7rem;color:#a8e8b8;margin-bottom:6px}
+.chain-arrow{width:28px;flex-shrink:0;text-align:center;color:#2a4830;font-size:1.2rem}
+.attr-dots{display:flex;gap:3px;justify-content:center;margin-top:6px;flex-wrap:wrap}
+.dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dot.consent{background:#f0a830}
+.dot.attribution{background:#7f77dd}
+.dot.notes{background:#1d9e75}
+.dot.limits{background:#d85a30}
+.dot.gone{background:#1a3820;border:1px solid #2a4830}
+.dot-legend{display:flex;gap:12px;margin-top:.75rem;justify-content:center}
+.dot-legend span{font-size:.65rem;color:#4a7055;display:flex;align-items:center;gap:4px}
+
+/* list slides */
+.big-list{list-style:none;text-align:left;margin:1.5rem 0;width:100%;max-width:600px}
+.big-list li{font-size:1.1rem;color:#a8e8b8;padding:.5rem 0;border-bottom:1px solid #0f2414;display:flex;align-items:baseline;gap:.75rem}
+.big-list li::before{content:'→';font-family:'Courier New',monospace;color:#2a4830;flex-shrink:0}
+.big-list li.fade{color:#3a6845}
+
+/* file diagram */
+.file-diagram{width:100%;max-width:580px;border:1px solid #1a3820;border-radius:6px;overflow:hidden;margin:1.5rem 0;text-align:left}
+.file-layer{padding:14px 20px;border-bottom:1px solid #1a3820;transition:all .4s}
+.file-layer:last-child{border-bottom:none}
+.file-layer .layer-label{font-family:'Courier New',monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:4px}
+.file-layer .layer-desc{font-size:.85rem;color:#7eaa8a}
+.layer-yaml{background:#0f2414}.layer-yaml .layer-label{color:#f0a830}
+.layer-body{background:#111f14}.layer-body .layer-label{color:#1d9e75}
+.layer-payload{background:#0a1a0d}.layer-payload .layer-label{color:#7f77dd}
+.file-caption{font-family:'Courier New',monospace;font-size:.75rem;color:#4a7055;margin-top:1rem;text-align:center}
+
+/* terminal */
+.terminal{background:#040c06;border:1px solid #1a3820;border-radius:4px;padding:16px 20px;text-align:left;width:100%;max-width:560px;margin:1.5rem 0}
+.terminal-line{font-family:'Courier New',monospace;font-size:.78rem;line-height:1.8}
+.t-label{color:#4a7055}
+.t-value{color:#a8e8b8}
+.t-match{color:#5dd68c}
+.t-mismatch{color:#e24b4a}
+.t-prompt{color:#2a4830}
+.t-cmd{color:#7eaa8a}
+.t-note{color:#4a7055;font-style:italic}
+
+/* two-col */
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;width:100%;max-width:700px;margin:1.5rem 0}
+.col-card{background:#0a1a0d;border:1px solid #1a3820;border-radius:4px;padding:14px 16px;text-align:left}
+.col-card .col-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-family:'Courier New',monospace;margin-bottom:.75rem}
+.col-card.bad .col-label{color:#e24b4a}
+.col-card.good .col-label{color:#5dd68c}
+.col-card p{font-size:.8rem;line-height:1.7;color:#7eaa8a}
+.col-card code{font-family:'Courier New',monospace;font-size:.75rem}
+
+/* what-not list */
+.not-list{display:grid;grid-template-columns:1fr 1fr;gap:.5rem 2rem;text-align:left;max-width:600px;margin:1.5rem 0;width:100%}
+.not-item{font-size:.9rem;color:#4a7055;display:flex;align-items:baseline;gap:.5rem}
+.not-item::before{content:'✗';color:#2a4830;font-family:'Courier New',monospace;flex-shrink:0}
+
+/* action cards */
+.action-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;width:100%;max-width:660px;margin:1.5rem 0}
+.action-card{background:#0a1a0d;border:1px solid #1a3820;border-radius:4px;padding:14px;text-align:center}
+.action-card .action-num{font-family:'Courier New',monospace;font-size:.7rem;color:#3a6845;margin-bottom:.5rem}
+.action-card .action-text{font-size:.85rem;color:#a8e8b8;line-height:1.5}
+.action-card .action-url{font-family:'Courier New',monospace;font-size:.7rem;color:#4a7055;margin-top:.5rem}
+
+/* harness diagram */
+.harness-split{display:flex;gap:1px;width:100%;max-width:580px;margin:1.5rem 0;border:1px solid #1a3820;border-radius:4px;overflow:hidden}
+.harness-col{flex:1;padding:16px 18px;text-align:left}
+.harness-col:first-child{background:#0f1a24;border-right:1px solid #1a3820}
+.harness-col:last-child{background:#0a1a0d}
+.harness-col .h-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-family:'Courier New',monospace;margin-bottom:.75rem}
+.harness-col:first-child .h-label{color:#534ab7}
+.harness-col:last-child .h-label{color:#1d9e75}
+.harness-col p{font-size:.85rem;color:#7eaa8a;line-height:1.7}
+
+/* nav controls */
+#botbar{display:flex;align-items:center;justify-content:space-between;padding:10px 20px;background:#0a1c0e;border-top:1px solid #1a3820}
+.nav-btn{font-family:'Courier New',monospace;font-size:13px;padding:6px 16px;border:1px solid #2a4830;background:transparent;color:#7eaa8a;cursor:pointer;border-radius:3px}
+.nav-btn:hover{background:#1a3820;color:#a8e8b8}
+.nav-btn:disabled{opacity:.25;cursor:default}
+#progress-bar{flex:1;height:2px;background:#0f2414;margin:0 16px;border-radius:1px;overflow:hidden}
+#progress-fill{height:100%;background:#1d9e75;width:0%;transition:width .3s;border-radius:1px}
+
+/* speaker notes */
+#notes-panel{display:none;background:#040c06;border-top:1px solid #1a3820;padding:16px 24px;max-height:180px;overflow-y:auto}
+#notes-panel h4{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:#3a6845;font-family:'Courier New',monospace;margin-bottom:.5rem}
+#notes-panel p{font-size:.82rem;color:#5a8060;line-height:1.7}
+</style>
+
+<div id="deck">
+<h2 class="sr-only">KNOBE Protocol v1 — explainer on context survivorship, portable interpretive context, and verifiable knowledge objects</h2>
+
+<div id="topbar">
+  <div class="seg-btns">
+    <button class="seg-btn active" onclick="gotoSlide(0)" title="Title">⬛</button>
+    <button class="seg-btn" onclick="gotoSegment(1)" title="Segment 1: Orphaned Fragments">1</button>
+    <button class="seg-btn" onclick="gotoSegment(2)" title="Segment 2: One File, Three Layers">2</button>
+    <button class="seg-btn" onclick="gotoSegment(3)" title="Segment 3: Watch It Work">3</button>
+    <button class="seg-btn" onclick="gotoSegment(4)" title="Segment 4: Limits &amp; invitation">4</button>
+  </div>
+  <span id="slide-counter">0 / 12</span>
+  <button id="notes-toggle" onclick="toggleNotes()">notes [n]</button>
+</div>
+
+<div id="stage">
+
+<!-- Slide 0 — Title -->
+<div class="slide seg-0 active" data-seg="0" data-idx="0">
+  <span class="eyebrow gray">Open protocol · Plain text · CC BY 4.0</span>
+  <h1 class="hero">KNOBE Protocol v1</h1>
+  <div class="tagline">A protocol for knowledge objects that keep their context when they move.</div>
+  <div style="margin:2rem 0;font-family:'Courier New',monospace;font-size:.75rem;color:#2a4830;letter-spacing:.05em">
+    payload_hash: 86e9d761bf4c0f83c024bf526301f035141d…<br>
+    status: verified · quarantine_status: quarantine · CC BY 4.0
+  </div>
+  <div class="meta">David Kyle · UC Davis · knobe.org</div>
+</div>
+
+<!-- Slide 1 — The chain -->
+<div class="slide seg-1" data-seg="1" data-idx="1">
+  <span class="seg-label">Segment 1 of 4 — the problem</span>
+  <span class="eyebrow amber">Orphaned fragments</span>
+  <h2 class="hero" style="font-size:1.6rem;margin-bottom:1.5rem">Every step was reasonable.</h2>
+  <div class="chain">
+    <div class="chain-node">
+      <div class="node-title">oral history transcript</div>
+      <div style="font-size:.65rem;color:#4a7055">consent terms<br>do-not-quote request<br>contextual notes</div>
+      <div class="attr-dots">
+        <div class="dot consent"></div><div class="dot attribution"></div>
+        <div class="dot notes"></div><div class="dot limits"></div>
+      </div>
+    </div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node">
+      <div class="node-title">AI abstract</div>
+      <div style="font-size:.65rem;color:#4a7055">summarized<br>for conference</div>
+      <div class="attr-dots">
+        <div class="dot gone"></div><div class="dot attribution"></div>
+        <div class="dot gone"></div><div class="dot limits"></div>
+      </div>
+    </div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node">
+      <div class="node-title">newsletter</div>
+      <div style="font-size:.65rem;color:#4a7055">edited for<br>general audience</div>
+      <div class="attr-dots">
+        <div class="dot gone"></div><div class="dot gone"></div>
+        <div class="dot gone"></div><div class="dot gone"></div>
+      </div>
+    </div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-node">
+      <div class="node-title">grant report</div>
+      <div style="font-size:.65rem;color:#4a7055">cited as<br>evidence</div>
+      <div class="attr-dots">
+        <div class="dot gone"></div><div class="dot gone"></div>
+        <div class="dot gone"></div><div class="dot gone"></div>
+      </div>
+    </div>
+  </div>
+  <div class="dot-legend">
+    <span><div class="dot consent"></div>consent terms</span>
+    <span><div class="dot attribution"></div>attribution</span>
+    <span><div class="dot notes"></div>contextual notes</span>
+    <span><div class="dot limits"></div>fidelity limits</span>
+  </div>
+  <div class="tagline" style="font-size:.9rem">The words circulate. Everything that governed them is gone.</div>
+</div>
+
+<!-- Slide 2 — Context survivorship bias -->
+<div class="slide seg-1" data-seg="1" data-idx="2">
+  <span class="seg-label">Segment 1 of 4 — the problem</span>
+  <span class="eyebrow amber">Context survivorship bias</span>
+  <h3 class="slide-title">The fragment that survives transit is mistaken for the full knowledge object.</h3>
+  <ul class="big-list" style="margin-top:1rem">
+    <li>A file becomes a person</li>
+    <li>A credential becomes competence</li>
+    <li>A ranking becomes quality</li>
+    <li>A summary becomes the source</li>
+    <li>A model output becomes a decision basis</li>
+  </ul>
+  <div class="tagline" style="font-size:.9rem;margin-top:1rem">Compressed objects are treated as operationally sufficient.<br>The problem is not compression. It is compression <em>without portable interpretive obligation.</em></div>
+</div>
+
+<!-- Slide 3 — Landing S1 -->
+<div class="slide seg-1" data-seg="1" data-idx="3">
+  <span class="seg-label">Segment 1 of 4 — the problem</span>
+  <span class="eyebrow amber" style="margin-bottom:3rem">The answer</span>
+  <div class="refrain">KNOBE makes it harder for fragments<br>to pass as whole objects.</div>
+  <div style="width:60px;height:1px;background:#1a3820;margin:2.5rem auto"></div>
+  <div class="refrain" style="font-size:1.4rem;color:#6ecc8e">KNOBE preserves objecthood under compression.</div>
+</div>
+
+<!-- Slide 4 — Three layers -->
+<div class="slide seg-2" data-seg="2" data-idx="4">
+  <span class="seg-label">Segment 2 of 4 — the protocol</span>
+  <span class="eyebrow teal">One file, three layers</span>
+  <h3 class="slide-title">Every .knobe.md file is simultaneously human-readable, machine-legible, and hash-verifiable.</h3>
+  <div class="file-diagram">
+    <div class="file-layer layer-yaml">
+      <div class="layer-label">layer 1 — yaml frontmatter</div>
+      <div class="layer-desc">title, author, license, date — readable in any text editor in 2 seconds</div>
+    </div>
+    <div class="file-layer layer-body">
+      <div class="layer-label">layer 2 — markdown body</div>
+      <div class="layer-desc">the document itself — opens in any editor, AI assistant, or browser</div>
+    </div>
+    <div class="file-layer layer-payload">
+      <div class="layer-label">layer 3 — base64 json payload</div>
+      <div class="layer-desc">attribution · transformation history · fidelity limits · SHA-256 integrity hash</div>
+    </div>
+  </div>
+  <div class="file-caption">A human reads it. A machine decodes it. A parser verifies it.<br>No conversion. No sidecar. No platform.</div>
+</div>
+
+<!-- Slide 5 — Hash + quarantine -->
+<div class="slide seg-2" data-seg="2" data-idx="5">
+  <span class="seg-label">Segment 2 of 4 — the protocol</span>
+  <span class="eyebrow teal">Two protocol rules</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;max-width:640px;margin:1.5rem 0;width:100%">
+    <div style="background:#0a1a0d;border:1px solid #1a3820;border-radius:4px;padding:20px;text-align:left">
+      <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-family:'Courier New',monospace;color:#1d9e75;margin-bottom:.75rem">integrity, not truth</div>
+      <p style="font-size:.9rem;color:#7eaa8a;line-height:1.7">The hash proves the record is unaltered since sealing. It does not prove accuracy, attribution honesty, or trustworthiness.</p>
+      <p style="font-size:.85rem;color:#3a6845;margin-top:.75rem;font-style:italic">The green check is where inspection begins, not where it ends.</p>
+    </div>
+    <div style="background:#0a1a0d;border:1px solid #1a3820;border-radius:4px;padding:20px;text-align:left">
+      <div style="font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-family:'Courier New',monospace;color:#1d9e75;margin-bottom:.75rem">quarantine-first</div>
+      <p style="font-size:.9rem;color:#7eaa8a;line-height:1.7">Every new or external KNOBE defaults to <code style="font-family:'Courier New',monospace;color:#a8e8b8">quarantine</code> until a human or governed system marks it trusted.</p>
+      <p style="font-size:.85rem;color:#3a6845;margin-top:.75rem;font-style:italic">Inspection precedes action.</p>
+    </div>
+  </div>
+  <div class="tagline" style="font-size:.9rem">Attribution travels with the artifact. When the file circulates, the attribution circulates with it.</div>
+</div>
+
+<!-- Slide 6 — System of context -->
+<div class="slide seg-2" data-seg="2" data-idx="6">
+  <span class="seg-label">Segment 2 of 4 — the protocol</span>
+  <span class="eyebrow teal">Institutional positioning</span>
+  <div class="refrain" style="font-size:1.6rem">A system of context,<br>not a system of record.</div>
+  <ul class="big-list" style="margin-top:1.5rem;max-width:520px">
+    <li class="fade">The LMS keeps grades</li>
+    <li class="fade">The IRB keeps approvals</li>
+    <li class="fade">The repository keeps deposits</li>
+    <li style="color:#a8e8b8">KNOBE carries context between them</li>
+  </ul>
+  <div class="tagline" style="font-size:.9rem">It does not replace those systems. It lowers the coordination cost across them.</div>
+</div>
+
+<!-- Slide 7 — Grove invitation -->
+<div class="slide seg-3" data-seg="3" data-idx="7">
+  <span class="seg-label">Segment 3 of 4 — the demo</span>
+  <span class="eyebrow green">The magic grove</span>
+  <h3 class="slide-title" style="margin-bottom:1rem">Magic Grove is one no-login, no-AI way to author a KNOBE.<br>Try it: pause and open knobe.org/grove.</h3>
+      <div style="display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:center;max-width:560px;width:100%;margin:1.5rem 0">
+    <div style="width:100px;height:100px;background:#0a1a0d;border:1px solid #1a3820;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:'Courier New',monospace;font-size:.6rem;color:#2a4830;text-align:center">
+      QR<br>knobe.org<br>/grove
+    </div>
+    <div style="text-align:left">
+      <p style="font-size:.9rem;color:#7eaa8a;line-height:1.7;margin-bottom:.75rem">The Grove asks questions about work you are carrying. It uses the sequoia's anatomy as a frame. At the end, you were building a KNOBE the entire time.</p>
+      <p style="font-size:.85rem;color:#4a7055;font-family:'Courier New',monospace">knobe.org/grove</p>
+    </div>
+  </div>
+</div>
+
+<!-- Slide 8 — Round trip verification -->
+<div class="slide seg-3" data-seg="3" data-idx="8">
+  <span class="seg-label">Segment 3 of 4 — the demo</span>
+  <span class="eyebrow green">The round trip</span>
+  <h3 class="slide-title">Grove → sealed .knobe.md → lens.py → green check</h3>
+  <div class="terminal">
+    <div class="terminal-line"><span class="t-prompt">$</span> <span class="t-cmd">python3 lens.py grove-journey.knobe.md</span></div>
+    <div class="terminal-line" style="margin-top:8px"><span class="t-label">title:             </span><span class="t-value">My Grove Journey</span></div>
+    <div class="terminal-line"><span class="t-label">spec_version:      </span><span class="t-value">1.0</span></div>
+    <div class="terminal-line"><span class="t-label">quarantine_status: </span><span class="t-value">quarantine</span></div>
+    <div class="terminal-line"><span class="t-label">status:            </span><span class="t-match">verified</span></div>
+    <div class="terminal-line"><span class="t-label">body_verified:     </span><span class="t-match">yes</span></div>
+    <div class="terminal-line"><span class="t-label">conformance:       </span><span class="t-match">valid</span></div>
+    <div class="terminal-line" style="margin-top:8px"><span class="t-note">integrity verified. Integrity is not truth — inspect before trusting.</span></div>
+  </div>
+  <div class="tagline" style="font-size:.88rem">Computed locally in the browser. Verified in 50 lines of Python.<br>No server. No AI. Pure math.</div>
+</div>
+
+<!-- Slide 9 — Gemini case -->
+<div class="slide seg-3" data-seg="3" data-idx="9">
+  <span class="seg-label">Segment 3 of 4 — the demo</span>
+  <span class="eyebrow green">Empirical case study</span>
+  <h3 class="slide-title">A model correctly diagnosed its verification failure. Then committed it again.</h3>
+  <div class="two-col">
+    <div class="col-card bad">
+      <div class="col-label">Model output</div>
+      <p>Computed hash: <code>85d886bb…</code><br>Stored hash: <code>85d886bb…</code><br><br>✅ TEST PASSED</p>
+      <p style="margin-top:.5rem;color:#3a6845;font-size:.75rem">Both values confabulated. It narrated a passing test.</p>
+    </div>
+    <div class="col-card good">
+      <div class="col-label">lens.py output</div>
+      <p>Computed: <code>3a99e98b…</code><br>Stored: <code>3a99e98b…</code><br><br><span style="color:#5dd68c">status: verified</span></p>
+      <p style="margin-top:.5rem;color:#3a6845;font-size:.75rem">Pure SHA-256. No narrative. The protocol held.</p>
+    </div>
+  </div>
+  <div class="tagline" style="font-size:.88rem">We do not ask an AI whether the object verifies. We run the verifier.</div>
+</div>
+
+<!-- Slide 10 — What KNOBE is not -->
+<div class="slide seg-4" data-seg="4" data-idx="10">
+  <span class="seg-label">Segment 4 of 4 — the invitation</span>
+  <span class="eyebrow purple">What KNOBE is not</span>
+  <h3 class="slide-title">What KNOBE does not do.</h3>
+  <div class="not-list">
+    <div class="not-item">a platform</div>
+    <div class="not-item">a system of record</div>
+    <div class="not-item">DRM or a smart contract</div>
+    <div class="not-item">a truth machine</div>
+    <div class="not-item">a way to open the AI black box</div>
+    <div class="not-item">only for AI workflows</div>
+    <div class="not-item">a replacement for institutional systems</div>
+    <div class="not-item">finished</div>
+  </div>
+  <div class="tagline" style="font-size:.9rem">Seed stage. Open license. The specification is public and the reference verifier ships with it.</div>
+</div>
+
+<!-- Slide 11 — Harness vs artifact -->
+<div class="slide seg-4" data-seg="4" data-idx="11">
+  <span class="seg-label">Segment 4 of 4 — the invitation</span>
+  <span class="eyebrow purple">Two complementary layers</span>
+  <h3 class="slide-title">KNOBE is what the harness handles.</h3>
+  <div class="harness-split">
+    <div class="harness-col">
+      <div class="h-label">harness infrastructure</div>
+      <p>Controls the conditions <em>around</em> the agent — execution policy, tool permissions, observability, memory architecture.</p>
+      <p style="margin-top:.75rem;font-style:italic;color:#4a5570">The harness controls the encounter.</p>
+    </div>
+    <div class="harness-col">
+      <div class="h-label">KNOBE — object layer</div>
+      <p>The artifact side of the agent harness vision — attribution, transformation history, fidelity limits, interpretive obligations carried <em>by</em> the object through any system.</p>
+      <p style="margin-top:.75rem;font-style:italic;color:#3a6845">The KNOBE preserves the object across encounters.</p>
+    </div>
+  </div>
+  <div class="tagline" style="font-size:.88rem">Complementary, not competing. If the artifact arrives stripped, no harness can reconstruct what was never carried.</div>
+</div>
+
+<!-- Slide 12 — Invitation -->
+<div class="slide seg-4" data-seg="4" data-idx="12">
+  <span class="seg-label">Segment 4 of 4 — the invitation</span>
+  <span class="eyebrow purple">Start here</span>
+  <div class="action-card" style="max-width:420px;margin:1.5rem auto;padding:28px 32px">
+    <div class="action-num" style="font-size:2rem;margin-bottom:.5rem">→</div>
+    <div class="action-text" style="font-size:1.3rem;margin-bottom:.5rem">Make one KNOBE in the Grove.</div>
+    <div class="action-url" style="font-size:1rem">knobe.org/grove</div>
+  </div>
+  <div style="font-family:'Courier New',monospace;font-size:.72rem;color:#2a4830;margin-top:.5rem;letter-spacing:.04em">
+    then: education profile · spec · verify an example
+  </div>
+  <div style="width:60px;height:1px;background:#1a3820;margin:1.5rem auto"></div>
+  <div class="refrain" style="font-size:1.5rem;color:#6ecc8e">KNOBE preserves objecthood under compression.</div>
+</div>
+
+</div><!-- end stage -->
+
+<div id="botbar">
+  <button class="nav-btn" id="prev-btn" onclick="prevSlide()" disabled>← prev</button>
+  <div id="progress-bar"><div id="progress-fill"></div></div>
+  <button class="nav-btn" id="next-btn" onclick="nextSlide()">next →</button>
+</div>
+
+<div id="notes-panel">
+  <h4>speaker notes</h4>
+  <p id="notes-text"></p>
+</div>
+
+</div><!-- end deck -->
+
+<script>
+const notes = [
+  "Title slide. Let it breathe 20-30 seconds. The hash and metadata at the bottom are doing work — they show the paper is a live artifact, not a static PDF. Say: 'I am going to show you the problem, the protocol, and a way to try it yourself. By the end, you will have made one yourself.'",
+  "SEGMENT 1 (0:00–5:00). The oral history chain. Walk through each hop slowly. Pause at the empty dots: 'By the fourth hop, the words still circulate. But the consent terms, the do-not-quote request, and the notes are gone. No one downstream knows they ever existed.' Don't rush this — it's the image that makes everything else land.",
+  "Name the failure mode. Walk the list slowly — pause on each one so it lands: 'A summary becomes the source.' This is the 1960 Barzun problem and the 2026 AI problem. Same failure, different velocity. Phrase to land: 'Compression is not the enemy. Compression without portable interpretive obligation is.'",
+  "Hold the refrain. Pause after each line. 'KNOBE makes it harder for compressed objects to become consequential while pretending they are whole.' Beat. 'KNOBE preserves objecthood under compression.' This is the only thing they need to remember if they walk out after segment 1.",
+  "SEGMENT 2 (5:00–10:00). Build the file slowly — point to each layer. 'One file. All three layers present at once. You can open it in TextEdit and read it. You can run a Python script and verify it. Both work.' Emphasize: 'No conversion. No sidecar. No platform dependency.' This answers the CIO objection before it arrives.",
+  "Two rules that do most of the trust work. Hash/integrity: 'A green check does not mean the content is true. It means this record has not changed since sealing. That is all.' Quarantine: 'Everything arrives untrusted. That is the honest default.' These two rules together mean KNOBE is not an authority system. It is an inspection-first system.",
+  "The institutional bridge. Walk through the list letting each item land. Then: 'Your institution already has all of these. KNOBE does not replace them. It carries context between them — so when a document crosses the line between systems, its attribution and obligations come with it.' This is the answer to: 'we already have systems.'",
+  "SEGMENT 3 (10:00–15:00). Open knobe.org/grove in any browser. It asks plain-language questions about the work you are carrying and turns the answers into a sealed .knobe.md file. For viewers: invite them to pause and try it. Then proceed to the verification round-trip.",
+  "The round trip is the demo payoff. If live: run it on stage. If not: show this terminal output and say: 'Computed in the browser. Verified in 50 lines of Python. Pure math.' The key line: 'Integrity verified. Integrity is not truth — inspect before trusting.' Make them repeat that last phrase if possible.",
+  "Keep this brief — 45 seconds. The model produced a plausible verification story. lens.py produced a checkable result. Say: we do not ask a model whether the object verifies. We run the verifier. Then move on.",
+  "SEGMENT 4 (15:00–20:00). Read the not-list — let the items land without commentary. The honest limits are the argument. Then: 'Seed stage means we are not pretending this is finished. We are inviting you to find the gaps.'",
+  "The harness positioning handles the inevitable 'how does this relate to MCP / tool use / agent frameworks' question. Key line: 'The harness controls the encounter. The KNOBE preserves the object across encounters.' If someone asks about LangChain or AutoGen: 'Complementary. If the artifact arrives stripped, no harness can reconstruct what was never carried.'",
+  "Final slide. Slow down. Make the Grove the single next action — say it once, clearly. Mention the education profile, spec, and verifier as follow-up paths for those who want to go deeper. Then the refrain, one more time. Hold silence after. Don't fill it."
+];
+
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const total = slides.length - 1;
+
+function gotoSlide(n){
+  slides[current].classList.remove('active');
+  current = Math.max(0, Math.min(n, total));
+  slides[current].classList.add('active');
+  updateUI();
+}
+function nextSlide(){ gotoSlide(current + 1); }
+function prevSlide(){ gotoSlide(current - 1); }
+function gotoSegment(seg){
+  const target = document.querySelector('.slide[data-seg="'+seg+'"]');
+  if(target){
+    const idx = parseInt(target.dataset.idx);
+    gotoSlide(idx);
+  }
+}
+function updateUI(){
+  document.getElementById('slide-counter').textContent = current + ' / ' + total;
+  document.getElementById('prev-btn').disabled = current === 0;
+  document.getElementById('next-btn').disabled = current === total;
+  document.getElementById('progress-fill').style.width = (current/total*100) + '%';
+  document.getElementById('notes-text').textContent = notes[current] || '';
+  const seg = parseInt(slides[current].dataset.seg);
+  document.querySelectorAll('.seg-btn').forEach((b,i) => {
+    b.classList.toggle('active', i === (seg === 0 ? 0 : seg));
+  });
+}
+function toggleNotes(){
+  const p = document.getElementById('notes-panel');
+  p.style.display = p.style.display === 'block' ? 'none' : 'block';
+}
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+  if(e.key === 'ArrowLeft') prevSlide();
+  if(e.key === 'n' || e.key === 'N') toggleNotes();
+  if(e.key >= '1' && e.key <= '4') gotoSegment(parseInt(e.key));
+});
+updateUI();
+</script>
+</html>
