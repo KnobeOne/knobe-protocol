@@ -40,13 +40,16 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .grove-callout .gc-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
 .grove-callout:hover .gc-cta,.grove-callout:focus-visible .gc-cta{color:var(--moss-deep)}
 
-/* On this page — homepage-only local nav, visually distinct from the global nav */
+/* Overview — homepage-only reader map, visually distinct from the global nav */
 .onpage{padding:24px 0 0}
-.onpage .onpage-inner{display:flex;align-items:baseline;gap:10px 18px;flex-wrap:wrap;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:13px 0}
-.onpage-label{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint)}
-.onpage-links{list-style:none;display:flex;gap:6px 16px;flex-wrap:wrap;margin:0;padding:0}
-.onpage-links a{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--line);transition:color .15s,border-color .15s}
-.onpage-links a:hover,.onpage-links a:focus-visible{color:var(--moss);border-color:var(--moss)}
+.onpage .onpage-inner{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}
+.onpage-label{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:6px}
+.onpage-intro{margin:0 0 10px;font-size:.85rem;color:var(--ink-soft)}
+.onpage-map{margin:0;padding-left:1.6em;font-size:.84rem;color:var(--ink-soft);line-height:1.7;columns:2;column-gap:2.5rem}
+.onpage-map li{break-inside:avoid}
+.onpage-map a{color:var(--moss);text-decoration:none;border-bottom:1px dotted var(--line);transition:color .15s,border-color .15s}
+.onpage-map a:hover,.onpage-map a:focus-visible{color:var(--moss);border-color:var(--moss)}
+@media(max-width:680px){.onpage-map{columns:1}}
 
 /* KNOBE in use — tools list with status + description */
 .inuse{margin:22px 0 0;border-top:1px solid var(--line)}
@@ -319,24 +322,32 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </div>
 
-<nav class="onpage" aria-label="On this page">
+<nav class="onpage" aria-label="Overview — page contents">
   <div class="wrap">
     <div class="onpage-inner">
-      <span class="onpage-label">On this page</span>
-      <ul class="onpage-links">
-        <li><a href="#problem">Problem</a></li>
-        <li><a href="#format">Format</a></li>
-        <li><a href="#carry">Context</a></li>
-        <li><a href="#verify">Verify</a></li>
-        <li><a href="#build">Build</a></li>
-        <li><a href="#downloads">Downloads</a></li>
-        <li><a href="#faq">FAQ</a></li>
-      </ul>
+      <span class="onpage-label">Overview</span>
+      <p class="onpage-intro">This page introduces KNOBE in order:</p>
+      <ol class="onpage-map">
+        <li><a href="#plain">In plain terms — the basic idea</a></li>
+        <li><a href="#problem">The problem — what gets lost when knowledge moves</a></li>
+        <li><a href="#format">The format — one plain-text file, three layers</a></li>
+        <li><a href="#carry">Context that travels — what the next reader can use</a></li>
+        <li><a href="#verify">Verification — what Lens and lens.py can and cannot prove</a></li>
+        <li><a href="#accessibility">Accessibility — same KNOBE, many ways in</a></li>
+        <li><a href="#grove">Grove — an experiential first encounter</a></li>
+        <li><a href="#build">Build with KNOBE — spec, vectors, verifier, and source</a></li>
+        <li><a href="#agents">Agent builders — the object layer in AI-mediated exchange</a></li>
+        <li><a href="#related">Related work — where KNOBE fits</a></li>
+        <li><a href="#downloads">Downloads — sealed public KNOBEs you can inspect</a></li>
+        <li><a href="#limits">Honest limits — what KNOBE is not</a></li>
+        <li><a href="#use">KNOBE in use — Lens, Grove, Crystallizer, Mix, Desk, Studio</a></li>
+        <li><a href="#governance">Governance — how the open protocol is stewarded</a></li>
+      </ol>
     </div>
   </div>
 </nav>
 
-<section id="plain-terms" style="background:var(--paper-warm);border-bottom:1px solid var(--line)">
+<section id="plain" style="background:var(--paper-warm);border-bottom:1px solid var(--line)">
   <div class="wrap">
     <div class="shead">In plain terms</div>
     <p class="lead" style="max-width:660px">Right now, AI handles knowledge like a port worker unloading containers with no shipping labels: cargo gets dumped on the dock, origin unknown, destination unknown, rules forgotten. Whatever is in the container gets used anyway.</p>
@@ -524,7 +535,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </section>
 
-<section id="sits">
+<section id="related">
   <div class="wrap">
     <div class="shead">Related work</div>
     <h2>The gap KNOBE fills</h2>
@@ -578,7 +589,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </section>
 
-<section id="fullnot">
+<section id="limits">
   <div class="wrap">
     <div class="shead">Honest limits</div>
     <h2>What KNOBE is not</h2>
@@ -592,7 +603,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </section>
 
-<section id="roadmap">
+<section id="use">
   <div class="wrap">
     <div class="shead">KNOBE in use</div>
     <h2>The tools that read, build, and carry KNOBEs</h2>
