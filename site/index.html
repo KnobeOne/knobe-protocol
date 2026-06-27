@@ -205,13 +205,6 @@ div.dl:hover{border-color:var(--moss)}
 @media(max-width:560px){.kp-overlay{padding:0;align-items:flex-end}.kp-panel{border-radius:8px 8px 0 0;max-height:92dvh}.kp-body{padding:20px 22px}.kp-foot{flex-direction:column;align-items:flex-start;gap:8px}}
 
 
-.faq details{border-bottom:1px solid var(--line);padding:12px 0}
-.faq summary{cursor:pointer;font-weight:bold;font-size:.98rem;color:var(--ink);list-style:none}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary::before{content:'+  ';color:var(--moss);font-family:monospace}
-.faq details[open] summary::before{content:'–  '}
-.faq details p{margin:10px 0 4px;font-size:.92rem;color:var(--ink-soft)}
-
 .gov dt{font-weight:bold;margin-top:18px;margin-bottom:4px;font-size:.98rem}
 .gov dd{color:var(--ink-soft);font-size:.95rem;margin-bottom:4px}
 
@@ -596,20 +589,6 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
           <p class="inuse-desc">A credentialed environment for institutional workflows. Verified identity, ledger anchoring, and enforcement belong here, not in the open protocol.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="faq">
-  <div class="wrap">
-    <div class="shead">Questions</div>
-    <h2>FAQ</h2>
-    <div class="faq">
-      <details open><summary>Is this just metadata?</summary><p>It includes metadata, but the claim is structural: the metadata travels inside the object as plain text, stays human-readable and inspectable, is hash-sealed, and behaves consistently across any tool. A vector-database tag or a course-system field stays behind when the file moves. A KNOBE's payload moves with it, including the fields written for the receiver, like fidelity limits and adaptation lineage.</p></details>
-      <details><summary>What does the hash prove?</summary><p>That the payload is unaltered since sealing. Nothing else. Not accuracy, not honesty, not safety. A liar can seal a lie; the seal then faithfully proves the lie has not been edited. Verification is where inspection begins.</p></details>
-      <details><summary>Does this require AI?</summary><p>No. KNOBE applies to work done with AI, with some AI, or with none. The planned pilots span a range: some courses disallow AI entirely, others allow limited self-attested use. The Magic Grove builds a KNOBE with no AI at all. The format records what actually happened in whatever workflow occurred.</p></details>
-      <details><summary>Does it replace the course system, ethics board, or repository?</summary><p>No. It is a system of context, not a system of record. It carries attribution and interpretive obligation between the systems you already have, and lowers the cost of moving between them.</p></details>
-      <details><summary>What does "seed stage" mean?</summary><p>v1 file semantics are frozen — the spec will not break existing files. The ecosystem around KNOBE is not finished. Extensions may add optional fields; breaking changes require a v2.0 declaration. We are inviting testing, critique, and independent implementation.</p></details>
     </div>
   </div>
 </section>
