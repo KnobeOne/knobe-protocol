@@ -59,9 +59,9 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .inuse-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:5px}
 .inuse-name{font-size:1.05rem;font-weight:bold;color:var(--ink);text-decoration:none}
 a.inuse-name:hover{color:var(--moss)}
-.inuse-status{font-family:-apple-system,system-ui,sans-serif;font-size:.64rem;font-weight:600;letter-spacing:.07em;text-transform:uppercase;padding:2px 9px;border-radius:10px;border:1px solid var(--line);white-space:nowrap}
-.inuse-status.now{color:var(--moss-deep);background:#e4ede4;border-color:var(--moss)}
-.inuse-status.dev{color:var(--ink-faint);background:var(--paper-warm)}
+.inuse-tag{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--moss);margin:3px 0 7px}
+.inuse-open{padding:18px 0;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft);line-height:1.65;border-bottom:1px solid var(--line)}
+.inuse-dev-head{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding:14px 0 4px}
 .inuse-desc{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft);margin:0;line-height:1.55}
 
 header.hero{padding:80px 0 56px;border-bottom:1px solid var(--line)}
@@ -543,49 +543,57 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <section id="use">
   <div class="wrap">
     <div class="shead">KNOBE in use</div>
-    <h2>The tools that read, build, and carry KNOBEs</h2>
-    <p>The protocol is the open layer. Around it, a small set of tools makes KNOBEs usable in practice — from verifying a file, to authoring one, to working with a whole collection. Two are available now; the rest are in development.</p>
+    <h2>Two tools now. An open protocol to build on.</h2>
+    <p>KNOBE is already usable. You can verify a KNOBE, make a first one, inspect public examples, run the reference verifier, and build against the v1 specification today.</p>
     <div class="inuse">
       <div class="inuse-item">
         <div class="inuse-num">01</div>
         <div>
-          <div class="inuse-head"><a class="inuse-name" href="/lens">Lens</a><span class="inuse-status now">Available now</span></div>
-          <p class="inuse-desc">Reads any <code>.knobe.md</code>, checks the payload hash, and reports verification and conformance state. The reference verifier, <code>lens.py</code>, is a single standard-library Python file with no dependencies.</p>
+          <div class="inuse-head"><a class="inuse-name" href="/lens">Lens</a></div>
+          <div class="inuse-tag">verify locally</div>
+          <p class="inuse-desc">Check any <code>.knobe.md</code> file in the browser or with <code>lens.py</code>. No upload, no account, no server, no AI.</p>
         </div>
       </div>
       <div class="inuse-item">
         <div class="inuse-num">02</div>
         <div>
-          <div class="inuse-head"><a class="inuse-name" href="/grove/">Grove</a><span class="inuse-status now">Available now</span></div>
-          <p class="inuse-desc">A guided, no-AI first encounter that walks you through authoring a valid, sealed KNOBE — using the giant sequoia's anatomy as a frame. No login, nothing to install.</p>
+          <div class="inuse-head"><a class="inuse-name" href="/grove/">Grove</a></div>
+          <div class="inuse-tag">make a first KNOBE</div>
+          <p class="inuse-desc">A guided, no-AI first encounter that helps you create a valid, sealed KNOBE. No login, nothing to install.</p>
         </div>
       </div>
+      <div class="inuse-open">The protocol is open. That means KNOBEs are not limited to our tools. Others can build compatible readers, authoring systems, accessibility workflows, repositories, collections, and institutional integrations.</div>
+      <div class="inuse-dev-head">In development</div>
       <div class="inuse-item">
         <div class="inuse-num">03</div>
         <div>
-          <div class="inuse-head"><span class="inuse-name">Crystallizer</span><span class="inuse-status dev">In development</span></div>
-          <p class="inuse-desc">Turns a working document into a sealed KNOBE: declares source context, transformation history, and fidelity limits, then writes the integrity hash.</p>
+          <div class="inuse-head"><span class="inuse-name">Crystallizer</span></div>
+          <div class="inuse-tag">author &amp; seal</div>
+          <p class="inuse-desc">Turn a working document into a sealed KNOBE with source context, transformation history, fidelity limits, and an integrity hash.</p>
         </div>
       </div>
       <div class="inuse-item">
         <div class="inuse-num">04</div>
         <div>
-          <div class="inuse-head"><span class="inuse-name">Mix</span><span class="inuse-status dev">In development</span></div>
-          <p class="inuse-desc">Combines multiple KNOBEs into a new object while preserving each source's attribution and transformation lineage.</p>
+          <div class="inuse-head"><span class="inuse-name">Mix</span></div>
+          <div class="inuse-tag">combine with lineage</div>
+          <p class="inuse-desc">Combine KNOBEs while preserving source attribution and transformation history.</p>
         </div>
       </div>
       <div class="inuse-item">
         <div class="inuse-num">05</div>
         <div>
-          <div class="inuse-head"><span class="inuse-name">Desk</span><span class="inuse-status dev">In development</span></div>
-          <p class="inuse-desc">A local workspace for reading, verifying, and organizing a working collection of KNOBEs.</p>
+          <div class="inuse-head"><span class="inuse-name">Desk</span></div>
+          <div class="inuse-tag">local workspace</div>
+          <p class="inuse-desc">Read, verify, organize, and work with KNOBE collections locally.</p>
         </div>
       </div>
       <div class="inuse-item">
         <div class="inuse-num">06</div>
         <div>
-          <div class="inuse-head"><span class="inuse-name">Studio</span><span class="inuse-status dev">In development</span></div>
-          <p class="inuse-desc">An integrated, credentialed environment. The verified-identity, ledger-anchoring, and enforcement capabilities of a credentialed environment belong to Studio, not to the open protocol.</p>
+          <div class="inuse-head"><span class="inuse-name">Studio</span></div>
+          <div class="inuse-tag">credentialed app</div>
+          <p class="inuse-desc">A credentialed environment for institutional workflows. Verified identity, ledger anchoring, and enforcement belong here, not in the open protocol.</p>
         </div>
       </div>
     </div>
