@@ -126,13 +126,6 @@ strong{font-weight:600;color:var(--ink)}
 .term .tl{color:#6b8a76}.term .tv{color:var(--code-ink)}.term .tm{color:#7ed99a}
 .term .tp{color:#3d5447}.term .tc{color:#a8c9b4}.term .tn{color:#6b8a76;font-style:italic}
 
-.states{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;margin:18px 0}
-.state-row{display:grid;grid-template-columns:210px 1fr;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
-.state-row:last-child{border-bottom:none}
-.state-name{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.77rem;color:var(--moss-deep);font-weight:500}
-.state-desc{color:var(--ink-soft)}
-@media(max-width:560px){.state-row{grid-template-columns:1fr;gap:3px}}
-
 .twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
 .tc-card{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
 .tc-card h3{margin-top:0;font-size:1rem}
@@ -171,10 +164,6 @@ strong{font-weight:600;color:var(--ink)}
 .sits-name{font-weight:600;color:var(--ink)}
 .sits-desc{color:var(--ink-soft)}
 @media(max-width:560px){.sits-row{grid-template-columns:1fr;gap:3px}}
-
-.notlist{display:grid;grid-template-columns:1fr 1fr;gap:6px 24px;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-faint);margin:16px 0}
-.notlist div::before{content:'—  ';color:var(--line)}
-@media(max-width:560px){.notlist{grid-template-columns:1fr}}
 
 .dls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
 .dl{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .15s}
@@ -352,8 +341,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">In plain terms</div>
     <p class="lead" style="max-width:660px">Right now, AI handles knowledge like a port worker unloading containers with no shipping labels: cargo gets dumped on the dock, origin unknown, destination unknown, rules forgotten. Whatever is in the container gets used anyway.</p>
-    <p style="max-width:660px;margin-top:16px;color:var(--ink-soft);line-height:1.75">KNOBE is the shipping label that travels inside the cargo itself. When the object arrives at a person, a tool, or an AI agent, the label is still there: where it came from, who made it, what conditions governed it, what it can and cannot be used for. A digital passport that shows where the document has been and what rules traveled with it, without stopping it from moving.</p>
-    <p style="max-width:660px;margin-top:20px;color:var(--ink-faint);font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;font-style:italic">Here is what that looks like technically, and why it matters.</p>
+    <p style="max-width:660px;margin-top:16px;color:var(--ink-soft);line-height:1.75">KNOBE is the shipping label that travels inside the cargo itself. When the object reaches a person, a tool, or an AI agent, the label is still there: where it came from, who made it, what conditions governed it, what it can and cannot be used for — without stopping it from moving.</p>
   </div>
 </section>
 
@@ -371,7 +359,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </div>
     <p class="chain-caption">Every step was reasonable. By the fourth, the words still circulate — but the consent terms, the do-not-quote request, and the notes that governed them are gone, and no one downstream knows they ever existed. <button class="replay" id="chainReplay">Replay ↻</button></p>
     <div class="credstrip" style="margin-top:18px"><div class="ct">What failed</div><div style="font-size:.92rem;color:var(--ink-soft);font-family:Georgia,serif">The words survived. The consent terms and interpretive conditions that governed them did not.</div></div>
-    <p style="margin-top:26px">We call this <em class="kw">context survivorship bias</em>: the fragment that survives transit is mistaken for the full knowledge object, while the context that made it interpretable disappears. Compression is not the enemy — summary, quotation, translation, and adaptation all depend on it. The problem is compression <em>without portable interpretive obligation</em>. Compression makes information portable; context-rich redundancy makes it interpretable. A KNOBE keeps that obligation attached to the object, so the next reader, the next tool, or the next agent can see how the object should be interpreted.</p>
+    <p style="margin-top:26px">We call this <em class="kw">context survivorship bias</em>: the fragment that survives transit is mistaken for the full knowledge object, while the context that made it interpretable disappears. Compression is not the enemy — summary, quotation, translation, and adaptation all depend on it. The problem is compression <em>without portable interpretive obligation</em>: compression makes information portable; context-rich redundancy makes it interpretable. A KNOBE keeps that obligation attached to the object.</p>
   </div>
 </section>
 
@@ -408,15 +396,14 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">Context that travels</div>
     <h2>What the next reader can use</h2>
-    <p>Most provenance systems answer one important question: <em>where did this come from?</em></p>
-    <p>KNOBE asks that question, but it also asks what the next receiver needs to know. What changed? What was adapted? What limits travel with this version? What should not be inferred from it? What conditions did the maker want preserved?</p>
-    <p>These fields are optional, but they are not ornamental. A KNOBE gives a document a way to carry usable context across a gap between people, tools, institutions, or AI systems that do not share the same background.</p>
+    <p>Most provenance systems answer one question: <em>where did this come from?</em> KNOBE asks that too, but also what the next receiver needs to know — what changed, what was adapted, what limits travel with this version, what should not be inferred from it, what conditions the maker wanted preserved.</p>
+    <p>These fields are optional, but not ornamental. They let a document carry usable context across a gap between people, tools, institutions, or AI systems that do not share the same background.</p>
     <div class="fields">
-      <div class="field"><div class="fn">fidelity_limits</div><div class="fd">How far the object can be trusted as a representation of its source: what it is fit for, and what must not be inferred from it. A summary that dropped caveats says so, so a downstream reader does not over-read it.</div></div>
-      <div class="field"><div class="fn">use_conditions</div><div class="fd">The originator's declared terms, carried forward: permitted and disallowed uses, required preservations, consent and quotation constraints. A condition set at sealing stays legible to a receiver who never met the author.</div></div>
-      <div class="field"><div class="fn">accessibility</div><div class="fd">Adaptation lineage. When a captioned, translated, or simplified version is made from a source, this binds the adaptation to its source by hash and credits the adapter, so the adaptation stays tied to what it was made from, and to whose labor made it.</div></div>
+      <div class="field"><div class="fn">fidelity_limits</div><div class="fd">How far the object can be trusted as a representation of its source: what it is fit for, and what must not be inferred from it. A summary that dropped its caveats says so.</div></div>
+      <div class="field"><div class="fn">use_conditions</div><div class="fd">The originator's declared terms, carried forward: permitted and disallowed uses, consent and quotation constraints. A condition set at sealing stays legible to a receiver who never met the author.</div></div>
+      <div class="field"><div class="fn">accessibility</div><div class="fd">Adaptation lineage. When a captioned, translated, or simplified version is made from a source, this binds it to that source by hash and credits the adapter — so the adaptation stays tied to what it was made from, and to whose labor made it.</div></div>
     </div>
-    <p>These fields inform; they do not enforce. A receiver may ignore them, but the object has still made its interpretive conditions visible. This is the difference between a knowledge object and an orphaned fragment: an orphaned fragment may still be quoted, summarized, or fed to a model, but it can no longer answer where it came from, what changed, or what it should be trusted for.</p>
+    <p>These fields inform; they do not enforce. A receiver may ignore them, but the object has still made its interpretive conditions visible. That is the difference between a knowledge object and an orphaned fragment: the fragment can still be quoted, summarized, or fed to a model, but it can no longer say where it came from, what changed, or what it should be trusted for.</p>
   </div>
 </section>
 
@@ -438,8 +425,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">Proof</div>
     <h2>Verify any KNOBE</h2>
-    <p>You do not need to understand the code to verify a KNOBE. The verifier reports a small set of human-readable states, and integrity is not truth — a match proves the sealed record has not changed, not that its contents are correct.</p>
-    <p><code>lens.py</code> is the reference verifier: a single standard-library Python file with no external dependencies. It runs locally — it does not upload your file, call an AI model, or contact a server. It extracts the payload, computes the canonical hash, and reports an integrity <em>status</em> and a <em>conformance</em> level. No server. No AI. No certificate authority. Pure math. It is the engine for builders and auditors today. If you prefer to verify without a terminal, <a href="lens.html" class="inline">KNOBE Lens</a> runs the same algorithm in your browser — drag in a file and get a result locally, with no upload and no server.</p>
+    <p>You do not need to understand the code to verify a KNOBE — it reports a small set of plain, human-readable states.</p>
+    <p><code>lens.py</code> is the reference verifier: a single standard-library Python file with no external dependencies. It runs locally — it does not upload your file, call an AI model, or contact a server. It extracts the payload, computes the canonical hash, and reports an integrity <em>status</em> and a <em>conformance</em> level. No server, no AI, no certificate authority — pure math. Prefer no terminal? <a href="lens.html" class="inline">KNOBE Lens</a> runs the same algorithm in your browser: drag in a file, get a result locally.</p>
     <button class="runbtn" id="runVerify" aria-label="Run the verification demo">▸ Run verification</button>
     <div class="term copywrap" id="verifyTerm" role="group" aria-label="Verifier output for interview-04.knobe.md">
       <button class="copybtn" data-copy="python3 lens.py interview-04.knobe.md">copy cmd</button>
@@ -452,26 +439,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <div style="margin-top:8px"><span class="tn">integrity verified. Integrity is not truth — inspect before trusting.</span></div>
       </div>
     </div>
-    <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;color:var(--ink-soft);margin:22px 0 4px">What the verifier tells you, in plain meaning:</p>
-    <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin:14px 0 2px">status — is the sealed record intact?</div>
-    <div class="states">
-      <div class="state-row"><span class="state-name">verified</span><span class="state-desc">The sealed payload is intact. The body matches, or no body hash is present.</span></div>
-      <div class="state-row"><span class="state-name">verified-body-modified</span><span class="state-desc">The payload is intact, but the markdown body changed. Often legitimate (a typo fixed, alt text added, a passage translated), so this is a signal to inspect, not a verdict of tampering.</span></div>
-      <div class="state-row"><span class="state-name">failed</span><span class="state-desc">The sealed payload does not match its hash. The structured record changed.</span></div>
-      <div class="state-row"><span class="state-name">unreadable</span><span class="state-desc">No valid KNOBE payload could be read, decoded, or parsed.</span></div>
-    </div>
-    <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin:18px 0 2px">body_verified — was the visible text sealed and unchanged?</div>
-    <div class="states">
-      <div class="state-row"><span class="state-name">yes</span><span class="state-desc">The visible body was sealed and still matches.</span></div>
-      <div class="state-row"><span class="state-name">modified</span><span class="state-desc">The body was sealed but no longer matches. Inspect what changed.</span></div>
-      <div class="state-row"><span class="state-name">omitted</span><span class="state-desc">The body was not sealed, or could not be safely checked (for example, when multiple payload blocks are present).</span></div>
-    </div>
-    <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin:18px 0 2px">conformance — does it follow the v1 spec?</div>
-    <div class="states">
-      <div class="state-row"><span class="state-name">valid</span><span class="state-desc">The file follows the v1 specification.</span></div>
-      <div class="state-row"><span class="state-name">warnings</span><span class="state-desc">The file works, but has soft issues worth inspecting (for example, custom vocabulary without a namespace).</span></div>
-      <div class="state-row"><span class="state-name">invalid</span><span class="state-desc">The file violates a v1 requirement (for example, a malformed hash or bare numeric values in the payload).</span></div>
-    </div>
+    <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft);margin-top:22px">Lens and <code>lens.py</code> report three things: an integrity <em>status</em> (is the sealed record intact?), whether the visible <em>body</em> was sealed and unchanged, and a <em>conformance</em> level against the v1 spec. The full state definitions live on the <a href="spec.html" class="inline">Spec</a> and <a href="lens.html" class="inline">Lens</a> pages. The important point here is simpler: a verified KNOBE means the sealed record is intact — not that its contents are true or safe.</p>
   </div>
 </section>
 
@@ -479,7 +447,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">The first proving ground</div>
     <h2>Accessibility is not a metaphor here</h2>
-    <p>The KNOBE instructional approach will be piloted in multiple large courses at UC Davis, ranging from 100 to 500 students. The pilots span a deliberate diversity of AI tool use: from courses where AI is disallowed entirely to those allowing limited, self-attested use with an emphasis on the learning journey. Accessibility is not an add-on use case for KNOBE; it is the first proving ground, with its own ethical stakes, and it reveals the general problem most clearly.</p>
+    <p>The KNOBE instructional approach will be piloted in multiple large courses at UC Davis, ranging from 100 to 500 students. Accessibility is not an add-on use case for KNOBE; it is the first proving ground, with its own ethical stakes, and it reveals the general problem most clearly.</p>
     <p>When materials are captioned, translated, simplified, or remediated, the adaptation is knowledge work. It carries labor, judgment, and responsibility. But adaptations usually circulate severed from their sources: the adapted object travels without the original, without the adapter's contribution recorded, without a clear account of what changed or what fidelity limits remain. The labor disappears, and the link to the source disappears with it.</p>
     <p>A KNOBE keeps the adaptation bound to its source by hash and credits the adapter in the record. This page links to a worked example: a plain-language simplification of the white paper that records what it was adapted from, who adapted it, and what it does and does not preserve. It is the vision in miniature: knowledge made legible across a gap between parties who do not share the same access to it, with the labor of making that crossing possible kept visible.</p>
     <p>Same KNOBE, many ways in. That is one reason accessibility collaborators have been among the first people to recognize the value of the protocol. A KNOBE lets everyone receive and return the same knowledge object without requiring everyone to use the same interface. It can be read as plain text, inspected by a verifier, opened with a screen reader, transformed into audio, adapted into a visual layout, summarized by an AI assistant, or used inside a learning platform. The object remains the same, and its context, lineage, and verification record remain attached.</p>
@@ -519,7 +487,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       </div>
       <div style="color:#7ed99a;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.74rem;margin-top:6px">canonical hash: sorted keys · no whitespace · literal UTF-8 · SHA-256</div>
     </div>
-    <p style="font-size:.9rem;color:var(--ink-faint);font-family:-apple-system,system-ui,sans-serif;margin-top:14px">The public source repository is available <a href="https://github.com/KnobeOne/knobe-protocol" style="color:var(--moss);text-decoration:underline;text-underline-offset:2px">on GitHub</a>. A preprint DOI will be linked when available.</p>
+    <p style="font-size:.9rem;color:var(--ink-faint);font-family:-apple-system,system-ui,sans-serif;margin-top:14px">A preprint DOI will be linked when available.</p>
   </div>
 </section>
 
@@ -527,12 +495,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">For agent builders</div>
     <h2>Agent harness engineering, not prompt engineering</h2>
-    <p>Prompt engineering governs what you ask an agent. Agent harness engineering is the broader discipline — execution policy, tool permissions, memory architecture, observability: the conditions around the agent. KNOBE is part of that vision, but it came at the problem from the artifact side. Rather than engineering the system, it engineers what the object carries through any system — the context-harness concern: not how agents are built, but what artifacts bring to the encounter. Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</p>
+    <p>Prompt engineering governs what you ask an agent. Agent harness engineering is the broader discipline — execution policy, tool permissions, memory, observability: the conditions around the agent. KNOBE comes at the problem from the other side. It does not engineer the system; it engineers what the object carries through any system. Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</p>
     <div class="twocol">
       <div class="tc-card"><div class="tcl" style="color:var(--ink-faint)">harness infrastructure</div><h3>Controls the encounter</h3><p>Execution policy, tool permissions, observability, memory: the conditions around the agent.</p></div>
       <div class="tc-card"><div class="tcl" style="color:var(--moss)">KNOBE · object layer</div><h3>Preserves the object</h3><p>Attribution, transformation history, fidelity limits: carried by the artifact across encounters.</p></div>
     </div>
-    <p>The harness controls the encounter. The KNOBE preserves the object across encounters. If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work: sources, transformations, permissions, fidelity limits. It does not open the model's reasoning. It solves context survival across AI-mediated exchange, not AI interpretability.</p>
+    <p>If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits. It does not open the model's reasoning. It solves context survival across AI-mediated exchange, not AI interpretability.</p>
   </div>
 </section>
 
@@ -540,18 +508,15 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">Related work</div>
     <h2>The gap KNOBE fills</h2>
-    <p>KNOBE did not invent the knowledge object, the self-verifying file, or the idea that metadata should travel with content. A lot of good work is moving in the same general direction. That is not a problem for KNOBE; it is evidence that the problem is real.</p>
-    <p>The difference is the design point. KNOBE asks a narrower question:</p>
-    <p><strong>Can a single plain-text document carry enough declared context to be interpreted responsibly after it leaves its original setting?</strong></p>
-    <p>That question puts KNOBE beside, but not inside, several neighboring efforts.</p>
+    <p>KNOBE did not invent the knowledge object, the self-verifying file, or the idea that metadata should travel with content. A lot of good work moves in the same direction — which is evidence the problem is real. KNOBE's design point is narrower: <strong>can a single plain-text document carry enough declared context to be interpreted responsibly after it leaves its original setting?</strong> That puts it beside, but not inside, several neighbors:</p>
     <div class="sits">
-      <div class="sits-row"><span class="sits-name">Google OKF</span><span class="sits-desc">Helps organize portable markdown knowledge for human-agent exchange. KNOBE can work with that kind of structure, but its concern is the interpretive obligation carried by the object itself: source, transformation history, fidelity limits, use conditions, and trust posture.</span></div>
-      <div class="sits-row"><span class="sits-name">C2PA</span><span class="sits-desc">Provides provenance and integrity infrastructure for media, backed by signing authorities and certificates. KNOBE is document-centered, plain-text, and authority-free at the open protocol layer. Credential-backed identity or institutional attestation can be added later, but it is not required for a KNOBE to be readable or locally verifiable.</span></div>
-      <div class="sits-row"><span class="sits-name">Nanopublications</span><span class="sits-desc">Make small, citable, provenance-rich claims for the Semantic Web. KNOBE is aimed at the human web: one readable markdown file that can move through classrooms, archives, email, repositories, AI tools, and local folders without requiring RDF or specialized infrastructure.</span></div>
-      <div class="sits-row"><span class="sits-name">RO-Crate / PROV</span><span class="sits-desc">Help package research objects and describe provenance for reproducibility and FAIR data. KNOBE has a narrower concern: whether one traveling object carries the context a receiver needs to understand what it is, what changed, and what it should or should not be trusted for.</span></div>
-      <div class="sits-row"><span class="sits-name">Git / OpenTimestamps</span><span class="sits-desc">Provide powerful ways to track versions, prove existence, and anchor files in external systems. KNOBE can compose with them. But Git's integrity lives in the repository, and timestamping lives in an external proof. KNOBE's seal travels inside the object, even when the object leaves the repo.</span></div>
+      <div class="sits-row"><span class="sits-name">C2PA</span><span class="sits-desc">Provenance and integrity for media, backed by signing authorities and certificates. KNOBE is document-centered, plain-text, and authority-free at the open layer; credential-backed attestation can be added later but is never required to verify.</span></div>
+      <div class="sits-row"><span class="sits-name">Nanopublications</span><span class="sits-desc">Small, citable, provenance-rich claims for the Semantic Web. KNOBE aims at the human web: one readable markdown file, no RDF or specialized infrastructure required.</span></div>
+      <div class="sits-row"><span class="sits-name">RO-Crate / PROV</span><span class="sits-desc">Package research objects and describe provenance for reproducibility and FAIR data. KNOBE's concern is narrower: whether one traveling object carries the context a receiver needs.</span></div>
+      <div class="sits-row"><span class="sits-name">Git / OpenTimestamps</span><span class="sits-desc">Track versions, prove existence, and anchor files in external systems. KNOBE can compose with them, but its seal travels inside the object, even when the object leaves the repo.</span></div>
+      <div class="sits-row"><span class="sits-name">Agent-readable knowledge formats</span><span class="sits-desc">Organize portable markdown for human–agent exchange. KNOBE's concern is the interpretive obligation carried by the object itself: source, transformation history, fidelity limits, use conditions, and trust posture.</span></div>
     </div>
-    <p>The neighboring systems make artifacts findable, attributable, reproducible, attestable, or agent-readable. KNOBE's narrower job is to keep interpretive context attached to the object itself, in plain text, after the object moves beyond the system that first held it.</p>
+    <p>The neighbors make artifacts findable, attributable, reproducible, attestable, or agent-readable. KNOBE's narrower job is to keep interpretive context attached to the object itself, in plain text, after it moves beyond the system that first held it. The <a href="#downloads" class="inline">white paper</a> situates KNOBE among these in detail.</p>
   </div>
 </section>
 
@@ -594,13 +559,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">Honest limits</div>
     <h2>What KNOBE is not</h2>
-    <div class="notlist">
-      <div>a platform</div><div>a system of record</div>
-      <div>DRM or a smart contract</div><div>a truth machine</div>
-      <div>a replacement for institutional systems</div><div>identity verification</div>
-      <div>a way to open the AI black box</div><div>finished</div>
-    </div>
-    <p>KNOBE does not solve hallucination, copyright, authorship, or governance. Attribution and identity are declared in v1, not cryptographically proven. KNOBEs do not execute: a <code>.knobe.md</code> is inert plain text. It carries obligations; it does not enforce them. And it applies equally to work done with AI, with some AI, or with none — the format records what actually happened, whatever that was.</p>
+    <p>KNOBE is not a platform, a system of record, a truth machine, DRM, a smart contract, identity verification, or a replacement for institutional governance. It does not open the AI black box, and it is not finished.</p>
+    <p>It does not solve hallucination, copyright, authorship, or governance. Attribution and identity are declared in v1, not cryptographically proven. KNOBEs do not execute: a <code>.knobe.md</code> is inert plain text — it carries obligations; it does not enforce them. And it applies equally to work done with AI, with some AI, or with none — the format records what actually happened, whatever that was.</p>
   </div>
 </section>
 
@@ -662,12 +622,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <h2>FAQ</h2>
     <div class="faq">
       <details open><summary>Is this just metadata?</summary><p>It includes metadata, but the claim is structural: the metadata travels inside the object as plain text, stays human-readable and inspectable, is hash-sealed, and behaves consistently across any tool. A vector-database tag or a course-system field stays behind when the file moves. A KNOBE's payload moves with it, including the fields written for the receiver, like fidelity limits and adaptation lineage.</p></details>
-      <details><summary>Isn't this just a nanopublication, OKF with a hash, or Git?</summary><p>No. Nanopublications make granular claims citable and provenance-rich in the Semantic Web. OKF organizes markdown knowledge so humans and agents can exchange it. Git verifies and versions content in a repository. KNOBE is a different design point: one ordinary readable object that carries declared interpretive obligations (permissions, fidelity limits, transformations, accessibility adaptations) and reports whether that context still matches, without requiring a repository, registry, certificate authority, or platform.</p></details>
       <details><summary>What does the hash prove?</summary><p>That the payload is unaltered since sealing. Nothing else. Not accuracy, not honesty, not safety. A liar can seal a lie; the seal then faithfully proves the lie has not been edited. Verification is where inspection begins.</p></details>
-      <details><summary>Does it make AI reasoning legible?</summary><p>No, and it does not claim to. KNOBE carries the human-supplied context around AI-mediated work: sources, transformations, permissions, fidelity limits, adaptation history. It does not open the model's internal reasoning; that is a different problem. KNOBE solves context survival across AI-mediated exchange, not AI interpretability.</p></details>
       <details><summary>Does this require AI?</summary><p>No. KNOBE applies to work done with AI, with some AI, or with none. The planned pilots span a range: some courses disallow AI entirely, others allow limited self-attested use. The Magic Grove builds a KNOBE with no AI at all. The format records what actually happened in whatever workflow occurred.</p></details>
       <details><summary>Does it replace the course system, ethics board, or repository?</summary><p>No. It is a system of context, not a system of record. It carries attribution and interpretive obligation between the systems you already have, and lowers the cost of moving between them.</p></details>
-      <details><summary>Is quarantine part of the file or the tool?</summary><p>Both. A KNOBE carries a declared <code>quarantine_status</code> field in its payload — it can say <code>quarantine</code>, <code>trusted</code>, or <code>rejected</code>. But quarantine-first is also a recommended implementation posture: any external KNOBE should be treated as untrusted until reviewed, regardless of what the field says. Verification confirms the payload is intact; it does not clear the object for use. The receiver — human, institution, or governed system — makes that call.</p></details>
       <details><summary>What does "seed stage" mean?</summary><p>v1 file semantics are frozen — the spec will not break existing files. The ecosystem around KNOBE is not finished. Extensions may add optional fields; breaking changes require a v2.0 declaration. We are inviting testing, critique, and independent implementation.</p></details>
     </div>
   </div>
@@ -679,17 +636,15 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <h2>An open protocol, stewarded in the open</h2>
     <dl class="gov">
       <dt>Open and staying open</dt>
-      <dd>KNOBE Protocol v1 is authored and stewarded by David Kyle, University of California, Davis, with a growing team of researchers, designers, and practitioners at UC Davis contributing to its design, piloting, and development. It is released under CC BY 4.0 and will remain open. Anyone may implement, extend, or build on it; the protocol itself will not be enclosed.</dd>
+      <dd>KNOBE Protocol v1 is authored and stewarded by David Kyle, University of California, Davis. It is released under CC BY 4.0 and will remain open. Anyone may implement, extend, or build on it; the protocol itself will not be enclosed.</dd>
       <dt>v1 is frozen</dt>
       <dd>The canonical hash rule, marker format, required fields, three-layer structure, and verification semantics will not change in v1.x. Backward-compatible additions may be issued as v1.x updates. Breaking changes require a v2.0 declaration. Files sealed under v1.0 remain valid under any v1.x verifier.</dd>
       <dt>Semantics follow the sealed version</dt>
       <dd>A verifier must apply the verification semantics of the spec version a file was sealed under. A future verifier may report additional advisory information, but must not reinterpret a previously valid KNOBE as failed.</dd>
       <dt>How the spec changes</dt>
       <dd>Proposed changes, bug reports, and implementation questions are submitted through the public source repository. The steward reviews proposals, maintains a public comment period for substantive changes, and issues decisions with documented rationale.</dd>
-      <dt>The team</dt>
-      <dd>KNOBE is being developed with a growing team at UC Davis spanning research, accessibility, software development, and education technology. If you are working on related problems and want to be part of what's being built, write to us.</dd>
-      <dt>Advisory board</dt>
-      <dd>An advisory board is forming. We are looking for people with experience in independent protocol implementation, educational technology, accessibility, open infrastructure, and institutional knowledge governance. Write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with a brief note on your perspective and relevant work. There is no deadline; this is an ongoing invitation.</dd>
+      <dt>Team and advisory board</dt>
+      <dd>KNOBE is developed with a growing team at UC Davis spanning research, accessibility, software development, and education technology. An advisory board is forming — we are looking for people with experience in independent protocol implementation, educational technology, accessibility, open infrastructure, and institutional knowledge governance. Write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with a brief note on your perspective and relevant work. There is no deadline; this is an ongoing invitation.</dd>
     </dl>
   </div>
 </section>
