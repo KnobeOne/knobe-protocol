@@ -236,7 +236,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <div class="navlinks">
       <a href="#format">Format</a>
       <a href="#problem">Problem</a>
-      <a href="#carry">What it carries</a>
+      <a href="#carry">What must not get lost</a>
       <a href="#verify">Verify</a>
       <a href="#sits">Related work</a>
       <a href="#downloads">Downloads</a>
@@ -329,9 +329,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <section id="carry">
   <div class="wrap">
-    <div class="shead">What it carries</div>
-    <h2>More than provenance: context the next reader can act on</h2>
-    <p>Most provenance formats answer <em>where did this come from</em>. A KNOBE also carries fields written for whoever — or whatever — receives it next. These are optional, but they are the point: they let an object be interpreted correctly across a gap between parties who do not share the same access to it.</p>
+    <div class="shead">What must not get lost</div>
+    <h2>Context the next reader can use</h2>
+    <p>Most provenance systems answer one important question: <em>where did this come from?</em></p>
+    <p>KNOBE asks that question, but it also asks what the next receiver needs to know. What changed? What was adapted? What limits travel with this version? What should not be inferred from it? What conditions did the maker want preserved?</p>
+    <p>These fields are optional, but they are not ornamental. They are the point. A KNOBE gives a document a way to carry usable context across a gap between people, tools, institutions, or AI systems that do not share the same background.</p>
     <div class="fields">
       <div class="field"><div class="fn">fidelity_limits</div><div class="fd">How far the object can be trusted as a representation of its source: what it is fit for, and what must not be inferred from it. A summary that dropped caveats says so, so a downstream reader does not over-read it.</div></div>
       <div class="field"><div class="fn">use_conditions</div><div class="fd">The originator's declared terms, carried forward: permitted and disallowed uses, required preservations, consent and quotation constraints. A condition set at sealing stays legible to a receiver who never met the author.</div></div>
