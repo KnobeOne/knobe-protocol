@@ -361,7 +361,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">Proof</div>
     <h2>Verify any KNOBE</h2>
-    <p>The reference verifier, <code>lens.py</code>, is about 70 lines of Python with no imports beyond the standard library. It extracts the payload, computes the canonical payload hash, and reports one of four states. No server. No AI. No certificate authority. Pure math.</p>
+    <p>You do not need to understand the code to verify a KNOBE. The verifier reports a small set of human-readable states, and integrity is not truth — a match proves the sealed record has not changed, not that its contents are correct.</p>
+    <p><code>lens.py</code> is the reference verifier: a single standard-library Python file with no external dependencies. It runs locally — it does not upload your file, call an AI model, or contact a server. It extracts the payload, computes the canonical hash, and reports an integrity <em>status</em> and a <em>conformance</em> level. No server. No AI. No certificate authority. Pure math. It is the engine for builders and auditors today; a non-technical Lens experience, where you drop a file in and verify it in your browser, is coming soon.</p>
     <button class="runbtn" id="runVerify" aria-label="Run the verification demo">▸ Run verification</button>
     <div class="term copywrap" id="verifyTerm" role="group" aria-label="Verifier output for interview-04.knobe.md">
       <button class="copybtn" data-copy="python3 lens.py interview-04.knobe.md">copy cmd</button>
@@ -374,11 +375,25 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <div style="margin-top:8px"><span class="tn">integrity verified. Integrity is not truth — inspect before trusting.</span></div>
       </div>
     </div>
+    <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;color:var(--ink-soft);margin:22px 0 4px">What the verifier tells you, in plain meaning:</p>
+    <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin:14px 0 2px">status — is the sealed record intact?</div>
     <div class="states">
-      <div class="state-row"><span class="state-name">verified</span><span class="state-desc">Payload matches. Body matches, or no body hash present.</span></div>
-      <div class="state-row"><span class="state-name">verified-body-modified</span><span class="state-desc">Payload matches; the optional body hash does not. Structurally valid; inspect the body. A body is often legitimately changed (a typo fixed, alt text added, a passage translated), so this is a signal, not a verdict of tampering.</span></div>
-      <div class="state-row"><span class="state-name">failed</span><span class="state-desc">Payload hash mismatch. The structured record changed.</span></div>
-      <div class="state-row"><span class="state-name">unreadable</span><span class="state-desc">No payload block, or it could not be decoded or parsed.</span></div>
+      <div class="state-row"><span class="state-name">verified</span><span class="state-desc">The sealed payload is intact. The body matches, or no body hash is present.</span></div>
+      <div class="state-row"><span class="state-name">verified-body-modified</span><span class="state-desc">The payload is intact, but the markdown body changed. Often legitimate (a typo fixed, alt text added, a passage translated), so this is a signal to inspect, not a verdict of tampering.</span></div>
+      <div class="state-row"><span class="state-name">failed</span><span class="state-desc">The sealed payload does not match its hash. The structured record changed.</span></div>
+      <div class="state-row"><span class="state-name">unreadable</span><span class="state-desc">No valid KNOBE payload could be read, decoded, or parsed.</span></div>
+    </div>
+    <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin:18px 0 2px">body_verified — was the visible text sealed and unchanged?</div>
+    <div class="states">
+      <div class="state-row"><span class="state-name">yes</span><span class="state-desc">The visible body was sealed and still matches.</span></div>
+      <div class="state-row"><span class="state-name">modified</span><span class="state-desc">The body was sealed but no longer matches. Inspect what changed.</span></div>
+      <div class="state-row"><span class="state-name">omitted</span><span class="state-desc">The body was not sealed, or could not be safely checked (for example, when multiple payload blocks are present).</span></div>
+    </div>
+    <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin:18px 0 2px">conformance — does it follow the v1 spec?</div>
+    <div class="states">
+      <div class="state-row"><span class="state-name">valid</span><span class="state-desc">The file follows the v1 specification.</span></div>
+      <div class="state-row"><span class="state-name">warnings</span><span class="state-desc">The file works, but has soft issues worth inspecting (for example, custom vocabulary without a namespace).</span></div>
+      <div class="state-row"><span class="state-name">invalid</span><span class="state-desc">The file violates a v1 requirement (for example, a malformed hash or bare numeric values in the payload).</span></div>
     </div>
   </div>
 </section>
@@ -421,7 +436,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <a href="spec.html"><div class="it">Specification</div><div class="id">frozen v1 contract</div></a>
         <a href="test-vectors/"><div class="it">Test vectors</div><div class="id">9 files, known results</div></a>
         <a href="knobe-seed-v1.0.knobe.md"><div class="it">Sample KNOBE (Seed)</div><div class="id">a full valid artifact</div></a>
-        <a href="lens.py"><div class="it">lens.py</div><div class="id">reference verifier ~70 lines</div></a>
+        <a href="lens.py"><div class="it">lens.py</div><div class="id">reference verifier, no dependencies</div></a>
       </div>
       <div style="color:#7ed99a;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.74rem;margin-top:6px">canonical hash: sorted keys · no whitespace · literal UTF-8 · SHA-256</div>
     </div>
