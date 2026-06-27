@@ -238,7 +238,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <a href="#problem">Problem</a>
       <a href="#carry">What it carries</a>
       <a href="#verify">Verify</a>
-      <a href="#sits">Where it sits</a>
+      <a href="#sits">Related work</a>
       <a href="#downloads">Downloads</a>
       <a href="education-profile.html">Education</a>
       <a href="about.html">About</a>
@@ -442,17 +442,20 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <section id="sits">
   <div class="wrap">
-    <div class="shead">Where it sits</div>
-    <h2>Honest about the neighbors</h2>
-    <p>KNOBE did not invent the knowledge object, the self-verifying file, or the idea that metadata should travel with content. The field is converging from several directions at once — which is the strongest evidence the problem is real. KNOBE's contribution is a specific design point, not a new primitive.</p>
+    <div class="shead">Related work</div>
+    <h2>The gap KNOBE fills</h2>
+    <p>KNOBE did not invent the knowledge object, the self-verifying file, or the idea that metadata should travel with content. A lot of good work is moving in the same general direction. That is not a problem for KNOBE; it is evidence that the problem is real.</p>
+    <p>The difference is the design point. KNOBE asks a narrower question:</p>
+    <p><strong>Can a single plain-text document carry enough declared context to be interpreted responsibly after it leaves its original setting?</strong></p>
+    <p>That question puts KNOBE beside, but not inside, several neighboring efforts.</p>
     <div class="sits">
-      <div class="sits-row"><span class="sits-name">Google OKF</span><span class="sits-desc">Organizes portable markdown knowledge for human-agent exchange. KNOBE preserves the interpretive obligations of an object as it moves through such exchanges. A KNOBE can be authored OKF-compatible; the two are complementary layers.</span></div>
-      <div class="sits-row"><span class="sits-name">C2PA</span><span class="sits-desc">Content provenance and integrity for media, bound to signing authorities and X.509 certificates. KNOBE is plain-text, document-centric, and authority-free; the certificate-backed guarantees live in an optional application tier, not the open protocol.</span></div>
-      <div class="sits-row"><span class="sits-name">Nanopublications</span><span class="sits-desc">Granular, citable, provenance-rich knowledge units for the Semantic Web, in RDF. KNOBE is for the human web: one readable markdown file, no RDF and no infrastructure required.</span></div>
-      <div class="sits-row"><span class="sits-name">RO-Crate / PROV</span><span class="sits-desc">Package research artifacts and model provenance for FAIRness and reproducibility. KNOBE's narrower concern is whether a single object carries enough declared context to be interpreted responsibly by the next human or machine.</span></div>
-      <div class="sits-row"><span class="sits-name">Git / OpenTimestamps</span><span class="sits-desc">Content-addressed versioning and authority-free timestamping. Infrastructure KNOBE can compose with: Git's integrity lives in the repository; KNOBE's seal travels inside the object, whether or not a repo is present.</span></div>
+      <div class="sits-row"><span class="sits-name">Google OKF</span><span class="sits-desc">Helps organize portable markdown knowledge for human-agent exchange. KNOBE can work with that kind of structure, but its concern is the interpretive obligation carried by the object itself: source, transformation history, fidelity limits, use conditions, and trust posture.</span></div>
+      <div class="sits-row"><span class="sits-name">C2PA</span><span class="sits-desc">Provides provenance and integrity infrastructure for media, backed by signing authorities and certificates. KNOBE is document-centered, plain-text, and authority-free at the open protocol layer. Credential-backed identity or institutional attestation can be added later, but it is not required for a KNOBE to be readable or locally verifiable.</span></div>
+      <div class="sits-row"><span class="sits-name">Nanopublications</span><span class="sits-desc">Make small, citable, provenance-rich claims for the Semantic Web. KNOBE is aimed at the human web: one readable markdown file that can move through classrooms, archives, email, repositories, AI tools, and local folders without requiring RDF or specialized infrastructure.</span></div>
+      <div class="sits-row"><span class="sits-name">RO-Crate / PROV</span><span class="sits-desc">Help package research objects and describe provenance for reproducibility and FAIR data. KNOBE has a narrower concern: whether one traveling object carries the context a receiver needs to understand what it is, what changed, and what it should or should not be trusted for.</span></div>
+      <div class="sits-row"><span class="sits-name">Git / OpenTimestamps</span><span class="sits-desc">Provide powerful ways to track versions, prove existence, and anchor files in external systems. KNOBE can compose with them. But Git's integrity lives in the repository, and timestamping lives in an external proof. KNOBE's seal travels inside the object, even when the object leaves the repo.</span></div>
     </div>
-    <p>The neighboring systems make artifacts findable, attributable, reproducible, attestable, or agent-readable. KNOBE's narrower concern is whether the object carries enough declared context to be interpreted responsibly by the next human or machine that receives it — in plain text, outside any walled garden. A walled garden can offer legibility to those inside it. KNOBE is for the harder case: legibility that survives leaving the garden, readable by the least-powerful participant, not only by the platform with the best tooling.</p>
+    <p>The neighboring systems make artifacts findable, attributable, reproducible, attestable, or agent-readable. KNOBE's narrower job is to keep interpretive context attached to the object itself, in plain text, after the object moves beyond the system that first held it.</p>
   </div>
 </section>
 
