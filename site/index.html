@@ -30,7 +30,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 @media(max-width:760px){.navlinks{display:none}}
 
 /* Grove callout — featured experiential-demo card after hero */
-.grove-callout-wrap{padding:30px 0 0}
+.grove-callout-wrap{padding:30px 0 0;scroll-margin-top:64px}
 .grove-callout{display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:22px 26px;text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s}
 .grove-callout:hover,.grove-callout:focus-visible{border-color:var(--moss);box-shadow:0 2px 18px rgba(47,107,79,.13)}
 .grove-callout .gc-main{flex:1;min-width:240px}
@@ -139,9 +139,6 @@ strong{font-weight:600;color:var(--ink)}
 .field{border-left:2px solid var(--line);padding:4px 0 4px 16px;margin:14px 0}
 .field .fn{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.82rem;color:var(--moss-deep);font-weight:500}
 .field .fd{font-size:.92rem;color:var(--ink-soft);margin-top:3px}
-
-.mgcard{background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:22px 24px;margin:8px 0}
-.mgcard .mgnote{font-size:.92rem;color:var(--ink-soft);font-style:italic;margin-bottom:14px}
 
 .implpanel{background:var(--code-bg);border-radius:8px;padding:26px 28px;margin:8px 0}
 .implpanel h3{color:var(--code-ink);margin-top:0;font-family:-apple-system,system-ui,sans-serif;font-size:1rem}
@@ -308,13 +305,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </header>
 
-<div class="grove-callout-wrap">
+<div class="grove-callout-wrap" id="grove">
   <div class="wrap">
-    <a class="grove-callout" href="/grove/" aria-label="Enter Grove, an experiential demo">
+    <a class="grove-callout" href="/grove/" aria-label="Enter Grove, an optional guided way to learn KNOBE by building one">
       <div class="gc-main">
-        <div class="gc-kicker">An experiential demo</div>
-        <div class="gc-title">Walk the Grove and build a real KNOBE</div>
-        <p class="gc-desc">A guided, no-AI first encounter that seals a verifiable <code>.knobe.md</code> as you go — no login, nothing to install.</p>
+        <div class="gc-kicker">Optional · learn by doing</div>
+        <div class="gc-title">New to KNOBE? Walk the Grove</div>
+        <p class="gc-desc">A short, guided, no-AI journey that teaches the format by building one real sealed <code>.knobe.md</code> with you — no login, nothing to install. It's a friendly way to dig in and learn the idea, not the standard or fastest way to make a KNOBE.</p>
       </div>
       <span class="gc-cta">Enter Grove →</span>
     </a>
@@ -330,7 +327,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <li><a href="#format"><span class="ov-title">Knowledge Object</span><span class="ov-dash"> — </span><span class="ov-desc">one plain-text file that carries context</span></a></li>
         <li><a href="#integrity"><span class="ov-title">Verification</span><span class="ov-dash"> — </span><span class="ov-desc">what Lens and lens.py can and cannot prove</span></a></li>
         <li><a href="#accessibility"><span class="ov-title">Accessibility</span><span class="ov-dash"> — </span><span class="ov-desc">same KNOBE, many ways in</span></a></li>
-        <li><a href="#grove"><span class="ov-title">Use KNOBE</span><span class="ov-dash"> — </span><span class="ov-desc">Grove, examples, downloads, source, and emerging tools</span></a></li>
+        <li><a href="#use"><span class="ov-title">Use KNOBE</span><span class="ov-dash"> — </span><span class="ov-desc">the tools that read, build, and carry KNOBEs</span></a></li>
         <li><a href="#governance"><span class="ov-title">Governance</span><span class="ov-dash"> — </span><span class="ov-desc">how the open protocol is stewarded</span></a></li>
       </ol>
     </div>
@@ -453,19 +450,6 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>Same KNOBE, many ways in. That is one reason accessibility collaborators have been among the first people to recognize the value of the protocol. A KNOBE lets everyone receive and return the same knowledge object without requiring everyone to use the same interface. It can be read as plain text, inspected by a verifier, opened with a screen reader, transformed into audio, adapted into a visual layout, summarized by an AI assistant, or used inside a learning platform. The object remains the same, and its context, lineage, and verification record remain attached.</p>
     <div class="cta-row" style="margin-top:8px">
       <a href="knobe-v1-plain-language-summary.knobe.md" class="btn btn-ghost">See the worked adaptation</a>
-    </div>
-  </div>
-</section>
-
-<section id="grove">
-  <div class="wrap">
-    <div class="shead">First encounter</div>
-    <h2>Make your first KNOBE</h2>
-    <div class="mgcard">
-      <div class="mgnote">Magic Grove is a first encounter surface for KNOBE. It is not the protocol and not a required tool. It is a guided, no-AI authoring experience that helps a person create a valid <code>.knobe.md</code> file without reading the specification first.</div>
-      <p style="margin-bottom:16px;font-size:.95rem;color:var(--ink-soft)">It asks a few questions about a document, project, source, or idea you want to carry forward, using the sequoia's anatomy as a frame. At the end you download a sealed file you can verify with <code>lens.py</code> — and you were building it the whole time.</p>
-      <div style="font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint);margin-bottom:16px;letter-spacing:.04em">Roots → Trunk → Canopy → Seal &nbsp;·&nbsp; no AI · no login · produces <code>.knobe.md</code></div>
-      <a href="grove" class="btn btn-primary">Open the Magic Grove</a>
     </div>
   </div>
 </section>
