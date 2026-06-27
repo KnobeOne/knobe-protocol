@@ -155,6 +155,12 @@ strong{font-weight:600;color:var(--ink)}
 .whofor div p{font-size:.86rem;color:var(--ink-soft);margin:2px 0 0}
 @media(max-width:560px){.whofor{grid-template-columns:1fr}}
 
+.gains{list-style:none;margin:20px 0 22px;padding:0}
+.gains li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);color:var(--ink-soft);line-height:1.65}
+.gains li:last-child{border-bottom:none}
+.gains li::before{content:'·';position:absolute;left:0;color:var(--moss);font-size:1.3em;line-height:1.3}
+.gains li strong{color:var(--ink)}
+
 .dls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
 .dl{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .15s}
 a.dl{display:block;padding:16px 18px;text-decoration:none}
@@ -483,9 +489,19 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <section id="related">
   <div class="wrap">
-    <div class="shead">Related work</div>
-    <h2>The gap KNOBE fills</h2>
-    <p>KNOBE sits beside related work in provenance, research packaging, media authenticity, version control, and agent-readable knowledge formats. Its narrower job is different: to keep interpretive context attached to a single plain-text knowledge object after it leaves the system that first held it. The <a href="#downloads" class="inline">white paper</a> situates KNOBE among neighboring efforts in more detail.</p>
+    <h2>What KNOBE changes</h2>
+    <p>Knowledge work breaks at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
+    <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
+    <p>It gives you six practical gains:</p>
+    <ul class="gains" role="list">
+      <li><strong>Context travels with the content.</strong> The interpretive record stays inside the object.</li>
+      <li><strong>Integrity can be checked locally.</strong> No account, server, registry, certificate authority, or institutional infrastructure required.</li>
+      <li><strong>Obligations become visible.</strong> Fidelity limits, consent notes, use conditions, and adaptation history are written for the next receiver.</li>
+      <li><strong>The seal reports; it never locks.</strong> A broken seal is a signal to inspect, not a barrier to reading.</li>
+      <li><strong>Same KNOBE, many ways in.</strong> The same object can move through different interfaces, assistive technologies, modalities, and AI supports.</li>
+      <li><strong>It works alone or inside larger systems.</strong> A KNOBE can live in email, Git, an LMS, a repository, a shared drive, or heavier provenance infrastructure.</li>
+    </ul>
+    <p>The <a href="#downloads" class="inline">white paper</a> situates KNOBE among neighboring efforts in provenance, research packaging, media authenticity, version control, and agent-readable knowledge formats.</p>
   </div>
 </section>
 
