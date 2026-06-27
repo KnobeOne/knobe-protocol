@@ -315,12 +315,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <div class="contents">
       <div class="contents-title">Contents</div>
       <ol>
-        <li><a href="#plain"><span class="ov-title">The Problem</span><span class="ov-dash"> — </span><span class="ov-desc">what gets lost when knowledge moves</span></a></li>
-        <li><a href="#format"><span class="ov-title">Knowledge Object</span><span class="ov-dash"> — </span><span class="ov-desc">one plain-text file that carries context</span></a></li>
+        <li><a href="#plain"><span class="ov-title">The problem</span><span class="ov-dash"> — </span><span class="ov-desc">what gets lost when knowledge moves</span></a></li>
+        <li><a href="#related"><span class="ov-title">What KNOBE changes</span><span class="ov-dash"> — </span><span class="ov-desc">what it buys you in everyday work</span></a></li>
+        <li><a href="#format"><span class="ov-title">The object</span><span class="ov-dash"> — </span><span class="ov-desc">one plain-text file that carries context</span></a></li>
         <li><a href="#integrity"><span class="ov-title">Verification</span><span class="ov-dash"> — </span><span class="ov-desc">what Lens and lens.py can and cannot prove</span></a></li>
         <li><a href="#accessibility"><span class="ov-title">Accessibility</span><span class="ov-dash"> — </span><span class="ov-desc">same KNOBE, many ways in</span></a></li>
-        <li><a href="#use"><span class="ov-title">Use KNOBE</span><span class="ov-dash"> — </span><span class="ov-desc">the tools that read, build, and carry KNOBEs</span></a></li>
-        <li><a href="#governance"><span class="ov-title">Governance</span><span class="ov-dash"> — </span><span class="ov-desc">how the open protocol is stewarded</span></a></li>
+        <li><a href="#use"><span class="ov-title">Use KNOBE</span><span class="ov-dash"> — </span><span class="ov-desc">Grove, examples, downloads, source, and emerging tools</span></a></li>
       </ol>
     </div>
   </div>
@@ -349,6 +349,25 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p class="chain-caption">Every step was reasonable. By the fourth, the words still circulate — but the consent terms, the do-not-quote request, and the notes that governed them are gone, and no one downstream knows they ever existed. <button class="replay" id="chainReplay">Replay ↻</button></p>
     <div class="credstrip" style="margin-top:18px"><div class="ct">What failed</div><div style="font-size:.92rem;color:var(--ink-soft);font-family:Georgia,serif">The words survived. The consent terms and interpretive conditions that governed them did not.</div></div>
     <p style="margin-top:26px">We call this <em class="kw">context survivorship bias</em>: the fragment that survives transit is mistaken for the full knowledge object, while the context that made it interpretable disappears. Compression is not the enemy — summary, quotation, translation, and adaptation all depend on it. The problem is compression <em>without portable interpretive obligation</em>: compression makes information portable; context-rich redundancy makes it interpretable. A KNOBE keeps that obligation attached to the object.</p>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <div class="shead">What KNOBE changes</div>
+    <h2>What it buys you in everyday work</h2>
+    <p>Knowledge work breaks at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
+    <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
+    <p>It gives you six practical gains:</p>
+    <ul class="gains" role="list">
+      <li><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</li>
+      <li><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens — no account, registry, certificate authority, or server required.</li>
+      <li><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</li>
+      <li><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</li>
+      <li><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</li>
+      <li><strong>Start simple. Build bigger later.</strong> KNOBEs work in email, shared drives, and local folders today, and can later be indexed or composed inside Git, RO-Crate, FDO, OKF, or other infrastructure.</li>
+    </ul>
+    <p>KNOBE sits beside related work in provenance, research packaging, media authenticity, version control, and agent-readable knowledge formats. Its narrower job is to keep interpretive context attached to a single plain-text object after it leaves the system that first held it. The white paper situates KNOBE among neighboring efforts in more detail.</p>
   </div>
 </section>
 
@@ -480,24 +499,6 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </section>
 
-<section id="related">
-  <div class="wrap">
-    <h2>What KNOBE changes</h2>
-    <p>Knowledge work breaks at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
-    <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
-    <p>It gives you six practical gains:</p>
-    <ul class="gains" role="list">
-      <li><strong>Context travels with the content.</strong> The interpretive record stays inside the object.</li>
-      <li><strong>Integrity can be checked locally.</strong> No account, server, registry, certificate authority, or institutional infrastructure required.</li>
-      <li><strong>Obligations become visible.</strong> Fidelity limits, consent notes, use conditions, and adaptation history are written for the next receiver.</li>
-      <li><strong>The seal reports; it never locks.</strong> A broken seal is a signal to inspect, not a barrier to reading.</li>
-      <li><strong>Same KNOBE, many ways in.</strong> The same object can move through different interfaces, assistive technologies, modalities, and AI supports.</li>
-      <li><strong>It works alone or inside larger systems.</strong> A KNOBE can live in email, Git, an LMS, a repository, a shared drive, or heavier provenance infrastructure.</li>
-    </ul>
-    <p>The <a href="#downloads" class="inline">white paper</a> situates KNOBE among neighboring efforts in provenance, research packaging, media authenticity, version control, and agent-readable knowledge formats.</p>
-  </div>
-</section>
-
 <section id="downloads">
   <div class="wrap">
     <div class="shead">Downloads</div>
@@ -593,24 +594,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </section>
 
-<section id="governance">
-  <div class="wrap">
-    <div class="shead">Governance</div>
-    <h2>An open protocol, stewarded in the open</h2>
-    <dl class="gov">
-      <dt>Open and staying open</dt>
-      <dd>KNOBE Protocol v1 is authored and stewarded by David Kyle, University of California, Davis. It is released under CC BY 4.0 and will remain open. Anyone may implement, extend, or build on it; the protocol itself will not be enclosed.</dd>
-      <dt>v1 is frozen</dt>
-      <dd>The canonical hash rule, marker format, required fields, three-layer structure, and verification semantics will not change in v1.x. Backward-compatible additions may be issued as v1.x updates. Breaking changes require a v2.0 declaration. Files sealed under v1.0 remain valid under any v1.x verifier.</dd>
-      <dt>Semantics follow the sealed version</dt>
-      <dd>A verifier must apply the verification semantics of the spec version a file was sealed under. A future verifier may report additional advisory information, but must not reinterpret a previously valid KNOBE as failed.</dd>
-      <dt>How the spec changes</dt>
-      <dd>Proposed changes, bug reports, and implementation questions are submitted through the public source repository. The steward reviews proposals, maintains a public comment period for substantive changes, and issues decisions with documented rationale.</dd>
-      <dt>Team and advisory board</dt>
-      <dd>KNOBE is developed with a growing team at UC Davis spanning research, accessibility, software development, and education technology. An advisory board is forming — we are looking for people with experience in independent protocol implementation, educational technology, accessibility, open infrastructure, and institutional knowledge governance. Write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with a brief note on your perspective and relevant work. There is no deadline; this is an ongoing invitation.</dd>
-    </dl>
-  </div>
-</section>
+<div class="wrap" style="padding:40px 0;border-top:1px solid var(--line)">
+  <p style="max-width:640px;color:var(--ink-soft);font-size:.95rem">KNOBE Protocol v1 is open, frozen, and stewarded in public. Governance, change process, team, and advisory-board details are on the <a href="/about" class="inline">About page</a>.</p>
+</div>
 
 <div id="kPreview" class="kp-overlay" role="dialog" aria-modal="true" aria-labelledby="kpTitle" hidden>
   <div class="kp-panel">
