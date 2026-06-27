@@ -13,7 +13,7 @@
   --code-bg:#10231a;--code-ink:#cfe6d6;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;scroll-padding-top:64px}
+html{scroll-behavior:smooth}
 body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
 .wrap{max-width:740px;margin:0 auto;padding:0 28px}
 .wide{max-width:920px}
@@ -40,17 +40,17 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .grove-callout .gc-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
 .grove-callout:hover .gc-cta,.grove-callout:focus-visible .gc-cta{color:var(--moss-deep)}
 
-/* Overview — homepage page map, modeled on the spec page Contents */
-.onpage{padding:24px 0 8px}
-.overview{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:20px 24px;max-width:620px}
-.overview-title{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
-.overview ol{margin:0;padding-left:20px;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;line-height:1.5}
-.overview li{margin:0 0 8px}
-.overview li:last-child{margin-bottom:0}
-.overview a{text-decoration:none;color:var(--ink-soft)}
-.overview .ov-title{color:var(--ink);font-weight:600}
-.overview .ov-desc{color:var(--ink-faint)}
-.overview a:hover .ov-title,.overview a:focus-visible .ov-title{color:var(--moss);text-decoration:underline}
+/* Contents — homepage page map, modeled on the spec page Contents */
+.onpage{padding:18px 0 4px}
+.contents{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:18px 22px;max-width:640px}
+.contents-title{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+.contents ol{margin:0;padding-left:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;line-height:1.7}
+.contents li{margin:0}
+.contents a{text-decoration:none;color:var(--ink-soft)}
+.contents .ov-title{color:var(--ink);font-weight:600}
+.contents .ov-desc{color:var(--ink-faint)}
+.contents a:hover .ov-title,.contents a:focus-visible .ov-title{color:var(--moss);text-decoration:underline}
+@media(max-width:600px){.contents{padding:14px 16px}.contents ol{line-height:1.6}.contents .ov-dash,.contents .ov-desc{display:none}}
 
 /* KNOBE in use — tools list with status + description */
 .inuse{margin:22px 0 0;border-top:1px solid var(--line)}
@@ -81,7 +81,7 @@ h1.claim em{font-style:italic;color:var(--moss-deep)}
 .starthere a{color:var(--ink-soft);text-decoration:none;border-bottom:1px dotted var(--line)}
 .starthere a:hover{color:var(--moss);border-color:var(--moss)}
 
-section{padding:56px 0;border-bottom:1px solid var(--line)}
+section{padding:56px 0;border-bottom:1px solid var(--line);scroll-margin-top:64px}
 .shead{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
 h2{font-size:1.6rem;font-weight:normal;line-height:1.3;margin-bottom:18px;letter-spacing:-.01em}
 h3{font-size:1.1rem;font-weight:bold;margin:26px 0 9px}
@@ -292,7 +292,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="eyebrow">Open protocol · Plain text · Local verification · v1 frozen</div>
     <h1 class="claim">A protocol for knowledge objects that keep their <em>context</em> when they move.</h1>
-    <p class="sub">When a document passes to the next person, the next tool, or an AI agent, the words usually arrive, but the things that made them interpretable often do not: where they came from, what was adapted from what, what the author asked, how far they can be trusted. KNOBE keeps that context inside the object, in plain text, so it travels with the words.</p>
+    <p class="sub">When a document passes to the next person, the next tool, or an AI agent, the words usually arrive, but the things that made them interpretable often do not: where they came from, what was adapted from what, what the author asked, how far they can be trusted. KNOBE <span style="color:var(--ink-faint);font-style:italic;font-weight:normal">(pronounced Nōbee)</span> keeps that context inside the object, in plain text, so it travels with the words.</p>
     <div class="refrain">KNOBE preserves objecthood under compression.</div>
     <p class="sub" style="font-size:.92rem;color:var(--ink-faint);margin-top:-16px;margin-bottom:28px">By objecthood: a document remains attached to the context that governs its responsible interpretation: source, transformations, permissions, fidelity limits, adaptation history.</p>
     <div class="cta-row">
@@ -323,17 +323,17 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </div>
 
-<nav class="onpage" aria-label="Overview — page contents">
+<nav class="onpage" aria-label="Contents — page sections">
   <div class="wrap">
-    <div class="overview">
-      <div class="overview-title">Overview</div>
+    <div class="contents">
+      <div class="contents-title">Contents</div>
       <ol>
-        <li><a href="#plain"><span class="ov-title">The problem</span> — <span class="ov-desc">what gets lost when knowledge moves</span></a></li>
-        <li><a href="#format"><span class="ov-title">The object</span> — <span class="ov-desc">one plain-text file that carries context</span></a></li>
-        <li><a href="#integrity"><span class="ov-title">Verification</span> — <span class="ov-desc">what Lens and lens.py can and cannot prove</span></a></li>
-        <li><a href="#accessibility"><span class="ov-title">Accessibility</span> — <span class="ov-desc">same KNOBE, many ways in</span></a></li>
-        <li><a href="#grove"><span class="ov-title">Use KNOBE</span> — <span class="ov-desc">Grove, examples, downloads, source, and emerging tools</span></a></li>
-        <li><a href="#governance"><span class="ov-title">Governance</span> — <span class="ov-desc">how the open protocol is stewarded</span></a></li>
+        <li><a href="#plain"><span class="ov-title">The Problem</span><span class="ov-dash"> — </span><span class="ov-desc">what gets lost when knowledge moves</span></a></li>
+        <li><a href="#format"><span class="ov-title">Knowledge Object</span><span class="ov-dash"> — </span><span class="ov-desc">one plain-text file that carries context</span></a></li>
+        <li><a href="#integrity"><span class="ov-title">Verification</span><span class="ov-dash"> — </span><span class="ov-desc">what Lens and lens.py can and cannot prove</span></a></li>
+        <li><a href="#accessibility"><span class="ov-title">Accessibility</span><span class="ov-dash"> — </span><span class="ov-desc">same KNOBE, many ways in</span></a></li>
+        <li><a href="#grove"><span class="ov-title">Use KNOBE</span><span class="ov-dash"> — </span><span class="ov-desc">Grove, examples, downloads, source, and emerging tools</span></a></li>
+        <li><a href="#governance"><span class="ov-title">Governance</span><span class="ov-dash"> — </span><span class="ov-desc">how the open protocol is stewarded</span></a></li>
       </ol>
     </div>
   </div>
