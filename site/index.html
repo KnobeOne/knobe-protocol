@@ -40,16 +40,17 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .grove-callout .gc-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
 .grove-callout:hover .gc-cta,.grove-callout:focus-visible .gc-cta{color:var(--moss-deep)}
 
-/* Overview — homepage-only reader map, visually distinct from the global nav */
-.onpage{padding:24px 0 0}
-.onpage .onpage-inner{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0}
-.onpage-label{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:6px}
-.onpage-intro{margin:0 0 10px;font-size:.85rem;color:var(--ink-soft)}
-.onpage-map{margin:0;padding-left:1.6em;font-size:.84rem;color:var(--ink-soft);line-height:1.7;columns:2;column-gap:2.5rem}
-.onpage-map li{break-inside:avoid}
-.onpage-map a{color:var(--moss);text-decoration:none;border-bottom:1px dotted var(--line);transition:color .15s,border-color .15s}
-.onpage-map a:hover,.onpage-map a:focus-visible{color:var(--moss);border-color:var(--moss)}
-@media(max-width:680px){.onpage-map{columns:1}}
+/* Overview — homepage page map, modeled on the spec page Contents */
+.onpage{padding:24px 0 8px}
+.overview{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:20px 24px;max-width:620px}
+.overview-title{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.overview ol{margin:0;padding-left:20px;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;line-height:1.5}
+.overview li{margin:0 0 8px}
+.overview li:last-child{margin-bottom:0}
+.overview a{text-decoration:none;color:var(--ink-soft)}
+.overview .ov-title{color:var(--ink);font-weight:600}
+.overview .ov-desc{color:var(--ink-faint)}
+.overview a:hover .ov-title,.overview a:focus-visible .ov-title{color:var(--moss);text-decoration:underline}
 
 /* KNOBE in use — tools list with status + description */
 .inuse{margin:22px 0 0;border-top:1px solid var(--line)}
@@ -324,24 +325,15 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <nav class="onpage" aria-label="Overview — page contents">
   <div class="wrap">
-    <div class="onpage-inner">
-      <span class="onpage-label">Overview</span>
-      <p class="onpage-intro">This page introduces KNOBE in order:</p>
-      <ol class="onpage-map">
-        <li><a href="#plain">In plain terms — the basic idea</a></li>
-        <li><a href="#problem">The problem — what gets lost when knowledge moves</a></li>
-        <li><a href="#format">The format — one plain-text file, three layers</a></li>
-        <li><a href="#carry">Context that travels — what the next reader can use</a></li>
-        <li><a href="#verify">Verification — what Lens and lens.py can and cannot prove</a></li>
-        <li><a href="#accessibility">Accessibility — same KNOBE, many ways in</a></li>
-        <li><a href="#grove">Grove — an experiential first encounter</a></li>
-        <li><a href="#build">Build with KNOBE — spec, vectors, verifier, and source</a></li>
-        <li><a href="#agents">Agent builders — the object layer in AI-mediated exchange</a></li>
-        <li><a href="#related">Related work — where KNOBE fits</a></li>
-        <li><a href="#downloads">Downloads — sealed public KNOBEs you can inspect</a></li>
-        <li><a href="#limits">Honest limits — what KNOBE is not</a></li>
-        <li><a href="#use">KNOBE in use — Lens, Grove, Crystallizer, Mix, Desk, Studio</a></li>
-        <li><a href="#governance">Governance — how the open protocol is stewarded</a></li>
+    <div class="overview">
+      <div class="overview-title">Overview</div>
+      <ol>
+        <li><a href="#plain"><span class="ov-title">The problem</span> — <span class="ov-desc">what gets lost when knowledge moves</span></a></li>
+        <li><a href="#format"><span class="ov-title">The object</span> — <span class="ov-desc">one plain-text file that carries context</span></a></li>
+        <li><a href="#integrity"><span class="ov-title">Verification</span> — <span class="ov-desc">what Lens and lens.py can and cannot prove</span></a></li>
+        <li><a href="#accessibility"><span class="ov-title">Accessibility</span> — <span class="ov-desc">same KNOBE, many ways in</span></a></li>
+        <li><a href="#grove"><span class="ov-title">Use KNOBE</span> — <span class="ov-desc">Grove, examples, downloads, source, and emerging tools</span></a></li>
+        <li><a href="#governance"><span class="ov-title">Governance</span> — <span class="ov-desc">how the open protocol is stewarded</span></a></li>
       </ol>
     </div>
   </div>
