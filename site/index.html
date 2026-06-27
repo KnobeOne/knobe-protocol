@@ -216,8 +216,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .layers .layer.lit{box-shadow:inset 3px 0 0 var(--moss)}
 .fs-hint{font-family:-apple-system,system-ui,sans-serif;font-size:.74rem;color:var(--ink-faint);text-align:center;margin-top:8px}
 
-.runbtn{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;font-weight:500;color:var(--code-ink);background:rgba(126,217,154,.12);border:1px solid #2a4435;border-radius:4px;padding:7px 15px;cursor:pointer;transition:all .15s;margin-bottom:14px}
-.runbtn:hover{background:rgba(126,217,154,.2);border-color:var(--moss)}
+.runbtn{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;font-weight:600;color:var(--moss-deep);background:rgba(47,107,79,.1);border:1px solid var(--moss);border-radius:4px;padding:7px 15px;cursor:pointer;transition:all .15s;margin-bottom:14px}
+.runbtn:hover{background:rgba(47,107,79,.18);border-color:var(--moss-deep)}
 .runbtn:disabled{opacity:.5;cursor:default}
 
 .copywrap{position:relative}
@@ -362,11 +362,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <div class="shead">Proof</div>
     <h2>Verify any KNOBE</h2>
     <p>The reference verifier, <code>lens.py</code>, is about 70 lines of Python with no imports beyond the standard library. It extracts the payload, computes the canonical payload hash, and reports one of four states. No server. No AI. No certificate authority. Pure math.</p>
-    <button class="runbtn" id="runVerify">▸ Run verification</button>
-    <div class="term copywrap" id="verifyTerm">
+    <button class="runbtn" id="runVerify" aria-label="Run the verification demo">▸ Run verification</button>
+    <div class="term copywrap" id="verifyTerm" role="group" aria-label="Verifier output for interview-04.knobe.md">
       <button class="copybtn" data-copy="python3 lens.py interview-04.knobe.md">copy cmd</button>
       <div><span class="tp">$</span> <span class="tc">python3 lens.py interview-04.knobe.md</span></div>
-      <div id="verifyOut">
+      <div id="verifyOut" aria-live="polite">
       <div style="margin-top:8px"><span class="tl">title:             </span><span class="tv">Oral history — interview 04</span></div>
       <div><span class="tl">quarantine_status: </span><span class="tv">quarantine</span></div>
       <div><span class="tl">status:            </span><span class="tm">verified</span></div>
