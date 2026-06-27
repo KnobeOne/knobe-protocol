@@ -155,13 +155,6 @@ strong{font-weight:600;color:var(--ink)}
 .whofor div p{font-size:.86rem;color:var(--ink-soft);margin:2px 0 0}
 @media(max-width:560px){.whofor{grid-template-columns:1fr}}
 
-.sits{font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;margin:18px 0}
-.sits-row{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
-.sits-row:last-child{border-bottom:none}
-.sits-name{font-weight:600;color:var(--ink)}
-.sits-desc{color:var(--ink-soft)}
-@media(max-width:560px){.sits-row{grid-template-columns:1fr;gap:3px}}
-
 .dls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
 .dl{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .15s}
 a.dl{display:block;padding:16px 18px;text-decoration:none}
@@ -492,15 +485,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="shead">Related work</div>
     <h2>The gap KNOBE fills</h2>
-    <p>KNOBE did not invent the knowledge object, the self-verifying file, or the idea that metadata should travel with content. A lot of good work moves in the same direction — which is evidence the problem is real. KNOBE's design point is narrower: <strong>can a single plain-text document carry enough declared context to be interpreted responsibly after it leaves its original setting?</strong> That puts it beside, but not inside, several neighbors:</p>
-    <div class="sits">
-      <div class="sits-row"><span class="sits-name">C2PA</span><span class="sits-desc">Provenance and integrity for media, backed by signing authorities and certificates. KNOBE is document-centered, plain-text, and authority-free at the open layer; credential-backed attestation can be added later but is never required to verify.</span></div>
-      <div class="sits-row"><span class="sits-name">Nanopublications</span><span class="sits-desc">Small, citable, provenance-rich claims for the Semantic Web. KNOBE aims at the human web: one readable markdown file, no RDF or specialized infrastructure required.</span></div>
-      <div class="sits-row"><span class="sits-name">RO-Crate / PROV</span><span class="sits-desc">Package research objects and describe provenance for reproducibility and FAIR data. KNOBE's concern is narrower: whether one traveling object carries the context a receiver needs.</span></div>
-      <div class="sits-row"><span class="sits-name">Git / OpenTimestamps</span><span class="sits-desc">Track versions, prove existence, and anchor files in external systems. KNOBE can compose with them, but its seal travels inside the object, even when the object leaves the repo.</span></div>
-      <div class="sits-row"><span class="sits-name">Agent-readable knowledge formats</span><span class="sits-desc">Organize portable markdown for human–agent exchange. KNOBE's concern is the interpretive obligation carried by the object itself: source, transformation history, fidelity limits, use conditions, and trust posture.</span></div>
-    </div>
-    <p>The neighbors make artifacts findable, attributable, reproducible, attestable, or agent-readable. KNOBE's narrower job is to keep interpretive context attached to the object itself, in plain text, after it moves beyond the system that first held it. The <a href="#downloads" class="inline">white paper</a> situates KNOBE among these in detail.</p>
+    <p>KNOBE sits beside related work in provenance, research packaging, media authenticity, version control, and agent-readable knowledge formats. Its narrower job is different: to keep interpretive context attached to a single plain-text knowledge object after it leaves the system that first held it. The <a href="#downloads" class="inline">white paper</a> situates KNOBE among neighboring efforts in more detail.</p>
   </div>
 </section>
 
@@ -536,15 +521,6 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       </div>
       <a href="lens.py" class="dl"><div class="dt">lens.py + test vectors</div><div class="dd">The reference verifier and nine conformance files</div><div class="dh">CC BY 4.0 · reference implementation</div></a>
     </div>
-  </div>
-</section>
-
-<section id="limits">
-  <div class="wrap">
-    <div class="shead">Honest limits</div>
-    <h2>What KNOBE is not</h2>
-    <p>KNOBE is not a platform, a system of record, a truth machine, DRM, a smart contract, identity verification, or a replacement for institutional governance. It does not open the AI black box, and it is not finished.</p>
-    <p>It does not solve hallucination, copyright, authorship, or governance. Attribution and identity are declared in v1, not cryptographically proven. KNOBEs do not execute: a <code>.knobe.md</code> is inert plain text — it carries obligations; it does not enforce them. And it applies equally to work done with AI, with some AI, or with none — the format records what actually happened, whatever that was.</p>
   </div>
 </section>
 
