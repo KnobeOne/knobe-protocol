@@ -61,8 +61,6 @@ KNOBE Protocol v1 is published under [CC BY 4.0](LICENSE). You are free to share
 David Kyle, Associate Professor of Sociology, University of California, Davis
 djkyle@ucdavis.edu · [knobe.org](https://knobe.org)
 
-The protocol is stewarded at UC Davis with technical architecture led by Joshua Hori. The active development roadmap includes a distributed-register verification tier integrating with Apache ResilientDB.
-
 ## Citation
 
 ```bibtex
