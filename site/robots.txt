@@ -1,0 +1,6 @@
+# robots.txt for knobe.org — KNOBE Protocol v1
+# The protocol is open; crawling is welcome.
+User-agent: *
+Allow: /
+
+Sitemap: https://knobe.org/sitemap.xml
