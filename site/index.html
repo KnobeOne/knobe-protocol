@@ -82,6 +82,8 @@ h1.claim em{font-style:italic;color:var(--moss-deep)}
 .starthere a:hover{color:var(--moss);border-color:var(--moss)}
 
 section{padding:56px 0;border-bottom:1px solid var(--line);scroll-margin-top:64px}
+section:nth-of-type(odd){background:var(--paper-warm)}
+section:nth-of-type(even){background:var(--paper)}
 .shead{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:18px}
 h2{font-size:1.6rem;font-weight:normal;line-height:1.3;margin-bottom:18px;letter-spacing:-.01em}
 h3{font-size:1.1rem;font-weight:bold;margin:26px 0 9px}
@@ -326,7 +328,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </nav>
 
-<section id="plain" style="background:var(--paper-warm);border-bottom:1px solid var(--line)">
+<section id="plain">
   <div class="wrap">
     <div class="shead">In plain terms</div>
     <p class="lead" style="max-width:660px">Right now, AI handles knowledge like a port worker unloading containers with no shipping labels: cargo gets dumped on the dock, origin unknown, destination unknown, rules forgotten. Whatever is in the container gets used anyway.</p>
