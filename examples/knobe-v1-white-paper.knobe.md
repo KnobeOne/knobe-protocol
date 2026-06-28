@@ -22,7 +22,7 @@ created_date: "2026-06-11"
 
 KNOBE Protocol v1 is an open protocol for responsible knowledge movement. It defines a plain-text `.knobe.md` file that lets a knowledge object carry its readable content together with a machine-legible, hash-sealed record of attribution, source relations, transformation history, fidelity limits, use conditions, accessibility adaptations, quarantine status, and integrity checks.
 
-The problem KNOBE addresses is simple. When knowledge moves between people, platforms, course systems, archives, AI tools, summaries, and reports, the words often survive while the conditions that made them responsible to use do not. This paper calls that failure **context survivorship bias**: the fragment that survives transit is mistaken for the full knowledge object, while the missing context that made it meaningful falls from view.
+The problem KNOBE addresses is simple. When knowledge moves between people, platforms, course systems, archives, AI tools, summaries, and reports, the words often survive while the conditions that made them responsible to use do not.
 
 KNOBE does not prove truth, authorship, authorization, or trustworthiness. Its hash proves only that the sealed payload has not changed since sealing. Attribution is declared, not independently verified, and new or external KNOBEs should be treated as quarantined until a human or governed system marks them trusted.
 
@@ -342,8 +342,8 @@ bnRoZXNpc19ub3RlIjoiUHVibGljIHJlbGVhc2UuIFBlciB0aGUgUmVjdXJzaXZlIENhbGlicmF0
 aW9uIFJ1bGUsIGFsbCBlbXBpcmljYWwgY2xhaW1zIGZyb20gdGhlIFNlZWQgZmllbGQgdGVzdHMg
 YWNyb3NzIGZvdXIgQUkgc3lzdGVtcyBhcmUgcmVwb3J0ZWQgYXMgZGVjbGFyZWQ7IHByb3RvY29s
 IG1lY2hhbmljcyBhcmUgdmVyaWZpZWQgYnkgbGVucy5weS4ifSwiYXR0cmlidXRpb25fZGVjbGFy
-ZWQiOnRydWUsImJvZHlfaGFzaCI6IjBmOTIzOGM3MjBmM2E0NWRlYzkyMDUzZjlkOGFkY2QwYmUy
-NDg4ZDgzMjNhNmU5YjM0ZWY2NDY0ODU5NDEwODAiLCJjYW5vbmljYWxfdXJsIjoiaHR0cHM6Ly9r
+ZWQiOnRydWUsImJvZHlfaGFzaCI6IjdhMzI3ZmI3MDRkNTE5MThiMjZjZGZkZThkMjIwMjdkYWMy
+YTBlMWIwNzAyZDFjZjU2MWY1MWExZjcwMWRkNzUiLCJjYW5vbmljYWxfdXJsIjoiaHR0cHM6Ly9r
 bm9iZS5vcmcvd2hpdGUtcGFwZXIiLCJjb250ZW50X3R5cGUiOiJjb21wcmVzc2lvbiIsImNyZWF0
 ZWRfZGF0ZSI6IjIwMjYtMDYtMTEiLCJmaWRlbGl0eV9saW1pdHMiOnsiZG9fbm90X2luZmVyIjpb
 InRoYXQgb3B0aW9uYWwgZmllbGRzIChmaWRlbGl0eV9saW1pdHMsIHVzZV9jb25kaXRpb25zLCBh
@@ -419,8 +419,8 @@ LyIsIm1ldGFfZGVwdGgiOiIyIiwicGFyZW50cyI6W3siaWQiOiJrbm9iZS12MS1sYXVuY2gtcGFj
 a2FnZSIsInBheWxvYWRfaGFzaCI6Ijg1OWQ4ZjkwMzdhOTRkNmU3YjVkY2ViZTZjNmFiNTY4NGE0
 ODI0NDhhZmExNzgwZmMxMjVhYmZkNTk1YWFiMTIiLCJyZWxhdGlvbnNoaXAiOiJjb21wcmVzc2lv
 bl9vZiIsInRpdGxlIjoiS05PQkUgUHJvdG9jb2wgdjEg4oCUIFB1YmxpYyBMYXVuY2ggUGFja2Fn
-ZSJ9XSwicGF5bG9hZF9oYXNoIjoiYjY4MTY4YTlmMGI5ZWJmMWY4NjM1YmZiZTY0MDI2MTNiNTQx
-MTFhMDhkMGQzMjA4YTIxOWIwYjdjZTkzM2U1NCIsInByaXZhY3lfbGV2ZWwiOiJwdWJsaWMiLCJx
+ZSJ9XSwicGF5bG9hZF9oYXNoIjoiNWU3N2Y0YTVlOGFkODExNmMwOGMyZjM3MjAzOGY1ZDkyZTkx
+YzI0ODI1MTBkY2YzYjU5MzJlYTk2ZTMxZmNlMCIsInByaXZhY3lfbGV2ZWwiOiJwdWJsaWMiLCJx
 dWFyYW50aW5lX3N0YXR1cyI6InF1YXJhbnRpbmUiLCJzcGVjX3ZlcnNpb24iOiIxLjAiLCJzdWJ0
 aXRsZSI6IlByZXNlcnZpbmcgb2JqZWN0aG9vZCwgYXR0cmlidXRpb24sIGFuZCBpbnRlcnByZXRp
 dmUgb2JsaWdhdGlvbiB1bmRlciBjb21wcmVzc2lvbiIsInN1bW1hcnkiOiJUaGUgcHVibGljIHdo
@@ -550,6 +550,9 @@ b2dyYXBoeSBwYXNzLCBtaW5vciBwcm9zZSBlZGl0cy4gYm9keV9oYXNoIGFuZCBwYXlsb2FkX2hh
 c2ggcmVjb21wdXRlZC4iLCJ2ZXJzaW9uIjoicHVibGljLXJlbGVhc2UtcjQifSx7ImRhdGUiOiIy
 MDI2LTA2LTI4Iiwibm90ZXMiOiJSZW1vdmVkIHNlY3Rpb24tYnJlYWsgaG9yaXpvbnRhbCBydWxl
 cyBmcm9tIGJvZHkuIGJvZHlfaGFzaCBhbmQgcGF5bG9hZF9oYXNoIHJlY29tcHV0ZWQuIiwidmVy
-c2lvbiI6InB1YmxpYy1yZWxlYXNlLXI1In1dfQ==
+c2lvbiI6InB1YmxpYy1yZWxlYXNlLXI1In0seyJkYXRlIjoiMjAyNi0wNi0yOCIsIm5vdGVzIjoi
+QWJzdHJhY3Q6IHJlbW92ZWQgcmVkdW5kYW50IGZpcnN0IG5hbWluZyBvZiBjb250ZXh0IHN1cnZp
+dm9yc2hpcCBiaWFzLiBib2R5X2hhc2ggYW5kIHBheWxvYWRfaGFzaCByZWNvbXB1dGVkLiIsInZl
+cnNpb24iOiJwdWJsaWMtcmVsZWFzZS1yNiJ9XX0=
 
 -----END KNOBE B64-----
