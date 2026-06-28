@@ -17,7 +17,6 @@ created_date: "2026-06-11"
 **David Kyle** · University of California, Davis · knobe.org
 *Public release, June 2026*
 
----
 
 ## Abstract
 
@@ -29,7 +28,6 @@ KNOBE does not prove truth, authorship, authorization, or trustworthiness. Its h
 
 KNOBE is informing infrastructure, not controlling infrastructure. It reports what traveled with the object so that humans, institutions, and agentic systems can decide responsibly. Its core claim is that **KNOBE preserves objecthood under compression**: it gives knowledge objects a portable way to carry the context and obligations that would otherwise be lost across human, institutional, and AI handoffs.
 
----
 
 ## 1. The Problem: Fragments in Transit
 
@@ -75,7 +73,6 @@ KNOBE addresses this problem at the only layer that travels everywhere: the arti
 
 **KNOBE preserves objecthood under compression.**
 
----
 
 ## 2. What KNOBE Is
 
@@ -107,7 +104,6 @@ Accessibility adaptation is the paradigm case. When work is captioned, simplifie
 
 A note on the name: KNOBE began as an acronym, **Knowledge-Native Objects for Bots and Engines**. That expansion is now historical. It made the protocol sound bot-centered when the frame had become broader. Read KNOBE today as it functions: **knowledge objects with portable interpretive obligation**.
 
----
 
 ## 3. One Artifact, Three Layers
 
@@ -149,7 +145,6 @@ Each layer reflects a choice with a reason behind it:
 * **Quarantine-first**: arrival is not endorsement; verifying an object is never the same as trusting it.
 * **Non-enforcing seal**: the seal reports and never blocks, so inspection, accessibility, and adaptation stay possible.
 
----
 
 ## 4. Fields That Carry Obligation
 
@@ -181,7 +176,6 @@ An `accessibility` field records adaptation lineage: what was adapted, from what
 
 Together, these fields make KNOBE more than a provenance wrapper. Attribution says who contributed. Lineage says what it derives from. Transformation history says what changed. Fidelity limits say how far to trust the representation. Use conditions say what obligations the originator asks the next party to honor. Accessibility records how adaptation labor remains tied to its source. They let a knowledge object arrive carrying more of the interpretive field required to handle it responsibly, across a gap between parties who do not share the same access to it: between an author and a later reader, between a human and an agent, between a source and its adaptation. They inform; they do not enforce. A receiver is free to ignore them, but never able to say the object failed to carry them.
 
----
 
 ## 5. Integrity, Not Truth
 
@@ -209,7 +203,6 @@ Hash verification requires a deterministic runtime. For that reason, KNOBE ships
 
 > Models can help understand verification. Code must perform verification.
 
----
 
 ## 6. Quarantine-First
 
@@ -223,7 +216,6 @@ Quarantine is not an accusation. It is the honest starting point for any object 
 
 > A verified KNOBE is not necessarily trusted. A trusted KNOBE is not necessarily true. A true claim still requires interpretation. The seal reports; the human decides.
 
----
 
 ## 7. A System of Context, Not a System of Record
 
@@ -246,7 +238,6 @@ Many institutions do not need another platform. They need a way for knowledge ob
 
 The goal is not to centralize control. It is to make movement more answerable.
 
----
 
 ## 8. Agent Harness Engineering and Process Literacy
 
@@ -262,7 +253,6 @@ The same machinery serves a long-standing institutional aspiration: **process li
 
 Process literacy is also where a quieter failure is fought. The **Matthew Effect** — the well-documented tendency for credit in knowledge systems to accumulate around those already prominent (Merton, 1968) — is a problem of *maldistribution*: the credit exists, and it flows unfairly. The **Matthew Defect** is a more basic failure. The contribution record never survives to be credited at all. Attribution and context are stripped in transit, buried under reformatting, quietly co-opted by a more prominent name, or marginalized as unimportant, by accident, by convenience, or by design. What remains is the visible fragment; the labor, judgment, and source relations that made it meaningful are gone. Where the Effect misallocates credit that was recorded, the Defect destroys the record before allocation is even possible, and no after-the-fact redistribution can recover what was never carried. This is the human-level expression of context survivorship bias, and it is why attribution fields are protocol requirements rather than optional metadata. The requirement is deliberately workflow-neutral: it applies identically to the entirely human essay, the AI-assisted synthesis, and the archival monograph, because the point is recording what actually happened.
 
----
 
 ## 9. Adoption Without a Platform
 
@@ -274,7 +264,6 @@ The public site provides current entry points for verification, authoring, examp
 
 The success of KNOBE depends on independent implementation. A developer should be able to build a compatible verifier from the specification alone, compare results against shared test vectors, and know whether the implementation conforms to v1. That is why v1 file semantics are frozen. Extensions may add optional fields; they may not reinterpret valid v1 files.
 
----
 
 ## 10. Limits and Invitation
 
@@ -290,13 +279,11 @@ This paper practices what it specifies. The document you are reading is itself a
 
 **KNOBE preserves objecthood under compression.**
 
----
 
 ## Appendix A. Technical Specification
 
 The normative file format, required fields, canonical hash rule, body-hash behavior, verification states, conformance rules, and version semantics are defined in the [KNOBE Protocol v1 Spec](https://knobe.org/spec). This white paper is argumentative rather than normative; where this paper summarizes implementation behavior, the Spec controls.
 
----
 
 ## References
 
@@ -355,8 +342,8 @@ bnRoZXNpc19ub3RlIjoiUHVibGljIHJlbGVhc2UuIFBlciB0aGUgUmVjdXJzaXZlIENhbGlicmF0
 aW9uIFJ1bGUsIGFsbCBlbXBpcmljYWwgY2xhaW1zIGZyb20gdGhlIFNlZWQgZmllbGQgdGVzdHMg
 YWNyb3NzIGZvdXIgQUkgc3lzdGVtcyBhcmUgcmVwb3J0ZWQgYXMgZGVjbGFyZWQ7IHByb3RvY29s
 IG1lY2hhbmljcyBhcmUgdmVyaWZpZWQgYnkgbGVucy5weS4ifSwiYXR0cmlidXRpb25fZGVjbGFy
-ZWQiOnRydWUsImJvZHlfaGFzaCI6IjAyMmNmZTliYzIzNzRlMDY4MmNjNGI5ZjVkMmVhNjQ1Zjcz
-MzdmMGJiODY4ZTVmNmQ4ZTkwZTNmZGVkZTFhYmUiLCJjYW5vbmljYWxfdXJsIjoiaHR0cHM6Ly9r
+ZWQiOnRydWUsImJvZHlfaGFzaCI6IjBmOTIzOGM3MjBmM2E0NWRlYzkyMDUzZjlkOGFkY2QwYmUy
+NDg4ZDgzMjNhNmU5YjM0ZWY2NDY0ODU5NDEwODAiLCJjYW5vbmljYWxfdXJsIjoiaHR0cHM6Ly9r
 bm9iZS5vcmcvd2hpdGUtcGFwZXIiLCJjb250ZW50X3R5cGUiOiJjb21wcmVzc2lvbiIsImNyZWF0
 ZWRfZGF0ZSI6IjIwMjYtMDYtMTEiLCJmaWRlbGl0eV9saW1pdHMiOnsiZG9fbm90X2luZmVyIjpb
 InRoYXQgb3B0aW9uYWwgZmllbGRzIChmaWRlbGl0eV9saW1pdHMsIHVzZV9jb25kaXRpb25zLCBh
@@ -432,8 +419,8 @@ LyIsIm1ldGFfZGVwdGgiOiIyIiwicGFyZW50cyI6W3siaWQiOiJrbm9iZS12MS1sYXVuY2gtcGFj
 a2FnZSIsInBheWxvYWRfaGFzaCI6Ijg1OWQ4ZjkwMzdhOTRkNmU3YjVkY2ViZTZjNmFiNTY4NGE0
 ODI0NDhhZmExNzgwZmMxMjVhYmZkNTk1YWFiMTIiLCJyZWxhdGlvbnNoaXAiOiJjb21wcmVzc2lv
 bl9vZiIsInRpdGxlIjoiS05PQkUgUHJvdG9jb2wgdjEg4oCUIFB1YmxpYyBMYXVuY2ggUGFja2Fn
-ZSJ9XSwicGF5bG9hZF9oYXNoIjoiZGNjOTM5Y2E3M2ZlZTNkNGQ1NTQ0ZGQ2M2U1MGNhZjRkMGM4
-OGRjOTM5Njk4MDFjYjczNmExZjM5MTZlMTVmMCIsInByaXZhY3lfbGV2ZWwiOiJwdWJsaWMiLCJx
+ZSJ9XSwicGF5bG9hZF9oYXNoIjoiYjY4MTY4YTlmMGI5ZWJmMWY4NjM1YmZiZTY0MDI2MTNiNTQx
+MTFhMDhkMGQzMjA4YTIxOWIwYjdjZTkzM2U1NCIsInByaXZhY3lfbGV2ZWwiOiJwdWJsaWMiLCJx
 dWFyYW50aW5lX3N0YXR1cyI6InF1YXJhbnRpbmUiLCJzcGVjX3ZlcnNpb24iOiIxLjAiLCJzdWJ0
 aXRsZSI6IlByZXNlcnZpbmcgb2JqZWN0aG9vZCwgYXR0cmlidXRpb24sIGFuZCBpbnRlcnByZXRp
 dmUgb2JsaWdhdGlvbiB1bmRlciBjb21wcmVzc2lvbiIsInN1bW1hcnkiOiJUaGUgcHVibGljIHdo
@@ -560,6 +547,9 @@ IHRlbiB2YWxpZGl0eS1yZXF1aXJlZCBmaWVsZHMgb3IgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUu
 IiwidmVyc2lvbiI6InB1YmxpYy1yZWxlYXNlLXIzIn0seyJkYXRlIjoiMjAyNi0wNi0yOCIsIm5v
 dGVzIjoiQm9keSBwb2xpc2g6IG9iamVjdGhvb2QgcmV3cml0ZSwgwqc5IGRlLXNlZWRlZCwgdHlw
 b2dyYXBoeSBwYXNzLCBtaW5vciBwcm9zZSBlZGl0cy4gYm9keV9oYXNoIGFuZCBwYXlsb2FkX2hh
-c2ggcmVjb21wdXRlZC4iLCJ2ZXJzaW9uIjoicHVibGljLXJlbGVhc2UtcjQifV19
+c2ggcmVjb21wdXRlZC4iLCJ2ZXJzaW9uIjoicHVibGljLXJlbGVhc2UtcjQifSx7ImRhdGUiOiIy
+MDI2LTA2LTI4Iiwibm90ZXMiOiJSZW1vdmVkIHNlY3Rpb24tYnJlYWsgaG9yaXpvbnRhbCBydWxl
+cyBmcm9tIGJvZHkuIGJvZHlfaGFzaCBhbmQgcGF5bG9hZF9oYXNoIHJlY29tcHV0ZWQuIiwidmVy
+c2lvbiI6InB1YmxpYy1yZWxlYXNlLXI1In1dfQ==
 
 -----END KNOBE B64-----
