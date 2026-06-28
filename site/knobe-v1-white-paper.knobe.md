@@ -112,7 +112,7 @@ The **frontmatter** is lightweight YAML readable without tooling: title, author,
 
 The **body** is standard markdown: the human-readable content, unconstrained by schema. It can be an essay, field note, transcript, lesson, recipe, protocol, reflection, accessibility adaptation, index, or other knowledge object. This layer is why a KNOBE never requires special software to be *read*.
 
-The **payload block** is Base64-encoded UTF-8 JSON carrying the structured record: attribution, key concepts, version history, privacy level, quarantine status, parents, transformation history, fidelity limits, use conditions, accessibility fields, build recipes for Seeds, and the integrity hashes. Base64 is deliberate (Josefsson, 2006). Raw JSON in the body would wreck human readability; Base64 is opaque to casual reading but trivially extractable by any competent parser. The payload markers are **newline-anchored by protocol requirement, not convention**, because KNOBEs can be self-referential: a Seed or a white paper may quote the marker strings in its own body. Documents that quote the markers should indent them, as this section does, and robust parsers should prefer the last well-formed payload block in the file.
+The **payload block** is Base64-encoded UTF-8 JSON carrying the structured record: attribution, key concepts, version history, privacy level, quarantine status, parents, transformation history, fidelity limits, use conditions, accessibility fields, build recipes for Seeds, and the integrity hashes. Base64 is deliberate (Josefsson, 2006): raw JSON in the body would wreck human readability; Base64 is opaque to casual reading but trivially decodable by any parser. Exact payload markers, canonicalization rules, and parser requirements are defined in the [v1 Spec](https://knobe.org/spec).
 
 The result is an artifact that degrades gracefully in both directions.
 
@@ -128,24 +128,7 @@ Deterministic verification requires KNOBE-aware tooling. Handed to such a tool, 
 
 ## 4. Fields That Carry Obligation
 
-The v1 schema is small by design. A KNOBE is **valid** when its frontmatter declares `spec_version: "1.0"` and its payload contains ten required elements:
-
-| Payload field | Required | Purpose |
-|---|---|---|
-| `payload_hash` | yes | SHA-256 of the canonical JSON, excluding this field |
-| `spec_version` | yes | Protocol version, `"1.0"` |
-| `title` | yes | Object identity |
-| `summary` | yes | Machine-readable gist |
-| `content_type` | yes | Type of object (see controlled vocabularies below) |
-| `created_date` | yes | ISO 8601 date |
-| `license` | yes | Declared license |
-| `privacy_level` | yes | `public`, `internal`, `sensitive`, or `restricted` |
-| `quarantine_status` | yes | `quarantine`, `trusted`, or `rejected` |
-| `attribution.sources` | yes | Contributors and their declared contributions |
-
-Everything else is optional structure for richer records.
-
-**Controlled vocabularies.** Four fields draw on a canonical vocabulary that the reference verifier recognizes: `content_type` (`original`, `synthesis`, `adaptation`, `compression`, `annotation`, `seed`, `collection`, `translation`); `quarantine_status` (`quarantine`, `trusted`, `rejected`); `privacy_level` (`public`, `internal`, `sensitive`, `restricted`); and `identity_status` (`declared`, `signed`). These vocabularies are open, not closed. A value outside the canonical set does not make a KNOBE invalid; the verifier records it but flags it as a soft deviation unless it is namespaced with a domain or extension prefix — for example `domain:embargoed` or `ext-confidential`. Namespacing lets a community extend the vocabulary without colliding with the canonical terms or silently masquerading as one of them. All payload values are encoded as JSON strings in v1; the reference verifier reports bare numeric values as nonconformant.
+The v1 payload is deliberately small. A required core names what the object is and how to read it — title, summary, content type, license, creation date, spec version, privacy and trust posture, and source attribution — all sealed under a payload hash. Everything beyond that core is optional structure for richer records; the exact field list, controlled vocabularies, and conformance rules are defined in the [v1 Spec](https://knobe.org/spec).
 
 The optional fields are where KNOBE carries more than provenance. Provenance answers *where did this come from?* KNOBE also asks *how should the next party receive it?* Several optional fields carry that obligation.
 
@@ -240,7 +223,7 @@ The goal is not to centralize control. It is to make movement more answerable.
 
 ## 8. Agent Harness Engineering and Process Literacy
 
-A significant shift is underway in agentic AI. Attention is moving from isolated prompts toward the systems around models: memory, tools, permissions, execution policy, retrieval, observability, evaluation, and handoff. Recent work calls this turn *system scaling* — treating the structured execution layer around a foundation model as a first-class object of design, evaluation, and optimization (Gu, 2026). Whatever the label — harness, context, runtime, orchestration — the core insight is the same: what appears to be a model capability is often a model-plus-system capability, and performance changes materially when the same model runs under a more constrained and better-instrumented execution policy.
+AI deployment now attends to the systems around models — memory, tools, permissions, retrieval, observability, execution policy — as much as to models themselves. What appears to be a model capability is often a model-plus-system capability, and performance changes materially when the same model runs under a more constrained and better-instrumented execution layer (Gu, 2026).
 
 KNOBE does not replace that harness. It supplies a better object for any harness to handle: a knowledge artifact that arrives at any encounter already carrying its attribution, transformation history, constraints, and interpretive obligations as part of itself.
 
@@ -262,16 +245,7 @@ The recursion is both the point and the risk. A Seed describes the very protocol
 
 In that spirit, the early evidence for Seeds is reported here as *declared*. The current Seed has been tested against four AI systems — Claude, GPT-4, Gemini, and Manus — and all four passed the core prompts; one independently produced a ten-pathway university-deployment document from the Seed alone and independently recommended the viewer-verifier as the first tool to build. This is early evidence that a Seed can function as a bootstrapping artifact. It shows promise, not completion, and it has not yet been independently replicated.
 
-The initial tool ecosystem includes:
-
-* **Lens** — view and verify KNOBEs.
-* **Crystallizer** — author and seal KNOBEs.
-* **Magic Grove** — a guided, no-AI first encounter for creating a valid `.knobe.md`.
-* **Mix** — combine KNOBEs while preserving parent relations and lineage.
-* **Desk** — a local workspace for managing KNOBEs.
-* **Studio** — an integrated authoring, teaching, and knowledge-work environment.
-
-The protocol does not depend on any single tool. The success of KNOBE depends on independent implementation: a developer should be able to build a compatible verifier from the specification alone, compare results against shared test vectors, and know whether the implementation conforms to v1. That is why v1 file semantics are frozen. Extensions may add optional fields; they may not reinterpret valid v1 files.
+Seeds and groves are bootstrapping patterns, not required protocol machinery: they help the format spread and cohere, but a valid v1 file needs neither. The public site provides current entry points for verification, authoring, examples, and implementation; the protocol does not depend on any single tool. The success of KNOBE depends on independent implementation: a developer should be able to build a compatible verifier from the specification alone, compare results against shared test vectors, and know whether the implementation conforms to v1. That is why v1 file semantics are frozen. Extensions may add optional fields; they may not reinterpret valid v1 files.
 
 ---
 
@@ -279,7 +253,7 @@ The protocol does not depend on any single tool. The success of KNOBE depends on
 
 It is as important to say what KNOBE does not do as what it does.
 
-KNOBE does not solve hallucination, truth, copyright, authorship verification, identity, governance, or ethics. The hash proves integrity, never trust. Attribution and good faith are *declared* in v1, not proven; `identity_status: signed` points toward future cryptographic identity extensions, but v1 makes no such guarantee. KNOBEs do not execute: a `.knobe.md` is inert plain text, and build recipes are instructions a human or agent may choose to follow after inspection, never self-executing code. KNOBE replaces no system of record: no learning-management system, ethics platform, repository, archive, database, or compliance system. And KNOBE does not treat compression as the enemy; the entire design concerns whether interpretive obligations survive compression, not whether compression occurs.
+KNOBE does not solve hallucination, truth, copyright, authorship verification, identity, governance, or ethics. The hash proves integrity, never trust. Attribution and good faith are *declared* in v1, not proven; `identity_status: signed` points toward future cryptographic identity extensions, but v1 makes no such guarantee. KNOBEs do not execute: a `.knobe.md` is inert plain text, and build recipes are instructions a human or agent may choose to follow after inspection, never self-executing code. KNOBE replaces no system of record.
 
 KNOBE Protocol v1 is released as an early public v1: a public protocol with an open specification, an open license, and a reference verifier, offered for testing, critique, and extension. The specification is small enough to implement in an afternoon and precise enough to be falsifiable in the only way that matters for infrastructure — by strangers trying to build against it. Readers are invited to verify the artifacts at knobe.org, to attempt independent implementations from the specification alone, to test against the conformance set, to break the canonicalization rule if they can, and to propose extensions where the schema proves too small for real work.
 
@@ -289,61 +263,9 @@ This paper practices what it specifies. The document you are reading is itself a
 
 ---
 
-## Appendix A. Minimum Valid KNOBE and the Canonical Hash Rule
+## Appendix A. Technical Specification
 
-**A KNOBE is valid if and only if:**
-
-1. the YAML frontmatter includes `spec_version: "1.0"`;
-2. the payload includes `spec_version`, `title`, `summary`, `content_type`, `created_date`, `license`, `privacy_level`, `quarantine_status`, `attribution.sources` (each source bearing at least `author` and `contribution`), and `payload_hash`;
-3. the file consists of YAML frontmatter delimited by `---` lines, a free markdown body, and one payload block of Base64-encoded UTF-8 JSON bounded by newline-anchored markers.
-
-### Canonical payload hash
-
-To verify `payload_hash`:
-
-1. Decode the Base64 payload to JSON.
-2. Delete the `payload_hash` field.
-3. Normalize every object key and every string value to Unicode Normalization Form C (NFC), recursively.
-4. Serialize the remaining JSON with: all object keys recursively sorted alphabetically; no whitespace; arrays preserved in insertion order; Unicode preserved as literal UTF-8, never `\uXXXX`-escaped.
-5. Compute SHA-256 over the UTF-8 bytes.
-6. Compare the hex digest to the stored `payload_hash`.
-
-The NFC step in (3) is required: it guarantees that two payloads which are visually and semantically identical but differ only in Unicode composition hash to the same value across platforms and editors. JavaScript `JSON.stringify` with sorted keys is the canonical baseline for the serialization in (4); the Python equivalent, applied after NFC normalization, is `json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)`. The rule is specified independently but shares its goals with the JSON Canonicalization Scheme (Rundgren et al., 2020). A match proves the payload is unaltered since sealing. It proves nothing else.
-
-### Optional body hash
-
-The optional `body_hash` field records SHA-256 over the normalized markdown body. Normalization:
-
-1. Extract the body as all text between the closing `---` of the YAML frontmatter and the line preceding the `BEGIN` payload marker.
-2. Strip leading and trailing whitespace from the whole extracted body.
-3. Replace every `\r\n` and every remaining lone `\r` with `\n`.
-4. Strip only trailing U+0020 spaces and U+0009 tabs from each line.
-5. Apply no Unicode normalization; NFC and NFD are hashed as written.
-6. Encode as UTF-8.
-7. Compute SHA-256.
-
-`body_hash` is advisory. If `payload_hash` verifies but `body_hash` mismatches, the KNOBE remains structurally valid and is reported as `verified-body-modified` — a signal to inspect, not a verdict of tampering. Because body extraction is ambiguous when more than one payload block is present, the body result is reported only when exactly one block exists.
-
-### Verification states
-
-A verifier should distinguish at least four integrity states:
-
-* `verified` — payload hash matches; body hash matches or is absent.
-* `verified-body-modified` — payload hash matches; optional body hash mismatches.
-* `failed` — payload hash mismatch.
-* `unreadable` — the payload block is missing, malformed, undecodable, or unparsable.
-
-### Conformance
-
-Independently of integrity, the reference verifier reports a conformance dimension: `valid` (all required fields present, formats well-formed), `warnings` (usable, but with soft deviations such as a custom vocabulary value without a namespace prefix), or `invalid` (a normative requirement is violated — a missing required field, a malformed `payload_hash`, a non-ISO `created_date`, or a bare numeric value where a string is required). Integrity and conformance are orthogonal: a file can be `verified` yet `invalid`, or `failed` yet otherwise well-formed.
-
-### Version semantics
-
-A verifier must apply the verification semantics of the spec version under which a file was sealed. A future verifier may report additional advisory information, but it must not reinterpret a previously valid v1 KNOBE as failed unless v1 semantics would have done so.
-
-### Reference verifier
-
-The reference verifier, `lens.py`, is available at knobe.org. A match proves integrity, not truth; a valid result proves conformance, not truth. Inspect before trusting.
+The normative file format, required fields, canonical hash rule, body-hash behavior, verification states, conformance rules, and version semantics are defined in the [KNOBE Protocol v1 Spec](https://knobe.org/spec). This white paper is argumentative rather than normative; where this paper summarizes implementation behavior, the Spec controls.
 
 ---
 
@@ -362,8 +284,6 @@ Mangel, M., & Samaniego, F. J. (1984). Abraham Wald's work on aircraft survivabi
 Merton, R. K. (1968). The Matthew effect in science. *Science, 159*(3810), 56–63.
 
 National Institute of Standards and Technology. (2015). *Secure Hash Standard (SHS).* FIPS PUB 180-4.
-
-Rundgren, A., Jordan, B., & Erdtman, S. (2020). *JSON Canonicalization Scheme (JCS).* RFC 8785, Internet Engineering Task Force.
 
 -----BEGIN KNOBE B64-----
 eyJhY2Nlc3NpYmlsaXR5Ijp7ImFkYXB0YXRpb25fdHlwZV92b2NhYnVsYXJ5IjpbImNhcHRpb24i
