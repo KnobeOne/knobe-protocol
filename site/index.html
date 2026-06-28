@@ -157,11 +157,12 @@ strong{font-weight:600;color:var(--ink)}
 .whofor div p{font-size:.86rem;color:var(--ink-soft);margin:2px 0 0}
 @media(max-width:560px){.whofor{grid-template-columns:1fr}}
 
-.gains{list-style:none;margin:20px 0 22px;padding:0}
-.gains li{padding:9px 0 9px 24px;position:relative;border-bottom:1px solid var(--line);color:var(--ink-soft);line-height:1.65}
-.gains li:last-child{border-bottom:none}
-.gains li::before{content:'·';position:absolute;left:0;color:var(--moss);font-size:1.3em;line-height:1.3}
-.gains li strong{color:var(--ink)}
+.gains{list-style:none;margin:24px 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.gains li{display:flex;gap:13px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:15px 17px;color:var(--ink-soft);line-height:1.6;font-size:.92rem;transition:border-color .15s,box-shadow .15s,transform .15s}
+.gains li:hover{border-color:var(--moss);box-shadow:0 3px 12px rgba(31,42,38,.07);transform:translateY(-1px)}
+.gains .gn{flex:none;width:25px;height:25px;border-radius:50%;background:var(--moss);color:#fff;font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.gains li strong{display:block;color:var(--ink);margin-bottom:3px}
+@media(max-width:560px){.gains{grid-template-columns:1fr}}
 
 .dls{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
 .dl{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;overflow:hidden;transition:border-color .15s}
@@ -360,16 +361,16 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
   <div class="wrap">
     <div class="shead">What KNOBE changes</div>
     <h2>What it buys you in everyday work</h2>
-    <p>Knowledge work breaks at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
+    <p>Knowledge work is most fragile at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
     <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
     <p>It gives you six practical gains:</p>
     <ul class="gains" role="list">
-      <li><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</li>
-      <li><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens — no account, registry, certificate authority, or server required.</li>
-      <li><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</li>
-      <li><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</li>
-      <li><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</li>
-      <li><strong>Start simple. Build bigger later.</strong> KNOBEs work in email, shared drives, and local folders today, and can later be indexed or composed inside Git, RO-Crate, FDO, OKF, or other infrastructure.</li>
+      <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</span></li>
+      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens — no account, registry, certificate authority, or server required.</span></li>
+      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</span></li>
+      <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</span></li>
+      <li><span class="gn" aria-hidden="true">5</span><span class="gt"><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</span></li>
+      <li><span class="gn" aria-hidden="true">6</span><span class="gt"><strong>Start simple. Build bigger later.</strong> KNOBEs work in email, shared drives, and local folders today, and can later be indexed or composed inside Git, RO-Crate, FDO, OKF, or other infrastructure.</span></li>
     </ul>
     <p>KNOBE sits beside related work in provenance, research packaging, media authenticity, version control, and agent-readable knowledge formats. Its narrower job is to keep interpretive context attached to a single plain-text object after it leaves the system that first held it. The white paper situates KNOBE among neighboring efforts in more detail.</p>
   </div>
@@ -493,13 +494,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 <section id="agents">
   <div class="wrap">
     <div class="shead">For agent builders</div>
-    <h2>Agent harness engineering, not prompt engineering</h2>
-    <p>Prompt engineering governs what you ask an agent. Agent harness engineering is the broader discipline — execution policy, tool permissions, memory, observability: the conditions around the agent. KNOBE comes at the problem from the other side. It does not engineer the system; it engineers what the object carries through any system. Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</p>
-    <div class="twocol">
-      <div class="tc-card"><div class="tcl" style="color:var(--ink-faint)">harness infrastructure</div><h3>Controls the encounter</h3><p>Execution policy, tool permissions, observability, memory: the conditions around the agent.</p></div>
-      <div class="tc-card"><div class="tcl" style="color:var(--moss)">KNOBE · object layer</div><h3>Preserves the object</h3><p>Attribution, transformation history, fidelity limits: carried by the artifact across encounters.</p></div>
-    </div>
-    <p>If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits. It does not open the model's reasoning. It solves context survival across AI-mediated exchange, not AI interpretability.</p>
+    <p>Agent harness engineering governs execution policy, tool permissions, memory, and observability — the conditions around the agent. KNOBE comes at the problem from the other side, engineering what the object carries through any system rather than the system itself. <strong>Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</strong> If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits — not the model's reasoning.</p>
   </div>
 </section>
 
