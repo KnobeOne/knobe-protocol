@@ -6,7 +6,7 @@ content_type: adaptation
 spec_version: "1.0"
 license: CC BY 4.0
 created_date: "2026-06-20"
-adapted_from: "7f2fd7939a643b6ada0741c436d681cda90c12936957569671ac243613e6f184"
+adapted_from: "dcc939ca73fee3d4d5544dd63e50caf4d0c88dc93969801cb736a1f3916e15f0"
 ---
 
 # KNOBE Protocol v1 — Plain-Language Summary
