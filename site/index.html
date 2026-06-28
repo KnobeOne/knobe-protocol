@@ -214,7 +214,9 @@ footer{padding:46px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-s
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:var(--ink-soft);text-decoration:none}
 footer a:hover{color:var(--moss)}
-footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:22px;font-size:.95rem}
+footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:14px;font-size:.95rem}
+footer .fnote{max-width:560px;font-size:.86rem;color:var(--ink-soft);line-height:1.6;margin-bottom:26px}
+footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .seal-line{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.68rem;color:var(--line);margin-top:22px;word-break:break-all}
 
 #vrail{position:fixed;right:16px;bottom:16px;z-index:60;background:rgba(16,35,26,.85);color:#7a9486;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.64rem;padding:6px 11px;border-radius:4px;border:1px solid rgba(42,68,53,.7);transition:opacity .3s;letter-spacing:.02em;opacity:.8}
@@ -596,10 +598,6 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </section>
 
-<div class="wrap" style="padding:40px 0;border-top:1px solid var(--line)">
-  <p style="max-width:640px;color:var(--ink-soft);font-size:.95rem">KNOBE Protocol v1 is open, frozen, and stewarded in public. Governance, change process, team, and advisory-board details are on the <a href="/about" class="inline">About page</a>.</p>
-</div>
-
 <div id="kPreview" class="kp-overlay" role="dialog" aria-modal="true" aria-labelledby="kpTitle" hidden>
   <div class="kp-panel">
     <div class="kp-head">
@@ -617,6 +615,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <footer>
   <div class="wrap">
     <div class="fclaim">KNOBE preserves objecthood under compression.</div>
+    <p class="fnote">The protocol is open, frozen, and stewarded in public. Governance, change process, team, and advisory-board details are on the <a href="about.html">About page</a>.</p>
     <div class="frow">
       <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis</div>
       <div style="text-align:right"><a href="about.html">About</a> · <a href="#downloads">White paper</a> · <a href="spec.html">Spec</a> · <a href="grove">Grove</a> · <a href="test-vectors/">Test vectors</a> · <a href="https://github.com/KnobeOne/knobe-protocol">Source</a><br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a></div>
