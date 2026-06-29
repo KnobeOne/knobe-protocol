@@ -58,7 +58,7 @@ KNOBE Protocol v1 is published under [CC BY 4.0](LICENSE). You are free to share
 
 ## Steward
 
-David Kyle, Associate Professor of Sociology, University of California, Davis
+David Kyle, founder and steward · University of California, Davis
 djkyle@ucdavis.edu · [knobe.org](https://knobe.org)
 
 ## Citation
