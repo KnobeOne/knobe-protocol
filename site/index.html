@@ -284,8 +284,8 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Open protocol · Plain text · Local verification · v1 frozen</div>
-    <h1 class="claim">A protocol for knowledge objects that keep their <em>context</em> when they move.</h1>
-    <p class="sub">When a document passes to the next person, the next tool, or an AI agent, the words usually arrive, but the things that made them interpretable often do not: where they came from, what was adapted from what, what the author asked, how far they can be trusted. KNOBE <span style="color:var(--ink-faint);font-style:italic;font-weight:normal">(pronounced Nōbee)</span> keeps that context inside the object, in plain text, so it travels with the words.</p>
+    <h1 class="claim">AI moves knowledge. <em>Context doesn't follow.</em></h1>
+    <p class="sub">We are building the open infrastructure so you can trust the history of ideas as easily as you trust the history of software.</p>
     <div class="refrain">KNOBE preserves objecthood under compression.</div>
     <p class="sub" style="font-size:.92rem;color:var(--ink-faint);margin-top:-16px;margin-bottom:28px">By objecthood: a document remains attached to the context that governs its responsible interpretation: source, transformations, permissions, fidelity limits, adaptation history.</p>
     <div class="cta-row">
@@ -302,6 +302,26 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <div class="hero-meta">CC BY 4.0 · authored and stewarded at UC Davis</div>
   </div>
 </header>
+
+<section id="gap" style="padding:40px 0;border-bottom:1px solid var(--line);background:var(--paper-warm)">
+  <div class="wrap">
+    <div class="shead">The infrastructure gap</div>
+    <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:4px">
+      <div style="flex:1;min-width:220px">
+        <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin-bottom:6px">Software has Git</div>
+        <p style="font-size:.95rem;margin:0">Software history is preserved through version control, commits, diffs, and inspectable change records.</p>
+      </div>
+      <div style="flex:1;min-width:220px">
+        <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:6px">Knowledge has nothing</div>
+        <p style="font-size:.95rem;margin:0">Knowledge work has no equally ordinary habit for carrying the history of an idea as it moves through systems.</p>
+      </div>
+      <div style="flex:1;min-width:220px">
+        <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px">The AI boundary</div>
+        <p style="font-size:.95rem;margin:0">When knowledge crosses an AI boundary, it is stripped of its origin, fidelity limits, and context. You get the content, but lose the object.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div class="grove-callout-wrap" id="grove">
   <div class="wrap">
@@ -496,6 +516,27 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
   <div class="wrap">
     <div class="shead">For agent builders</div>
     <p>Agent harness engineering governs execution policy, tool permissions, memory, and observability — the conditions around the agent. KNOBE comes at the problem from the other side, engineering what the object carries through any system rather than the system itself. <strong>Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</strong> If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits — not the model's reasoning.</p>
+  </div>
+</section>
+
+<section id="pilots">
+  <div class="wrap">
+    <div class="shead">Institutional validation &amp; compliance</div>
+    <h2>Piloted at scale, built for enterprise</h2>
+    <p>KNOBE is currently being piloted by a UC Davis team in large-scale university courses — including a 500-student course operating under strict privacy and accessibility requirements.</p>
+    <p>Tech partner Joshua Hori and KNOBE are developing accessible credentialing with distributed ledger capabilities as an option for enterprise-level deployment. This replaces cognitive tests (passwords/CAPTCHAs) with hardware authentication, meeting WCAG 2.2 SC 3.3.8 requirements for barrier-free access.</p>
+  </div>
+</section>
+
+<section id="decks">
+  <div class="wrap">
+    <div class="shead">Presentations &amp; decks</div>
+    <h2>Learn more</h2>
+    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px">
+      <a href="/KNOBE-Two-Minute-Pitch-Deck.pdf" class="btn btn-ghost" download>↓ Two-Minute Pitch Deck (PDF)</a>
+      <a href="/KNOBE-Technical-Intro-Deck.pdf" class="btn btn-ghost" download>↓ Technical Intro Deck (PDF)</a>
+    </div>
+    <p style="margin-top:14px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)">Two-Minute Pitch: 6-slide overview of provenance debt and the KNOBE solution. &nbsp;·&nbsp; Technical Intro: 15-slide deep dive into context survivorship bias, the protocol schema, and cryptographic verification.</p>
   </div>
 </section>
 
