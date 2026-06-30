@@ -280,6 +280,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
       <a href="/test-vectors/">Test vectors</a>
       <a href="/education-profile">Education uses</a>
       <a href="/about">About</a>
+      <a href="/downloads">Downloads</a>
       <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
     </div>
   </div>
@@ -302,7 +303,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <p class="sub" style="font-style:italic;color:var(--moss-deep)">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</p>
 <div class="cta-row">
       <a href="#format" class="btn btn-primary">See the format</a>
-      <a href="#downloads" class="btn btn-ghost">Read the white paper</a>
+      <a href="/downloads" class="btn btn-ghost">Downloads</a>
     </div>
     <div class="starthere">
       <span>Start here:</span>
@@ -338,8 +339,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
         <li><a href="#format">One file, three layers</a></li>
         <li><a href="#integrity">Integrity, not truth</a></li>
         <li><a href="#accessibility">A first use: accessibility</a></li>
-        <li><a href="#decks">Presentations</a></li>
-        <li><a href="#downloads">Download and verify</a></li>
       </ol>
     </div>
   </div>
@@ -431,57 +430,11 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <p>A KNOBE keeps the adaptation bound to its source by hash and credits the adapter in the record. This page links to a worked example: a plain-language simplification of the white paper that records what it was adapted from, who adapted it, and what it does and does not preserve. It is the vision in miniature: knowledge made legible across a gap between parties who do not share the same access to it, with the labor of making that crossing possible kept visible.</p>
     <p>Same KNOBE, many ways in. That is one reason accessibility collaborators have been among the first people to recognize the value of the protocol. A KNOBE lets everyone receive and return the same knowledge object without requiring everyone to use the same interface. It can be read as plain text, inspected by a verifier, opened with a screen reader, transformed into audio, adapted into a visual layout, summarized by an AI assistant, or used inside a learning platform. The object remains the same, and its context, lineage, and verification record remain attached.</p>
     <div class="cta-row" style="margin-top:8px">
-      <a href="#downloads" class="btn btn-ghost">See the plain-language adaptation</a>
+      <a href="/downloads" class="btn btn-ghost">See the plain-language adaptation</a>
     </div>
   </div>
 </section>
 
-
-
-<section id="decks">
-  <div class="wrap">
-    <h2>Presentations</h2>
-    <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:8px">
-      <a href="/KNOBE-Two-Minute-Pitch-Deck.pdf" class="btn btn-ghost" download>↓ Two-Minute Pitch Deck (PDF)</a>
-      <a href="/KNOBE-Technical-Intro-Deck.pdf" class="btn btn-ghost" download>↓ Technical Intro Deck (PDF)</a>
-    </div>
-    <p style="margin-top:14px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)">Two-Minute Pitch: 6-slide overview of provenance debt and the KNOBE solution. &nbsp;·&nbsp; Technical Intro: 15-slide deep dive into context survivorship bias, the protocol schema, and cryptographic verification.</p>
-  </div>
-</section>
-
-<section id="downloads">
-  <div class="wrap">
-    <h2>Download and verify</h2>
-    <p>The white paper, Seed, and worked adaptation are themselves sealed <code>.knobe.md</code> files. Drop any of them into <code>lens.py</code> and verify the payload hash — the protocol demonstrates itself.</p>
-    <div class="dls">
-      <div class="dl">
-        <button class="kp-btn" data-src="knobe-v1-white-paper.knobe.md" data-title="White paper">
-          <div class="kp-btn-head"><span class="dt">White paper</span><span class="kp-read-badge">Read ▸</span></div>
-          <div class="dd">KNOBE Protocol v1, the full argument and specification</div>
-          <div class="dh">payload_hash: 5e77f4a5e8ad8116…</div>
-        </button>
-        <div class="kp-bar"><a href="knobe-v1-white-paper.knobe.md" class="kp-bar-raw">↓ raw .knobe.md</a></div>
-      </div>
-      <div class="dl">
-        <button class="kp-btn" data-src="knobe-seed-v1.0.knobe.md" data-title="The Seed">
-          <div class="kp-btn-head"><span class="dt">The Seed</span><span class="kp-read-badge">Read ▸</span></div>
-          <div class="dd">A self-attesting helper KNOBE that teaches the protocol and carries build recipes</div>
-          <div class="dh">payload_hash: 837c9e1d67c4889f…</div>
-        </button>
-        <div class="kp-bar"><a href="knobe-seed-v1.0.knobe.md" class="kp-bar-raw">↓ raw .knobe.md</a></div>
-      </div>
-      <div class="dl">
-        <button class="kp-btn" data-src="knobe-v1-plain-language-summary.knobe.md" data-title="Plain-language adaptation">
-          <div class="kp-btn-head"><span class="dt">Plain-language adaptation</span><span class="kp-read-badge">Read ▸</span></div>
-          <div class="dd">A worked example showing how a KNOBE keeps an accessibility adaptation tied to its source by hash, with adapter credit and fidelity limits preserved</div>
-          <div class="dh">payload_hash: 3b7423d456f3f6f0…</div>
-        </button>
-        <div class="kp-bar"><a href="knobe-v1-plain-language-summary.knobe.md" class="kp-bar-raw">↓ raw .knobe.md</a></div>
-      </div>
-      <a href="lens.py" class="dl"><div class="dt">lens.py + test vectors</div><div class="dd">The reference verifier and nine conformance files</div><div class="dh">CC BY 4.0 · reference implementation</div></a>
-    </div>
-  </div>
-</section>
 
 
 <div id="kPreview" class="kp-overlay" role="dialog" aria-modal="true" aria-labelledby="kpTitle" hidden>
@@ -504,7 +457,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <p class="fnote">The protocol is open, frozen, and stewarded in public. Governance, change process, team, and advisory-board details are on the <a href="about.html">About page</a>.</p>
     <div class="frow">
       <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis</div>
-      <div style="text-align:right"><a href="about.html">About</a> · <a href="#downloads">White paper</a> · <a href="spec.html">Spec</a> · <a href="grove">Grove</a> · <a href="test-vectors/">Test vectors</a> · <a href="https://github.com/KnobeOne/knobe-protocol">Source</a><br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a></div>
+      <div style="text-align:right"><a href="about.html">About</a> · <a href="/downloads">Downloads</a> · <a href="spec.html">Spec</a> · <a href="grove">Grove</a> · <a href="test-vectors/">Test vectors</a> · <a href="https://github.com/KnobeOne/knobe-protocol">Source</a><br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a></div>
     </div>
     <div class="seal-line">white-paper payload_hash: 5e77f4a5e8ad8116c08c2f372038f5d92e91c2482510dcf3b5932ea96e31fce0</div>
   </div>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE — Downloads</title>
+<meta name="description" content="Download KNOBE Protocol v1 documents, presentations, and the reference verifier. All documents are sealed .knobe.md files — verifiable with no account, no server, no dependencies.">
+<style>
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:0 28px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:bold;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.brand .v{color:var(--ink-faint);font-weight:normal;font-size:.8rem}
+.navlinks{display:flex;gap:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
+.navlinks a{color:var(--ink-soft);text-decoration:none;transition:color .15s}
+.navlinks a:hover{color:var(--moss)}
+.navlinks a.here{color:var(--moss);border-bottom:1px solid var(--moss)}
+@media(max-width:680px){.navlinks{display:none}}
+
+header.top{padding:74px 0 18px}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:22px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:normal;letter-spacing:-.01em;margin-bottom:10px}
+
+main{padding:20px 0 60px}
+p{margin-bottom:18px;font-size:1.05rem}
+p.lead{font-size:1.18rem;color:var(--ink-soft);line-height:1.6}
+h2{font-size:1.35rem;font-weight:normal;color:var(--moss-deep);margin:40px 0 0;letter-spacing:-.01em}
+a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.88em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
+
+.dl-group{margin:10px 0 0;border-top:1px solid var(--line)}
+.dl-item{display:grid;grid-template-columns:1fr auto;gap:8px 24px;padding:20px 0;border-bottom:1px solid var(--line);align-items:center}
+.dl-meta{min-width:0}
+.dl-name{font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:5px}
+.dl-desc{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft);line-height:1.5;margin:0}
+.dl-hash{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint);margin-top:6px}
+.dl-btn{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;font-weight:500;text-decoration:none;padding:9px 18px;border-radius:3px;border:1px solid var(--line);color:var(--ink-soft);background:transparent;white-space:nowrap;transition:all .15s;flex-shrink:0}
+.dl-btn:hover{border-color:var(--moss);color:var(--moss)}
+@media(max-width:560px){.dl-item{grid-template-columns:1fr}.dl-btn{align-self:start;width:fit-content}}
+
+footer{border-top:1px solid var(--line);margin-top:40px;padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--moss)}
+footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:20px;font-size:.95rem}
+</style>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="canonical" href="https://knobe.org/downloads">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KNOBE Protocol">
+<meta property="og:title" content="KNOBE — Downloads">
+<meta property="og:description" content="Download KNOBE Protocol v1 documents, presentations, and the reference verifier. All documents are sealed .knobe.md files — verifiable with no account, no server, no dependencies.">
+<meta property="og:url" content="https://knobe.org/downloads">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KNOBE — Downloads">
+<meta name="twitter:description" content="Download KNOBE Protocol v1 documents, presentations, and the reference verifier.">
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="brand">KNOBE <span class="v">Protocol v1</span></a>
+    <div class="navlinks">
+      <a href="/">Start</a>
+      <a href="/spec">Spec</a>
+      <a href="/white-paper">White paper</a>
+      <a href="/lens">Lens</a>
+      <a href="/grove/">Grove</a>
+      <a href="/test-vectors/">Test vectors</a>
+      <a href="/education-profile">Education uses</a>
+      <a href="/about">About</a>
+      <a href="/downloads" class="here" aria-current="page">Downloads</a>
+      <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Downloads</div>
+    <h1>Documents, presentations, and the reference verifier</h1>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="lead">The documents below are sealed <code>.knobe.md</code> files. Drop any of them into <a href="/lens" class="inline">Lens</a> or run <code>python3 lens.py &lt;file&gt;</code> to verify the payload hash — the protocol demonstrates itself.</p>
+
+    <h2>Documents</h2>
+    <div class="dl-group">
+      <div class="dl-item">
+        <div class="dl-meta">
+          <div class="dl-name">White paper</div>
+          <p class="dl-desc">KNOBE Protocol v1 — the full argument and specification. Human-readable body; sealed payload carries provenance, fidelity limits, and integrity hash.</p>
+          <div class="dl-hash">payload_hash: 5e77f4a5e8ad8116…</div>
+        </div>
+        <a href="/knobe-v1-white-paper.knobe.md" class="dl-btn" download>↓ .knobe.md</a>
+      </div>
+      <div class="dl-item">
+        <div class="dl-meta">
+          <div class="dl-name">The Seed</div>
+          <p class="dl-desc">A self-attesting helper KNOBE that teaches the protocol and carries build recipes.</p>
+          <div class="dl-hash">payload_hash: 837c9e1d67c4889f…</div>
+        </div>
+        <a href="/knobe-seed-v1.0.knobe.md" class="dl-btn" download>↓ .knobe.md</a>
+      </div>
+      <div class="dl-item">
+        <div class="dl-meta">
+          <div class="dl-name">Plain-language adaptation</div>
+          <p class="dl-desc">A worked example showing how a KNOBE keeps an accessibility adaptation tied to its source by hash, with adapter credit and fidelity limits preserved.</p>
+          <div class="dl-hash">payload_hash: 3b7423d456f3f6f0…</div>
+        </div>
+        <a href="/knobe-v1-plain-language-summary.knobe.md" class="dl-btn" download>↓ .knobe.md</a>
+      </div>
+    </div>
+
+    <h2>Presentations</h2>
+    <div class="dl-group">
+      <div class="dl-item">
+        <div class="dl-meta">
+          <div class="dl-name">Two-Minute Pitch Deck</div>
+          <p class="dl-desc">6-slide overview of provenance debt and the KNOBE solution.</p>
+        </div>
+        <a href="/KNOBE-Two-Minute-Pitch-Deck.pdf" class="dl-btn" download>↓ PDF</a>
+      </div>
+      <div class="dl-item">
+        <div class="dl-meta">
+          <div class="dl-name">Technical Intro Deck</div>
+          <p class="dl-desc">15-slide deep dive into context survivorship bias, the protocol schema, and cryptographic verification.</p>
+        </div>
+        <a href="/KNOBE-Technical-Intro-Deck.pdf" class="dl-btn" download>↓ PDF</a>
+      </div>
+    </div>
+
+    <h2>Reference verifier and test vectors</h2>
+    <div class="dl-group">
+      <div class="dl-item">
+        <div class="dl-meta">
+          <div class="dl-name">lens.py + test vectors</div>
+          <p class="dl-desc">The reference verifier — a single standard-library Python file with no external dependencies — and nine conformance vectors. An implementation that reproduces all nine expected results is canonically compatible with KNOBE Protocol v1.</p>
+        </div>
+        <a href="/lens.py" class="dl-btn" download>↓ lens.py</a>
+      </div>
+    </div>
+
+    <p style="margin-top:28px;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-faint)">All materials are released under CC BY 4.0. The normative protocol definition is in the <a href="/spec" class="inline">Spec</a>. Nine conformance test vectors are in <a href="/test-vectors/" class="inline">test-vectors/</a>.</p>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fclaim">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</div>
+    <div class="frow">
+      <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis</div>
+      <div style="text-align:right"><a href="/">Start</a> · <a href="/spec">Spec</a> · <a href="/white-paper">White paper</a><br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
