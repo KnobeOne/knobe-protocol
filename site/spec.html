@@ -88,6 +88,15 @@ pre .n{color:#8fb8e8}
 .conformance h3{margin-top:0;font-size:1rem}
 .conformance ul{margin-top:10px}
 
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.tc-card{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+.tc-card h3{margin-top:0;font-size:1rem}
+.tc-card p{font-size:.9rem;color:var(--ink-soft);margin-bottom:0}
+.tc-card .tcl{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+.tc-card.ctrl .tcl{color:var(--amber)}
+.tc-card.resp .tcl{color:var(--moss)}
+@media(max-width:560px){.twocol{grid-template-columns:1fr}}
+
 .spec-resources{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 4px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
 .spec-resources a{color:var(--moss);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:5px 13px;transition:all .15s}
 .spec-resources a:hover{border-color:var(--moss);background:var(--paper-warm)}
@@ -554,6 +563,15 @@ const canon = canonicalize(nfc(rest));
       <li><strong>Automatic verification.</strong> Verification is the receiver's responsibility, not the protocol's. The substrate KNOBE lives in — text editors, AI assistants, ingestion pipelines, ordinary markdown tools — does not check seals by default. A KNOBE with a broken or missing payload will be opened, displayed, summarised, and indexed by most consumers without any warning. This is a property of the substrate, not a defect of the protocol: the same characteristics that make KNOBE portable across these tools are the ones that make verification optional rather than enforced. Tools that want fail-closed behaviour on broken KNOBEs must integrate <code>lens.py</code> or an equivalent verifier at the point of ingestion.</li>
       <li><strong>AI interpretability.</strong> KNOBE carries human-supplied context around AI-mediated knowledge work. It does not expose a model's internal reasoning.</li>
     </ul>
+
+    <h2>Integrity, not truth</h2>
+    <p>KNOBE uses standard SHA-256 hashing. There is no cryptographic novelty here, and no claim that a hash can solve trust. The hash proves one narrow thing: <strong>the sealed payload has not changed since sealing.</strong> It does not prove the content is true, the author is who they say, attribution is honest, consent was obtained, or the object is safe to use. A liar can seal a lie; the seal then proves only that the lie has not changed.</p>
+    <p>This limit is a design principle, not a flaw to hide. It marks a distinction the rest of the protocol depends on:</p>
+    <div class="twocol">
+      <div class="tc-card ctrl"><div class="tcl">control infrastructure</div><h3>Decides for you</h3><p>Blocks, permits, denies, enforces, locks, or fails closed. The system makes the call.</p></div>
+      <div class="tc-card resp"><div class="tcl">responsibility infrastructure</div><h3>Informs your decision</h3><p>Makes the relevant conditions visible so a human or institution can decide what to do next. KNOBE is this kind.</p></div>
+    </div>
+    <p style="font-size:.9rem;font-family:-apple-system,system-ui,sans-serif;color:var(--ink-soft)">The recommended posture is <em class="kw">quarantine-first</em>: treat external objects as untrusted until reviewed, even if they verify. Full semantics are in §11 above and the <a href="/threat-model" class="inline">threat model</a>.</p>
 
     <h2>For implementers</h2>
 

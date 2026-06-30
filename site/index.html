@@ -337,7 +337,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
         <li><a href="#problem">What is lost when knowledge moves</a></li>
         <li><a href="#related">What KNOBE changes</a></li>
         <li><a href="#format">One file, three layers</a></li>
-        <li><a href="#integrity">Integrity, not truth</a></li>
       </ol>
     </div>
   </div>
@@ -407,18 +406,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 </section>
 
 
-<section id="integrity">
-  <div class="wrap">
-    <h2>Integrity, not truth</h2>
-    <p>KNOBE uses standard SHA-256 hashing. There is no cryptographic novelty here, and no claim that a hash can solve trust. The hash proves one narrow thing: <strong>the sealed payload has not changed since sealing.</strong> It does not prove the content is true, the author is who they say, attribution is honest, consent was obtained, or the object is safe to use. A liar can seal a lie; the seal then proves only that the lie has not changed.</p>
-    <p>This limit is a design principle, not a flaw to hide. It marks a distinction the rest of the protocol depends on:</p>
-    <div class="twocol">
-      <div class="tc-card ctrl"><div class="tcl">control infrastructure</div><h3>Decides for you</h3><p>Blocks, permits, denies, enforces, locks, or fails closed. The system makes the call.</p></div>
-      <div class="tc-card resp"><div class="tcl">responsibility infrastructure</div><h3>Informs your decision</h3><p>Makes the relevant conditions visible so a human or institution can decide what to do next. KNOBE is this kind.</p></div>
-    </div>
-    <p style="font-size:.9rem;font-family:-apple-system,system-ui,sans-serif;color:var(--ink-soft)">The recommended posture is <em class="kw">quarantine-first</em>: treat external objects as untrusted until reviewed, even if they verify. Full semantics and honest limits are in the <a href="spec.html" class="inline">Spec</a> and <a href="/threat-model" class="inline">threat model</a>.</p>
-  </div>
-</section>
 
 
 
@@ -522,7 +509,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     var states=[
       {id:'format',t:'artifact: .knobe.md'},
       {id:'problem',t:'context survivorship bias'},
-      {id:'fullnot',t:'integrity \u2260 truth'},
       {id:'governance',t:'open · CC BY 4.0'}
     ];
     var t=rail.querySelector('.vr-text');
