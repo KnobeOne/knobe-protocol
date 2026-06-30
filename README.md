@@ -75,4 +75,4 @@ djkyle@ucdavis.edu · [knobe.org](https://knobe.org)
 
 ---
 
-Knowledge that explains itself, wherever it travels.
+KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.
