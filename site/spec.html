@@ -543,6 +543,14 @@ const canon = canonicalize(nfc(rest));
       <li><strong>AI interpretability.</strong> KNOBE carries human-supplied context around AI-mediated knowledge work. It does not expose a model's internal reasoning.</li>
     </ul>
 
+    <h2>For implementers</h2>
+
+    <p>v1 file semantics are frozen. Everything needed to build a compatible verifier or tool is in this specification, the <a href="test-vectors/" class="inline">test vectors</a> (nine files, known results), the <a href="lens.py" class="inline">reference verifier</a>, and the <a href="https://github.com/KnobeOne/knobe-protocol" class="inline">source repository</a>. Reproduce the nine test vectors and your implementation is canonically compatible with KNOBE Protocol v1.</p>
+
+    <h2>For agent builders</h2>
+
+    <p>Agent harness engineering governs execution policy, tool permissions, memory, and observability — the conditions <em>around</em> the agent. KNOBE comes at the problem from the other side, engineering what the object carries <em>through</em> any system rather than the system itself. <strong>Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</strong> If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits — not the model's reasoning.</p>
+
   </div>
 </main>
 

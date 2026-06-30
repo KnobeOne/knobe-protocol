@@ -339,8 +339,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
         <li><a href="#carry">What the next reader can use</a></li>
         <li><a href="#integrity">Integrity, not truth</a></li>
         <li><a href="#accessibility">A first use: accessibility</a></li>
-        <li><a href="#build">For implementers</a></li>
-        <li><a href="#agents">For agent builders</a></li>
         <li><a href="#decks">Presentations</a></li>
         <li><a href="#downloads">Download and verify</a></li>
         <li><a href="#use">Two tools, and an open protocol</a></li>
@@ -447,19 +445,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
   </div>
 </section>
 
-<section id="build">
-  <div class="wrap">
-    <h2>For implementers</h2>
-    <p><strong>v1 file semantics are frozen.</strong> Everything needed to build a compatible verifier or tool is in the <a href="spec.html" class="inline">Spec</a>, <a href="test-vectors/" class="inline">test vectors</a> (nine files, known results), <a href="lens.py" class="inline">reference verifier</a>, and <a href="https://github.com/KnobeOne/knobe-protocol" class="inline">source repository</a>.</p>
-  </div>
-</section>
-
-<section id="agents">
-  <div class="wrap">
-    <h2>For agent builders</h2>
-    <p>Agent harness engineering governs execution policy, tool permissions, memory, and observability — the conditions around the agent. KNOBE comes at the problem from the other side, engineering what the object carries through any system rather than the system itself. <strong>Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</strong> If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits — not the model's reasoning.</p>
-  </div>
-</section>
 
 
 <section id="decks">
