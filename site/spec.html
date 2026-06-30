@@ -88,6 +88,10 @@ pre .n{color:#8fb8e8}
 .conformance h3{margin-top:0;font-size:1rem}
 .conformance ul{margin-top:10px}
 
+.spec-resources{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 4px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
+.spec-resources a{color:var(--moss);text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:5px 13px;transition:all .15s}
+.spec-resources a:hover{border-color:var(--moss);background:var(--paper-warm)}
+
 footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:var(--ink-soft);text-decoration:none}
@@ -123,8 +127,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <a href="/white-paper">White paper</a>
       <a href="/lens">Lens</a>
       <a href="/grove/">Grove</a>
-      <a href="/test-vectors/">Test vectors</a>
       <a href="/education-profile">Education uses</a>
+      <a href="/accessibility">Accessibility</a>
       <a href="/about">About</a>
       <a href="/downloads">Downloads</a>
       <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
@@ -165,6 +169,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <li><a href="#conformance">Conformance</a></li>
         <li><a href="#limits">Honest limits</a></li>
       </ol>
+    </div>
+
+    <div class="spec-resources" aria-label="Quick resources">
+      <a href="/test-vectors/">Test vectors</a>
+      <a href="/lens">Lens (browser verifier)</a>
+      <a href="/lens.py" download>↓ lens.py</a>
+      <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
     </div>
 
     <!-- §1 -->

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE — Accessibility</title>
+<meta name="description" content="Accessibility is not an add-on use case for KNOBE; it is the first proving ground. A KNOBE keeps adaptations bound to their sources, credits adapter labor, and carries fidelity limits — so knowledge stays interpretable across every interface.">
+<style>
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding:0 28px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:bold;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.brand .v{color:var(--ink-faint);font-weight:normal;font-size:.8rem}
+.navlinks{display:flex;gap:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
+.navlinks a{color:var(--ink-soft);text-decoration:none;transition:color .15s}
+.navlinks a:hover{color:var(--moss)}
+.navlinks a.here{color:var(--moss);border-bottom:1px solid var(--moss)}
+@media(max-width:680px){.navlinks{display:none}}
+
+header.top{padding:74px 0 18px}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:22px}
+h1{font-size:2.1rem;line-height:1.25;font-weight:normal;letter-spacing:-.01em;margin-bottom:10px}
+
+main{padding:20px 0 30px}
+main p{margin-bottom:18px;font-size:1.05rem}
+main p.lead{font-size:1.18rem;color:var(--ink-soft);line-height:1.6}
+h2{font-size:1.35rem;font-weight:normal;color:var(--moss-deep);margin:42px 0 14px;letter-spacing:-.01em}
+a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.88em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
+
+.pull{border-left:2px solid var(--moss);padding:4px 0 4px 20px;margin:30px 0;font-size:1.2rem;font-style:italic;color:var(--moss-deep);line-height:1.5}
+
+.cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;font-weight:500;text-decoration:none;padding:11px 20px;border-radius:3px;transition:all .15s;display:inline-block}
+.btn-primary{background:var(--moss-deep);color:var(--paper)}
+.btn-primary:hover{background:var(--moss)}
+.btn-ghost{border:1px solid var(--line);color:var(--ink-soft);background:transparent}
+.btn-ghost:hover{border-color:var(--moss);color:var(--moss)}
+
+.related{margin-top:40px;padding-top:28px;border-top:1px solid var(--line);font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)}
+.related a{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+
+footer{border-top:1px solid var(--line);margin-top:40px;padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--moss)}
+footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:20px;font-size:.95rem}
+</style>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="canonical" href="https://knobe.org/accessibility">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KNOBE Protocol">
+<meta property="og:title" content="KNOBE — Accessibility">
+<meta property="og:description" content="Accessibility is not an add-on use case for KNOBE; it is the first proving ground. A KNOBE keeps adaptations bound to their sources, credits adapter labor, and carries fidelity limits across every interface.">
+<meta property="og:url" content="https://knobe.org/accessibility">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KNOBE — Accessibility">
+<meta name="twitter:description" content="Accessibility is not an add-on use case for KNOBE; it is the first proving ground.">
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="brand">KNOBE <span class="v">Protocol v1</span></a>
+    <div class="navlinks">
+      <a href="/">Start</a>
+      <a href="/spec">Spec</a>
+      <a href="/white-paper">White paper</a>
+      <a href="/lens">Lens</a>
+      <a href="/grove/">Grove</a>
+      <a href="/education-profile">Education uses</a>
+      <a href="/accessibility" class="here" aria-current="page">Accessibility</a>
+      <a href="/about">About</a>
+      <a href="/downloads">Downloads</a>
+      <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
+    </div>
+  </div>
+</nav>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">Accessibility</div>
+    <h1>A first use: accessibility</h1>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <p class="lead">Accessibility is not an add-on use case for KNOBE; it is the first proving ground, with its own ethical stakes, and it reveals the general problem most clearly.</p>
+
+    <p>The KNOBE instructional approach will be piloted in multiple large courses at UC Davis, ranging from 100 to 500 students. These courses operate under strict privacy and accessibility requirements — conditions that make the question of what travels with a knowledge object concrete rather than theoretical.</p>
+
+    <p>When materials are captioned, translated, simplified, or remediated, the adaptation is knowledge work. It carries labor, judgment, and responsibility. But adaptations usually circulate severed from their sources: the adapted object travels without the original, without the adapter's contribution recorded, without a clear account of what changed or what fidelity limits remain. The labor disappears, and the link to the source disappears with it.</p>
+
+    <div class="pull">The knowledge object itself has to carry more of what used to live outside it.</div>
+
+    <p>A KNOBE keeps the adaptation bound to its source by hash and credits the adapter in the record. The plain-language adaptation in the Downloads section is a worked example: a simplification of the white paper that records what it was adapted from, who adapted it, and what it does and does not preserve. It is the vision in miniature — knowledge made legible across a gap between parties who do not share the same access to it, with the labor of making that crossing possible kept visible.</p>
+
+    <p>Same KNOBE, many ways in. A KNOBE lets everyone receive and return the same knowledge object without requiring everyone to use the same interface. It can be read as plain text, inspected by a verifier, opened with a screen reader, transformed into audio, adapted into a visual layout, summarized by an AI assistant, or used inside a learning platform. The object remains the same, and its context, lineage, and verification record remain attached.</p>
+
+    <div class="cta-row">
+      <a href="/downloads" class="btn btn-primary">See the plain-language adaptation</a>
+      <a href="/education-profile" class="btn btn-ghost">Education uses</a>
+    </div>
+
+    <div class="related">
+      <p>The accessibility lineage fields (<code>accessibility</code>, <code>adapter</code>, <code>accessibility_reviewer</code>) are defined in the <a href="/spec">Spec §4</a>. Tech partner Joshua Hori and KNOBE are also developing accessible credentialing with distributed ledger capabilities — replacing cognitive tests (passwords/CAPTCHAs) with hardware authentication, meeting WCAG 2.2 SC 3.3.8 requirements for barrier-free access. Write to <a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with questions or collaboration interest.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fclaim">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</div>
+    <div class="frow">
+      <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis</div>
+      <div style="text-align:right"><a href="/">Start</a> · <a href="/spec">Spec</a> · <a href="/education-profile">Education uses</a><br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
