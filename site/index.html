@@ -301,7 +301,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <p class="sub" style="font-style:italic;color:var(--moss-deep)">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</p>
 <div class="cta-row">
       <a href="#format" class="btn btn-primary">See the format</a>
-      <a href="#verify" class="btn btn-ghost">Verify a KNOBE</a>
       <a href="#downloads" class="btn btn-ghost">Read the white paper</a>
     </div>
     <div class="starthere">
@@ -333,12 +332,18 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <div class="contents">
       <div class="contents-title">Contents</div>
       <ol>
-        <li><a href="#problem"><span class="ov-title">The problem</span><span class="ov-dash"> — </span><span class="ov-desc">what gets lost when knowledge moves</span></a></li>
-        <li><a href="#related"><span class="ov-title">What KNOBE changes</span><span class="ov-dash"> — </span><span class="ov-desc">what it buys you in everyday work</span></a></li>
-        <li><a href="#format"><span class="ov-title">The object</span><span class="ov-dash"> — </span><span class="ov-desc">one plain-text file that carries context</span></a></li>
-        <li><a href="#integrity"><span class="ov-title">Verification</span><span class="ov-dash"> — </span><span class="ov-desc">what Lens and lens.py can and cannot prove</span></a></li>
-        <li><a href="#accessibility"><span class="ov-title">Accessibility</span><span class="ov-dash"> — </span><span class="ov-desc">same KNOBE, many ways in</span></a></li>
-        <li><a href="#use"><span class="ov-title">Use KNOBE</span><span class="ov-dash"> — </span><span class="ov-desc">Grove, examples, downloads, source, and emerging tools</span></a></li>
+        <li><a href="#problem">What is lost when knowledge moves</a></li>
+        <li><a href="#related">What KNOBE changes</a></li>
+        <li><a href="#format">One file, three layers</a></li>
+        <li><a href="#carry">What the next reader can use</a></li>
+        <li><a href="#integrity">Integrity, not truth</a></li>
+        <li><a href="#accessibility">A first use: accessibility</a></li>
+        <li><a href="#build">For implementers</a></li>
+        <li><a href="#agents">For agent builders</a></li>
+        <li><a href="#pilots">Institutional pilot and compliance</a></li>
+        <li><a href="#decks">Presentations</a></li>
+        <li><a href="#downloads">Download and verify</a></li>
+        <li><a href="#use">Two tools, and an open protocol</a></li>
       </ol>
     </div>
   </div>
@@ -397,22 +402,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 <section id="format">
   <div class="wrap">
     <h2>One file, three layers</h2>
-    <p>A KNOBE is a single plain-text file. A human reads it in any editor. A machine decodes its payload. A verifier checks its payload hash. Here is the whole structure:</p>
-    <div class="copywrap"><button class="copybtn" data-copy="---&#10;title: &quot;Oral history — interview 04&quot;&#10;spec_version: &quot;1.0&quot;&#10;---&#10;&#10;# Oral history — interview 04&#10;The human-readable document. Free-form markdown.&#10;&#10;-----BEGIN KNOBE B64-----&#10;{base64-encoded sealed JSON payload}&#10;-----END KNOBE B64-----">copy skeleton</button>
-    <div class="filestruct"><span class="fs-layer" data-layer="1"><span class="fs-delim">---</span>
-<span class="fs-c1">title: "Oral history — interview 04"</span>
-<span class="fs-c1">spec_version: "1.0"</span>
-<span class="fs-delim">---</span></span>
-
-<span class="fs-layer" data-layer="2"><span class="fs-c2"># Oral history — interview 04</span>
-<span class="fs-c2">The human-readable document. Free-form markdown.</span>
-<span class="fs-c2">Opens in any editor, AI assistant, or browser.</span></span>
-
-<span class="fs-layer" data-layer="3"><span class="fs-c3">-----BEGIN KNOBE B64-----</span>
-<span class="fs-c3">eyJzcGVjX3ZlcnNpb24iOiIxLjAiLCJ0aXRsZSI6Ik9yYWwg…</span>  <span class="fs-comment"># attribution, sources,</span>
-<span class="fs-c3">dHJhbnNmb3JtYXRpb24sIGZpZGVsaXR5LCBzZWFs…</span>          <span class="fs-comment"># fidelity limits, seal</span>
-<span class="fs-c3">-----END KNOBE B64-----</span></span></div></div>
-    <div class="fs-hint">Hover or tap a layer to see what it carries.</div>
+    <p>A KNOBE is a single plain-text file. A human reads it in any editor. A machine decodes its payload. A verifier checks its payload hash.</p>
     <div class="layers">
       <div class="layer l1" data-layer="1"><div class="ll">layer 1 · yaml frontmatter</div><div class="ld">Human-scannable metadata: title, author, license, date.</div></div>
       <div class="layer l2" data-layer="2"><div class="ll">layer 2 · markdown body</div><div class="ld">The document itself. No schema. No special software required to read it.</div></div>
@@ -426,13 +416,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
   <div class="wrap">
     <h2>What the next reader can use</h2>
     <p>Most provenance systems answer one question: <em>where did this come from?</em> KNOBE asks that too, but also what the next receiver needs to know — what changed, what was adapted, what limits travel with this version, what should not be inferred from it, what conditions the maker wanted preserved.</p>
-    <p>These fields are optional, but not ornamental. They let a document carry usable context across a gap between people, tools, institutions, or AI systems that do not share the same background.</p>
-    <div class="fields">
-      <div class="field"><div class="fn">fidelity_limits</div><div class="fd">How far the object can be trusted as a representation of its source: what it is fit for, and what must not be inferred from it. A summary that dropped its caveats says so.</div></div>
-      <div class="field"><div class="fn">use_conditions</div><div class="fd">The originator's declared terms, carried forward: permitted and disallowed uses, consent and quotation constraints. A condition set at sealing stays legible to a receiver who never met the author.</div></div>
-      <div class="field"><div class="fn">accessibility</div><div class="fd">Adaptation lineage. When a captioned, translated, or simplified version is made from a source, this binds it to that source by hash and credits the adapter — so the adaptation stays tied to what it was made from, and to whose labor made it.</div></div>
-    </div>
-    <p>These fields inform; they do not enforce. A receiver may ignore them, but the object has still made its interpretive conditions visible. That is the difference between a knowledge object and an orphaned fragment: the fragment can still be quoted, summarized, or fed to a model, but it can no longer say where it came from, what changed, or what it should be trusted for.</p>
+    <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">The payload fields are defined in full in the <a href="spec.html" class="inline">Spec §4</a>.</p>
   </div>
 </section>
 
@@ -445,30 +429,10 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
       <div class="tc-card ctrl"><div class="tcl">control infrastructure</div><h3>Decides for you</h3><p>Blocks, permits, denies, enforces, locks, or fails closed. The system makes the call.</p></div>
       <div class="tc-card resp"><div class="tcl">responsibility infrastructure</div><h3>Informs your decision</h3><p>Makes the relevant conditions visible so a human or institution can decide what to do next. KNOBE is this kind.</p></div>
     </div>
-    <p>The protocol is designed to remain readable by the least-powerful participant in the exchange — which is why it requires no certificate, no registry, no platform, and no authority to verify. Every new or external KNOBE carries a declared trust status — and the protocol's recommended posture is <em class="kw">quarantine-first</em>: treat external objects as untrusted until reviewed, regardless of whether they verify. A KNOBE can verify and still remain in quarantine. Verification means the payload is intact, not that the object is true, safe, or appropriate. The green check is where inspection begins, not where it ends.</p>
+    <p style="font-size:.9rem;font-family:-apple-system,system-ui,sans-serif;color:var(--ink-soft)">The recommended posture is <em class="kw">quarantine-first</em>: treat external objects as untrusted until reviewed, even if they verify. Full semantics and honest limits are in the <a href="spec.html" class="inline">Spec</a> and <a href="/threat-model" class="inline">threat model</a>.</p>
   </div>
 </section>
 
-<section id="verify">
-  <div class="wrap">
-    <h2>Verifying a KNOBE</h2>
-    <p>You do not need to understand the code to verify a KNOBE — it reports a small set of plain, human-readable states.</p>
-    <p><code>lens.py</code> is the reference verifier: a single standard-library Python file with no external dependencies. It runs locally — it does not upload your file, call an AI model, or contact a server. It extracts the payload, computes the canonical hash, and reports an integrity <em>status</em> and a <em>conformance</em> level. No server, no AI, no certificate authority — pure math. Prefer no terminal? <a href="lens.html" class="inline">KNOBE Lens</a> runs the same algorithm in your browser: drag in a file, get a result locally.</p>
-    <button class="runbtn" id="runVerify" aria-label="Run the verification demo">▸ Run verification</button>
-    <div class="term copywrap" id="verifyTerm" role="group" aria-label="Verifier output for interview-04.knobe.md">
-      <button class="copybtn" data-copy="python3 lens.py interview-04.knobe.md">copy cmd</button>
-      <div><span class="tp">$</span> <span class="tc">python3 lens.py interview-04.knobe.md</span></div>
-      <div id="verifyOut" aria-live="polite">
-      <div style="margin-top:8px"><span class="tl">title:             </span><span class="tv">Oral history — interview 04</span></div>
-      <div><span class="tl">quarantine_status: </span><span class="tv">quarantine</span></div>
-      <div><span class="tl">status:            </span><span class="tm">verified</span></div>
-      <div><span class="tl">body_hash:         </span><span class="tm">match</span></div>
-      <div style="margin-top:8px"><span class="tn">integrity verified. Integrity is not truth — inspect before trusting.</span></div>
-      </div>
-    </div>
-    <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft);margin-top:22px">Lens and <code>lens.py</code> report three things: an integrity <em>status</em> (is the sealed record intact?), whether the visible <em>body</em> was sealed and unchanged, and a <em>conformance</em> level against the v1 spec. The full state definitions live on the <a href="spec.html" class="inline">Spec</a> and <a href="lens.html" class="inline">Lens</a> pages. The important point here is simpler: a verified KNOBE means the sealed record is intact — not that its contents are true or safe.</p>
-  </div>
-</section>
 
 <section id="accessibility">
   <div class="wrap">
@@ -486,20 +450,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 <section id="build">
   <div class="wrap">
     <h2>For implementers</h2>
-    <p>The protocol's success depends on independent implementation. Everything needed to build a compatible verifier or other tool is here. <strong>v1 file semantics are frozen</strong>: extensions may add optional fields, but they will not reinterpret valid v1 files. Seed stage means early public release, not unstable syntax.</p>
-    <div class="implpanel">
-      <h3>Implementation kit</h3>
-      <p>Reproduce the nine test vectors and your implementation matches the v1 reference conformance set.</p>
-      <div class="impl-grid">
-        <a href="spec.html"><div class="it">Specification</div><div class="id">frozen v1 contract</div></a>
-        <a href="test-vectors/"><div class="it">Test vectors</div><div class="id">9 files, known results</div></a>
-        <a href="knobe-seed-v1.0.knobe.md"><div class="it">Sample KNOBE (Seed)</div><div class="id">a full valid artifact</div></a>
-        <a href="lens.py"><div class="it">lens.py</div><div class="id">reference verifier, no dependencies</div></a>
-        <a href="https://github.com/KnobeOne/knobe-protocol"><div class="it">Source repository</div><div class="id">github.com/KnobeOne</div></a>
-      </div>
-      <div style="color:#7ed99a;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.74rem;margin-top:6px">canonical hash: sorted keys · no whitespace · literal UTF-8 · SHA-256</div>
-    </div>
-    <p style="font-size:.9rem;color:var(--ink-faint);font-family:-apple-system,system-ui,sans-serif;margin-top:14px">A preprint DOI will be linked when available.</p>
+    <p><strong>v1 file semantics are frozen.</strong> Everything needed to build a compatible verifier or tool is in the <a href="spec.html" class="inline">Spec</a>, <a href="test-vectors/" class="inline">test vectors</a> (nine files, known results), <a href="lens.py" class="inline">reference verifier</a>, and <a href="https://github.com/KnobeOne/knobe-protocol" class="inline">source repository</a>.</p>
   </div>
 </section>
 
