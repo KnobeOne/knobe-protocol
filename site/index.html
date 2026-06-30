@@ -218,6 +218,15 @@ div.dl:hover{border-color:var(--moss)}
 .gov dt{font-weight:bold;margin-top:18px;margin-bottom:4px;font-size:.98rem}
 .gov dd{color:var(--ink-soft);font-size:.95rem;margin-bottom:4px}
 
+/* Sitemap */
+.smap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 32px;margin-top:22px;font-family:-apple-system,system-ui,sans-serif}
+@media(max-width:660px){.smap{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:380px){.smap{grid-template-columns:1fr}}
+.smap-head{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.smap-link{display:block;font-size:.88rem;color:var(--ink-soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;padding:3px 0;line-height:1.4}
+.smap-link:hover{color:var(--moss)}
+.smap-path{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;color:var(--ink-faint);display:block;text-decoration:none;margin-top:1px}
+
 footer{padding:46px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:var(--ink-soft);text-decoration:none}
@@ -337,6 +346,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
         <li><a href="#problem">What is lost when knowledge moves</a></li>
         <li><a href="#related">What KNOBE changes</a></li>
         <li><a href="#format">One file, three layers</a></li>
+        <li><a href="#sitemap">Site map</a></li>
       </ol>
     </div>
   </div>
@@ -409,7 +419,38 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 
 
 
-
+<section id="sitemap">
+  <div class="wrap">
+    <h2>Site map</h2>
+    <div class="smap">
+      <div>
+        <div class="smap-head">Protocol</div>
+        <a href="/" class="smap-link">Start<span class="smap-path">/</span></a>
+        <a href="/spec" class="smap-link">Spec<span class="smap-path">/spec</span></a>
+        <a href="/white-paper" class="smap-link">White paper<span class="smap-path">/white-paper</span></a>
+        <a href="/threat-model" class="smap-link">Threat model<span class="smap-path">/threat-model</span></a>
+      </div>
+      <div>
+        <div class="smap-head">Tools</div>
+        <a href="/lens" class="smap-link">Lens<span class="smap-path">/lens</span></a>
+        <a href="/grove/" class="smap-link">Grove<span class="smap-path">/grove</span></a>
+        <a href="/test-vectors/" class="smap-link">Test vectors<span class="smap-path">/test-vectors</span></a>
+      </div>
+      <div>
+        <div class="smap-head">Uses</div>
+        <a href="/education-profile" class="smap-link">Education uses<span class="smap-path">/education-profile</span></a>
+        <a href="/accessibility" class="smap-link">Accessibility<span class="smap-path">/accessibility</span></a>
+      </div>
+      <div>
+        <div class="smap-head">Project</div>
+        <a href="/about" class="smap-link">About<span class="smap-path">/about</span></a>
+        <a href="/downloads" class="smap-link">Downloads<span class="smap-path">/downloads</span></a>
+        <a href="https://github.com/KnobeOne/knobe-protocol" class="smap-link">GitHub<span class="smap-path">github.com ↗</span></a>
+        <a href="mailto:djkyle@ucdavis.edu" class="smap-link">Contact<span class="smap-path">djkyle@ucdavis.edu</span></a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <div id="kPreview" class="kp-overlay" role="dialog" aria-modal="true" aria-labelledby="kpTitle" hidden>
   <div class="kp-panel">
@@ -431,7 +472,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <p class="fnote">The protocol is open, frozen, and stewarded in public. Governance, change process, team, and advisory-board details are on the <a href="about.html">About page</a>.</p>
     <div class="frow">
       <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis</div>
-      <div style="text-align:right"><a href="about.html">About</a> · <a href="/downloads">Downloads</a> · <a href="spec.html">Spec</a> · <a href="grove">Grove</a> · <a href="test-vectors/">Test vectors</a> · <a href="https://github.com/KnobeOne/knobe-protocol">Source</a><br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a></div>
+      <div style="text-align:right"><a href="/spec">Spec</a> · <a href="/lens">Lens</a> · <a href="/grove/">Grove</a> · <a href="/downloads">Downloads</a> · <a href="/about">About</a> · <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a><br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a></div>
     </div>
     <div class="seal-line">white-paper payload_hash: 5e77f4a5e8ad8116c08c2f372038f5d92e91c2482510dcf3b5932ea96e31fce0</div>
   </div>
