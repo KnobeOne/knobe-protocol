@@ -89,6 +89,9 @@ h2{font-size:1.6rem;font-weight:normal;line-height:1.3;margin-bottom:18px;letter
 h3{font-size:1.1rem;font-weight:bold;margin:26px 0 9px}
 p{margin-bottom:16px}
 p.lead{font-size:1.1rem;color:var(--ink-soft)}
+.manifesto{max-width:660px;margin-bottom:0;border-left:3px solid var(--moss);padding-left:22px}
+.manifesto-line{font-size:1.2rem;font-family:-apple-system,system-ui,sans-serif;font-weight:400;color:var(--ink-soft);line-height:1.6;margin-bottom:4px}
+.manifesto-line--em{color:var(--moss-deep);font-weight:600}
 a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 em.kw{font-style:italic;color:var(--moss-deep)}
 strong{font-weight:600;color:var(--ink)}
@@ -353,9 +356,15 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 
 <section id="plain">
   <div class="wrap">
-    <div class="shead">In plain terms</div>
-    <p class="lead" style="max-width:660px">Right now, AI handles knowledge like a port worker unloading containers with no shipping labels: cargo gets dumped on the dock, origin unknown, destination unknown, rules forgotten. Whatever is in the container gets used anyway.</p>
-    <p style="max-width:660px;margin-top:16px;color:var(--ink-soft);line-height:1.75">KNOBE is the shipping label that travels inside the cargo itself. When the object reaches a person, a tool, or an AI agent, the label is still there: where it came from, who made it, what conditions governed it, what it can and cannot be used for — without stopping it from moving.</p>
+    <div class="manifesto" aria-label="KNOBE manifesto">
+      <p class="manifesto-line">Compressed knowledge now moves through AI.</p>
+      <p class="manifesto-line">Context does not automatically follow.</p>
+      <p class="manifesto-line">Humans cannot always tell what changed.</p>
+      <p class="manifesto-line manifesto-line--em">Knowledge needs to explain itself.</p>
+    </div>
+    <p style="max-width:660px;margin-top:28px;line-height:1.8">We're now in an era where knowledge moves continuously through humans and AI. AI has changed the scale and speed of information movement so dramatically that we can no longer assume context will be reconstructed downstream as knowledge passes through multiple systems, people, and tools.</p>
+    <p style="max-width:660px;margin-top:16px;color:var(--ink-soft);line-height:1.8">The missing infrastructure is not simply better AI. It is better ways for knowledge to retain its memory as it moves. The knowledge object itself has to carry more of what used to live outside it.</p>
+    <p style="max-width:660px;margin-top:20px;font-style:italic;color:var(--moss-deep);line-height:1.75">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</p>
   </div>
 </section>
 
