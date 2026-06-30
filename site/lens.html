@@ -230,7 +230,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <section class="explain">
       <h2>What the verdict means</h2>
-      <p><strong>Integrity is not truth.</strong> A green check proves the sealed record has not changed since it was signed — not that its contents are correct, safe, or appropriate. The check is where inspection begins, not where it ends. The protocol's recommended posture is <em class="kw">quarantine-first</em>: treat any external object as untrusted until you have reviewed it, regardless of whether it verifies.</p>
+      <p><strong>Integrity is not truth.</strong> A green check proves the sealed record has not changed since sealing — not that its contents are correct, safe, or appropriate. The check is where inspection begins, not where it ends. The protocol's recommended posture is <em class="kw">quarantine-first</em>: treat any external object as untrusted until you have reviewed it, regardless of whether it verifies.</p>
       <div class="states">
         <div class="state-row"><div class="state-name">verified</div><div class="state-desc">The payload's contents hash exactly to the stored <code>payload_hash</code>. The sealed record is intact.</div></div>
         <div class="state-row"><div class="state-name">verified · body modified</div><div class="state-desc">The sealed payload is intact, but the human-readable markdown body no longer matches the sealed <code>body_hash</code>. Inspect before relying on this version.</div></div>
