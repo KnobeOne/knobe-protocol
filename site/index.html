@@ -287,9 +287,15 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 <header class="hero">
   <div class="wrap">
     <div class="eyebrow">Open protocol · Plain text · Local verification · v1 frozen</div>
-    <h1 class="claim">AI moves knowledge.<br><em style="display:block;margin-top:0.2em">Context doesn't follow.</em></h1>
-    <p class="sub">We're now in an era where knowledge moves continuously through humans and AI. AI has changed the scale and speed of information movement so dramatically that we can no longer assume context will be reconstructed downstream as knowledge passes through multiple systems, people, and tools.</p>
+    <div class="manifesto" aria-label="KNOBE manifesto">
+      <p class="manifesto-line">Compressed knowledge now moves through AI.</p>
+      <p class="manifesto-line">Context does not automatically follow.</p>
+      <p class="manifesto-line">Humans cannot always tell what changed.</p>
+      <p class="manifesto-line manifesto-line--em">Knowledge needs to explain itself.</p>
+    </div>
+    <p class="sub" style="margin-top:28px">We're now in an era where knowledge moves continuously through humans and AI. AI has changed the scale and speed of information movement so dramatically that we can no longer assume context will be reconstructed downstream as knowledge passes through multiple systems, people, and tools.</p>
     <p class="sub">The missing infrastructure is not simply better AI. It is better ways for knowledge to retain its memory as it moves. The knowledge object itself has to carry more of what used to live outside it.</p>
+    <p class="sub" style="font-style:italic;color:var(--moss-deep)">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</p>
 <div class="cta-row">
       <a href="#format" class="btn btn-primary">See the format</a>
       <a href="#verify" class="btn btn-ghost">Verify a KNOBE</a>
@@ -343,7 +349,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <div class="contents">
       <div class="contents-title">Contents</div>
       <ol>
-        <li><a href="#plain"><span class="ov-title">The problem</span><span class="ov-dash"> — </span><span class="ov-desc">what gets lost when knowledge moves</span></a></li>
+        <li><a href="#problem"><span class="ov-title">The problem</span><span class="ov-dash"> — </span><span class="ov-desc">what gets lost when knowledge moves</span></a></li>
         <li><a href="#related"><span class="ov-title">What KNOBE changes</span><span class="ov-dash"> — </span><span class="ov-desc">what it buys you in everyday work</span></a></li>
         <li><a href="#format"><span class="ov-title">The object</span><span class="ov-dash"> — </span><span class="ov-desc">one plain-text file that carries context</span></a></li>
         <li><a href="#integrity"><span class="ov-title">Verification</span><span class="ov-dash"> — </span><span class="ov-desc">what Lens and lens.py can and cannot prove</span></a></li>
@@ -354,19 +360,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
   </div>
 </nav>
 
-<section id="plain">
-  <div class="wrap">
-    <div class="manifesto" aria-label="KNOBE manifesto">
-      <p class="manifesto-line">Compressed knowledge now moves through AI.</p>
-      <p class="manifesto-line">Context does not automatically follow.</p>
-      <p class="manifesto-line">Humans cannot always tell what changed.</p>
-      <p class="manifesto-line manifesto-line--em">Knowledge needs to explain itself.</p>
-    </div>
-    <p style="max-width:660px;margin-top:28px;line-height:1.8">We're now in an era where knowledge moves continuously through humans and AI. AI has changed the scale and speed of information movement so dramatically that we can no longer assume context will be reconstructed downstream as knowledge passes through multiple systems, people, and tools.</p>
-    <p style="max-width:660px;margin-top:16px;color:var(--ink-soft);line-height:1.8">The missing infrastructure is not simply better AI. It is better ways for knowledge to retain its memory as it moves. The knowledge object itself has to carry more of what used to live outside it.</p>
-    <p style="max-width:660px;margin-top:20px;font-style:italic;color:var(--moss-deep);line-height:1.75">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</p>
-  </div>
-</section>
 
 <section id="problem">
   <div class="wrap">
