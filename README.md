@@ -75,4 +75,4 @@ djkyle@ucdavis.edu · [knobe.org](https://knobe.org)
 
 ---
 
-KNOBE preserves objecthood under compression.
+Knowledge that explains itself, wherever it travels.
