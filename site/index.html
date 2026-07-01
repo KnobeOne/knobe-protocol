@@ -236,11 +236,6 @@ footer .fnote{max-width:560px;font-size:.86rem;color:var(--ink-soft);line-height
 footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .seal-line{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.68rem;color:var(--line);margin-top:22px;word-break:break-all}
 
-#vrail{position:fixed;right:16px;bottom:16px;z-index:60;background:rgba(16,35,26,.85);color:#7a9486;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.64rem;padding:6px 11px;border-radius:4px;border:1px solid rgba(42,68,53,.7);transition:opacity .3s;letter-spacing:.02em;opacity:.8}
-#vrail:hover{opacity:1}
-#vrail .vr-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#5a9a72;margin-right:6px;vertical-align:middle}
-@media(max-width:620px){#vrail{display:none}}
-
 .filestruct .fs-layer{display:block;border-radius:3px;padding:0 4px;margin:0 -4px;cursor:pointer;transition:background .15s}
 .filestruct .fs-layer:hover,.filestruct .fs-layer.lit{background:rgba(126,217,154,.1)}
 .layers .layer.lit{box-shadow:inset 3px 0 0 var(--moss)}
@@ -255,7 +250,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 .copybtn:hover{color:var(--code-ink);border-color:var(--moss)}
 .copybtn.copied{color:#7ed99a;border-color:#7ed99a}
 
-@media(prefers-reduced-motion:reduce){.cdot{transition:none}#vrail{transition:none}}
+@media(prefers-reduced-motion:reduce){.cdot{transition:none}}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -296,7 +291,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 </nav>
 
 <a id="top"></a>
-<div id="vrail"><span class="vr-dot"></span><span class="vr-text">KNOBE v1 · verify locally</span></div>
 
 <header class="hero">
   <div class="wrap">
@@ -309,7 +303,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     </div>
     <p class="sub" style="margin-top:28px">We're now in an era where knowledge moves continuously through humans and AI. AI has changed the scale and speed of information movement so dramatically that we can no longer assume context will be reconstructed downstream as knowledge passes through multiple systems, people, and tools.</p>
     <p class="sub">The missing infrastructure is not simply better AI. It is better ways for knowledge to retain its memory as it moves. The knowledge object itself has to carry more of what used to live outside it.</p>
-    <p class="sub" style="font-style:italic;color:var(--moss-deep)">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</p>
+    <p class="sub" style="font-style:italic;color:var(--moss-deep)">KNOBE is an open protocol for auditable plain-text knowledge objects that carry their source, history, limits, and obligations across most human and AI systems. Accessibility, interoperability, portability.</p>
 <div class="cta-row">
       <a href="#format" class="btn btn-primary">See the format</a>
       <a href="/downloads" class="btn btn-ghost">Downloads</a>
@@ -467,7 +461,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 
 <footer>
   <div class="wrap">
-    <div class="fclaim">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</div>
+    <div class="fclaim">KNOBE is an open protocol for auditable plain-text knowledge objects that carry their source, history, limits, and obligations across most human and AI systems. Accessibility, interoperability, portability.</div>
     <p class="fnote">The protocol is open, frozen, and stewarded in public. Governance, change process, team, and advisory-board details are on the <a href="about.html">About page</a>.</p>
     <div class="frow">
       <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis<br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> · <a href="https://linkedin.com/in/david-kyle-969b7812">linkedin.com/in/david-kyle-969b7812</a></div>
@@ -542,17 +536,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     });
   });
 
-  var rail=document.getElementById('vrail');
-  if(rail){
-    var states=[
-      {id:'format',t:'artifact: .knobe.md'},
-      {id:'problem',t:'context survivorship bias'},
-      {id:'governance',t:'open · CC BY 4.0'}
-    ];
-    var t=rail.querySelector('.vr-text');
-    function upd(){ var best='KNOBE v1 · verify locally'; states.forEach(function(s){ var el=document.getElementById(s.id); if(el && el.getBoundingClientRect().top < window.innerHeight*0.5) best=s.t; }); if(t) t.textContent=best; }
-    window.addEventListener('scroll', upd, {passive:true}); upd();
-  }
 })();
 </script>
 <script>
