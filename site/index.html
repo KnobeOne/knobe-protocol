@@ -30,7 +30,6 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 @media(max-width:760px){.navlinks{display:none}}
 
 /* Grove callout — featured experiential-demo card after hero */
-.grove-callout-wrap{padding:30px 0 0;scroll-margin-top:64px}
 .grove-callout{display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:22px 26px;text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s}
 .grove-callout:hover,.grove-callout:focus-visible{border-color:var(--moss);box-shadow:0 2px 18px rgba(47,107,79,.13)}
 .grove-callout .gc-main{flex:1;min-width:240px}
@@ -39,18 +38,6 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .grove-callout .gc-desc{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft);margin:0}
 .grove-callout .gc-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
 .grove-callout:hover .gc-cta,.grove-callout:focus-visible .gc-cta{color:var(--moss-deep)}
-
-/* Contents — homepage page map, modeled on the spec page Contents */
-.onpage{position:static;padding:18px 0 4px;background:transparent;backdrop-filter:none;border-bottom:none}
-.contents{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:18px 22px;max-width:640px}
-.contents-title{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
-.contents ol{margin:0;padding-left:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;line-height:1.7}
-.contents li{margin:0}
-.contents a{text-decoration:none;color:var(--ink-soft)}
-.contents .ov-title{color:var(--ink);font-weight:600}
-.contents .ov-desc{color:var(--ink-faint)}
-.contents a:hover .ov-title,.contents a:focus-visible .ov-title{color:var(--moss);text-decoration:underline}
-@media(max-width:600px){.contents{padding:14px 16px}.contents ol{line-height:1.6}.contents .ov-dash,.contents .ov-desc{display:none}}
 
 /* KNOBE in use — tools list with status + description */
 .inuse{margin:22px 0 0;border-top:1px solid var(--line)}
@@ -219,13 +206,13 @@ div.dl:hover{border-color:var(--moss)}
 .gov dd{color:var(--ink-soft);font-size:.95rem;margin-bottom:4px}
 
 /* Sitemap */
-.smap{display:grid;grid-template-columns:repeat(4,1fr);gap:24px 32px;margin-top:22px;font-family:-apple-system,system-ui,sans-serif}
+.smap{display:grid;grid-template-columns:repeat(4,1fr);gap:32px 40px;margin-top:28px;font-family:-apple-system,system-ui,sans-serif}
 @media(max-width:660px){.smap{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:380px){.smap{grid-template-columns:1fr}}
-.smap-head{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-.smap-link{display:block;font-size:.88rem;color:var(--ink-soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;padding:3px 0;line-height:1.4}
-.smap-link:hover{color:var(--moss)}
-span.smap-link{text-decoration:none;color:var(--ink-faint);cursor:default}
+.smap-head{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);font-weight:700;margin-bottom:14px;padding-bottom:8px;border-bottom:2px solid var(--moss)}
+.smap-link{display:block;font-size:.95rem;color:var(--ink-soft);text-decoration:none;padding:5px 0;line-height:1.4;border-bottom:1px solid transparent;transition:color .12s,border-color .12s}
+.smap-link:hover{color:var(--moss-deep);border-bottom-color:var(--moss)}
+span.smap-link{color:var(--ink-faint);cursor:default;font-style:italic}
 
 footer{padding:46px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
@@ -319,20 +306,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 </header>
 
 
-<nav class="onpage" aria-label="Contents — page sections">
-  <div class="wrap">
-    <div class="contents">
-      <div class="contents-title">Contents</div>
-      <ol>
-        <li><a href="#problem">What is lost when knowledge moves</a></li>
-        <li><a href="#related">What KNOBE changes</a></li>
-        <li><a href="#format">One file, three layers</a></li>
-        <li><a href="#sitemap">Site map</a></li>
-      </ol>
-    </div>
-  </div>
-</nav>
-
 
 <section id="problem">
   <div class="wrap">
@@ -399,7 +372,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
 
 
 
-<div class="grove-callout-wrap" id="grove">
+<section id="grove">
   <div class="wrap">
     <a class="grove-callout" href="/grove/" aria-label="Enter Grove, an optional guided way to learn KNOBE by building one">
       <div class="gc-main">
@@ -410,11 +383,12 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
       <span class="gc-cta">Enter Grove →</span>
     </a>
   </div>
-</div>
+</section>
 
 <section id="sitemap">
-  <div class="wrap">
-    <h2>Site map</h2>
+  <div class="wrap wide">
+    <h2>Everything in one place</h2>
+    <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-faint);margin-bottom:0;margin-top:-10px">Every page on this site, by category.</p>
     <div class="smap">
       <div>
         <div class="smap-head">Protocol</div>
