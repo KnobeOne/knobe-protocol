@@ -27,6 +27,17 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .navlinks a{color:var(--ink-soft);text-decoration:none;transition:color .15s}
 .navlinks a:hover{color:var(--moss)}
 .navlinks a.here{color:var(--moss);border-bottom:1px solid var(--moss)}
+.navlinks{align-items:center}
+.nav-uses{position:relative;display:inline-block}
+.nav-uses>summary{list-style:none;cursor:pointer;color:var(--ink-soft);transition:color .15s}
+.nav-uses>summary::-webkit-details-marker{display:none}
+.nav-uses>summary::after{content:"\25be";font-size:.7em;margin-left:5px}
+.nav-uses>summary:hover,.nav-uses[open]>summary,.nav-uses>summary.here{color:var(--moss)}
+.nav-uses>summary.here{border-bottom:1px solid var(--moss)}
+.nav-menu{position:absolute;top:calc(100% + 10px);left:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:7px;min-width:172px;display:flex;flex-direction:column;gap:1px;box-shadow:0 8px 24px rgba(26,40,32,.12);z-index:60}
+.nav-menu a{padding:7px 10px;border-radius:4px;white-space:nowrap;border-bottom:none}
+.nav-menu a:hover{background:var(--paper-warm);color:var(--moss)}
+.nav-menu a.here{color:var(--moss);border-bottom:none}
 @media(max-width:760px){.navlinks{display:none}}
 
 /* Grove callout — featured experiential-demo card after hero */
@@ -266,17 +277,20 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
   <div class="wrap wide">
     <a href="/" class="brand">KNOBE <span class="v">Protocol v1</span></a>
     <div class="navlinks">
-      <a href="/" class="here" aria-current="page">Intro</a>
       <a href="/spec">Spec</a>
       <a href="/white-paper">White paper</a>
       <a href="/lens">Lens</a>
-      <a href="/grove/">Grove</a>
-      <a href="/education-profile">Education uses</a>
-      <a href="/government-profile">Government</a>
-      <a href="/enterprise-profile">Enterprise</a>
-      <a href="/accessibility">Accessibility</a>
-      <a href="/about">About</a>
+      <details class="nav-uses">
+        <summary>Uses</summary>
+        <div class="nav-menu">
+          <a href="/education-profile">Education uses</a>
+          <a href="/government-profile">Government</a>
+          <a href="/enterprise-profile">Enterprise</a>
+          <a href="/accessibility">Accessibility</a>
+        </div>
+      </details>
       <a href="/downloads">Downloads</a>
+      <a href="/about">About</a>
     </div>
   </div>
 </nav>
