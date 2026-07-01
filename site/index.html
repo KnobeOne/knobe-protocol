@@ -223,12 +223,9 @@ div.dl:hover{border-color:var(--moss)}
 @media(max-width:660px){.smap{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:380px){.smap{grid-template-columns:1fr}}
 .smap-head{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-.smap-link{display:block;font-size:.88rem;color:var(--ink-soft);text-decoration:none;padding:3px 0;line-height:1.4}
+.smap-link{display:block;font-size:.88rem;color:var(--ink-soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;padding:3px 0;line-height:1.4}
 .smap-link:hover{color:var(--moss)}
-.smap-label{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
-span.smap-link{color:var(--ink-faint);cursor:default}
-span.smap-link .smap-label{text-decoration:none}
-.smap-path{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;color:var(--ink-faint);display:block;margin-top:1px}
+span.smap-link{text-decoration:none;color:var(--ink-faint);cursor:default}
 
 footer{padding:46px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
@@ -427,28 +424,28 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <div class="smap">
       <div>
         <div class="smap-head">Protocol</div>
-        <span class="smap-link"><span class="smap-label">Intro</span><span class="smap-path">/</span></span>
-        <a href="/spec" class="smap-link"><span class="smap-label">Spec</span><span class="smap-path">/spec</span></a>
-        <a href="/white-paper" class="smap-link"><span class="smap-label">White paper</span><span class="smap-path">/white-paper</span></a>
-        <a href="/threat-model" class="smap-link"><span class="smap-label">Threat model</span><span class="smap-path">/threat-model</span></a>
+        <span class="smap-link">Intro</span>
+        <a href="/spec" class="smap-link">Spec</a>
+        <a href="/white-paper" class="smap-link">White paper</a>
+        <a href="/threat-model" class="smap-link">Threat model</a>
       </div>
       <div>
         <div class="smap-head">Tools</div>
-        <a href="/lens" class="smap-link"><span class="smap-label">Lens</span><span class="smap-path">/lens</span></a>
-        <a href="/grove/" class="smap-link"><span class="smap-label">Grove</span><span class="smap-path">/grove</span></a>
-        <a href="/test-vectors/" class="smap-link"><span class="smap-label">Test vectors</span><span class="smap-path">/test-vectors</span></a>
+        <a href="/lens" class="smap-link">Lens</a>
+        <a href="/grove/" class="smap-link">Grove</a>
+        <a href="/test-vectors/" class="smap-link">Test vectors</a>
       </div>
       <div>
         <div class="smap-head">Uses</div>
-        <a href="/education-profile" class="smap-link"><span class="smap-label">Education uses</span><span class="smap-path">/education-profile</span></a>
-        <a href="/accessibility" class="smap-link"><span class="smap-label">Accessibility</span><span class="smap-path">/accessibility</span></a>
+        <a href="/education-profile" class="smap-link">Education uses</a>
+        <a href="/accessibility" class="smap-link">Accessibility</a>
       </div>
       <div>
         <div class="smap-head">Project</div>
-        <a href="/about" class="smap-link"><span class="smap-label">About</span><span class="smap-path">/about</span></a>
-        <a href="/downloads" class="smap-link"><span class="smap-label">Downloads</span><span class="smap-path">/downloads</span></a>
-        <a href="https://github.com/KnobeOne/knobe-protocol" class="smap-link"><span class="smap-label">GitHub</span><span class="smap-path">github.com ↗</span></a>
-        <a href="mailto:djkyle@ucdavis.edu" class="smap-link"><span class="smap-label">Contact</span><span class="smap-path">djkyle@ucdavis.edu</span></a>
+        <a href="/about" class="smap-link">About</a>
+        <a href="/downloads" class="smap-link">Downloads</a>
+        <a href="https://github.com/KnobeOne/knobe-protocol" class="smap-link">GitHub</a>
+        <a href="mailto:djkyle@ucdavis.edu" class="smap-link">Contact</a>
       </div>
     </div>
   </div>
