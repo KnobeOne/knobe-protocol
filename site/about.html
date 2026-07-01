@@ -26,29 +26,30 @@ nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-it
 .navlinks a.here{color:var(--moss);border-bottom:1px solid var(--moss)}
 @media(max-width:680px){.navlinks{display:none}}
 
-header.top{padding:74px 0 18px}
-.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:22px}
-h1{font-size:2.1rem;line-height:1.25;font-weight:normal;letter-spacing:-.01em;margin-bottom:10px}
+header.top{padding:92px 0 48px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:26px}
+h1{font-size:2.55rem;line-height:1.18;font-weight:normal;letter-spacing:-.02em;margin-bottom:0;max-width:580px}
 h1 em{font-style:italic;color:var(--moss-deep)}
 
-main{padding:20px 0 30px}
+main{padding:0}
 main p{margin-bottom:18px;font-size:1.05rem}
-main p.lead{font-size:1.18rem;color:var(--ink-soft);line-height:1.6}
-h2{font-size:1.35rem;font-weight:normal;color:var(--moss-deep);margin:42px 0 14px;letter-spacing:-.01em}
+main p.lead{font-size:1.2rem;color:var(--moss-deep);line-height:1.65;margin:36px 0 24px}
+h2{font-size:1.3rem;font-weight:normal;color:var(--moss-deep);margin:0 0 18px;letter-spacing:-.01em;padding-top:32px;border-top:1px solid var(--line)}
+.section-gap{margin-top:52px}
 em.kw{font-style:italic;color:var(--moss-deep)}
 strong{font-weight:600}
 a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 
+.gov-block{background:var(--paper-warm);border-left:3px solid var(--moss);border-radius:0 6px 6px 0;padding:26px 30px 8px;margin:22px 0 0}
+.gov-block p{font-size:1.02rem;color:var(--ink-soft)}
 
-.invite{margin:40px 0 10px;padding:28px 0 0;border-top:1px solid var(--line)}
-.invite .cta-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;font-weight:500;text-decoration:none;padding:11px 20px;border-radius:3px;transition:all .15s;display:inline-block}
-.btn-primary{background:var(--moss-deep);color:var(--paper)}
-.btn-primary:hover{background:var(--moss)}
-.btn-ghost{border:1px solid var(--line);color:var(--ink-soft);background:transparent}
-.btn-ghost:hover{border-color:var(--moss);color:var(--moss)}
+.closing-band{background:var(--moss-deep);text-align:center;padding:80px 28px 88px;margin-top:72px}
+.closing-band .cb-title{font-family:Georgia,'Times New Roman',serif;font-size:2rem;font-weight:normal;font-style:italic;color:var(--paper);letter-spacing:-.02em;margin-bottom:22px;line-height:1.25}
+.closing-band .cb-text{font-family:-apple-system,system-ui,sans-serif;font-size:1rem;color:rgba(247,245,239,.72);max-width:460px;margin:0 auto 28px;line-height:1.65}
+.closing-band .cb-link{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--paper);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;opacity:.65;transition:opacity .15s}
+.closing-band .cb-link:hover{opacity:1}
 
-footer{border-top:1px solid var(--line);margin-top:40px;padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer{border-top:1px solid var(--line);margin-top:0;padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:var(--ink-soft);text-decoration:none}
 footer a:hover{color:var(--moss)}
@@ -113,45 +114,44 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>Until a formal advisory board is constituted, David Kyle is the sole steward of the KNOBE protocol. That is a transitional condition, not a design goal. Trust in an open protocol should not rest on who the steward is. It should rest on the constraints the steward accepts in public.</p>
 
-    <p>The protocol is open under CC BY 4.0 and will stay that way. It will not be enclosed, gated, or quietly converted into something people must pay to read or verify.</p>
+    <div class="gov-block">
+      <p>The protocol is open under CC BY 4.0 and will stay that way. It will not be enclosed, gated, or quietly converted into something people must pay to read or verify.</p>
+      <p>Verification will always be possible with no server, no account, and no permission from anyone. The reference verifier is a single standard-library Python file with no external dependencies. That is a design constraint, not a feature that can be traded away.</p>
+      <p>The protocol will not be represented as doing more than it does. Integrity is not truth. KNOBE does not open the AI black box.</p>
+      <p>Where commercial tooling is built on top of the protocol, the boundary between the open layer and the application layer will be kept visible. The open protocol will never depend on any commercial implementation.</p>
+      <p>This comes from a research program, not a growth target. The measure of success is whether KNOBE stays useful and stays honest.</p>
+    </div>
 
-    <p>Verification will always be possible with no server, no account, and no permission from anyone. The reference verifier is a single standard-library Python file with no external dependencies. That is a design constraint, not a feature that can be traded away.</p>
-
-    <p>The protocol will not be represented as doing more than it does. Integrity is not truth. KNOBE does not open the AI black box.</p>
-
-    <p>Where commercial tooling is built on top of the protocol, the boundary between the open layer and the application layer will be kept visible. The open protocol will never depend on any commercial implementation.</p>
-
-    <p>This comes from a research program, not a growth target. The measure of success is whether KNOBE stays useful and stays honest.</p>
-
-    <h2>v1 is frozen</h2>
+    <h2 class="section-gap">v1 is frozen</h2>
 
     <p>The canonical hash rule, marker format, required fields, three-layer structure, and verification semantics will not change in v1.x. Backward-compatible additions may be issued as v1.x updates. Breaking changes require a v2.0 declaration. Files sealed under v1.0 remain valid under any v1.x verifier.</p>
 
-    <h2>Semantics follow the sealed version</h2>
+    <h2 class="section-gap">Semantics follow the sealed version</h2>
 
     <p>A verifier must apply the verification semantics of the spec version a file was sealed under. A future verifier may report additional advisory information, but must not reinterpret a previously valid KNOBE as failed.</p>
 
-    <h2>How the spec changes</h2>
+    <h2 class="section-gap">How the spec changes</h2>
 
     <p>Proposed changes, bug reports, and implementation questions are submitted through the <a class="inline" href="https://github.com/KnobeOne/knobe-protocol">public source repository</a>. The steward reviews proposals, maintains a public comment period for substantive changes, and issues decisions with documented rationale.</p>
 
-    <h2>Team and advisory board</h2>
+    <h2 class="section-gap">Team and advisory board</h2>
 
     <p>KNOBE is being developed in collaboration with colleagues and partners working across research, accessibility, software development, and education technology. An advisory board is forming. We are looking for people with experience in independent protocol implementation, educational technology, accessibility, open infrastructure, and institutional knowledge governance.</p>
 
     <p>Write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with a brief note on your perspective and relevant work. There is no deadline; this is an ongoing invitation.</p>
 
-    <h2>Institutional pilots</h2>
+    <h2 class="section-gap">Institutional pilots</h2>
 
     <p>KNOBE instructional pilots are being developed for large-scale university courses, including a 500-student course operating under strict privacy and accessibility requirements.</p>
 
     <p>Application-layer work is also exploring accessible credentialing, hardware authentication, and distributed-ledger options for institutional deployment. These are possible implementations built around KNOBE; they are not requirements of the open protocol.</p>
 
-    <h2>What do you know? What will you KNOBE?</h2>
+  </div>
 
-    <div class="invite">
-      <p style="margin-bottom:0;font-size:1.05rem;color:var(--ink-soft)">Write to us. Tell us what you are building, what you would test, or what we could fix or improve.</p>
-    </div>
+  <div class="closing-band">
+    <p class="cb-title">What do you know? What will you KNOBE?</p>
+    <p class="cb-text">Write to us. Tell us what you are building, what you would test, or what we could fix or improve.</p>
+    <a href="mailto:djkyle@ucdavis.edu" class="cb-link">djkyle@ucdavis.edu</a>
   </div>
 </main>
 
