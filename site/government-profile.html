@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE Government Profile v1 — Non-normative guidance for public-sector records</title>
+<meta name="description" content="Non-normative guidance for using KNOBE Protocol v1 in government settings: records provenance, FOIA release lineage, sensitivity and handling guidance, custody roles, fidelity limit templates, and UI label translations for records officers and archivists.">
+<style>
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;
+  --code-bg:#10231a;--code-ink:#cfe6d6;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding:0 28px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:bold;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.brand .v{color:var(--ink-faint);font-weight:normal;font-size:.8rem}
+.navlinks{display:flex;gap:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
+.navlinks a{color:var(--ink-soft);text-decoration:none}
+.navlinks a:hover,.navlinks a.here{color:var(--moss)}
+@media(max-width:680px){.navlinks{display:none}}
+
+header{padding:64px 0 36px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
+h1{font-size:2rem;font-weight:normal;letter-spacing:-.01em;margin-bottom:10px}
+.meta{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);line-height:1.9}
+.meta span{margin-right:18px}
+.nonnorm-badge{display:inline-block;background:var(--amber);color:var(--paper);font-family:-apple-system,system-ui,sans-serif;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:3px;vertical-align:middle}
+
+.toc{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:20px 24px;margin:32px 0}
+.toc-title{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.toc ol{padding-left:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;line-height:2}
+.toc a{color:var(--ink-soft);text-decoration:none}
+.toc a:hover{color:var(--moss)}
+
+main{padding:40px 0 60px}
+h2{font-size:1.4rem;font-weight:normal;color:var(--ink);margin:48px 0 14px;padding-top:8px;border-top:1px solid var(--line);letter-spacing:-.01em}
+h2 .sec{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint);margin-right:10px;font-weight:normal}
+h3{font-size:1.05rem;font-weight:bold;margin:26px 0 8px}
+h4{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;font-weight:600;color:var(--moss-deep);margin:18px 0 6px;text-transform:uppercase;letter-spacing:.05em}
+p{margin-bottom:14px;font-size:1rem}
+p.lead{font-size:1.08rem;color:var(--ink-soft)}
+ul,ol{margin:10px 0 14px 22px}
+li{margin-bottom:6px;font-size:.98rem}
+strong{font-weight:600}
+em.kw{font-style:italic;color:var(--moss-deep)}
+a.inline{color:var(--moss);text-decoration:underline;text-underline-offset:2px}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.87em;background:var(--paper-warm);padding:1px 5px;border-radius:3px;color:var(--moss-deep)}
+pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;overflow-x:auto;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;line-height:1.75;color:var(--code-ink)}
+
+.nonnorm{border-left:3px solid var(--amber);background:#fdf8f0;padding:14px 18px;margin:16px 0;border-radius:0 4px 4px 0;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
+
+.field-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0}
+.field-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
+.field-table td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.field-table tr:last-child td{border-bottom:none}
+.field-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
+.field-table td:nth-child(2){font-size:.88rem}
+.field-table td:nth-child(3){font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint)}
+
+.label-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0}
+.label-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.label-table td{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.label-table tr:last-child td{border-bottom:none}
+.label-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep)}
+.label-table td:nth-child(2){font-weight:600;color:var(--ink);font-family:-apple-system,system-ui,sans-serif}
+.label-table td:nth-child(3){color:var(--ink-soft);font-family:-apple-system,system-ui,sans-serif;font-size:.88rem}
+
+.dl-card{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:22px 26px;margin:20px 0}
+.dl-card .dt{font-weight:bold;font-size:1rem;margin-bottom:4px}
+.dl-card .dd{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin-bottom:12px}
+.dl-card .dh{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.68rem;color:var(--moss);word-break:break-all;margin-bottom:14px}
+.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;font-weight:500;text-decoration:none;padding:9px 18px;border-radius:3px;background:var(--moss-deep);color:var(--paper);display:inline-block;transition:background .15s}
+.btn:hover{background:var(--moss)}
+
+footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--moss)}
+footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:20px;font-size:.95rem}
+.social-icon{display:inline-flex;align-items:center;vertical-align:middle;margin-left:8px;color:var(--ink-faint);transition:color .15s;line-height:1}
+.social-icon:hover{color:var(--moss)}
+.social-icon svg{display:block}
+</style>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7c3aed">
+<link rel="canonical" href="https://knobe.org/government-profile">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KNOBE Protocol">
+<meta property="og:title" content="KNOBE Government Profile v1 — Non-normative guidance for public-sector records">
+<meta property="og:description" content="Non-normative guidance for using KNOBE Protocol v1 in government settings — records provenance, FOIA release lineage, sensitivity and handling guidance, custody roles, and fidelity limit templates.">
+<meta property="og:url" content="https://knobe.org/government-profile">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KNOBE Government Profile v1 — Non-normative guidance for public-sector records">
+<meta name="twitter:description" content="Non-normative guidance for using KNOBE Protocol v1 in government settings — records provenance, FOIA release lineage, sensitivity and handling guidance, and custody roles.">
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <a href="/" class="brand">KNOBE <span class="v">Protocol v1</span></a>
+    <div class="navlinks">
+      <a href="/">Intro</a>
+      <a href="/spec">Spec</a>
+      <a href="/white-paper">White paper</a>
+      <a href="/lens">Lens</a>
+      <a href="/grove/">Grove</a>
+      <a href="/education-profile">Education uses</a>
+      <a href="/government-profile" class="here" aria-current="page">Government</a>
+      <a href="/enterprise-profile">Enterprise</a>
+      <a href="/accessibility">Accessibility</a>
+      <a href="/about">About</a>
+      <a href="/downloads">Downloads</a>
+    </div>
+  </div>
+</nav>
+
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Domain profile · Government</div>
+    <h1>KNOBE Government Profile v1 <span class="nonnorm-badge">Non-normative</span></h1>
+    <div class="meta">
+      <span>Based on KNOBE Protocol v1.0</span>
+      <span>2026-07-01</span>
+      <span>Guidance, not protocol</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+
+    <p class="lead">This page is non-normative guidance for using KNOBE in public-sector records work. Nothing here changes the protocol. If this document conflicts with the <a class="inline" href="spec.html">normative specification</a>, the specification governs.</p>
+
+    <div class="nonnorm">
+      <strong>Who this is for.</strong> Records managers, archivists, FOIA and public-records officers, digital-preservation staff, Section 508 and accessibility compliance officers, agency counsel, and public-sector data stewards who want records, releases, and adaptations to carry their own provenance, handling terms, and interpretive limits as they move between systems and across administrations. Companion profiles cover <a class="inline" href="education-profile.html">education</a> and <a class="inline" href="enterprise-profile.html">enterprise</a> use.
+    </div>
+
+    <div class="nonnorm">
+      <strong>Scope caveat — unclassified systems only.</strong> KNOBE is plain-text tooling for unclassified information. Do not use it to mark, carry, or move classified national-security information; that is governed by separate systems and authorities. The <code>privacy_level</code> field declares handling intent — it is not a classification authority and does not substitute for CUI marking, agency policy, or statute.
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#why">Why KNOBE in government</a></li>
+        <li><a href="#defaults">Recommended field defaults</a></li>
+        <li><a href="#sensitivity">Sensitivity and handling guidance</a></li>
+        <li><a href="#custody">Custody and attribution roles</a></li>
+        <li><a href="#fidelity">Fidelity limit templates</a></li>
+        <li><a href="#use">Use condition and release templates</a></li>
+        <li><a href="#labels">UI label translations</a></li>
+        <li><a href="#example">Worked example: a record and its release</a></li>
+      </ol>
+    </div>
+
+    <h2 id="why"><span class="sec">§1</span>Why KNOBE in government</h2>
+
+    <p>Public-sector records outlive the systems that hold them. A record created in one case-management platform is migrated to another, exported for litigation, released under FOIA, adapted for accessibility, summarized for a briefing, and — increasingly — ingested by AI tools that compress and recombine it. At each step, the conditions that made the record interpretable travel less reliably than the content: who issued it and under what authority, what it can and cannot be trusted to represent, what was withheld and on what legal basis, and whether it is the version of record or a downstream derivative.</p>
+
+    <p>KNOBE addresses this at the artifact layer, without requiring an agency to adopt a new system of record. A <code>.knobe.md</code> file is readable in any text editor, verifiable with a small Python script, and self-describing: it carries attribution, source relations, transformation history, fidelity limits, handling terms, and a hash-sealed integrity check. It is a <em class="kw">system of context</em> that rides alongside whatever systems an agency already runs.</p>
+
+    <p>Three government problems map directly onto the protocol's fields. <strong>Chain of custody and provenance</strong> — <code>attribution</code>, <code>parents</code>, and <code>transformation_history</code> record where a record came from and what has been done to it. <strong>Release integrity</strong> — a redacted FOIA production can reference the unaltered source by hash, so a recipient can confirm what the release was derived from without access to the record itself. <strong>Accessibility as legal obligation</strong> — Section 508 and WCAG adaptations (alt text, plain-language versions, captions, translations) can be recorded with the adapter's labor visible and the source preserved, rather than circulating as detached copies.</p>
+
+    <h2 id="defaults"><span class="sec">§2</span>Recommended field defaults for government use</h2>
+
+    <table class="field-table">
+      <thead><tr><th>Field</th><th>Recommended default</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>quarantine_status</td><td><code>"quarantine"</code></td><td>Default for incoming and working material. A records officer or governed system marks <code>trusted</code> after review.</td></tr>
+        <tr><td>privacy_level</td><td><code>"internal"</code></td><td>For most working records. See §3 for the full handling map.</td></tr>
+        <tr><td>identity_status</td><td><code>"declared"</code></td><td>Correct for v1. Attribution is self-reported; signatures arrive in a later revision.</td></tr>
+        <tr><td>license</td><td>See below</td><td>U.S. federal works are generally public domain; state, local, and contractor works vary.</td></tr>
+        <tr><td>content_type</td><td>See below</td><td>Match to the artifact's role in the records lifecycle.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="nonnorm">
+      <strong>License note.</strong> Works of the U.S. federal government are generally not subject to copyright and can be marked <code>"Public domain (U.S. Government work)"</code>. State, local, tribal, territorial, and contractor-produced works are governed by their own rules — do not assume public domain. When in doubt, consult the agency's records or legal office.
+    </div>
+
+    <h4>Recommended content_type values for government artifacts</h4>
+    <table class="field-table">
+      <thead><tr><th>Artifact</th><th>content_type</th></tr></thead>
+      <tbody>
+        <tr><td>Published notice, report, memo, or record of authority</td><td><code>original</code></td></tr>
+        <tr><td>Redacted release of an underlying record</td><td><code>adaptation</code></td></tr>
+        <tr><td>Summary or briefing derived from records</td><td><code>compression</code></td></tr>
+        <tr><td>Analytic product synthesizing multiple records</td><td><code>synthesis</code></td></tr>
+        <tr><td>FOIA production or release package (multiple items)</td><td><code>collection</code></td></tr>
+        <tr><td>Annotated exhibit or marked-up primary source</td><td><code>annotation</code></td></tr>
+        <tr><td>Official translation of a public notice</td><td><code>translation</code></td></tr>
+        <tr><td>Accessibility adaptation (alt text, plain-language, captions)</td><td><code>adaptation</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="sensitivity"><span class="sec">§3</span>Sensitivity and handling guidance</h2>
+
+    <p>The protocol's open vocabulary for <code>privacy_level</code> is: <code>public</code>, <code>internal</code>, <code>sensitive</code>, <code>restricted</code>. In government contexts these declare handling <em>intent</em> and travel with the artifact; they do not replace an agency's marking systems or governing authorities.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Value</th><th>Handling meaning</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><code>public</code></td><td>Releasable to the public, or already published.</td><td>Published notice, cleared FOIA release, open dataset, public report.</td></tr>
+        <tr><td><code>internal</code></td><td>Agency-internal working material; not yet cleared for release.</td><td>Draft memo, working file, pre-decisional analysis.</td></tr>
+        <tr><td><code>sensitive</code></td><td>Controlled Unclassified Information (CUI), PII, or law-enforcement sensitive. Handle per governing policy.</td><td>Record with personal data, investigative material, security-relevant operational detail.</td></tr>
+        <tr><td><code>restricted</code></td><td>Statutorily protected, under legal hold, or otherwise not releasable in its current form.</td><td>Record under litigation hold, sealed material, statutorily exempt content.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="nonnorm">
+      <strong>CUI note.</strong> Controlled Unclassified Information has its own marking framework (32 CFR Part 2002). Setting <code>privacy_level: "sensitive"</code> declares handling intent inside the artifact; it does not apply or replace a CUI marking. Where CUI applies, mark per the framework and reference the governing category in <code>use_conditions</code>.
+    </div>
+
+    <div class="nonnorm">
+      <strong>Classified information.</strong> Do not place classified national-security information in a KNOBE. The format is designed for unclassified systems and plain-text portability. Classified material is governed by separate marking, handling, and transmission systems that KNOBE neither implements nor satisfies.
+    </div>
+
+    <h2 id="custody"><span class="sec">§4</span>Custody and attribution roles</h2>
+
+    <p>The protocol requires an <code>attribution.sources</code> array with at least one entry. Each source should include <code>author</code> and <code>contribution</code>. Adding a <code>role</code> to each entry makes custody records interoperable across tools. The following roles are recommended for government workflows.</p>
+
+    <table class="field-table">
+      <thead><tr><th>Role value</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><code>record_originator</code></td><td>The office or official that created and originated the record.</td></tr>
+        <tr><td><code>records_officer</code></td><td>The records manager who reviewed, certified, or scheduled the record. Typically the party that sets <code>quarantine_status: trusted</code>.</td></tr>
+        <tr><td><code>releasing_official</code></td><td>The official who authorized public release of a record or production.</td></tr>
+        <tr><td><code>redacting_official</code></td><td>The person who applied redactions and identified the governing exemption or authority.</td></tr>
+        <tr><td><code>authorizing_authority</code></td><td>The statute, order, or delegation under which an action was taken. Name it explicitly.</td></tr>
+        <tr><td><code>accessibility_adapter</code></td><td>A person who produced a Section 508 / WCAG adaptation (alt text, plain-language, captions, translation).</td></tr>
+        <tr><td><code>accessibility_reviewer</code></td><td>A person who reviewed or approved an adaptation for accuracy and conformance.</td></tr>
+        <tr><td><code>ai_assistant</code></td><td>An AI model that contributed to a briefing, summary, or draft. Always <code>"rights_bearing": false</code>. Contribution should state specifically what the model did.</td></tr>
+        <tr><td><code>source_record</code></td><td>An upstream record a derivative draws on. Use <code>parents</code> to link by hash when the source is itself a KNOBE.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="fidelity"><span class="sec">§5</span>Fidelity limit templates</h2>
+
+    <p>The <code>fidelity_limits</code> field tells a recipient what an artifact is fit for and what must not be inferred from it. In records work this prevents a redacted release from being read as a complete record, a briefing from being mistaken for the underlying evidence, and an AI-assisted summary from being treated as verified.</p>
+
+    <h4>Template: redacted public release</h4>
+<pre>{
+  "fidelity_limits": {
+    "represents": "the redacted public version of [record] as released under [authority]",
+    "trust_as": "an accurate reproduction of the source record with [category] withheld",
+    "do_not_infer": [
+      "that redacted passages are absent from the source — they are withheld, not deleted",
+      "that this release reflects events after the source record's date",
+      "that withheld content implies any particular fact about its subject"
+    ]
+  }
+}</pre>
+
+    <h4>Template: record of authority (published notice, report)</h4>
+<pre>{
+  "fidelity_limits": {
+    "represents": "the authoritative published version of [notice/report] as issued",
+    "trust_as": "the official statement of record as of the created_date",
+    "do_not_infer": [
+      "that real-time conditions or later corrections are reflected here",
+      "that this remains current after a later record supersedes it"
+    ]
+  }
+}</pre>
+
+    <h4>Template: AI-assisted briefing or summary</h4>
+<pre>{
+  "fidelity_limits": {
+    "represents": "a summary of [records] assisted by AI as described in attribution",
+    "trust_as": "a starting point for review, not a substitute for the underlying records",
+    "do_not_infer": [
+      "that AI-generated statements have been independently verified",
+      "that every source record was consulted in full",
+      "that the summary captures all legally material detail"
+    ]
+  }
+}</pre>
+
+    <h2 id="use"><span class="sec">§6</span>Use condition and release templates</h2>
+
+    <p>The <code>use_conditions</code> field carries the originator's declared terms for how the next person may use the artifact — terms that otherwise get separated from the record as it moves.</p>
+
+    <h4>Template: public-domain release (U.S. federal work)</h4>
+<pre>{
+  "use_conditions": {
+    "license": "Public domain (U.S. Government work)",
+    "permitted": [
+      "republish, quote, and redistribute freely",
+      "incorporate into downstream products and tools"
+    ],
+    "requested_preservations": [
+      "preserve the issuing authority and record identifier when republishing",
+      "preserve fidelity limits so recipients read the record correctly"
+    ]
+  }
+}</pre>
+
+    <h4>Template: restricted / controlled handling</h4>
+<pre>{
+  "use_conditions": {
+    "license": "Not for public release",
+    "permitted": [
+      "internal review and records retention"
+    ],
+    "requested_preservations": [
+      "do not release externally without records-office review and required redaction",
+      "preserve the governing authority reference"
+    ],
+    "consent_note": "Controlled handling. Contains material subject to [CUI category / statute / legal hold]."
+  }
+}</pre>
+
+    <h2 id="labels"><span class="sec">§7</span>UI label translations</h2>
+
+    <p>Protocol field names are precise but not always the right language for a records-facing interface. The following translations are recommended for government tools. The protocol field names remain unchanged in the payload; these labels apply only at the display layer.</p>
+
+    <table class="label-table">
+      <thead><tr><th>Protocol field</th><th>Records-facing label</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>quarantine_status: quarantine</td><td>Pending records review</td><td>Neutral workflow language for material not yet certified.</td></tr>
+        <tr><td>quarantine_status: trusted</td><td>Certified record</td><td>Set by a records officer or governed system after review.</td></tr>
+        <tr><td>fidelity_limits</td><td>What this record is and is not</td><td>Or: "Read-before-relying notes."</td></tr>
+        <tr><td>use_conditions</td><td>Handling and release terms</td><td>Or: "Release and reuse terms."</td></tr>
+        <tr><td>transformation_history</td><td>Custody and change log</td><td>Or: "Chain of custody."</td></tr>
+        <tr><td>parents</td><td>Source records</td><td>Or: "Derived from."</td></tr>
+        <tr><td>privacy_level: sensitive</td><td>Controlled — handle per policy</td><td>CUI / PII / law-enforcement sensitive.</td></tr>
+        <tr><td>privacy_level: restricted</td><td>Restricted — not for release</td><td>Under hold, sealed, or statutorily exempt.</td></tr>
+        <tr><td>payload_hash: verified</td><td>Record integrity intact</td><td>Follow with "Integrity is not the same as accuracy or authority."</td></tr>
+        <tr><td>payload_hash: failed</td><td>Record may have changed — inspect</td><td>Avoid "tampered"; changes may be legitimate. Prompt review.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 id="example"><span class="sec">§8</span>Worked example: a record and its release</h2>
+
+    <div class="nonnorm"><strong>Note.</strong> Each example is a separate <code>.knobe.md</code> file. The hashes shown are payload hashes — they prove the structured record is intact, not proof of identity, authority, or approval. Integrity is not truth.</div>
+
+    <p>The two examples below form a verifiable release lineage. An internal inspection memo is the record of origin; a FOIA release is a redacted public version that references the source memo by hash. Download both and verify with <code>lens.py</code>. A recipient of the release can confirm exactly what it was derived from — and that the finding text was reproduced faithfully — without ever needing access to the restricted source record itself.</p>
+
+    <div class="dl-card">
+      <div class="dt">Example 1 — Internal record of origin</div>
+      <div class="dd">An internal facility-inspection memo. Carries <code>privacy_level: restricted</code>, <code>quarantine_status: trusted</code> (certified by the originating office), and the hash that the redacted release references as a parent. Contains a personnel section that is withheld downstream.</div>
+      <div class="dh">payload_hash: 472b7c28584bbc178c30fe7c942a6891e8babb5d3f8d32872e1940f3341037bc</div>
+      <a href="knobe-government-record.knobe.md" class="btn">Download</a>
+    </div>
+
+    <div class="dl-card">
+      <div class="dt">Example 2 — Redacted FOIA release</div>
+      <div class="dd">A redacted public release of the memo, prepared in response to a FOIA request. Personnel details are withheld under Exemption 6. Carries a <code>redaction</code> record naming the authority and scope, a <code>parents</code> entry referencing the source by hash, and fidelity limits stating that withheld passages are withheld — not deleted.</div>
+      <div class="dh">payload_hash: 1c503fa97dbdaacca370aba6b967d993a061bf3a0f92e01aa007a41947402d64</div>
+      <a href="knobe-government-foia-release.knobe.md" class="btn">Download</a>
+    </div>
+
+    <h3>What the lineage demonstrates</h3>
+
+    <p>Opening the release's <code>parents</code> array reveals one entry with a payload hash. Verify that hash against the source record above and it matches: the release is provably derived from that exact record and no other. The <code>redaction</code> field records the governing exemption and the scope of what was withheld, so the basis for withholding travels with the release rather than living only in a separate log. The chain — originating office certifies the record, FOIA office redacts and releases — is sealed and checkable without any case-management system, portal, or database. The artifacts carry their own custody.</p>
+
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fclaim">KNOBE is an open protocol for auditable plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems. Accessibility, interoperability, portability.</div>
+    <div class="frow">
+      <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 128 128" aria-hidden="true" style="vertical-align:-3px;margin-right:5px"><defs><radialGradient id="kg" cx="50%" cy="40%"><stop offset="0%" stop-color="#fff" stop-opacity=".5"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><rect width="128" height="128" rx="24" fill="#7c3aed"/><rect width="128" height="128" rx="24" fill="url(#kg)" opacity=".2"/><g transform="translate(64,64)" fill="#fff"><rect x="-16" y="-42" width="22" height="84" rx="3"/><path d="M6-22L6-10 32-42 46-34 20-2 8-2Z"/><path d="M6 22L6 10 32 42 46 34 20 2 8 2Z"/><circle cx="14" cy="0" r="13" fill="#7c3aed"/></g></svg>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis<br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> <a href="https://linkedin.com/in/david-kyle-969b7812" class="social-icon" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://github.com/KnobeOne/knobe-protocol" class="social-icon" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
