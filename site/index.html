@@ -225,6 +225,7 @@ div.dl:hover{border-color:var(--moss)}
 .smap-head{font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line)}
 .smap-link{display:block;font-size:.88rem;color:var(--ink-soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px;padding:3px 0;line-height:1.4}
 .smap-link:hover{color:var(--moss)}
+span.smap-link{text-decoration:none;color:var(--ink-faint);cursor:default}
 .smap-path{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;color:var(--ink-faint);display:block;text-decoration:none;margin-top:1px}
 
 footer{padding:46px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
@@ -398,7 +399,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
       <div class="layer l2" data-layer="2"><div class="ll">layer 2 · markdown body</div><div class="ld">The document itself. No schema. No special software required to read it.</div></div>
       <div class="layer l3" data-layer="3"><div class="ll">layer 3 · base64 json payload</div><div class="ld">Attribution, source context, transformation history, fidelity limits, use conditions, accessibility lineage, and a SHA-256 integrity hash.</div></div>
     </div>
-    <div class="filefoot">Yes, it includes metadata. The claim is structural: the metadata travels <em>inside</em> the object, stays inspectable, is hash-sealed, and behaves consistently across tools. A database tag stays in the database. A platform field stays in the platform. A KNOBE carries its context with the object itself.</div>
   </div>
 </section>
 
@@ -425,7 +425,7 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
     <div class="smap">
       <div>
         <div class="smap-head">Protocol</div>
-        <a href="/" class="smap-link">Intro<span class="smap-path">/</span></a>
+        <span class="smap-link">Intro<span class="smap-path">/</span></span>
         <a href="/spec" class="smap-link">Spec<span class="smap-path">/spec</span></a>
         <a href="/white-paper" class="smap-link">White paper<span class="smap-path">/white-paper</span></a>
         <a href="/threat-model" class="smap-link">Threat model<span class="smap-path">/threat-model</span></a>
@@ -433,7 +433,6 @@ footer .fnote a{color:var(--moss);text-decoration:underline;text-decoration-thic
       <div>
         <div class="smap-head">Tools</div>
         <a href="/lens" class="smap-link">Lens<span class="smap-path">/lens</span></a>
-        <a href="/grove/" class="smap-link">Grove<span class="smap-path">/grove</span></a>
         <a href="/test-vectors/" class="smap-link">Test vectors<span class="smap-path">/test-vectors</span></a>
       </div>
       <div>
