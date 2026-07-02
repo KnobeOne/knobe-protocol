@@ -78,6 +78,8 @@ djkyle@ucdavis.edu · [knobe.org](https://knobe.org)
   author       = {Kyle, David},
   title        = {KNOBE Protocol v1: A Plain-Text Protocol for Knowledge Object Context Survival},
   year         = {2026},
+  month        = {jun},
+  note         = {Published 28 June 2026},
   url          = {https://knobe.org}
 }
 ```
