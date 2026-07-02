@@ -26,7 +26,7 @@ The problem KNOBE addresses is simple. When knowledge moves between people, plat
 
 KNOBE does not prove truth, authorship, authorization, or trustworthiness. Its hash proves only that the sealed payload has not changed since sealing. Attribution is declared, not independently verified, and new or external KNOBEs should be treated as quarantined until a human or governed system marks them trusted.
 
-KNOBE is informing infrastructure, not controlling infrastructure. It reports what traveled with the object so that humans, institutions, and agentic systems can decide responsibly. Its core claim is that **KNOBE preserves objecthood under compression**: it gives knowledge objects a portable way to carry the context and obligations that would otherwise be lost across human, institutional, and AI handoffs.
+KNOBE is informing infrastructure, not controlling infrastructure. It reports what traveled with the object so that humans, institutions, and agentic systems can decide responsibly. KNOBE's practical claim is that knowledge objects need a portable way to carry their source, history, limits, and obligations across human and AI systems. Its deeper theoretical claim is that doing so preserves objecthood under compression.
 
 
 ## 1. The Problem: Fragments in Transit
@@ -237,7 +237,7 @@ Many institutions do not need another platform. They need a way for knowledge ob
 The goal is not to centralize control. It is to make movement more answerable.
 
 
-## 8. Agent Harness Engineering and Process Literacy
+## 8. AI Harnesses and Process Literacy
 
 AI deployment now attends to the systems around models (memory, tools, permissions, retrieval, observability, execution policy) as much as to models themselves. What appears to be a model capability is often a model-plus-system capability, and performance changes materially when the same model runs under a more constrained and better-instrumented execution layer (Gu, 2026).
 
@@ -283,7 +283,7 @@ The normative file format, required fields, canonical hash rule, body-hash behav
 
 ## References
 
-C2PA. (2025). *C2PA Technical Specification, version 2.3.* Coalition for Content Provenance and Authenticity. December 2025.
+C2PA. (2025). *C2PA Technical Specification, version 2.3.* Coalition for Content Provenance and Authenticity. https://spec.c2pa.org/specifications/specifications/2.3/
 
 Gleick, J. (2011). *The Information: A History, a Theory, a Flood.* New York: Pantheon Books.
 
@@ -343,8 +343,8 @@ bGVhc2UuIFBlciB0aGUgUmVjdXJzaXZlIENhbGlicmF0aW9uIFJ1bGUsIGFsbCBlbXBpcmljYWwg
 Y2xhaW1zIGZyb20gdGhlIFNlZWQgZmllbGQgdGVzdHMgYWNyb3NzIGZvdXIgQUkgc3lzdGVtcyBh
 cmUgcmVwb3J0ZWQgYXMgZGVjbGFyZWQ7IHByb3RvY29sIG1lY2hhbmljcyBhcmUgdmVyaWZpZWQg
 YnkgbGVucy5weS4ifSwgImF0dHJpYnV0aW9uX2RlY2xhcmVkIjogdHJ1ZSwgImJvZHlfaGFzaCI6
-ICJlMTU0YzBiMzNmMmI3MDkzZTg0MDMxMzc2ZjcwMDM2YTFlOWUyODc1Mzg3NjQ3YzQxMDlmMTE4
-Y2JkNzFjOWUyIiwgImNhbm9uaWNhbF91cmwiOiAiaHR0cHM6Ly9rbm9iZS5vcmcvd2hpdGUtcGFw
+ICIxY2E2ZDQ0Mjc1MzZmMmUwYWMxYWQxOGJjMTZlODJlNjJhM2I4YzIxYzM4YjZlNmY3YzllZDU5
+OTlkMDNlOGNmIiwgImNhbm9uaWNhbF91cmwiOiAiaHR0cHM6Ly9rbm9iZS5vcmcvd2hpdGUtcGFw
 ZXIiLCAiY29udGVudF90eXBlIjogImNvbXByZXNzaW9uIiwgImNyZWF0ZWRfZGF0ZSI6ICIyMDI2
 LTA2LTExIiwgImZpZGVsaXR5X2xpbWl0cyI6IHsiZG9fbm90X2luZmVyIjogWyJ0aGF0IG9wdGlv
 bmFsIGZpZWxkcyAoZmlkZWxpdHlfbGltaXRzLCB1c2VfY29uZGl0aW9ucywgYWNjZXNzaWJpbGl0
@@ -421,8 +421,8 @@ eS80LjAvIiwgIm1ldGFfZGVwdGgiOiAiMiIsICJwYXJlbnRzIjogW3siaWQiOiAia25vYmUtdjEt
 bGF1bmNoLXBhY2thZ2UiLCAicGF5bG9hZF9oYXNoIjogIjg1OWQ4ZjkwMzdhOTRkNmU3YjVkY2Vi
 ZTZjNmFiNTY4NGE0ODI0NDhhZmExNzgwZmMxMjVhYmZkNTk1YWFiMTIiLCAicmVsYXRpb25zaGlw
 IjogImNvbXByZXNzaW9uX29mIiwgInRpdGxlIjogIktOT0JFIFByb3RvY29sIHYxIOKAlCBQdWJs
-aWMgTGF1bmNoIFBhY2thZ2UifV0sICJwYXlsb2FkX2hhc2giOiAiODZjODcyMWQ0YzBkOWNhNmM2
-YzQ0N2JhMTU0Y2JkZjdlMzAxN2EyODg5MDRjMzhlMGE5ZWEyMzFiMTIwMTBiMSIsICJwcml2YWN5
+aWMgTGF1bmNoIFBhY2thZ2UifV0sICJwYXlsb2FkX2hhc2giOiAiZGZkODcwNjQ4ZDdkOGQ4Zjgy
+NjgzNGI0ODA4Mzk3ZDg5YmRjOGM0ZWMwOWE5ZThmMGMwYTI3MzZiNWI1ZDhmMyIsICJwcml2YWN5
 X2xldmVsIjogInB1YmxpYyIsICJxdWFyYW50aW5lX3N0YXR1cyI6ICJxdWFyYW50aW5lIiwgInNw
 ZWNfdmVyc2lvbiI6ICIxLjAiLCAic3VidGl0bGUiOiAiQ2Fycnlpbmcgc291cmNlLCBoaXN0b3J5
 LCBsaW1pdHMsIGFuZCBvYmxpZ2F0aW9ucyBhY3Jvc3MgaHVtYW4gYW5kIEFJIHN5c3RlbXMiLCAi
@@ -575,5 +575,14 @@ ZWxkcyAoYXV0aG9yLCBhc3Npc3RhbnQsIGNpdGVkIHNvdXJjZSwgZmllbGQtdGVzdCBzdWJqZWN0
 KSB0byBhdHRyaWJ1dGlvbi5zb3VyY2VzIGVudHJpZXM7IHByb3NlIHJlZ2lzdGVyIGFuZCB0eXBv
 Z3JhcGh5IHBhc3MuIEJvZHkgdGV4dCBjaGFuZ2VkOyBib2R5X2hhc2ggYW5kIHBheWxvYWRfaGFz
 aCByZWNvbXB1dGVkLiBObyBjaGFuZ2UgdG8gdGhlIHRlbiB2YWxpZGl0eS1yZXF1aXJlZCBmaWVs
-ZHMgb3IgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUuIn1dfQ==
+ZHMgb3IgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUuIn0sIHsiZGF0ZSI6ICIyMDI2LTA3LTAyIiwg
+InZlcnNpb24iOiAicHVibGljLXJlbGVhc2UtcjgiLCAibm90ZXMiOiAiQWJzdHJhY3Q6IGxlZCB3
+aXRoIHRoZSBwcmFjdGljYWwgY2xhaW0gKGNhcnJ5IHNvdXJjZSwgaGlzdG9yeSwgbGltaXRzLCBh
+bmQgb2JsaWdhdGlvbnMgYWNyb3NzIGh1bWFuIGFuZCBBSSBzeXN0ZW1zKSwgd2l0aCBvYmplY3Ro
+b29kIHVuZGVyIGNvbXByZXNzaW9uIGZyYW1lZCBhcyB0aGUgZGVlcGVyIHRoZW9yZXRpY2FsIGNs
+YWltLCB0byBtYXRjaCB0aGUgc3VidGl0bGUuIFNlY3Rpb24gOCBoZWFkaW5nIGdlbmVyYWxpemVk
+IHRvICdBSSBIYXJuZXNzZXMgYW5kIFByb2Nlc3MgTGl0ZXJhY3knLiBDMlBBIHJlZmVyZW5jZSBw
+aW5uZWQgdG8gdGhlIHZlcnNpb24gMi4zIHNwZWMgVVJMLiBCb2R5IHRleHQgY2hhbmdlZDsgYm9k
+eV9oYXNoIGFuZCBwYXlsb2FkX2hhc2ggcmVjb21wdXRlZC4gTm8gY2hhbmdlIHRvIHRoZSB0ZW4g
+dmFsaWRpdHktcmVxdWlyZWQgZmllbGRzIG9yIHRoZSBjYW5vbmljYWwgaGFzaCBydWxlLiJ9XX0=
 -----END KNOBE B64-----
