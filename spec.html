@@ -85,6 +85,14 @@ pre .n{color:#8fb8e8}
 .algo .ss{font-size:.78rem;color:#4a6555;font-style:italic;margin-left:34px}
 
 .conformance{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:22px 26px;margin:20px 0}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0}
+.tc-card{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:18px 20px}
+.tc-card h3{margin-top:0;font-size:1rem}
+.tc-card p{font-size:.9rem;color:var(--ink-soft);margin-bottom:0}
+.tc-card .tcl{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;letter-spacing:.05em;margin-bottom:8px;text-transform:uppercase}
+.tc-card.ctrl .tcl{color:var(--amber)}
+.tc-card.resp .tcl{color:var(--moss)}
+@media(max-width:560px){.twocol{grid-template-columns:1fr}}
 .conformance h3{margin-top:0;font-size:1rem}
 .conformance ul{margin-top:10px}
 
@@ -505,7 +513,7 @@ const canon = canonicalize(nfc(rest));
       </ul>
     </div>
 
-    <p>The reference verifier <code>lens.py</code> is the canonical implementation for resolving serialization ambiguity under §5. This written specification remains normative in all other respects. Test vectors for all four states are available in the <a class="inline" href="test-vectors/">test-vectors/</a> directory. An implementation that produces the expected state for all six conformance vectors is considered conforming.</p>
+    <p>The reference verifier <code>lens.py</code> is the canonical implementation for resolving serialization ambiguity under §5. This written specification remains normative in all other respects. Test vectors for all four states are available in the <a class="inline" href="test-vectors/">test-vectors/</a> directory. An implementation that produces the expected state for all nine conformance vectors is considered conforming.</p>
 
     <!-- §11 -->
     <h2 id="limits"><span class="sec">§11</span>Honest limits</h2>
@@ -522,12 +530,29 @@ const canon = canonicalize(nfc(rest));
       <li><strong>AI interpretability.</strong> KNOBE carries human-supplied context around AI-mediated knowledge work. It does not expose a model's internal reasoning.</li>
     </ul>
 
+    <h2>Integrity, not truth</h2>
+    <p>KNOBE uses standard SHA-256 hashing. There is no cryptographic novelty here, and no claim that a hash can solve trust. The hash proves one narrow thing: <strong>the sealed payload has not changed since sealing.</strong> It does not prove the content is true, the author is who they say, attribution is honest, consent was obtained, or the object is safe to use. A liar can seal a lie; the seal then proves only that the lie has not changed.</p>
+    <p>This limit is a design principle, not a flaw to hide. It marks a distinction the rest of the protocol depends on:</p>
+    <div class="twocol">
+      <div class="tc-card ctrl"><div class="tcl">control infrastructure</div><h3>Decides for you</h3><p>Blocks, permits, denies, enforces, locks, or fails closed. The system makes the call.</p></div>
+      <div class="tc-card resp"><div class="tcl">responsibility infrastructure</div><h3>Informs your decision</h3><p>Makes the relevant conditions visible so a human or institution can decide what to do next. KNOBE is this kind.</p></div>
+    </div>
+    <p style="font-size:.9rem;font-family:-apple-system,system-ui,sans-serif;color:var(--ink-soft)">The recommended posture is <em class="kw">quarantine-first</em>: treat external objects as untrusted until reviewed, even if they verify. Full semantics are in §11 above and the <a href="https://knobe.org/threat-model" class="inline">threat model</a>.</p>
+
+    <h2>For implementers</h2>
+
+    <p>v1 file semantics are frozen. Everything needed to build a compatible verifier or tool is in this specification, the <a href="test-vectors/" class="inline">test vectors</a> (nine files, known results), the <a href="lens.py" class="inline">reference verifier</a>, and the <a href="https://github.com/KnobeOne/knobe-protocol" class="inline">source repository</a>. Reproduce the nine test vectors and your implementation is canonically compatible with KNOBE Protocol v1.</p>
+
+    <h2>For agent builders</h2>
+
+    <p>Agent harness engineering governs execution policy, tool permissions, memory, and observability — the conditions <em>around</em> the agent. KNOBE comes at the problem from the other side, engineering what the object carries <em>through</em> any system rather than the system itself. <strong>Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</strong> If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits — not the model's reasoning.</p>
+
   </div>
 </main>
 
 <footer>
   <div class="wrap">
-    <div class="fclaim">KNOBE preserves objecthood under compression.</div>
+    <div class="fclaim">KNOBE is an open protocol for auditable plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems. Built for accessibility, interoperability, and portability.</div>
     <div class="frow">
       <div>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis</div>
       <div style="text-align:right">

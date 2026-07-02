@@ -29,6 +29,10 @@ python3 lens.py minimal-valid.knobe.md
 | `omitted-body-hash.knobe.md` | verified | valid | no body_hash field; body_verified MUST be omitted |
 | `multi-block.knobe.md` | verified (last block) | valid | two payload blocks; verifier surfaces warning, body_verified MUST be omitted |
 
+## Adversarial hardening set
+
+The [`adversarial/`](adversarial/) subdirectory contains ten additional hostile-input files — duplicate keys, NFC key collisions, control-character injection, unsupported spec versions — with expected results in [`adversarial/README.md`](adversarial/README.md). They are not part of the canonical-compatibility bar; they test verifier robustness.
+
 ## Notes
 
 - `payload_hash` is the SHA-256 of the canonical JSON payload (keys recursively sorted, no whitespace, NFC-normalized keys and string values, literal UTF-8, `payload_hash` field excluded).
