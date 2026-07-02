@@ -58,7 +58,7 @@ KNOBE Protocol v1 is published under [CC BY 4.0](LICENSE). You are free to share
 
 ## Steward
 
-David Kyle, founder and steward · University of California, Davis
+David Kyle, author and steward · University of California, Davis
 djkyle@ucdavis.edu · [knobe.org](https://knobe.org)
 
 ## Citation
@@ -68,7 +68,6 @@ djkyle@ucdavis.edu · [knobe.org](https://knobe.org)
   author       = {Kyle, David},
   title        = {KNOBE Protocol v1: A Plain-Text Protocol for Knowledge Object Context Survival},
   year         = {2026},
-  publisher    = {University of California, Davis},
   url          = {https://knobe.org}
 }
 ```
