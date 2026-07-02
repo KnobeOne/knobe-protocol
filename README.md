@@ -54,7 +54,17 @@ An implementation that reproduces all nine expected results is canonically compa
 
 ## License
 
-KNOBE Protocol v1 is published under [CC BY 4.0](LICENSE). You are free to share, adapt, and build on the protocol with attribution.
+| Material | License |
+|----------|---------|
+| Specification, white paper, profiles, and all prose | [CC BY 4.0](LICENSE) |
+| Verifier code — `lens.py` and the browser Lens (`site/lens.html`) | [Apache-2.0](LICENSE-CODE) |
+| Test vectors (`test-vectors/`) | [CC0-1.0](test-vectors/LICENSE) — copy them into your test suite freely, no attribution required |
+
+The steward asserts no patents covering KNOBE Protocol v1 and will not assert any patent against conformant implementations. See [GOVERNANCE.md](GOVERNANCE.md).
+
+## Contributing
+
+Errata, hostile test vectors, and independent verifier implementations are the most valuable contributions. See [CONTRIBUTING.md](CONTRIBUTING.md) for process and [SECURITY.md](SECURITY.md) for reporting verification-bypass issues. The v1 freeze contract and stewardship commitments are in [GOVERNANCE.md](GOVERNANCE.md).
 
 ## Steward
 

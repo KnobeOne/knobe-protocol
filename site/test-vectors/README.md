@@ -42,4 +42,4 @@ The [`adversarial/`](adversarial/) subdirectory contains ten additional hostile-
 - Verifiers emit three independent dimensions: `status` (integrity), `body_verified` (yes/modified/omitted), and `conformance` (valid/warnings/invalid).
 - An implementation that reproduces all nine expected results is canonically compatible with KNOBE Protocol v1.
 
-KNOBE Protocol v1 · CC BY 4.0 · UC Davis
+KNOBE Protocol v1 · Test vectors: [CC0-1.0](LICENSE) (public domain — no attribution required) · David Kyle (UC Davis)

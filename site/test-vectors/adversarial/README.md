@@ -27,4 +27,4 @@ python3 lens.py adversarial/<file>
 
 This file is deliberately **fully valid and verified**. Its `title` contains terminal escape sequences and a newline crafted to print a fake `status: verified` line if a verifier echoes payload strings raw. The hazard is in display, not integrity: verifiers and any tool that renders payload fields MUST escape or strip control characters in output (the reference verifier prints them escaped, e.g. `\x1b`). A green result on this file plus clean output is the pass condition.
 
-KNOBE Protocol v1 · CC BY 4.0 · UC Davis
+KNOBE Protocol v1 · Test vectors: [CC0-1.0](../LICENSE) (public domain — no attribution required) · David Kyle (UC Davis)
