@@ -26,7 +26,7 @@ The problem KNOBE addresses is simple. When knowledge moves between people, plat
 
 KNOBE does not prove truth, authorship, authorization, or trustworthiness. Its hash proves only that the sealed payload has not changed since sealing. Attribution is declared, not independently verified, and new or external KNOBEs should be treated as quarantined until a human or governed system marks them trusted.
 
-KNOBE is informing infrastructure, not controlling infrastructure. It reports what traveled with the object so that humans, institutions, and agentic systems can decide responsibly. KNOBE's practical claim is that knowledge objects need a portable way to carry their source, history, limits, and obligations across human and AI systems. Its deeper theoretical claim is that doing so preserves objecthood under compression.
+KNOBE is informing infrastructure, not controlling infrastructure. It reports what traveled with the object so that humans, institutions, and AI systems can decide responsibly. KNOBE's practical claim is that knowledge objects need a portable way to carry their source, history, limits, and obligations across human and AI systems. Its deeper theoretical claim is that doing so preserves objecthood under compression.
 
 
 ## 1. The Problem: Fragments in Transit
@@ -65,7 +65,7 @@ The point is not unique to drums. Long-distance communication has often depended
 
 A single well-chosen word can be a complete and faithful knowledge object. The lesson is that as a signal is compressed and travels farther through more hands, platforms, and AI systems, it needs interpretive support to remain intelligible when it arrives.
 
-KNOBE supplies that support without imposing a rigid schema. Source, transformation history, fidelity limits, use conditions, accessibility lineage, and trust posture are common forms of context-rich redundancy, but they are not the only ones. A teacher might include assignment purpose, permitted AI use, or the learning standard a student was trying to meet. A researcher might include consent limits, field conditions, uncertainty, excluded evidence, or why a source was trusted. An accessibility worker might include what was simplified, captioned, translated, preserved, or necessarily lost. A team might include decision history, version rationale, local terminology, handoff instructions, or warnings for an unknown future reader.
+KNOBE supplies that support without imposing a rigid schema. Source, transformation history, fidelity limits, use conditions, accessibility lineage, and quarantine posture are common forms of context-rich redundancy, but they are not the only ones. A teacher might include assignment purpose, permitted AI use, or the learning standard a student was trying to meet. A researcher might include consent limits, field conditions, uncertainty, excluded evidence, or why a source was trusted. An accessibility worker might include what was simplified, captioned, translated, preserved, or necessarily lost. A team might include decision history, version rationale, local terminology, handoff instructions, or warnings for an unknown future reader.
 
 The point is not to fill every field. It is to carry enough interpretive support for the object's likely journey, including destinations the author cannot fully predict. KNOBE treats context as a creative responsibility: the maker decides what another person, tool, institution, or AI system may need in order to use the object responsibly without mistaking a compressed fragment for a complete knowledge object.
 
@@ -96,7 +96,7 @@ The issue is older than AI. Writing already changed knowledge by turning thought
 
 A knowledge artifact is not only the *known*: the text, image, file, or output. It also carries the *knowing* that produced it: the labor, position, source relations, constraints, intention, method, and process behind it. Neither alone is enough: the known without the knowing becomes harder to interrogate, extend, credit, or trust, and the knowing without the known leaves no durable artifact to carry forward. Knowledge that travels needs both held together: *known + knowing = knowledge*. What is ordinarily called "context" is just the knowing after it has been cut away and demoted to optional background; a file refuses nothing, so the cut is usually silent.
 
-KNOBE cannot preserve all of the knowing. That would be impossible, and it would defeat the compression that makes knowledge useful. It preserves the parts of the knowing the maker judges necessary for responsible reuse: attribution, source relations, transformation history, fidelity limits, accessibility lineage, use conditions, and trust posture. In doing so it holds that cut up to view, turning it from a silent default into a visible act, and it makes process literacy part of the object itself. KNOBE is pedagogical in this sense: it does not merely store process information for machines but teaches makers and receivers to ask what kind of object they are handling: where it came from, what transformed it, what it preserves, what it loses, who contributed, what obligations travel with it, and what a responsible next use would require.
+KNOBE cannot preserve all of the knowing. That would be impossible, and it would defeat the compression that makes knowledge useful. It preserves the parts of the knowing the maker judges necessary for responsible reuse: attribution, source relations, transformation history, fidelity limits, accessibility lineage, use conditions, and quarantine posture. In doing so it holds that cut up to view, turning it from a silent default into a visible act, and it makes process literacy part of the object itself. KNOBE is pedagogical in this sense: it does not merely store process information for machines but teaches makers and receivers to ask what kind of object they are handling: where it came from, what transformed it, what it preserves, what it loses, who contributed, what obligations travel with it, and what a responsible next use would require.
 
 Accessibility adaptation is the paradigm case. When work is captioned, simplified, translated, described, or otherwise transformed so someone else can use it, the adaptation becomes knowledge work in its own right. It carries judgment, labor, and fidelity limits, the knowing that should not vanish when the object travels on. KNOBE makes that transformation visible and keeps the adaptation tied to the source it was made from.
 
@@ -146,7 +146,7 @@ Each layer reflects a choice with a reason behind it:
 
 ## 4. Fields That Carry Obligation
 
-The v1 payload is deliberately small. A required core names what the object is and how to read it (title, summary, content type, license, creation date, spec version, privacy and trust posture, and source attribution), all sealed under a payload hash. Everything beyond that core is optional structure for richer records; the exact field list, controlled vocabularies, and conformance rules are defined in the [v1 Spec](https://knobe.org/spec).
+The v1 payload is deliberately small. A required core names what the object is and how to read it (title, summary, content type, license, creation date, spec version, privacy and quarantine posture, and source attribution), all sealed under a payload hash. Everything beyond that core is optional structure for richer records; the exact field list, controlled vocabularies, and conformance rules are defined in the [v1 Spec](https://knobe.org/spec).
 
 The optional fields are where KNOBE carries more than provenance. Provenance answers *where did this come from?* KNOBE also asks *how should the next party receive it?* Several optional fields carry that obligation.
 
@@ -177,7 +177,7 @@ Together, these fields make KNOBE more than a provenance wrapper. They let a kno
 
 ## 5. Integrity, Not Truth
 
-KNOBE's trust posture has two parts: integrity is narrow, and trust is local. This section takes the first; the next takes the second.
+KNOBE's stance on trust has two parts: integrity is narrow, and trust is local. This section takes the first; the next takes the second.
 
 When a verifier shows a green check, exactly one thing has been established: the sealed payload is the same payload that was present when the artifact was sealed. The SHA-256 comparison (NIST, 2015) is a tamper-evidence mechanism, and a strong one. It is not, and cannot be, a truth mechanism.
 
@@ -204,9 +204,9 @@ Hash verification requires a deterministic runtime. For that reason, KNOBE ships
 
 ## 6. Quarantine-First
 
-New or external KNOBEs should be treated as quarantined until a local human or governed system marks them trusted. This is the local half of that trust posture, and it inverts the usual default of circulation systems, which treat arrival as implicit endorsement.
+New or external KNOBEs should be treated as quarantined until a local human or governed system marks them trusted. This is the local half of that stance, and it inverts the usual default of circulation systems, which treat arrival as implicit endorsement.
 
-This matters because a KNOBE may arrive declaring itself `trusted`. Receiving systems should not automatically inherit that declaration; local trust is a receiving-system decision. The field `quarantine_status` records the trust posture associated with the object, but receiving environments should maintain their own review layer. An external KNOBE may be valid, readable, and hash-verified while still remaining untrusted locally.
+This matters because a KNOBE may arrive declaring itself `trusted`. Receiving systems should not automatically inherit that declaration; local trust is a receiving-system decision. The field `quarantine_status` records the review posture the object declares, but receiving environments should maintain their own review layer. An external KNOBE may be valid, readable, and hash-verified while still remaining untrusted locally.
 
 Quarantine-first has three practical consequences. First, inspection precedes action: tools that consume KNOBEs surface quarantine status prominently and do not act on quarantined build recipes or transformations without explicit human or governed approval. Second, trust becomes a recorded decision rather than an ambient assumption: someone, or some governed process, changes the status, and that decision belongs to the object's history. Third, the posture scales in both directions: a single reader applying personal judgment and an institution applying a formal review workflow use the same field, with different governance behind it.
 
@@ -221,7 +221,7 @@ The predictable institutional objection arrives early: *we already have systems.
 
 Course systems keep grades. Ethics review keeps approvals. Repositories keep deposits. Archives keep accession records. Publishers keep formal publication metadata. Human resources systems keep employment records. Compliance systems keep official decisions. Each is a system of record, and each should remain. KNOBE replaces none of them.
 
-KNOBE is a **system of context**. It carries object-level context *between* systems of record: attribution, source relations, transformation history, fidelity limits, use conditions, accessibility adaptations, quarantine status, and inspection cues. Systems of record are walls; objects move through the doors between them. KNOBE is what the object wears as it moves.
+KNOBE is a **system of context**. It carries object-level context *between* systems of record: attribution, source relations, transformation history, fidelity limits, use conditions, accessibility adaptations, quarantine status, and inspection cues. Systems of record are walls; objects move through the doors between them. KNOBE is the context layer that travels with the object.
 
 Many institutions do not need another platform. They need a way for knowledge objects to move through the systems they already run without losing the context that makes them responsible to use. A KNOBE lets an object say, in a form both a person and an agent can read:
 
@@ -245,7 +245,7 @@ KNOBE does not replace that harness. It supplies a better object for any harness
 
 **The harness controls the encounter. KNOBE preserves the object across encounters.**
 
-The harness governs execution policy, memory architecture, tool permissions, observability, and runtime constraints; KNOBE governs what the artifact carries: attribution, transformation history, fidelity limits, use conditions, and interpretive obligations. If an artifact arrives stripped of those, no downstream harness can reconstruct what was never carried; the loss compounds across hops, until agent A summarizes, agent B excerpts the summary, agent C acts on the excerpt, and no party (human or machine) can recover what the original object obligated its users to know. If the artifact arrives as a KNOBE, the harness begins with a richer, more accountable object. This is why KNOBE belongs to the emerging practice of agent harness engineering without claiming to be the harness itself: it addresses the object side of the problem.
+The harness governs execution policy, memory architecture, tool permissions, observability, and runtime constraints; KNOBE governs what the artifact carries: attribution, transformation history, fidelity limits, use conditions, and interpretive obligations. If an artifact arrives stripped of those, no downstream harness can reconstruct what was never carried; the loss compounds across hops, until agent A summarizes, agent B excerpts the summary, agent C acts on the excerpt, and no party (human or machine) can recover what the original object required responsible users to know. If the artifact arrives as a KNOBE, the harness begins with a richer, more accountable object. This is why KNOBE belongs to the emerging practice of agent harness engineering without claiming to be the harness itself: it addresses the object side of the problem.
 
 The same machinery serves a long-standing institutional aspiration: **process literacy**, the ability to understand, document, inspect, and evaluate the pathway by which knowledge work was produced, not only its final output. Students need it to learn honestly and to show their work. Researchers need it for methods, replication, and credit. Accessibility specialists need it to record adaptations without severing them from sources. Administrators and reviewers need it to evaluate work they did not watch happen. Draft folders, chat logs, course-system submissions, ethics records, and institutional repositories each preserve part of the picture; none reliably carries a shared, object-level account of judgment, transformation, attribution, constraint, and use condition that travels with the work. KNOBE gives the process record a portable home inside the object.
 
@@ -256,7 +256,7 @@ Process literacy is also where a quieter failure is fought. The **Matthew Effect
 
 KNOBE does not require an official authoring path. A valid v1 object may be written directly, converted from an existing document, generated from a guided form, produced through batch upload, assembled from other KNOBEs, or created inside a credentialed application environment. These are creation paths, not protocol requirements. The protocol defines the object, not the one correct way to make it.
 
-Some KNOBEs may be designed as teaching or bootstrapping artifacts, and collections of KNOBEs may share conventions, trust posture, and transformation norms. These are useful adoption patterns. A valid v1 KNOBE needs no bootstrapping artifact, guided environment, or official tool. KNOBE's own materials include such aids (teaching objects called Seeds; a guided introduction called Grove), but they are conveniences, not protocol machinery.
+Some KNOBEs may be designed as teaching or bootstrapping artifacts, and collections of KNOBEs may share conventions, review posture, and transformation norms. These are useful adoption patterns. A valid v1 KNOBE needs no bootstrapping artifact, guided environment, or official tool. KNOBE's own materials include such aids (teaching objects called Seeds; a guided introduction called Grove), but they are conveniences, not protocol machinery.
 
 The public site provides current entry points for verification, authoring, examples, and implementation. Credentialed environments, institutional workflows, identity, review, and governance can be built as application layers; they are not the protocol itself.
 
@@ -343,8 +343,8 @@ bGVhc2UuIFBlciB0aGUgUmVjdXJzaXZlIENhbGlicmF0aW9uIFJ1bGUsIGFsbCBlbXBpcmljYWwg
 Y2xhaW1zIGZyb20gdGhlIFNlZWQgZmllbGQgdGVzdHMgYWNyb3NzIGZvdXIgQUkgc3lzdGVtcyBh
 cmUgcmVwb3J0ZWQgYXMgZGVjbGFyZWQ7IHByb3RvY29sIG1lY2hhbmljcyBhcmUgdmVyaWZpZWQg
 YnkgbGVucy5weS4ifSwgImF0dHJpYnV0aW9uX2RlY2xhcmVkIjogdHJ1ZSwgImJvZHlfaGFzaCI6
-ICIxY2E2ZDQ0Mjc1MzZmMmUwYWMxYWQxOGJjMTZlODJlNjJhM2I4YzIxYzM4YjZlNmY3YzllZDU5
-OTlkMDNlOGNmIiwgImNhbm9uaWNhbF91cmwiOiAiaHR0cHM6Ly9rbm9iZS5vcmcvd2hpdGUtcGFw
+ICIxYzRmNDkyNzg5OTM0MDAwMjgzN2YwZDI5M2M2Mzk5NjQ4YmViMmU3NzE4YjNmYmJkZTBmZTA1
+YjU3NzlkYTJiIiwgImNhbm9uaWNhbF91cmwiOiAiaHR0cHM6Ly9rbm9iZS5vcmcvd2hpdGUtcGFw
 ZXIiLCAiY29udGVudF90eXBlIjogImNvbXByZXNzaW9uIiwgImNyZWF0ZWRfZGF0ZSI6ICIyMDI2
 LTA2LTExIiwgImZpZGVsaXR5X2xpbWl0cyI6IHsiZG9fbm90X2luZmVyIjogWyJ0aGF0IG9wdGlv
 bmFsIGZpZWxkcyAoZmlkZWxpdHlfbGltaXRzLCB1c2VfY29uZGl0aW9ucywgYWNjZXNzaWJpbGl0
@@ -421,8 +421,8 @@ eS80LjAvIiwgIm1ldGFfZGVwdGgiOiAiMiIsICJwYXJlbnRzIjogW3siaWQiOiAia25vYmUtdjEt
 bGF1bmNoLXBhY2thZ2UiLCAicGF5bG9hZF9oYXNoIjogIjg1OWQ4ZjkwMzdhOTRkNmU3YjVkY2Vi
 ZTZjNmFiNTY4NGE0ODI0NDhhZmExNzgwZmMxMjVhYmZkNTk1YWFiMTIiLCAicmVsYXRpb25zaGlw
 IjogImNvbXByZXNzaW9uX29mIiwgInRpdGxlIjogIktOT0JFIFByb3RvY29sIHYxIOKAlCBQdWJs
-aWMgTGF1bmNoIFBhY2thZ2UifV0sICJwYXlsb2FkX2hhc2giOiAiZGZkODcwNjQ4ZDdkOGQ4Zjgy
-NjgzNGI0ODA4Mzk3ZDg5YmRjOGM0ZWMwOWE5ZThmMGMwYTI3MzZiNWI1ZDhmMyIsICJwcml2YWN5
+aWMgTGF1bmNoIFBhY2thZ2UifV0sICJwYXlsb2FkX2hhc2giOiAiMjEyMGQzODMyOWUxYWIyMjMy
+ZDI4ZGUzMDIwY2I0MGQ0YmRjNmE2YzYxZGE5ZDIxOGM2MmFhOTQ3OGRlMGVjOSIsICJwcml2YWN5
 X2xldmVsIjogInB1YmxpYyIsICJxdWFyYW50aW5lX3N0YXR1cyI6ICJxdWFyYW50aW5lIiwgInNw
 ZWNfdmVyc2lvbiI6ICIxLjAiLCAic3VidGl0bGUiOiAiQ2Fycnlpbmcgc291cmNlLCBoaXN0b3J5
 LCBsaW1pdHMsIGFuZCBvYmxpZ2F0aW9ucyBhY3Jvc3MgaHVtYW4gYW5kIEFJIHN5c3RlbXMiLCAi
@@ -584,5 +584,14 @@ YWltLCB0byBtYXRjaCB0aGUgc3VidGl0bGUuIFNlY3Rpb24gOCBoZWFkaW5nIGdlbmVyYWxpemVk
 IHRvICdBSSBIYXJuZXNzZXMgYW5kIFByb2Nlc3MgTGl0ZXJhY3knLiBDMlBBIHJlZmVyZW5jZSBw
 aW5uZWQgdG8gdGhlIHZlcnNpb24gMi4zIHNwZWMgVVJMLiBCb2R5IHRleHQgY2hhbmdlZDsgYm9k
 eV9oYXNoIGFuZCBwYXlsb2FkX2hhc2ggcmVjb21wdXRlZC4gTm8gY2hhbmdlIHRvIHRoZSB0ZW4g
-dmFsaWRpdHktcmVxdWlyZWQgZmllbGRzIG9yIHRoZSBjYW5vbmljYWwgaGFzaCBydWxlLiJ9XX0=
+dmFsaWRpdHktcmVxdWlyZWQgZmllbGRzIG9yIHRoZSBjYW5vbmljYWwgaGFzaCBydWxlLiJ9LCB7
+ImRhdGUiOiAiMjAyNi0wNy0wMiIsICJ2ZXJzaW9uIjogInB1YmxpYy1yZWxlYXNlLXI5IiwgIm5v
+dGVzIjogIlJlZ2lzdGVyIHBhc3M6ICdhZ2VudGljIHN5c3RlbXMnIHRvICdBSSBzeXN0ZW1zJyBp
+biB0aGUgYWJzdHJhY3Q7IHJlcGxhY2VkICd0cnVzdCBwb3N0dXJlJyB0aHJvdWdob3V0IHdpdGgg
+J3F1YXJhbnRpbmUgcG9zdHVyZScsICdyZXZpZXcgcG9zdHVyZScsIG9yICdzdGFuY2Ugb24gdHJ1
+c3QnIHRvIGtlZXAgdGhlIGludGVncml0eS90cnVzdC90cnV0aCBkaXN0aW5jdGlvbiBjbGVhbiBh
+bmQgYXZvaWQgaW1wbHlpbmcgdGhlIGZpbGUgY2FycmllcyB0cnVzdDsgcGxhaW5lciBwaHJhc2lu
+ZyBpbiBTZWN0aW9ucyA3IGFuZCA4LiBCb2R5IHRleHQgY2hhbmdlZDsgYm9keV9oYXNoIGFuZCBw
+YXlsb2FkX2hhc2ggcmVjb21wdXRlZC4gTm8gY2hhbmdlIHRvIHRoZSB0ZW4gdmFsaWRpdHktcmVx
+dWlyZWQgZmllbGRzIG9yIHRoZSBjYW5vbmljYWwgaGFzaCBydWxlLiJ9XX0=
 -----END KNOBE B64-----
