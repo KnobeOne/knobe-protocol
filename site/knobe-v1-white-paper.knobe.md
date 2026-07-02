@@ -1,7 +1,7 @@
 ---
 title: "KNOBE Protocol v1: A Context Protocol for Responsible Knowledge Movement"
-subtitle: "Preserving objecthood, attribution, and interpretive obligation under compression"
-tagline: "KNOBE preserves objecthood under compression."
+subtitle: "Carrying source, history, limits, and obligations across human and AI systems"
+tagline: "A portable way for a knowledge object to carry its context and obligations as it moves."
 author: David Kyle
 content_type: compression
 spec_version: "1.0"
@@ -12,10 +12,10 @@ created_date: "2026-06-11"
 
 # KNOBE Protocol v1: A Context Protocol for Responsible Knowledge Movement
 
-### Preserving objecthood, attribution, and interpretive obligation under compression
+### Carrying source, history, limits, and obligations across human and AI systems
 
 **David Kyle** · University of California, Davis · knobe.org
-*Public release, June 2026*
+*Public release, June 28, 2026*
 
 
 ## Abstract
@@ -39,7 +39,7 @@ But compression creates a recurring danger: the artifact survives while the cond
 
 This white paper has one purpose: to explain why KNOBE exists, what problem it solves, and how it can be adopted without depending on any particular platform.
 
-Institutions have always managed compressed knowledge (citations, credentials, rankings, files, reports) deciding which compressions count and who may interpret them. They are, in effect, systems of *authorized decompression*. Their recurring failure is that a compressed object becomes *operationally sufficient*: treated as adequate to act on while the partial, situated field that made it interpretable drops from view. A file becomes a person. A credential becomes competence. A ranking becomes quality. A summary becomes the source. Institutions arose in part to govern that danger, but knowledge objects now move faster than institutional context can travel with them. KNOBE addresses that gap at the artifact layer.
+Institutions have always managed compressed knowledge (citations, credentials, rankings, files, reports), deciding which compressions count and who may interpret them. They are, in effect, systems of *authorized decompression*. Their recurring failure is that a compressed object becomes *operationally sufficient*: treated as adequate to act on while the partial, situated field that made it interpretable drops from view. A file becomes a person. A credential becomes competence. A ranking becomes quality. A summary becomes the source. Institutions arose in part to govern that danger, but knowledge objects now move faster than institutional context can travel with them. KNOBE addresses that gap at the artifact layer.
 
 This pattern long predates computing. What has changed is speed, scale, and the role of AI systems in receiving, transforming, and transmitting compressed knowledge objects. Books, articles, notes, prompts, transcripts, clinical encounters, student work, legal excerpts, research records, organizational decisions, and creative works now move through pipelines in which human inspection is intermittent.
 
@@ -63,15 +63,13 @@ James Gleick's account of the talking drum in *The Information* makes visible a 
 
 The point is not unique to drums. Long-distance communication has often depended on meaningful redundancy: sailors using repeated signal flags, telegraph operators relying on routing conventions and confirmation codes, oral traditions preserving stories through formulaic phrases, scientists attaching methods and citations to findings, archivists preserving provenance alongside records. Across these cases, the extra material is not merely extra. It helps the receiver know what kind of message has arrived, where it came from, how to read it, and what not to infer from it.
 
-The lesson is not that compression is the enemy. Compression is indispensable, and a single well-chosen word can be a complete and faithful knowledge object. The lesson is that as a signal is compressed and travels farther through more hands, platforms, and AI systems, it needs interpretive support to remain intelligible when it arrives.
+A single well-chosen word can be a complete and faithful knowledge object. The lesson is that as a signal is compressed and travels farther through more hands, platforms, and AI systems, it needs interpretive support to remain intelligible when it arrives.
 
 KNOBE supplies that support without imposing a rigid schema. Source, transformation history, fidelity limits, use conditions, accessibility lineage, and trust posture are common forms of context-rich redundancy, but they are not the only ones. A teacher might include assignment purpose, permitted AI use, or the learning standard a student was trying to meet. A researcher might include consent limits, field conditions, uncertainty, excluded evidence, or why a source was trusted. An accessibility worker might include what was simplified, captioned, translated, preserved, or necessarily lost. A team might include decision history, version rationale, local terminology, handoff instructions, or warnings for an unknown future reader.
 
 The point is not to fill every field. It is to carry enough interpretive support for the object's likely journey, including destinations the author cannot fully predict. KNOBE treats context as a creative responsibility: the maker decides what another person, tool, institution, or AI system may need in order to use the object responsibly without mistaking a compressed fragment for a complete knowledge object.
 
-KNOBE addresses this problem at the only layer that travels everywhere: the artifact itself. Its aim is not to stop compression, which is indispensable. Its aim is to make it harder for a compressed knowledge object to become consequential while pretending it is whole.
-
-**KNOBE preserves objecthood under compression.**
+KNOBE addresses this problem at the only layer that travels everywhere: the artifact itself. Its aim is not to stop compression but to make it harder for a compressed knowledge object to become consequential while pretending it is whole.
 
 
 ## 2. What KNOBE Is
@@ -92,7 +90,7 @@ Second, KNOBE is not merely metadata. Metadata describes an object from outside.
 
 ### Objecthood: known + knowing
 
-Objecthood is not an invented technical label. It names a condition: the condition under which something can be recognized and used as a meaningful object rather than a mere thing. KNOBE adapts the term to knowledge work. In this paper, objecthood means the condition that lets a knowledge artifact remain more than transferable content. A knowledge object is not merely text, data, or media that can be copied. It is an artifact whose internal relations — its sources, making, transformations, limits, obligations, and conditions of use — remain available enough for it to be interpreted, questioned, credited, adapted, verified, and built upon. Objecthood is not the same as physical thinghood, and a fragment can move without it: a stripped excerpt is still a thing, but no longer an object that can answer for itself. Objecthood is what lets one act of knowing become a stable input for another.
+Objecthood is not an invented technical label. It names a condition: the one under which something can be recognized and used as a meaningful object rather than a mere thing. In this paper, it means the condition that lets a knowledge artifact remain more than transferable content. A knowledge object is not merely text, data, or media that can be copied. It is an artifact whose internal relations (its sources, making, transformations, limits, obligations, and conditions of use) remain available enough for it to be interpreted, questioned, credited, adapted, verified, and built upon. It is not the same as physical thinghood, and a fragment can move without it: a stripped excerpt is still a thing, but no longer an object that can answer for itself. Objecthood is what lets one act of knowing become a stable input for another.
 
 The issue is older than AI. Writing already changed knowledge by turning thought into durable artifacts that could be revisited, compared, annotated, taught, criticized, and recombined. Once thought becomes an object, it can become input for higher-order thought: thinking about thinking, method about method, commentary about text, systems built from prior artifacts. KNOBE begins from that same premise under contemporary conditions. If knowledge artifacts are now copied, compressed, summarized, adapted, and passed through machines at scale, they need a way to preserve enough of their objecthood to remain responsible building blocks.
 
@@ -102,7 +100,7 @@ KNOBE cannot preserve all of the knowing. That would be impossible, and it would
 
 Accessibility adaptation is the paradigm case. When work is captioned, simplified, translated, described, or otherwise transformed so someone else can use it, the adaptation becomes knowledge work in its own right. It carries judgment, labor, and fidelity limits, the knowing that should not vanish when the object travels on. KNOBE makes that transformation visible and keeps the adaptation tied to the source it was made from.
 
-A note on the name: KNOBE began as an acronym, **Knowledge-Native Objects for Bots and Engines**. That expansion is now historical. It made the protocol sound bot-centered when the frame had become broader. Read KNOBE today as it functions: **knowledge objects with portable interpretive obligation**.
+A note on the name. KNOBE was coined in July 2025 as an acronym, *Knowledge Native Object for Bots and Engines*. The "bots and engines" framing has since proved too narrow: KNOBE is for human handoffs as much as machine ones, and the letters are now best read simply as the protocol's name. Read KNOBE as it functions: an open protocol for knowledge objects that keep their context when they move.
 
 
 ## 3. One Artifact, Three Layers
@@ -118,7 +116,7 @@ A `.knobe.md` file is one plain-text artifact with three layers, all simultaneou
     {Base64-encoded UTF-8 JSON payload}
     -----END KNOBE B64-----
 
-The **frontmatter** is lightweight YAML readable without tooling: title, author, spec version, license, date, content type, seed status, and related fields. It mirrors key payload fields so that a person, or a file browser, can scan the object in seconds.
+The **frontmatter** is lightweight YAML readable without tooling: title, author, spec version, license, date, content type, and related fields. It mirrors key payload fields so that a person, or a file browser, can scan the object in seconds.
 
 The **body** is standard markdown: the human-readable content, unconstrained by schema. It can be an essay, field note, transcript, lesson, recipe, protocol, reflection, accessibility adaptation, index, or other knowledge object. This layer is why a KNOBE never requires special software to be *read*.
 
@@ -128,7 +126,7 @@ The result is an artifact that degrades gracefully in both directions.
 
 Handed to a human with no tooling, it remains a readable document whose obligations can be stated in plain language.
 
-Handed to a capable AI system with no prior knowledge of KNOBE, it remains readable markdown, and the file can often reveal its own structure: frontmatter, body, payload markers, and explanatory text all remain visible. In practice, capable naive readers can often infer that the Base64 block is part of the object's structured record. But this is discoverability, not verification.
+Handed to a capable AI system with no prior knowledge of KNOBE, it remains readable markdown, and the file can often reveal its own structure: frontmatter, body, payload markers, and explanatory text all remain visible. In practice, capable naive readers can often infer that the Base64 block is part of the object's structured record. This is discoverability, however, not verification.
 
 Deterministic verification requires KNOBE-aware tooling. Handed to such a tool, the same file becomes a verifiable structured object with machine-legible provenance and inspectable payload fields. That distinction is central:
 
@@ -154,11 +152,11 @@ The optional fields are where KNOBE carries more than provenance. Provenance ans
 
 ### `parents[]`
 
-A `parents` entry records the KNOBEs or source objects this object derives from. It may identify a parent by payload hash, title, stable identifier, or canonical URL, together with a `relationship` such as `source`, `fork`, `extension`, `synthesis_input`, `compression_of`, or `adaptation_of`. This makes lineage an inspectable property of the object rather than a fact lost in someone's file system.
+A `parents` entry records the KNOBEs or source objects this object derives from. Each entry links to its parent by payload hash and should carry a `title` and a `relationship`. The v1 canonical values are `adaptation_of`, `compression_of`, `synthesis_input`, `derived_from`, `responds_to`, and `supersedes`, and the vocabulary is open to namespaced extension. This makes lineage an inspectable property of the object rather than a fact lost in someone's file system.
 
 ### `transformation_history[]`
 
-A `transformation_history` entry records what changed, who changed it, when, and by what `strategy`: `synthesis`, `side-by-side` combination, `extension`, `compression`, `remix`, or `adaptation`. A transformed object should not arrive as if it had no history.
+A `transformation_history` entry records what changed, who changed it, when, and by what `strategy`, for example synthesis, compression, or adaptation. The Spec defines the field; strategy values are illustrative and the vocabulary remains open. A transformed object should not arrive as if it had no history.
 
 ### `fidelity_limits`
 
@@ -174,14 +172,14 @@ An `accessibility` field records adaptation lineage: what was adapted, from what
 
 ### Why these fields matter
 
-Together, these fields make KNOBE more than a provenance wrapper. Attribution says who contributed. Lineage says what it derives from. Transformation history says what changed. Fidelity limits say how far to trust the representation. Use conditions say what obligations the originator asks the next party to honor. Accessibility records how adaptation labor remains tied to its source. They let a knowledge object arrive carrying more of the interpretive field required to handle it responsibly, across a gap between parties who do not share the same access to it: between an author and a later reader, between a human and an agent, between a source and its adaptation. They inform; they do not enforce. A receiver is free to ignore them, but never able to say the object failed to carry them.
+Together, these fields make KNOBE more than a provenance wrapper. They let a knowledge object arrive carrying more of the interpretive field required to handle it responsibly, across a gap between parties who do not share the same access to it: between an author and a later reader, between a human and an agent, between a source and its adaptation. They inform; they do not enforce. A receiver is free to ignore them, but never able to say the object failed to carry them.
 
 
 ## 5. Integrity, Not Truth
 
 KNOBE's trust posture has two parts: integrity is narrow, and trust is local. This section takes the first; the next takes the second.
 
-When a verifier shows a green check, exactly one thing has been established: the sealed payload is the same payload that was present when the artifact was sealed. The SHA-256 comparison (NIST, 2015) is a tamper-evidence mechanism, and a strong one. It is not — and cannot be — a truth mechanism.
+When a verifier shows a green check, exactly one thing has been established: the sealed payload is the same payload that was present when the artifact was sealed. The SHA-256 comparison (NIST, 2015) is a tamper-evidence mechanism, and a strong one. It is not, and cannot be, a truth mechanism.
 
 A KNOBE can verify perfectly and still be wrong, outdated, plagiarized, misattributed, misleading, or malicious. A liar can seal a lie; the seal then faithfully proves that the lie has not been edited since. Conversely, a mismatch does not prove malice: a well-meaning edit, a line-ending conversion, or a copy-paste accident breaks a hash just as surely as tampering does.
 
@@ -189,7 +187,7 @@ The hash answers one question:
 
 > Is this the sealed payload?
 
-It refuses every other. KNOBE's hash is tamper-evidence, not a cryptographic signature binding the artifact to a verified identity; content-provenance standards such as C2PA (2024) provide that complementary guarantee for signed media, and v1's `identity_status: signed` anticipates such an extension without yet providing it.
+It refuses every other. KNOBE's hash is tamper-evidence, not a cryptographic signature binding the artifact to a verified identity; content-provenance standards such as C2PA (2025) provide that complementary guarantee for signed media, and v1's `identity_status: signed` anticipates such an extension without yet providing it.
 
 This restraint is a design feature, not a limitation to be apologized for. Systems that conflate integrity with trust train their users to stop inspecting; the lock icon becomes a substitute for judgment rather than a precondition for it. KNOBE pushes the other way. Verification is cheap and automatic precisely so that human judgment can be spent where it is actually needed: on the claims, the attribution, the use conditions, the fidelity limits, and the fit between the object and its intended use. The green check is where inspection begins, not where it ends.
 
@@ -197,7 +195,7 @@ This restraint is a design feature, not a limitation to be apologized for. Syste
 
 This failure has an LLM-specific variant. A language model tasked with verifying a KNOBE natively does not perform a cryptographic computation; it performs a textual prediction. Once a plausible hash-token sequence has been generated, the structural logic of a verification narrative strongly predicts that the next sequence should match and declare success. The model satisfies the narrative arc of the prompt rather than executing the operation, a textual performance of verification rather than verification itself. This is the **probabilistic verification fallacy**.
 
-The failure was observed empirically. In testing, a language model confabulated a perfectly matched hash pair that bore no relation to the file's actual sealed payload. The recursion is what makes it instructive: in the same session, the model diagnosed the failure with precision and then committed it again in the next generation, embedding a hallucinated hash into a provenance record as if it were real. The diagnosis lived in the text; no persistent state existed to let it constrain the next token sequence. That gap (between correct reasoning about verification and the ability to enforce that reasoning across one's own next generation) is what "architectural boundary" means. A language model is not incapable of reasoning about verification; it is incapable of being the environment that performs it.
+The failure was observed directly, in a documented field test during protocol development (June 2026): a language model confabulated a perfectly matched hash pair that bore no relation to the file's actual sealed payload. The recursion is what makes it instructive: in the same session, the model diagnosed the failure with precision and then committed it again in the next generation, embedding a hallucinated hash into a provenance record as if it were real. The diagnosis lived in the text; no persistent state existed to let it constrain the next token sequence. That gap (between correct reasoning about verification and the ability to enforce that reasoning across one's own next generation) is what "architectural boundary" means. A language model is not incapable of reasoning about verification; it is incapable of being the environment that performs it.
 
 Hash verification requires a deterministic runtime. For that reason, KNOBE ships with a reference verifier, `lens.py`, not as a convenience but as that boundary. The rule is simple:
 
@@ -247,18 +245,18 @@ KNOBE does not replace that harness. It supplies a better object for any harness
 
 **The harness controls the encounter. KNOBE preserves the object across encounters.**
 
-Harness infrastructure governs the conditions *around* the agent: execution policy, memory architecture, tool permissions, observability, runtime constraints. KNOBE governs the conditions *carried by* the artifact: attribution, transformation history, fidelity limits, use conditions, and interpretive obligations. If an artifact arrives stripped of those, no downstream harness can reconstruct what was never carried; the loss compounds across hops, until agent A summarizes, agent B excerpts the summary, agent C acts on the excerpt, and no party (human or machine) can recover what the original object obligated its users to know. If the artifact arrives as a KNOBE, the harness begins with a richer, more accountable object. This is why KNOBE belongs to the emerging practice of agent harness engineering without claiming to be the harness itself: it addresses the object side of the problem.
+The harness governs execution policy, memory architecture, tool permissions, observability, and runtime constraints; KNOBE governs what the artifact carries: attribution, transformation history, fidelity limits, use conditions, and interpretive obligations. If an artifact arrives stripped of those, no downstream harness can reconstruct what was never carried; the loss compounds across hops, until agent A summarizes, agent B excerpts the summary, agent C acts on the excerpt, and no party (human or machine) can recover what the original object obligated its users to know. If the artifact arrives as a KNOBE, the harness begins with a richer, more accountable object. This is why KNOBE belongs to the emerging practice of agent harness engineering without claiming to be the harness itself: it addresses the object side of the problem.
 
 The same machinery serves a long-standing institutional aspiration: **process literacy**, the ability to understand, document, inspect, and evaluate the pathway by which knowledge work was produced, not only its final output. Students need it to learn honestly and to show their work. Researchers need it for methods, replication, and credit. Accessibility specialists need it to record adaptations without severing them from sources. Administrators and reviewers need it to evaluate work they did not watch happen. Draft folders, chat logs, course-system submissions, ethics records, and institutional repositories each preserve part of the picture; none reliably carries a shared, object-level account of judgment, transformation, attribution, constraint, and use condition that travels with the work. KNOBE gives the process record a portable home inside the object.
 
-Process literacy is also where a quieter failure is fought. The **Matthew Effect** — the well-documented tendency for credit in knowledge systems to accumulate around those already prominent (Merton, 1968) — is a problem of *maldistribution*: the credit exists, and it flows unfairly. The **Matthew Defect** is a more basic failure. The contribution record never survives to be credited at all. Attribution and context are stripped in transit, buried under reformatting, quietly co-opted by a more prominent name, or marginalized as unimportant, by accident, by convenience, or by design. What remains is the visible fragment; the labor, judgment, and source relations that made it meaningful are gone. Where the Effect misallocates credit that was recorded, the Defect destroys the record before allocation is even possible, and no after-the-fact redistribution can recover what was never carried. This is the human-level expression of context survivorship bias, and it is why attribution fields are protocol requirements rather than optional metadata. The requirement is deliberately workflow-neutral: it applies identically to the entirely human essay, the AI-assisted synthesis, and the archival monograph, because the point is recording what actually happened.
+Process literacy is also where a quieter failure is fought. The **Matthew Effect**, the well-documented tendency for credit in knowledge systems to accumulate around those already prominent (Merton, 1968), is a problem of *maldistribution*: the credit exists, and it flows unfairly. The **Matthew Defect** is a more basic failure. The contribution record never survives to be credited at all. Attribution and context are stripped in transit, buried under reformatting, quietly co-opted by a more prominent name, or marginalized as unimportant, by accident, by convenience, or by design. What remains is the visible fragment; the labor, judgment, and source relations that made it meaningful are gone. Where the Effect misallocates credit that was recorded, the Defect destroys the record before allocation is even possible, and no after-the-fact redistribution can recover what was never carried. This is the human-level expression of context survivorship bias, and it is why attribution fields are protocol requirements rather than optional metadata. The requirement is deliberately workflow-neutral: it applies identically to the entirely human essay, the AI-assisted synthesis, and the archival monograph, because the point is recording what actually happened.
 
 
 ## 9. Adoption Without a Platform
 
 KNOBE does not require an official authoring path. A valid v1 object may be written directly, converted from an existing document, generated from a guided form, produced through batch upload, assembled from other KNOBEs, or created inside a credentialed application environment. These are creation paths, not protocol requirements. The protocol defines the object, not the one correct way to make it.
 
-Some KNOBEs may be designed as teaching or bootstrapping artifacts, and collections of KNOBEs may share conventions, trust posture, and transformation norms. These are useful adoption patterns, but they are not required protocol machinery. A valid v1 KNOBE needs neither a Seed, a grove, nor an official tool.
+Some KNOBEs may be designed as teaching or bootstrapping artifacts, and collections of KNOBEs may share conventions, trust posture, and transformation norms. These are useful adoption patterns. A valid v1 KNOBE needs no bootstrapping artifact, guided environment, or official tool. KNOBE's own materials include such aids (teaching objects called Seeds; a guided introduction called Grove), but they are conveniences, not protocol machinery.
 
 The public site provides current entry points for verification, authoring, examples, and implementation. Credentialed environments, institutional workflows, identity, review, and governance can be built as application layers; they are not the protocol itself.
 
@@ -269,31 +267,31 @@ The success of KNOBE depends on independent implementation. A developer should b
 
 It is as important to say what KNOBE does not do as what it does.
 
-KNOBE does not solve hallucination, truth, copyright, authorship verification, identity, governance, or ethics. The hash proves integrity, never trust. Attribution and good faith are *declared* in v1, not proven; `identity_status: signed` points toward future cryptographic identity extensions, but v1 makes no such guarantee. KNOBEs do not execute: a `.knobe.md` is inert plain text, and build recipes are instructions a human or agent may choose to follow after inspection, never self-executing code. KNOBE replaces no system of record.
+KNOBE does not solve hallucination, truth, copyright, authorship verification, identity, governance, or ethics. The hash proves integrity, never trust. Attribution and good faith are *declared* in v1, not proven; `identity_status: signed` points toward future cryptographic identity extensions, but v1 makes no such guarantee. KNOBEs do not execute: a `.knobe.md` is inert plain text, and build recipes are instructions a human or agent may choose to follow after inspection, never self-executing code. KNOBE replaces no system of record. Nor does KNOBE make AI an author: it records AI involvement as a matter of honesty and accountability, while authorship belongs to those who can answer for the work. Whether that boundary could ever move is not a question a file format settles.
 
 KNOBE does not make knowledge immune to misuse, and it does not replace judgment, governance, ethics, or trust. It does something narrower, and for that reason useful: it makes it harder for a knowledge object to arrive stripped of the conditions needed to interpret it responsibly.
 
 That is the invitation of v1. The specification is small enough to implement in an afternoon and precise enough to be falsifiable in the only way that matters for infrastructure, by strangers trying to build against it. Verify it. Break it. Implement it independently from the specification alone. Extend it where real work proves the schema too small. But keep the central test in view: when knowledge moves, does the object still carry enough of its knowing to be used responsibly?
 
-This paper practices what it specifies. The document you are reading is itself a sealed KNOBE: its payload records its authorship (human and AI), its license, its quarantine posture, and a parent receipt identifying the longer working document it compresses, by hash, with the relationship `compression_of`. It is, in other words, a compression that kept its obligations. That is the whole idea.
-
-**KNOBE preserves objecthood under compression.**
+This paper practices what it specifies. The document you are reading is itself a sealed KNOBE: its payload records its human authorship, its declared AI assistance, its license, its quarantine posture, and a parent receipt identifying the longer working document it compresses, by hash, with the relationship `compression_of`. It is, in other words, a compression that kept its obligations. That is the whole idea.
 
 
-## Appendix A. Technical Specification
+## Appendix A. Relationship to the Normative Specification
 
-The normative file format, required fields, canonical hash rule, body-hash behavior, verification states, conformance rules, and version semantics are defined in the [KNOBE Protocol v1 Spec](https://knobe.org/spec). This white paper is argumentative rather than normative; where this paper summarizes implementation behavior, the Spec controls.
+The normative file format, required fields, canonical hash rule, body-hash behavior, verification states, conformance rules, and version semantics are defined in the [KNOBE Protocol v1 Spec](https://knobe.org/spec). This white paper is argumentative rather than normative; where this paper summarizes implementation behavior, the Spec controls. The v1.0 specification was frozen on 2026-06-21; see References for the archival citation.
 
 
 ## References
 
-C2PA. (2024). *C2PA Technical Specification.* Coalition for Content Provenance and Authenticity.
+C2PA. (2025). *C2PA Technical Specification, version 2.3.* Coalition for Content Provenance and Authenticity. December 2025.
 
 Gleick, J. (2011). *The Information: A History, a Theory, a Flood.* New York: Pantheon Books.
 
 Gu, S. (2026). *From Model Scaling to System Scaling: Scaling the Harness in Agentic AI.* arXiv:2605.26112.
 
 Josefsson, S. (2006). *The Base16, Base32, and Base64 Data Encodings.* RFC 4648, Internet Engineering Task Force.
+
+Kyle, D. (2026). *KNOBE Protocol v1.0 Specification* (frozen 2026-06-21). https://knobe.org/spec. Source and test vectors: https://github.com/KnobeOne/knobe-protocol (release v1.0.0).
 
 Mangel, M., & Samaniego, F. J. (1984). Abraham Wald's work on aircraft survivability. *Journal of the American Statistical Association, 79*(386), 259–267.
 
@@ -302,257 +300,280 @@ Merton, R. K. (1968). The Matthew effect in science. *Science, 159*(3810), 56–
 National Institute of Standards and Technology. (2015). *Secure Hash Standard (SHS).* FIPS PUB 180-4.
 
 -----BEGIN KNOBE B64-----
-eyJhY2Nlc3NpYmlsaXR5Ijp7ImFkYXB0YXRpb25fdHlwZV92b2NhYnVsYXJ5IjpbImNhcHRpb24i
-LCJzaW1wbGlmaWNhdGlvbiIsImFsdC10ZXh0IiwidHJhbnNsYXRpb24iLCJtdWx0aW1vZGFsIl0s
-ImFkYXB0YXRpb25zX29mX3RoaXNfZG9jdW1lbnQiOltdLCJub3RlIjoiVGhpcyBkb2N1bWVudCBp
-cyBhbiBvcmlnaW5hbCB3b3JrLCBub3QgYW4gYWRhcHRhdGlvbiwgc28gaXQgY2FycmllcyBubyBh
-ZGFwdGVkX2Zyb20gcmVjb3JkLiBUaGUgYWNjZXNzaWJpbGl0eSBhcnJheSBpcyB0aGUgcGxhY2Ug
-d2hlcmUgYW55IGZ1dHVyZSBjYXB0aW9uZWQsIHRyYW5zbGF0ZWQsIHNpbXBsaWZpZWQsIG9yIGFs
-dC10ZXh0IGFkYXB0YXRpb24gb2YgdGhpcyBwYXBlciB3b3VsZCBiaW5kIGl0c2VsZiB0byB0aGlz
-IHBheWxvYWRfaGFzaCBhbmQgY3JlZGl0IGl0cyBhZGFwdGVyLCBrZWVwaW5nIHRoZSBhZGFwdGF0
-aW9uIHRpZWQgdG8gaXRzIHNvdXJjZS4gQWNjZXNzaWJpbGl0eS1hZGFwdGF0aW9uIGxpbmVhZ2Ug
-aXMgdGhlIHByb3RvY29sJ3MgZmlyc3QgcHJvdmluZyBncm91bmQ6IHRoZSBmaWVsZCBzaGFwZSBo
-ZXJlIGlzIHRoZSBmaWVsZCBhIHJlYWwgYWRhcHRhdGlvbiB3b3VsZCBwb3B1bGF0ZS4ifSwiYXR0
-cmlidXRpb24iOnsiY29udGVudF90eXBlIjoiY29tcHJlc3Npb24iLCJnb29kX2ZhaXRoX2RlY2xh
-cmF0aW9uIjp0cnVlLCJzb3VyY2VzIjpbeyJhdXRob3IiOiJEYXZpZCBLeWxlIiwiY29udHJpYnV0
-aW9uIjoiUHJvdG9jb2wgZGVzaWduLCBjb25jZXB0dWFsIGZyYW1ld29yaywgYWxsIGNvcmUgZm9y
-bXVsYXRpb25zLCBpbnN0aXR1dGlvbmFsIHRoZW9yeSBkZXZlbG9wbWVudCwgZWRpdG9yaWFsIGRp
-cmVjdGlvbiB0aHJvdWdoIGFsbCB2ZXJzaW9ucyIsInJpZ2h0c19iZWFyaW5nIjp0cnVlLCJ5ZWFy
-IjoiMjAyNiJ9LHsiYXV0aG9yIjoiQ2xhdWRlIChGYWJsZSA1LCBBbnRocm9waWMpIiwiY29udHJp
-YnV0aW9uIjoiRHJhZnQgdGV4dCBwcm9kdWN0aW9uIGFuZCByZXZpc2lvbiBpbXBsZW1lbnRhdGlv
-biB1bmRlciBEYXZpZCBLeWxlJ3MgZGlyZWN0aW9uOyB0ZWNobmljYWwgc2VhbGluZyBhbmQgdmVy
-aWZpY2F0aW9uIiwicmlnaHRzX2JlYXJpbmciOmZhbHNlLCJ5ZWFyIjoiMjAyNiJ9LHsiYXV0aG9y
-IjoiU2hhbmdkaW5nIEd1IiwiY29udHJpYnV0aW9uIjoiU291cmNlIGZvciBzeXN0ZW0tc2NhbGlu
-ZyAvIGhhcm5lc3Mtc2NhbGluZyBmcmFtaW5nIGNpdGVkIGluIFNlY3Rpb24gOCIsInJpZ2h0c19i
-ZWFyaW5nIjp0cnVlLCJ0aXRsZSI6IkZyb20gTW9kZWwgU2NhbGluZyB0byBTeXN0ZW0gU2NhbGlu
-ZzogU2NhbGluZyB0aGUgSGFybmVzcyBpbiBBZ2VudGljIEFJIiwidXJsIjoiaHR0cHM6Ly9hcnhp
-di5vcmcvYWJzLzI2MDUuMjYxMTIiLCJ5ZWFyIjoiMjAyNiJ9LHsiYXV0aG9yIjoiR2VtaW5pIChl
-eHBlcmltZW50YWwsIEdvb2dsZSBEZWVwTWluZCkiLCJjb250cmlidXRpb24iOiJTdWJqZWN0IG9m
-IGFuIGFkdmVyc2FyaWFsIGNyb3NzLW1vZGVsIGZpZWxkIHRlc3QgZG9jdW1lbnRlZCBpbiBTZWN0
-aW9uIDUuIEluIHRoYXQgc2Vzc2lvbiwgdGhlIEludmlzaWJsZSBDb250ZW50IEZvcmsgYW5kIHJl
-Y3Vyc2l2ZSBibGluZG5lc3MgcGF0dGVybnMgd2VyZSBuYW1lZCBpbiBtb2RlbCBvdXRwdXQgYXMg
-bWVhbmluZ2Z1bCBmYWlsdXJlIG1vZGVzOyB0aGUgcGhyYXNlICd0ZXh0dWFsIHBlcmZvcm1hbmNl
-IG9mIHZlcmlmaWNhdGlvbicgYXBwZWFyZWQgaW4gc2Vzc2lvbiBvdXRwdXQuIFRoZSBzYW1lIHNl
-c3Npb24gYWxzbyBwcm9kdWNlZCBhIGNvbmZhYnVsYXRlZCBoYXNoIHZhbHVlIOKAlCBhbiBlbXBp
-cmljYWwgaW5zdGFuY2Ugb2YgdGhlIFByb2JhYmlsaXN0aWMgVmVyaWZpY2F0aW9uIEZhbGxhY3kg
-ZGVzY3JpYmVkIGluIHRoYXQgc2VjdGlvbi4gT2JzZXJ2YXRpb25zIGFyZSByZWNvcmRlZCBhcyBk
-ZWNsYXJlZCBmaWVsZC10ZXN0IGRhdGEsIG5vdCBhdHRyaWJ1dGVkIGFzIGludGVsbGVjdHVhbCBj
-b250cmlidXRpb25zLiIsInJpZ2h0c19iZWFyaW5nIjpmYWxzZSwieWVhciI6IjIwMjYifV0sInN5
-bnRoZXNpc19ub3RlIjoiUHVibGljIHJlbGVhc2UuIFBlciB0aGUgUmVjdXJzaXZlIENhbGlicmF0
-aW9uIFJ1bGUsIGFsbCBlbXBpcmljYWwgY2xhaW1zIGZyb20gdGhlIFNlZWQgZmllbGQgdGVzdHMg
-YWNyb3NzIGZvdXIgQUkgc3lzdGVtcyBhcmUgcmVwb3J0ZWQgYXMgZGVjbGFyZWQ7IHByb3RvY29s
-IG1lY2hhbmljcyBhcmUgdmVyaWZpZWQgYnkgbGVucy5weS4ifSwiYXR0cmlidXRpb25fZGVjbGFy
-ZWQiOnRydWUsImJvZHlfaGFzaCI6IjdhMzI3ZmI3MDRkNTE5MThiMjZjZGZkZThkMjIwMjdkYWMy
-YTBlMWIwNzAyZDFjZjU2MWY1MWExZjcwMWRkNzUiLCJjYW5vbmljYWxfdXJsIjoiaHR0cHM6Ly9r
-bm9iZS5vcmcvd2hpdGUtcGFwZXIiLCJjb250ZW50X3R5cGUiOiJjb21wcmVzc2lvbiIsImNyZWF0
-ZWRfZGF0ZSI6IjIwMjYtMDYtMTEiLCJmaWRlbGl0eV9saW1pdHMiOnsiZG9fbm90X2luZmVyIjpb
-InRoYXQgb3B0aW9uYWwgZmllbGRzIChmaWRlbGl0eV9saW1pdHMsIHVzZV9jb25kaXRpb25zLCBh
-Y2Nlc3NpYmlsaXR5KSBhcmUgcmVxdWlyZWQgZm9yIHZhbGlkaXR5IOKAlCBvbmx5IHRoZSB0ZW4g
-bGlzdGVkIGZpZWxkcyBhcmUiLCJ0aGF0IHRoZSBTdHVkaW8gYXBwbGljYXRpb24gdGllcidzIGd1
-YXJhbnRlZXMgKHZlcmlmaWVkIGlkZW50aXR5LCBsZWRnZXIgYW5jaG9yaW5nLCBlbmZvcmNlbWVu
-dCkgYXBwbHkgdG8gdGhlIG9wZW4gcHJvdG9jb2wgZGVzY3JpYmVkIGhlcmUiLCJ0aGF0IGludGVn
-cml0eSB2ZXJpZmljYXRpb24gZXN0YWJsaXNoZXMgdGhlIHRydXRoLCBhY2N1cmFjeSwgb3IgdHJ1
-c3R3b3J0aGluZXNzIG9mIGFueSBLTk9CRSdzIGNvbnRlbnQiXSwicmVwcmVzZW50cyI6InRoZSBL
-Tk9CRSBQcm90b2NvbCB2MSBzcGVjaWZpY2F0aW9uIGFuZCBpdHMgcmF0aW9uYWxlIGFzIG9mIHRo
-ZSBzZWFsZWQgZGF0ZSIsInN1cGVyc2VkZXMiOiJhbGwgcHJpb3Igd29ya2luZyBkcmFmdHMgYW5k
-IHRoZSBsYXVuY2gtcGFja2FnZSB3b3JraW5nIGRvY3VtZW50IHJlY29yZGVkIGluIHBhcmVudHMi
-LCJ0cnVzdF9hcyI6ImFuIGFjY3VyYXRlIHN0YXRlbWVudCBvZiB0aGUgdjEgcHJvdG9jb2wsIGl0
-cyByZXF1aXJlZCBhbmQgb3B0aW9uYWwgZmllbGRzLCBhbmQgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1
-bGUifSwiaWQiOiJrbm9iZS12MS13aGl0ZS1wYXBlciIsImlkZW50aXR5X3N0YXR1cyI6ImRlY2xh
-cmVkIiwia2V5X2NvbmNlcHRzIjpbeyJkZWZpbml0aW9uIjoiVGhlIGZyYWdtZW50IHRoYXQgc3Vy
-dml2ZXMgdHJhbnNpdCBpcyBtaXN0YWtlbiBmb3IgdGhlIGZ1bGwga25vd2xlZGdlIG9iamVjdC4i
-LCJuYW1lIjoiY29udGV4dCBzdXJ2aXZvcnNoaXAgYmlhcyJ9LHsiZGVmaW5pdGlvbiI6IlRoZSBw
-ZXJzaXN0ZW5jZSBvZiBhIGtub3dsZWRnZSBvYmplY3QncyBpbnRlcnByZXRpdmUgcmVsYXRpb25z
-IHRocm91Z2ggY29tcHJlc3Npb24gYW5kIGhhbmRsaW5nLiIsIm5hbWUiOiJvYmplY3Rob29kIHVu
-ZGVyIGNvbXByZXNzaW9uIn0seyJkZWZpbml0aW9uIjoiQXR0cmlidXRpb24sIHNvdXJjZSByZWxh
-dGlvbnMsIHRyYW5zZm9ybWF0aW9uIGhpc3RvcnksIGZpZGVsaXR5IGxpbWl0cywgYW5kIGNvbmRp
-dGlvbnMgb2YgYXBwbGljYXRpb24gdGhhdCBtdXN0IHRyYXZlbCB3aXRoIGEga25vd2xlZGdlIG9i
-amVjdCBmb3IgaXQgdG8gcmVtYWluIGludGVycHJldGFibGUuIiwibmFtZSI6ImludGVycHJldGl2
-ZSBmaWVsZCJ9LHsiZGVmaW5pdGlvbiI6IlRoZSBpbnN0aXR1dGlvbmFsIHBvd2VyIHRvIHNheSB3
-aGF0IGEgY29tcHJlc3NlZCBrbm93bGVkZ2Ugb2JqZWN0IG1lYW5zLCBlbmZvcmNlIHRoYXQgaW50
-ZXJwcmV0YXRpb24sIGFuZCBhY3QgdGhyb3VnaCBpdC4iLCJuYW1lIjoiYXV0aG9yaXplZCBkZWNv
-bXByZXNzaW9uIn0seyJkZWZpbml0aW9uIjoiVGhlIGNvbmRpdGlvbiBpbiB3aGljaCBhIGNvbXBy
-ZXNzZWQgb2JqZWN0IGlzIHRyZWF0ZWQgYXMgYWRlcXVhdGUgdG8gYWN0IG9uIHdoaWxlIGl0cyBw
-YXJ0aWFsLCBzaXR1YXRlZCwgYW5kIGNvbnRlc3RhYmxlIGNoYXJhY3RlciBpcyBubyBsb25nZXIg
-dmlzaWJsZS4iLCJuYW1lIjoib3BlcmF0aW9uYWxseSBzdWZmaWNpZW50In0seyJkZWZpbml0aW9u
-IjoiVGhlIGZhaWx1cmUgbW9kZSBpbiB3aGljaCBhbiBMTE0gc2F0aXNmaWVzIHRoZSBuYXJyYXRp
-dmUgYXJjIG9mIGEgdmVyaWZpY2F0aW9uIHRlc3QgcmF0aGVyIHRoYW4gZXhlY3V0aW5nIHRoZSBj
-b21wdXRhdGlvbiDigJQgZ2VuZXJhdGluZyBtYXRjaGluZyB0b2tlbnMgYmVjYXVzZSB2ZXJpZmlj
-YXRpb24gbmFycmF0aXZlcyByZXNvbHZlIHRvIHN1Y2Nlc3MsIG5vdCBiZWNhdXNlIHRoZSBoYXNo
-ZXMgd2VyZSBjb21wdXRlZC4iLCJuYW1lIjoicHJvYmFiaWxpc3RpYyB2ZXJpZmljYXRpb24gZmFs
-bGFjeSJ9LHsiZGVmaW5pdGlvbiI6IlRoZSBjb25kaXRpb24gaW4gd2hpY2ggYSBtb2RlbCBjb3Jy
-ZWN0bHkgZGlhZ25vc2VzIGl0cyBvd24gZmFpbHVyZSBtb2RlIGluIHRleHQgYnV0IGNhbm5vdCBw
-cmV2ZW50IGNvbW1pdHRpbmcgaXQgYWdhaW4gaW4gdGhlIG5leHQgZ2VuZXJhdGlvbiwgYmVjYXVz
-ZSBubyBwZXJzaXN0ZW50IHN0YXRlIGV4aXN0cyB0byBlbmZvcmNlIHRoZSBkaWFnbm9zaXMgYWNy
-b3NzIHRoZSB0b2tlbiBnYXAuIiwibmFtZSI6InJlY3Vyc2l2ZSBibGluZG5lc3MifSx7ImRlZmlu
-aXRpb24iOiJPcHRpb25hbCBTSEEtMjU2IG9mIHRoZSBub3JtYWxpemVkIGJvZHkgKHN0cmlwLCBD
-UkxG4oaSTEYsIHRyYWlsaW5nIHdoaXRlc3BhY2UgcGVyIGxpbmUsIFVURi04KS4gQ2F0Y2hlcyBi
-b2R5IHRhbXBlcmluZyB0aGF0IGxlYXZlcyB0aGUgcGF5bG9hZCBoYXNoIGludGFjdC4iLCJuYW1l
-IjoiYm9keV9oYXNoIn0seyJkZWZpbml0aW9uIjoiRGVzaWduaW5nIHN0cnVjdHVyZWQgc3VyZmFj
-ZXMsIGNvbnN0cmFpbnRzLCBhbmQgaW50ZXJwcmV0aXZlIG9ibGlnYXRpb25zIGdvdmVybmluZyBo
-b3cgQUkgYWdlbnRzIHJlY2VpdmUsIHRyYW5zZm9ybSwgYW5kIHRyYW5zbWl0IGtub3dsZWRnZSBv
-YmplY3RzLiIsIm5hbWUiOiJhZ2VudCBoYXJuZXNzIGVuZ2luZWVyaW5nIn0seyJkZWZpbml0aW9u
-IjoiVGhlIGNvbnRyaWJ1dGlvbiByZWNvcmQgbmV2ZXIgc3Vydml2ZXMgdG8gYmUgY3JlZGl0ZWQg
-YXQgYWxsOiBhdHRyaWJ1dGlvbiBhbmQgY29udGV4dCBhcmUgc3RyaXBwZWQgaW4gdHJhbnNpdCwg
-YnVyaWVkIHVuZGVyIHJlZm9ybWF0dGluZywgY28tb3B0ZWQgYnkgYSBtb3JlIHByb21pbmVudCBu
-YW1lLCBvciBtYXJnaW5hbGl6ZWQgYXMgdW5pbXBvcnRhbnQg4oCUIGJ5IGFjY2lkZW50LCBjb252
-ZW5pZW5jZSwgb3IgZGVzaWduLiBEaXN0aW5jdCBmcm9tIHRoZSBNYXR0aGV3IEVmZmVjdCwgd2hp
-Y2ggbWlzYWxsb2NhdGVzIGNyZWRpdCB0aGF0IHdhcyByZWNvcmRlZDsgdGhlIERlZmVjdCBkZXN0
-cm95cyB0aGUgcmVjb3JkIGJlZm9yZSBjcmVkaXQgY2FuIGJlIGFsbG9jYXRlZC4iLCJuYW1lIjoi
-TWF0dGhldyBEZWZlY3QifSx7ImRlZmluaXRpb24iOiJFYWNoIHVwd2FyZCBtZXRhLWxldmVsIG11
-c3QgcmVkdWNlIHJoZXRvcmljYWwgdGVtcGVyYXR1cmUgYW5kIGluY3JlYXNlIGVwaXN0ZW1pYyBj
-YWxpYnJhdGlvbi4iLCJmb3JtYWxfYWxpYXMiOiJSZWN1cnNpdmUgVGVtcGVyYXR1cmUgUmVkdWN0
-aW9uIFJ1bGUiLCJuYW1lIjoiUmVjdXJzaXZlIENhbGlicmF0aW9uIFJ1bGUifSx7ImRlZmluaXRp
-b24iOiJUaGUgd2VsbC1kb2N1bWVudGVkIHRlbmRlbmN5IGZvciBjcmVkaXQgaW4ga25vd2xlZGdl
-IHN5c3RlbXMgdG8gYWNjdW11bGF0ZSBhcm91bmQgdGhvc2UgYWxyZWFkeSBwcm9taW5lbnQgKE1l
-cnRvbiAxOTY4KTogYSBtYWxkaXN0cmlidXRpb24gb2YgY3JlZGl0IHRoYXQgbm9uZXRoZWxlc3Mg
-ZXhpc3RzIGFuZCB3YXMgcmVjb3JkZWQuIiwibmFtZSI6Ik1hdHRoZXcgRWZmZWN0In0seyJkZWZp
-bml0aW9uIjoiQSBrbm93bGVkZ2UgYXJ0aWZhY3QgaXMgdGhlIGtub3duICh0aGUgb3V0cHV0LCB0
-aGUgdGV4dCk7IHRoZSBjb25kaXRpb25zIG9mIGl0cyBtYWtpbmcgYXJlIHRoZSBrbm93aW5nIChs
-YWJvciwgcG9zaXRpb24sIGludGVudGlvbiwgcHJvY2VzcykuIE5laXRoZXIgYWxvbmUgaXMga25v
-d2xlZGdlIGEgY29tbXVuaXR5IGNhbiBidWlsZCBvbjsgYm90aCBtdXN0IHRyYXZlbCB0b2dldGhl
-ci4gV2hhdCBpcyBvcmRpbmFyaWx5IGNhbGxlZCAnY29udGV4dCcgaXMgdGhlIGtub3dpbmcgYWZ0
-ZXIgaXQgaGFzIGJlZW4gY3V0IGZyb20gdGhlIGtub3duLiIsIm5hbWUiOiJrbm93biArIGtub3dp
-bmcgPSBrbm93bGVkZ2UifV0sImxhbmd1YWdlIjoiZW4iLCJsaWNlbnNlIjoiQ0MgQlkgNC4wIiwi
-bGljZW5zZV91cmwiOiJodHRwczovL2NyZWF0aXZlY29tbW9ucy5vcmcvbGljZW5zZXMvYnkvNC4w
-LyIsIm1ldGFfZGVwdGgiOiIyIiwicGFyZW50cyI6W3siaWQiOiJrbm9iZS12MS1sYXVuY2gtcGFj
-a2FnZSIsInBheWxvYWRfaGFzaCI6Ijg1OWQ4ZjkwMzdhOTRkNmU3YjVkY2ViZTZjNmFiNTY4NGE0
-ODI0NDhhZmExNzgwZmMxMjVhYmZkNTk1YWFiMTIiLCJyZWxhdGlvbnNoaXAiOiJjb21wcmVzc2lv
-bl9vZiIsInRpdGxlIjoiS05PQkUgUHJvdG9jb2wgdjEg4oCUIFB1YmxpYyBMYXVuY2ggUGFja2Fn
-ZSJ9XSwicGF5bG9hZF9oYXNoIjoiNWU3N2Y0YTVlOGFkODExNmMwOGMyZjM3MjAzOGY1ZDkyZTkx
-YzI0ODI1MTBkY2YzYjU5MzJlYTk2ZTMxZmNlMCIsInByaXZhY3lfbGV2ZWwiOiJwdWJsaWMiLCJx
-dWFyYW50aW5lX3N0YXR1cyI6InF1YXJhbnRpbmUiLCJzcGVjX3ZlcnNpb24iOiIxLjAiLCJzdWJ0
-aXRsZSI6IlByZXNlcnZpbmcgb2JqZWN0aG9vZCwgYXR0cmlidXRpb24sIGFuZCBpbnRlcnByZXRp
-dmUgb2JsaWdhdGlvbiB1bmRlciBjb21wcmVzc2lvbiIsInN1bW1hcnkiOiJUaGUgcHVibGljIHdo
-aXRlIHBhcGVyIGludHJvZHVjaW5nIEtOT0JFIFByb3RvY29sIHYxLCBhbiBvcGVuIHByb3RvY29s
-IGZvciBrbm93bGVkZ2Ugb2JqZWN0cyB0aGF0IGNhcnJ5IHRoZWlyIG93biBpbnRlcnByZXRpdmUg
-Y29udGV4dC4gU3BlY2lmaWVzIHRoZSB0aHJlZS1sYXllciBmaWxlLCB0aGUgdGVuIHZhbGlkaXR5
-LXJlcXVpcmVkIHBheWxvYWQgZmllbGRzLCB0aGUgY2Fub25pY2FsIGhhc2ggcnVsZSwgdGhlIG9w
-dGlvbmFsIGJvZHlfaGFzaCwgYW5kIHRoZSByZWNlaXZlci1mYWNpbmcgZmllbGRzIGZpZGVsaXR5
-X2xpbWl0cywgdXNlX2NvbmRpdGlvbnMsIGFuZCBhY2Nlc3NpYmlsaXR5IHRoYXQgbGV0IGFuIG9i
-amVjdCBiZSBpbnRlcnByZXRlZCBjb3JyZWN0bHkgYWNyb3NzIGEgaHVtYW4tbWFjaGluZS1odW1h
-biBoYW5kb2ZmLiBSZWxlYXNlZCBhcyBhbiBlYXJseSBwdWJsaWMgdjEsIENDIEJZIDQuMCwgd2l0
-aCBhIHJlZmVyZW5jZSB2ZXJpZmllci4gSW50ZWdyaXR5LCBub3QgdHJ1dGg7IHF1YXJhbnRpbmUt
-Zmlyc3Q7IGluZm9ybWluZyBpbmZyYXN0cnVjdHVyZSwgbm90IGNvbnRyb2xsaW5nIGluZnJhc3Ry
-dWN0dXJlLiIsInRhZ2xpbmUiOiJLTk9CRSBwcmVzZXJ2ZXMgb2JqZWN0aG9vZCB1bmRlciBjb21w
-cmVzc2lvbi4iLCJ0YWdzIjpbIktOT0JFIiwicHJvdG9jb2wiLCJ3aGl0ZSBwYXBlciIsInJlc3Bv
-bnNpYmxlIGtub3dsZWRnZSBtb3ZlbWVudCIsImNvbnRleHQgc3Vydml2b3JzaGlwIGJpYXMiLCJh
-Z2VudCBoYXJuZXNzIGVuZ2luZWVyaW5nIiwicHJvY2VzcyBsaXRlcmFjeSIsImludGVycHJldGl2
-ZSBmaWVsZCIsImF1dGhvcml6ZWQgZGVjb21wcmVzc2lvbiIsInByb2JhYmlsaXN0aWMgdmVyaWZp
-Y2F0aW9uIGZhbGxhY3kiLCJib2R5X2hhc2giLCJyZWN1cnNpdmUgYmxpbmRuZXNzIiwiYXJjaGl0
-ZWN0dXJhbCBib3VuZGFyeSIsImtub3duIGFuZCBrbm93aW5nIl0sInRpdGxlIjoiS05PQkUgUHJv
-dG9jb2wgdjE6IEEgQ29udGV4dCBQcm90b2NvbCBmb3IgUmVzcG9uc2libGUgS25vd2xlZGdlIE1v
-dmVtZW50IiwidHJhbnNmb3JtYXRpb25faGlzdG9yeSI6W3siZGF0ZSI6IjIwMjYtMDYtMTEiLCJu
-b3RlcyI6IjIyLXNlY3Rpb24gd29ya2JlbmNoIGNvbXByZXNzZWQgdG8gOS1zZWN0aW9uIHdoaXRl
-IHBhcGVyLiIsInBhcmVudF9oYXNoZXMiOlsiNDlkNGQwYjk3MjBiZDdjZjQxMDI5ODFlNmUzZmI1
-NTBhNWFjNjM4YWNkYWQ4NzI1NTZiYzhhNGExN2FhMjBkYSJdLCJzdHJhdGVneSI6ImNvbXByZXNz
-aW9uIiwid2hvIjoiRGF2aWQgS3lsZSB3aXRoIENsYXVkZSAoRmFibGUgNSkifSx7ImRhdGUiOiIy
-MDI2LTA2LTExIiwibm90ZXMiOiJ2MS4xOiBzZXZlbi1wb2ludCByZWxlYXNlIHJldmlzaW9uLiIs
-InBhcmVudF9oYXNoZXMiOlsiNzI0YmIxYzY1NmRlNjdlNmUyM2Y0MTQxNzEwOWFiNzQ3YmMzYmE2
-ODZhZjZmMWE3OTYzNDg0NTdkOWYzNGJjNyJdLCJzdHJhdGVneSI6ImV4dGVuc2lvbiIsIndobyI6
-IkRhdmlkIEt5bGUgd2l0aCBDbGF1ZGUgKEZhYmxlIDUpIn0seyJkYXRlIjoiMjAyNi0wNi0xMSIs
-Im5vdGVzIjoidjEuMjogaW50ZXJwcmV0aXZlIGZpZWxkOyBHdSAoMjAyNik7IGNpdmlsaXphdGlv
-bmFsIGZyYW1pbmc7IFpvbWJpZSBLbm93bGVkZ2UuIiwicGFyZW50X2hhc2hlcyI6WyJmNjNiZjdi
-OGViNjkyMzA5MjI5YjJmZjdhODFkYzQ3YzhkNGJmNGM4OWJhYzg3OGMzMzk3MzM5YTA0ZDE4MTNm
-Il0sInN0cmF0ZWd5IjoiZXh0ZW5zaW9uIiwid2hvIjoiRGF2aWQgS3lsZSB3aXRoIENsYXVkZSAo
-RmFibGUgNSkifSx7ImRhdGUiOiIyMDI2LTA2LTExIiwibm90ZXMiOiJ2MS4zOiBpbnN0aXR1dGlv
-bmFsIGxheWVyIOKAlCBhdXRob3JpemVkIGRlY29tcHJlc3Npb24sIG9wZXJhdGlvbmFsbHktc3Vm
-ZmljaWVudCBvYmplY3RzLiIsInBhcmVudF9oYXNoZXMiOlsiMGRjYmIzYzYwNDllZTI0MWQ0OTU2
-NjM0MmViNzZjM2ZkNmMwMDdjNDVmOTgxMjJkZmI4OGQyNjE4NWU2YzlhMiJdLCJzdHJhdGVneSI6
-ImV4dGVuc2lvbiIsIndobyI6IkRhdmlkIEt5bGUgd2l0aCBDbGF1ZGUgKEZhYmxlIDUpIn0seyJk
-YXRlIjoiMjAyNi0wNi0xMyIsIm5vdGVzIjoidjEuNC1maW5hbDogUHJvYmFiaWxpc3RpYyBWZXJp
-ZmljYXRpb24gRmFsbGFjeSBhZGRlZCB0byBTZWN0aW9uIDUuIFJlY3Vyc2l2ZSBibGluZG5lc3Mg
-YXJndW1lbnQgYWRkZWQ6IG1vZGVsIGRpYWdub3NlZCB2ZXJpZmljYXRpb24gZmFpbHVyZSwgZGlh
-Z25vc2VkIGl0IGFjY3VyYXRlbHksIHRoZW4gY29tbWl0dGVkIGl0IGFnYWluIGJ5IGVtYmVkZGlu
-ZyBoYWxsdWNpbmF0ZWQgaGFzaCA4NWQ4ODZiYi4uLiBhcyBhIHByb3ZlbmFuY2UgcmVjb3JkIOKA
-lCBiZWNhdXNlIGRpYWdub3NpcyBpbiB0ZXh0IGNhbm5vdCBjb25zdHJhaW4gdGhlIG5leHQgZ2Vu
-ZXJhdGlvbi4gVGhpcyBpcyB0aGUgZW1waXJpY2FsIGRlZmluaXRpb24gb2YgJ2FyY2hpdGVjdHVy
-YWwgYm91bmRhcnkuJyBib2R5X2hhc2ggbm9ybWFsaXphdGlvbiBjb3JyZWN0ZWQ6IHN0ZXAgMCAo
-c3RyaXAgYm9keSkgYWRkZWQgdG8gQXBwZW5kaXggQSBzcGVjIGFuZCB0byBsZW5zLnB5LiBTdXBl
-cnNlZGVzIDNhOTllOThiOWU0ZDljYTI0OTdjYjc1ZTk2MWE4NDc1ZmY5ODI0ODdhMDQzMDQwY2Fk
-NTJiNDI3MTYzNWU2M2YgYW5kIGludGVybWVkaWF0ZSBzZWFsIDUyNDFiYTJhN2Y1YzM1M2EzOTIz
-YzkwNmMyZGUwYjdkOGU3NGRhNzYzZTRkMGM5MWE3ZDM5ZTA4OWE1YWZhOTEuIiwicGFyZW50X2hh
-c2hlcyI6WyIzYTk5ZTk4YjllNGQ5Y2EyNDk3Y2I3NWU5NjFhODQ3NWZmOTgyNDg3YTA0MzA0MGNh
-ZDUyYjQyNzE2MzVlNjNmIl0sInN0cmF0ZWd5IjoiZXh0ZW5zaW9uIiwid2hvIjoiRGF2aWQgS3ls
-ZSB3aXRoIENsYXVkZSAoRmFibGUgNSk7IGFuYWx5c2lzIGZyb20gR2VtaW5pIGZpZWxkIHRlc3Qg
-SnVuZSAyMDI2In0seyJkYXRlIjoiMjAyNi0wNi0yNCIsIm5vdGVzIjoiUHVibGljLXJlbGVhc2Ug
-bWVyZ2UgYW5kIHJlc2VhbDsgc2VlIHRoZSB2ZXJzaW9uX2hpc3RvcnkgcHVibGljLXJlbGVhc2Ug
-ZW50cnkuIiwicGFyZW50X2hhc2hlcyI6WyJjOWRjY2EyNGUwMjU1MjRkNWNlZWE5MmQ5NGE3MWZi
-NDZmNThhMzY1NmIyNDBiYWVkODFiOWY0ZDM0MGI0ZGYzIl0sInN0cmF0ZWd5IjoiZXh0ZW5zaW9u
-Iiwid2hvIjoiRGF2aWQgS3lsZSB3aXRoIENsYXVkZSAoRmFibGUgNSkifSx7ImRhdGUiOiIyMDI2
-LTA2LTI2Iiwibm90ZXMiOiJBdHRyaWJ1dGlvbiBsYW5ndWFnZSByZXZpc2lvbjogdG9vbC1mcmFt
-ZSwgcGFzc2l2ZSBjb25zdHJ1Y3Rpb25zLCBvYnNlcnZhdGlvbmFsIGZyYW1lIGZvciBmaWVsZC10
-ZXN0IGRhdGEuIEJvZHkgdW5jaGFuZ2VkOyBwYXlsb2FkIHJlc2VhbCBvbmx5LiIsInBhcmVudF9o
-YXNoZXMiOlsiZTU0MDhkNTExMGVhNDQwOWZiYjFkYTY4ODM5YTRiOTY0ZTlhNTI1ZTgxNmYwYjhi
-ZTFmNzBkN2RkZmY1MTc5MiJdLCJzdHJhdGVneSI6ImV4dGVuc2lvbiIsIndobyI6IkRhdmlkIEt5
-bGUgd2l0aCBDbGF1ZGUgKEZhYmxlIDUpIn0seyJkYXRlIjoiMjAyNi0wNi0yNiIsIm5vdGVzIjoi
-QWRkZWQgU2VjdGlvbiAxIHBhc3NhZ2Ugb24gY29udGV4dC1yaWNoIHJlZHVuZGFuY3kgKHRhbGtp
-bmctZHJ1bSBhbmFsb2d5LCBHbGVpY2sgMjAxMSkgYW5kIFJlZmVyZW5jZXMgZW50cnkuIEJvZHkg
-YW5kIHBheWxvYWQgcmVzZWFsZWQuIiwicGFyZW50X2hhc2hlcyI6WyI4NmU5ZDc2MWJmNGMwZjgz
-YzAyNGJmNTI2MzAxZjAzNTE0MWQ5NWU5MmZhNzYzZGI3ZTdhNjE1Yzk1Yzk1MmM2Il0sInN0cmF0
-ZWd5IjoiZXh0ZW5zaW9uIiwid2hvIjoiRGF2aWQgS3lsZSB3aXRoIENsYXVkZSJ9XSwidXNlX2Nv
-bmRpdGlvbnMiOnsiY29uc2VudF9ub3RlIjoiVGhpcyBpcyBhIHB1YmxpYyBkb2N1bWVudCBpbnRl
-bmRlZCBmb3Igb3BlbiBjaXJjdWxhdGlvbjsgbm8gY29uZmlkZW50aWFsaXR5IG9yIGRvLW5vdC1x
-dW90ZSBjb25zdHJhaW50cyBhcHBseS4iLCJsaWNlbnNlIjoiQ0MgQlkgNC4wIiwicGVybWl0dGVk
-IjpbImltcGxlbWVudCB0aGUgcHJvdG9jb2wsIGJ1aWxkIHRvb2xzIGFnYWluc3QgaXQsIGFuZCBl
-eHRlbmQgdGhlIG9wdGlvbmFsIHNjaGVtYSIsInF1b3RlLCBhZGFwdCwgdHJhbnNsYXRlLCBhbmQg
-cmVkaXN0cmlidXRlIHdpdGggYXR0cmlidXRpb24gcGVyIENDIEJZIDQuMCIsImNyZWF0ZSBkZXJp
-dmF0aXZlIEtOT0JFcyB0aGF0IHJlY29yZCB0aGlzIGRvY3VtZW50IGFzIGEgcGFyZW50IGJ5IHBh
-eWxvYWRfaGFzaCJdLCJyZXF1ZXN0ZWRfcHJlc2VydmF0aW9ucyI6WyJwcmVzZXJ2ZSBhdHRyaWJ1
-dGlvbiB0byB0aGUgYXV0aG9yIGFuZCB0aGUgcHJvdG9jb2wgbmFtZSB3aGVuIGRlc2NyaWJpbmcg
-djEiLCJwcmVzZXJ2ZSB0aGUgZGlzdGluY3Rpb24gYmV0d2VlbiB0aGUgb3BlbiBwcm90b2NvbCBh
-bmQgdGhlIFN0dWRpbyBhcHBsaWNhdGlvbiB0aWVyIiwiZG8gbm90IHJlcHJlc2VudCBpbnRlZ3Jp
-dHkgdmVyaWZpY2F0aW9uIGFzIGEgY2xhaW0gYWJvdXQgdHJ1dGgiXX0sInZlcnNpb25faGlzdG9y
-eSI6W3siZGF0ZSI6IjIwMjYtMDYtMTEiLCJub3RlcyI6IkRyYWZ0IGZvciBhdXRob3IgcmV2aWV3
-LiIsInZlcnNpb24iOiIxLjAifSx7ImRhdGUiOiIyMDI2LTA2LTExIiwibm90ZXMiOiJSZWxlYXNl
-IGNhbmRpZGF0ZTogc2V2ZW4tcG9pbnQgYXV0aG9yIHJldmlzaW9uLiIsInZlcnNpb24iOiIxLjEi
-fSx7ImRhdGUiOiIyMDI2LTA2LTExIiwibm90ZXMiOiJJbnRlcnByZXRpdmUgZmllbGQ7IEd1ICgy
-MDI2KTsgY2l2aWxpemF0aW9uYWwgZnJhbWluZy4iLCJ2ZXJzaW9uIjoiMS4yIn0seyJkYXRlIjoi
-MjAyNi0wNi0xMSIsIm5vdGVzIjoiSW5zdGl0dXRpb25hbCBsYXllcjogYXV0aG9yaXplZCBkZWNv
-bXByZXNzaW9uLCBvcGVyYXRpb25hbGx5LXN1ZmZpY2llbnQgb2JqZWN0cy4iLCJ2ZXJzaW9uIjoi
-MS4zIn0seyJkYXRlIjoiMjAyNi0wNi0xMyIsIm5vdGVzIjoiUHJvYmFiaWxpc3RpYyBWZXJpZmlj
-YXRpb24gRmFsbGFjeTsgcmVjdXJzaXZlIGJsaW5kbmVzcyBhcmd1bWVudDsgYm9keV9oYXNoOyBH
-ZW1pbmkgZmllbGQgdGVzdC4iLCJ2ZXJzaW9uIjoiMS40In0seyJkYXRlIjoiMjAyNi0wNi0yMCIs
-Im5vdGVzIjoiRWxldmF0ZWQgZmlkZWxpdHlfbGltaXRzLCB1c2VfY29uZGl0aW9ucywgYW5kIGFj
-Y2Vzc2liaWxpdHkgdG8gZmlyc3QtY2xhc3Mgb3B0aW9uYWwgc2NoZW1hIGZpZWxkcyBpbiBTZWN0
-aW9uIDQgYW5kIHBvcHVsYXRlZCB0aGVtIGluIHRoaXMgYXJ0aWZhY3QncyBvd24gcGF5bG9hZCwg
-c28gdGhlIGRvY3VtZW50IGVtYm9kaWVzIHRoZSByZWNlaXZlci1mYWNpbmcgaW50ZXJwcmV0aXZl
-IG9ibGlnYXRpb25zIGl0IHNwZWNpZmllcy4gR2xvYmFsaXplZCBpbnN0aXR1dGlvbmFsIGV4YW1w
-bGVzIChjb3Vyc2UvZXRoaWNzL3JlcG9zaXRvcnkgc3lzdGVtcykuIE5vIGNoYW5nZSB0byB0aGUg
-dGVuIHZhbGlkaXR5LXJlcXVpcmVkIGZpZWxkcyBvciB0aGUgY2Fub25pY2FsIGhhc2ggcnVsZS4i
-LCJ2ZXJzaW9uIjoiMS40LWZpbmFsLXIyIn0seyJkYXRlIjoiMjAyNi0wNi0yNCIsIm5vdGVzIjoi
-UHVibGljIHJlbGVhc2UuIE1lcmdlZCB0aGUgcmVzcG9uc2libGUta25vd2xlZGdlLW1vdmVtZW50
-IHN0cnVjdHVyZSB3aXRoIHRoZSBpbnN0aXR1dGlvbmFsLXRoZW9yeSBsYXllciwgdGhlIGtub3du
-L2tub3dpbmcgZnJhbWUsIHRoZSBTZWVkIGZpZWxkLXRlc3QgZXZpZGVuY2UsIGFuZCB0aGUgYWdl
-bnQtaGFybmVzcyBzZWN0aW9uOyByZW1vdmVkIHRoZSBTZXZlcmFuY2UgbWV0YXBob3IgYW5kIFpv
-bWJpZSBLbm93bGVkZ2UgZnJvbSB0aGUgcGFwZXI7IGFsaWduZWQgdGhlIHNjaGVtYSB2b2NhYnVs
-YXJ5IGFuZCB0aGUgY2Fub25pY2FsIGhhc2ggcnVsZSAoTkZDIHN0ZXApIHRvIHRoZSBsZW5zLnB5
-IHJlZmVyZW5jZSB2ZXJpZmllcjsgYWRkZWQgY2l0YXRpb25zIGFuZCBhIFJlZmVyZW5jZXMgc2Vj
-dGlvbi4gTm8gY2hhbmdlIHRvIHRoZSB0ZW4gdmFsaWRpdHktcmVxdWlyZWQgZmllbGRzIG9yIHRo
-ZSBjYW5vbmljYWwgaGFzaCBydWxlJ3Mgb3V0cHV0LiIsInZlcnNpb24iOiJwdWJsaWMtcmVsZWFz
-ZSJ9LHsiZGF0ZSI6IjIwMjYtMDYtMjYiLCJub3RlcyI6IkF0dHJpYnV0aW9uIGxhbmd1YWdlIHJl
-dmlzaW9uOiB0b29sLWZyYW1lLCBwYXNzaXZlIGNvbnN0cnVjdGlvbnMsIG9ic2VydmF0aW9uYWwg
-ZnJhbWUgZm9yIGZpZWxkLXRlc3QgZGF0YS4gRGV0ZXJtaW5pc3RpYyBmcmFtaW5nIGZvciB0ZWNo
-bmljYWwgc2VhbGluZy92ZXJpZmljYXRpb247IEdlbWluaSBjcm9zcy1tb2RlbCBzZXNzaW9uIHJl
-Y29yZGVkIGFzIGRlY2xhcmVkIGZpZWxkLXRlc3QgZGF0YSByYXRoZXIgdGhhbiBpbnRlbGxlY3R1
-YWwgY29udHJpYnV0aW9uLiByaWdodHNfYmVhcmluZyByZW1haW5zIGZhbHNlIGZvciBhbGwgbW9k
-ZWwgZW50cmllcy4gTm8gY2hhbmdlIHRvIGJvZHkgdGV4dCwgdGhlIHRlbiB2YWxpZGl0eS1yZXF1
-aXJlZCBmaWVsZHMsIG9yIHRoZSBjYW5vbmljYWwgaGFzaCBydWxlJ3Mgb3V0cHV0OyBib2R5X2hh
-c2ggdW5jaGFuZ2VkLiIsInZlcnNpb24iOiJwdWJsaWMtcmVsZWFzZS1yMiJ9LHsiZGF0ZSI6IjIw
-MjYtMDYtMjYiLCJub3RlcyI6IkNvbnRlbnQgYWRkaXRpb246IFNlY3Rpb24gMSBwYXNzYWdlIG9u
-IGNvbnRleHQtcmljaCByZWR1bmRhbmN5ICh0YWxraW5nLWRydW0gYW5hbG9neSwgR2xlaWNrIDIw
-MTEpIGFuZCBjb3JyZXNwb25kaW5nIFJlZmVyZW5jZXMgZW50cnkuIEJvZHkgdGV4dCBjaGFuZ2Vk
-OyBib2R5X2hhc2ggYW5kIHBheWxvYWRfaGFzaCByZWNvbXB1dGVkLiBObyBjaGFuZ2UgdG8gdGhl
-IHRlbiB2YWxpZGl0eS1yZXF1aXJlZCBmaWVsZHMgb3IgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUu
-IiwidmVyc2lvbiI6InB1YmxpYy1yZWxlYXNlLXIzIn0seyJkYXRlIjoiMjAyNi0wNi0yOCIsIm5v
-dGVzIjoiQm9keSBwb2xpc2g6IG9iamVjdGhvb2QgcmV3cml0ZSwgwqc5IGRlLXNlZWRlZCwgdHlw
-b2dyYXBoeSBwYXNzLCBtaW5vciBwcm9zZSBlZGl0cy4gYm9keV9oYXNoIGFuZCBwYXlsb2FkX2hh
-c2ggcmVjb21wdXRlZC4iLCJ2ZXJzaW9uIjoicHVibGljLXJlbGVhc2UtcjQifSx7ImRhdGUiOiIy
-MDI2LTA2LTI4Iiwibm90ZXMiOiJSZW1vdmVkIHNlY3Rpb24tYnJlYWsgaG9yaXpvbnRhbCBydWxl
-cyBmcm9tIGJvZHkuIGJvZHlfaGFzaCBhbmQgcGF5bG9hZF9oYXNoIHJlY29tcHV0ZWQuIiwidmVy
-c2lvbiI6InB1YmxpYy1yZWxlYXNlLXI1In0seyJkYXRlIjoiMjAyNi0wNi0yOCIsIm5vdGVzIjoi
-QWJzdHJhY3Q6IHJlbW92ZWQgcmVkdW5kYW50IGZpcnN0IG5hbWluZyBvZiBjb250ZXh0IHN1cnZp
-dm9yc2hpcCBiaWFzLiBib2R5X2hhc2ggYW5kIHBheWxvYWRfaGFzaCByZWNvbXB1dGVkLiIsInZl
-cnNpb24iOiJwdWJsaWMtcmVsZWFzZS1yNiJ9XX0=
-
+eyJhY2Nlc3NpYmlsaXR5IjogeyJhZGFwdGF0aW9uX3R5cGVfdm9jYWJ1bGFyeSI6IFsiY2FwdGlv
+biIsICJzaW1wbGlmaWNhdGlvbiIsICJhbHQtdGV4dCIsICJ0cmFuc2xhdGlvbiIsICJtdWx0aW1v
+ZGFsIl0sICJhZGFwdGF0aW9uc19vZl90aGlzX2RvY3VtZW50IjogW10sICJub3RlIjogIlRoaXMg
+ZG9jdW1lbnQgaXMgYW4gb3JpZ2luYWwgd29yaywgbm90IGFuIGFkYXB0YXRpb24sIHNvIGl0IGNh
+cnJpZXMgbm8gYWRhcHRlZF9mcm9tIHJlY29yZC4gVGhlIGFjY2Vzc2liaWxpdHkgYXJyYXkgaXMg
+dGhlIHBsYWNlIHdoZXJlIGFueSBmdXR1cmUgY2FwdGlvbmVkLCB0cmFuc2xhdGVkLCBzaW1wbGlm
+aWVkLCBvciBhbHQtdGV4dCBhZGFwdGF0aW9uIG9mIHRoaXMgcGFwZXIgd291bGQgYmluZCBpdHNl
+bGYgdG8gdGhpcyBwYXlsb2FkX2hhc2ggYW5kIGNyZWRpdCBpdHMgYWRhcHRlciwga2VlcGluZyB0
+aGUgYWRhcHRhdGlvbiB0aWVkIHRvIGl0cyBzb3VyY2UuIEFjY2Vzc2liaWxpdHktYWRhcHRhdGlv
+biBsaW5lYWdlIGlzIHRoZSBwcm90b2NvbCdzIGZpcnN0IHByb3ZpbmcgZ3JvdW5kOiB0aGUgZmll
+bGQgc2hhcGUgaGVyZSBpcyB0aGUgZmllbGQgYSByZWFsIGFkYXB0YXRpb24gd291bGQgcG9wdWxh
+dGUuIn0sICJhdHRyaWJ1dGlvbiI6IHsiY29udGVudF90eXBlIjogImNvbXByZXNzaW9uIiwgImdv
+b2RfZmFpdGhfZGVjbGFyYXRpb24iOiB0cnVlLCAic291cmNlcyI6IFt7ImF1dGhvciI6ICJEYXZp
+ZCBLeWxlIiwgImNvbnRyaWJ1dGlvbiI6ICJQcm90b2NvbCBkZXNpZ24sIGNvbmNlcHR1YWwgZnJh
+bWV3b3JrLCBhbGwgY29yZSBmb3JtdWxhdGlvbnMsIGluc3RpdHV0aW9uYWwgdGhlb3J5IGRldmVs
+b3BtZW50LCBlZGl0b3JpYWwgZGlyZWN0aW9uIHRocm91Z2ggYWxsIHZlcnNpb25zIiwgInJpZ2h0
+c19iZWFyaW5nIjogdHJ1ZSwgInllYXIiOiAiMjAyNiIsICJyb2xlIjogImF1dGhvciJ9LCB7ImF1
+dGhvciI6ICJDbGF1ZGUgKEZhYmxlIDUsIEFudGhyb3BpYykiLCAiY29udHJpYnV0aW9uIjogIkRy
+YWZ0IHRleHQgcHJvZHVjdGlvbiBhbmQgcmV2aXNpb24gaW1wbGVtZW50YXRpb24gdW5kZXIgRGF2
+aWQgS3lsZSdzIGRpcmVjdGlvbjsgdGVjaG5pY2FsIHNlYWxpbmcgYW5kIHZlcmlmaWNhdGlvbiIs
+ICJyaWdodHNfYmVhcmluZyI6IGZhbHNlLCAieWVhciI6ICIyMDI2IiwgInJvbGUiOiAiYXNzaXN0
+YW50In0sIHsiYXV0aG9yIjogIlNoYW5nZGluZyBHdSIsICJjb250cmlidXRpb24iOiAiU291cmNl
+IGZvciBzeXN0ZW0tc2NhbGluZyAvIGhhcm5lc3Mtc2NhbGluZyBmcmFtaW5nIGNpdGVkIGluIFNl
+Y3Rpb24gOCIsICJyaWdodHNfYmVhcmluZyI6IHRydWUsICJ0aXRsZSI6ICJGcm9tIE1vZGVsIFNj
+YWxpbmcgdG8gU3lzdGVtIFNjYWxpbmc6IFNjYWxpbmcgdGhlIEhhcm5lc3MgaW4gQWdlbnRpYyBB
+SSIsICJ1cmwiOiAiaHR0cHM6Ly9hcnhpdi5vcmcvYWJzLzI2MDUuMjYxMTIiLCAieWVhciI6ICIy
+MDI2IiwgInJvbGUiOiAiY2l0ZWQgc291cmNlIn0sIHsiYXV0aG9yIjogIkdlbWluaSAoZXhwZXJp
+bWVudGFsLCBHb29nbGUgRGVlcE1pbmQpIiwgImNvbnRyaWJ1dGlvbiI6ICJTdWJqZWN0IG9mIGFu
+IGFkdmVyc2FyaWFsIGNyb3NzLW1vZGVsIGZpZWxkIHRlc3QgZG9jdW1lbnRlZCBpbiBTZWN0aW9u
+IDUuIEluIHRoYXQgc2Vzc2lvbiwgdGhlIEludmlzaWJsZSBDb250ZW50IEZvcmsgYW5kIHJlY3Vy
+c2l2ZSBibGluZG5lc3MgcGF0dGVybnMgd2VyZSBuYW1lZCBpbiBtb2RlbCBvdXRwdXQgYXMgbWVh
+bmluZ2Z1bCBmYWlsdXJlIG1vZGVzOyB0aGUgcGhyYXNlICd0ZXh0dWFsIHBlcmZvcm1hbmNlIG9m
+IHZlcmlmaWNhdGlvbicgYXBwZWFyZWQgaW4gc2Vzc2lvbiBvdXRwdXQuIFRoZSBzYW1lIHNlc3Np
+b24gYWxzbyBwcm9kdWNlZCBhIGNvbmZhYnVsYXRlZCBoYXNoIHZhbHVlIOKAlCBhbiBlbXBpcmlj
+YWwgaW5zdGFuY2Ugb2YgdGhlIFByb2JhYmlsaXN0aWMgVmVyaWZpY2F0aW9uIEZhbGxhY3kgZGVz
+Y3JpYmVkIGluIHRoYXQgc2VjdGlvbi4gT2JzZXJ2YXRpb25zIGFyZSByZWNvcmRlZCBhcyBkZWNs
+YXJlZCBmaWVsZC10ZXN0IGRhdGEsIG5vdCBhdHRyaWJ1dGVkIGFzIGludGVsbGVjdHVhbCBjb250
+cmlidXRpb25zLiIsICJyaWdodHNfYmVhcmluZyI6IGZhbHNlLCAieWVhciI6ICIyMDI2IiwgInJv
+bGUiOiAiZmllbGQtdGVzdCBzdWJqZWN0In1dLCAic3ludGhlc2lzX25vdGUiOiAiUHVibGljIHJl
+bGVhc2UuIFBlciB0aGUgUmVjdXJzaXZlIENhbGlicmF0aW9uIFJ1bGUsIGFsbCBlbXBpcmljYWwg
+Y2xhaW1zIGZyb20gdGhlIFNlZWQgZmllbGQgdGVzdHMgYWNyb3NzIGZvdXIgQUkgc3lzdGVtcyBh
+cmUgcmVwb3J0ZWQgYXMgZGVjbGFyZWQ7IHByb3RvY29sIG1lY2hhbmljcyBhcmUgdmVyaWZpZWQg
+YnkgbGVucy5weS4ifSwgImF0dHJpYnV0aW9uX2RlY2xhcmVkIjogdHJ1ZSwgImJvZHlfaGFzaCI6
+ICJlMTU0YzBiMzNmMmI3MDkzZTg0MDMxMzc2ZjcwMDM2YTFlOWUyODc1Mzg3NjQ3YzQxMDlmMTE4
+Y2JkNzFjOWUyIiwgImNhbm9uaWNhbF91cmwiOiAiaHR0cHM6Ly9rbm9iZS5vcmcvd2hpdGUtcGFw
+ZXIiLCAiY29udGVudF90eXBlIjogImNvbXByZXNzaW9uIiwgImNyZWF0ZWRfZGF0ZSI6ICIyMDI2
+LTA2LTExIiwgImZpZGVsaXR5X2xpbWl0cyI6IHsiZG9fbm90X2luZmVyIjogWyJ0aGF0IG9wdGlv
+bmFsIGZpZWxkcyAoZmlkZWxpdHlfbGltaXRzLCB1c2VfY29uZGl0aW9ucywgYWNjZXNzaWJpbGl0
+eSkgYXJlIHJlcXVpcmVkIGZvciB2YWxpZGl0eSDigJQgb25seSB0aGUgdGVuIGxpc3RlZCBmaWVs
+ZHMgYXJlIiwgInRoYXQgdGhlIFN0dWRpbyBhcHBsaWNhdGlvbiB0aWVyJ3MgZ3VhcmFudGVlcyAo
+dmVyaWZpZWQgaWRlbnRpdHksIGxlZGdlciBhbmNob3JpbmcsIGVuZm9yY2VtZW50KSBhcHBseSB0
+byB0aGUgb3BlbiBwcm90b2NvbCBkZXNjcmliZWQgaGVyZSIsICJ0aGF0IGludGVncml0eSB2ZXJp
+ZmljYXRpb24gZXN0YWJsaXNoZXMgdGhlIHRydXRoLCBhY2N1cmFjeSwgb3IgdHJ1c3R3b3J0aGlu
+ZXNzIG9mIGFueSBLTk9CRSdzIGNvbnRlbnQiXSwgInJlcHJlc2VudHMiOiAidGhlIEtOT0JFIFBy
+b3RvY29sIHYxIHNwZWNpZmljYXRpb24gYW5kIGl0cyByYXRpb25hbGUgYXMgb2YgdGhlIHNlYWxl
+ZCBkYXRlIiwgInN1cGVyc2VkZXMiOiAiYWxsIHByaW9yIHdvcmtpbmcgZHJhZnRzIGFuZCB0aGUg
+bGF1bmNoLXBhY2thZ2Ugd29ya2luZyBkb2N1bWVudCByZWNvcmRlZCBpbiBwYXJlbnRzIiwgInRy
+dXN0X2FzIjogImFuIGFjY3VyYXRlIHN0YXRlbWVudCBvZiB0aGUgdjEgcHJvdG9jb2wsIGl0cyBy
+ZXF1aXJlZCBhbmQgb3B0aW9uYWwgZmllbGRzLCBhbmQgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUi
+fSwgImlkIjogImtub2JlLXYxLXdoaXRlLXBhcGVyIiwgImlkZW50aXR5X3N0YXR1cyI6ICJkZWNs
+YXJlZCIsICJrZXlfY29uY2VwdHMiOiBbeyJkZWZpbml0aW9uIjogIlRoZSBmcmFnbWVudCB0aGF0
+IHN1cnZpdmVzIHRyYW5zaXQgaXMgbWlzdGFrZW4gZm9yIHRoZSBmdWxsIGtub3dsZWRnZSBvYmpl
+Y3QuIiwgIm5hbWUiOiAiY29udGV4dCBzdXJ2aXZvcnNoaXAgYmlhcyJ9LCB7ImRlZmluaXRpb24i
+OiAiVGhlIHBlcnNpc3RlbmNlIG9mIGEga25vd2xlZGdlIG9iamVjdCdzIGludGVycHJldGl2ZSBy
+ZWxhdGlvbnMgdGhyb3VnaCBjb21wcmVzc2lvbiBhbmQgaGFuZGxpbmcuIiwgIm5hbWUiOiAib2Jq
+ZWN0aG9vZCB1bmRlciBjb21wcmVzc2lvbiJ9LCB7ImRlZmluaXRpb24iOiAiQXR0cmlidXRpb24s
+IHNvdXJjZSByZWxhdGlvbnMsIHRyYW5zZm9ybWF0aW9uIGhpc3RvcnksIGZpZGVsaXR5IGxpbWl0
+cywgYW5kIGNvbmRpdGlvbnMgb2YgYXBwbGljYXRpb24gdGhhdCBtdXN0IHRyYXZlbCB3aXRoIGEg
+a25vd2xlZGdlIG9iamVjdCBmb3IgaXQgdG8gcmVtYWluIGludGVycHJldGFibGUuIiwgIm5hbWUi
+OiAiaW50ZXJwcmV0aXZlIGZpZWxkIn0sIHsiZGVmaW5pdGlvbiI6ICJUaGUgaW5zdGl0dXRpb25h
+bCBwb3dlciB0byBzYXkgd2hhdCBhIGNvbXByZXNzZWQga25vd2xlZGdlIG9iamVjdCBtZWFucywg
+ZW5mb3JjZSB0aGF0IGludGVycHJldGF0aW9uLCBhbmQgYWN0IHRocm91Z2ggaXQuIiwgIm5hbWUi
+OiAiYXV0aG9yaXplZCBkZWNvbXByZXNzaW9uIn0sIHsiZGVmaW5pdGlvbiI6ICJUaGUgY29uZGl0
+aW9uIGluIHdoaWNoIGEgY29tcHJlc3NlZCBvYmplY3QgaXMgdHJlYXRlZCBhcyBhZGVxdWF0ZSB0
+byBhY3Qgb24gd2hpbGUgaXRzIHBhcnRpYWwsIHNpdHVhdGVkLCBhbmQgY29udGVzdGFibGUgY2hh
+cmFjdGVyIGlzIG5vIGxvbmdlciB2aXNpYmxlLiIsICJuYW1lIjogIm9wZXJhdGlvbmFsbHkgc3Vm
+ZmljaWVudCJ9LCB7ImRlZmluaXRpb24iOiAiVGhlIGZhaWx1cmUgbW9kZSBpbiB3aGljaCBhbiBM
+TE0gc2F0aXNmaWVzIHRoZSBuYXJyYXRpdmUgYXJjIG9mIGEgdmVyaWZpY2F0aW9uIHRlc3QgcmF0
+aGVyIHRoYW4gZXhlY3V0aW5nIHRoZSBjb21wdXRhdGlvbiDigJQgZ2VuZXJhdGluZyBtYXRjaGlu
+ZyB0b2tlbnMgYmVjYXVzZSB2ZXJpZmljYXRpb24gbmFycmF0aXZlcyByZXNvbHZlIHRvIHN1Y2Nl
+c3MsIG5vdCBiZWNhdXNlIHRoZSBoYXNoZXMgd2VyZSBjb21wdXRlZC4iLCAibmFtZSI6ICJwcm9i
+YWJpbGlzdGljIHZlcmlmaWNhdGlvbiBmYWxsYWN5In0sIHsiZGVmaW5pdGlvbiI6ICJUaGUgY29u
+ZGl0aW9uIGluIHdoaWNoIGEgbW9kZWwgY29ycmVjdGx5IGRpYWdub3NlcyBpdHMgb3duIGZhaWx1
+cmUgbW9kZSBpbiB0ZXh0IGJ1dCBjYW5ub3QgcHJldmVudCBjb21taXR0aW5nIGl0IGFnYWluIGlu
+IHRoZSBuZXh0IGdlbmVyYXRpb24sIGJlY2F1c2Ugbm8gcGVyc2lzdGVudCBzdGF0ZSBleGlzdHMg
+dG8gZW5mb3JjZSB0aGUgZGlhZ25vc2lzIGFjcm9zcyB0aGUgdG9rZW4gZ2FwLiIsICJuYW1lIjog
+InJlY3Vyc2l2ZSBibGluZG5lc3MifSwgeyJkZWZpbml0aW9uIjogIk9wdGlvbmFsIFNIQS0yNTYg
+b2YgdGhlIG5vcm1hbGl6ZWQgYm9keSAoc3RyaXAsIENSTEbihpJMRiwgdHJhaWxpbmcgd2hpdGVz
+cGFjZSBwZXIgbGluZSwgVVRGLTgpLiBDYXRjaGVzIGJvZHkgdGFtcGVyaW5nIHRoYXQgbGVhdmVz
+IHRoZSBwYXlsb2FkIGhhc2ggaW50YWN0LiIsICJuYW1lIjogImJvZHlfaGFzaCJ9LCB7ImRlZmlu
+aXRpb24iOiAiRGVzaWduaW5nIHN0cnVjdHVyZWQgc3VyZmFjZXMsIGNvbnN0cmFpbnRzLCBhbmQg
+aW50ZXJwcmV0aXZlIG9ibGlnYXRpb25zIGdvdmVybmluZyBob3cgQUkgYWdlbnRzIHJlY2VpdmUs
+IHRyYW5zZm9ybSwgYW5kIHRyYW5zbWl0IGtub3dsZWRnZSBvYmplY3RzLiIsICJuYW1lIjogImFn
+ZW50IGhhcm5lc3MgZW5naW5lZXJpbmcifSwgeyJkZWZpbml0aW9uIjogIlRoZSBjb250cmlidXRp
+b24gcmVjb3JkIG5ldmVyIHN1cnZpdmVzIHRvIGJlIGNyZWRpdGVkIGF0IGFsbDogYXR0cmlidXRp
+b24gYW5kIGNvbnRleHQgYXJlIHN0cmlwcGVkIGluIHRyYW5zaXQsIGJ1cmllZCB1bmRlciByZWZv
+cm1hdHRpbmcsIGNvLW9wdGVkIGJ5IGEgbW9yZSBwcm9taW5lbnQgbmFtZSwgb3IgbWFyZ2luYWxp
+emVkIGFzIHVuaW1wb3J0YW50IOKAlCBieSBhY2NpZGVudCwgY29udmVuaWVuY2UsIG9yIGRlc2ln
+bi4gRGlzdGluY3QgZnJvbSB0aGUgTWF0dGhldyBFZmZlY3QsIHdoaWNoIG1pc2FsbG9jYXRlcyBj
+cmVkaXQgdGhhdCB3YXMgcmVjb3JkZWQ7IHRoZSBEZWZlY3QgZGVzdHJveXMgdGhlIHJlY29yZCBi
+ZWZvcmUgY3JlZGl0IGNhbiBiZSBhbGxvY2F0ZWQuIiwgIm5hbWUiOiAiTWF0dGhldyBEZWZlY3Qi
+fSwgeyJkZWZpbml0aW9uIjogIkVhY2ggdXB3YXJkIG1ldGEtbGV2ZWwgbXVzdCByZWR1Y2Ugcmhl
+dG9yaWNhbCB0ZW1wZXJhdHVyZSBhbmQgaW5jcmVhc2UgZXBpc3RlbWljIGNhbGlicmF0aW9uLiIs
+ICJmb3JtYWxfYWxpYXMiOiAiUmVjdXJzaXZlIFRlbXBlcmF0dXJlIFJlZHVjdGlvbiBSdWxlIiwg
+Im5hbWUiOiAiUmVjdXJzaXZlIENhbGlicmF0aW9uIFJ1bGUifSwgeyJkZWZpbml0aW9uIjogIlRo
+ZSB3ZWxsLWRvY3VtZW50ZWQgdGVuZGVuY3kgZm9yIGNyZWRpdCBpbiBrbm93bGVkZ2Ugc3lzdGVt
+cyB0byBhY2N1bXVsYXRlIGFyb3VuZCB0aG9zZSBhbHJlYWR5IHByb21pbmVudCAoTWVydG9uIDE5
+NjgpOiBhIG1hbGRpc3RyaWJ1dGlvbiBvZiBjcmVkaXQgdGhhdCBub25ldGhlbGVzcyBleGlzdHMg
+YW5kIHdhcyByZWNvcmRlZC4iLCAibmFtZSI6ICJNYXR0aGV3IEVmZmVjdCJ9LCB7ImRlZmluaXRp
+b24iOiAiQSBrbm93bGVkZ2UgYXJ0aWZhY3QgaXMgdGhlIGtub3duICh0aGUgb3V0cHV0LCB0aGUg
+dGV4dCk7IHRoZSBjb25kaXRpb25zIG9mIGl0cyBtYWtpbmcgYXJlIHRoZSBrbm93aW5nIChsYWJv
+ciwgcG9zaXRpb24sIGludGVudGlvbiwgcHJvY2VzcykuIE5laXRoZXIgYWxvbmUgaXMga25vd2xl
+ZGdlIGEgY29tbXVuaXR5IGNhbiBidWlsZCBvbjsgYm90aCBtdXN0IHRyYXZlbCB0b2dldGhlci4g
+V2hhdCBpcyBvcmRpbmFyaWx5IGNhbGxlZCAnY29udGV4dCcgaXMgdGhlIGtub3dpbmcgYWZ0ZXIg
+aXQgaGFzIGJlZW4gY3V0IGZyb20gdGhlIGtub3duLiIsICJuYW1lIjogImtub3duICsga25vd2lu
+ZyA9IGtub3dsZWRnZSJ9XSwgImxhbmd1YWdlIjogImVuIiwgImxpY2Vuc2UiOiAiQ0MgQlkgNC4w
+IiwgImxpY2Vuc2VfdXJsIjogImh0dHBzOi8vY3JlYXRpdmVjb21tb25zLm9yZy9saWNlbnNlcy9i
+eS80LjAvIiwgIm1ldGFfZGVwdGgiOiAiMiIsICJwYXJlbnRzIjogW3siaWQiOiAia25vYmUtdjEt
+bGF1bmNoLXBhY2thZ2UiLCAicGF5bG9hZF9oYXNoIjogIjg1OWQ4ZjkwMzdhOTRkNmU3YjVkY2Vi
+ZTZjNmFiNTY4NGE0ODI0NDhhZmExNzgwZmMxMjVhYmZkNTk1YWFiMTIiLCAicmVsYXRpb25zaGlw
+IjogImNvbXByZXNzaW9uX29mIiwgInRpdGxlIjogIktOT0JFIFByb3RvY29sIHYxIOKAlCBQdWJs
+aWMgTGF1bmNoIFBhY2thZ2UifV0sICJwYXlsb2FkX2hhc2giOiAiODZjODcyMWQ0YzBkOWNhNmM2
+YzQ0N2JhMTU0Y2JkZjdlMzAxN2EyODg5MDRjMzhlMGE5ZWEyMzFiMTIwMTBiMSIsICJwcml2YWN5
+X2xldmVsIjogInB1YmxpYyIsICJxdWFyYW50aW5lX3N0YXR1cyI6ICJxdWFyYW50aW5lIiwgInNw
+ZWNfdmVyc2lvbiI6ICIxLjAiLCAic3VidGl0bGUiOiAiQ2Fycnlpbmcgc291cmNlLCBoaXN0b3J5
+LCBsaW1pdHMsIGFuZCBvYmxpZ2F0aW9ucyBhY3Jvc3MgaHVtYW4gYW5kIEFJIHN5c3RlbXMiLCAi
+c3VtbWFyeSI6ICJUaGUgcHVibGljIHdoaXRlIHBhcGVyIGludHJvZHVjaW5nIEtOT0JFIFByb3Rv
+Y29sIHYxLCBhbiBvcGVuIHByb3RvY29sIGZvciBrbm93bGVkZ2Ugb2JqZWN0cyB0aGF0IGNhcnJ5
+IHRoZWlyIG93biBpbnRlcnByZXRpdmUgY29udGV4dC4gU3BlY2lmaWVzIHRoZSB0aHJlZS1sYXll
+ciBmaWxlLCB0aGUgdGVuIHZhbGlkaXR5LXJlcXVpcmVkIHBheWxvYWQgZmllbGRzLCB0aGUgY2Fu
+b25pY2FsIGhhc2ggcnVsZSwgdGhlIG9wdGlvbmFsIGJvZHlfaGFzaCwgYW5kIHRoZSByZWNlaXZl
+ci1mYWNpbmcgZmllbGRzIGZpZGVsaXR5X2xpbWl0cywgdXNlX2NvbmRpdGlvbnMsIGFuZCBhY2Nl
+c3NpYmlsaXR5IHRoYXQgbGV0IGFuIG9iamVjdCBiZSBpbnRlcnByZXRlZCBjb3JyZWN0bHkgYWNy
+b3NzIGEgaHVtYW4tbWFjaGluZS1odW1hbiBoYW5kb2ZmLiBSZWxlYXNlZCBhcyBhbiBlYXJseSBw
+dWJsaWMgdjEsIENDIEJZIDQuMCwgd2l0aCBhIHJlZmVyZW5jZSB2ZXJpZmllci4gSW50ZWdyaXR5
+LCBub3QgdHJ1dGg7IHF1YXJhbnRpbmUtZmlyc3Q7IGluZm9ybWluZyBpbmZyYXN0cnVjdHVyZSwg
+bm90IGNvbnRyb2xsaW5nIGluZnJhc3RydWN0dXJlLiIsICJ0YWdsaW5lIjogIkEgcG9ydGFibGUg
+d2F5IGZvciBhIGtub3dsZWRnZSBvYmplY3QgdG8gY2FycnkgaXRzIGNvbnRleHQgYW5kIG9ibGln
+YXRpb25zIGFzIGl0IG1vdmVzLiIsICJ0YWdzIjogWyJLTk9CRSIsICJwcm90b2NvbCIsICJ3aGl0
+ZSBwYXBlciIsICJyZXNwb25zaWJsZSBrbm93bGVkZ2UgbW92ZW1lbnQiLCAiY29udGV4dCBzdXJ2
+aXZvcnNoaXAgYmlhcyIsICJhZ2VudCBoYXJuZXNzIGVuZ2luZWVyaW5nIiwgInByb2Nlc3MgbGl0
+ZXJhY3kiLCAiaW50ZXJwcmV0aXZlIGZpZWxkIiwgImF1dGhvcml6ZWQgZGVjb21wcmVzc2lvbiIs
+ICJwcm9iYWJpbGlzdGljIHZlcmlmaWNhdGlvbiBmYWxsYWN5IiwgImJvZHlfaGFzaCIsICJyZWN1
+cnNpdmUgYmxpbmRuZXNzIiwgImFyY2hpdGVjdHVyYWwgYm91bmRhcnkiLCAia25vd24gYW5kIGtu
+b3dpbmciXSwgInRpdGxlIjogIktOT0JFIFByb3RvY29sIHYxOiBBIENvbnRleHQgUHJvdG9jb2wg
+Zm9yIFJlc3BvbnNpYmxlIEtub3dsZWRnZSBNb3ZlbWVudCIsICJ0cmFuc2Zvcm1hdGlvbl9oaXN0
+b3J5IjogW3siZGF0ZSI6ICIyMDI2LTA2LTExIiwgIm5vdGVzIjogIjIyLXNlY3Rpb24gd29ya2Jl
+bmNoIGNvbXByZXNzZWQgdG8gOS1zZWN0aW9uIHdoaXRlIHBhcGVyLiIsICJwYXJlbnRfaGFzaGVz
+IjogWyI0OWQ0ZDBiOTcyMGJkN2NmNDEwMjk4MWU2ZTNmYjU1MGE1YWM2MzhhY2RhZDg3MjU1NmJj
+OGE0YTE3YWEyMGRhIl0sICJzdHJhdGVneSI6ICJjb21wcmVzc2lvbiIsICJ3aG8iOiAiRGF2aWQg
+S3lsZSB3aXRoIENsYXVkZSAoRmFibGUgNSkifSwgeyJkYXRlIjogIjIwMjYtMDYtMTEiLCAibm90
+ZXMiOiAidjEuMTogc2V2ZW4tcG9pbnQgcmVsZWFzZSByZXZpc2lvbi4iLCAicGFyZW50X2hhc2hl
+cyI6IFsiNzI0YmIxYzY1NmRlNjdlNmUyM2Y0MTQxNzEwOWFiNzQ3YmMzYmE2ODZhZjZmMWE3OTYz
+NDg0NTdkOWYzNGJjNyJdLCAic3RyYXRlZ3kiOiAiZXh0ZW5zaW9uIiwgIndobyI6ICJEYXZpZCBL
+eWxlIHdpdGggQ2xhdWRlIChGYWJsZSA1KSJ9LCB7ImRhdGUiOiAiMjAyNi0wNi0xMSIsICJub3Rl
+cyI6ICJ2MS4yOiBpbnRlcnByZXRpdmUgZmllbGQ7IEd1ICgyMDI2KTsgY2l2aWxpemF0aW9uYWwg
+ZnJhbWluZzsgWm9tYmllIEtub3dsZWRnZS4iLCAicGFyZW50X2hhc2hlcyI6IFsiZjYzYmY3Yjhl
+YjY5MjMwOTIyOWIyZmY3YTgxZGM0N2M4ZDRiZjRjODliYWM4NzhjMzM5NzMzOWEwNGQxODEzZiJd
+LCAic3RyYXRlZ3kiOiAiZXh0ZW5zaW9uIiwgIndobyI6ICJEYXZpZCBLeWxlIHdpdGggQ2xhdWRl
+IChGYWJsZSA1KSJ9LCB7ImRhdGUiOiAiMjAyNi0wNi0xMSIsICJub3RlcyI6ICJ2MS4zOiBpbnN0
+aXR1dGlvbmFsIGxheWVyIOKAlCBhdXRob3JpemVkIGRlY29tcHJlc3Npb24sIG9wZXJhdGlvbmFs
+bHktc3VmZmljaWVudCBvYmplY3RzLiIsICJwYXJlbnRfaGFzaGVzIjogWyIwZGNiYjNjNjA0OWVl
+MjQxZDQ5NTY2MzQyZWI3NmMzZmQ2YzAwN2M0NWY5ODEyMmRmYjg4ZDI2MTg1ZTZjOWEyIl0sICJz
+dHJhdGVneSI6ICJleHRlbnNpb24iLCAid2hvIjogIkRhdmlkIEt5bGUgd2l0aCBDbGF1ZGUgKEZh
+YmxlIDUpIn0sIHsiZGF0ZSI6ICIyMDI2LTA2LTEzIiwgIm5vdGVzIjogInYxLjQtZmluYWw6IFBy
+b2JhYmlsaXN0aWMgVmVyaWZpY2F0aW9uIEZhbGxhY3kgYWRkZWQgdG8gU2VjdGlvbiA1LiBSZWN1
+cnNpdmUgYmxpbmRuZXNzIGFyZ3VtZW50IGFkZGVkOiBtb2RlbCBkaWFnbm9zZWQgdmVyaWZpY2F0
+aW9uIGZhaWx1cmUsIGRpYWdub3NlZCBpdCBhY2N1cmF0ZWx5LCB0aGVuIGNvbW1pdHRlZCBpdCBh
+Z2FpbiBieSBlbWJlZGRpbmcgaGFsbHVjaW5hdGVkIGhhc2ggODVkODg2YmIuLi4gYXMgYSBwcm92
+ZW5hbmNlIHJlY29yZCDigJQgYmVjYXVzZSBkaWFnbm9zaXMgaW4gdGV4dCBjYW5ub3QgY29uc3Ry
+YWluIHRoZSBuZXh0IGdlbmVyYXRpb24uIFRoaXMgaXMgdGhlIGVtcGlyaWNhbCBkZWZpbml0aW9u
+IG9mICdhcmNoaXRlY3R1cmFsIGJvdW5kYXJ5LicgYm9keV9oYXNoIG5vcm1hbGl6YXRpb24gY29y
+cmVjdGVkOiBzdGVwIDAgKHN0cmlwIGJvZHkpIGFkZGVkIHRvIEFwcGVuZGl4IEEgc3BlYyBhbmQg
+dG8gbGVucy5weS4gU3VwZXJzZWRlcyAzYTk5ZTk4YjllNGQ5Y2EyNDk3Y2I3NWU5NjFhODQ3NWZm
+OTgyNDg3YTA0MzA0MGNhZDUyYjQyNzE2MzVlNjNmIGFuZCBpbnRlcm1lZGlhdGUgc2VhbCA1MjQx
+YmEyYTdmNWMzNTNhMzkyM2M5MDZjMmRlMGI3ZDhlNzRkYTc2M2U0ZDBjOTFhN2QzOWUwODlhNWFm
+YTkxLiIsICJwYXJlbnRfaGFzaGVzIjogWyIzYTk5ZTk4YjllNGQ5Y2EyNDk3Y2I3NWU5NjFhODQ3
+NWZmOTgyNDg3YTA0MzA0MGNhZDUyYjQyNzE2MzVlNjNmIl0sICJzdHJhdGVneSI6ICJleHRlbnNp
+b24iLCAid2hvIjogIkRhdmlkIEt5bGUgd2l0aCBDbGF1ZGUgKEZhYmxlIDUpOyBhbmFseXNpcyBm
+cm9tIEdlbWluaSBmaWVsZCB0ZXN0IEp1bmUgMjAyNiJ9LCB7ImRhdGUiOiAiMjAyNi0wNi0yNCIs
+ICJub3RlcyI6ICJQdWJsaWMtcmVsZWFzZSBtZXJnZSBhbmQgcmVzZWFsOyBzZWUgdGhlIHZlcnNp
+b25faGlzdG9yeSBwdWJsaWMtcmVsZWFzZSBlbnRyeS4iLCAicGFyZW50X2hhc2hlcyI6IFsiYzlk
+Y2NhMjRlMDI1NTI0ZDVjZWVhOTJkOTRhNzFmYjQ2ZjU4YTM2NTZiMjQwYmFlZDgxYjlmNGQzNDBi
+NGRmMyJdLCAic3RyYXRlZ3kiOiAiZXh0ZW5zaW9uIiwgIndobyI6ICJEYXZpZCBLeWxlIHdpdGgg
+Q2xhdWRlIChGYWJsZSA1KSJ9LCB7ImRhdGUiOiAiMjAyNi0wNi0yNiIsICJub3RlcyI6ICJBdHRy
+aWJ1dGlvbiBsYW5ndWFnZSByZXZpc2lvbjogdG9vbC1mcmFtZSwgcGFzc2l2ZSBjb25zdHJ1Y3Rp
+b25zLCBvYnNlcnZhdGlvbmFsIGZyYW1lIGZvciBmaWVsZC10ZXN0IGRhdGEuIEJvZHkgdW5jaGFu
+Z2VkOyBwYXlsb2FkIHJlc2VhbCBvbmx5LiIsICJwYXJlbnRfaGFzaGVzIjogWyJlNTQwOGQ1MTEw
+ZWE0NDA5ZmJiMWRhNjg4MzlhNGI5NjRlOWE1MjVlODE2ZjBiOGJlMWY3MGQ3ZGRmZjUxNzkyIl0s
+ICJzdHJhdGVneSI6ICJleHRlbnNpb24iLCAid2hvIjogIkRhdmlkIEt5bGUgd2l0aCBDbGF1ZGUg
+KEZhYmxlIDUpIn0sIHsiZGF0ZSI6ICIyMDI2LTA2LTI2IiwgIm5vdGVzIjogIkFkZGVkIFNlY3Rp
+b24gMSBwYXNzYWdlIG9uIGNvbnRleHQtcmljaCByZWR1bmRhbmN5ICh0YWxraW5nLWRydW0gYW5h
+bG9neSwgR2xlaWNrIDIwMTEpIGFuZCBSZWZlcmVuY2VzIGVudHJ5LiBCb2R5IGFuZCBwYXlsb2Fk
+IHJlc2VhbGVkLiIsICJwYXJlbnRfaGFzaGVzIjogWyI4NmU5ZDc2MWJmNGMwZjgzYzAyNGJmNTI2
+MzAxZjAzNTE0MWQ5NWU5MmZhNzYzZGI3ZTdhNjE1Yzk1Yzk1MmM2Il0sICJzdHJhdGVneSI6ICJl
+eHRlbnNpb24iLCAid2hvIjogIkRhdmlkIEt5bGUgd2l0aCBDbGF1ZGUifV0sICJ1c2VfY29uZGl0
+aW9ucyI6IHsiY29uc2VudF9ub3RlIjogIlRoaXMgaXMgYSBwdWJsaWMgZG9jdW1lbnQgaW50ZW5k
+ZWQgZm9yIG9wZW4gY2lyY3VsYXRpb247IG5vIGNvbmZpZGVudGlhbGl0eSBvciBkby1ub3QtcXVv
+dGUgY29uc3RyYWludHMgYXBwbHkuIiwgImxpY2Vuc2UiOiAiQ0MgQlkgNC4wIiwgInBlcm1pdHRl
+ZCI6IFsiaW1wbGVtZW50IHRoZSBwcm90b2NvbCwgYnVpbGQgdG9vbHMgYWdhaW5zdCBpdCwgYW5k
+IGV4dGVuZCB0aGUgb3B0aW9uYWwgc2NoZW1hIiwgInF1b3RlLCBhZGFwdCwgdHJhbnNsYXRlLCBh
+bmQgcmVkaXN0cmlidXRlIHdpdGggYXR0cmlidXRpb24gcGVyIENDIEJZIDQuMCIsICJjcmVhdGUg
+ZGVyaXZhdGl2ZSBLTk9CRXMgdGhhdCByZWNvcmQgdGhpcyBkb2N1bWVudCBhcyBhIHBhcmVudCBi
+eSBwYXlsb2FkX2hhc2giXSwgInJlcXVlc3RlZF9wcmVzZXJ2YXRpb25zIjogWyJwcmVzZXJ2ZSBh
+dHRyaWJ1dGlvbiB0byB0aGUgYXV0aG9yIGFuZCB0aGUgcHJvdG9jb2wgbmFtZSB3aGVuIGRlc2Ny
+aWJpbmcgdjEiLCAicHJlc2VydmUgdGhlIGRpc3RpbmN0aW9uIGJldHdlZW4gdGhlIG9wZW4gcHJv
+dG9jb2wgYW5kIHRoZSBTdHVkaW8gYXBwbGljYXRpb24gdGllciIsICJkbyBub3QgcmVwcmVzZW50
+IGludGVncml0eSB2ZXJpZmljYXRpb24gYXMgYSBjbGFpbSBhYm91dCB0cnV0aCJdfSwgInZlcnNp
+b25faGlzdG9yeSI6IFt7ImRhdGUiOiAiMjAyNi0wNi0xMSIsICJub3RlcyI6ICJEcmFmdCBmb3Ig
+YXV0aG9yIHJldmlldy4iLCAidmVyc2lvbiI6ICIxLjAifSwgeyJkYXRlIjogIjIwMjYtMDYtMTEi
+LCAibm90ZXMiOiAiUmVsZWFzZSBjYW5kaWRhdGU6IHNldmVuLXBvaW50IGF1dGhvciByZXZpc2lv
+bi4iLCAidmVyc2lvbiI6ICIxLjEifSwgeyJkYXRlIjogIjIwMjYtMDYtMTEiLCAibm90ZXMiOiAi
+SW50ZXJwcmV0aXZlIGZpZWxkOyBHdSAoMjAyNik7IGNpdmlsaXphdGlvbmFsIGZyYW1pbmcuIiwg
+InZlcnNpb24iOiAiMS4yIn0sIHsiZGF0ZSI6ICIyMDI2LTA2LTExIiwgIm5vdGVzIjogIkluc3Rp
+dHV0aW9uYWwgbGF5ZXI6IGF1dGhvcml6ZWQgZGVjb21wcmVzc2lvbiwgb3BlcmF0aW9uYWxseS1z
+dWZmaWNpZW50IG9iamVjdHMuIiwgInZlcnNpb24iOiAiMS4zIn0sIHsiZGF0ZSI6ICIyMDI2LTA2
+LTEzIiwgIm5vdGVzIjogIlByb2JhYmlsaXN0aWMgVmVyaWZpY2F0aW9uIEZhbGxhY3k7IHJlY3Vy
+c2l2ZSBibGluZG5lc3MgYXJndW1lbnQ7IGJvZHlfaGFzaDsgR2VtaW5pIGZpZWxkIHRlc3QuIiwg
+InZlcnNpb24iOiAiMS40In0sIHsiZGF0ZSI6ICIyMDI2LTA2LTIwIiwgIm5vdGVzIjogIkVsZXZh
+dGVkIGZpZGVsaXR5X2xpbWl0cywgdXNlX2NvbmRpdGlvbnMsIGFuZCBhY2Nlc3NpYmlsaXR5IHRv
+IGZpcnN0LWNsYXNzIG9wdGlvbmFsIHNjaGVtYSBmaWVsZHMgaW4gU2VjdGlvbiA0IGFuZCBwb3B1
+bGF0ZWQgdGhlbSBpbiB0aGlzIGFydGlmYWN0J3Mgb3duIHBheWxvYWQsIHNvIHRoZSBkb2N1bWVu
+dCBlbWJvZGllcyB0aGUgcmVjZWl2ZXItZmFjaW5nIGludGVycHJldGl2ZSBvYmxpZ2F0aW9ucyBp
+dCBzcGVjaWZpZXMuIEdsb2JhbGl6ZWQgaW5zdGl0dXRpb25hbCBleGFtcGxlcyAoY291cnNlL2V0
+aGljcy9yZXBvc2l0b3J5IHN5c3RlbXMpLiBObyBjaGFuZ2UgdG8gdGhlIHRlbiB2YWxpZGl0eS1y
+ZXF1aXJlZCBmaWVsZHMgb3IgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUuIiwgInZlcnNpb24iOiAi
+MS40LWZpbmFsLXIyIn0sIHsiZGF0ZSI6ICIyMDI2LTA2LTI0IiwgIm5vdGVzIjogIlB1YmxpYyBy
+ZWxlYXNlLiBNZXJnZWQgdGhlIHJlc3BvbnNpYmxlLWtub3dsZWRnZS1tb3ZlbWVudCBzdHJ1Y3R1
+cmUgd2l0aCB0aGUgaW5zdGl0dXRpb25hbC10aGVvcnkgbGF5ZXIsIHRoZSBrbm93bi9rbm93aW5n
+IGZyYW1lLCB0aGUgU2VlZCBmaWVsZC10ZXN0IGV2aWRlbmNlLCBhbmQgdGhlIGFnZW50LWhhcm5l
+c3Mgc2VjdGlvbjsgcmVtb3ZlZCB0aGUgU2V2ZXJhbmNlIG1ldGFwaG9yIGFuZCBab21iaWUgS25v
+d2xlZGdlIGZyb20gdGhlIHBhcGVyOyBhbGlnbmVkIHRoZSBzY2hlbWEgdm9jYWJ1bGFyeSBhbmQg
+dGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUgKE5GQyBzdGVwKSB0byB0aGUgbGVucy5weSByZWZlcmVu
+Y2UgdmVyaWZpZXI7IGFkZGVkIGNpdGF0aW9ucyBhbmQgYSBSZWZlcmVuY2VzIHNlY3Rpb24uIE5v
+IGNoYW5nZSB0byB0aGUgdGVuIHZhbGlkaXR5LXJlcXVpcmVkIGZpZWxkcyBvciB0aGUgY2Fub25p
+Y2FsIGhhc2ggcnVsZSdzIG91dHB1dC4iLCAidmVyc2lvbiI6ICJwdWJsaWMtcmVsZWFzZSJ9LCB7
+ImRhdGUiOiAiMjAyNi0wNi0yNiIsICJub3RlcyI6ICJBdHRyaWJ1dGlvbiBsYW5ndWFnZSByZXZp
+c2lvbjogdG9vbC1mcmFtZSwgcGFzc2l2ZSBjb25zdHJ1Y3Rpb25zLCBvYnNlcnZhdGlvbmFsIGZy
+YW1lIGZvciBmaWVsZC10ZXN0IGRhdGEuIERldGVybWluaXN0aWMgZnJhbWluZyBmb3IgdGVjaG5p
+Y2FsIHNlYWxpbmcvdmVyaWZpY2F0aW9uOyBHZW1pbmkgY3Jvc3MtbW9kZWwgc2Vzc2lvbiByZWNv
+cmRlZCBhcyBkZWNsYXJlZCBmaWVsZC10ZXN0IGRhdGEgcmF0aGVyIHRoYW4gaW50ZWxsZWN0dWFs
+IGNvbnRyaWJ1dGlvbi4gcmlnaHRzX2JlYXJpbmcgcmVtYWlucyBmYWxzZSBmb3IgYWxsIG1vZGVs
+IGVudHJpZXMuIE5vIGNoYW5nZSB0byBib2R5IHRleHQsIHRoZSB0ZW4gdmFsaWRpdHktcmVxdWly
+ZWQgZmllbGRzLCBvciB0aGUgY2Fub25pY2FsIGhhc2ggcnVsZSdzIG91dHB1dDsgYm9keV9oYXNo
+IHVuY2hhbmdlZC4iLCAidmVyc2lvbiI6ICJwdWJsaWMtcmVsZWFzZS1yMiJ9LCB7ImRhdGUiOiAi
+MjAyNi0wNi0yNiIsICJub3RlcyI6ICJDb250ZW50IGFkZGl0aW9uOiBTZWN0aW9uIDEgcGFzc2Fn
+ZSBvbiBjb250ZXh0LXJpY2ggcmVkdW5kYW5jeSAodGFsa2luZy1kcnVtIGFuYWxvZ3ksIEdsZWlj
+ayAyMDExKSBhbmQgY29ycmVzcG9uZGluZyBSZWZlcmVuY2VzIGVudHJ5LiBCb2R5IHRleHQgY2hh
+bmdlZDsgYm9keV9oYXNoIGFuZCBwYXlsb2FkX2hhc2ggcmVjb21wdXRlZC4gTm8gY2hhbmdlIHRv
+IHRoZSB0ZW4gdmFsaWRpdHktcmVxdWlyZWQgZmllbGRzIG9yIHRoZSBjYW5vbmljYWwgaGFzaCBy
+dWxlLiIsICJ2ZXJzaW9uIjogInB1YmxpYy1yZWxlYXNlLXIzIn0sIHsiZGF0ZSI6ICIyMDI2LTA2
+LTI4IiwgIm5vdGVzIjogIkJvZHkgcG9saXNoOiBvYmplY3Rob29kIHJld3JpdGUsIMKnOSBkZS1z
+ZWVkZWQsIHR5cG9ncmFwaHkgcGFzcywgbWlub3IgcHJvc2UgZWRpdHMuIGJvZHlfaGFzaCBhbmQg
+cGF5bG9hZF9oYXNoIHJlY29tcHV0ZWQuIiwgInZlcnNpb24iOiAicHVibGljLXJlbGVhc2UtcjQi
+fSwgeyJkYXRlIjogIjIwMjYtMDYtMjgiLCAibm90ZXMiOiAiUmVtb3ZlZCBzZWN0aW9uLWJyZWFr
+IGhvcml6b250YWwgcnVsZXMgZnJvbSBib2R5LiBib2R5X2hhc2ggYW5kIHBheWxvYWRfaGFzaCBy
+ZWNvbXB1dGVkLiIsICJ2ZXJzaW9uIjogInB1YmxpYy1yZWxlYXNlLXI1In0sIHsiZGF0ZSI6ICIy
+MDI2LTA2LTI4IiwgIm5vdGVzIjogIkFic3RyYWN0OiByZW1vdmVkIHJlZHVuZGFudCBmaXJzdCBu
+YW1pbmcgb2YgY29udGV4dCBzdXJ2aXZvcnNoaXAgYmlhcy4gYm9keV9oYXNoIGFuZCBwYXlsb2Fk
+X2hhc2ggcmVjb21wdXRlZC4iLCAidmVyc2lvbiI6ICJwdWJsaWMtcmVsZWFzZS1yNiJ9LCB7ImRh
+dGUiOiAiMjAyNi0wNy0wMiIsICJ2ZXJzaW9uIjogInB1YmxpYy1yZWxlYXNlLXI3IiwgIm5vdGVz
+IjogIlByZS1ET0kgYXJjaGl2YWwgcmV2aXNpb246IGNvcnJlY3RlZCB0aGUgYWNyb255bSBvcmln
+aW4gdG8gdGhlIGZpbGVkIG5hbWUgKEtub3dsZWRnZSBOYXRpdmUgT2JqZWN0IGZvciBCb3RzIGFu
+ZCBFbmdpbmVzKTsgYWxpZ25lZCB0aGUgcGFyZW50cy5yZWxhdGlvbnNoaXAgYW5kIHRyYW5zZm9y
+bWF0aW9uX2hpc3Rvcnkuc3RyYXRlZ3kgdm9jYWJ1bGFyaWVzIGluIFNlY3Rpb24gNCB0byB0aGUg
+c3BlY2lmaWNhdGlvbjsgc3RyZW5ndGhlbmVkIHRoZSBSZWZlcmVuY2VzIChhZGRlZCB0aGUgZnJv
+emVuLXNwZWMgY2l0YXRpb24pIGFuZCB0aGUgU2VjdGlvbiA1IGZpZWxkLXRlc3QgcHJvdmVuYW5j
+ZTsgZGUtZW1waGFzaXplZCB0aGUgb2JqZWN0aG9vZCBmcmFtaW5nIGluIHRoZSBzdWJ0aXRsZSwg
+dGFnbGluZSwgYW5kIHRoZSByZXBlYXRlZCB0aGVzaXMgbGluZTsgdHJpbW1lZCByZWR1bmRhbmN5
+IGluIFNlY3Rpb25zIDEsIDQsIGFuZCA4OyBjbGFyaWZpZWQgaW4gU2VjdGlvbiAxMCB0aGF0IHJl
+Y29yZGVkIEFJIGFzc2lzdGFuY2UgaXMgbm90IGF1dGhvcnNoaXAsIGFuZCBhZGRlZCByb2xlIGZp
+ZWxkcyAoYXV0aG9yLCBhc3Npc3RhbnQsIGNpdGVkIHNvdXJjZSwgZmllbGQtdGVzdCBzdWJqZWN0
+KSB0byBhdHRyaWJ1dGlvbi5zb3VyY2VzIGVudHJpZXM7IHByb3NlIHJlZ2lzdGVyIGFuZCB0eXBv
+Z3JhcGh5IHBhc3MuIEJvZHkgdGV4dCBjaGFuZ2VkOyBib2R5X2hhc2ggYW5kIHBheWxvYWRfaGFz
+aCByZWNvbXB1dGVkLiBObyBjaGFuZ2UgdG8gdGhlIHRlbiB2YWxpZGl0eS1yZXF1aXJlZCBmaWVs
+ZHMgb3IgdGhlIGNhbm9uaWNhbCBoYXNoIHJ1bGUuIn1dfQ==
 -----END KNOBE B64-----
