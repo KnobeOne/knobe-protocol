@@ -20,7 +20,7 @@ The steward **may not**:
 
 ## Patent pledge
 
-The steward asserts no patents covering KNOBE Protocol v1 and will not assert any patent against conformant implementations of it.
+The steward asserts no patents covering KNOBE Protocol v1 and will not assert any patent against conformant implementations of it. KNOBE is published as open specification and reference code precisely so that it stays free to implement; no patent is sought or held over the protocol.
 
 ## Transition to shared governance
 

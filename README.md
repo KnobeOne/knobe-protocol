@@ -2,7 +2,7 @@
 
 **An open, plain-text protocol for knowledge objects that keep their context when they move.**
 
-A KNOBE (Knowledge Object Boundary Envelope) is a single markdown file with three layers:
+A KNOBE is a single markdown file with three layers:
 
 1. **YAML frontmatter** — human-scannable metadata
 2. **Markdown body** — the document itself, opens in any editor
