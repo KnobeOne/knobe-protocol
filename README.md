@@ -52,6 +52,8 @@ The reference verifier `lens.py` is a standard-library Python file with no exter
 
 An implementation that reproduces all nine expected results is canonically compatible with KNOBE Protocol v1.
 
+A second, independent implementation already exists. The browser Lens ([`site/lens.html`](site/lens.html), live at [knobe.org/lens](https://knobe.org/lens)) is a pure-JavaScript verifier built from the same specification, sharing no code with `lens.py`. It reproduces `lens.py`'s verdicts across the conformance and adversarial test vectors, with one deliberate exception: in a browser, where numeric canonicalization cannot match Python's guarantees, it declines to issue a hash verdict on bare-numeric payloads (a §5 violation) and defers to `lens.py` as canonical for that case. Two independent implementations agreeing on the vectors is the practical test that the spec is buildable from text alone.
+
 ## License
 
 | Material | License |

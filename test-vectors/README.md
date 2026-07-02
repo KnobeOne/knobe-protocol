@@ -27,7 +27,7 @@ python3 lens.py minimal-valid.knobe.md
 |------|----------------|----------------------|-------|
 | `numeric-violation.knobe.md` | verified | invalid | bare integer in payload triggers §5 violation; integrity intact |
 | `omitted-body-hash.knobe.md` | verified | valid | no body_hash field; body_verified MUST be omitted |
-| `multi-block.knobe.md` | verified (last block) | valid | two payload blocks; verifier surfaces warning, body_verified MUST be omitted |
+| `multi-block.knobe.md` | verified (last block) | warnings | two payload blocks; verifier surfaces a warning and MUST report body_verified omitted |
 
 ## Adversarial hardening set
 
