@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNOBE — Related work</title>
-<meta name="description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs — where it complements them, where it differs, and when to use them instead.">
+<meta name="description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -83,11 +83,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE — Related work">
-<meta property="og:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs — where it complements them, where it differs, and when to use them instead.">
+<meta property="og:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
 <meta property="og:url" content="https://knobe.org/related-work">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE — Related work">
-<meta name="twitter:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs — where it complements them, where it differs, and when to use them instead.">
+<meta name="twitter:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -117,7 +117,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <header>
   <div class="wrap">
     <div class="eyebrow">Positioning</div>
-    <h1>Related work — and why not just use X?</h1>
+    <h1>Related work, and why not just use X?</h1>
     <div class="meta">
       <span>Based on KNOBE Protocol v1.0</span>
       <span>2026-07-01</span>
@@ -132,34 +132,34 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p class="lead">KNOBE occupies a deliberately small corner: a <strong>single plain-text file</strong> that carries its own context and integrity seal, requires <strong>no infrastructure, no identity system, and no platform</strong> to read or verify, and degrades gracefully to ordinary markdown when no tooling is present. Most neighboring standards are better than KNOBE at something. This page says what, honestly, and when you should use them instead.</p>
 
     <h2>Git</h2>
-    <p>Git is version control <em>inside a repository</em>: it answers "what changed here, when, by whom" with great precision — as long as the file stays home. The moment a file is emailed, uploaded to an LMS, pasted into a chat, or ingested by a RAG pipeline, its Git history stays behind. KNOBE is built for that exit moment: the context rides inside the file itself. Git answers "what changed here"; KNOBE answers "what is this, where did it come from, what may you do with it" wherever the file lands.</p>
+    <p>Git is version control <em>inside a repository</em>: it answers "what changed here, when, by whom" with great precision, as long as the file stays home. The moment a file is emailed, uploaded to an LMS, pasted into a chat, or ingested by a RAG pipeline, its Git history stays behind. KNOBE is built for that exit moment: the context rides inside the file itself. Git answers "what changed here"; KNOBE answers "what is this, where did it come from, what may you do with it" wherever the file lands.</p>
     <div class="defer"><span class="dlabel">They compose</span>Seal a KNOBE, commit it. Use Git for development history; use KNOBE for what the object must carry when it leaves.</div>
 
     <h2>C2PA (Content Credentials)</h2>
-    <p>C2PA is the closest neighbor and, for media, the more mature one. It binds provenance manifests to images, video, and audio, with <strong>real cryptographic signing</strong> backed by a certificate infrastructure. Where it differs: C2PA manifests are embedded binary structures aimed at media assets and assume signing infrastructure; KNOBE targets plain-text knowledge work, stays human-readable with no tooling at all, and requires no identity system — v1 attribution is <em class="kw">declared, not signed</em>, by design.</p>
+    <p>C2PA is the closest neighbor and, for media, the more mature one. It binds provenance manifests to images, video, and audio, with <strong>real cryptographic signing</strong> backed by a certificate infrastructure. Where it differs: C2PA manifests are embedded binary structures aimed at media assets and assume signing infrastructure; KNOBE targets plain-text knowledge work, stays human-readable with no tooling at all, and requires no identity system. In v1, attribution is <em class="kw">declared, not signed</em>, by design.</p>
     <p>An honest concession: if you need signed identity today, C2PA (for media) or Verifiable Credentials (for claims) offer what KNOBE v1 deliberately does not. KNOBE serves the no-PKI, plain-text, degradation-tolerant corner C2PA does not; a future signed KNOBE profile is designed to compose with certificate- or credential-based identity rather than reinvent it.</p>
     <div class="defer"><span class="dlabel">Defer to C2PA</span>For provenance of images, video, and audio.</div>
 
     <h2>W3C Verifiable Credentials</h2>
-    <p>VCs prove <strong>claims made by identified issuers</strong> — "University X states that person Y completed Z" — and presume issuer infrastructure: DIDs, key management, revocation. KNOBE carries <strong>context without requiring identity</strong>: its floor is intentionally lower, so a student, archivist, or script can produce a valid object with nothing but a text editor and a hash. Where identity-backed claims matter, a VC can travel inside or alongside a KNOBE. They are complementary layers, not rivals.</p>
+    <p>VCs prove <strong>claims made by identified issuers</strong> (for example, "University X states that person Y completed Z"), and presume issuer infrastructure: DIDs, key management, revocation. KNOBE carries <strong>context without requiring identity</strong>: its floor is intentionally lower, so a student, archivist, or script can produce a valid object with nothing but a text editor and a hash. Where identity-backed claims matter, a VC can travel inside or alongside a KNOBE. They are complementary layers, not rivals.</p>
     <div class="defer"><span class="dlabel">Defer to VCs</span>When the question is "who asserts this, and can they prove it?" Use KNOBE when the question is "what is this object, and what must travel with it?"</div>
 
     <h2>W3C PROV</h2>
-    <p>PROV is the standards-grade <em>vocabulary</em> for provenance — entities, activities, agents — designed for provenance databases and queryable graphs. It defines how to describe lineage richly; it does not define a self-contained, sealed, human-readable file that survives being emailed. KNOBE's <code>parents</code> and <code>transformation_history</code> fields are a deliberately small subset of what PROV can express. A KNOBE profile mapping its fields onto PROV terms is a natural future bridge, and contributions in that direction are welcome.</p>
+    <p>PROV is the standards-grade <em>vocabulary</em> for provenance (entities, activities, agents), designed for provenance databases and queryable graphs. It defines how to describe lineage richly; it does not define a self-contained, sealed, human-readable file that survives being emailed. KNOBE's <code>parents</code> and <code>transformation_history</code> fields are a deliberately small subset of what PROV can express. A KNOBE profile mapping its fields onto PROV terms is a natural future bridge, and contributions in that direction are welcome.</p>
     <div class="defer"><span class="dlabel">Defer to PROV</span>When you need deep, queryable provenance graphs across many systems.</div>
 
     <h2>RO-Crate</h2>
-    <p>RO-Crate packages <strong>research data</strong> — datasets, code, and their metadata — as a directory with a JSON-LD manifest, aimed at repositories and machine actionability. It is the right answer for datasets. KNOBE is one file, human-first, aimed at <em>documents and knowledge artifacts</em> rather than data packages, and it defines sealing and verification semantics RO-Crate does not.</p>
+    <p>RO-Crate packages <strong>research data</strong> (datasets, code, and their metadata) as a directory with a JSON-LD manifest, aimed at repositories and machine actionability. It is the right answer for datasets. KNOBE is one file, human-first, aimed at <em>documents and knowledge artifacts</em> rather than data packages, and it defines sealing and verification semantics RO-Crate does not.</p>
     <div class="defer"><span class="dlabel">Defer to RO-Crate</span>For research-data packaging and repository deposit. If your object is a dataset, use RO-Crate; if it is a memo, transcript, adaptation, summary, or piece of student work, KNOBE fits.</div>
 
     <h2>Dublin Core (and metadata standards generally)</h2>
-    <p>Dublin Core gives shared <em>names</em> for descriptive fields — creator, date, rights. KNOBE's problem is not naming but <strong>survival and accountability</strong>: ordinary metadata is exactly what pipelines strip, and nothing in Dublin Core detects that the description was altered or separated from its object. KNOBE adds the envelope: sealed payload, integrity hash, verification states, transformation history, fidelity limits, use conditions. Where sensible, KNOBE vocabulary stays mappable to Dublin Core terms rather than competing with them.</p>
+    <p>Dublin Core gives shared <em>names</em> for descriptive fields: creator, date, rights. KNOBE's problem is not naming but <strong>survival and accountability</strong>: ordinary metadata is exactly what pipelines strip, and nothing in Dublin Core detects that the description was altered or separated from its object. KNOBE adds the envelope: sealed payload, integrity hash, verification states, transformation history, fidelity limits, use conditions. Where sensible, KNOBE vocabulary stays mappable to Dublin Core terms rather than competing with them.</p>
 
     <h2>Knowledge graphs</h2>
-    <p>A knowledge graph is a <strong>centralized representation queried in place</strong> — powerful for linking and inference inside a system you control. KNOBE is what a node carries <em>when it leaves the graph</em>. The two are complementary by construction: a graph can ingest KNOBEs (their payloads are structured JSON) and can emit KNOBEs when knowledge exits its boundary. If your knowledge never leaves your platform, you may not need KNOBE. Most knowledge leaves.</p>
+    <p>A knowledge graph is a <strong>centralized representation queried in place</strong>, powerful for linking and inference inside a system you control. KNOBE is what a node carries <em>when it leaves the graph</em>. The two are complementary by construction: a graph can ingest KNOBEs (their payloads are structured JSON) and can emit KNOBEs when knowledge exits its boundary. If your knowledge never leaves your platform, you may not need KNOBE. Most knowledge leaves.</p>
 
     <h2>Isn't this just metadata / front-matter?</h2>
-    <p>Front-matter metadata is the <em>content</em> of the solution; KNOBE's contribution is the <strong>transport guarantee</strong>. YAML front-matter alone is silently editable, routinely stripped, and carries no tamper evidence. KNOBE is metadata that survives: self-contained, hash-sealed, with defined <a href="/spec" class="inline">verification semantics</a>, published <a href="/test-vectors/" class="inline">test vectors</a>, and graceful degradation to readable text. If plain front-matter meets your needs, use it — KNOBE's YAML layer is deliberately compatible with that practice, so the upgrade path is short.</p>
+    <p>Front-matter metadata is the <em>content</em> of the solution; KNOBE's contribution is the <strong>transport guarantee</strong>. YAML front-matter alone is silently editable, routinely stripped, and carries no tamper evidence. KNOBE is metadata that survives: self-contained, hash-sealed, with defined <a href="/spec" class="inline">verification semantics</a>, published <a href="/test-vectors/" class="inline">test vectors</a>, and graceful degradation to readable text. If plain front-matter meets your needs, use it; KNOBE's YAML layer is deliberately compatible with that practice, so the upgrade path is short.</p>
 
     <h2>Summary</h2>
     <table class="rw-table">
