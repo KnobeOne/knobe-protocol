@@ -33,7 +33,7 @@ nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-it
 .nav-menu a{padding:7px 10px;border-radius:4px;white-space:nowrap;border-bottom:none}
 .nav-menu a:hover{background:var(--paper-warm);color:var(--moss)}
 .nav-menu a.here{color:var(--moss);border-bottom:none}
-@media(max-width:680px){.navlinks{display:none}}
+@media(max-width:680px){nav .inner{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}}
 
 .wp-bar{background:var(--paper-warm);border-bottom:1px solid var(--line);padding:11px 0}
 .wp-bar .inner{max-width:920px;margin:0 auto;padding:0 28px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
@@ -70,9 +70,14 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .social-icon{display:inline-flex;align-items:center;vertical-align:middle;margin-left:8px;color:var(--ink-faint);transition:color .15s;line-height:1}
 .social-icon:hover{color:var(--moss)}
 .social-icon svg{display:block}
+/* ---- skip link (accessibility) ---- */
+.skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
+  font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
+.skip:focus{left:0}
 </style>
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 
 <nav>
   <div class="inner">
@@ -84,7 +89,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <details class="nav-uses">
         <summary>Uses</summary>
         <div class="nav-menu">
-          <a href="/education-profile">Education uses</a>
+          <a href="/education-profile">Education</a>
           <a href="/government-profile">Government</a>
           <a href="/enterprise-profile">Enterprise</a>
           <a href="/accessibility">Accessibility</a>
@@ -106,7 +111,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </div>
 
-<main>
+<main id="main">
   <div class="wrap">
 <h1>KNOBE Protocol v1: A Context Protocol for Responsible Knowledge Movement</h1>
 <h3>Preserving objecthood, attribution, and interpretive obligation under compression</h3>

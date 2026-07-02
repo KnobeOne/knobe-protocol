@@ -34,7 +34,7 @@ nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-it
 .nav-menu a{padding:7px 10px;border-radius:4px;white-space:nowrap;border-bottom:none}
 .nav-menu a:hover{background:var(--paper-warm);color:var(--moss)}
 .nav-menu a.here{color:var(--moss);border-bottom:none}
-@media(max-width:680px){.navlinks{display:none}.field-table,.label-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:680px){nav .inner{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}.field-table,.label-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
 
 header{padding:64px 0 36px;border-bottom:1px solid var(--line)}
 .eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
@@ -97,6 +97,10 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .social-icon{display:inline-flex;align-items:center;vertical-align:middle;margin-left:8px;color:var(--ink-faint);transition:color .15s;line-height:1}
 .social-icon:hover{color:var(--moss)}
 .social-icon svg{display:block}
+/* ---- skip link (accessibility) ---- */
+.skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
+  font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
+.skip:focus{left:0}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -117,6 +121,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta name="twitter:description" content="Non-normative guidance for using KNOBE Protocol v1 in educational settings — recommended field values, privacy defaults, attribution roles, and fidelity limit templates.">
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 
 <nav>
   <div class="inner">
@@ -128,7 +133,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <details class="nav-uses">
         <summary class="here">Uses</summary>
         <div class="nav-menu">
-          <a href="/education-profile" class="here" aria-current="page">Education uses</a>
+          <a href="/education-profile" class="here" aria-current="page">Education</a>
           <a href="/government-profile">Government</a>
           <a href="/enterprise-profile">Enterprise</a>
           <a href="/accessibility">Accessibility</a>
@@ -152,10 +157,10 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="wrap">
 
-    <p class="lead">This page is non-normative guidance for using KNOBE in educational settings. Nothing here changes the protocol. If this document conflicts with the <a class="inline" href="spec.html">normative specification</a>, the specification governs.</p>
+    <p class="lead">This page is non-normative guidance for using KNOBE in educational settings. Nothing here changes the protocol. If this document conflicts with the <a class="inline" href="/spec">normative specification</a>, the specification governs.</p>
 
     <div class="nonnorm">
       <strong>Who this is for.</strong> Instructors, students, ed-tech builders, librarians, and course designers who want to use KNOBE to document student work, course materials, AI use disclosure, and accessibility adaptations. The first planned KNOBE instructional pilots are being developed with collaborators at UC Davis across multiple large courses with a range of AI use policies.

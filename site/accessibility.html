@@ -35,7 +35,7 @@ nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-it
 .nav-menu a{padding:7px 10px;border-radius:4px;white-space:nowrap;border-bottom:none}
 .nav-menu a:hover{background:var(--paper-warm);color:var(--moss)}
 .nav-menu a.here{color:var(--moss);border-bottom:none}
-@media(max-width:680px){.navlinks{display:none}}
+@media(max-width:680px){nav .inner{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}}
 
 header.top{padding:74px 0 18px}
 .eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:22px}
@@ -68,6 +68,10 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .social-icon{display:inline-flex;align-items:center;vertical-align:middle;margin-left:8px;color:var(--ink-faint);transition:color .15s;line-height:1}
 .social-icon:hover{color:var(--moss)}
 .social-icon svg{display:block}
+/* ---- skip link (accessibility) ---- */
+.skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
+  font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
+.skip:focus{left:0}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -87,6 +91,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta name="twitter:description" content="Accessibility is not an add-on use case for KNOBE; it is the first proving ground.">
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 
 <nav>
   <div class="inner">
@@ -98,7 +103,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <details class="nav-uses">
         <summary class="here">Uses</summary>
         <div class="nav-menu">
-          <a href="/education-profile">Education uses</a>
+          <a href="/education-profile">Education</a>
           <a href="/government-profile">Government</a>
           <a href="/enterprise-profile">Enterprise</a>
           <a href="/accessibility" class="here" aria-current="page">Accessibility</a>
@@ -117,7 +122,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="wrap">
     <p class="lead">Accessibility is not an add-on use case for KNOBE; it is the first proving ground, with its own ethical stakes, and it reveals the general problem most clearly.</p>
 
@@ -133,7 +138,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <div class="cta-row">
       <a href="/downloads" class="btn btn-primary">See the plain-language adaptation</a>
-      <a href="/education-profile" class="btn btn-ghost">Education uses</a>
+      <a href="/education-profile" class="btn btn-ghost">Education</a>
     </div>
 
     <div class="related">

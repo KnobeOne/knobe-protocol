@@ -33,7 +33,7 @@ nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-it
 .nav-menu a{padding:7px 10px;border-radius:4px;white-space:nowrap;border-bottom:none}
 .nav-menu a:hover{background:var(--paper-warm);color:var(--moss)}
 .nav-menu a.here{color:var(--moss);border-bottom:none}
-@media(max-width:680px){.navlinks{display:none}}
+@media(max-width:680px){nav .inner{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}}
 
 header{padding:64px 0 36px;border-bottom:1px solid var(--line)}
 .eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
@@ -77,6 +77,10 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .social-icon{display:inline-flex;align-items:center;vertical-align:middle;margin-left:8px;color:var(--ink-faint);transition:color .15s;line-height:1}
 .social-icon:hover{color:var(--moss)}
 .social-icon svg{display:block}
+/* ---- skip link (accessibility) ---- */
+.skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
+  font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
+.skip:focus{left:0}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -97,6 +101,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta name="twitter:description" content="What KNOBE Protocol v1 defends against, what it does not, and the boundary between the two. A precise threat model for security-focused audiences.">
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 
 <nav>
   <div class="inner">
@@ -108,7 +113,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <details class="nav-uses">
         <summary>Uses</summary>
         <div class="nav-menu">
-          <a href="/education-profile">Education uses</a>
+          <a href="/education-profile">Education</a>
           <a href="/government-profile">Government</a>
           <a href="/enterprise-profile">Enterprise</a>
           <a href="/accessibility">Accessibility</a>
@@ -132,7 +137,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   </div>
 </header>
 
-<main>
+<main id="main">
   <div class="wrap">
 
     <p class="lead">KNOBE is a context-survival protocol, not a hard security primitive. This page is for engineers, security reviewers, and adopters who want a precise account of where the protocol provides genuine value and where it does not. The boundary matters, and the protocol is honest about both sides of it.</p>
@@ -225,11 +230,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <footer>
   <div class="wrap">
-    <div class="fclaim">KNOBE is an open protocol for plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</div>
+    <div class="fclaim">KNOBE is an open protocol for auditable plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems. Built for accessibility, interoperability, and portability.</div>
     <div class="frow">
       <div>KNOBE Protocol v1 · Threat model · CC BY 4.0<br>David Kyle · University of California, Davis</div>
       <div style="text-align:right">
-        <a href="spec.html">Spec</a> · <a href="index.html">Overview</a> · <a href="about.html">About</a><br>
+        <a href="/spec">Spec</a> · <a href="/">Overview</a> · <a href="/about">About</a><br>
         <a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a>
       </div>
     </div>
