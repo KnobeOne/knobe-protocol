@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KNOBE Government Profile v1 — Non-normative guidance for public-sector records</title>
+<title>KNOBE Government Profile v1: Non-normative guidance for public-sector records</title>
 <meta name="description" content="Non-normative guidance for using KNOBE Protocol v1 in government settings: records provenance, FOIA release lineage, sensitivity and handling guidance, custody roles, fidelity limit templates, and UI label translations for records officers and archivists.">
 <style>
 :root{
@@ -113,12 +113,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <link rel="canonical" href="https://knobe.org/government-profile">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
-<meta property="og:title" content="KNOBE Government Profile v1 — Non-normative guidance for public-sector records">
-<meta property="og:description" content="Non-normative guidance for using KNOBE Protocol v1 in government settings — records provenance, FOIA release lineage, sensitivity and handling guidance, custody roles, and fidelity limit templates.">
+<meta property="og:title" content="KNOBE Government Profile v1: Non-normative guidance for public-sector records">
+<meta property="og:description" content="Non-normative guidance for using KNOBE Protocol v1 in government settings: records provenance, FOIA release lineage, sensitivity and handling guidance, custody roles, and fidelity limit templates.">
 <meta property="og:url" content="https://knobe.org/government-profile">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KNOBE Government Profile v1 — Non-normative guidance for public-sector records">
-<meta name="twitter:description" content="Non-normative guidance for using KNOBE Protocol v1 in government settings — records provenance, FOIA release lineage, sensitivity and handling guidance, and custody roles.">
+<meta name="twitter:title" content="KNOBE Government Profile v1: Non-normative guidance for public-sector records">
+<meta name="twitter:description" content="Non-normative guidance for using KNOBE Protocol v1 in government settings: records provenance, FOIA release lineage, sensitivity and handling guidance, and custody roles.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -167,7 +167,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </div>
 
     <div class="nonnorm">
-      <strong>Scope caveat — unclassified systems only.</strong> KNOBE is plain-text tooling for unclassified information. Do not use it to mark, carry, or move classified national-security information; that is governed by separate systems and authorities. The <code>privacy_level</code> field declares handling intent — it is not a classification authority and does not substitute for CUI marking, agency policy, or statute.
+      <strong>Scope caveat: unclassified systems only.</strong> KNOBE is plain-text tooling for unclassified information. Do not use it to mark, carry, or move classified national-security information; that is governed by separate systems and authorities. The <code>privacy_level</code> field declares handling intent; it is not a classification authority and does not substitute for CUI marking, agency policy, or statute.
     </div>
 
     <div class="toc">
@@ -186,11 +186,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h2 id="why"><span class="sec">§1</span>Why KNOBE in government</h2>
 
-    <p>Public-sector records outlive the systems that hold them. A record created in one case-management platform is migrated to another, exported for litigation, released under FOIA, adapted for accessibility, summarized for a briefing, and — increasingly — ingested by AI tools that compress and recombine it. At each step, the conditions that made the record interpretable travel less reliably than the content: who issued it and under what authority, what it can and cannot be trusted to represent, what was withheld and on what legal basis, and whether it is the version of record or a downstream derivative.</p>
+    <p>Public-sector records outlive the systems that hold them. A record created in one case-management platform is migrated to another, exported for litigation, released under FOIA, adapted for accessibility, summarized for a briefing, and increasingly ingested by AI tools that compress and recombine it. At each step, the conditions that made the record interpretable travel less reliably than the content: who issued it and under what authority, what it can and cannot be trusted to represent, what was withheld and on what legal basis, and whether it is the version of record or a downstream derivative.</p>
 
     <p>KNOBE addresses this at the artifact layer, without requiring an agency to adopt a new system of record. A <code>.knobe.md</code> file is readable in any text editor, verifiable with a small Python script, and self-describing: it carries attribution, source relations, transformation history, fidelity limits, handling terms, and a hash-sealed integrity check. It is a <em class="kw">system of context</em> that rides alongside whatever systems an agency already runs.</p>
 
-    <p>Three government problems map directly onto the protocol's fields. <strong>Chain of custody and provenance</strong> — <code>attribution</code>, <code>parents</code>, and <code>transformation_history</code> record where a record came from and what has been done to it. <strong>Release integrity</strong> — a redacted FOIA production can reference the unaltered source by hash: a precise, tamper-evident identification of the exact record it declares as its source, checkable whenever that record is produced. <strong>Accessibility as legal obligation</strong> — Section 508 and WCAG adaptations (alt text, plain-language versions, captions, translations) can be recorded with the adapter's labor visible and the source preserved, rather than circulating as detached copies. KNOBE records who produced an adaptation and how it relates to its source; it does not itself certify that an adaptation meets Section 508 or WCAG, which remains the agency's determination.</p>
+    <p>Three government problems map directly onto the protocol's fields. <strong>Chain of custody and provenance</strong>: <code>attribution</code>, <code>parents</code>, and <code>transformation_history</code> record where a record came from and what has been done to it. <strong>Release integrity</strong>: a redacted FOIA production can reference the unaltered source by hash, a precise, tamper-evident identification of the exact record it declares as its source, checkable whenever that record is produced. <strong>Accessibility as legal obligation</strong>: Section 508 and WCAG adaptations (alt text, plain-language versions, captions, translations) can be recorded with the adapter's labor visible and the source preserved, rather than circulating as detached copies. KNOBE records who produced an adaptation and how it relates to its source; it does not itself certify that an adaptation meets Section 508 or WCAG, which remains the agency's determination.</p>
 
     <h2 id="defaults"><span class="sec">§2</span>Recommended field defaults for government use</h2>
 
@@ -206,7 +206,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </table>
 
     <div class="nonnorm">
-      <strong>License note.</strong> Works of the U.S. federal government are generally not subject to copyright and can be marked <code>"Public domain (U.S. Government work)"</code>. State, local, tribal, territorial, and contractor-produced works are governed by their own rules — do not assume public domain. When in doubt, consult the agency's records or legal office.
+      <strong>License note.</strong> Works of the U.S. federal government are generally not subject to copyright and can be marked <code>"Public domain (U.S. Government work)"</code>. State, local, tribal, territorial, and contractor-produced works are governed by their own rules; do not assume public domain. When in doubt, consult the agency's records or legal office.
     </div>
 
     <h4>Recommended content_type values for government artifacts</h4>
@@ -275,7 +275,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     "represents": "the redacted public version of [record] as released under [authority]",
     "trust_as": "an accurate reproduction of the source record with [category] withheld",
     "do_not_infer": [
-      "that redacted passages are absent from the source — they are withheld, not deleted",
+      "that redacted passages are absent from the source, they are withheld, not deleted",
       "that this release reflects events after the source record's date",
       "that withheld content implies any particular fact about its subject"
     ]
@@ -309,7 +309,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h2 id="use"><span class="sec">§6</span>Use condition and release templates</h2>
 
-    <p>The <code>use_conditions</code> field carries the originator's declared terms for how the next person may use the artifact — terms that otherwise get separated from the record as it moves.</p>
+    <p>The <code>use_conditions</code> field carries the originator's declared terms for how the next person may use the artifact, terms that otherwise get separated from the record as it moves.</p>
 
     <h4>Template: public-domain release (U.S. federal work)</h4>
 <pre>{
@@ -354,36 +354,36 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <tr><td>use_conditions</td><td>Handling and release terms</td><td>Or: "Release and reuse terms."</td></tr>
         <tr><td>transformation_history</td><td>Custody and change log</td><td>Or: "Chain of custody."</td></tr>
         <tr><td>parents</td><td>Source records</td><td>Or: "Derived from."</td></tr>
-        <tr><td>privacy_level: sensitive</td><td>Controlled — handle per policy</td><td>CUI / PII / law-enforcement sensitive.</td></tr>
-        <tr><td>privacy_level: restricted</td><td>Restricted — not for release</td><td>Under hold, sealed, or statutorily exempt.</td></tr>
+        <tr><td>privacy_level: sensitive</td><td>Controlled: handle per policy</td><td>CUI / PII / law-enforcement sensitive.</td></tr>
+        <tr><td>privacy_level: restricted</td><td>Restricted: not for release</td><td>Under hold, sealed, or statutorily exempt.</td></tr>
         <tr><td>payload_hash: verified</td><td>Record integrity intact</td><td>Follow with "Integrity is not the same as accuracy or authority."</td></tr>
-        <tr><td>payload_hash: failed</td><td>Record may have changed — inspect</td><td>Avoid "tampered"; changes may be legitimate. Prompt review.</td></tr>
+        <tr><td>payload_hash: failed</td><td>Record may have changed, inspect</td><td>Avoid "tampered"; changes may be legitimate. Prompt review.</td></tr>
       </tbody>
     </table>
 
     <h2 id="example"><span class="sec">§8</span>Worked example: a record and its release</h2>
 
-    <div class="nonnorm"><strong>Note.</strong> Each example is a separate <code>.knobe.md</code> file. The hashes shown are payload hashes — they prove the structured record is intact, not proof of identity, authority, or approval. Integrity is not truth.</div>
+    <div class="nonnorm"><strong>Note.</strong> Each example is a separate <code>.knobe.md</code> file. The hashes shown are payload hashes; they prove the structured record is intact, not proof of identity, authority, or approval. Integrity is not truth.</div>
 
-    <p>The two examples below form a verifiable release lineage. An internal inspection memo is the record of origin; a FOIA release is a redacted public version that references the source memo by hash. Download both and verify with <code>lens.py</code>. The release declares its source by payload hash. A recipient cannot see the restricted memo, but the reference is precise and tamper-evident: if the source record is ever produced — in litigation, audit, or a later release — anyone can confirm it is the exact record the release named at sealing. The derivation itself is declared by the issuing office, not proven by the hash.</p>
+    <p>The two examples below form a verifiable release lineage. An internal inspection memo is the record of origin; a FOIA release is a redacted public version that references the source memo by hash. Download both and verify with <code>lens.py</code>. The release declares its source by payload hash. A recipient cannot see the restricted memo, but the reference is precise and tamper-evident: if the source record is ever produced (in litigation, audit, or a later release), anyone can confirm it is the exact record the release named at sealing. The derivation itself is declared by the issuing office, not proven by the hash.</p>
 
     <div class="dl-card">
-      <div class="dt">Example 1 — Internal record of origin</div>
+      <div class="dt">Example 1: Internal record of origin</div>
       <div class="dd">An internal facility-inspection memo. Carries <code>privacy_level: restricted</code>, <code>quarantine_status: trusted</code> (certified by the originating office), and the hash that the redacted release references as a parent. Contains a personnel section that is withheld downstream.</div>
       <div class="dh">payload_hash: 472b7c28584bbc178c30fe7c942a6891e8babb5d3f8d32872e1940f3341037bc</div>
       <a href="knobe-government-record.knobe.md" class="btn">Download</a>
     </div>
 
     <div class="dl-card">
-      <div class="dt">Example 2 — Redacted FOIA release</div>
-      <div class="dd">A redacted public release of the memo, prepared in response to a FOIA request. Personnel details are withheld under Exemption 6. Carries a <code>redaction</code> record naming the authority and scope, a <code>parents</code> entry referencing the source by hash, and fidelity limits stating that withheld passages are withheld — not deleted.</div>
+      <div class="dt">Example 2: Redacted FOIA release</div>
+      <div class="dd">A redacted public release of the memo, prepared in response to a FOIA request. Personnel details are withheld under Exemption 6. Carries a <code>redaction</code> record naming the authority and scope, a <code>parents</code> entry referencing the source by hash, and fidelity limits stating that withheld passages are withheld, not deleted.</div>
       <div class="dh">payload_hash: 1c503fa97dbdaacca370aba6b967d993a061bf3a0f92e01aa007a41947402d64</div>
       <a href="knobe-government-foia-release.knobe.md" class="btn">Download</a>
     </div>
 
     <h3>What the lineage demonstrates</h3>
 
-    <p>Opening the release's <code>parents</code> array reveals one entry with a payload hash. Verify that hash against the source record above and it matches: the release names that exact record as its source, and no other. The hash proves the identity of the referenced record precisely; the derivation and the faithfulness of reproduced text remain declarations by the issuing office — sealed, attributable, and tamper-evident, but not independently proven. The <code>redaction</code> field records the governing exemption and the scope of what was withheld, so the basis for withholding travels with the release rather than living only in a separate log. The chain — originating office certifies the record, FOIA office redacts and releases — is sealed and checkable without any case-management system, portal, or database. The artifacts carry their own custody.</p>
+    <p>Opening the release's <code>parents</code> array reveals one entry with a payload hash. Verify that hash against the source record above and it matches: the release names that exact record as its source, and no other. The hash proves the identity of the referenced record precisely; the derivation and the faithfulness of reproduced text remain declarations by the issuing office: sealed, attributable, and tamper-evident, but not independently proven. The <code>redaction</code> field records the governing exemption and the scope of what was withheld, so the basis for withholding travels with the release rather than living only in a separate log. The chain (originating office certifies the record, FOIA office redacts and releases) is sealed and checkable without any case-management system, portal, or database. The artifacts carry their own custody.</p>
 
   </div>
 </main>

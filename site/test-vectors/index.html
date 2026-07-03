@@ -1,63 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>KNOBE Protocol v1 — Conformance Test Vectors</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE — Test vectors</title>
+<meta name="description" content="Nine conformance test vectors for KNOBE Protocol v1 implementations, from valid seals and body modification to payload tampering and malformed Base64.">
 <style>
-  :root {
-    --bg:#f6f4ef; --ink:#1f2a26; --muted:#5f6b66; --line:#dcd7cc;
-    --accent:#2e5d4b; --warn:#8a3b2e; --amber:#7a5c3a; --chip:#eef0ea;
-  }
-  * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--ink);
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  }
-  header {
-    padding: 22px 32px 16px; border-bottom: 3px solid var(--accent);
-  }
-  header a { color: var(--accent); text-decoration: none; font-size: .9rem; }
-  header a:hover { text-decoration: underline; }
-  h1 { margin: 0 0 4px; font-size: 1.35rem; }
-  .sub { margin: 0 0 0; color: var(--muted); font-size: .9rem; }
-  main { max-width: 880px; margin: 0 auto; padding: 28px 32px 60px; }
-  p.lead { color: var(--muted); margin: 0 0 24px; font-size: .95rem; }
-  p.lead a { color: var(--accent); }
-  table { border-collapse: collapse; width: 100%; font-size: .9rem; }
-  th {
-    text-align: left; padding: 9px 14px; border-bottom: 2px solid var(--accent);
-    color: var(--accent); font-size: .82rem; text-transform: uppercase; letter-spacing: .04em;
-  }
-  td { padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
-  tr:last-child td { border-bottom: none; }
-  td a { color: var(--accent); text-decoration: none; font-family: monospace; font-size: .88rem; }
-  td a:hover { text-decoration: underline; }
-  code {
-    background: var(--chip); padding: 1px 6px; border-radius: 4px;
-    font-size: .82em; white-space: nowrap;
-  }
-  .pass  { color: var(--accent); font-weight: 600; }
-  .fail  { color: var(--warn);   font-weight: 600; }
-  .caution { color: var(--amber); font-weight: 600; }
-  .desc { color: var(--muted); font-size: .85rem; margin-top: 3px; }
-  footer {
-    max-width: 880px; margin: 0 auto; padding: 0 32px 40px;
-    font-size: .8rem; color: var(--muted); border-top: 1px solid var(--line);
-    padding-top: 18px;
-  }
-  footer a { color: var(--muted); }
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;--fail:#8a3b2e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:740px;margin:0 auto;padding:0 28px}
+.wide{max-width:920px}
 
-  /* Global site nav — consistent across knobe.org */
-  nav { position: sticky; top: 0; z-index: 50; background: rgba(246,244,239,.92); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
-  nav .inner { max-width: 880px; margin: 0 auto; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
-  nav .brand { font-weight: 700; font-size: 1.05rem; color: var(--ink); text-decoration: none; }
-  nav .brand .v { color: var(--muted); font-weight: 400; font-size: .8rem; }
-  nav .navlinks { display: flex; gap: 18px; font-size: .82rem; }
-  nav .navlinks a { color: var(--muted); text-decoration: none; transition: color .15s; }
-  nav .navlinks a:hover { color: var(--accent); }
-  nav .navlinks a.here { color: var(--accent); border-bottom: 1px solid var(--accent); }
-  @media (max-width: 680px) { nav .navlinks { display: none; } }
+nav{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:bold;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.brand .v{color:var(--ink-faint);font-weight:normal;font-size:.8rem}
+.navlinks{display:flex;gap:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem}
+.navlinks a{color:var(--ink-soft);text-decoration:none}
+.navlinks a:hover,.navlinks a.here{color:var(--moss)}
+.navlinks{align-items:center}
+.nav-uses{position:relative;display:inline-block}
+.nav-uses>summary{list-style:none;cursor:pointer;color:var(--ink-soft);transition:color .15s}
+.nav-uses>summary::-webkit-details-marker{display:none}
+.nav-uses>summary::after{content:"\25be";font-size:.7em;margin-left:5px}
+.nav-uses>summary:hover,.nav-uses[open]>summary,.nav-uses>summary.here{color:var(--moss)}
+.nav-uses>summary.here{border-bottom:1px solid var(--moss)}
+.nav-menu{position:absolute;top:calc(100% + 10px);left:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:7px;min-width:172px;display:flex;flex-direction:column;gap:1px;box-shadow:0 8px 24px rgba(26,40,32,.12);z-index:60}
+.nav-menu a{padding:7px 10px;border-radius:4px;white-space:nowrap;border-bottom:none}
+.nav-menu a:hover{background:var(--paper-warm);color:var(--moss)}
+.nav-menu a.here{color:var(--moss);border-bottom:none}
+@media(max-width:680px){nav .inner{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}.tv-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+
+header{padding:64px 0 36px;border-bottom:1px solid var(--line)}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
+h1{font-size:2rem;font-weight:normal;letter-spacing:-.01em;margin-bottom:10px}
+.meta{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);line-height:1.9}
+.meta span{margin-right:18px}
+
+main{padding:40px 0 60px}
+p{margin-bottom:14px;font-size:1rem}
+p.lead{font-size:1.1rem;color:var(--ink-soft);line-height:1.6}
+strong{font-weight:600}
+a.inline{color:var(--moss);text-decoration:underline;text-underline-offset:2px}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.87em;background:var(--paper-warm);padding:1px 5px;border-radius:3px;color:var(--moss-deep)}
+
+.tv-table{width:100%;border-collapse:collapse;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;margin:20px 0}
+.tv-table th,.tv-table td{border:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
+.tv-table th{background:var(--paper-warm);font-weight:600;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+.tv-table td:first-child a{color:var(--moss-deep);text-decoration:none;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.85em}
+.tv-table td:first-child a:hover{text-decoration:underline}
+.tv-table .desc{color:var(--ink-faint);font-size:.92em}
+.pass{color:var(--moss);font-weight:600}
+.fail{color:var(--fail);font-weight:600}
+.caution{color:var(--amber);font-weight:600}
+
+footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--moss)}
+footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:20px;font-size:.95rem}
+/* ---- skip link (accessibility) ---- */
+.skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
+  font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
+.skip:focus{left:0}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -70,114 +80,138 @@
 <link rel="canonical" href="https://knobe.org/test-vectors/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
-<meta property="og:title" content="KNOBE Protocol v1 — Conformance Test Vectors">
+<meta property="og:title" content="KNOBE — Test vectors">
 <meta property="og:description" content="Nine conformance test vectors for KNOBE Protocol v1 implementations, from valid seals and body modification to payload tampering and malformed Base64.">
 <meta property="og:url" content="https://knobe.org/test-vectors/">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KNOBE Protocol v1 — Conformance Test Vectors">
+<meta name="twitter:title" content="KNOBE — Test vectors">
 <meta name="twitter:description" content="Nine conformance test vectors for KNOBE Protocol v1 implementations, from valid seals and body modification to payload tampering and malformed Base64.">
 </head>
 <body>
+<a href="#main" class="skip">Skip to content</a>
 
 <nav>
   <div class="inner">
     <a href="/" class="brand">KNOBE <span class="v">Protocol v1</span></a>
     <div class="navlinks">
-      <a href="/">Start</a>
       <a href="/spec">Spec</a>
+      <a href="/white-paper">White paper</a>
       <a href="/lens">Lens</a>
-      <a href="/grove/">Grove</a>
-      <a href="/test-vectors/" class="here" aria-current="page">Test vectors</a>
-      <a href="/education-profile">Education</a>
+      <details class="nav-uses">
+        <summary>Uses</summary>
+        <div class="nav-menu">
+          <a href="/education-profile">Education</a>
+          <a href="/government-profile">Government</a>
+          <a href="/enterprise-profile">Enterprise</a>
+          <a href="/accessibility">Accessibility</a>
+        </div>
+      </details>
+      <a href="/downloads">Downloads</a>
       <a href="/about">About</a>
-      <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
     </div>
   </div>
 </nav>
 
 <header>
-  <h1>Conformance Test Vectors — KNOBE Protocol v1</h1>
-  <p class="sub">Nine files for verifying a KNOBE v1 implementation against the <a href="../spec.html">normative specification</a>.</p>
+  <div class="wrap">
+    <div class="eyebrow">Reference material</div>
+    <h1>Conformance test vectors</h1>
+    <div class="meta">
+      <span>Based on KNOBE Protocol v1.0</span>
+      <span>Nine files</span>
+      <span>For verifier implementers</span>
+    </div>
+  </div>
 </header>
 
-<main>
-  <p class="lead">
-    Run each file through your verifier and compare the result to the expected outcome below.
-    Reference verifier: <a href="../lens.py">lens.py</a>
-    (<code>python3 lens.py &lt;file&gt;</code>) ·
-    <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
-  </p>
+<main id="main">
+  <div class="wrap wide">
 
-  <table>
-    <thead>
-      <tr>
-        <th>File</th>
-        <th>Expected outcome</th>
-        <th>What it tests</th>
-      </tr>
-    </thead>
-    <tbody>
+    <p class="lead">Nine files for verifying a KNOBE v1 implementation against the <a href="/spec" class="inline">normative specification</a>. Run each file through your verifier and compare the result to the expected outcome below.</p>
 
-      <tr>
-        <td><a href="full-valid.knobe.md">full-valid.knobe.md</a></td>
-        <td><span class="pass">verified · body_verified yes · conformance valid</span></td>
-        <td>Complete, fully populated valid KNOBE</td>
-      </tr>
+    <p>Reference verifier: <a href="/lens.py" class="inline">lens.py</a> (<code>python3 lens.py &lt;file&gt;</code>). An implementation that reproduces all nine expected results is canonically compatible with KNOBE Protocol v1. A further ten <a href="adversarial/README.md" class="inline">adversarial hardening vectors</a> exercise hostile input beyond the conformance bar.</p>
 
-      <tr>
-        <td><a href="minimal-valid.knobe.md">minimal-valid.knobe.md</a></td>
-        <td><span class="pass">verified · body_verified omitted · conformance valid</span></td>
-        <td>Minimum required fields only; no <code>body_hash</code></td>
-      </tr>
+    <table class="tv-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th>Expected outcome</th>
+          <th>What it tests</th>
+        </tr>
+      </thead>
+      <tbody>
 
-      <tr>
-        <td><a href="unicode-valid.knobe.md">unicode-valid.knobe.md</a></td>
-        <td><span class="pass">verified · body_verified yes · conformance valid</span></td>
-        <td>Unicode content in body and payload — verifier must apply NFC normalization to the payload before hashing</td>
-      </tr>
+        <tr>
+          <td><a href="full-valid.knobe.md">full-valid.knobe.md</a></td>
+          <td><span class="pass">verified · body_verified yes · conformance valid</span></td>
+          <td class="desc">Complete, fully populated valid KNOBE</td>
+        </tr>
 
-      <tr>
-        <td><a href="multi-block.knobe.md">multi-block.knobe.md</a></td>
-        <td><span class="pass">verified · body_verified omitted · conformance warnings</span></td>
-        <td>Multiple <code>BEGIN KNOBE B64</code> blocks present — verifier must use the <em>last</em> block and surface a warning</td>
-      </tr>
+        <tr>
+          <td><a href="minimal-valid.knobe.md">minimal-valid.knobe.md</a></td>
+          <td><span class="pass">verified · body_verified omitted · conformance valid</span></td>
+          <td class="desc">Minimum required fields only; no <code>body_hash</code></td>
+        </tr>
 
-      <tr>
-        <td><a href="omitted-body-hash.knobe.md">omitted-body-hash.knobe.md</a></td>
-        <td><span class="pass">verified · body_verified omitted · conformance valid</span></td>
-        <td>Payload verifies; no <code>body_hash</code> field — body verification is intentionally skipped</td>
-      </tr>
+        <tr>
+          <td><a href="unicode-valid.knobe.md">unicode-valid.knobe.md</a></td>
+          <td><span class="pass">verified · body_verified yes · conformance valid</span></td>
+          <td class="desc">Unicode content in body and payload; verifier must apply NFC normalization to the payload before hashing</td>
+        </tr>
 
-      <tr>
-        <td><a href="numeric-violation.knobe.md">numeric-violation.knobe.md</a></td>
-        <td><span class="caution">verified · body_verified yes · conformance invalid</span></td>
-        <td>Hashes intact; a numeric field violates a conformance rule — verifier must flag conformance as invalid while still reporting verified</td>
-      </tr>
+        <tr>
+          <td><a href="multi-block.knobe.md">multi-block.knobe.md</a></td>
+          <td><span class="pass">verified · body_verified omitted · conformance warnings</span></td>
+          <td class="desc">Multiple <code>BEGIN KNOBE B64</code> blocks present; verifier must use the <em>last</em> block and surface a warning</td>
+        </tr>
 
-      <tr>
-        <td><a href="body-modified.knobe.md">body-modified.knobe.md</a></td>
-        <td><span class="caution">verified-body-modified · body_verified modified · conformance valid</span></td>
-        <td>Payload hash intact; body text altered after sealing — verifier reports a distinct body-modified status</td>
-      </tr>
+        <tr>
+          <td><a href="omitted-body-hash.knobe.md">omitted-body-hash.knobe.md</a></td>
+          <td><span class="pass">verified · body_verified omitted · conformance valid</span></td>
+          <td class="desc">Payload verifies; no <code>body_hash</code> field, so body verification is intentionally skipped</td>
+        </tr>
 
-      <tr>
-        <td><a href="payload-modified.knobe.md">payload-modified.knobe.md</a></td>
-        <td><span class="fail">failed · conformance valid</span></td>
-        <td>Payload JSON altered after sealing — payload hash mismatch; verifier must report failed</td>
-      </tr>
+        <tr>
+          <td><a href="numeric-violation.knobe.md">numeric-violation.knobe.md</a></td>
+          <td><span class="caution">verified · body_verified yes · conformance invalid</span></td>
+          <td class="desc">Hashes intact; a numeric field violates a conformance rule, so the verifier must flag conformance as invalid while still reporting verified</td>
+        </tr>
 
-      <tr>
-        <td><a href="unreadable.knobe.md">unreadable.knobe.md</a></td>
-        <td><span class="fail">unreadable · conformance invalid</span></td>
-        <td>Malformed Base64 block — verifier must report unreadable without crashing</td>
-      </tr>
+        <tr>
+          <td><a href="body-modified.knobe.md">body-modified.knobe.md</a></td>
+          <td><span class="caution">verified-body-modified · body_verified modified · conformance valid</span></td>
+          <td class="desc">Payload hash intact; body text altered after sealing, so the verifier reports a distinct body-modified status</td>
+        </tr>
 
-    </tbody>
-  </table>
+        <tr>
+          <td><a href="payload-modified.knobe.md">payload-modified.knobe.md</a></td>
+          <td><span class="fail">failed · conformance valid</span></td>
+          <td class="desc">Payload JSON altered after sealing; payload hash mismatch, so the verifier must report failed</td>
+        </tr>
+
+        <tr>
+          <td><a href="unreadable.knobe.md">unreadable.knobe.md</a></td>
+          <td><span class="fail">unreadable · conformance invalid</span></td>
+          <td class="desc">Malformed Base64 block; verifier must report unreadable without crashing</td>
+        </tr>
+
+      </tbody>
+    </table>
+
+  </div>
 </main>
 
 <footer>
-  KNOBE Protocol v1 · CC BY 4.0 · <a href="mailto:djkyle@ucdavis.edu">David Kyle, UC Davis</a>
+  <div class="wrap wide">
+    <div class="fclaim">KNOBE is an open protocol for auditable plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems. Built for accessibility, interoperability, and portability.</div>
+    <div class="frow">
+      <div>KNOBE Protocol v1 · Test vectors · CC BY 4.0<br>David Kyle · University of California, Davis · an independent open protocol, not a UC Davis product or endorsement</div>
+      <div style="text-align:right">
+        <a href="/spec">Spec</a> · <a href="/downloads">Downloads</a> · <a href="/">Overview</a> · <a href="/about">About</a><br>
+        <a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
 </body>

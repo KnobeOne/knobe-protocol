@@ -310,11 +310,38 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <p class="manifesto-line ml-4"><span class="mn">4.</span>The context has to travel with the object.</p>
     </div>
     <p class="sub" style="margin-top:28px">We're now in an era where knowledge moves continuously through humans and AI. AI has changed the scale and speed of knowledge movement so dramatically that we can no longer assume context will be reconstructed downstream as knowledge passes through multiple systems, people, and tools.</p>
-    <p class="sub">The missing infrastructure is not simply better AI. Nor is the answer to pretend knowledge can be made pure again by keeping it outside AI systems. Knowledge has always moved, compressed, adapted, and changed. The challenge now is to make that movement more visible, responsible, and inspectable.</p>
   </div>
 </header>
 
 
+
+<section id="format">
+  <div class="wrap">
+    <h2>One file, three layers</h2>
+    <p>A KNOBE is a single plain-text file. A human reads it in any editor. A machine decodes its payload. A verifier checks its payload hash.</p>
+    <div class="layers">
+      <div class="layer l1" data-layer="1"><div class="ll">layer 1 · yaml frontmatter</div><div class="ld">Human-scannable metadata: title, author, license, date.</div></div>
+      <div class="layer l2" data-layer="2"><div class="ll">layer 2 · markdown body</div><div class="ld">The document itself. No schema. No special software required to read it.</div></div>
+      <div class="layer l3" data-layer="3"><div class="ll">layer 3 · base64 json payload</div><div class="ld">Attribution, source context, transformation history, fidelity limits, use conditions, accessibility lineage, and a SHA-256 integrity hash.</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <h2>What KNOBE changes</h2>
+    <p>Knowledge work is most fragile at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
+    <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
+    <ul class="gains" role="list">
+      <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</span></li>
+      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens — no account, registry, certificate authority, or server required.</span></li>
+      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</span></li>
+      <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</span></li>
+      <li><span class="gn" aria-hidden="true">5</span><span class="gt"><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</span></li>
+      <li><span class="gn" aria-hidden="true">6</span><span class="gt"><strong>Start simple. Build bigger later.</strong> KNOBEs work in email, shared drives, and local folders today, and can later be indexed or composed inside Git, RO-Crate, FDO, OKF, or other infrastructure.</span></li>
+    </ul>
+  </div>
+</section>
 
 <section id="problem">
   <div class="wrap">
@@ -345,34 +372,6 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
           <p style="font-size:.95rem;margin:0">When knowledge crosses an AI boundary, its origin, fidelity limits, and context often stop traveling reliably. The content may remain usable, while the object's interpretive conditions become harder to inspect.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section id="related">
-  <div class="wrap">
-    <h2>What KNOBE changes</h2>
-    <p>Knowledge work is most fragile at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
-    <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
-    <ul class="gains" role="list">
-      <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</span></li>
-      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens — no account, registry, certificate authority, or server required.</span></li>
-      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</span></li>
-      <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</span></li>
-      <li><span class="gn" aria-hidden="true">5</span><span class="gt"><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</span></li>
-      <li><span class="gn" aria-hidden="true">6</span><span class="gt"><strong>Start simple. Build bigger later.</strong> KNOBEs work in email, shared drives, and local folders today, and can later be indexed or composed inside Git, RO-Crate, FDO, OKF, or other infrastructure.</span></li>
-    </ul>
-  </div>
-</section>
-
-<section id="format">
-  <div class="wrap">
-    <h2>One file, three layers</h2>
-    <p>A KNOBE is a single plain-text file. A human reads it in any editor. A machine decodes its payload. A verifier checks its payload hash.</p>
-    <div class="layers">
-      <div class="layer l1" data-layer="1"><div class="ll">layer 1 · yaml frontmatter</div><div class="ld">Human-scannable metadata: title, author, license, date.</div></div>
-      <div class="layer l2" data-layer="2"><div class="ll">layer 2 · markdown body</div><div class="ld">The document itself. No schema. No special software required to read it.</div></div>
-      <div class="layer l3" data-layer="3"><div class="ll">layer 3 · base64 json payload</div><div class="ld">Attribution, source context, transformation history, fidelity limits, use conditions, accessibility lineage, and a SHA-256 integrity hash.</div></div>
     </div>
   </div>
 </section>
