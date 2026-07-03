@@ -114,11 +114,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE Education Profile v1 — Non-normative guidance for course use">
-<meta property="og:description" content="Non-normative guidance for using KNOBE Protocol v1 in educational settings — recommended field values, privacy defaults, attribution roles, fidelity limit templates, and UI label translations.">
+<meta property="og:description" content="Non-normative guidance for using KNOBE Protocol v1 in educational settings: recommended field values, privacy defaults, attribution roles, fidelity limit templates, and UI label translations.">
 <meta property="og:url" content="https://knobe.org/education-profile">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE Education Profile v1 — Non-normative guidance for course use">
-<meta name="twitter:description" content="Non-normative guidance for using KNOBE Protocol v1 in educational settings — recommended field values, privacy defaults, attribution roles, and fidelity limit templates.">
+<meta name="twitter:description" content="Non-normative guidance for using KNOBE Protocol v1 in educational settings: recommended field values, privacy defaults, attribution roles, and fidelity limit templates.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -285,7 +285,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     "trust_as": "an accurate summary of the source's main argument",
     "do_not_infer": [
       "that this captures all nuance, qualification, or evidence in the original",
-      "that quotations in this summary are accurate — check against the original",
+      "that quotations in this summary are accurate; check against the original",
       "that this summary should substitute for reading the original"
     ]
   }
@@ -358,33 +358,33 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <tr><td>attribution.sources</td><td>Who contributed, and how</td><td>Show AI contributors clearly with their role.</td></tr>
         <tr><td>privacy_level: internal</td><td>Course only</td><td>Not for redistribution outside the enrolled group.</td></tr>
         <tr><td>privacy_level: sensitive</td><td>Handle with care</td><td>Contains personal or sensitive content.</td></tr>
-        <tr><td>payload_hash: verified</td><td>Record intact</td><td>Follow with "Integrity is not the same as accuracy — read carefully."</td></tr>
-        <tr><td>payload_hash: failed</td><td>Record may have changed</td><td>Avoid "tampered" — changes may be legitimate. Prompt inspection.</td></tr>
+        <tr><td>payload_hash: verified</td><td>Record intact</td><td>Follow with "Integrity is not the same as accuracy; read carefully."</td></tr>
+        <tr><td>payload_hash: failed</td><td>Record may have changed</td><td>Avoid "tampered"; changes may be legitimate. Prompt inspection.</td></tr>
       </tbody>
     </table>
 
     <h2 id="example"><span class="sec">§8</span>Worked examples</h2>
 
-    <div class="nonnorm"><strong>Note.</strong> Each example is a separate <code>.knobe.md</code> file. The hashes shown are payload hashes — they prove the structured record is intact, not proof of identity, timestamp, or institutional approval. Integrity is not truth.</div>
+    <div class="nonnorm"><strong>Note.</strong> Each example is a separate <code>.knobe.md</code> file. The hashes shown are payload hashes; they prove the structured record is intact, not proof of identity, timestamp, or institutional approval. Integrity is not truth.</div>
 
     <p>The three examples below form a verifiable lineage: the instructor creates an assignment KNOBE, assigns a reading KNOBE, and the student submits a reflection KNOBE that carries both as parents by hash. Download any of them and verify with <code>lens.py</code>. The chain from reading to assignment to student response is sealed across artifacts and checkable without a database, platform, or institutional system.</p>
 
     <div class="dl-card">
-      <div class="dt">Example 1 — Assigned Reading</div>
+      <div class="dt">Example 1: Assigned Reading</div>
       <div class="dd">An instructor-sealed version of the course reading. Carries <code>quarantine_status: trusted</code> (the instructor has reviewed it), use conditions limiting redistribution, and the hash that student submissions reference as a parent.</div>
       <div class="dh">payload_hash: 6014b58eb6ff572fe844d3893971743979a5bbd1b6058b51cc59c892a7dfb54e</div>
       <a href="knobe-education-reading.knobe.md" class="btn">Download</a>
     </div>
 
     <div class="dl-card">
-      <div class="dt">Example 2 — Instructor Assignment</div>
+      <div class="dt">Example 2: Instructor Assignment</div>
       <div class="dd">The assignment specification as a sealed KNOBE. Carries the AI use policy, submission format, and evaluation criteria inside the payload, so students who reference the assignment in their submission are linking to a verifiable, unaltered specification.</div>
       <div class="dh">payload_hash: 7c2cb52737909933cd45b52d0e70146c2530d10c421e49627606e6688d9b18e9</div>
       <a href="knobe-education-assignment.knobe.md" class="btn">Download</a>
     </div>
 
     <div class="dl-card">
-      <div class="dt">Example 3 — Student AI-Assisted Reflection</div>
+      <div class="dt">Example 3: Student AI-Assisted Reflection</div>
       <div class="dd">A student reflection on the assigned reading. AI consulted once for terminology; all prose written by the student. Parents reference both the reading and the assignment by hash. Carries <code>assignment_context</code>, <code>education_review</code>, full attribution, fidelity limits, and course-private use conditions.</div>
       <div class="dh">payload_hash: 8a0d690ce4d129c862df075d97a38ab4d0f66492578e15c6f927ac5cd45601fc</div>
       <a href="knobe-education-example.knobe.md" class="btn">Download</a>
@@ -394,17 +394,17 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>Two profile-specific payload fields appear in the assignment and reflection examples. These are not part of the core v1 protocol but are recommended for educational tools building on KNOBE.</p>
 
-    <p><strong><code>assignment_context</code></strong> — carried by the student reflection, links the submission to its course and assignment specification:</p>
+    <p><strong><code>assignment_context</code></strong>, carried by the student reflection, links the submission to its course and assignment specification:</p>
 <pre>{
   "assignment_context": {
-    "course": "SOC 150 — Knowledge in the AI Era",
+    "course": "SOC 150: Knowledge in the AI Era",
     "assignment_type": "reading_reflection",
     "assignment_knobe_hash": "7c2cb527…",
     "ai_policy": "limited_with_disclosure"
   }
 }</pre>
 
-    <p><strong><code>education_review</code></strong> — tracks submission and review status separately from the protocol's <code>quarantine_status</code>, which handles receiver trust rather than workflow state:</p>
+    <p><strong><code>education_review</code></strong> tracks submission and review status separately from the protocol's <code>quarantine_status</code>, which handles receiver trust rather than workflow state:</p>
 <pre>{
   "education_review": {
     "submission_status": "submitted",
@@ -416,7 +416,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h3>What the lineage demonstrates</h3>
 
-    <p>Opening the reflection KNOBE's <code>parents</code> array reveals two entries, each with a payload hash. Verify both hashes against the reading and assignment KNOBEs above and they match. The chain — instructor creates reading, instructor specifies assignment, student responds to both — is sealed and checkable without any database, platform, or institutional system. The artifacts carry their own provenance.</p>
+    <p>Opening the reflection KNOBE's <code>parents</code> array reveals two entries, each with a payload hash. Verify both hashes against the reading and assignment KNOBEs above and they match. The chain (instructor creates reading, instructor specifies assignment, student responds to both) is sealed and checkable without any database, platform, or institutional system. The artifacts carry their own provenance.</p>
 
   </div>
 </main>

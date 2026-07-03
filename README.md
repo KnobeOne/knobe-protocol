@@ -16,7 +16,7 @@ KNOBE makes it harder for fragments to pass as whole objects. It carries interpr
 
 ## What this protocol does not do
 
-It is not DRM, not a truth machine, not an identity verification system, and not a replacement for institutional systems. It declares interpretive obligations; it does not enforce them. See [`spec.html`](spec.html) §11 (Honest limits) and the [threat model](https://knobe.org/threat-model) for the precise account.
+It is not DRM, not a truth machine, not an identity verification system, and not a replacement for institutional systems. It declares interpretive obligations; it does not enforce them. See the [specification](https://knobe.org/spec) §11 (Honest limits) and the [threat model](https://knobe.org/threat-model) for the precise account.
 
 ## Verifying a KNOBE
 
@@ -36,7 +36,7 @@ A `verified` result proves the payload is byte-identical to what was hashed at s
 
 ```
 .
-├── spec.html              The normative v1 specification
+├── site/spec.html         The normative v1 specification (served at knobe.org/spec)
 ├── lens.py                Python reference verifier, no external dependencies
 ├── test-vectors/          Nine conformance vectors for testing implementations
 └── examples/              Sealed example KNOBEs (white paper, education chain, etc.)
@@ -46,7 +46,7 @@ A `verified` result proves the payload is byte-identical to what was hashed at s
 
 The reference verifier `lens.py` is a standard-library Python file with no external dependencies. To build a conformant verifier in another language:
 
-1. Read [`spec.html`](spec.html) — particularly §3.3 (Payload block), §5 (Canonical hash rule), §6 (Body hash), §7 (Verification states)
+1. Read the [specification](https://knobe.org/spec) — particularly §3.3 (Payload block), §5 (Canonical hash rule), §6 (Body hash), §7 (Verification states)
 2. Reproduce the canonical hash algorithm: sort keys recursively, NFC-normalize all keys and string values, no whitespace between tokens, literal UTF-8, SHA-256
 3. Run your implementation against all nine test vectors in `test-vectors/` and confirm expected outputs match the README in that directory
 

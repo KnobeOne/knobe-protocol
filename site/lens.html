@@ -179,11 +179,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE Lens — verify a KNOBE in your browser">
-<meta property="og:description" content="Verify a .knobe.md file entirely in your browser. No upload, no server, no AI — the same canonical hash algorithm as lens.py, the reference verifier, reporting integrity and conformance locally.">
+<meta property="og:description" content="Verify a .knobe.md file entirely in your browser. No upload, no server, no AI, using the same canonical hash algorithm as lens.py, the reference verifier, reporting integrity and conformance locally.">
 <meta property="og:url" content="https://knobe.org/lens">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE Lens — verify a KNOBE in your browser">
-<meta name="twitter:description" content="Verify a .knobe.md file entirely in your browser. No upload, no server, no AI — the same canonical hash algorithm as lens.py, reporting integrity and conformance locally.">
+<meta name="twitter:description" content="Verify a .knobe.md file entirely in your browser. No upload, no server, no AI, using the same canonical hash algorithm as lens.py, reporting integrity and conformance locally.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to the verifier</a>
@@ -214,7 +214,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   <div class="wrap">
     <div class="eyebrow">KNOBE Lens</div>
     <h1>Drop in a KNOBE. <em>Verify it</em> here.</h1>
-    <p class="sub">The Lens checks a <code>.knobe.md</code> file's sealed payload and tells you whether it is intact. It runs the same canonical algorithm as <code>lens.py</code>, the reference verifier — only in your browser, with nothing to install.</p>
+    <p class="sub">The Lens checks a <code>.knobe.md</code> file's sealed payload and tells you whether it is intact. It runs the same canonical algorithm as <code>lens.py</code>, the reference verifier, only in your browser, with nothing to install.</p>
     <div class="assurance">
       <span class="lock" aria-hidden="true">&#9679;</span>
       <span>Verification happens locally in your browser. No upload. No server. No AI.</span>
@@ -248,16 +248,16 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <section class="explain">
       <h2>What the verdict means</h2>
-      <p><strong>Integrity is not truth.</strong> A green check proves the sealed record has not changed since sealing — not that its contents are correct, safe, or appropriate. The check is where inspection begins, not where it ends. The protocol's recommended posture is <em class="kw">quarantine-first</em>: treat any external object as untrusted until you have reviewed it, regardless of whether it verifies.</p>
+      <p><strong>Integrity is not truth.</strong> A green check proves the sealed record has not changed since sealing, not that its contents are correct, safe, or appropriate. The check is where inspection begins, not where it ends. The protocol's recommended posture is <em class="kw">quarantine-first</em>: treat any external object as untrusted until you have reviewed it, regardless of whether it verifies.</p>
       <div class="states">
         <div class="state-row"><div class="state-name">verified</div><div class="state-desc">The payload's contents hash exactly to the stored <code>payload_hash</code>. The sealed record is intact.</div></div>
         <div class="state-row"><div class="state-name">verified · body modified</div><div class="state-desc">The sealed payload is intact, but the human-readable markdown body no longer matches the sealed <code>body_hash</code>. Inspect before relying on this version.</div></div>
         <div class="state-row"><div class="state-name">failed</div><div class="state-desc">The recomputed hash does not match the stored one. The payload has been altered, or the stored hash is wrong.</div></div>
-        <div class="state-row"><div class="state-name">unreadable</div><div class="state-desc">No valid payload could be found or parsed — malformed file, missing block, duplicate keys, an unsupported spec version, or invalid encoding.</div></div>
+        <div class="state-row"><div class="state-name">unreadable</div><div class="state-desc">No valid payload could be found or parsed: malformed file, missing block, duplicate keys, an unsupported spec version, or invalid encoding.</div></div>
       </div>
       <p style="margin-top:14px;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;color:var(--ink-soft)"><strong>Bare-numeric payloads:</strong> When a payload contains bare JSON numeric values (which KNOBE v1 treats as a spec violation), Browser Lens does not issue a hash verdict. This is a browser Lens behavior, not a protocol state. Use <a href="lens.py" class="inline">lens.py</a> for canonical verification of these files.</p>
-      <p style="margin-top:14px"><strong>Conformance</strong> is reported separately from integrity. A file can be <em>verified</em> yet still carry conformance <em>warnings</em> or be <em>invalid</em> — for example a missing field, a malformed date, or multiple payload blocks. Integrity asks "is the sealed record unchanged?"; conformance asks "is it well-formed against the spec?"</p>
-      <p>This Lens matches <a href="lens.py" class="inline">lens.py</a> for conforming all-string KNOBE v1 payloads and deliberately declines hash verdicts for bare-numeric payloads, deferring to <code>lens.py</code> as canonical. The engine is verified against 10 sealed public KNOBEs, 9 conformance vectors, and 10 adversarial hardening vectors — 29 files total. For automation, audits, and the definitive result, use <a href="lens.py" class="inline">lens.py</a> — a single standard-library Python file with no dependencies. Read the algorithm in the <a href="/spec" class="inline">specification</a>.</p>
+      <p style="margin-top:14px"><strong>Conformance</strong> is reported separately from integrity. A file can be <em>verified</em> yet still carry conformance <em>warnings</em> or be <em>invalid</em>: for example a missing field, a malformed date, or multiple payload blocks. Integrity asks "is the sealed record unchanged?"; conformance asks "is it well-formed against the spec?"</p>
+      <p>This Lens matches <a href="lens.py" class="inline">lens.py</a> for conforming all-string KNOBE v1 payloads and deliberately declines hash verdicts for bare-numeric payloads, deferring to <code>lens.py</code> as canonical. The engine is verified against 10 sealed public KNOBEs, 9 conformance vectors, and 10 adversarial hardening vectors (29 files total). For automation, audits, and the definitive result, use <a href="lens.py" class="inline">lens.py</a>, a single standard-library Python file with no dependencies. Read the algorithm in the <a href="/spec" class="inline">specification</a>.</p>
     </section>
 
   </div>
@@ -273,18 +273,18 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 </footer>
 
 <!-- ============================================================= -->
-<!-- KNOBE verification engine — byte-for-byte conformance-locked   -->
+<!-- KNOBE verification engine: byte-for-byte conformance-locked   -->
 <!-- to lens.py. Proven by a Node parity harness against all nine   -->
 <!-- conformance vectors plus the adversarial hardening set.        -->
 <!-- ============================================================= -->
 <script>
-// lens.js — KNOBE Protocol v1 in-browser verification engine.
+// lens.js: KNOBE Protocol v1 in-browser verification engine.
 // Conformance-locked to lens.py: identical §5 canonicalization (NFC, recursive
 // key-sort by code point, separators ","/":", literal UTF-8), SHA-256, body
 // normalization, and two-dimensional reporting. For payloads containing bare
 // numeric values (a §5 violation) this engine reports conformance: invalid and
 // DECLINES an integrity verdict, deferring to lens.py as canonical (honest
-// refusal — avoids any JS/Python number-formatting divergence).
+// refusal: avoids any JS/Python number-formatting divergence).
 (function (root) {
   "use strict";
 
@@ -721,7 +721,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   }
 
   // verdict presentation: symbol + word label + colour class. Colour is never
-  // the only signal — the symbol and the word carry the state on their own.
+  // the only signal: the symbol and the word carry the state on their own.
   function verdictView(r){
     switch(r.state){
       case "verified":               return {sym:"✓", word:"Verified",                cls:"v-ok"};
@@ -798,7 +798,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       var cd = row(dl, 'computed hash', ''); cd.className='mono'; cd.textContent = r.computed || '(none)';
       var st = row(dl, 'stored payload_hash', ''); st.className='mono'; st.textContent = safeText(r.stored) || '(none)';
       var hm = el('div', 'hashmatch ' + (r.state==="failed" ? 'bad':'ok'),
-        r.state==="failed" ? '✕ mismatch — the payload does not hash to the stored value'
+        r.state==="failed" ? '✕ mismatch: the payload does not hash to the stored value'
                            : '✓ the computed hash matches the stored value');
       st.parentNode.appendChild(hm);
     }
@@ -834,7 +834,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     if (r.state === "verified" || r.state === "verified-body-modified"){
       var n1 = el('p');
       n1.appendChild(el('span','strong','Integrity verified. '));
-      n1.appendChild(document.createTextNode('A match proves the sealed record is unchanged — not that its contents are true, safe, or appropriate. Inspect before trusting.'));
+      n1.appendChild(document.createTextNode('A match proves the sealed record is unchanged, not that its contents are true, safe, or appropriate. Inspect before trusting.'));
       notes.appendChild(n1);
     }
     if (r.state === "verified-body-modified"){

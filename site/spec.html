@@ -334,11 +334,11 @@ spec_version: "1.0"
       <div class="step"><span class="sn">1.</span><span class="sc">Decode the Base64 payload block to bytes and parse as UTF-8 JSON.</span></div>
       <div class="step"><span class="sn">2.</span><span class="sc">Remove the <code>payload_hash</code> field from the resulting object.</span></div>
       <div class="step"><span class="sn">3.</span><span class="sc">Serialize the object to canonical JSON:</span></div>
-      <div class="ss">— All object keys sorted alphabetically, recursively at every nesting depth.</div>
-      <div class="ss">— All JSON object keys and string values normalized to Unicode Normalization Form C (NFC) before serialization.</div>
-      <div class="ss">— No whitespace between tokens (separators <code>","</code> and <code>":"</code>).</div>
-      <div class="ss">— Arrays preserved in insertion order; their elements are not reordered.</div>
-      <div class="ss">— All string content encoded as literal UTF-8; <span class="must">MUST NOT</span> use <code>\uXXXX</code> escapes for characters that can be represented directly.</div>
+      <div class="ss">· All object keys sorted alphabetically, recursively at every nesting depth.</div>
+      <div class="ss">· All JSON object keys and string values normalized to Unicode Normalization Form C (NFC) before serialization.</div>
+      <div class="ss">· No whitespace between tokens (separators <code>","</code> and <code>":"</code>).</div>
+      <div class="ss">· Arrays preserved in insertion order; their elements are not reordered.</div>
+      <div class="ss">· All string content encoded as literal UTF-8; <span class="must">MUST NOT</span> use <code>\uXXXX</code> escapes for characters that can be represented directly.</div>
       <div class="step"><span class="sn">4.</span><span class="sc">Encode the canonical JSON string as UTF-8 bytes.</span></div>
       <div class="step"><span class="sn">5.</span><span class="sc">Compute SHA-256 of those bytes. The hex digest is the <code>payload_hash</code>.</span></div>
     </div>
@@ -348,7 +348,7 @@ spec_version: "1.0"
     <p>Two constraints close cross-language canonicalization gaps that would otherwise allow conforming Python and JavaScript implementations to compute different hashes for visually-identical payloads.</p>
 
     <div class="norm">
-      <p><span class="must">MUST</span> All numeric payload values <span class="must">MUST</span> be represented as JSON strings (e.g., <code>"week": "6"</code>, not <code>"week": 6</code>). This bypasses divergent JSON number serialization between host languages — <code>json.dumps(1.0)</code> in Python produces <code>"1.0"</code> while <code>JSON.stringify(1.0)</code> in JavaScript produces <code>"1"</code>, which would yield different canonical hashes for identical-looking payloads. JSON <code>true</code>, <code>false</code>, and <code>null</code> are permitted scalar values; this restriction applies only to numeric values.</p>
+      <p><span class="must">MUST</span> All numeric payload values <span class="must">MUST</span> be represented as JSON strings (e.g., <code>"week": "6"</code>, not <code>"week": 6</code>). This bypasses divergent JSON number serialization between host languages: <code>json.dumps(1.0)</code> in Python produces <code>"1.0"</code> while <code>JSON.stringify(1.0)</code> in JavaScript produces <code>"1"</code>, which would yield different canonical hashes for identical-looking payloads. JSON <code>true</code>, <code>false</code>, and <code>null</code> are permitted scalar values; this restriction applies only to numeric values.</p>
     </div>
 
     <div class="norm">
@@ -416,7 +416,7 @@ const canon = canonicalize(nfc(rest));
     </div>
 
     <div class="norm">
-      <p><span class="must">MUST</span> When multiple payload blocks are present in a file (see §3.3), body extraction is ambiguous — the body could plausibly be extracted down to the first BEGIN marker or down to the last. Conforming verifiers <span class="must">MUST NOT</span> attempt body verification in this case. The <code>body_verified</code> output <span class="must">MUST</span> be reported as <code>omitted</code> regardless of whether the evaluated payload block contains a <code>body_hash</code> field. The multi-block warning required by §3.3 communicates the structural anomaly; body verification semantics are not preserved across that anomaly.</p>
+      <p><span class="must">MUST</span> When multiple payload blocks are present in a file (see §3.3), body extraction is ambiguous: the body could plausibly be extracted down to the first BEGIN marker or down to the last. Conforming verifiers <span class="must">MUST NOT</span> attempt body verification in this case. The <code>body_verified</code> output <span class="must">MUST</span> be reported as <code>omitted</code> regardless of whether the evaluated payload block contains a <code>body_hash</code> field. The multi-block warning required by §3.3 communicates the structural anomaly; body verification semantics are not preserved across that anomaly.</p>
     </div>
 
     <!-- §7 -->
@@ -477,16 +477,16 @@ const canon = canonicalize(nfc(rest));
 
     <h3>Conformance, distinct from integrity</h3>
 
-    <p>The four verification states report <em>integrity</em>: whether the sealed payload is byte-identical to what was hashed at sealing. They do not, by themselves, report <em>conformance</em>: whether the payload structure and field values satisfy the schema and constraints in this specification. A file can have a hash that matches its payload (integrity is <code>verified</code>) and still violate the spec — for example, <code>created_date: "yesterday"</code> instead of an ISO date, or a numeric value where the spec requires a string, or a malformed parent hash.</p>
+    <p>The four verification states report <em>integrity</em>: whether the sealed payload is byte-identical to what was hashed at sealing. They do not, by themselves, report <em>conformance</em>: whether the payload structure and field values satisfy the schema and constraints in this specification. A file can have a hash that matches its payload (integrity is <code>verified</code>) and still violate the spec: for example, <code>created_date: "yesterday"</code> instead of an ISO date, or a numeric value where the spec requires a string, or a malformed parent hash.</p>
 
     <p>Verifiers <span class="must">MUST</span> report conformance as a separate dimension from integrity. This preserves the elegant four-state integrity model while allowing schema validation to be reported honestly without collapsing the two layers.</p>
 
     <div class="norm">
       <p><span class="must">MUST</span> In addition to <code>status</code> and <code>body_verified</code>, verifiers <span class="must">MUST</span> report a <code>conformance</code> output with one of three values:</p>
       <ul style="margin-top:8px;font-size:.95rem">
-        <li><code>valid</code> — All required fields are present, all field formats and types match the schema, all open-vocabulary values are syntactically well-formed, and no normative MUSTs are violated.</li>
-        <li><code>warnings</code> — All required fields are present and the file is usable, but the verifier detected non-fatal issues (e.g., custom vocabulary values without namespace prefixes, fields with unrecognized but well-formed values, soft-spec deviations).</li>
-        <li><code>invalid</code> — The verifier detected one or more violations of normative MUSTs (e.g., missing required field, malformed <code>payload_hash</code>, numeric value in payload, malformed <code>created_date</code>, malformed parent hash). The file may still verify cryptographically, but does not conform to this specification.</li>
+        <li><code>valid</code>: All required fields are present, all field formats and types match the schema, all open-vocabulary values are syntactically well-formed, and no normative MUSTs are violated.</li>
+        <li><code>warnings</code>: All required fields are present and the file is usable, but the verifier detected non-fatal issues (e.g., custom vocabulary values without namespace prefixes, fields with unrecognized but well-formed values, soft-spec deviations).</li>
+        <li><code>invalid</code>: The verifier detected one or more violations of normative MUSTs (e.g., missing required field, malformed <code>payload_hash</code>, numeric value in payload, malformed <code>created_date</code>, malformed parent hash). The file may still verify cryptographically, but does not conform to this specification.</li>
       </ul>
     </div>
 
@@ -506,7 +506,7 @@ const canon = canonicalize(nfc(rest));
     <p>The following fields use open vocabularies. The values listed here are canonical and recommended. Implementations <span class="may">MAY</span> define additional values. Verifiers <span class="must">MUST NOT</span> fail a file because an unrecognized vocabulary value is present.</p>
 
     <div class="norm">
-      <p><span class="should">SHOULD</span> Custom vocabulary values <span class="should">SHOULD</span> use a recognizable namespace or prefix convention (e.g., <code>ucdavis:irb-cleared</code>, <code>ext-trusted-by-foundation</code>) to distinguish them from canonical spec values. Verifiers and UI implementations <span class="should">SHOULD</span> render canonical and custom vocabulary values distinguishably to mitigate UI spoofing — a value like <code>quarantine_status: "trusted-by-IRB"</code> may otherwise be mistaken by a casual reader for an authoritative protocol-level designation when it is in fact self-declared.</p>
+      <p><span class="should">SHOULD</span> Custom vocabulary values <span class="should">SHOULD</span> use a recognizable namespace or prefix convention (e.g., <code>ucdavis:irb-cleared</code>, <code>ext-trusted-by-foundation</code>) to distinguish them from canonical spec values. Verifiers and UI implementations <span class="should">SHOULD</span> render canonical and custom vocabulary values distinguishably to mitigate UI spoofing: a value like <code>quarantine_status: "trusted-by-IRB"</code> may otherwise be mistaken by a casual reader for an authoritative protocol-level designation when it is in fact self-declared.</p>
     </div>
 
     <h4>content_type</h4>
@@ -582,7 +582,7 @@ const canon = canonicalize(nfc(rest));
       <li><strong>Trust.</strong> A <code>verified</code> result means the payload is intact since sealing. It does not mean the content is accurate, the attribution is honest, or the object is appropriate for any purpose.</li>
       <li><strong>Enforcement.</strong> The protocol declares interpretive obligations (fidelity limits, use conditions, quarantine status). It does not enforce them. A receiver is free to ignore declared conditions; the protocol cannot prevent this.</li>
       <li><strong>Lineage truth.</strong> The protocol verifies that a lineage claim is intact at the time of sealing; it does not verify that claimed parent objects exist or actually possess the cited payload hashes. An author can list any string as a parent hash. A graph-traversal application attempting to resolve the parent chain will surface the error (parent not found, or parent hash mismatch); the open protocol layer does not perform that traversal.</li>
-      <li><strong>Automatic verification.</strong> Verification is the receiver's responsibility, not the protocol's. The substrate KNOBE lives in — text editors, AI assistants, ingestion pipelines, ordinary markdown tools — does not check seals by default. A KNOBE with a broken or missing payload will be opened, displayed, summarised, and indexed by most consumers without any warning. This is a property of the substrate, not a defect of the protocol: the same characteristics that make KNOBE portable across these tools are the ones that make verification optional rather than enforced. Tools that want fail-closed behaviour on broken KNOBEs must integrate <code>lens.py</code> or an equivalent verifier at the point of ingestion.</li>
+      <li><strong>Automatic verification.</strong> Verification is the receiver's responsibility, not the protocol's. The substrate KNOBE lives in (text editors, AI assistants, ingestion pipelines, ordinary markdown tools) does not check seals by default. A KNOBE with a broken or missing payload will be opened, displayed, summarised, and indexed by most consumers without any warning. This is a property of the substrate, not a defect of the protocol: the same characteristics that make KNOBE portable across these tools are the ones that make verification optional rather than enforced. Tools that want fail-closed behaviour on broken KNOBEs must integrate <code>lens.py</code> or an equivalent verifier at the point of ingestion.</li>
       <li><strong>AI interpretability.</strong> KNOBE carries human-supplied context around AI-mediated knowledge work. It does not expose a model's internal reasoning.</li>
     </ul>
 
@@ -601,7 +601,7 @@ const canon = canonicalize(nfc(rest));
 
     <h2>For agent builders</h2>
 
-    <p>Agent harness engineering governs execution policy, tool permissions, memory, and observability — the conditions <em>around</em> the agent. KNOBE comes at the problem from the other side, engineering what the object carries <em>through</em> any system rather than the system itself. <strong>Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</strong> If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work — sources, transformations, permissions, fidelity limits — not the model's reasoning.</p>
+    <p>Agent harness engineering governs execution policy, tool permissions, memory, and observability: the conditions <em>around</em> the agent. KNOBE comes at the problem from the other side, engineering what the object carries <em>through</em> any system rather than the system itself. <strong>Harness infrastructure governs the conditions around the agent. KNOBE governs the conditions carried by the artifact.</strong> If the artifact arrives stripped, no harness can reconstruct what was never carried. One honest limit: KNOBE carries the human-supplied context around AI-mediated work (sources, transformations, permissions, fidelity limits), not the model's reasoning.</p>
 
   </div>
 </main>

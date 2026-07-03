@@ -40,7 +40,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .nav-menu a.here{color:var(--moss);border-bottom:none}
 @media(max-width:760px){nav .wrap{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}}
 
-/* Grove callout — featured experiential-demo card after hero */
+/* Grove callout: featured experiential-demo card after hero */
 .grove-callout{display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:22px 26px;text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s}
 .grove-callout:hover,.grove-callout:focus-visible{border-color:var(--moss);box-shadow:0 2px 18px rgba(47,107,79,.13)}
 .grove-callout .gc-main{flex:1;min-width:240px}
@@ -50,7 +50,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;padding:
 .grove-callout .gc-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
 .grove-callout:hover .gc-cta,.grove-callout:focus-visible .gc-cta{color:var(--moss-deep)}
 
-/* KNOBE in use — tools list with status + description */
+/* KNOBE in use: tools list with status + description */
 .inuse{margin:22px 0 0;border-top:1px solid var(--line)}
 .inuse-item{display:grid;grid-template-columns:32px 1fr;gap:0 16px;padding:18px 0;border-bottom:1px solid var(--line)}
 .inuse-num{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.82rem;color:var(--moss);padding-top:3px}
@@ -254,6 +254,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -267,11 +268,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE Protocol v1: A protocol for knowledge objects that keep their context when they move">
-<meta property="og:description" content="An open, plain-text protocol for knowledge objects that carry their context — attribution, source, transformations, and fidelity limits — in a hash-sealed payload alongside readable markdown.">
+<meta property="og:description" content="An open, plain-text protocol for knowledge objects that carry their context (attribution, source, transformations, and fidelity limits) in a hash-sealed payload alongside readable markdown.">
 <meta property="og:url" content="https://knobe.org/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE Protocol v1: A protocol for knowledge objects that keep their context when they move">
-<meta name="twitter:description" content="An open, plain-text protocol for knowledge objects that carry their context — attribution, source, transformations, and fidelity limits — in a hash-sealed payload alongside readable markdown.">
+<meta name="twitter:description" content="An open, plain-text protocol for knowledge objects that carry their context (attribution, source, transformations, and fidelity limits) in a hash-sealed payload alongside readable markdown.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -334,7 +335,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
     <ul class="gains" role="list">
       <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</span></li>
-      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens — no account, registry, certificate authority, or server required.</span></li>
+      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens: no account, registry, certificate authority, or server required.</span></li>
       <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</span></li>
       <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</span></li>
       <li><span class="gn" aria-hidden="true">5</span><span class="gt"><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</span></li>
@@ -348,13 +349,14 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <h2>What is lost when knowledge moves</h2>
     <p class="lead">Knowledge objects move. The context that makes them interpretable usually doesn't.</p>
     <p>A graduate student records an oral history. The transcript carries consent terms, a do-not-quote request, and contextual notes. A semester later, an excerpt is pasted into an AI assistant to draft an abstract. The abstract is summarized for a newsletter. A sentence from the newsletter appears in a grant report.</p>
-    <div class="chain">
+    <p class="vh">Illustration: as the material moves from the transcript to an AI abstract to a newsletter to a grant report, the interpretive conditions attached to it fall away. Four of four remain at the transcript, two at the AI abstract, and none at the newsletter or the grant report.</p>
+    <div class="chain" aria-hidden="true">
       <div class="chain-step"><div class="cs-title">transcript</div><div class="cs-dots"><span class="cdot on"></span><span class="cdot on"></span><span class="cdot on"></span><span class="cdot on"></span></div></div>
       <div class="chain-step"><div class="cs-title">AI abstract</div><div class="cs-dots"><span class="cdot off"></span><span class="cdot on"></span><span class="cdot off"></span><span class="cdot on"></span></div></div>
       <div class="chain-step"><div class="cs-title">newsletter</div><div class="cs-dots"><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span></div></div>
       <div class="chain-step"><div class="cs-title">grant report</div><div class="cs-dots"><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span></div></div>
     </div>
-    <p class="chain-caption">Every step was reasonable. By the fourth, the words still circulate — but the consent terms, the do-not-quote request, and the notes that governed them are gone, and no one downstream knows they ever existed. <button class="replay" id="chainReplay">Replay ↻</button></p>
+    <p class="chain-caption">Every step was reasonable. By the fourth, the words still circulate, but the consent terms, the do-not-quote request, and the notes that governed them are gone, and no one downstream knows they ever existed. <button class="replay" id="chainReplay">Replay ↻</button></p>
     <div class="credstrip" style="margin-top:18px"><div class="ct">What failed</div><div style="font-size:.92rem;color:var(--ink-soft);font-family:Georgia,serif">The words survived. The consent terms and interpretive conditions that governed them did not.</div></div>
     <div id="gap" style="margin-top:36px;padding-top:28px;border-top:1px solid var(--line)">
       <div class="shead">The infrastructure gap</div>
@@ -386,7 +388,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <div class="gc-main">
         <div class="gc-kicker">Optional · learn by doing</div>
         <div class="gc-title">New to KNOBE? Walk the Grove</div>
-        <p class="gc-desc">A short, guided, no-AI journey that teaches the format by building one real sealed <code>.knobe.md</code> with you — no login, nothing to install. It's a friendly way to dig in and learn the idea, not the standard or fastest way to make a KNOBE. <strong>Note:</strong> Grove may take up to a minute to load on first visit.</p>
+        <p class="gc-desc">A short, guided, no-AI journey that teaches the format by building one real sealed <code>.knobe.md</code> with you: no login, nothing to install. It's a friendly way to dig in and learn the idea, not the standard or fastest way to make a KNOBE. <strong>Note:</strong> Grove may take up to a minute to load on first visit.</p>
       </div>
       <span class="gc-cta">Enter Grove →</span>
     </a>
@@ -493,14 +495,14 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   var runBtn=document.getElementById('runVerify'), out=document.getElementById('verifyOut');
   if(runBtn && out){
     var lines=[
-      '<div style="margin-top:8px"><span class="tl">title:             </span><span class="tv">Oral history — interview 04</span></div>',
+      '<div style="margin-top:8px"><span class="tl">title:             </span><span class="tv">Oral history: interview 04</span></div>',
       '<div><span class="tl">spec_version:      </span><span class="tv">1.0</span></div>',
       '<div><span class="tl">quarantine_status: </span><span class="tv">quarantine</span></div>',
       '<div><span class="tl">computed_hash:     </span><span class="tv">a6c5de4313586170c7600cb9065a858d…</span></div>',
       '<div><span class="tl">stored_hash:       </span><span class="tv">a6c5de4313586170c7600cb9065a858d…</span></div>',
       '<div><span class="tl">status:            </span><span class="tm">verified</span></div>',
       '<div><span class="tl">body_hash:         </span><span class="tm">match</span></div>',
-      '<div style="margin-top:8px"><span class="tn">integrity verified. Integrity is not truth — inspect before trusting.</span></div>'
+      '<div style="margin-top:8px"><span class="tn">integrity verified. Integrity is not truth. Inspect before trusting.</span></div>'
     ];
     runBtn.addEventListener('click', function(){
       runBtn.disabled=true; out.innerHTML='';
@@ -565,7 +567,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     }
     /* Strip the real payload: the LAST newline-anchored marker, per protocol
        ("prefer the last well-formed payload block"). Indented example markers
-       inside the body — e.g. the illustration in section 3 — are ignored. */
+       inside the body (e.g. the illustration in section 3) are ignored. */
     var re=/(?:^|\n)-----BEGIN KNOBE B64-----/g, m, last=-1;
     while((m=re.exec(body))!==null){ last=m.index; }
     if(last!==-1) body=body.slice(0,last);
