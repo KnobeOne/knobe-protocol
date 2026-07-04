@@ -251,6 +251,33 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .social-icon svg{display:block}
 
 /* ---- skip link (accessibility) ---- */
+/* ---- hero definition + pull ---- */
+.defn{font-family:Georgia,serif;font-size:1.12rem;color:var(--moss-deep);border-left:3px solid var(--moss);padding:14px 18px;background:var(--paper-warm);border-radius:0 6px 6px 0;margin-top:22px;line-height:1.6}
+.pull{display:inline-block;margin-top:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;font-weight:600;color:var(--moss);text-decoration:none}
+.pull:hover{text-decoration:underline}
+/* ---- inline verify demo ---- */
+.demo{margin-top:26px;border:1px solid var(--line);border-radius:10px;background:#fff;padding:18px 20px}
+.demo-head{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+.demo-file{font-family:ui-monospace,'SF Mono',Menlo,monospace;font-size:.74rem;line-height:1.5;max-height:150px;overflow:auto;border-radius:6px;margin:0 0 10px;white-space:pre-wrap;word-break:break-word;padding:10px 12px}
+.demo-file.fm{background:#eef1f6;color:#333f52}
+.demo-file.dbody{background:var(--paper-warm);color:var(--ink)}
+.demo-file.payload{background:var(--code-bg);color:var(--code-ink)}
+.demo-btn{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;border:1px solid var(--moss);border-radius:6px;background:var(--moss);color:#fff;padding:8px 16px;cursor:pointer;margin:4px 10px 4px 0}
+.demo-btn.ghost{background:transparent;color:var(--moss)}
+.demo-verdict{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;font-weight:600;margin-top:10px;padding:10px 14px;border-radius:6px;border:1px solid var(--line)}
+.demo-verdict.pass{border-color:#2f6b4f;background:#eef5f0;color:#1d4733}
+.demo-verdict.fail{border-color:#a33;background:#f7ecec;color:#7a2222}
+.demo-note{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint);margin-top:8px}
+/* ---- intent router ---- */
+.intent{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
+@media(max-width:760px){.intent{grid-template-columns:1fr}}
+.intent-card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:18px 20px}
+.intent-q{font-family:Georgia,serif;font-style:italic;font-size:1.05rem;color:var(--moss-deep);margin:0 0 8px}
+.intent-d{font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);margin:0 0 12px}
+.intent-card a{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);text-decoration:none;margin:0 14px 6px 0}
+.intent-card a:hover{text-decoration:underline}
+.smap-details{margin-top:22px}
+.smap-details>summary{cursor:pointer;font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-faint)}
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
@@ -311,40 +338,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <p class="manifesto-line ml-4"><span class="mn">4.</span>The context has to travel with the object.</p>
     </div>
     <p class="sub" style="margin-top:28px">We're now in an era where knowledge moves continuously through humans and AI. AI has changed the scale and speed of knowledge movement so dramatically that we can no longer assume context will be reconstructed downstream as knowledge passes through multiple systems, people, and tools.</p>
+    <p class="defn">KNOBE is an open protocol for auditable plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</p>
+    <a class="pull" href="#problem">Here is what happens without it ↓</a>
   </div>
 </header>
 
 
-
-<section id="format">
-  <div class="wrap">
-    <h2>One file, three layers</h2>
-    <p>A KNOBE is a single plain-text file. A human reads it in any editor. A machine decodes its payload. A verifier checks its payload hash.</p>
-    <div class="layers">
-      <div class="layer l1" data-layer="1"><div class="ll">layer 1 · yaml frontmatter</div><div class="ld">Human-scannable metadata: title, author, license, date.</div></div>
-      <div class="layer l2" data-layer="2"><div class="ll">layer 2 · markdown body</div><div class="ld">The document itself. No schema. No special software required to read it.</div></div>
-      <div class="layer l3" data-layer="3"><div class="ll">layer 3 · base64 json payload</div><div class="ld">Attribution, source context, transformation history, fidelity limits, use conditions, accessibility lineage, and a SHA-256 integrity hash.</div></div>
-    </div>
-  </div>
-</section>
-
-<section id="related">
-  <div class="wrap">
-    <h2>What KNOBE changes</h2>
-    <p>Knowledge work is most fragile at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
-    <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
-    <ul class="gains" role="list">
-      <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</span></li>
-      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens: no account, registry, certificate authority, or server required.</span></li>
-      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</span></li>
-      <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</span></li>
-      <li><span class="gn" aria-hidden="true">5</span><span class="gt"><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</span></li>
-      <li><span class="gn" aria-hidden="true">6</span><span class="gt"><strong>Start simple. Build bigger later.</strong> KNOBEs work in email, shared drives, and local folders today, and can later be indexed or composed inside Git, RO-Crate, FDO, OKF, or other infrastructure.</span></li>
-      <li><span class="gn" aria-hidden="true">7</span><span class="gt"><strong>Share the object, not the system.</strong> Because the context lives inside the file, you can share a knowledge object with its full provenance without exposing the database, drive, or platform it came from.</span></li>
-      <li><span class="gn" aria-hidden="true">8</span><span class="gt"><strong>Built to outlast its tools.</strong> A KNOBE is plain text sealed against a frozen v1 specification, so it stays readable and verifiable years from now: no proprietary format to obsolesce, no vendor whose survival you depend on.</span></li>
-    </ul>
-  </div>
-</section>
 
 <section id="problem">
   <div class="wrap">
@@ -377,6 +376,50 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         </div>
       </div>
     </div>
+    <p style="margin-top:26px;font-size:1.08rem"><strong>KNOBE closes this gap by making the context travel inside the file.</strong></p>
+  </div>
+</section>
+
+<section id="related">
+  <div class="wrap">
+    <h2>What KNOBE changes</h2>
+    <p>Knowledge work is most fragile at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
+    <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
+    <ul class="gains" role="list">
+      <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</span></li>
+      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</span></li>
+      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>Share the object, not the system.</strong> Because the context lives inside the file, you can share a knowledge object with its full provenance without exposing the database, drive, or platform it came from.</span></li>
+      <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</span></li>
+      <li><span class="gn" aria-hidden="true">5</span><span class="gt"><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens: no account, registry, certificate authority, or server required.</span></li>
+      <li><span class="gn" aria-hidden="true">6</span><span class="gt"><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</span></li>
+      <li><span class="gn" aria-hidden="true">7</span><span class="gt"><strong>Built to outlast its tools.</strong> A KNOBE is plain text sealed against a frozen v1 specification, so it stays readable and verifiable years from now: no proprietary format to obsolesce, no vendor whose survival you depend on.</span></li>
+      <li><span class="gn" aria-hidden="true">8</span><span class="gt"><strong>Start simple. Build bigger later.</strong> KNOBEs work in email, shared drives, and local folders today, and can later be indexed or composed inside Git, RO-Crate, FDO, OKF, or other infrastructure.</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="format">
+  <div class="wrap">
+    <h2>One file, three layers</h2>
+    <p>A KNOBE is a single plain-text file. A human reads it in any editor. A machine decodes its payload. A verifier checks its payload hash.</p>
+    <div class="layers">
+      <div class="layer l1" data-layer="1"><div class="ll">layer 1 · yaml frontmatter</div><div class="ld">Human-scannable metadata: title, author, license, date.</div></div>
+      <div class="layer l2" data-layer="2"><div class="ll">layer 2 · markdown body</div><div class="ld">The document itself. No schema. No special software required to read it.</div></div>
+      <div class="layer l3" data-layer="3"><div class="ll">layer 3 · base64 json payload</div><div class="ld">Attribution, source context, transformation history, fidelity limits, use conditions, accessibility lineage, and a SHA-256 integrity hash.</div></div>
+    </div>
+    <div class="demo" id="demo" hidden>
+      <div class="demo-head">Live — this is a real sealed KNOBE. Verify it right here.</div>
+      <pre class="demo-file fm" id="demoFm" aria-label="Layer 1: YAML frontmatter"></pre>
+      <pre class="demo-file dbody" id="demoBody" aria-label="Layer 2: markdown body"></pre>
+      <pre class="demo-file payload" id="demoPayload" aria-label="Layer 3: sealed payload"></pre>
+      <div>
+        <button class="demo-btn" id="demoVerify" type="button">Verify</button>
+        <button class="demo-btn ghost" id="demoTamper" type="button" hidden>Tamper &amp; re-verify</button>
+        <button class="demo-btn ghost" id="demoReset" type="button" hidden>Reset</button>
+      </div>
+      <div id="demoVerdict" class="demo-verdict" role="status" aria-live="polite" hidden></div>
+      <p class="demo-note">The check runs in your browser with <a class="inline" href="/knobe-core.js">knobe-core.js</a> — nothing is uploaded. A verified seal proves integrity, not truth.</p>
+    </div>
   </div>
 </section>
 
@@ -399,8 +442,28 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <section id="sitemap">
   <div class="wrap wide">
-    <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-faint);margin-bottom:0;margin-top:-10px">Every page on this site, by category.</p>
-    <div class="smap">
+    <div class="shead">Where next?</div>
+    <div class="intent">
+      <div class="intent-card">
+        <p class="intent-q">“I want to understand the design.”</p>
+        <p class="intent-d">The full conceptual case — or a hands-on walk.</p>
+        <a href="/white-paper">White paper →</a><a href="/grove/">Grove →</a>
+      </div>
+      <div class="intent-card">
+        <p class="intent-q">“I want to evaluate this for my context.”</p>
+        <p class="intent-d">Domain guidance — and the skeptic's pages.</p>
+        <a href="/education-profile">Education →</a><a href="/enterprise-profile">Enterprise →</a><a href="/government-profile">Government →</a><a href="/threat-model">Threat model →</a><a href="/related-work">Related work →</a>
+      </div>
+      <div class="intent-card">
+        <p class="intent-q">“I want to implement or integrate.”</p>
+        <p class="intent-d">The normative rules, the verifiers, the corpus.</p>
+        <a href="/spec">Spec →</a><a href="/lens">Lens →</a><a href="/test-vectors/">Test vectors →</a><a href="/implementations">Implementations →</a><a href="https://github.com/KnobeOne/knobe-protocol">GitHub →</a>
+      </div>
+    </div>
+    <details class="smap-details">
+      <summary>Every page on this site, by category</summary>
+      <div style="margin-top:14px">
+      <div class="smap">
       <div>
         <div class="smap-head">Protocol</div>
         <a href="/spec" class="smap-link">Spec</a>
@@ -429,6 +492,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <a href="mailto:djkyle@ucdavis.edu" class="smap-link">Contact</a>
       </div>
     </div>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -603,6 +668,31 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
   overlay.addEventListener('click',function(e){ if(e.target===overlay) closePreview(); });
   document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!overlay.hasAttribute('hidden')) closePreview(); });
 })();
+</script>
+<script type="module">
+import { verify } from '/knobe-core.js';
+const $=(q)=>document.querySelector(q);
+let original=null, displayed=null;
+function b64wrap(bytes){let bin='';for(const b of bytes)bin+=String.fromCharCode(b);const b=btoa(bin);const out=[];for(let i=0;i<b.length;i+=76)out.push(b.slice(i,i+76));return out.join('\n');}
+function split(t){const m=t.match(/^(---\n[\s\S]*?\n---\n)([\s\S]*?)(-----BEGIN KNOBE B64-----[\s\S]*?-----END KNOBE B64-----\s*)$/);return m?{fm:m[1],body:m[2],payload:m[3]}:{fm:'',body:'',payload:t};}
+function render(){const L=split(displayed);$('#demoFm').textContent=L.fm.trim();$('#demoBody').textContent=L.body.trim();const p=L.payload.trim();$('#demoPayload').textContent=p.length>640?p.slice(0,640)+'\n… (truncated for display; the full block is what gets verified)':p;}
+function verdict(cls,text){const v=$('#demoVerdict');v.hidden=false;v.className='demo-verdict '+cls;v.textContent=text;}
+async function runVerify(){const r=await verify(displayed);
+  if(r.state==='verified'){verdict('pass','✓ Integrity verified — the payload matches its seal.');$('#demoTamper').hidden=false;}
+  else if(r.state==='verified-body-modified'){verdict('pass','✓ Payload seal intact — but the readable body was changed after sealing.');}
+  else if(r.state==='failed'){verdict('fail','✕ Modified since sealing — one character changed, and the seal caught it.');$('#demoReset').hidden=false;}
+  else{verdict('fail','✕ Unreadable — this file cannot be evaluated as a KNOBE.');$('#demoReset').hidden=false;}}
+$('#demoVerify').addEventListener('click',runVerify);
+$('#demoTamper').addEventListener('click',async()=>{
+  const m=displayed.match(/-----BEGIN KNOBE B64-----\n([\s\S]*?)\n-----END KNOBE B64-----/);if(!m)return;
+  const bytes=Uint8Array.from(atob(m[1].replace(/\s+/g,'')),c=>c.charCodeAt(0));
+  const json=new TextDecoder().decode(bytes);
+  const tampered=json.replace(/("title":")(.)/,(s,a,c)=>a+(c==='X'?'Y':'X'));
+  const b64=b64wrap(new TextEncoder().encode(tampered));
+  displayed=displayed.replace(m[0],'-----BEGIN KNOBE B64-----\n'+b64+'\n-----END KNOBE B64-----');
+  render();await runVerify();$('#demoTamper').hidden=true;$('#demoReset').hidden=false;});
+$('#demoReset').addEventListener('click',()=>{displayed=original;render();$('#demoVerdict').hidden=true;$('#demoTamper').hidden=true;$('#demoReset').hidden=true;});
+try{const res=await fetch('/knobe-education-reading.knobe.md');if(res.ok){original=displayed=await res.text();render();$('#demo').hidden=false;}}catch{}
 </script>
 </body>
 </html>
