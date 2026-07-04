@@ -22,6 +22,13 @@ em.kw{font-style:italic;color:var(--moss-deep)}
 strong{font-weight:600}
 
 /* ---- skip link (accessibility) ---- */
+/* ---- forward transitions (where to go next) ---- */
+.fwd{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 10px}
+.fwd-why{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
+.fwd a.fwd-link{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.98rem;font-weight:600;color:var(--moss);text-decoration:none;margin:0 22px 8px 0}
+.fwd a.fwd-link:hover{text-decoration:underline}
+.fwd-also{font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-faint);margin-top:6px}
+.fwd-also a{color:var(--ink-soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
@@ -261,6 +268,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </section>
 
   </div>
+
+<div class="wrap"><nav class="fwd" aria-label="Where to go next">
+    <p class="fwd-why">Verified in the browser. Take it further:</p>
+    <a class="fwd-link" href="/downloads">Get the command-line verifier →</a>
+    <a class="fwd-link" href="/grove/">Learn how to create one →</a>
+</nav></div>
+
 </main>
 
 <footer>

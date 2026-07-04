@@ -98,6 +98,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .social-icon:hover{color:var(--moss)}
 .social-icon svg{display:block}
 /* ---- skip link (accessibility) ---- */
+/* ---- forward transitions (where to go next) ---- */
+.fwd{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 10px}
+.fwd-why{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
+.fwd a.fwd-link{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.98rem;font-weight:600;color:var(--moss);text-decoration:none;margin:0 22px 8px 0}
+.fwd a.fwd-link:hover{text-decoration:underline}
+.fwd-also{font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-faint);margin-top:6px}
+.fwd-also a{color:var(--ink-soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
@@ -386,6 +393,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>Opening the release's <code>parents</code> array reveals one entry with a payload hash. Verify that hash against the source record above and it matches: the release names that exact record as its source, and no other. The hash proves the identity of the referenced record precisely; the derivation and the faithfulness of reproduced text remain declarations by the issuing office: sealed, attributable, and tamper-evident, but not independently proven. The <code>redaction</code> field records the governing exemption and the scope of what was withheld, so the basis for withholding travels with the release rather than living only in a separate log. The chain (originating office certifies the record, FOIA office redacts and releases) is sealed and checkable without any case-management system, portal, or database. The artifacts carry their own custody.</p>
 
   </div>
+
+<div class="wrap"><nav class="fwd" aria-label="Where to go next">
+    <p class="fwd-why">Ready to evaluate KNOBE for records and releases?</p>
+    <a class="fwd-link" href="/downloads">Get started →</a>
+    <p class="fwd-also">See also: <a href="/education-profile">Education</a> | <a href="/enterprise-profile">Enterprise</a> | <a href="/accessibility">Accessibility</a></p>
+</nav></div>
+
 </main>
 
 <footer>

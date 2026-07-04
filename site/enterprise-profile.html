@@ -98,6 +98,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .social-icon:hover{color:var(--moss)}
 .social-icon svg{display:block}
 /* ---- skip link (accessibility) ---- */
+/* ---- forward transitions (where to go next) ---- */
+.fwd{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 10px}
+.fwd-why{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
+.fwd a.fwd-link{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.98rem;font-weight:600;color:var(--moss);text-decoration:none;margin:0 22px 8px 0}
+.fwd a.fwd-link:hover{text-decoration:underline}
+.fwd-also{font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-faint);margin-top:6px}
+.fwd-also a{color:var(--ink-soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
@@ -394,6 +401,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>Opening the synthesis's <code>parents</code> array reveals one entry with a payload hash. Verify that hash against the knowledge-base source above and it matches: the summary names that exact document as its source. The hash identifies the referenced document precisely; the derivation itself is a declaration by the sealing pipeline: tamper-evident, but not independently proven. The source is <code>trusted</code>; the synthesis is <code>quarantine</code>. Nothing about generating the summary promoted it: trust is conferred by an explicit review step, recorded by a <code>reviewer</code> role, not by the act of generation. The chain (human-maintained source, agent synthesis, pending review) is sealed and checkable in version control, without a pipeline-observability platform or database. The artifacts carry their own lineage.</p>
 
   </div>
+
+<div class="wrap"><nav class="fwd" aria-label="Where to go next">
+    <p class="fwd-why">Ready to evaluate KNOBE for your organization?</p>
+    <a class="fwd-link" href="/downloads">Get started →</a>
+    <p class="fwd-also">See also: <a href="/education-profile">Education</a> | <a href="/government-profile">Government</a> | <a href="/accessibility">Accessibility</a></p>
+</nav></div>
+
 </main>
 
 <footer>
