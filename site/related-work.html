@@ -105,7 +105,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <div class="navlinks">
       <a href="/spec">Spec</a>
       <a href="/white-paper">White paper</a>
-      <a href="/lens">Lens</a>
+      <details class="nav-uses">
+        <summary class="here">Trust</summary>
+        <div class="nav-menu">
+          <a href="/threat-model">Threat model</a>
+          <a href="/related-work" class="here" aria-current="page">Related work</a>
+        </div>
+      </details>
       <details class="nav-uses">
         <summary>Uses</summary>
         <div class="nav-menu">
@@ -115,11 +121,21 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
           <a href="/accessibility">Accessibility</a>
         </div>
       </details>
-      <a href="/downloads">Downloads</a>
+      <details class="nav-uses">
+        <summary>Build</summary>
+        <div class="nav-menu">
+          <a href="/lens">Lens</a>
+          <a href="/test-vectors/">Test vectors</a>
+          <a href="/implementations">Implementations</a>
+          <a href="/downloads">Downloads</a>
+          <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
+        </div>
+      </details>
       <a href="/about">About</a>
     </div>
   </div>
 </nav>
+<script>/* nav dropdown ux */(function(){var ds=document.querySelectorAll('.nav-uses');ds.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)ds.forEach(function(o){if(o!==d)o.open=false});});});document.addEventListener('keydown',function(e){if(e.key==='Escape')ds.forEach(function(o){o.open=false});});document.addEventListener('click',function(e){if(!e.target.closest('.nav-uses'))ds.forEach(function(o){o.open=false});});})();</script>
 
 <header>
   <div class="wrap">
