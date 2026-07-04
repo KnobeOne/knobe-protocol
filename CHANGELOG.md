@@ -11,6 +11,23 @@ The protocol itself is frozen at v1.0 (see [GOVERNANCE.md](GOVERNANCE.md)); entr
 
 ## Post-freeze updates (non-normative)
 
+### 2026-07-04
+
+- `lens.py` hardened: three malformed-input crash paths (unpaired-surrogate
+  payload strings, BEGIN-marker-at-byte-0 with a `body_hash`, non-list
+  `parents`) now degrade to honest verdicts instead of raising. The §5
+  canonical hash rule is unchanged; all 31 published fixtures verify
+  identically before and after.
+- `knobe-core.js` added: the JavaScript sibling verifier and engine — one
+  standalone file, no dependencies, Node ≥ 20.10 and browsers. Reproduces the
+  reference verifier's verdicts across all 31 published fixtures, including
+  the bare-numeric canonicalization case.
+- `knobe-core.selftest.mjs` added: runs both verifiers over every vector and
+  example and reports agreement (31/31 at time of commit).
+- Implementations page added at `/implementations`, documenting the reference
+  verifier, the browser Lens (and its documented bare-numeric deferral), and
+  the JavaScript sibling. `sitemap.xml` updated.
+
 ### 2026-07-01
 
 - Root `spec.html` brought to parity with the deployed spec: conformance count corrected (six → nine), "Integrity, not truth," "For implementers," and "For agent builders" sections restored, closing claim updated.

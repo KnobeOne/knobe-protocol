@@ -24,6 +24,13 @@ It is not DRM, not a truth machine, not an identity verification system, and not
 python3 lens.py examples/knobe-v1-white-paper.knobe.md
 ```
 
+To confirm the JavaScript sibling verifier agrees with the reference across
+every vector and example in this repository (requires Node ≥ 20.10 and Python 3):
+
+```bash
+node knobe-core.selftest.mjs
+```
+
 Output includes three independent dimensions:
 
 - **status** (integrity): `verified` · `verified-body-modified` · `failed` · `unreadable`
@@ -38,6 +45,8 @@ A `verified` result proves the payload is byte-identical to what was hashed at s
 .
 ├── site/spec.html         The normative v1 specification (served at knobe.org/spec)
 ├── lens.py                Python reference verifier, no external dependencies
+├── knobe-core.js          JavaScript sibling verifier and engine (Node ≥ 20.10 and browsers), no dependencies
+├── knobe-core.selftest.mjs  Cross-checks knobe-core.js against lens.py over every vector and example
 ├── test-vectors/          Nine conformance vectors for testing implementations
 └── examples/              Sealed example KNOBEs (white paper, education chain, etc.)
 ```
@@ -52,14 +61,14 @@ The reference verifier `lens.py` is a standard-library Python file with no exter
 
 An implementation that reproduces all nine expected results is canonically compatible with KNOBE Protocol v1.
 
-A second, independent implementation already exists. The browser Lens ([`site/lens.html`](site/lens.html), live at [knobe.org/lens](https://knobe.org/lens)) is a pure-JavaScript verifier built from the same specification, sharing no code with `lens.py`. It reproduces `lens.py`'s verdicts across the conformance and adversarial test vectors, with one deliberate exception: in a browser, where numeric canonicalization cannot match Python's guarantees, it declines to issue a hash verdict on bare-numeric payloads (a §5 violation) and defers to `lens.py` as canonical for that case. Two independent implementations agreeing on the vectors is the practical test that the spec is buildable from text alone.
+Two JavaScript verifiers already exist. The browser Lens ([`site/lens.html`](site/lens.html), live at [knobe.org/lens](https://knobe.org/lens)) is a pure-JavaScript verifier built to the same specification, sharing no code with `lens.py`; it reproduces `lens.py`'s verdicts across the conformance and adversarial vectors, declining to issue a hash verdict on bare-numeric payloads (a §5 violation) in the browser and deferring to `lens.py` there. [`knobe-core.js`](knobe-core.js) is a single standalone JavaScript file — a sibling verifier, written by studying `lens.py`, sharing no code but sharing lineage — that reproduces `lens.py`'s verdicts including the bare-numeric case, and also seals, creates, and derives KNOBEs. Run `node knobe-core.selftest.mjs` to check `knobe-core.js` against `lens.py` over every vector and example. Multiple implementations agreeing on the vectors is the practical test that the spec is buildable from text. See [knobe.org/implementations](https://knobe.org/implementations).
 
 ## License
 
 | Material | License |
 |----------|---------|
 | Specification, white paper, profiles, and all prose | [CC BY 4.0](LICENSE) |
-| Verifier code — `lens.py` and the browser Lens (`site/lens.html`) | [Apache-2.0](LICENSE-CODE) |
+| Verifier code — `lens.py`, `knobe-core.js`, and the browser Lens (`site/lens.html`) | [Apache-2.0](LICENSE-CODE) |
 | Test vectors (`test-vectors/`) | [CC0-1.0](test-vectors/LICENSE) — copy them into your test suite freely, no attribution required |
 
 The steward asserts no patents covering KNOBE Protocol v1 and will not assert any patent against conformant implementations. See [GOVERNANCE.md](GOVERNANCE.md).
