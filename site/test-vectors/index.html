@@ -65,6 +65,13 @@ footer a{color:var(--ink-soft);text-decoration:none}
 footer a:hover{color:var(--moss)}
 footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep);margin-bottom:20px;font-size:.95rem}
 /* ---- skip link (accessibility) ---- */
+/* ---- forward transitions (where to go next) ---- */
+.fwd{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 10px}
+.fwd-why{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
+.fwd a.fwd-link{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.98rem;font-weight:600;color:var(--moss);text-decoration:none;margin:0 22px 8px 0}
+.fwd a.fwd-link:hover{text-decoration:underline}
+.fwd-also{font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-faint);margin-top:6px}
+.fwd-also a{color:var(--ink-soft);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
@@ -96,7 +103,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <div class="navlinks">
       <a href="/spec">Spec</a>
       <a href="/white-paper">White paper</a>
-      <a href="/lens">Lens</a>
+      <details class="nav-uses">
+        <summary>Trust</summary>
+        <div class="nav-menu">
+          <a href="/threat-model">Threat model</a>
+          <a href="/related-work">Related work</a>
+        </div>
+      </details>
       <details class="nav-uses">
         <summary>Uses</summary>
         <div class="nav-menu">
@@ -106,11 +119,21 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
           <a href="/accessibility">Accessibility</a>
         </div>
       </details>
-      <a href="/downloads">Downloads</a>
+      <details class="nav-uses">
+        <summary class="here">Build</summary>
+        <div class="nav-menu">
+          <a href="/lens">Lens</a>
+          <a href="/test-vectors/" class="here" aria-current="page">Test vectors</a>
+          <a href="/implementations">Implementations</a>
+          <a href="/downloads">Downloads</a>
+          <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
+        </div>
+      </details>
       <a href="/about">About</a>
     </div>
   </div>
 </nav>
+<script>/* nav dropdown ux */(function(){var ds=document.querySelectorAll('.nav-uses');ds.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)ds.forEach(function(o){if(o!==d)o.open=false});});});document.addEventListener('keydown',function(e){if(e.key==='Escape')ds.forEach(function(o){o.open=false});});document.addEventListener('click',function(e){if(!e.target.closest('.nav-uses'))ds.forEach(function(o){o.open=false});});})();</script>
 
 <header>
   <div class="wrap">
@@ -199,6 +222,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </table>
 
   </div>
+
+<div class="wrap"><nav class="fwd" aria-label="Where to go next">
+    <p class="fwd-why">Your implementation matches the corpus? Compare two verifiers directly.</p>
+    <a class="fwd-link" href="/implementations">Run the cross-verifier parity check →</a>
+    <a class="fwd-link" href="/spec">The normative reference →</a>
+</nav></div>
+
 </main>
 
 <footer>
