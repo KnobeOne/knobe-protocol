@@ -59,12 +59,6 @@ ul.plain li{margin-bottom:10px;font-size:1.02rem}
 .status{background:var(--paper-warm);border-left:3px solid var(--amber);border-radius:0 6px 6px 0;padding:16px 22px;margin:20px 0}
 .status p{font-family:-apple-system,system-ui,sans-serif;font-size:.92rem;color:var(--ink-soft);margin:0}
 
-.levels{border:1px solid var(--line);border-radius:10px;background:#fff;padding:16px 20px 8px;margin:18px 0 6px}
-.levels .lvl{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft);margin:0 0 10px}
-.levels .lvl strong{color:var(--moss-deep)}
-.levels .lvl a{color:var(--moss);text-decoration:none;font-weight:600;white-space:nowrap}
-.levels .lvl a:hover{text-decoration:underline}
-
 ol.flow{list-style:none;margin:20px 0 24px;counter-reset:step}
 ol.flow li{position:relative;padding:0 0 18px 52px;counter-increment:step;font-size:1.02rem}
 ol.flow li::before{content:counter(step);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--moss-deep);color:var(--paper);font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center}
@@ -186,14 +180,6 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <p><strong>Status.</strong> The integrity and lineage mechanisms described here are implemented in the public verifier and can be tested in a browser. The stronger, participant-held custody model described below has not yet been evaluated in a live study. It is included here as a proposed pilot workflow, not as an established research practice.</p>
     </div>
 
-    <div class="levels" aria-label="Uses, from the modest to the more experimental">
-      <p class="lvl">Four uses, ordered from the modest to the more experimental:</p>
-      <p class="lvl">First, a KNOBE can seal a file so that a later change is detectable, with no consent semantics required. <a href="#workflow">How →</a></p>
-      <p class="lvl">Second, it can keep consent terms and source context attached to transcripts and excerpts. <a href="#declares">What it declares →</a></p>
-      <p class="lvl">Third, it can link transformations such as coding, translation, memoing, and AI-assisted summarization. <a href="#range">The range →</a></p>
-      <p class="lvl">Finally, in studies designed for it, it may support participant-held originals. <a href="#custody">The pilot →</a></p>
-    </div>
-
     <nav class="toc" aria-label="On this page">
       <a href="#problem">The problem</a> <span>·</span> <a href="#declares">What the object declares</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#range">Range of use</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#limits">Limits</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilots</a>
     </nav>
@@ -298,7 +284,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <li><strong>Waves could not be quietly revised.</strong> Wave-one objects stay sealed against a frozen specification.</li>
       <li><strong>Analysis tools would consult each object's terms before use,</strong> honoring aggregate-only conditions per object, per participant, with a citable basis for every refusal.</li>
     </ul>
-    <p>This is the study we would most like to run with partners. We have not run it. That distinction is the point of this page.</p>
+    <p>This study has not been run. That distinction is the point of this page.</p>
 
     <h2 id="irb">For your IRB</h2>
     <p>KNOBE does not change what you collect or how you collect it. It changes how data is stored and transmitted: a plain-text file with the consent terms embedded, instead of a transcript in one folder and a consent form in a drawer. Integrity can be checked in a browser with the <a class="inline" href="/lens">Lens</a>, with no technical training. Whether sealing counts as a protocol amendment is your board's call; for pilot partners, we will draft the protocol language together. And sealing is not anonymization; de-identification remains a methods responsibility, as stated above.</p>
@@ -314,7 +300,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <tr><td>Portability, lineage, local verification, legible terms</td><td class="st now">Protocol, today</td><td>v1 is frozen; verify it on this site</td></tr>
         <tr><td>Consent-aware creation, reading, and permission checks</td><td class="st now">Tooling, working</td><td>the same engine that verifies on this page</td></tr>
         <tr><td>Identity, enforcement, markets, trusted time</td><td class="st plan">Credentialed layer, planned</td><td>application-layer work; not the open protocol</td></tr>
-        <tr><td>Personal corpora as a cognitive commons</td><td class="st agenda">Research agenda</td><td>what this page invites you to study with us</td></tr>
+        <tr><td>Personal corpora as a cognitive commons</td><td class="st agenda">Research agenda</td><td>an open research question</td></tr>
       </tbody>
     </table>
 
