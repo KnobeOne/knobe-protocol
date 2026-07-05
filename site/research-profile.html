@@ -198,7 +198,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <li><strong>Lineage.</strong> A <code>parents</code> field chaining to the hash of the object it came from.</li>
       <li><strong>A verification hash.</strong> Change one character and the check fails.</li>
     </ul>
-    <p>What do "consent terms inside the payload" look like? These are the actual fields from the sealed example below, not a mockup:</p>
+    <p>What do "consent terms inside the payload" look like? These are the actual fields from the sealed example below:</p>
     <div class="cfields">"research:consent-version": "illustrative-1.0",
 "research:permitted-uses": ["quotation-with-pseudonym-and-year",
                             "educational-display",
@@ -219,8 +219,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </ol>
 
     <div class="exbox">
-      <div class="xh">Illustrative fixture: synthetic, and labeled as such</div>
-      <p>A synthetic consented interview, sealed with this repository's own tooling. The fictional participant's terms travel inside the payload you just read. Its closing line puts the condition in the participant's own (fictional) voice: <em>“Quote me with that date attached, or don't quote me.”</em></p>
+      <div class="xh">Illustrative fixture: synthetic</div>
+      <p>A synthetic consented interview, sealed with this repository's own tooling. The fictional participant's terms are declared in the payload you just read. Its closing line puts the condition in the participant's own (fictional) voice: <em>“Quote me with that date attached, or don't quote me.”</em></p>
       <div class="exlinks">
         <a href="/knobe-research-interview.knobe.md" download>Download the object</a>
         <a href="/lens">Open the Lens and verify it</a>
@@ -262,7 +262,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h2 id="custody">An advanced pilot: the participant keeps the original</h2>
     <p>Everything above leaves custody where it already is. For some studies, the same mechanics could support a stronger model: the participant retains the sealed original, and researchers work from verified derivatives whose lineage points back to it.</p>
-    <p>The participant's copy is plain text. It lives in their email or their drive, opens in any editor, and verifies locally years later, with no account and no platform. Because the consent terms travel inside it, the participant keeps proof of what they agreed to rather than a photocopy of a form. Years later, they can grant a new use by issuing a new license object chained to the original, or issue a revocation object that cooperating tools will cite when declining further use.</p>
+    <p>The participant's copy is plain text. It lives in their email or their drive, opens in any editor, and verifies locally years later, with no account and no platform. Because the consent terms travel inside it, the participant keeps proof of what they agreed to rather than a photocopy of a form. Years later, they could grant a new use by issuing a new license object chained to the original, or a revocation object that cooperating tools would cite when declining further use.</p>
     <p>This model is not required for any of the workflow above. It is a promising fit for oral history, community-based research, data donation, and long-term panels, and an IRB-governed pilot would test it first.</p>
 
     <h2 id="limits">Limits</h2>
@@ -276,7 +276,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </dl>
 
     <h2 id="scale">At larger scale: a study we have not run</h2>
-    <p>The workflow works at any scale. A fifteen-participant qualitative study is a complete use, not a stepping stone. What follows is the far end of the range, described in the conditional, because it should be.</p>
+    <p>The workflow works at any scale. A fifteen-participant qualitative study is a complete use on its own. What follows is the far end of the range.</p>
     <p>In research on what AI does to cognition and culture, the stimulus and the response both need provenance, and human-AI interaction is currently the least-provenanced data in science. A panel study built on participant-retained originals would look like this: participants donate sealed monthly slices of their AI interactions. Each donation records which model produced the stimulus, what the human did with it, and the participant's terms. Each participant keeps their own longitudinal corpus, so the panel's value accrues to the panelists and not only to the lab.</p>
     <ul class="plain">
       <li><strong>Contamination would be inspectable by declaration.</strong> Every object states its AI involvement, so corpora could be built AI-labeled or AI-excluded without relying on detection heuristics.</li>
@@ -284,7 +284,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <li><strong>Waves could not be quietly revised.</strong> Wave-one objects stay sealed against a frozen specification.</li>
       <li><strong>Analysis tools would consult each object's terms before use,</strong> honoring aggregate-only conditions per object, per participant, with a citable basis for every refusal.</li>
     </ul>
-    <p>This study has not been run. That distinction is the point of this page.</p>
+    <p>This study has not been run.</p>
 
     <h2 id="irb">For your IRB</h2>
     <p>KNOBE does not change what you collect or how you collect it. It changes how data is stored and transmitted: a plain-text file with the consent terms embedded, instead of a transcript in one folder and a consent form in a drawer. Integrity can be checked in a browser with the <a class="inline" href="/lens">Lens</a>, with no technical training. Whether sealing counts as a protocol amendment is your board's call; for pilot partners, we will draft the protocol language together. And sealing is not anonymization; de-identification remains a methods responsibility, as stated above.</p>
