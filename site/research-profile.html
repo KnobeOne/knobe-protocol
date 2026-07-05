@@ -180,7 +180,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <main id="main">
   <div class="wrap">
-    <p class="lead">In many research workflows, consent forms, transcripts, excerpts, translations, coded segments, and published quotations are stored and circulated separately. As materials move across tools, people, and publications, the conditions that governed their use can become harder to see. KNOBE approaches this as a file-level problem: a research object can carry its readable content together with consent terms, source context, transformation history, and a verification hash, in one plain-text file.</p>
+    <p class="lead">In many research workflows, consent forms, transcripts, excerpts, translations, coded segments, and published quotations are stored and circulated separately. As materials move across tools, people, and publications, the conditions that governed their use can become harder to see. KNOBE approaches this as a file-level problem: a research object can pair its readable content with a sealed declaration of consent terms, source context, transformation history, and a verification hash, in one plain-text file.</p>
 
     <div class="status">
       <p><strong>Status.</strong> The integrity and lineage mechanisms described here are implemented in the public verifier and can be tested in a browser. The stronger, participant-held custody model described below has not yet been evaluated in a live study. It is included here as a proposed pilot workflow, not as an established research practice.</p>
@@ -189,13 +189,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <div class="levels" aria-label="Uses, from the modest to the more experimental">
       <p class="lvl">Four uses, ordered from the modest to the more experimental:</p>
       <p class="lvl">First, a KNOBE can seal a file so that a later change is detectable, with no consent semantics required. <a href="#workflow">How →</a></p>
-      <p class="lvl">Second, it can keep consent terms and source context attached to transcripts and excerpts. <a href="#carries">What travels →</a></p>
+      <p class="lvl">Second, it can keep consent terms and source context attached to transcripts and excerpts. <a href="#declares">What it declares →</a></p>
       <p class="lvl">Third, it can link transformations such as coding, translation, memoing, and AI-assisted summarization. <a href="#range">The range →</a></p>
       <p class="lvl">Finally, in studies designed for it, it may support participant-held originals. <a href="#custody">The pilot →</a></p>
     </div>
 
     <nav class="toc" aria-label="On this page">
-      <a href="#problem">The problem</a> <span>·</span> <a href="#carries">What the object carries</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#range">Range of use</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilots</a>
+      <a href="#problem">The problem</a> <span>·</span> <a href="#declares">What the object declares</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#range">Range of use</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilots</a>
     </nav>
 
     <h2 id="problem">What breaks in research today</h2>
@@ -203,7 +203,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>Three familiar drifts sit underneath that decay. <strong>Consent detaches from data:</strong> terms agreed at collection are stored apart from the material and become hard to consult downstream. <strong>Derivation goes quiet:</strong> by the time a quotation reaches print, the path back through coding, translation, and summarization is reconstructable only from memory. <strong>AI-assisted steps compound both:</strong> summaries and abstracts move faster and farther than the conditions that governed their sources.</p>
     <p>The technical question is whether consent terms and lineage can remain attached to the material itself, rather than being reconstructed later from surrounding documentation. KNOBE is one answer to that question.</p>
 
-    <h2 id="carries">What a research object carries</h2>
+    <h2 id="declares">What a sealed research object declares</h2>
     <p>A sealed research object is one plain-text file: the transcript, excerpt, or translation as its readable body, and a sealed payload that declares:</p>
     <ul class="plain">
       <li><strong>Consent terms.</strong> The version agreed to, and the uses permitted and prohibited.</li>
@@ -227,7 +227,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <ol class="flow">
       <li>A transcript is sealed as a <code>.knobe.md</code>: the words as the readable body, the consent terms inside the sealed payload.</li>
       <li>A coded excerpt is sealed as a derivative. Its <code>parents</code> field chains to the transcript's hash, and its <code>content_type</code> declares the transformation.</li>
-      <li>A translation is sealed the same way and carries its own fidelity limits.</li>
+      <li>A translation is sealed the same way and declares its own fidelity limits.</li>
       <li>A quotation in a publication can be traced back through the chain to the consented source.</li>
       <li>Anyone holding the files, including an IRB, can verify the chain locally, with no registry or account.</li>
     </ol>
@@ -252,7 +252,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <h3>Low friction</h3>
     <ul class="plain">
       <li><strong>Excerpts keep source context.</strong> A quotation leaves the transcript with its consent terms, collection context, and de-identification status attached.</li>
-      <li><strong>Translation declares fidelity.</strong> A translated instrument or interview chains to its original and carries its equivalence limits.</li>
+      <li><strong>Translation declares fidelity.</strong> A translated instrument or interview chains to its original and declares its equivalence limits.</li>
       <li><strong>Coding becomes traceable.</strong> Coded segments chain to the transcript and the codebook version that shaped them.</li>
       <li><strong>AI assistance is declared.</strong> Transcription, translation, coding help, drafting: stated per object rather than per project, and declared-synthetic material stays separable from human corpora.</li>
     </ul>
