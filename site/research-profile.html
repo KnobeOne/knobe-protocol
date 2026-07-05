@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNOBE — Research</title>
-<meta name="description" content="A proposal for social research with KNOBE: the participant keeps the sealed original, and researchers work from derivatives with lineage. The mechanics are verifiable on this page today; the workflow is seeking pilot partners.">
+<meta name="description" content="Consent-aware social research with KNOBE: materials keep their consent terms, source context, and derivation history as they move. An advanced pilot model lets participants retain sealed originals while researchers work from verified derivatives.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -117,11 +117,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE — Research">
-<meta property="og:description" content="A proposal for social research: the participant keeps the sealed original, and researchers work from derivatives with lineage. The mechanics are verifiable today; the workflow is seeking pilot partners.">
+<meta property="og:description" content="Research materials that keep their consent terms, context, and lineage as they move. An advanced pilot model lets participants retain sealed originals.">
 <meta property="og:url" content="https://knobe.org/research-profile">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE — Research">
-<meta name="twitter:description" content="A proposal: the participant keeps the sealed original; researchers work from derivatives with lineage.">
+<meta name="twitter:description" content="Consent, context, and lineage that travel with research materials.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -167,39 +167,37 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <header class="top">
   <div class="wrap">
-    <div class="eyebrow">A use to pilot: social research</div>
-    <h1>What if the participant kept the original?</h1>
+    <div class="eyebrow">A use: social research</div>
+    <h1>Consent should travel with the data.</h1>
   </div>
 </header>
 
 <main id="main">
   <div class="wrap">
-    <p class="lead">Today the researcher holds the data, and the participant holds a photocopy of a consent form. This page describes the inversion: the participant keeps the sealed original, and researchers work from derivatives whose lineage points back to it, with the consent terms traveling inside every copy.</p>
+    <p class="lead">In many research workflows, consent forms, transcripts, excerpts, translations, coded segments, and published quotations are stored and circulated separately. The material keeps moving; the conditions that governed it become harder to see. KNOBE's intervention is simple: the research object carries its consent terms, source context, and transformation history with it, in one plain-text file anyone can verify.</p>
 
     <div class="status">
-      <p><strong>Status, plainly:</strong> every mechanism on this page works today and can be verified here, in your browser. No study has yet been run this way. This is a workflow we think deserves piloting, and an invitation to pilot it.</p>
+      <p><strong>Status, plainly:</strong> sealing research materials this way works today, and every mechanism on this page can be verified here, in your browser. The stronger custody model further down has not been run in a live study. That is the pilot we are seeking partners for.</p>
     </div>
 
     <nav class="toc" aria-label="On this page">
-      <a href="#problem">The problem</a> <span>·</span> <a href="#inversion">The inversion</a> <span>·</span> <a href="#lands">Where it could land</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#ladder">The ladder</a> <span>·</span> <a href="#pilot">Pilot it</a>
+      <a href="#problem">The problem</a> <span>·</span> <a href="#carries">What the object carries</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#lands">Where it could land</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilot it</a>
     </nav>
 
     <h2 id="problem">What breaks in research today</h2>
     <p>The failure on this site's front page is a research scenario: an oral history whose consent terms, do-not-quote request, and contextual notes fall away as an excerpt moves through an AI abstract into a newsletter and a grant report. Every step was reasonable. By the fourth, the words still circulate and the conditions that governed them are gone.</p>
-    <p>Three research-specific problems sit underneath that decay. <strong>Consent detaches from data:</strong> the terms live in a filing cabinet while the transcript travels. <strong>Custody is one-sided:</strong> participants surrender their words and keep nothing that proves what they agreed to. <strong>Derivation is invisible:</strong> by the time a quote reaches print, no one can trace it back through coding, translation, and summarization to the consented original.</p>
+    <p>Three familiar drifts sit underneath that decay. <strong>Consent detaches from data:</strong> terms agreed at collection are stored apart from the material and become hard to consult downstream. <strong>Derivation goes quiet:</strong> by the time a quotation reaches print, the path back through coding, translation, and summarization is reconstructable only from memory. <strong>AI-assisted steps compound both:</strong> summaries and abstracts move faster and farther than the conditions that governed their sources.</p>
     <p>None of this requires new infrastructure to fix. It requires the consent terms and the lineage to live inside the file. That part exists.</p>
 
-    <h2 id="inversion">The custody inversion, step by step</h2>
-    <p>Here is the lifecycle we propose. Each mechanism in it (sealing, hashing, lineage, local verification) is part of the frozen protocol and runs in the tooling on this site. What has not happened yet is a study conducted this way.</p>
-    <ol class="flow">
-      <li>An interview is recorded and transcribed, as it is now.</li>
-      <li>The transcript is sealed as a <code>.knobe.md</code>: the words as the readable body, the consent terms inside the sealed payload.</li>
-      <li>The participant receives the sealed original. It is plain text; it lives in their email or their drive, opens in any editor, and verifies locally years later, with no account and no platform.</li>
-      <li>The researcher works from derivatives: a de-identified excerpt, a coded segment, a translation. Each is a new sealed object whose <code>parents</code> field chains to the original's hash and whose <code>content_type</code> declares the transformation.</li>
-      <li>A publication quotes the derivative. The chain from consent terms to printed quotation is inspectable end to end, by an IRB or by anyone holding the files.</li>
-      <li>Years later, the participant grants a new use by issuing a new license object chained to the original. Or declines. The original never left their hands.</li>
-      <li>Anyone holding the objects can verify the whole chain with a local verifier. No registry, no platform, no one's permission.</li>
-    </ol>
+    <h2 id="carries">What a research object carries</h2>
+    <p>A sealed research object is one plain-text file: the transcript, excerpt, or translation as its readable body, and a sealed payload that declares:</p>
+    <ul class="plain">
+      <li><strong>Consent terms.</strong> The version agreed to, and the uses permitted and prohibited.</li>
+      <li><strong>Source context.</strong> Who contributed, who collected, under what instrument.</li>
+      <li><strong>Transformation history.</strong> What kind of derivation this object is, declared rather than inferred.</li>
+      <li><strong>Lineage.</strong> A <code>parents</code> field chaining to the hash of the object it came from.</li>
+      <li><strong>A verification hash.</strong> Change one character and the check fails.</li>
+    </ul>
     <p>What do "consent terms inside the payload" look like? These are the actual fields from the sealed example below, not a mockup:</p>
     <div class="cfields">"research:consent-version": "illustrative-1.0",
 "research:permitted-uses": ["quotation-with-pseudonym-and-year",
@@ -208,11 +206,17 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 "research:prohibited-uses": ["re-identification", "commercial-reuse"],
 "research:custody": "participant retains the sealed original;
                      researcher copies are derivatives with lineage"</div>
-    <div class="callout">
-      <p><strong>What the protocol does here, and what it deliberately does not.</strong> KNOBE makes consent terms legible, citable, and refusable at the point of use. A cooperating tool or agent can check an object's declared conditions before acting, and decline with a citable basis. The open protocol does not process payments, verify legal identity, or enforce anything against an uncooperative party. Markets, identity, and enforcement are application-layer work for credentialed environments, not properties of the file format.</p>
-    </div>
 
-    <h2 id="example">One sealed object, on the table</h2>
+    <h2 id="workflow">The basic workflow</h2>
+    <p>No new infrastructure, no platform, and no change to what you collect or how. Materials are sealed as they are produced, and every later object chains back. Each mechanism here is part of the frozen protocol and runs in the tooling on this site.</p>
+    <ol class="flow">
+      <li>A transcript is sealed as a <code>.knobe.md</code>: the words as the readable body, the consent terms inside the sealed payload.</li>
+      <li>A coded excerpt is sealed as a derivative. Its <code>parents</code> field chains to the transcript's hash, and its <code>content_type</code> declares the transformation.</li>
+      <li>A translation is sealed the same way and carries its own fidelity limits.</li>
+      <li>A quotation in a publication can be traced back through the chain to the consented source.</li>
+      <li>Anyone holding the files, including an IRB, verifies the chain locally. No registry, no account, no one's permission.</li>
+    </ol>
+
     <div class="exbox">
       <div class="xh">Illustrative fixture: synthetic, and labeled as such</div>
       <p>A synthetic consented interview, sealed with this repository's own tooling. The fictional participant's terms travel inside the payload you just read. Its closing line is the whole idea in the participant's own (fictional) voice: <em>“Quote me with that date attached, or don't quote me.”</em></p>
@@ -224,6 +228,15 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <p>Change one character and verification fails. That is the property the whole workflow rests on.</p>
       <span class="hash">payload_hash: acbf1dbebcd410d4d82a75367f57c84c726588480b97711514129819a4395eb4</span>
     </div>
+
+    <div class="callout">
+      <p><strong>What the protocol does here, and what it deliberately does not.</strong> KNOBE makes consent terms legible, citable, and refusable at the point of use. A cooperating tool or agent can check an object's declared conditions before acting, and decline with a citable basis. The open protocol does not process payments, verify legal identity, or enforce anything against an uncooperative party. Markets, identity, and enforcement are application-layer work for credentialed environments, not properties of the file format.</p>
+    </div>
+
+    <h2 id="custody">An advanced pilot: the participant keeps the original</h2>
+    <p>Everything above leaves custody where it already is. For some studies, the same mechanics support a stronger model, and it is the one we most want to pilot: the participant retains the sealed original, and researchers work from verified derivatives whose lineage points back to it.</p>
+    <p>The participant's copy is plain text. It lives in their email or their drive, opens in any editor, and verifies locally years later, with no account and no platform. Because the consent terms travel inside it, the participant keeps proof of what they agreed to rather than a photocopy of a form. Years later, they can grant a new use by issuing a new license object chained to the original, or issue a revocation object that cooperating tools will cite when declining further use.</p>
+    <p>This model is not required for any of the workflow above. It is a promising fit for oral history, community-based research, data donation, and long-term panels, and it is the design we are seeking IRB-governed pilots for.</p>
 
     <h2 id="lands">Where else this could land</h2>
     <h3>Qualitative and archival</h3>
@@ -253,8 +266,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </dl>
 
     <h2 id="scale">At larger scale: a study we have not run</h2>
-    <p>The inversion works at any scale. A fifteen-participant qualitative study is a complete use, not a stepping stone. What follows is the far end of the range, described in the conditional, because it should be.</p>
-    <p>In research on what AI does to cognition and culture, the stimulus and the response both need provenance, and human-AI interaction is currently the least-provenanced data in science. A panel study built on the inversion would look like this: participants donate sealed monthly slices of their AI interactions. Each donation records which model produced the stimulus, what the human did with it, and the participant's terms. Each participant keeps their own longitudinal corpus, so the panel's value accrues to the panelists and not only to the lab.</p>
+    <p>The workflow works at any scale. A fifteen-participant qualitative study is a complete use, not a stepping stone. What follows is the far end of the range, described in the conditional, because it should be.</p>
+    <p>In research on what AI does to cognition and culture, the stimulus and the response both need provenance, and human-AI interaction is currently the least-provenanced data in science. A panel study built on participant-retained originals would look like this: participants donate sealed monthly slices of their AI interactions. Each donation records which model produced the stimulus, what the human did with it, and the participant's terms. Each participant keeps their own longitudinal corpus, so the panel's value accrues to the panelists and not only to the lab.</p>
     <ul class="plain">
       <li><strong>Contamination would be inspectable by declaration.</strong> Every object states its AI involvement, so corpora could be built AI-labeled or AI-excluded without relying on detection heuristics.</li>
       <li><strong>Replication would inherit materials, not methods paragraphs.</strong> Instrument, exact stimuli, and responses, all sealed and byte-verifiable years later.</li>
@@ -283,12 +296,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p><em>A coda, past the edge of this page:</em> the participant who keeps their interviews is the same person as the student who keeps their learning record and anyone who keeps their AI conversations. A lifetime of sealed objects is a personal corpus, and platforms become interchangeable lenses over it. That argument is larger than research and belongs to the <a class="inline" href="/white-paper">white paper</a>.</p>
 
-    <h2 id="pilot">Pilot custody inversion</h2>
+    <h2 id="pilot">Run a pilot</h2>
     <p>We are looking for co-investigators, not test subjects. A pilot can be as small as sealing one existing, consented dataset and evaluating the workflow, or as large as writing the inversion into a new IRB protocol. Starting the conversation commits you to nothing. Write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with a short note on your context. KNOBE is an independent open protocol authored by David Kyle at UC Davis, not an official UC Davis standard or product.</p>
   </div>
 
 <div class="wrap"><nav class="fwd" aria-label="Where to go next">
-    <p class="fwd-why">Research is where the custody inversion starts, not where it ends.</p>
+    <p class="fwd-why">One sealed transcript is a complete start. The pilots can go as far as custody.</p>
     <a class="fwd-link" href="/downloads">Get started →</a>
     <a class="fwd-link" href="/education-profile">The education profile →</a>
     <a class="fwd-link" href="/implementations">Check the verifiers →</a>
