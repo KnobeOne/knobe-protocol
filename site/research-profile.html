@@ -59,6 +59,12 @@ ul.plain li{margin-bottom:10px;font-size:1.02rem}
 .status{background:var(--paper-warm);border-left:3px solid var(--amber);border-radius:0 6px 6px 0;padding:16px 22px;margin:20px 0}
 .status p{font-family:-apple-system,system-ui,sans-serif;font-size:.92rem;color:var(--ink-soft);margin:0}
 
+.levels{border:1px solid var(--line);border-radius:10px;background:#fff;padding:16px 20px 8px;margin:18px 0 6px}
+.levels .lvl{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft);margin:0 0 10px}
+.levels .lvl strong{color:var(--moss-deep)}
+.levels .lvl a{color:var(--moss);text-decoration:none;font-weight:600;white-space:nowrap}
+.levels .lvl a:hover{text-decoration:underline}
+
 ol.flow{list-style:none;margin:20px 0 24px;counter-reset:step}
 ol.flow li{position:relative;padding:0 0 18px 52px;counter-increment:step;font-size:1.02rem}
 ol.flow li::before{content:counter(step);position:absolute;left:0;top:2px;width:30px;height:30px;border-radius:50%;background:var(--moss-deep);color:var(--paper);font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;font-weight:600;display:flex;align-items:center;justify-content:center}
@@ -180,8 +186,15 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <p><strong>Status, plainly:</strong> sealing research materials this way works today, and every mechanism on this page can be verified here, in your browser. The stronger custody model further down has not been run in a live study. That is the pilot we are seeking partners for.</p>
     </div>
 
+    <div class="levels" aria-label="Levels of use">
+      <p class="lvl"><strong>Level 1 · File integrity.</strong> Seal materials so any later change is detectable. No consent semantics required. <a href="#workflow">How →</a></p>
+      <p class="lvl"><strong>Level 2 · Consent-aware materials.</strong> Terms and source context travel inside transcripts and excerpts. <a href="#carries">What travels →</a></p>
+      <p class="lvl"><strong>Level 3 · Traceable workflows.</strong> Coding, translation, memos, instruments, replication packages, and declared AI assistance chain together. <a href="#range">The range →</a></p>
+      <p class="lvl"><strong>Level 4 · Participant-held originals.</strong> The advanced pilot, for studies that want it. <a href="#custody">The pilot →</a></p>
+    </div>
+
     <nav class="toc" aria-label="On this page">
-      <a href="#problem">The problem</a> <span>·</span> <a href="#carries">What the object carries</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#lands">Where it could land</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilot it</a>
+      <a href="#problem">The problem</a> <span>·</span> <a href="#carries">What the object carries</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#range">Range of use</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilot it</a>
     </nav>
 
     <h2 id="problem">What breaks in research today</h2>
@@ -208,6 +221,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
                      researcher copies are derivatives with lineage"</div>
 
     <h2 id="workflow">The basic workflow</h2>
+    <p>At minimum, sealing is nothing more exotic than file integrity: proof that a transcript has not drifted since collection. Everything else on this page is optional, layered on top of that.</p>
     <p>No new infrastructure, no platform, and no change to what you collect or how. Materials are sealed as they are produced, and every later object chains back. Each mechanism here is part of the frozen protocol and runs in the tooling on this site.</p>
     <ol class="flow">
       <li>A transcript is sealed as a <code>.knobe.md</code>: the words as the readable body, the consent terms inside the sealed payload.</li>
@@ -233,25 +247,36 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <p><strong>What the protocol does here, and what it deliberately does not.</strong> KNOBE makes consent terms legible, citable, and refusable at the point of use. A cooperating tool or agent can check an object's declared conditions before acting, and decline with a citable basis. The open protocol does not process payments, verify legal identity, or enforce anything against an uncooperative party. Markets, identity, and enforcement are application-layer work for credentialed environments, not properties of the file format.</p>
     </div>
 
+    <h2 id="range">The range of use</h2>
+    <h3>Low friction, today</h3>
+    <ul class="plain">
+      <li><strong>Excerpts keep source context.</strong> A quotation leaves the transcript with its consent terms, collection context, and de-identification status attached.</li>
+      <li><strong>Translation declares fidelity.</strong> A translated instrument or interview chains to its original and carries its equivalence limits.</li>
+      <li><strong>Coding becomes traceable.</strong> Coded segments chain to the transcript and the codebook version that shaped them.</li>
+      <li><strong>AI assistance is declared.</strong> Transcription, translation, coding help, drafting: stated per object rather than per project, and declared-synthetic material stays separable from human corpora.</li>
+    </ul>
+    <h3>Research infrastructure</h3>
+    <ul class="plain">
+      <li><strong>Codebooks as versioned objects,</strong> so revisions stop being unreconstructable.</li>
+      <li><strong>Analytic memos that chain</strong> to the excerpts and notes they interpret.</li>
+      <li><strong>Instruments sealed per version,</strong> prompts included; every response chains to the exact version used.</li>
+      <li><strong>Replication packages</strong> in which tables and figures chain to the data and code that produced them.</li>
+      <li><strong>Meta-analysis extraction trails,</strong> each estimate chained to the passage it came from.</li>
+      <li><strong>IRB audit packets:</strong> one sealed chain from consent version to published quotation, instead of scattered files.</li>
+    </ul>
+    <h3>Originals held by participants or communities</h3>
+    <ul class="plain">
+      <li><strong>Oral history</strong> whose do-not-quote and attribution terms travel with every excerpt.</li>
+      <li><strong>Community-based research</strong> in which the community holds the corpus and licenses researcher access.</li>
+      <li><strong>Data donation</strong> as purpose-limited license objects rather than surrendered raw exports.</li>
+      <li><strong>Long-term AI-interaction panels,</strong> the study described below.</li>
+    </ul>
+    <p>The last group pairs with the <a class="inline" href="#custody">custody pilot, next</a>. Nothing in the first two groups requires it.</p>
+
     <h2 id="custody">An advanced pilot: the participant keeps the original</h2>
     <p>Everything above leaves custody where it already is. For some studies, the same mechanics support a stronger model, and it is the one we most want to pilot: the participant retains the sealed original, and researchers work from verified derivatives whose lineage points back to it.</p>
     <p>The participant's copy is plain text. It lives in their email or their drive, opens in any editor, and verifies locally years later, with no account and no platform. Because the consent terms travel inside it, the participant keeps proof of what they agreed to rather than a photocopy of a form. Years later, they can grant a new use by issuing a new license object chained to the original, or issue a revocation object that cooperating tools will cite when declining further use.</p>
     <p>This model is not required for any of the workflow above. It is a promising fit for oral history, community-based research, data donation, and long-term panels, and it is the design we are seeking IRB-governed pilots for.</p>
-
-    <h2 id="lands">Where else this could land</h2>
-    <h3>Qualitative and archival</h3>
-    <ul class="plain">
-      <li><strong>Oral history and archives.</strong> Do-not-quote requests and context notes would travel with every excerpt into every future finding aid.</li>
-      <li><strong>Ethnography and community-based research.</strong> Informant-held originals; communities that hold the corpus and license researcher access, rather than the reverse.</li>
-      <li><strong>Qualitative coding.</strong> Codebooks as sealed objects; every coded excerpt chains to its raw source and codebook version.</li>
-      <li><strong>Translation.</strong> Translated instruments would carry their own equivalence caveats as fidelity limits.</li>
-    </ul>
-    <h3>Quantitative and replication</h3>
-    <ul class="plain">
-      <li><strong>Replication packages and meta-analysis.</strong> Every extracted estimate chains to the exact source object it came from.</li>
-      <li><strong>Data donation.</strong> Donors would keep sealed originals and issue purpose-limited licenses instead of surrendering raw exports.</li>
-      <li><strong>Synthetic-respondent hygiene.</strong> Declared-synthetic objects keep honest simulation studies separable from contaminated human panels.</li>
-    </ul>
 
     <h2 id="hard">Hard questions, answered plainly</h2>
     <dl class="qa">
