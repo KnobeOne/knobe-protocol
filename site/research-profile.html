@@ -173,34 +173,35 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <header class="top">
   <div class="wrap">
-    <div class="eyebrow">A use: social research</div>
-    <h1>Consent should travel with the data.</h1>
+    <div class="eyebrow">Domain profile · Research</div>
+    <h1>Consent, context, and lineage should stay attached to research materials.</h1>
   </div>
 </header>
 
 <main id="main">
   <div class="wrap">
-    <p class="lead">In many research workflows, consent forms, transcripts, excerpts, translations, coded segments, and published quotations are stored and circulated separately. The material keeps moving; the conditions that governed it become harder to see. KNOBE's intervention is simple: the research object carries its consent terms, source context, and transformation history with it, in one plain-text file anyone can verify.</p>
+    <p class="lead">In many research workflows, consent forms, transcripts, excerpts, translations, coded segments, and published quotations are stored and circulated separately. As materials move across tools, people, and publications, the conditions that governed their use can become harder to see. KNOBE approaches this as a file-level problem: a research object can carry its readable content together with consent terms, source context, transformation history, and a verification hash, in one plain-text file.</p>
 
     <div class="status">
-      <p><strong>Status, plainly:</strong> sealing research materials this way works today, and every mechanism on this page can be verified here, in your browser. The stronger custody model further down has not been run in a live study. That is the pilot we are seeking partners for.</p>
+      <p><strong>Status.</strong> The integrity and lineage mechanisms described here are implemented in the public verifier and can be tested in a browser. The stronger, participant-held custody model described below has not yet been evaluated in a live study. It is included here as a proposed pilot workflow, not as an established research practice.</p>
     </div>
 
-    <div class="levels" aria-label="Levels of use">
-      <p class="lvl"><strong>Level 1 · File integrity.</strong> Seal materials so any later change is detectable. No consent semantics required. <a href="#workflow">How →</a></p>
-      <p class="lvl"><strong>Level 2 · Consent-aware materials.</strong> Terms and source context travel inside transcripts and excerpts. <a href="#carries">What travels →</a></p>
-      <p class="lvl"><strong>Level 3 · Traceable workflows.</strong> Coding, translation, memos, instruments, replication packages, and declared AI assistance chain together. <a href="#range">The range →</a></p>
-      <p class="lvl"><strong>Level 4 · Participant-held originals.</strong> The advanced pilot, for studies that want it. <a href="#custody">The pilot →</a></p>
+    <div class="levels" aria-label="Uses, from the modest to the more experimental">
+      <p class="lvl">Four uses, ordered from the modest to the more experimental:</p>
+      <p class="lvl">First, a KNOBE can seal a file so that a later change is detectable, with no consent semantics required. <a href="#workflow">How →</a></p>
+      <p class="lvl">Second, it can keep consent terms and source context attached to transcripts and excerpts. <a href="#carries">What travels →</a></p>
+      <p class="lvl">Third, it can link transformations such as coding, translation, memoing, and AI-assisted summarization. <a href="#range">The range →</a></p>
+      <p class="lvl">Finally, in studies designed for it, it may support participant-held originals. <a href="#custody">The pilot →</a></p>
     </div>
 
     <nav class="toc" aria-label="On this page">
-      <a href="#problem">The problem</a> <span>·</span> <a href="#carries">What the object carries</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#range">Range of use</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilot it</a>
+      <a href="#problem">The problem</a> <span>·</span> <a href="#carries">What the object carries</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#range">Range of use</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilots</a>
     </nav>
 
     <h2 id="problem">What breaks in research today</h2>
     <p>The failure on this site's front page is a research scenario: an oral history whose consent terms, do-not-quote request, and contextual notes fall away as an excerpt moves through an AI abstract into a newsletter and a grant report. Every step was reasonable. By the fourth, the words still circulate and the conditions that governed them are gone.</p>
     <p>Three familiar drifts sit underneath that decay. <strong>Consent detaches from data:</strong> terms agreed at collection are stored apart from the material and become hard to consult downstream. <strong>Derivation goes quiet:</strong> by the time a quotation reaches print, the path back through coding, translation, and summarization is reconstructable only from memory. <strong>AI-assisted steps compound both:</strong> summaries and abstracts move faster and farther than the conditions that governed their sources.</p>
-    <p>None of this requires new infrastructure to fix. It requires the consent terms and the lineage to live inside the file. That part exists.</p>
+    <p>The technical question is whether consent terms and lineage can remain attached to the material itself, rather than being reconstructed later from surrounding documentation. KNOBE is one answer to that question.</p>
 
     <h2 id="carries">What a research object carries</h2>
     <p>A sealed research object is one plain-text file: the transcript, excerpt, or translation as its readable body, and a sealed payload that declares:</p>
@@ -221,14 +222,14 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
                      researcher copies are derivatives with lineage"</div>
 
     <h2 id="workflow">The basic workflow</h2>
-    <p>At minimum, sealing is nothing more exotic than file integrity: proof that a transcript has not drifted since collection. Everything else on this page is optional, layered on top of that.</p>
-    <p>No new infrastructure, no platform, and no change to what you collect or how. Materials are sealed as they are produced, and every later object chains back. Each mechanism here is part of the frozen protocol and runs in the tooling on this site.</p>
+    <p>At minimum, sealing is a file-integrity step: it establishes that a transcript has not changed since collection. Everything beyond that is optional and builds on it.</p>
+    <p>This does not require a new platform, and it does not change what you collect or how. Materials are sealed as they are produced, and each later object chains back to what it came from. The harder questions are procedural rather than technical: when to seal materials, how to describe consent terms, and how a research team or an IRB should treat derivative objects.</p>
     <ol class="flow">
       <li>A transcript is sealed as a <code>.knobe.md</code>: the words as the readable body, the consent terms inside the sealed payload.</li>
       <li>A coded excerpt is sealed as a derivative. Its <code>parents</code> field chains to the transcript's hash, and its <code>content_type</code> declares the transformation.</li>
       <li>A translation is sealed the same way and carries its own fidelity limits.</li>
       <li>A quotation in a publication can be traced back through the chain to the consented source.</li>
-      <li>Anyone holding the files, including an IRB, verifies the chain locally. No registry, no account, no one's permission.</li>
+      <li>Anyone holding the files, including an IRB, can verify the chain locally, with no registry or account.</li>
     </ol>
 
     <div class="exbox">
@@ -239,7 +240,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <a href="/lens">Open the Lens and verify it</a>
         <a href="/knobe-research-interview.knobe.md">View source</a>
       </div>
-      <p>Change one character and verification fails. That is the property the whole workflow rests on.</p>
+      <p>Changing one character causes verification to fail. This is the basic integrity property: once sealed, the object can be checked for any later alteration.</p>
       <span class="hash">payload_hash: acbf1dbebcd410d4d82a75367f57c84c726588480b97711514129819a4395eb4</span>
     </div>
 
@@ -248,7 +249,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </div>
 
     <h2 id="range">The range of use</h2>
-    <h3>Low friction, today</h3>
+    <h3>Low friction</h3>
     <ul class="plain">
       <li><strong>Excerpts keep source context.</strong> A quotation leaves the transcript with its consent terms, collection context, and de-identification status attached.</li>
       <li><strong>Translation declares fidelity.</strong> A translated instrument or interview chains to its original and carries its equivalence limits.</li>
@@ -274,7 +275,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>The last group pairs with the <a class="inline" href="#custody">custody pilot, next</a>. Nothing in the first two groups requires it.</p>
 
     <h2 id="custody">An advanced pilot: the participant keeps the original</h2>
-    <p>Everything above leaves custody where it already is. For some studies, the same mechanics support a stronger model, and it is the one we most want to pilot: the participant retains the sealed original, and researchers work from verified derivatives whose lineage points back to it.</p>
+    <p>Everything above leaves custody where it already is. For some studies, the same mechanics could support a stronger model: the participant retains the sealed original, and researchers work from verified derivatives whose lineage points back to it.</p>
     <p>The participant's copy is plain text. It lives in their email or their drive, opens in any editor, and verifies locally years later, with no account and no platform. Because the consent terms travel inside it, the participant keeps proof of what they agreed to rather than a photocopy of a form. Years later, they can grant a new use by issuing a new license object chained to the original, or issue a revocation object that cooperating tools will cite when declining further use.</p>
     <p>This model is not required for any of the workflow above. It is a promising fit for oral history, community-based research, data donation, and long-term panels, and it is the design we are seeking IRB-governed pilots for.</p>
 
@@ -321,12 +322,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p><em>A coda, past the edge of this page:</em> the participant who keeps their interviews is the same person as the student who keeps their learning record and anyone who keeps their AI conversations. A lifetime of sealed objects is a personal corpus, and platforms become interchangeable lenses over it. That argument is larger than research and belongs to the <a class="inline" href="/white-paper">white paper</a>.</p>
 
-    <h2 id="pilot">Run a pilot</h2>
-    <p>We are looking for co-investigators, not test subjects. A pilot can be as small as sealing one existing, consented dataset and evaluating the workflow, or as large as writing the inversion into a new IRB protocol. Starting the conversation commits you to nothing. Write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with a short note on your context. KNOBE is an independent open protocol authored by David Kyle at UC Davis, not an official UC Davis standard or product.</p>
+    <h2 id="pilot">Pilot studies</h2>
+    <p>We are interested in collaborating with researchers who want to test this workflow under ordinary research conditions: an existing consented dataset, a new interview study, an archive accession, or a course-based methods project. A pilot need not adopt participant-held originals. It could begin with a single sealed transcript, or a short excerpt chain, and evaluate what the format adds, what it complicates, and what an IRB would need to know. If that is useful in your context, write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a>. KNOBE is an independent open protocol authored by David Kyle at UC Davis, not an official UC Davis standard or product.</p>
   </div>
 
 <div class="wrap"><nav class="fwd" aria-label="Where to go next">
-    <p class="fwd-why">One sealed transcript is a complete start. The pilots can go as far as custody.</p>
+    <p class="fwd-why">A pilot could begin with a single sealed transcript, or extend to participant-held originals.</p>
     <a class="fwd-link" href="/downloads">Get started →</a>
     <a class="fwd-link" href="/education-profile">The education profile →</a>
     <a class="fwd-link" href="/implementations">Check the verifiers →</a>
