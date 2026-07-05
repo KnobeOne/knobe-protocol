@@ -11,6 +11,20 @@ The protocol itself is frozen at v1.0 (see [GOVERNANCE.md](GOVERNANCE.md)); entr
 
 ## Post-freeze updates (non-normative)
 
+### 2026-07-05
+
+- Research profile added at `/research-profile`: consent-aware research
+  objects (materials keep their consent terms, source context, and derivation
+  history as they move), with custody inversion (participant retains the
+  sealed original; researchers hold derivatives with lineage) presented as an
+  advanced pilot model; an AI-and-cognition study design, hard questions
+  answered plainly (withdrawal, timestamps, enforcement, re-identification),
+  and the status-labeled ladder from protocol to research agenda. Wired into
+  the Uses navigation, the homepage intent router, and `sitemap.xml`.
+- Sealed illustrative fixture `site/knobe-research-interview.knobe.md` added
+  (synthetic, labeled as such; verifies as `verified/valid`). Site-only: the
+  31-file conformance corpus is unchanged.
+
 ### 2026-07-04
 
 - `lens.py` hardened: three malformed-input crash paths (unpaired-surrogate
