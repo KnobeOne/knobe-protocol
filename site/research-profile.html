@@ -195,7 +195,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </div>
 
     <nav class="toc" aria-label="On this page">
-      <a href="#problem">The problem</a> <span>·</span> <a href="#declares">What the object declares</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#range">Range of use</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#hard">Hard questions</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilots</a>
+      <a href="#problem">The problem</a> <span>·</span> <a href="#declares">What the object declares</a> <span>·</span> <a href="#workflow">Basic workflow</a> <span>·</span> <a href="#range">Range of use</a> <span>·</span> <a href="#custody">Custody pilot</a> <span>·</span> <a href="#limits">Limits</a> <span>·</span> <a href="#scale">At larger scale</a> <span>·</span> <a href="#irb">For your IRB</a> <span>·</span> <a href="#cite">Cite</a> <span>·</span> <a href="#pilot">Pilots</a>
     </nav>
 
     <h2 id="problem">What breaks in research today</h2>
@@ -279,10 +279,10 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>The participant's copy is plain text. It lives in their email or their drive, opens in any editor, and verifies locally years later, with no account and no platform. Because the consent terms travel inside it, the participant keeps proof of what they agreed to rather than a photocopy of a form. Years later, they can grant a new use by issuing a new license object chained to the original, or issue a revocation object that cooperating tools will cite when declining further use.</p>
     <p>This model is not required for any of the workflow above. It is a promising fit for oral history, community-based research, data donation, and long-term panels, and it is the design we are seeking IRB-governed pilots for.</p>
 
-    <h2 id="hard">Hard questions</h2>
+    <h2 id="limits">Limits</h2>
     <dl class="qa">
       <dt>Can a participant withdraw?</dt>
-      <dd>Custody inversion helps: the participant deletes their original, and a revocation object chained to it makes withdrawal machine-legible, so cooperating tools decline further use and cite it. No protocol on earth claws back copies already made. KNOBE makes withdrawal visible and citable, not magically enforced.</dd>
+      <dd>In the custody model above, withdrawal could work like this: the participant deletes their original and issues a revocation object chained to it, and cooperating tools would decline further use and cite it. No protocol can claw back copies already made elsewhere. This would make withdrawal visible and citable, not enforced.</dd>
       <dt>Does the seal prove when something was created?</dt>
       <dd>No. <code>created_date</code> is a declared field; the seal proves content, not time. Preregistration and priority claims need trusted timestamping, which is application-layer work (for example, ledger anchoring in a credentialed environment) and never a requirement of the open format.</dd>
       <dt>What about re-identification?</dt>
