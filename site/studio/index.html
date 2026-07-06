@@ -1032,14 +1032,18 @@ function readFileAsText(file) {
 const tabs = [$('tab-create'), $('tab-verify'), $('tab-transform'), $('tab-journey'), $('tab-cohort'), $('tab-adapt')];
 const panels = { 'tab-create': $('panel-create'), 'tab-verify': $('panel-verify'), 'tab-transform': $('panel-transform'),
                  'tab-journey': $('panel-journey'), 'tab-cohort': $('panel-cohort'), 'tab-adapt': $('panel-adapt') };
-function selectTab(tab) {
+function selectTab(tab, opts) {
   tabs.forEach(t => {
     const on = t === tab;
     t.setAttribute('aria-selected', on ? 'true' : 'false');
     t.tabIndex = on ? 0 : -1;
     panels[t.id].hidden = !on;
   });
+  if (opts && opts.silent) return;
   tab.focus();
+  const p = new URLSearchParams(location.search);
+  p.set('tab', tab.id.slice(4));
+  history.replaceState(null, '', location.pathname + '?' + p);
 }
 tabs.forEach(t => {
   t.addEventListener('click', () => selectTab(t));
@@ -1049,6 +1053,12 @@ tabs.forEach(t => {
     if (e.key === 'ArrowLeft') { e.preventDefault(); selectTab(tabs[(i + tabs.length - 1) % tabs.length]); }
   });
 });
+// ?tab= deep link (create|verify|transform|journey|cohort|adapt). ?journey= implies Create and wins.
+{
+  const q = new URLSearchParams(location.search);
+  const want = q.get('tab');
+  if (want && !q.get('journey') && panels['tab-' + want]) selectTab($('tab-' + want), { silent: true });
+}
 
 // ---- attribution extra rows ----
 let srcCount = 1;
