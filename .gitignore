@@ -22,4 +22,5 @@ __pycache__/
 *.xlsx
 *.csv
 *.zip
+!site/kits/education/knobe-instructor-kit.zip
 *.tar.gz
