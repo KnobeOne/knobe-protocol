@@ -54,7 +54,7 @@ main p{margin-bottom:16px}
 h2{font-size:1.3rem;font-weight:normal;color:var(--moss-deep);margin:40px 0 12px;letter-spacing:-.01em}
 
 /* ---- panel switcher ---- */
-.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:10px 0 26px;font-family:-apple-system,system-ui,sans-serif}
+.tabs{display:flex;flex-wrap:wrap;gap:6px;border-bottom:1px solid var(--line);margin:10px 0 26px;font-family:-apple-system,system-ui,sans-serif}
 .tab{font-size:.95rem;font-weight:500;color:var(--ink-soft);background:none;border:none;border-bottom:2px solid transparent;
   padding:10px 16px;cursor:pointer;margin-bottom:-1px}
 .tab:hover{color:var(--moss)}
@@ -149,6 +149,43 @@ pre.filepre{max-height:340px;overflow:auto;font-family:'SF Mono',ui-monospace,Me
   background:#f6ebe8;border:1px solid #e3c4bd;border-radius:6px;padding:12px 16px;margin:18px 0 0}
 .enginefail{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--alert);
   background:#f6ebe8;border:1px solid #e3c4bd;border-radius:6px;padding:14px 18px;margin:20px 0}
+
+/* ---- journey + cohort ---- */
+.jload{border:1px solid var(--line);border-radius:8px;background:var(--paper-warm);padding:12px 16px;margin:0 0 18px;
+  font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
+.jload>span{font-weight:600;color:var(--ink);margin-right:8px}
+.jbanner{font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;color:var(--moss-deep);
+  background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;
+  padding:10px 14px;margin:10px 0 0}
+.jbanner .linkbtn{margin-left:10px}
+.jaiblock{border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;background:#fdf8f0;
+  padding:14px 16px 4px;margin:0 0 18px}
+.jainote{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin:0 0 12px}
+.jstep{border:1px solid var(--line);border-radius:8px;background:#fff;padding:14px 14px 4px;margin:0 0 12px}
+.jstep .jstephead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;
+  font-family:-apple-system,system-ui,sans-serif}
+.jstep .jstepnum{font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--moss)}
+.jstep .jstepbtns{display:flex;gap:12px}
+.jstep .sealed-hash{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.68rem;color:var(--moss-deep);word-break:break-all;margin:0 0 10px}
+.jbuilds{display:flex;gap:8px 16px;flex-wrap:wrap;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin:0 0 14px}
+.jbuilds label{display:flex;gap:5px;align-items:baseline}
+.chsummary{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink);margin:14px 0 6px}
+.chtablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px;background:#fff}
+.chtable{width:100%;border-collapse:collapse;font-family:-apple-system,system-ui,sans-serif;font-size:.8rem}
+.chtable th{text-align:left;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+  padding:9px 12px;border-bottom:2px solid var(--line);white-space:nowrap}
+.chtable td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);max-width:260px}
+.chtable tr:last-child td{border-bottom:none}
+.chtable td.mono{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;word-break:break-all}
+.chtable .cok{color:var(--moss-deep);font-weight:600}
+.chtable .cwarn{color:var(--amber);font-weight:600}
+.chtable .cbad{color:var(--alert);font-weight:600}
+.chtable .cneutral{color:var(--ink-faint)}
+#chChain{border:1px solid var(--line);border-radius:8px;background:#fff;padding:14px 18px;margin-top:12px;
+  font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;color:var(--ink-soft)}
+#chChain .chainitem{padding:7px 0;border-bottom:1px solid var(--line)}
+#chChain .chainitem:last-child{border-bottom:none}
+#chChain .chainlink{font-size:.78rem;color:var(--ink-faint);padding-left:18px}
 
 /* ---- dropzones ---- */
 .drop{margin:6px 0 8px;border:2px dashed var(--line);border-radius:10px;background:var(--paper-warm);
@@ -274,6 +311,7 @@ footer a:hover{color:var(--moss)}
         <summary>Uses</summary>
         <div class="nav-menu">
           <a href="/education-profile">Education</a>
+          <a href="/teaching">Teaching</a>
           <a href="/government-profile">Government</a>
           <a href="/enterprise-profile">Enterprise</a>
           <a href="/research-profile">Research</a>
@@ -318,10 +356,52 @@ footer a:hover{color:var(--moss)}
       <button class="tab" id="tab-create" role="tab" aria-selected="true" aria-controls="panel-create">Create</button>
       <button class="tab" id="tab-verify" role="tab" aria-selected="false" aria-controls="panel-verify" tabindex="-1">Verify</button>
       <button class="tab" id="tab-transform" role="tab" aria-selected="false" aria-controls="panel-transform" tabindex="-1">Transform</button>
+      <button class="tab" id="tab-journey" role="tab" aria-selected="false" aria-controls="panel-journey" tabindex="-1">Journey</button>
+      <button class="tab" id="tab-cohort" role="tab" aria-selected="false" aria-controls="panel-cohort" tabindex="-1">Cohort check</button>
+      <button class="tab" id="tab-adapt" role="tab" aria-selected="false" aria-controls="panel-adapt" tabindex="-1">Adapt</button>
     </div>
 
     <!-- ================= CREATE ================= -->
     <section class="panel" id="panel-create" role="tabpanel" aria-labelledby="tab-create">
+
+      <div class="jload" id="jsIntakeBox">
+        <span>Working from a course journey?</span>
+        <button type="button" class="linkbtn" id="jsIntakeToggle" aria-expanded="false" aria-controls="jsIntakeWrap">Load the journey file</button>
+        <div id="jsIntakeWrap" class="pastewrap">
+          <div id="jsDrop" class="drop" style="padding:22px 20px;margin-top:10px" aria-label="Drop the journey .knobe.md file here">
+            <div class="dmain">Drag the journey <code>.knobe.md</code> here</div>
+            <div class="dhint">Your instructor posted it with the assignment. It is read in this page and goes nowhere else.</div>
+            <button type="button" id="jsChoose" class="btn choosebtn">Choose the file</button>
+            <input type="file" id="jsFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file">
+          </div>
+          <label for="jsPasteArea" class="visually-hidden">Paste journey file text</label>
+          <textarea id="jsPasteArea" placeholder="Or paste the full text of the journey file." spellcheck="false"></textarea>
+          <div class="btnrow"><button type="button" id="jsPasteBtn" class="btn">Load pasted text</button></div>
+        </div>
+        <div class="errmsg" id="jsErr" role="alert" hidden></div>
+        <div id="jsPicker" hidden>
+          <div class="subhead" style="border-top:none;padding-top:6px">Which step are you sealing?</div>
+          <div id="jsPickerBtns" class="btnrow"></div>
+        </div>
+        <div id="jsBanner" class="jbanner" aria-live="polite" hidden></div>
+      </div>
+
+      <div class="jaiblock" id="jsAiWrap" hidden>
+        <div class="subhead" style="border-top:none;padding-top:0;margin-top:0" id="jsAiHead">AI assistance for this step</div>
+        <p class="jainote" id="jsAiPolicyNote"></p>
+        <div id="jsAiFields">
+          <div class="row2">
+            <div class="field">
+              <label for="jsAiName">AI tool or model</label>
+              <input type="text" id="jsAiName" placeholder="AI Assistant (unnamed model)" autocomplete="off">
+            </div>
+          </div>
+          <div class="field">
+            <label for="jsAiWhat">What the AI did, and what you did yourself</label>
+            <textarea id="jsAiWhat" rows="2" placeholder="Vague disclosure is not sufficient. Say what the AI did and what you did yourself. Leave blank if you did not use AI."></textarea>
+          </div>
+        </div>
+      </div>
 
       <fieldset class="tpls">
         <legend>Start from</legend>
@@ -633,6 +713,244 @@ footer a:hover{color:var(--moss)}
       </div>
     </section>
 
+    <!-- ================= JOURNEY ================= -->
+    <section class="panel" id="panel-journey" role="tabpanel" aria-labelledby="tab-journey" hidden>
+      <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">A journey is one sealed file that describes an assignment sequence: who seals each step, what kind of work it is, and the AI policy for that step. Its readable body is a syllabus-ready description; its sealed payload is what Studio reads when a student loads the file. Post both the journey file and this page's link with your Canvas assignment.</p>
+
+      <div class="jload" style="margin-bottom:18px">
+        <span>Revising an existing journey?</span>
+        <button type="button" class="linkbtn" id="jmLoadToggle" aria-expanded="false" aria-controls="jmLoadWrap">Load it for editing</button>
+        <div id="jmLoadWrap" class="pastewrap">
+          <label for="jmPasteArea" class="visually-hidden">Paste journey file text</label>
+          <textarea id="jmPasteArea" placeholder="Paste the full text of the journey .knobe.md file, or use the file picker." spellcheck="false"></textarea>
+          <div class="btnrow">
+            <button type="button" id="jmPasteBtn" class="btn">Load pasted text</button>
+            <button type="button" id="jmChoose" class="btn ghost">Choose a file</button>
+            <input type="file" id="jmFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file to edit">
+          </div>
+        </div>
+        <div class="errmsg" id="jmLoadErr" role="alert" hidden></div>
+        <div id="jmRevisionNote" class="jbanner" hidden></div>
+      </div>
+
+      <div class="row2">
+        <div class="field">
+          <label for="jmCourse">Course</label>
+          <input type="text" id="jmCourse" placeholder="SOC 150 — Knowledge in the AI Era" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="jmTerm">Term</label>
+          <input type="text" id="jmTerm" placeholder="Fall 2026" autocomplete="off">
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="jmTitle">Journey title</label>
+          <input type="text" id="jmTitle" placeholder="Assignment 3 sequence" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="jmInstructor">Instructor</label>
+          <input type="text" id="jmInstructor" autocomplete="name">
+        </div>
+      </div>
+
+      <span class="subhead">Steps</span>
+      <div id="jmSteps"></div>
+      <div class="rowbtns"><button type="button" class="linkbtn" id="jmAddStep">Add a step</button></div>
+
+      <details class="preview" id="jmPreviewBox">
+        <summary>Syllabus preview</summary>
+        <pre class="filepre" id="jmPreview"></pre>
+        <div class="previewnote">This text becomes the journey file's readable body. Paste it into the Canvas assignment description if you like; the file itself carries the same information for Studio.</div>
+      </details>
+
+      <div class="btnrow">
+        <button type="button" class="btn" id="jmSealBtn">Seal the journey</button>
+        <button type="button" class="btn ghost" id="jmResetBtn">Reset</button>
+      </div>
+      <div class="errmsg" id="jmErr" role="alert" hidden></div>
+
+      <div class="sealres" id="jmRes" tabindex="-1" aria-live="polite" hidden>
+        <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="jmResText"></span></div>
+        <div class="sbody">
+          <div class="hashline" id="jmResHash"></div>
+          <div class="fname">
+            <label for="jmFileName">File name</label>
+            <input type="text" id="jmFileName" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="btnrow">
+            <button type="button" class="btn" id="jmDownload">Download .knobe.md</button>
+            <button type="button" class="btn ghost" id="jmCopy">Copy file text</button>
+            <button type="button" class="btn ghost" id="jmCopySyllabus">Copy syllabus text</button>
+          </div>
+          <p class="jainote" style="margin:10px 0 0">Post the downloaded file with your Canvas assignment (as an attachment), and make sure the assignment's allowed file types include <code>md</code> so students can submit their sealed files.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= COHORT ================= -->
+    <section class="panel" id="panel-cohort" role="tabpanel" aria-labelledby="tab-cohort" hidden>
+      <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">Check a batch of submissions at once. In Canvas: <em>Download Submissions</em> on the assignment, unzip, then drag the folder here. Files are read in this page and go nowhere else; no student data leaves this device.</p>
+
+      <div class="jload" style="margin-bottom:14px">
+        <span>Optional: what should submissions chain to?</span>
+        <button type="button" class="linkbtn" id="chExpToggle" aria-expanded="false" aria-controls="chExpWrap">Load the journey or assignment spec</button>
+        <div id="chExpWrap" class="pastewrap">
+          <label for="chExpPaste" class="visually-hidden">Paste the journey or spec file text</label>
+          <textarea id="chExpPaste" placeholder="Paste the journey or assignment-spec .knobe.md, or use the file picker." spellcheck="false"></textarea>
+          <div class="btnrow">
+            <button type="button" id="chExpPasteBtn" class="btn">Load pasted text</button>
+            <button type="button" id="chExpChoose" class="btn ghost">Choose a file</button>
+            <input type="file" id="chExpFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey or spec file">
+          </div>
+        </div>
+        <div id="chExpBanner" class="jbanner" hidden></div>
+        <div class="errmsg" id="chExpErr" role="alert" hidden></div>
+      </div>
+
+      <div id="chDrop" class="drop" aria-label="Drop submission files or a folder here">
+        <div class="dicon" aria-hidden="true">&#9671;</div>
+        <div class="dmain">Drag submission files, or a whole folder, here</div>
+        <div class="dhint">Files are read in this page and go nowhere else.</div>
+        <div class="btnrow" style="justify-content:center;margin-top:14px">
+          <button type="button" id="chChooseFiles" class="btn choosebtn" style="margin-top:0">Choose files</button>
+          <button type="button" id="chChooseDir" class="btn ghost" style="margin-top:0">Choose a folder</button>
+        </div>
+        <input type="file" id="chFiles" class="visually-hidden" multiple accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose submission files">
+        <input type="file" id="chDir" class="visually-hidden" webkitdirectory aria-label="Choose a submissions folder">
+      </div>
+      <div class="errmsg" id="chErr" role="alert" hidden></div>
+
+      <div id="chResults" aria-live="polite" hidden>
+        <p class="chsummary" id="chSummary"></p>
+        <div class="btnrow">
+          <button type="button" class="btn ghost" id="chCsv">Download the table as CSV</button>
+          <button type="button" class="btn ghost" id="chChainView">Chain view</button>
+          <button type="button" class="btn ghost" id="chClear">Clear</button>
+        </div>
+        <div class="chtablewrap">
+          <table class="chtable" id="chTable">
+            <thead><tr><th>File</th><th>Title</th><th>Author</th><th>Integrity</th><th>Conformance</th><th>AI disclosure</th><th>Chain</th><th>Review</th></tr></thead>
+            <tbody id="chBody"></tbody>
+          </table>
+        </div>
+        <div id="chChain" hidden></div>
+      </div>
+    </section>
+
+    <!-- ================= ADAPT ================= -->
+    <section class="panel" id="panel-adapt" role="tabpanel" aria-labelledby="tab-adapt" hidden>
+      <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">An accessibility adaptation (plain language, translation, captions, description) is sealed as its own object: it chains to the source by hash, credits the adapter, and states honestly what it preserves and what it omits. The source work remains authoritative.</p>
+      <div id="aDrop" class="drop" aria-label="Drop a sealed .knobe.md file here to adapt it">
+        <div class="dicon" aria-hidden="true">&#9671;</div>
+        <div class="dmain">Drag a sealed <code>.knobe.md</code> here to adapt it</div>
+        <div class="dhint">The file is read in this page and goes nowhere else.</div>
+        <button type="button" id="aChoose" class="btn choosebtn">Choose a file</button>
+        <input type="file" id="aFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to adapt">
+      </div>
+      <div class="altrow">No file handy? <button type="button" id="aPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="aPasteWrap">Paste the text of a KNOBE instead</button></div>
+      <div id="aPasteWrap" class="pastewrap">
+        <label for="aPasteArea" class="visually-hidden">Paste KNOBE file text</label>
+        <textarea id="aPasteArea" placeholder="Paste the full contents of a sealed .knobe.md file." spellcheck="false"></textarea>
+        <div class="btnrow"><button type="button" id="aPasteBtn" class="btn">Load pasted text</button></div>
+      </div>
+      <div class="errmsg" id="aErr" role="alert" hidden></div>
+
+      <div id="aWork" hidden>
+        <div class="origcard" aria-live="polite">
+          <div class="ohead">Source</div>
+          <div class="obody">
+            <div class="otitle" id="aOrigTitle"></div>
+            <div class="ohash" id="aOrigHash"></div>
+            <div class="otags" id="aOrigTags"></div>
+          </div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="aType">Kind of adaptation</label>
+            <select id="aType">
+              <option value="simplification" selected>Plain language / simplification</option>
+              <option value="translation">Translation</option>
+              <option value="caption">Transcript / captions</option>
+              <option value="alt-text">Alt-text / description</option>
+              <option value="multimodal">Multimodal version</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="aAdapter">Who made this adaptation</label>
+            <input type="text" id="aAdapter" autocomplete="name" placeholder="Your name, or your unit's">
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="aTitle">Title of the adaptation</label>
+          <input type="text" id="aTitle" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="aBody">Adapted content</label>
+          <textarea id="aBody" rows="10" spellcheck="true"></textarea>
+          <div class="hint">Starts as the source body. Replace it with the adaptation: the plain-language version, the translation, the transcript, the description.</div>
+          <div class="btnrow"><button type="button" id="aCleanup" class="btn ghost">Clean pasted text</button><span class="hint" id="aCleanupNote" role="status"></span></div>
+        </div>
+        <div class="warnnote" id="aBlockWarn" hidden>The content contains a KNOBE payload block. The sealed file would carry more than one block and report <code>body_verified: omitted</code>.</div>
+
+        <div class="field">
+          <label for="aPreserved">What this adaptation preserves</label>
+          <textarea id="aPreserved" rows="2" placeholder="The core claims and structure; all section headings; the argument of Part 2."></textarea>
+        </div>
+        <div class="field">
+          <label for="aOmitted">What it omits or changes</label>
+          <textarea id="aOmitted" rows="2" placeholder="Technical appendices; the schema table; sentence-level nuance where simplified."></textarea>
+          <div class="hint">Both statements are sealed into the record. Honest limits are what make an adaptation trustworthy.</div>
+        </div>
+
+        <div class="row2">
+          <div class="field">
+            <label for="aAiName">AI assistance, if any (name the tool)</label>
+            <input type="text" id="aAiName" autocomplete="off" placeholder="Leave empty if none">
+          </div>
+          <div class="field">
+            <label for="aAiWhat">What the AI did</label>
+            <input type="text" id="aAiWhat" autocomplete="off" placeholder="Drafted the plain-language text; I revised and verified it.">
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="aReviewer">Reviewer, if any</label>
+            <input type="text" id="aReviewer" autocomplete="off" placeholder="Who checked it for accuracy and access">
+          </div>
+          <div class="field">
+            <label for="aLicense">License</label>
+            <input type="text" id="aLicense" list="licenseList" autocomplete="off">
+            <div class="hint">Prefilled from the source. The source's license governs whether an adaptation is authorized; the seal does not grant it.</div>
+          </div>
+        </div>
+
+        <div class="btnrow">
+          <button type="button" class="btn" id="aSealBtn">Seal the adaptation</button>
+        </div>
+        <div class="errmsg" id="aSealErr" role="alert" hidden></div>
+
+        <div class="sealres" id="aRes" tabindex="-1" aria-live="polite" hidden>
+          <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="aResText"></span></div>
+          <div class="sbody">
+            <div class="hashline" id="aResHash"></div>
+            <div class="chainline" id="aResChain"></div>
+            <div class="fname">
+              <label for="aFileName">File name</label>
+              <input type="text" id="aFileName" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="btnrow">
+              <button type="button" class="btn" id="aDownload">Download .knobe.md</button>
+              <button type="button" class="btn ghost" id="aCopy">Copy file text</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="explain">
       <h2>What sealing records</h2>
       <p>Sealing assembles your declared fields into a payload, computes a SHA-256 hash over its canonical form, and stores both inside the file. Anyone can later recompute the hash and see whether the sealed record changed. A match confirms integrity, not truth: it does not establish that the content is accurate, that the declared author wrote it, or that a use is authorized. The verdict vocabulary is the protocol's four-state model; the <a class="inline" href="/lens">Lens page</a> describes each state, and the <a class="inline" href="/spec">specification</a> defines the algorithm.</p>
@@ -669,7 +987,7 @@ const $ = (id) => document.getElementById(id);
 // ---- engine availability ----
 const engineOk = typeof crypto !== 'undefined' && !!crypto.subtle;
 if (engineOk) $('enginefail').remove();
-else { $('sealBtn').disabled = true; $('tSealBtn').disabled = true; }
+else { $('sealBtn').disabled = true; $('tSealBtn').disabled = true; $('aSealBtn').disabled = true; }
 
 // ---- small utilities ----
 const line = (v) => String(v || '').replace(/[\r\n]+/g, ' ').trim();
@@ -711,8 +1029,9 @@ function readFileAsText(file) {
 }
 
 // ---- panel switcher ----
-const tabs = [$('tab-create'), $('tab-verify'), $('tab-transform')];
-const panels = { 'tab-create': $('panel-create'), 'tab-verify': $('panel-verify'), 'tab-transform': $('panel-transform') };
+const tabs = [$('tab-create'), $('tab-verify'), $('tab-transform'), $('tab-journey'), $('tab-cohort'), $('tab-adapt')];
+const panels = { 'tab-create': $('panel-create'), 'tab-verify': $('panel-verify'), 'tab-transform': $('panel-transform'),
+                 'tab-journey': $('panel-journey'), 'tab-cohort': $('panel-cohort'), 'tab-adapt': $('panel-adapt') };
 function selectTab(tab) {
   tabs.forEach(t => {
     const on = t === tab;
@@ -727,7 +1046,7 @@ tabs.forEach(t => {
   t.addEventListener('keydown', (e) => {
     const i = tabs.indexOf(t);
     if (e.key === 'ArrowRight') { e.preventDefault(); selectTab(tabs[(i + 1) % tabs.length]); }
-    if (e.key === 'ArrowLeft') { e.preventDefault(); selectTab(tabs[(i + 2) % tabs.length]); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); selectTab(tabs[(i + tabs.length - 1) % tabs.length]); }
   });
 });
 
@@ -784,6 +1103,15 @@ function collectCreate() {
     if (inputs[3].checked) s.rights_bearing = true;
     sources.push(s);
   });
+  if (journeyCtx && journeyCtx.aiUI === 'disclose') {
+    const aiWhat = line($('jsAiWhat').value);
+    if (aiWhat) {
+      sources.push({
+        author: line($('jsAiName').value) || 'AI Assistant (unnamed model)',
+        contribution: aiWhat, rights_bearing: false, role: 'ai_assistant',
+      });
+    }
+  }
   const attribution = { sources };
   if ($('cGoodFaith').checked) attribution.good_faith_declaration = true;
   fields.attribution = attribution;
@@ -803,6 +1131,14 @@ function collectCreate() {
   const lang = line($('cLanguage').value); if (lang) fields.language = lang;
   const tags = String($('cTags').value || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
   if (tags.length) fields.tags = tags;
+
+  if (journeyCtx) {
+    fields.assignment_context = journeyCtx.assignmentContext;
+    if (journeyCtx.forStudent) {
+      fields.education_review = { submission_status: 'submitted', review_status: 'pending_instructor_review' };
+    }
+    if (journeyCtx.parents.length) fields.parents = journeyCtx.parents;
+  }
 
   return { fields, body: $('cContent').value, author: null };
 }
@@ -857,6 +1193,11 @@ function resetCreateForm() {
   srcCount = 1;
   $('cRes').hidden = true;
   $('cErr').hidden = true;
+  journeyCtx = null;
+  $('jsBanner').hidden = true;
+  $('jsAiWrap').hidden = true;
+  $('jsAiName').value = '';
+  $('jsAiWhat').value = '';
 }
 
 function applyTemplate(name) {
@@ -923,6 +1264,7 @@ $('sealBtn').addEventListener('click', async () => {
     $('cFileName').value = slugify(createResult.payload.title);
     $('cRes').hidden = false;
     $('cRes').focus();
+    onCreateSealed(createResult);
   } catch (e) {
     $('cErr').textContent = 'Sealing did not complete: ' + e.message;
     $('cErr').hidden = false;
@@ -1138,6 +1480,814 @@ $('tSealBtn').addEventListener('click', async () => {
 });
 $('tDownload').addEventListener('click', () => { if (transformResult) download(transformResult.text, line($('tFileName').value) || 'untitled.knobe.md'); });
 $('tCopy').addEventListener('click', (e) => { if (transformResult) copyText(transformResult.text, e.currentTarget); });
+
+// ============================================================
+// Journey Maker + journey-aware Create + Cohort Check
+// ============================================================
+
+let journeyCtx = null;        // active journey context feeding collectCreate()
+let sealForStepIdx = null;    // instructor "seal this step" flowback target
+let pendingJourney = null;    // journey loaded on the Create panel, pre step-pick
+
+const JKINDS = {
+  spec:        { label: 'Assignment spec',           content_type: 'seed',        relationship: 'synthesis_input' },
+  reading:     { label: 'Reading / source material', content_type: 'original',    relationship: 'synthesis_input' },
+  writing:     { label: 'Student writing',           content_type: 'original',    relationship: 'synthesis_input' },
+  summary:     { label: 'Summary / compression',     content_type: 'compression', relationship: 'compression_of' },
+  feedback:    { label: 'Feedback / annotation',     content_type: 'annotation',  relationship: 'responds_to' },
+  revision:    { label: 'Revision',                  content_type: 'original',    relationship: 'supersedes' },
+  translation: { label: 'Translation',               content_type: 'translation', relationship: 'adaptation_of' },
+};
+const JPOLICIES = {
+  prohibited:               { label: 'AI not allowed',              ui: 'attest' },
+  limited_with_disclosure:  { label: 'AI allowed with disclosure',  ui: 'disclose' },
+  required_with_disclosure: { label: 'AI required, with disclosure', ui: 'disclose' },
+  not_applicable:           { label: 'AI policy not applicable',    ui: 'none' },
+};
+const JSEALERS = { instructor: 'Instructor', student: 'Student', ta: 'TA', peer: 'Peer reviewer' };
+
+// ---- Journey Maker state ----
+const jm = { steps: [] };
+let jmLoadedFrom = null;   // {hash, title} when revising an existing journey
+let jmResult = null;
+
+function jmNewStep() {
+  return { title: '', sealer: 'student', kind: 'writing', ai_policy: 'limited_with_disclosure',
+           ai_detail: '', expectations: '', builds_on: [], spec_hash: '' };
+}
+
+function jmSelect(options, value, onchange, labelText, idAttr) {
+  const wrap = document.createElement('div'); wrap.className = 'field';
+  const lb = document.createElement('label'); lb.textContent = labelText; lb.setAttribute('for', idAttr);
+  const sel = document.createElement('select'); sel.id = idAttr;
+  for (const [val, meta] of Object.entries(options)) {
+    const o = document.createElement('option'); o.value = val;
+    o.textContent = typeof meta === 'string' ? meta : meta.label;
+    sel.appendChild(o);
+  }
+  sel.value = value;
+  sel.addEventListener('change', () => { onchange(sel.value); scheduleJmPreview(); });
+  wrap.appendChild(lb); wrap.appendChild(sel);
+  return wrap;
+}
+
+function jmTextInput(value, onInput, labelText, idAttr, textarea, placeholder) {
+  const wrap = document.createElement('div'); wrap.className = 'field';
+  const lb = document.createElement('label'); lb.textContent = labelText; lb.setAttribute('for', idAttr);
+  const el = document.createElement(textarea ? 'textarea' : 'input');
+  if (!textarea) el.type = 'text';
+  else el.rows = 2;
+  el.id = idAttr;
+  if (placeholder) el.placeholder = placeholder;
+  el.value = value;
+  el.addEventListener('input', () => { onInput(el.value); scheduleJmPreview(); });
+  wrap.appendChild(lb); wrap.appendChild(el);
+  return wrap;
+}
+
+function renderSteps() {
+  const box = $('jmSteps');
+  box.textContent = '';
+  jm.steps.forEach((s, i) => {
+    const card = document.createElement('div'); card.className = 'jstep';
+
+    const head = document.createElement('div'); head.className = 'jstephead';
+    const num = document.createElement('span'); num.className = 'jstepnum'; num.textContent = 'Step ' + (i + 1);
+    const btns = document.createElement('div'); btns.className = 'jstepbtns';
+    const mk = (label, fn, disabled) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'linkbtn';
+      b.textContent = label; b.disabled = !!disabled;
+      b.addEventListener('click', fn); btns.appendChild(b);
+    };
+    mk('Up', () => { if (i > 0) { [jm.steps[i-1], jm.steps[i]] = [jm.steps[i], jm.steps[i-1]]; jmRemapBuilds(i, i-1); renderSteps(); scheduleJmPreview(); } }, i === 0);
+    mk('Down', () => { if (i < jm.steps.length - 1) { [jm.steps[i+1], jm.steps[i]] = [jm.steps[i], jm.steps[i+1]]; jmRemapBuilds(i, i+1); renderSteps(); scheduleJmPreview(); } }, i === jm.steps.length - 1);
+    mk('Remove', () => { jm.steps.splice(i, 1); jm.steps.forEach(t => { t.builds_on = t.builds_on.filter(n => n !== i).map(n => n > i ? n - 1 : n); }); renderSteps(); scheduleJmPreview(); });
+    head.appendChild(num); head.appendChild(btns);
+    card.appendChild(head);
+
+    const row1 = document.createElement('div'); row1.className = 'row2';
+    row1.appendChild(jmTextInput(s.title, v => { s.title = v; }, 'Step title', 'jmS' + i + 'Title', false, i === 0 ? 'Week 6 reading' : ''));
+    row1.appendChild(jmSelect(JSEALERS, s.sealer, v => { s.sealer = v; renderSteps(); }, 'Sealed by', 'jmS' + i + 'Sealer'));
+    card.appendChild(row1);
+
+    const row2 = document.createElement('div'); row2.className = 'row2';
+    row2.appendChild(jmSelect(JKINDS, s.kind, v => { s.kind = v; }, 'Kind of work', 'jmS' + i + 'Kind'));
+    row2.appendChild(jmSelect(JPOLICIES, s.ai_policy, v => { s.ai_policy = v; }, 'AI policy for this step', 'jmS' + i + 'Policy'));
+    card.appendChild(row2);
+
+    card.appendChild(jmTextInput(s.ai_detail, v => { s.ai_detail = v; }, 'AI policy detail (shown to the student)', 'jmS' + i + 'Detail', true,
+      'e.g. AI may be used for terminology lookup or post-draft clarity review, not to draft content.'));
+    card.appendChild(jmTextInput(s.expectations, v => { s.expectations = v; }, 'Expectations', 'jmS' + i + 'Exp', true,
+      'What this step should contain, in a sentence or two.'));
+
+    if (i > 0) {
+      const builds = document.createElement('div'); builds.className = 'jbuilds';
+      const cap = document.createElement('span'); cap.textContent = 'Builds on:'; builds.appendChild(cap);
+      for (let k = 0; k < i; k++) {
+        const lab = document.createElement('label');
+        const cb = document.createElement('input'); cb.type = 'checkbox'; cb.checked = s.builds_on.includes(k);
+        cb.addEventListener('change', () => {
+          if (cb.checked) { if (!s.builds_on.includes(k)) s.builds_on.push(k); }
+          else s.builds_on = s.builds_on.filter(n => n !== k);
+          scheduleJmPreview();
+        });
+        lab.appendChild(cb);
+        lab.appendChild(document.createTextNode(' Step ' + (k + 1) + (jm.steps[k].title ? ': ' + jm.steps[k].title : '')));
+        builds.appendChild(lab);
+      }
+      card.appendChild(builds);
+    }
+
+    if (s.spec_hash) {
+      const h = document.createElement('div'); h.className = 'sealed-hash';
+      h.textContent = 'sealed: ' + s.spec_hash;
+      card.appendChild(h);
+    }
+    if (s.sealer === 'instructor') {
+      const row = document.createElement('div'); row.className = 'rowbtns';
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'linkbtn';
+      b.textContent = s.spec_hash ? 'Reseal this step in Create' : 'Seal this step in Create';
+      b.addEventListener('click', () => sealStepInCreate(i));
+      row.appendChild(b);
+      card.appendChild(row);
+    }
+
+    box.appendChild(card);
+  });
+}
+
+function jmRemapBuilds(a, b) {
+  jm.steps.forEach(t => {
+    t.builds_on = t.builds_on.map(n => n === a ? b : n === b ? a : n).filter(n => {
+      const self = jm.steps.indexOf(t);
+      return n < self;
+    });
+  });
+}
+
+function buildJourneyBody() {
+  const course = line($('jmCourse').value) || 'Course';
+  const term = line($('jmTerm').value);
+  const title = line($('jmTitle').value) || 'Assignment sequence';
+  const instructor = line($('jmInstructor').value);
+  const L = [];
+  L.push('# ' + title);
+  L.push('');
+  L.push(course + (term ? ' · ' + term : '') + (instructor ? ' · ' + instructor : ''));
+  L.push('');
+  L.push('This sequence uses sealed KNOBE files. Each step is a plain-text file that records who made it, what it builds on, and the AI policy it was made under. Load this journey file into KNOBE Studio (knobe.org/studio) to start your step; upload the sealed file it gives you to the assignment.');
+  jm.steps.forEach((s, i) => {
+    L.push('');
+    L.push('## Step ' + (i + 1) + ': ' + (s.title || 'Untitled step'));
+    L.push('');
+    L.push('- Sealed by: ' + (JSEALERS[s.sealer] || s.sealer));
+    L.push('- Kind of work: ' + (JKINDS[s.kind] ? JKINDS[s.kind].label : s.kind));
+    L.push('- AI policy: ' + (JPOLICIES[s.ai_policy] ? JPOLICIES[s.ai_policy].label : s.ai_policy) + (s.ai_detail ? '. ' + s.ai_detail : ''));
+    if (s.builds_on.length) L.push('- Builds on: ' + s.builds_on.map(n => 'Step ' + (n + 1)).join(', '));
+    if (s.expectations) L.push('- Expectations: ' + s.expectations);
+  });
+  return L.join('\n');
+}
+
+const scheduleJmPreview = debounce(() => { $('jmPreview').textContent = buildJourneyBody(); }, 300);
+['jmCourse','jmTerm','jmTitle','jmInstructor'].forEach(id => $(id).addEventListener('input', scheduleJmPreview));
+$('jmAddStep').addEventListener('click', () => { jm.steps.push(jmNewStep()); renderSteps(); scheduleJmPreview(); });
+$('jmResetBtn').addEventListener('click', () => {
+  jm.steps = []; jmLoadedFrom = null; jmResult = null;
+  ['jmCourse','jmTerm','jmTitle','jmInstructor'].forEach(id => { $(id).value = ''; });
+  $('jmRevisionNote').hidden = true; $('jmRes').hidden = true; $('jmErr').hidden = true;
+  renderSteps(); scheduleJmPreview();
+});
+
+function journeyPayloadSteps() {
+  return jm.steps.map((s, i) => {
+    const kind = JKINDS[s.kind] || JKINDS.writing;
+    const out = {
+      n: i + 1,
+      title: line(s.title) || 'Untitled step',
+      sealer: s.sealer,
+      kind: s.kind,
+      content_type: kind.content_type,
+      relationship: kind.relationship,
+      ai_policy: s.ai_policy,
+      builds_on: s.builds_on.map(n => n + 1),
+    };
+    const det = line(s.ai_detail); if (det) out.ai_policy_detail = det;
+    const exp = line(s.expectations); if (exp) out.expectations = exp;
+    if (s.spec_hash) out.spec_hash = s.spec_hash;
+    return out;
+  });
+}
+
+$('jmSealBtn').addEventListener('click', async () => {
+  $('jmErr').hidden = true;
+  try {
+    if (!jm.steps.length) throw new Error('Add at least one step first.');
+    const course = line($('jmCourse').value) || 'Untitled course';
+    const title = line($('jmTitle').value) || 'Assignment sequence';
+    const instructor = line($('jmInstructor').value) || 'Instructor';
+    const fields = {
+      title: title + ' (' + course + ')',
+      summary: 'Journey specification: ' + jm.steps.length + ' steps for ' + course + '.',
+      content_type: 'seed',
+      created_date: localToday(),
+      license: 'All rights reserved',
+      privacy_level: 'internal',
+      quarantine_status: 'trusted',
+      attribution: {
+        good_faith_declaration: true,
+        sources: [{ author: instructor, contribution: 'Designed this assignment sequence, its step policies, and its AI-use terms.', rights_bearing: true, role: 'instructor_prompt' }],
+      },
+      fidelity_limits: {
+        represents: "the instructor's journey specification as issued",
+        trust_as: 'the authoritative sequence and step policies for ' + title + ', ' + course,
+        do_not_infer: [
+          'that these steps or policies apply to other courses or assignments',
+          "that the AI policies here represent the instructor's policy beyond this sequence",
+        ],
+      },
+      use_conditions: {
+        permitted: ['enrolled student use', 'course design reference with attribution'],
+        requested_preservations: ['do not modify and redistribute as if the sequence were unchanged'],
+      },
+      tags: ['journey'],
+      journey: { course, title, steps: journeyPayloadSteps() },
+    };
+    const term = line($('jmTerm').value); if (term) fields.journey.term = term;
+    if (jmLoadedFrom) {
+      fields.parents = [{ payload_hash: jmLoadedFrom.hash, title: jmLoadedFrom.title, relationship: 'supersedes' }];
+      fields.transformation_history = [{
+        date: localToday(), who: instructor, strategy: 'revision',
+        notes: 'Journey revised in KNOBE Studio; this version supersedes the parent.',
+      }];
+    }
+    jmResult = await createKnobe({ fields, body: buildJourneyBody(), author: null });
+    $('jmResText').textContent = 'Sealed. Self-check: ' + jmResult.report.state + ' · ' + jmResult.report.conformance + '.';
+    $('jmResHash').textContent = 'payload_hash ' + jmResult.payloadHash;
+    $('jmFileName').value = slugify(jmResult.payload.title);
+    $('jmRes').hidden = false;
+    $('jmRes').focus();
+  } catch (e) {
+    $('jmErr').textContent = 'Sealing did not complete: ' + e.message;
+    $('jmErr').hidden = false;
+  }
+});
+$('jmDownload').addEventListener('click', () => { if (jmResult) download(jmResult.text, line($('jmFileName').value) || 'journey.knobe.md'); });
+$('jmCopy').addEventListener('click', (e) => { if (jmResult) copyText(jmResult.text, e.currentTarget); });
+$('jmCopySyllabus').addEventListener('click', (e) => { copyText(buildJourneyBody(), e.currentTarget); });
+
+// load an existing journey back into the maker (mid-term revision)
+$('jmLoadToggle').addEventListener('click', () => {
+  const open = $('jmLoadWrap').classList.toggle('open');
+  $('jmLoadToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+async function jmLoad(text) {
+  $('jmLoadErr').hidden = true;
+  const report = await verify(text);
+  if (report.state !== 'verified' && report.state !== 'verified-body-modified') {
+    throw new Error('This file does not verify (status: ' + report.state + ').');
+  }
+  const j = report.payload && report.payload.journey;
+  if (!j || !Array.isArray(j.steps)) throw new Error('This file carries no journey specification.');
+  $('jmCourse').value = typeof j.course === 'string' ? j.course : '';
+  $('jmTerm').value = typeof j.term === 'string' ? j.term : '';
+  $('jmTitle').value = typeof j.title === 'string' ? j.title : '';
+  const src = report.payload.attribution && report.payload.attribution.sources && report.payload.attribution.sources[0];
+  $('jmInstructor').value = src && typeof src.author === 'string' ? src.author : '';
+  jm.steps = j.steps.map(s => ({
+    title: typeof s.title === 'string' ? s.title : '',
+    sealer: JSEALERS[s.sealer] ? s.sealer : 'student',
+    kind: JKINDS[s.kind] ? s.kind : 'writing',
+    ai_policy: JPOLICIES[s.ai_policy] ? s.ai_policy : 'not_applicable',
+    ai_detail: typeof s.ai_policy_detail === 'string' ? s.ai_policy_detail : '',
+    expectations: typeof s.expectations === 'string' ? s.expectations : '',
+    builds_on: Array.isArray(s.builds_on) ? s.builds_on.map(n => Number(n) - 1).filter(n => n >= 0) : [],
+    spec_hash: typeof s.spec_hash === 'string' ? s.spec_hash : '',
+  }));
+  jmLoadedFrom = { hash: report.stored, title: typeof report.payload.title === 'string' ? report.payload.title : 'Untitled journey' };
+  $('jmRevisionNote').textContent = 'Revising: ' + safe(jmLoadedFrom.title, 120) + '. Sealing will produce a new version that records this one as its superseded parent.';
+  $('jmRevisionNote').hidden = false;
+  renderSteps(); scheduleJmPreview();
+}
+$('jmPasteBtn').addEventListener('click', async () => {
+  try { await jmLoad($('jmPasteArea').value); } catch (e) { $('jmLoadErr').textContent = e.message; $('jmLoadErr').hidden = false; }
+});
+$('jmChoose').addEventListener('click', () => $('jmFile').click());
+$('jmFile').addEventListener('change', async () => {
+  const f = $('jmFile').files && $('jmFile').files[0]; if (!f) return;
+  try { await jmLoad(await readFileAsText(f)); } catch (e) { $('jmLoadErr').textContent = e.message; $('jmLoadErr').hidden = false; }
+  $('jmFile').value = '';
+});
+
+// instructor: seal one step through the Create tab, hash flows back
+function sealStepInCreate(i) {
+  const s = jm.steps[i];
+  const kind = JKINDS[s.kind] || JKINDS.reading;
+  resetCreateForm();
+  document.querySelector('input[name="tpl"][value="blank"]').checked = true;
+  $('cTitle').value = s.title || '';
+  $('cType').value = kind.content_type;
+  $('cLicense').value = 'All rights reserved';
+  $('cPrivacy').value = 'internal';
+  $('cQuarantine').value = 'trusted';
+  $('cContribution1').value = 'Designed this step of the course sequence.';
+  $('cRole1').value = 'instructor_prompt';
+  $('cRights1').checked = true;
+  $('cGoodFaith').checked = true;
+  $('cAuthor').value = line($('jmInstructor').value);
+  const course = line($('jmCourse').value) || 'Untitled course';
+  const assignmentContext = { course, ai_policy: s.ai_policy, assignment_type: s.kind };
+  const det = line(s.ai_detail); if (det) assignmentContext.ai_policy_detail = det;
+  journeyCtx = {
+    forStudent: false, aiUI: 'none',
+    assignmentContext,
+    parents: s.builds_on.filter(n => jm.steps[n] && jm.steps[n].spec_hash)
+      .map(n => ({ payload_hash: jm.steps[n].spec_hash, title: line(jm.steps[n].title) || 'Untitled step', relationship: kind.relationship })),
+  };
+  sealForStepIdx = i;
+  $('jsBanner').textContent = 'Sealing journey step ' + (i + 1) + ': ' + (s.title || 'Untitled step') + '. The sealed hash will flow back into the journey.';
+  $('jsBanner').hidden = false;
+  selectTab($('tab-create'));
+  schedulePreview();
+}
+
+function onCreateSealed(r) {
+  if (sealForStepIdx !== null && jm.steps[sealForStepIdx]) {
+    jm.steps[sealForStepIdx].spec_hash = r.payloadHash;
+    sealForStepIdx = null;
+    renderSteps(); scheduleJmPreview();
+    $('jsBanner').textContent = 'Step sealed and its hash recorded in the journey. Return to the Journey tab to continue.';
+    $('jsBanner').hidden = false;
+  }
+}
+
+// ---- journey-aware Create (student flow) ----
+wireIntake('jsDrop', 'jsChoose', 'jsFile', 'jsIntakeToggle', 'jsIntakeWrap', 'jsPasteArea', 'jsPasteBtn', 'jsErr',
+  async (text, name) => { await loadJourneyForCreate(text, name); });
+
+async function loadJourneyForCreate(text, name) {
+  const report = await verify(text);
+  if (report.state !== 'verified' && report.state !== 'verified-body-modified') {
+    throw new Error('The journey file does not verify (status: ' + report.state + '). Ask your instructor for a fresh copy.');
+  }
+  const j = report.payload && report.payload.journey;
+  if (!j || !Array.isArray(j.steps)) throw new Error('This file carries no journey specification. Check that you loaded the journey file, not another KNOBE.');
+  pendingJourney = { journey: j, hash: report.stored, title: typeof report.payload.title === 'string' ? report.payload.title : 'Untitled journey' };
+  const studentSteps = j.steps.map((s, i) => ({ s, i })).filter(x => x.s.sealer === 'student');
+  const btns = $('jsPickerBtns');
+  btns.textContent = '';
+  const list = studentSteps.length ? studentSteps : j.steps.map((s, i) => ({ s, i }));
+  list.forEach(({ s, i }) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'btn ghost';
+    b.textContent = 'Step ' + (i + 1) + ': ' + (typeof s.title === 'string' && s.title ? s.title : 'Untitled step');
+    b.addEventListener('click', () => applyJourneyStep(pendingJourney, i));
+    btns.appendChild(b);
+  });
+  $('jsPicker').hidden = false;
+}
+
+function applyJourneyStep(p, idx) {
+  const step = p.journey.steps[idx];
+  const course = typeof p.journey.course === 'string' ? p.journey.course : 'this course';
+  const policy = JPOLICIES[step.ai_policy] || JPOLICIES.not_applicable;
+  resetCreateForm();
+  document.querySelector('input[name="tpl"][value="blank"]').checked = true;
+
+  $('cTitle').value = typeof step.title === 'string' ? step.title : '';
+  $('cType').value = typeof step.content_type === 'string' && step.content_type ? step.content_type : 'original';
+  $('cLicense').value = 'All rights reserved';
+  $('cPrivacy').value = 'internal';
+  $('cQuarantine').value = 'quarantine';
+  $('cContribution1').value = 'Wrote all prose in this submission.';
+  $('cRole1').value = 'student_author';
+  $('cRights1').checked = true;
+  $('cGoodFaith').checked = true;
+  $('cRepresents').value = 'a submission for "' + (step.title || 'this step') + '" (' + course + ')';
+  $('cTrustAs').value = "the student's own work at submission time";
+  $('cDoNotInfer').value = [
+    "that this represents the student's final or settled view",
+    'that claims are fully researched or cited unless the work explicitly does so',
+    'that AI contributed beyond anything disclosed in attribution',
+  ].join('\n');
+  $('cPermitted').value = ['instructor review and grading', "student's own reference and future use"].join('\n');
+  const pres = ["do not redistribute outside the course without the student's consent", 'preserve the fidelity limits if quoting or summarizing'];
+  if (policy.ui === 'disclose') pres.push('do not remove the AI contribution disclosure');
+  $('cPreservations').value = pres.join('\n');
+  $('cConsentNote').value = 'This is student work submitted under course privacy expectations. FERPA applies.';
+
+  const buildsOn = Array.isArray(step.builds_on) ? step.builds_on : [];
+  const parentSteps = buildsOn.map(n => p.journey.steps[n - 1]).filter(s => s && typeof s.spec_hash === 'string' && s.spec_hash);
+  const rel = typeof step.relationship === 'string' && step.relationship ? step.relationship : 'synthesis_input';
+  const assignmentContext = { course, ai_policy: step.ai_policy || 'not_applicable', assignment_type: step.kind || 'writing', journey_knobe_hash: p.hash };
+  if (typeof step.ai_policy_detail === 'string' && step.ai_policy_detail) assignmentContext.ai_policy_detail = step.ai_policy_detail;
+  const specStep = parentSteps.find(s => s.kind === 'spec') || parentSteps[0];
+  if (specStep) assignmentContext.assignment_knobe_hash = specStep.spec_hash;
+
+  journeyCtx = {
+    forStudent: true,
+    aiUI: policy.ui,
+    assignmentContext,
+    parents: parentSteps.map(s => ({ payload_hash: s.spec_hash, title: typeof s.title === 'string' ? s.title : 'Untitled step', relationship: rel })),
+  };
+
+  $('jsBanner').textContent = 'Journey: ' + safe(p.title, 90) + ' · Step ' + (idx + 1) + ' of ' + p.journey.steps.length + ': '
+    + safe(step.title || 'Untitled step', 90) + ' · ' + policy.label + '.';
+  $('jsBanner').hidden = false;
+  $('jsPicker').hidden = true;
+
+  if (policy.ui === 'disclose') {
+    $('jsAiWrap').hidden = false;
+    $('jsAiFields').hidden = false;
+    $('jsAiPolicyNote').textContent = (assignmentContext.ai_policy_detail ? assignmentContext.ai_policy_detail + ' ' : '')
+      + 'If you used AI, describe specifically what it did and what you did yourself. The disclosure is sealed into the file.';
+  } else if (policy.ui === 'attest') {
+    $('jsAiWrap').hidden = false;
+    $('jsAiFields').hidden = true;
+    $('jsAiPolicyNote').textContent = "This step's AI policy: not allowed. Sealing carries your good-faith declaration that the work is yours alone.";
+  }
+  schedulePreview();
+}
+
+// ?journey=<url> deep link (openly-hosted templates only; Canvas files cannot be fetched cross-origin)
+(async () => {
+  const u = new URLSearchParams(location.search).get('journey');
+  if (!u) return;
+  try {
+    const res = await fetch(u);
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    await loadJourneyForCreate(await res.text(), u);
+    $('jsIntakeWrap').classList.add('open');
+  } catch (e) {
+    $('jsErr').textContent = 'Could not load the journey from the link: ' + e.message;
+    $('jsErr').hidden = false;
+  }
+})();
+
+// ---- Cohort Check ----
+let chExpectation = null;   // {title, hashes:Set}
+let chRows = [];
+
+$('chExpToggle').addEventListener('click', () => {
+  const open = $('chExpWrap').classList.toggle('open');
+  $('chExpToggle').setAttribute('aria-expanded', open ? 'true' : 'false');
+});
+async function chLoadExpectation(text) {
+  $('chExpErr').hidden = true;
+  const report = await verify(text);
+  if (report.state !== 'verified' && report.state !== 'verified-body-modified') {
+    throw new Error('The expectation file does not verify (status: ' + report.state + ').');
+  }
+  const hashes = new Set([report.stored]);
+  const j = report.payload && report.payload.journey;
+  if (j && Array.isArray(j.steps)) j.steps.forEach(s => { if (typeof s.spec_hash === 'string' && s.spec_hash) hashes.add(s.spec_hash); });
+  chExpectation = { title: typeof report.payload.title === 'string' ? report.payload.title : 'Untitled', hashes };
+  $('chExpBanner').textContent = 'Submissions will be checked against: ' + safe(chExpectation.title, 110) + ' (' + hashes.size + ' accepted hash' + (hashes.size === 1 ? '' : 'es') + ').';
+  $('chExpBanner').hidden = false;
+  if (chRows.length) renderCohort();
+}
+$('chExpPasteBtn').addEventListener('click', async () => {
+  try { await chLoadExpectation($('chExpPaste').value); } catch (e) { $('chExpErr').textContent = e.message; $('chExpErr').hidden = false; }
+});
+$('chExpChoose').addEventListener('click', () => $('chExpFile').click());
+$('chExpFile').addEventListener('change', async () => {
+  const f = $('chExpFile').files && $('chExpFile').files[0]; if (!f) return;
+  try { await chLoadExpectation(await readFileAsText(f)); } catch (e) { $('chExpErr').textContent = e.message; $('chExpErr').hidden = false; }
+  $('chExpFile').value = '';
+});
+
+const CH_NAME_OK = /\.(md|knobe|txt)$/i;
+async function filesFromDataTransfer(dt) {
+  const out = [];
+  const entries = [...dt.items].map(i => i.webkitGetAsEntry && i.webkitGetAsEntry()).filter(Boolean);
+  if (!entries.length) return [...dt.files];
+  async function walk(entry) {
+    if (entry.isFile) {
+      const f = await new Promise((res, rej) => entry.file(res, rej));
+      out.push(f);
+    } else if (entry.isDirectory) {
+      const reader = entry.createReader();
+      let batch;
+      do {
+        batch = await new Promise((res, rej) => reader.readEntries(res, rej));
+        for (const e of batch) await walk(e);
+      } while (batch.length);
+    }
+  }
+  for (const e of entries) await walk(e);
+  return out;
+}
+
+async function chProcessFiles(files) {
+  $('chErr').hidden = true;
+  const usable = files.filter(f => CH_NAME_OK.test(f.name));
+  if (!usable.length) { $('chErr').textContent = 'No .knobe.md, .md, or .txt files found in what was dropped.'; $('chErr').hidden = false; return; }
+  for (const f of usable) {
+    let row;
+    try {
+      const text = await readFileAsText(f);
+      const report = await verify(text);
+      const p = report.payload || {};
+      const sources = (p.attribution && Array.isArray(p.attribution.sources)) ? p.attribution.sources : [];
+      const studentSrc = sources.find(s => s && s.role === 'student_author') || sources[0] || null;
+      const aiSrcs = sources.filter(s => s && s.role === 'ai_assistant');
+      const candidateHashes = [];
+      (Array.isArray(p.parents) ? p.parents : []).forEach(pa => { if (pa && typeof pa.payload_hash === 'string') candidateHashes.push(pa.payload_hash); });
+      const ac = p.assignment_context || {};
+      if (typeof ac.assignment_knobe_hash === 'string') candidateHashes.push(ac.assignment_knobe_hash);
+      if (typeof ac.journey_knobe_hash === 'string') candidateHashes.push(ac.journey_knobe_hash);
+      row = {
+        file: f.name,
+        title: typeof p.title === 'string' ? safe(p.title, 80) : '',
+        author: studentSrc && typeof studentSrc.author === 'string' ? safe(studentSrc.author, 60) : '',
+        state: report.state,
+        conformance: report.conformance,
+        ai: aiSrcs.length ? safe(aiSrcs.map(s => s.contribution).filter(x => typeof x === 'string').join(' | '), 140) : 'none declared',
+        chainHashes: candidateHashes,
+        review: (p.education_review && typeof p.education_review.submission_status === 'string') ? p.education_review.submission_status : '',
+        stored: report.stored,
+        parents: Array.isArray(p.parents) ? p.parents : [],
+      };
+    } catch (e) {
+      row = { file: f.name, title: '', author: '', state: 'unreadable', conformance: 'invalid', ai: '', chainHashes: [], review: '', stored: null, parents: [], error: e.message };
+    }
+    chRows.push(row);
+  }
+  renderCohort();
+}
+
+function chChainVerdict(row) {
+  if (!chExpectation) return { text: '—', cls: 'cneutral' };
+  const ok = row.chainHashes.some(h => chExpectation.hashes.has(h));
+  return ok ? { text: 'linked', cls: 'cok' } : { text: 'no link', cls: 'cbad' };
+}
+function chStateCls(state) {
+  return state === 'verified' ? 'cok' : state === 'verified-body-modified' ? 'cwarn' : 'cbad';
+}
+function chAnomalyScore(row) {
+  const integ = (row.state === 'verified' || row.state === 'verified-body-modified') ? 1 : 0;
+  const chain = !chExpectation ? 1 : (row.chainHashes.some(h => chExpectation.hashes.has(h)) ? 1 : 0);
+  return integ + chain;
+}
+
+function renderCohort() {
+  chRows.sort((a, b) => chAnomalyScore(a) - chAnomalyScore(b) || a.file.localeCompare(b.file));
+  const body = $('chBody');
+  body.textContent = '';
+  let okCount = 0, badCount = 0, aiCount = 0;
+  chRows.forEach(row => {
+    const tr = document.createElement('tr');
+    const td = (text, cls) => { const d = document.createElement('td'); d.textContent = text; if (cls) d.className = cls; tr.appendChild(d); };
+    td(row.file, 'mono');
+    td(row.title);
+    td(row.author);
+    td(row.state, chStateCls(row.state));
+    td(row.conformance, row.conformance === 'valid' ? 'cok' : row.conformance === 'warnings' ? 'cwarn' : 'cbad');
+    td(row.ai, row.ai === 'none declared' ? 'cneutral' : undefined);
+    const cv = chChainVerdict(row);
+    td(cv.text, cv.cls);
+    td(row.review || '—', row.review ? undefined : 'cneutral');
+    body.appendChild(tr);
+    if (row.state === 'verified' || row.state === 'verified-body-modified') okCount += 1; else badCount += 1;
+    if (row.ai && row.ai !== 'none declared') aiCount += 1;
+  });
+  $('chSummary').textContent = chRows.length + ' file' + (chRows.length === 1 ? '' : 's') + ' · '
+    + okCount + ' verified · ' + badCount + ' failed or unreadable · ' + aiCount + ' with an AI disclosure'
+    + (chExpectation ? ' · chain checked against "' + chExpectation.title + '"' : ' · no chain expectation loaded');
+  $('chResults').hidden = false;
+  $('chChain').hidden = true;
+}
+
+const chDrop = $('chDrop');
+chDrop.addEventListener('dragover', (e) => { e.preventDefault(); chDrop.classList.add('drag'); });
+chDrop.addEventListener('dragleave', () => chDrop.classList.remove('drag'));
+chDrop.addEventListener('drop', async (e) => {
+  e.preventDefault(); chDrop.classList.remove('drag');
+  try { await chProcessFiles(await filesFromDataTransfer(e.dataTransfer)); }
+  catch (err) { $('chErr').textContent = err.message; $('chErr').hidden = false; }
+});
+$('chChooseFiles').addEventListener('click', () => $('chFiles').click());
+$('chChooseDir').addEventListener('click', () => $('chDir').click());
+$('chFiles').addEventListener('change', async () => { await chProcessFiles([...$('chFiles').files]); $('chFiles').value = ''; });
+$('chDir').addEventListener('change', async () => { await chProcessFiles([...$('chDir').files]); $('chDir').value = ''; });
+$('chClear').addEventListener('click', () => { chRows = []; $('chResults').hidden = true; $('chBody').textContent = ''; });
+
+$('chCsv').addEventListener('click', () => {
+  const esc = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+  const head = ['file', 'title', 'author', 'integrity', 'conformance', 'ai_disclosure', 'chain', 'review_status'];
+  const lines = [head.join(',')];
+  chRows.forEach(row => {
+    lines.push([row.file, row.title, row.author, row.state, row.conformance, row.ai, chChainVerdict(row).text, row.review].map(esc).join(','));
+  });
+  download(lines.join('\n'), 'cohort-check-' + localToday() + '.csv');
+});
+
+$('chChainView').addEventListener('click', () => {
+  const box = $('chChain');
+  if (!box.hidden) { box.hidden = true; return; }
+  box.textContent = '';
+  const byHash = new Map();
+  chRows.forEach(r => { if (r.stored) byHash.set(r.stored, r); });
+  const inSetParents = (r) => r.parents.filter(pa => pa && typeof pa.payload_hash === 'string' && byHash.has(pa.payload_hash));
+  const roots = chRows.filter(r => !inSetParents(r).length);
+  const rest = chRows.filter(r => inSetParents(r).length);
+  const addItem = (r) => {
+    const div = document.createElement('div'); div.className = 'chainitem';
+    const head = document.createElement('div');
+    head.textContent = (r.title || r.file) + (r.author ? ' — ' + r.author : '') + ' · ' + r.state;
+    div.appendChild(head);
+    inSetParents(r).forEach(pa => {
+      const link = document.createElement('div'); link.className = 'chainlink';
+      const target = byHash.get(pa.payload_hash);
+      link.textContent = '↳ builds on ' + (target.title || target.file) + ' (' + (pa.relationship || 'linked') + ', hash matches)';
+      div.appendChild(link);
+    });
+    r.parents.filter(pa => pa && typeof pa.payload_hash === 'string' && !byHash.has(pa.payload_hash)).forEach(pa => {
+      const link = document.createElement('div'); link.className = 'chainlink';
+      link.textContent = '↳ builds on ' + safe(typeof pa.title === 'string' ? pa.title : 'an object', 60) + ' (not among the loaded files)';
+      div.appendChild(link);
+    });
+    box.appendChild(div);
+  };
+  roots.forEach(addItem);
+  rest.forEach(addItem);
+  box.hidden = false;
+});
+
+// ============================================================
+// Adapt (accessibility adaptations with sealed lineage)
+// ============================================================
+
+const ATYPES = {
+  simplification: { label: 'Plain language / simplification', suffix: 'Plain-Language Version',
+    represents: 'the source work in plain language' },
+  translation:    { label: 'Translation', suffix: 'Translation',
+    represents: 'the source work in another language' },
+  caption:        { label: 'Transcript / captions', suffix: 'Transcript',
+    represents: 'the spoken or audio content of the source work as text' },
+  'alt-text':     { label: 'Alt-text / description', suffix: 'Description',
+    represents: 'a textual description of the source work' + "'" + 's visual content' },
+  multimodal:     { label: 'Multimodal version', suffix: 'Multimodal Version',
+    represents: 'the source work re-presented in an additional modality' },
+};
+
+let aSource = null;
+let aTitleTouched = false;
+let adaptResult = null;
+
+function aSuggestTitle() {
+  if (aTitleTouched || !aSource) return;
+  const t = ATYPES[$('aType').value];
+  $('aTitle').value = aSource.title + ' (' + t.suffix + ')';
+}
+$('aTitle').addEventListener('input', () => { aTitleTouched = true; });
+$('aType').addEventListener('change', aSuggestTitle);
+
+wireIntake('aDrop', 'aChoose', 'aFile', 'aPasteToggle', 'aPasteWrap', 'aPasteArea', 'aPasteBtn', 'aErr',
+  async (text, name) => {
+    const report = await verify(text);
+    if (report.state !== 'verified' && report.state !== 'verified-body-modified') {
+      $('aWork').hidden = true;
+      throw new Error('Cannot adapt this file (status: ' + report.state + '). The source must verify first.');
+    }
+    const rd = await read(text);
+    const title = typeof report.payload.title === 'string' ? report.payload.title : 'Untitled';
+    const srcSources = (report.payload.attribution && Array.isArray(report.payload.attribution.sources)) ? report.payload.attribution.sources : [];
+    const srcAuthor = srcSources[0] && typeof srcSources[0].author === 'string' ? srcSources[0].author : '';
+    aSource = { text, report, title, srcAuthor };
+    $('aOrigTitle').textContent = safe(title, 160);
+    $('aOrigHash').textContent = 'payload_hash ' + report.stored;
+    const tagsEl = $('aOrigTags');
+    tagsEl.textContent = '';
+    tagsEl.appendChild(tag('integrity: ' + report.state, report.state === 'verified' ? 'ok' : 'warn'));
+    tagsEl.appendChild(tag('conformance: ' + report.conformance, report.conformance === 'valid' ? 'ok' : report.conformance === 'warnings' ? 'warn' : 'bad'));
+    $('aBody').value = (rd.body || '').replace(/^\n+/, '');
+    $('aLicense').value = typeof report.payload.license === 'string' ? report.payload.license : '';
+    aTitleTouched = false;
+    aSuggestTitle();
+    $('aPreserved').value = '';
+    $('aOmitted').value = '';
+    $('aAiName').value = ''; $('aAiWhat').value = ''; $('aReviewer').value = '';
+    $('aCleanupNote').textContent = '';
+    $('aRes').hidden = true;
+    $('aSealErr').hidden = true;
+    $('aWork').hidden = false;
+    $('aBlockWarn').hidden = !$('aBody').value.includes(BEGIN);
+    $('aType').focus();
+  });
+
+$('aBody').addEventListener('input', () => { $('aBlockWarn').hidden = !$('aBody').value.includes(BEGIN); });
+
+$('aCleanup').addEventListener('click', () => {
+  const before = $('aBody').value;
+  let t = before.replace(/\r\n/g, '\n');
+  t = t.replace(/[\u2018\u2019\u201b]/g, "'").replace(/[\u201c\u201d\u201f]/g, '"');
+  t = t.replace(/\u2026/g, '...').replace(/[\u00a0\u2000-\u200a\u202f\u3000]/g, ' ').replace(/[\u200b-\u200d\ufeff]/g, '');
+  t = t.replace(/<br\s*\/?>/gi, '\n').replace(/<\/p>\s*/gi, '\n\n').replace(/<p[^>]*>/gi, '\n\n');
+  t = t.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'");
+  t = t.split('\n').map(s => s.replace(/[ \t]+$/, '')).join('\n').replace(/\n{3,}/g, '\n\n');
+  $('aBody').value = t;
+  $('aBlockWarn').hidden = !t.includes(BEGIN);
+  $('aCleanupNote').textContent = t === before ? 'Nothing to clean.' : 'Cleaned: smart punctuation, stray HTML, and extra whitespace normalized.';
+});
+
+$('aSealBtn').addEventListener('click', async () => {
+  if (!aSource) return;
+  $('aSealErr').hidden = true;
+  try {
+    const t = ATYPES[$('aType').value];
+    const adapter = line($('aAdapter').value);
+    if (!adapter) throw new Error('Name who made this adaptation; the credit is part of the record.');
+    const aiName = line($('aAiName').value);
+    const aiWhat = line($('aAiWhat').value);
+    if (aiName && !aiWhat) throw new Error('You named an AI tool. Say what it did and what you did yourself.');
+    const reviewer = line($('aReviewer').value);
+    const preserved = $('aPreserved').value.trim().replace(/\s+/g, ' ');
+    const omitted = $('aOmitted').value.trim().replace(/\s+/g, ' ');
+    const stored = aSource.report.stored;
+    const today = localToday();
+
+    const sources = [];
+    if (aSource.srcAuthor) sources.push({ author: aSource.srcAuthor, contribution: 'Author of the source work', rights_bearing: true });
+    sources.push({ author: adapter, contribution: 'Produced this adaptation (' + t.label + ')', rights_bearing: true, role: 'adapter' });
+    if (aiName) sources.push({ author: aiName, contribution: aiWhat, rights_bearing: false, role: 'ai_assistant' });
+    if (reviewer) sources.push({ author: reviewer, contribution: 'Reviewed this adaptation for accuracy and access', rights_bearing: false, role: 'accessibility_reviewer' });
+
+    const dot = (s) => /[.!?]$/.test(s) ? s : s + '.';
+    const noteParts = [];
+    if (preserved) noteParts.push('Preserves: ' + dot(preserved));
+    if (omitted) noteParts.push('Omits or changes: ' + dot(omitted));
+    noteParts.push('See fidelity_limits.');
+
+    const fields = {
+      title: line($('aTitle').value) || aSource.title + ' (' + t.suffix + ')',
+      summary: 'A ' + t.label.toLowerCase() + ' of "' + aSource.title + '", bound to its source by payload hash and credited to its adapter.',
+      content_type: $('aType').value === 'translation' ? 'translation' : 'adaptation',
+      created_date: today,
+      quarantine_status: 'quarantine',
+      privacy_level: typeof aSource.report.payload.privacy_level === 'string' && ['public','internal','sensitive','restricted'].includes(aSource.report.payload.privacy_level) ? aSource.report.payload.privacy_level : 'internal',
+      attribution: { good_faith_declaration: true, sources },
+      fidelity_limits: {
+        represents: t.represents,
+        trust_as: 'an access-focused adaptation; the source work remains authoritative',
+        do_not_infer: [
+          'that this replaces the source work',
+          omitted ? 'that this is the complete source work; it omits or changes: ' + dot(omitted) : 'that this carries every detail of the source work',
+          'that omission implies the omitted material is unimportant',
+        ],
+      },
+      use_conditions: {
+        permitted: ['use, redistribution, and further adaptation within the terms of the source work' + "'" + 's license'],
+        requested_preservations: [
+          'keep the link to the source by hash when redistributing',
+          'credit the adapter when further adapting',
+          'preserve the fidelity limits when quoting or excerpting',
+        ],
+      },
+      parents: [{ payload_hash: stored, title: aSource.title, relationship: 'adaptation_of' }],
+      accessibility: [{
+        adaptation_type: $('aType').value,
+        adapted_from: stored,
+        adaptation_contributor: aiName ? adapter + ' (direction); ' + aiName + ' (drafting)' : adapter,
+        note: noteParts.join(' '),
+        review_date: today,
+      }],
+      transformation_history: [{
+        date: today,
+        who: aiName ? adapter + ' with ' + aiName : adapter,
+        strategy: 'adaptation',
+        parent_hashes: [stored],
+        notes: t.label + ' produced in KNOBE Studio. Source bound by payload_hash.',
+      }],
+    };
+    const lic = line($('aLicense').value); if (lic) fields.license = lic;
+
+    adaptResult = await createKnobe({ fields, body: $('aBody').value });
+    const pa = (adaptResult.payload.parents || [])[0] || {};
+    const acc = (adaptResult.payload.accessibility || [])[0] || {};
+    const match = pa.payload_hash === stored && acc.adapted_from === stored;
+    $('aResText').textContent = 'Sealed. Self-check: ' + adaptResult.report.state + ' · ' + adaptResult.report.conformance + '.';
+    $('aResHash').textContent = 'payload_hash ' + adaptResult.payloadHash;
+    const chain = $('aResChain');
+    chain.textContent = '';
+    const lbl = document.createElement('span');
+    lbl.textContent = 'Declared source (parents and accessibility record): ';
+    const codeEl = document.createElement('code');
+    codeEl.textContent = String(pa.payload_hash || '');
+    const mark = document.createElement('span');
+    mark.className = match ? 'cok' : 'cbad';
+    mark.textContent = match ? ' both match the loaded source.' : ' does not match the loaded source.';
+    chain.appendChild(lbl); chain.appendChild(codeEl); chain.appendChild(mark);
+    $('aFileName').value = slugify(adaptResult.payload.title);
+    $('aRes').hidden = false;
+    $('aRes').focus();
+  } catch (e) {
+    $('aSealErr').textContent = 'Sealing did not complete: ' + e.message;
+    $('aSealErr').hidden = false;
+  }
+});
+$('aDownload').addEventListener('click', () => { if (adaptResult) download(adaptResult.text, line($('aFileName').value) || 'untitled.knobe.md'); });
+$('aCopy').addEventListener('click', (e) => { if (adaptResult) copyText(adaptResult.text, e.currentTarget); });
 
 // ---- init ----
 $('cDate').value = localToday();

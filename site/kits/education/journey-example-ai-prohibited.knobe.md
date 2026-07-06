@@ -1,0 +1,75 @@
+---
+title: "Essay 1 sequence (WRI 101: Writing and Evidence)"
+spec_version: "1.0"
+content_type: seed
+license: All rights reserved
+created_date: "2026-07-06"
+---
+
+# Essay 1 sequence
+
+WRI 101: Writing and Evidence · Fall 2026 · Course Instructor
+
+This sequence uses sealed KNOBE files. Each step is a plain-text file that records who made it, what it builds on, and the AI policy it was made under. Load this journey file into KNOBE Studio (knobe.org/studio) to start your step; upload the sealed file it gives you to the assignment.
+
+## Step 1: Week 2 reading: Evidence and its limits
+
+- Sealed by: Instructor
+- Kind of work: Reading / source material
+- AI policy: AI policy not applicable
+
+## Step 2: Essay 1: Argument from primary sources
+
+- Sealed by: Instructor
+- Kind of work: Assignment spec
+- AI policy: AI not allowed. All work must be the student's own. AI tools may not be used at any stage, including outlining and editing.
+
+## Step 3: Essay 1 draft
+
+- Sealed by: Student
+- Kind of work: Student writing
+- AI policy: AI not allowed
+- Builds on: Step 1, Step 2
+- Expectations: 1,000–1,200 words: an argument built from the two assigned primary sources.
+
+-----BEGIN KNOBE B64-----
+eyJhdHRyaWJ1dGlvbiI6eyJnb29kX2ZhaXRoX2RlY2xhcmF0aW9uIjp0cnVlLCJzb3VyY2VzIjpb
+eyJhdXRob3IiOiJDb3Vyc2UgSW5zdHJ1Y3RvciIsImNvbnRyaWJ1dGlvbiI6IkRlc2lnbmVkIHRo
+aXMgYXNzaWdubWVudCBzZXF1ZW5jZSwgaXRzIHN0ZXAgcG9saWNpZXMsIGFuZCBpdHMgQUktdXNl
+IHRlcm1zLiIsInJpZ2h0c19iZWFyaW5nIjp0cnVlLCJyb2xlIjoiaW5zdHJ1Y3Rvcl9wcm9tcHQi
+fV19LCJib2R5X2hhc2giOiIxOTA4MjlkODhhMDE4OWFjN2JkYWUwMjUzMzMzMzYwN2IyN2RjYTU4
+NThjZjdlZDkxYmMxYjljZjk5NzM5YTgwIiwiY29udGVudF90eXBlIjoic2VlZCIsImNyZWF0ZWRf
+ZGF0ZSI6IjIwMjYtMDctMDYiLCJmaWRlbGl0eV9saW1pdHMiOnsiZG9fbm90X2luZmVyIjpbInRo
+YXQgdGhlc2Ugc3RlcHMgb3IgcG9saWNpZXMgYXBwbHkgdG8gb3RoZXIgY291cnNlcyBvciBhc3Np
+Z25tZW50cyIsInRoYXQgdGhlIEFJIHBvbGljaWVzIGhlcmUgcmVwcmVzZW50IHRoZSBpbnN0cnVj
+dG9yJ3MgcG9saWN5IGJleW9uZCB0aGlzIHNlcXVlbmNlIl0sInJlcHJlc2VudHMiOiJ0aGUgaW5z
+dHJ1Y3RvcidzIGpvdXJuZXkgc3BlY2lmaWNhdGlvbiBhcyBpc3N1ZWQiLCJ0cnVzdF9hcyI6InRo
+ZSBhdXRob3JpdGF0aXZlIHNlcXVlbmNlIGFuZCBzdGVwIHBvbGljaWVzIGZvciBFc3NheSAxIHNl
+cXVlbmNlLCBXUkkgMTAxOiBXcml0aW5nIGFuZCBFdmlkZW5jZSJ9LCJpZGVudGl0eV9zdGF0dXMi
+OiJkZWNsYXJlZCIsImpvdXJuZXkiOnsiY291cnNlIjoiV1JJIDEwMTogV3JpdGluZyBhbmQgRXZp
+ZGVuY2UiLCJzdGVwcyI6W3siYWlfcG9saWN5Ijoibm90X2FwcGxpY2FibGUiLCJidWlsZHNfb24i
+OltdLCJjb250ZW50X3R5cGUiOiJvcmlnaW5hbCIsImtpbmQiOiJyZWFkaW5nIiwibiI6IjEiLCJy
+ZWxhdGlvbnNoaXAiOiJzeW50aGVzaXNfaW5wdXQiLCJzZWFsZXIiOiJpbnN0cnVjdG9yIiwidGl0
+bGUiOiJXZWVrIDIgcmVhZGluZzogRXZpZGVuY2UgYW5kIGl0cyBsaW1pdHMifSx7ImFpX3BvbGlj
+eSI6InByb2hpYml0ZWQiLCJhaV9wb2xpY3lfZGV0YWlsIjoiQWxsIHdvcmsgbXVzdCBiZSB0aGUg
+c3R1ZGVudCdzIG93bi4gQUkgdG9vbHMgbWF5IG5vdCBiZSB1c2VkIGF0IGFueSBzdGFnZSwgaW5j
+bHVkaW5nIG91dGxpbmluZyBhbmQgZWRpdGluZy4iLCJidWlsZHNfb24iOltdLCJjb250ZW50X3R5
+cGUiOiJzZWVkIiwia2luZCI6InNwZWMiLCJuIjoiMiIsInJlbGF0aW9uc2hpcCI6InN5bnRoZXNp
+c19pbnB1dCIsInNlYWxlciI6Imluc3RydWN0b3IiLCJ0aXRsZSI6IkVzc2F5IDE6IEFyZ3VtZW50
+IGZyb20gcHJpbWFyeSBzb3VyY2VzIn0seyJhaV9wb2xpY3kiOiJwcm9oaWJpdGVkIiwiYnVpbGRz
+X29uIjpbIjEiLCIyIl0sImNvbnRlbnRfdHlwZSI6Im9yaWdpbmFsIiwiZXhwZWN0YXRpb25zIjoi
+MSwwMDDigJMxLDIwMCB3b3JkczogYW4gYXJndW1lbnQgYnVpbHQgZnJvbSB0aGUgdHdvIGFzc2ln
+bmVkIHByaW1hcnkgc291cmNlcy4iLCJraW5kIjoid3JpdGluZyIsIm4iOiIzIiwicmVsYXRpb25z
+aGlwIjoic3ludGhlc2lzX2lucHV0Iiwic2VhbGVyIjoic3R1ZGVudCIsInRpdGxlIjoiRXNzYXkg
+MSBkcmFmdCJ9XSwidGVybSI6IkZhbGwgMjAyNiIsInRpdGxlIjoiRXNzYXkgMSBzZXF1ZW5jZSJ9
+LCJsaWNlbnNlIjoiQWxsIHJpZ2h0cyByZXNlcnZlZCIsInBheWxvYWRfaGFzaCI6IjY4ODQxYmUx
+NzUxZTRmNjhkYThkNmI4ZGU4MTI4MGMzMjk1MzUyMTlmOTM0MzM1YTBiNDJiNjg1Mzk0YjM5ZmEi
+LCJwcml2YWN5X2xldmVsIjoiaW50ZXJuYWwiLCJxdWFyYW50aW5lX3N0YXR1cyI6InRydXN0ZWQi
+LCJzcGVjX3ZlcnNpb24iOiIxLjAiLCJzdW1tYXJ5IjoiSm91cm5leSBzcGVjaWZpY2F0aW9uOiAz
+IHN0ZXBzIGZvciBXUkkgMTAxOiBXcml0aW5nIGFuZCBFdmlkZW5jZS4iLCJ0YWdzIjpbImpvdXJu
+ZXkiXSwidGl0bGUiOiJFc3NheSAxIHNlcXVlbmNlIChXUkkgMTAxOiBXcml0aW5nIGFuZCBFdmlk
+ZW5jZSkiLCJ1c2VfY29uZGl0aW9ucyI6eyJwZXJtaXR0ZWQiOlsiZW5yb2xsZWQgc3R1ZGVudCB1
+c2UiLCJjb3Vyc2UgZGVzaWduIHJlZmVyZW5jZSB3aXRoIGF0dHJpYnV0aW9uIl0sInJlcXVlc3Rl
+ZF9wcmVzZXJ2YXRpb25zIjpbImRvIG5vdCBtb2RpZnkgYW5kIHJlZGlzdHJpYnV0ZSBhcyBpZiB0
+aGUgc2VxdWVuY2Ugd2VyZSB1bmNoYW5nZWQiXX19
+-----END KNOBE B64-----
