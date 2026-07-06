@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KNOBE Studio — create, verify, and transform knowledge objects in your browser</title>
+<meta name="description" content="KNOBE Studio creates sealed .knobe.md knowledge objects from your content, checks whether a sealed record is intact, and derives new objects that declare their parent. It runs locally in the browser on knobe-core.js; nothing is uploaded.">
+<style>
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;
+  --alert:#9e2b1e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+.wrap{max-width:720px;margin:0 auto;padding:0 28px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(247,245,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:bold;font-size:1.05rem;color:var(--ink);text-decoration:none}
+.brand .v{color:var(--ink-faint);font-weight:normal;font-size:.8rem}
+.navlinks{display:flex;gap:18px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;align-items:center}
+.navlinks a{color:var(--ink-soft);text-decoration:none;transition:color .15s}
+.navlinks a:hover{color:var(--moss)}
+.navlinks a.here{color:var(--moss);border-bottom:1px solid var(--moss)}
+.nav-uses{position:relative;display:inline-block}
+.nav-uses>summary{list-style:none;cursor:pointer;color:var(--ink-soft);transition:color .15s}
+.nav-uses>summary::-webkit-details-marker{display:none}
+.nav-uses>summary::after{content:"\25be";font-size:.7em;margin-left:5px}
+.nav-uses>summary:hover,.nav-uses[open]>summary,.nav-uses>summary.here{color:var(--moss)}
+.nav-uses>summary.here{border-bottom:1px solid var(--moss)}
+.nav-menu{position:absolute;top:calc(100% + 10px);left:0;background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:7px;min-width:172px;display:flex;flex-direction:column;gap:1px;box-shadow:0 8px 24px rgba(26,40,32,.12);z-index:60}
+.nav-menu a{padding:7px 10px;border-radius:4px;white-space:nowrap;border-bottom:none}
+.nav-menu a:hover{background:var(--paper-warm);color:var(--moss)}
+.nav-menu a.here{color:var(--moss);border-bottom:none}
+@media(max-width:680px){nav .inner{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}}
+
+header.top{padding:70px 0 14px}
+.eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:22px}
+h1{font-size:2.05rem;line-height:1.25;font-weight:normal;letter-spacing:-.01em;margin-bottom:16px}
+h1 em{font-style:italic;color:var(--moss-deep)}
+.sub{font-size:1.12rem;color:var(--ink-soft);max-width:660px;margin-bottom:22px}
+.assurance{font-family:-apple-system,system-ui,sans-serif;font-size:.92rem;font-weight:500;color:var(--moss-deep);
+  background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;
+  padding:14px 18px;margin:6px 0 4px;display:flex;gap:10px;align-items:baseline}
+.assurance .lock{font-family:Georgia,serif}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.88em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
+a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+
+main{padding:20px 0 30px}
+main p{margin-bottom:16px}
+h2{font-size:1.3rem;font-weight:normal;color:var(--moss-deep);margin:40px 0 12px;letter-spacing:-.01em}
+
+/* ---- panel switcher ---- */
+.tabs{display:flex;gap:6px;border-bottom:1px solid var(--line);margin:10px 0 26px;font-family:-apple-system,system-ui,sans-serif}
+.tab{font-size:.95rem;font-weight:500;color:var(--ink-soft);background:none;border:none;border-bottom:2px solid transparent;
+  padding:10px 16px;cursor:pointer;margin-bottom:-1px}
+.tab:hover{color:var(--moss)}
+.tab[aria-selected="true"]{color:var(--moss-deep);border-bottom-color:var(--moss)}
+.tab:focus-visible{outline:3px solid var(--moss);outline-offset:2px}
+.panel[hidden]{display:none}
+
+/* ---- forms ---- */
+.field{margin:0 0 18px}
+.field label,.acc legend,.subhead{display:block;font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;font-weight:600;color:var(--ink);margin-bottom:6px}
+.field .hint{font-family:-apple-system,system-ui,sans-serif;font-size:.76rem;font-weight:normal;color:var(--ink-faint);margin-top:5px}
+input[type=text],input[type=date],select,textarea{width:100%;font-family:-apple-system,system-ui,sans-serif;font-size:.92rem;color:var(--ink);
+  background:#fff;border:1px solid var(--line);border-radius:6px;padding:9px 12px}
+textarea{resize:vertical;line-height:1.55}
+textarea.mono{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem}
+input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--moss);outline-offset:1px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
+@media(max-width:560px){.row2{grid-template-columns:1fr}}
+.checkline{display:flex;align-items:baseline;gap:8px;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;color:var(--ink-soft);margin:0 0 14px}
+.checkline input{width:auto}
+
+/* ---- template picker ---- */
+.tpls{border:none;margin:0 0 22px}
+.tpls legend{margin-bottom:10px}
+.tplgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:560px){.tplgrid{grid-template-columns:1fr}}
+.tpl{position:relative;display:block;border:1px solid var(--line);border-radius:8px;background:#fff;padding:12px 14px;cursor:pointer}
+.tpl:hover{border-color:var(--moss)}
+.tpl input{position:absolute;opacity:0;pointer-events:none}
+.tpl:has(input:checked){border-color:var(--moss);background:#eef2ec}
+.tpl:has(input:focus-visible){outline:3px solid var(--moss);outline-offset:2px}
+.tpl .tname{display:block;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;font-weight:600;color:var(--ink)}
+.tpl .tdesc{display:block;font-family:-apple-system,system-ui,sans-serif;font-size:.76rem;color:var(--ink-faint);margin-top:4px;line-height:1.5}
+
+/* ---- accordion + attribution rows ---- */
+details.acc{border:1px solid var(--line);border-radius:8px;background:var(--paper-warm);margin:0 0 18px}
+details.acc>summary{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;font-weight:600;color:var(--ink-soft);
+  padding:12px 16px;cursor:pointer;list-style:none}
+details.acc>summary::-webkit-details-marker{display:none}
+details.acc>summary::before{content:"\25b8";margin-right:8px;color:var(--moss)}
+details.acc[open]>summary::before{content:"\25be"}
+details.acc>summary:focus-visible{outline:3px solid var(--moss);outline-offset:-3px}
+details.acc .accbody{padding:6px 16px 16px}
+.subhead{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.srcrow{border:1px solid var(--line);border-radius:6px;background:#fff;padding:12px 12px 4px;margin:0 0 10px}
+.srcrow .srclabel{font-family:-apple-system,system-ui,sans-serif;font-size:.74rem;color:var(--ink-faint);margin-bottom:8px}
+.rowbtns{margin:2px 0 14px}
+.linkbtn{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--moss);background:none;border:none;
+  cursor:pointer;padding:0;text-decoration:underline;text-underline-offset:2px}
+.linkbtn:hover{color:var(--moss-deep)}
+.linkbtn:focus-visible{outline:3px solid var(--moss);outline-offset:2px}
+
+/* ---- preview + results ---- */
+details.preview{border:1px solid var(--line);border-radius:8px;background:#fff;margin:0 0 18px;overflow:hidden}
+details.preview>summary{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;font-weight:600;color:var(--ink-soft);
+  padding:12px 16px;cursor:pointer;list-style:none;background:var(--paper-warm)}
+details.preview>summary::-webkit-details-marker{display:none}
+details.preview>summary::before{content:"\25b8";margin-right:8px;color:var(--moss)}
+details.preview[open]>summary::before{content:"\25be"}
+details.preview>summary:focus-visible{outline:3px solid var(--moss);outline-offset:-3px}
+.previewnote{font-family:-apple-system,system-ui,sans-serif;font-size:.76rem;color:var(--ink-faint);padding:8px 16px;border-top:1px solid var(--line)}
+pre.filepre{max-height:340px;overflow:auto;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;line-height:1.5;
+  color:var(--ink);padding:14px 16px;border-top:1px solid var(--line);white-space:pre-wrap;word-break:break-all}
+
+.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;font-weight:500;
+  background:var(--moss-deep);color:var(--paper);border:none;border-radius:4px;padding:11px 22px;cursor:pointer;transition:background .15s}
+.btn:hover{background:var(--moss)}
+.btn:disabled{background:var(--ink-faint);cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--moss-deep);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--moss);color:var(--moss)}
+.btn:focus-visible{outline:3px solid var(--moss);outline-offset:2px}
+.btnrow{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:6px 0 10px}
+
+.sealres{border:1px solid var(--line);border-radius:10px;background:#fff;margin:18px 0 8px;overflow:hidden}
+.sealres .shead{display:flex;align-items:center;gap:12px;padding:16px 20px;border-bottom:1px solid var(--line);background:#eef2ec}
+.sealres .shead .ssym{font-family:-apple-system,system-ui,sans-serif;font-weight:700;font-size:1.1rem;color:var(--moss-deep);
+  width:30px;height:30px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:2px solid currentColor;flex-shrink:0}
+.sealres .shead .stext{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;color:var(--moss-deep)}
+.sealres .sbody{padding:14px 20px 18px}
+.sealres .hashline{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint);word-break:break-all;margin:0 0 12px}
+.sealres .fname{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
+.sealres .fname label{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;font-weight:600;color:var(--ink)}
+.sealres .fname input{flex:1;min-width:220px;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.78rem}
+.chainline{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;color:var(--ink-soft);margin:0 0 12px}
+.chainline .cok{color:var(--moss-deep);font-weight:600}
+.chainline .cbad{color:var(--alert);font-weight:600}
+.chainline code{word-break:break-all}
+
+.warnnote{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--amber);
+  background:#f6efe4;border:1px solid #e8d5b5;border-radius:6px;padding:10px 14px;margin:0 0 16px}
+.errmsg{font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;color:var(--alert);
+  background:#f6ebe8;border:1px solid #e3c4bd;border-radius:6px;padding:12px 16px;margin:18px 0 0}
+.enginefail{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--alert);
+  background:#f6ebe8;border:1px solid #e3c4bd;border-radius:6px;padding:14px 18px;margin:20px 0}
+
+/* ---- dropzones ---- */
+.drop{margin:6px 0 8px;border:2px dashed var(--line);border-radius:10px;background:var(--paper-warm);
+  padding:34px 26px;text-align:center;transition:border-color .15s,background .15s}
+.drop.drag{border-color:var(--moss);background:#eef2ec}
+.drop .dicon{font-size:1.6rem;color:var(--ink-faint);margin-bottom:8px;font-family:Georgia,serif}
+.drop .dmain{font-size:1rem;color:var(--ink-soft);margin-bottom:4px}
+.drop .dhint{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;color:var(--ink-faint)}
+.drop .choosebtn{margin-top:14px}
+.visually-hidden{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.altrow{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin:12px 0 0;text-align:center}
+.pastewrap{margin:12px 0 0;display:none}
+.pastewrap.open{display:block}
+.pastewrap textarea{min-height:130px;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.76rem}
+
+/* ---- verify result card ---- */
+.result{margin:22px 0 8px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.result:focus{outline:none}
+.verdict{display:flex;align-items:center;gap:14px;padding:18px 22px;border-bottom:1px solid var(--line)}
+.verdict .vsym{font-family:-apple-system,system-ui,sans-serif;font-size:1.4rem;font-weight:700;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;border-radius:50%;flex-shrink:0;border:2px solid currentColor}
+.verdict .vlabel{font-size:1.12rem;letter-spacing:-.01em}
+.verdict .vfile{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint);margin-top:2px;word-break:break-all}
+.v-ok{color:var(--moss-deep)}
+.v-warn{color:var(--amber)}
+.v-bad{color:var(--alert)}
+.v-neutral{color:var(--ink-faint)}
+.verdict.v-ok{background:#eef2ec}
+.verdict.v-warn{background:#f6efe4}
+.verdict.v-bad{background:#f6ebe8}
+.verdict.v-neutral{background:var(--paper-warm)}
+.tagsrow{display:flex;gap:8px;flex-wrap:wrap;padding:12px 22px;border-bottom:1px solid var(--line)}
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;
+  font-weight:500;padding:2px 9px;border-radius:3px;border:1px solid currentColor}
+.tag.ok{color:var(--moss-deep);background:#eef2ec}
+.tag.warn{color:var(--amber);background:#f6efe4}
+.tag.bad{color:var(--alert);background:#f6ebe8}
+.tag.neutral{color:var(--ink-faint);background:var(--paper-warm)}
+.rgrid{padding:6px 22px 12px}
+.rrow{display:grid;grid-template-columns:150px 1fr;gap:4px 16px;padding:8px 0;border-bottom:1px solid var(--line);
+  font-family:-apple-system,system-ui,sans-serif;font-size:.84rem}
+.rrow:last-child{border-bottom:none}
+.rrow dt{color:var(--ink-faint);font-size:.76rem;letter-spacing:.02em}
+.rrow dd{color:var(--ink);word-break:break-word}
+.rrow dd.mono{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.74rem;word-break:break-all}
+@media(max-width:560px){.rrow{grid-template-columns:1fr}}
+.issues{list-style:none;margin:0;padding:4px 22px 8px}
+.issues li{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-soft);
+  padding:7px 0 7px 20px;position:relative;border-bottom:1px solid var(--line)}
+.issues li:last-child{border-bottom:none}
+.issues li::before{content:'!';position:absolute;left:0;top:7px;color:var(--amber);font-weight:700;
+  font-family:-apple-system,system-ui,sans-serif}
+.notes{padding:12px 22px 16px;background:var(--paper-warm);border-top:1px solid var(--line)}
+.notes p{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-soft);margin-bottom:8px}
+.notes p:last-child{margin-bottom:0}
+
+/* ---- transform original card ---- */
+.origcard{border:1px solid var(--line);border-radius:10px;background:#fff;margin:18px 0;overflow:hidden}
+.origcard .ohead{font-family:-apple-system,system-ui,sans-serif;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-faint);padding:10px 20px;border-bottom:1px solid var(--line);background:var(--paper-warm)}
+.origcard .obody{padding:12px 20px 14px}
+.origcard .otitle{font-size:1.05rem;margin-bottom:6px}
+.origcard .ohash{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;color:var(--ink-faint);word-break:break-all;margin-bottom:10px}
+.origcard .otags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.origcard .opermits{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-soft)}
+
+/* ---- explain + fwd + footer ---- */
+.explain{margin:46px 0 10px;padding:30px 0 0;border-top:1px solid var(--line)}
+.explain h2{margin-top:0}
+.explain p{font-size:1rem;color:var(--ink-soft)}
+.fwd{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 10px}
+.fwd-why{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
+.fwd a.fwd-link{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.98rem;font-weight:600;color:var(--moss);text-decoration:none;margin:0 22px 8px 0}
+.fwd a.fwd-link:hover{text-decoration:underline}
+footer{border-top:1px solid var(--line);margin-top:44px;padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
+footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+footer a{color:var(--ink-soft);text-decoration:none}
+footer a:hover{color:var(--moss)}
+.social-icon{display:inline-flex;align-items:center;vertical-align:middle;margin-left:8px;color:var(--ink-faint);transition:color .15s;line-height:1}
+.social-icon:hover{color:var(--moss)}
+.social-icon svg{display:block}
+.skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
+  font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
+.skip:focus{left:0}
+</style>
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png">
+<link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#7c3aed">
+<link rel="canonical" href="https://knobe.org/studio/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="KNOBE Protocol">
+<meta property="og:title" content="KNOBE Studio — create, verify, and transform knowledge objects in your browser">
+<meta property="og:description" content="KNOBE Studio creates sealed .knobe.md knowledge objects, checks whether a sealed record is intact, and derives new objects that declare their parent. Runs locally in the browser; nothing is uploaded.">
+<meta property="og:url" content="https://knobe.org/studio/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KNOBE Studio — create, verify, and transform knowledge objects in your browser">
+<meta name="twitter:description" content="KNOBE Studio creates sealed .knobe.md knowledge objects, checks whether a sealed record is intact, and derives new objects that declare their parent. Runs locally in the browser; nothing is uploaded.">
+</head>
+<body>
+<a href="#main" class="skip">Skip to the workbench</a>
+
+<nav aria-label="Main navigation">
+  <div class="inner">
+    <a href="/" class="brand">KNOBE <span class="v">Protocol v1</span></a>
+    <div class="navlinks">
+      <a href="/studio/" class="here" aria-current="page">Studio</a>
+      <a href="/spec">Spec</a>
+      <a href="/white-paper">White paper</a>
+      <details class="nav-uses">
+        <summary>Trust</summary>
+        <div class="nav-menu">
+          <a href="/threat-model">Threat model</a>
+          <a href="/related-work">Related work</a>
+        </div>
+      </details>
+      <details class="nav-uses">
+        <summary>Uses</summary>
+        <div class="nav-menu">
+          <a href="/education-profile">Education</a>
+          <a href="/government-profile">Government</a>
+          <a href="/enterprise-profile">Enterprise</a>
+          <a href="/research-profile">Research</a>
+          <a href="/accessibility">Accessibility</a>
+        </div>
+      </details>
+      <details class="nav-uses">
+        <summary>Build</summary>
+        <div class="nav-menu">
+          <a href="/lens">Lens</a>
+          <a href="/test-vectors/">Test vectors</a>
+          <a href="/implementations">Implementations</a>
+          <a href="/downloads">Downloads</a>
+          <a href="https://github.com/KnobeOne/knobe-protocol">GitHub</a>
+        </div>
+      </details>
+      <a href="/about">About</a>
+    </div>
+  </div>
+</nav>
+<script>/* nav dropdown ux */(function(){var ds=document.querySelectorAll('.nav-uses');ds.forEach(function(d){d.addEventListener('toggle',function(){if(d.open)ds.forEach(function(o){if(o!==d)o.open=false});});});document.addEventListener('keydown',function(e){if(e.key==='Escape')ds.forEach(function(o){o.open=false});});document.addEventListener('click',function(e){if(!e.target.closest('.nav-uses'))ds.forEach(function(o){o.open=false});});})();</script>
+
+<header class="top">
+  <div class="wrap">
+    <div class="eyebrow">KNOBE Studio</div>
+    <h1>Create, verify, and transform <em>knowledge objects</em>.</h1>
+    <p class="sub">Studio is a browser workbench for <code>.knobe.md</code> files. It seals your content into a knowledge object, checks whether a sealed record is intact, and derives new objects that declare their parent. It runs on <a class="inline" href="/knobe-core.js">knobe-core.js</a>, the JavaScript engine whose verdicts are checked against <code>lens.py</code> across the published test corpus.</p>
+    <div class="assurance">
+      <span class="lock" aria-hidden="true">&#9679;</span>
+      <span>Everything runs locally in your browser. No upload. No server. No account.</span>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+
+    <div class="enginefail" id="enginefail">Studio needs a browser with JavaScript modules and Web Crypto (any current browser over https or localhost). The engine could not be loaded in this session.</div>
+
+    <div class="tabs" role="tablist" aria-label="Studio tools">
+      <button class="tab" id="tab-create" role="tab" aria-selected="true" aria-controls="panel-create">Create</button>
+      <button class="tab" id="tab-verify" role="tab" aria-selected="false" aria-controls="panel-verify" tabindex="-1">Verify</button>
+      <button class="tab" id="tab-transform" role="tab" aria-selected="false" aria-controls="panel-transform" tabindex="-1">Transform</button>
+    </div>
+
+    <!-- ================= CREATE ================= -->
+    <section class="panel" id="panel-create" role="tabpanel" aria-labelledby="tab-create">
+
+      <fieldset class="tpls">
+        <legend>Start from</legend>
+        <div class="tplgrid">
+          <label class="tpl"><input type="radio" name="tpl" value="instructor">
+            <span class="tname">Instructor: seal a reading</span>
+            <span class="tdesc">Course-scoped terms for an assigned reading. The seal proves the file is intact, not that reuse is authorized.</span></label>
+          <label class="tpl"><input type="radio" name="tpl" value="student">
+            <span class="tname">Student: seal a reflection</span>
+            <span class="tdesc">Your own words at submission time. The seal records your declaration; it does not prove authorship.</span></label>
+          <label class="tpl"><input type="radio" name="tpl" value="researcher">
+            <span class="tname">Researcher: seal a transcript</span>
+            <span class="tdesc">A verbatim transcript with participant attribution and fidelity limits. The seal proves the record is unaltered, not that the transcription is accurate.</span></label>
+          <label class="tpl"><input type="radio" name="tpl" value="enterprise">
+            <span class="tname">Enterprise: seal a policy summary</span>
+            <span class="tdesc">A condensed summary sealed in quarantine: an orientation aid, not the policy, until review clears it.</span></label>
+          <label class="tpl"><input type="radio" name="tpl" value="blank" checked>
+            <span class="tname">Blank</span>
+            <span class="tdesc">Engine defaults only. A single paragraph and a Seal click produce a valid object.</span></label>
+        </div>
+      </fieldset>
+
+      <div class="field">
+        <label for="cTitle">Title</label>
+        <input type="text" id="cTitle" autocomplete="off">
+      </div>
+      <div class="field">
+        <label for="cContent">Content</label>
+        <textarea id="cContent" rows="9" spellcheck="true"></textarea>
+        <div class="hint">The human-readable markdown body. It is sealed with its own <code>body_hash</code>.</div>
+      </div>
+      <div class="warnnote" id="cBlockWarn" hidden>The content contains a KNOBE payload block. The sealed file would carry more than one block and report <code>body_verified: omitted</code>.</div>
+      <div class="field">
+        <label for="cAuthor">Author</label>
+        <input type="text" id="cAuthor" autocomplete="name">
+        <div class="hint">Recorded in the sealed attribution as source 1.</div>
+      </div>
+
+      <details class="acc" id="accFields">
+        <summary>All fields</summary>
+        <div class="accbody">
+          <div class="field">
+            <label for="cSummary">Summary</label>
+            <textarea id="cSummary" rows="2"></textarea>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="cType">Content type</label>
+              <select id="cType">
+                <option value="original" selected>original</option>
+                <option value="synthesis">synthesis</option>
+                <option value="adaptation">adaptation</option>
+                <option value="compression">compression</option>
+                <option value="annotation">annotation</option>
+                <option value="seed">seed</option>
+                <option value="collection">collection</option>
+                <option value="translation">translation</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="cDate">Created date</label>
+              <input type="date" id="cDate">
+            </div>
+          </div>
+          <div class="row2">
+            <div class="field">
+              <label for="cLicense">License</label>
+              <input type="text" id="cLicense" list="licenseList" autocomplete="off">
+              <datalist id="licenseList">
+                <option value="CC BY 4.0"></option>
+                <option value="CC BY-SA 4.0"></option>
+                <option value="CC BY-NC 4.0"></option>
+                <option value="CC BY-ND 4.0"></option>
+                <option value="CC0 1.0"></option>
+                <option value="All rights reserved"></option>
+                <option value="MIT"></option>
+              </datalist>
+              <div class="hint">Blank uses the engine default, CC BY 4.0.</div>
+            </div>
+            <div class="field">
+              <label for="cPrivacy">Privacy level</label>
+              <select id="cPrivacy">
+                <option value="public" selected>public</option>
+                <option value="internal">internal</option>
+                <option value="sensitive">sensitive</option>
+                <option value="restricted">restricted</option>
+              </select>
+            </div>
+          </div>
+          <div class="field">
+            <label for="cQuarantine">Quarantine status</label>
+            <select id="cQuarantine">
+              <option value="quarantine" selected>quarantine</option>
+              <option value="trusted">trusted</option>
+              <option value="rejected">rejected</option>
+            </select>
+            <div class="hint">The originator's declared posture, not a receiver's clearance.</div>
+          </div>
+
+          <span class="subhead">Attribution</span>
+          <div class="srcrow">
+            <div class="srclabel">Source 1 · the Author named above</div>
+            <div class="row2">
+              <div class="field">
+                <label for="cContribution1">Contribution</label>
+                <input type="text" id="cContribution1" placeholder="author" autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="cRole1">Role</label>
+                <input type="text" id="cRole1" autocomplete="off">
+              </div>
+            </div>
+            <label class="checkline"><input type="checkbox" id="cRights1"> <span>This contributor holds rights in the contribution (<code>rights_bearing: true</code>)</span></label>
+          </div>
+          <div id="extraSources"></div>
+          <div class="rowbtns"><button type="button" class="linkbtn" id="addSource">Add another source</button></div>
+          <label class="checkline"><input type="checkbox" id="cGoodFaith"> <span>Include <code>good_faith_declaration: true</code></span></label>
+
+          <span class="subhead">Fidelity limits</span>
+          <div class="row2">
+            <div class="field">
+              <label for="cRepresents">Represents</label>
+              <input type="text" id="cRepresents" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="cTrustAs">Trust as</label>
+              <input type="text" id="cTrustAs" autocomplete="off">
+            </div>
+          </div>
+          <div class="field">
+            <label for="cDoNotInfer">Do not infer (one item per line)</label>
+            <textarea id="cDoNotInfer" rows="3"></textarea>
+          </div>
+
+          <span class="subhead">Use conditions</span>
+          <div class="field">
+            <label for="cPermitted">Permitted (one item per line)</label>
+            <textarea id="cPermitted" rows="2"></textarea>
+          </div>
+          <div class="field">
+            <label for="cPreservations">Requested preservations (one item per line)</label>
+            <textarea id="cPreservations" rows="2"></textarea>
+          </div>
+          <div class="field">
+            <label for="cConsentNote">Consent note</label>
+            <input type="text" id="cConsentNote" autocomplete="off">
+          </div>
+
+          <span class="subhead">Other</span>
+          <div class="row2">
+            <div class="field">
+              <label for="cLanguage">Language</label>
+              <input type="text" id="cLanguage" placeholder="en" autocomplete="off">
+            </div>
+            <div class="field">
+              <label for="cTags">Tags (comma-separated)</label>
+              <input type="text" id="cTags" autocomplete="off">
+            </div>
+          </div>
+        </div>
+      </details>
+
+      <details class="preview" id="previewBox">
+        <summary>File preview</summary>
+        <pre class="filepre" id="createPreview"></pre>
+        <div class="previewnote" id="previewNote">Updates as you type. The preview is the exact file the Seal button produces, including its hash.</div>
+      </details>
+
+      <div class="btnrow">
+        <button type="button" class="btn" id="sealBtn">Seal</button>
+        <button type="button" class="btn ghost" id="resetBtn">Reset the form</button>
+      </div>
+      <div class="errmsg" id="cErr" role="alert" hidden></div>
+
+      <div class="sealres" id="cRes" tabindex="-1" aria-live="polite" hidden>
+        <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="cResText"></span></div>
+        <div class="sbody">
+          <div class="hashline" id="cResHash"></div>
+          <div class="fname">
+            <label for="cFileName">File name</label>
+            <input type="text" id="cFileName" autocomplete="off" spellcheck="false">
+          </div>
+          <div class="btnrow">
+            <button type="button" class="btn" id="cDownload">Download .knobe.md</button>
+            <button type="button" class="btn ghost" id="cCopy">Copy file text</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= VERIFY ================= -->
+    <section class="panel" id="panel-verify" role="tabpanel" aria-labelledby="tab-verify" hidden>
+      <div id="vDrop" class="drop" aria-label="Drop a .knobe.md file here to verify it">
+        <div class="dicon" aria-hidden="true">&#9671;</div>
+        <div class="dmain">Drag a <code>.knobe.md</code> file here</div>
+        <div class="dhint">The file is read in this page and goes nowhere else.</div>
+        <button type="button" id="vChoose" class="btn choosebtn">Choose a file</button>
+        <input type="file" id="vFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a .knobe.md file to verify">
+      </div>
+      <div class="altrow">No file handy? <button type="button" id="vPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="vPasteWrap">Paste the text of a KNOBE instead</button></div>
+      <div id="vPasteWrap" class="pastewrap">
+        <label for="vPasteArea" class="visually-hidden">Paste KNOBE file text</label>
+        <textarea id="vPasteArea" placeholder="Paste the full contents of a .knobe.md file, including the -----BEGIN KNOBE B64----- block." spellcheck="false"></textarea>
+        <div class="btnrow"><button type="button" id="vPasteBtn" class="btn">Verify pasted text</button></div>
+      </div>
+      <div class="errmsg" id="vErr" role="alert" hidden></div>
+      <section id="vResult" class="result" tabindex="-1" aria-live="polite" aria-label="Verification result" hidden></section>
+    </section>
+
+    <!-- ================= TRANSFORM ================= -->
+    <section class="panel" id="panel-transform" role="tabpanel" aria-labelledby="tab-transform" hidden>
+      <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">A derivative declares its parent: the new object's <code>parents</code> entry records the original's title and payload hash. The original must verify first; a broken seal cannot anchor a chain.</p>
+      <div id="tDrop" class="drop" aria-label="Drop a sealed .knobe.md file here to derive from it">
+        <div class="dicon" aria-hidden="true">&#9671;</div>
+        <div class="dmain">Drag a sealed <code>.knobe.md</code> here to derive from it</div>
+        <div class="dhint">The file is read in this page and goes nowhere else.</div>
+        <button type="button" id="tChoose" class="btn choosebtn">Choose a file</button>
+        <input type="file" id="tFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to derive from">
+      </div>
+      <div class="altrow">No file handy? <button type="button" id="tPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="tPasteWrap">Paste the text of a KNOBE instead</button></div>
+      <div id="tPasteWrap" class="pastewrap">
+        <label for="tPasteArea" class="visually-hidden">Paste KNOBE file text</label>
+        <textarea id="tPasteArea" placeholder="Paste the full contents of a sealed .knobe.md file." spellcheck="false"></textarea>
+        <div class="btnrow"><button type="button" id="tPasteBtn" class="btn">Load pasted text</button></div>
+      </div>
+      <div class="errmsg" id="tErr" role="alert" hidden></div>
+
+      <div id="tWork" hidden>
+        <div class="origcard" aria-live="polite">
+          <div class="ohead">Original</div>
+          <div class="obody">
+            <div class="otitle" id="tOrigTitle"></div>
+            <div class="ohash" id="tOrigHash"></div>
+            <div class="otags" id="tOrigTags"></div>
+            <div class="opermits" id="tOrigPermits"></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="tTitle">Title of the derivative</label>
+          <input type="text" id="tTitle" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="tSummary">Summary</label>
+          <textarea id="tSummary" rows="2"></textarea>
+        </div>
+        <div class="field">
+          <label for="tBody">Content</label>
+          <textarea id="tBody" rows="9" spellcheck="true"></textarea>
+          <div class="hint">Starts as the original's body. Edit it into the derivative: a summary, a translation, an annotated copy.</div>
+        </div>
+        <div class="warnnote" id="tBlockWarn" hidden>The content contains a KNOBE payload block. The sealed file would carry more than one block and report <code>body_verified: omitted</code>.</div>
+        <div class="row2">
+          <div class="field">
+            <label for="tType">Content type of the derivative</label>
+            <select id="tType">
+              <option value="adaptation" selected>adaptation</option>
+              <option value="compression">compression</option>
+              <option value="annotation">annotation</option>
+              <option value="translation">translation</option>
+              <option value="synthesis">synthesis</option>
+              <option value="original">original</option>
+              <option value="seed">seed</option>
+              <option value="collection">collection</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="tAuthor">Author of the derivative</label>
+            <input type="text" id="tAuthor" autocomplete="name">
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="tLicense">License</label>
+            <input type="text" id="tLicense" list="licenseList" autocomplete="off">
+            <div class="hint">Prefilled from the original. The original's license governs whether a derivative is authorized; the seal does not grant it.</div>
+          </div>
+          <div class="field">
+            <label for="tPrivacy">Privacy level</label>
+            <select id="tPrivacy">
+              <option value="public">public</option>
+              <option value="internal">internal</option>
+              <option value="sensitive">sensitive</option>
+              <option value="restricted">restricted</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="btnrow">
+          <button type="button" class="btn" id="tSealBtn">Seal the derivative</button>
+        </div>
+        <div class="errmsg" id="tSealErr" role="alert" hidden></div>
+
+        <div class="sealres" id="tRes" tabindex="-1" aria-live="polite" hidden>
+          <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="tResText"></span></div>
+          <div class="sbody">
+            <div class="hashline" id="tResHash"></div>
+            <div class="chainline" id="tResChain"></div>
+            <div class="fname">
+              <label for="tFileName">File name</label>
+              <input type="text" id="tFileName" autocomplete="off" spellcheck="false">
+            </div>
+            <div class="btnrow">
+              <button type="button" class="btn" id="tDownload">Download .knobe.md</button>
+              <button type="button" class="btn ghost" id="tCopy">Copy file text</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="explain">
+      <h2>What sealing records</h2>
+      <p>Sealing assembles your declared fields into a payload, computes a SHA-256 hash over its canonical form, and stores both inside the file. Anyone can later recompute the hash and see whether the sealed record changed. A match confirms integrity, not truth: it does not establish that the content is accurate, that the declared author wrote it, or that a use is authorized. The verdict vocabulary is the protocol's four-state model; the <a class="inline" href="/lens">Lens page</a> describes each state, and the <a class="inline" href="/spec">specification</a> defines the algorithm.</p>
+      <h2>What Studio keeps</h2>
+      <p>Nothing. Files exist in this page's memory until you download them. There is no account, no draft storage, and no history; reloading the page clears everything. Studio's engine, <a class="inline" href="/knobe-core.js">knobe-core.js</a>, is published on this site and its verdict parity with <code>lens.py</code> is documented on the <a class="inline" href="/implementations">implementations page</a>.</p>
+    </section>
+
+  </div>
+
+<div class="wrap"><nav class="fwd" aria-label="Where to go next">
+    <p class="fwd-why">Sealed in the browser. Take it further:</p>
+    <a class="fwd-link" href="/lens">Verify with the browser Lens →</a>
+    <a class="fwd-link" href="/spec">Read the specification →</a>
+    <a class="fwd-link" href="/downloads">Get lens.py and examples →</a>
+</nav></div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="frow">
+      <div><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 128 128" aria-hidden="true" style="vertical-align:-3px;margin-right:5px"><defs><radialGradient id="kg" cx="50%" cy="40%"><stop offset="0%" stop-color="#fff" stop-opacity=".5"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs><rect width="128" height="128" rx="24" fill="#7c3aed"/><rect width="128" height="128" rx="24" fill="url(#kg)" opacity=".2"/><g transform="translate(64,64)" fill="#fff"><rect x="-16" y="-42" width="22" height="84" rx="3"/><path d="M6-22L6-10 32-42 46-34 20-2 8-2Z"/><path d="M6 22L6 10 32 42 46 34 20 2 8 2Z"/><circle cx="14" cy="0" r="13" fill="#7c3aed"/></g></svg>KNOBE Protocol v1 · CC BY 4.0<br>David Kyle · University of California, Davis · an independent open protocol, not a UC Davis product or endorsement<br><a href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> <a href="https://linkedin.com/in/david-kyle-969b7812" class="social-icon" aria-label="LinkedIn" title="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a><a href="https://github.com/KnobeOne/knobe-protocol" class="social-icon" aria-label="GitHub" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg></a></div>
+    </div>
+  </div>
+</footer>
+
+<script type="module">
+import { createKnobe, transformKnobe, verify, read, permits, safe } from '/knobe-core.js';
+
+const $ = (id) => document.getElementById(id);
+
+// ---- engine availability ----
+const engineOk = typeof crypto !== 'undefined' && !!crypto.subtle;
+if (engineOk) $('enginefail').remove();
+else { $('sealBtn').disabled = true; $('tSealBtn').disabled = true; }
+
+// ---- small utilities ----
+const line = (v) => String(v || '').replace(/[\r\n]+/g, ' ').trim();
+const linesToArray = (v) => String(v || '').split(/\r?\n/).map(s => s.trim()).filter(Boolean);
+const localToday = () => {
+  const d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+};
+const slugify = (title) => {
+  const s = String(title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 60).replace(/-+$/g, '');
+  return (s || 'untitled') + '.knobe.md';
+};
+const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+const BEGIN = '-----BEGIN KNOBE B64-----';
+
+function download(text, name) {
+  const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name || 'untitled.knobe.md';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+}
+async function copyText(text, btn) {
+  try { await navigator.clipboard.writeText(text); flashBtn(btn, 'Copied'); }
+  catch { flashBtn(btn, 'Copy failed'); }
+}
+function flashBtn(btn, msg) {
+  const old = btn.textContent; btn.textContent = msg;
+  setTimeout(() => { btn.textContent = old; }, 1400);
+}
+function readFileAsText(file) {
+  return new Promise((resolve, reject) => {
+    const r = new FileReader();
+    r.onload = () => resolve(String(r.result));
+    r.onerror = () => reject(new Error('The file could not be read.'));
+    r.readAsText(file);
+  });
+}
+
+// ---- panel switcher ----
+const tabs = [$('tab-create'), $('tab-verify'), $('tab-transform')];
+const panels = { 'tab-create': $('panel-create'), 'tab-verify': $('panel-verify'), 'tab-transform': $('panel-transform') };
+function selectTab(tab) {
+  tabs.forEach(t => {
+    const on = t === tab;
+    t.setAttribute('aria-selected', on ? 'true' : 'false');
+    t.tabIndex = on ? 0 : -1;
+    panels[t.id].hidden = !on;
+  });
+  tab.focus();
+}
+tabs.forEach(t => {
+  t.addEventListener('click', () => selectTab(t));
+  t.addEventListener('keydown', (e) => {
+    const i = tabs.indexOf(t);
+    if (e.key === 'ArrowRight') { e.preventDefault(); selectTab(tabs[(i + 1) % tabs.length]); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); selectTab(tabs[(i + 2) % tabs.length]); }
+  });
+});
+
+// ---- attribution extra rows ----
+let srcCount = 1;
+$('addSource').addEventListener('click', () => {
+  srcCount += 1;
+  const n = srcCount;
+  const div = document.createElement('div');
+  div.className = 'srcrow';
+  div.innerHTML =
+    '<div class="srclabel">Source ' + n + '</div>' +
+    '<div class="row2">' +
+      '<div class="field"><label for="srcAuthor' + n + '">Author</label><input type="text" id="srcAuthor' + n + '" autocomplete="off"></div>' +
+      '<div class="field"><label for="srcContribution' + n + '">Contribution</label><input type="text" id="srcContribution' + n + '" autocomplete="off"></div>' +
+    '</div>' +
+    '<div class="row2">' +
+      '<div class="field"><label for="srcRole' + n + '">Role</label><input type="text" id="srcRole' + n + '" autocomplete="off"></div>' +
+      '<div class="field"><label class="checkline" style="margin-top:28px"><input type="checkbox" id="srcRights' + n + '"> <span>rights_bearing: true</span></label></div>' +
+    '</div>' +
+    '<div class="rowbtns"><button type="button" class="linkbtn rmSource">Remove this source</button></div>';
+  div.querySelector('.rmSource').addEventListener('click', () => { div.remove(); schedulePreview(); });
+  $('extraSources').appendChild(div);
+});
+
+// ---- collect the Create form ----
+function collectCreate() {
+  const fields = {};
+  const title = line($('cTitle').value);
+  if (title) fields.title = title;
+  const summary = $('cSummary').value.trim();
+  if (summary) fields.summary = summary;
+  fields.content_type = $('cType').value;
+  fields.created_date = $('cDate').value || localToday();
+  const lic = line($('cLicense').value);
+  if (lic) fields.license = lic;
+  fields.privacy_level = $('cPrivacy').value;
+  fields.quarantine_status = $('cQuarantine').value;
+
+  const sources = [];
+  const s1 = { author: line($('cAuthor').value) || 'Anonymous', contribution: line($('cContribution1').value) || 'author' };
+  const role1 = line($('cRole1').value);
+  if (role1) s1.role = role1;
+  if ($('cRights1').checked) s1.rights_bearing = true;
+  sources.push(s1);
+  $('extraSources').querySelectorAll('.srcrow').forEach(row => {
+    const inputs = row.querySelectorAll('input');
+    const author = line(inputs[0].value);
+    const contribution = line(inputs[1].value);
+    if (!author && !contribution) return;
+    const s = { author: author || 'Anonymous', contribution: contribution || 'contributor' };
+    const role = line(inputs[2].value);
+    if (role) s.role = role;
+    if (inputs[3].checked) s.rights_bearing = true;
+    sources.push(s);
+  });
+  const attribution = { sources };
+  if ($('cGoodFaith').checked) attribution.good_faith_declaration = true;
+  fields.attribution = attribution;
+
+  const fl = {};
+  const rep = line($('cRepresents').value); if (rep) fl.represents = rep;
+  const tr = line($('cTrustAs').value); if (tr) fl.trust_as = tr;
+  const dni = linesToArray($('cDoNotInfer').value); if (dni.length) fl.do_not_infer = dni;
+  if (Object.keys(fl).length) fields.fidelity_limits = fl;
+
+  const uc = {};
+  const perm = linesToArray($('cPermitted').value); if (perm.length) uc.permitted = perm;
+  const pres = linesToArray($('cPreservations').value); if (pres.length) uc.requested_preservations = pres;
+  const cn = line($('cConsentNote').value); if (cn) uc.consent_note = cn;
+  if (Object.keys(uc).length) fields.use_conditions = uc;
+
+  const lang = line($('cLanguage').value); if (lang) fields.language = lang;
+  const tags = String($('cTags').value || '').split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+  if (tags.length) fields.tags = tags;
+
+  return { fields, body: $('cContent').value, author: null };
+}
+
+// ---- templates ----
+const TEMPLATES = {
+  blank: {},
+  instructor: {
+    content_type: 'original', license: 'All rights reserved', privacy: 'internal', quarantine: 'trusted',
+    contribution1: 'author of the assigned reading', role1: 'instructor', rights1: true, goodFaith: true,
+    permitted: 'course reading and discussion\nstudent citation in course assignments',
+    preservations: 'do not redistribute outside the enrolled course group',
+    tags: 'assigned-reading',
+  },
+  student: {
+    content_type: 'original', license: 'All rights reserved', privacy: 'internal', quarantine: 'quarantine',
+    contribution1: 'wrote all prose in this reflection', role1: 'student_author', rights1: true, goodFaith: true,
+    represents: 'a first-draft course reflection',
+    trustAs: "the student's own thinking at submission time",
+    doNotInfer: 'that this is a polished or final position\nthat AI contributed beyond anything disclosed in attribution',
+  },
+  researcher: {
+    content_type: 'original', license: 'All rights reserved', privacy: 'sensitive', quarantine: 'quarantine',
+    contribution1: 'interview instrument and transcription', role1: 'researcher', goodFaith: true,
+    represents: 'a verbatim transcript of the recorded session',
+    trustAs: 'the words as transcribed; transcription may contain errors',
+    doNotInfer: 'speaker intent beyond the transcribed words\nthat the transcript was independently checked against the recording',
+    tags: 'interview, transcript',
+    extraSource: { author: 'Participant (pseudonym)', contribution: 'interview responses', rights: true },
+  },
+  enterprise: {
+    content_type: 'compression', license: 'All rights reserved', privacy: 'internal', quarantine: 'quarantine',
+    contribution1: 'wrote the summary from the source policy', role1: 'summary_author', goodFaith: true,
+    represents: 'a condensed summary of the underlying policy',
+    trustAs: 'a starting point to be checked against the full policy text',
+    doNotInfer: 'that this summary overrides the full policy\nthat exceptions and edge cases are fully captured',
+    permitted: 'internal review',
+    preservations: 'keep quarantine status until a review clears it',
+  },
+};
+
+function resetCreateForm() {
+  ['cTitle','cContent','cAuthor','cSummary','cLicense','cContribution1','cRole1','cRepresents','cTrustAs',
+   'cDoNotInfer','cPermitted','cPreservations','cConsentNote','cLanguage','cTags'].forEach(id => { $(id).value = ''; });
+  $('cType').value = 'original';
+  $('cDate').value = localToday();
+  $('cPrivacy').value = 'public';
+  $('cQuarantine').value = 'quarantine';
+  $('cRights1').checked = false;
+  $('cGoodFaith').checked = false;
+  $('extraSources').innerHTML = '';
+  srcCount = 1;
+  $('cRes').hidden = true;
+  $('cErr').hidden = true;
+}
+
+function applyTemplate(name) {
+  resetCreateForm();
+  const t = TEMPLATES[name] || {};
+  if (t.content_type) $('cType').value = t.content_type;
+  if (t.license) $('cLicense').value = t.license;
+  if (t.privacy) $('cPrivacy').value = t.privacy;
+  if (t.quarantine) $('cQuarantine').value = t.quarantine;
+  if (t.contribution1) $('cContribution1').value = t.contribution1;
+  if (t.role1) $('cRole1').value = t.role1;
+  if (t.rights1) $('cRights1').checked = true;
+  if (t.goodFaith) $('cGoodFaith').checked = true;
+  if (t.represents) $('cRepresents').value = t.represents;
+  if (t.trustAs) $('cTrustAs').value = t.trustAs;
+  if (t.doNotInfer) $('cDoNotInfer').value = t.doNotInfer;
+  if (t.permitted) $('cPermitted').value = t.permitted;
+  if (t.preservations) $('cPreservations').value = t.preservations;
+  if (t.tags) $('cTags').value = t.tags;
+  if (t.extraSource) {
+    $('addSource').click();
+    const row = $('extraSources').lastElementChild;
+    const inputs = row.querySelectorAll('input');
+    inputs[0].value = t.extraSource.author;
+    inputs[1].value = t.extraSource.contribution;
+    if (t.extraSource.rights) inputs[3].checked = true;
+  }
+  schedulePreview();
+}
+document.querySelectorAll('input[name="tpl"]').forEach(r => {
+  r.addEventListener('change', () => applyTemplate(r.value));
+});
+
+// ---- live preview ----
+let previewToken = 0;
+async function buildPreview() {
+  if (!engineOk) return;
+  const token = ++previewToken;
+  try {
+    const r = await createKnobe(collectCreate());
+    if (token !== previewToken) return;
+    $('createPreview').textContent = r.text;
+    $('previewNote').textContent = 'Self-check: ' + r.report.state + ' · ' + r.report.conformance + '. The preview is the exact file the Seal button produces.';
+  } catch (e) {
+    if (token !== previewToken) return;
+    $('createPreview').textContent = '';
+    $('previewNote').textContent = 'The file cannot be assembled yet: ' + e.message;
+  }
+}
+const schedulePreview = debounce(buildPreview, 350);
+$('panel-create').addEventListener('input', () => {
+  $('cBlockWarn').hidden = !$('cContent').value.includes(BEGIN);
+  schedulePreview();
+});
+
+// ---- seal (Create) ----
+let createResult = null;
+$('sealBtn').addEventListener('click', async () => {
+  $('cErr').hidden = true;
+  try {
+    createResult = await createKnobe(collectCreate());
+    $('cResText').textContent = 'Sealed. Self-check: ' + createResult.report.state + ' · ' + createResult.report.conformance + '.';
+    $('cResHash').textContent = 'payload_hash ' + createResult.payloadHash;
+    $('cFileName').value = slugify(createResult.payload.title);
+    $('cRes').hidden = false;
+    $('cRes').focus();
+  } catch (e) {
+    $('cErr').textContent = 'Sealing did not complete: ' + e.message;
+    $('cErr').hidden = false;
+  }
+});
+$('resetBtn').addEventListener('click', () => {
+  resetCreateForm();
+  document.querySelector('input[name="tpl"][value="blank"]').checked = true;
+  $('createPreview').textContent = '';
+  $('previewNote').textContent = 'Updates as you type. The preview is the exact file the Seal button produces, including its hash.';
+});
+$('cDownload').addEventListener('click', () => { if (createResult) download(createResult.text, line($('cFileName').value) || 'untitled.knobe.md'); });
+$('cCopy').addEventListener('click', (e) => { if (createResult) copyText(createResult.text, e.currentTarget); });
+
+// ---- verify rendering ----
+const STATE_META = {
+  'verified': { cls: 'v-ok', sym: '✓', label: 'Verified. The sealed record is intact.' },
+  'verified-body-modified': { cls: 'v-warn', sym: '!', label: 'Verified, body modified. The sealed payload is intact; the readable body changed.' },
+  'failed': { cls: 'v-bad', sym: '✕', label: 'Failed. The recomputed hash does not match the stored one.' },
+  'unreadable': { cls: 'v-neutral', sym: '?', label: 'Unreadable. No valid payload could be parsed.' },
+};
+function tag(text, cls) {
+  const s = document.createElement('span');
+  s.className = 'tag ' + cls;
+  s.textContent = text;
+  return s;
+}
+function rrow(dl, label, value, mono) {
+  const div = document.createElement('div'); div.className = 'rrow';
+  const dt = document.createElement('dt'); dt.textContent = label;
+  const dd = document.createElement('dd'); dd.textContent = value;
+  if (mono) dd.className = 'mono';
+  div.appendChild(dt); div.appendChild(dd); dl.appendChild(div);
+}
+function renderReport(container, report, sourceName) {
+  container.textContent = '';
+  const meta = STATE_META[report.state] || STATE_META.unreadable;
+
+  const verdict = document.createElement('div');
+  verdict.className = 'verdict ' + meta.cls;
+  const sym = document.createElement('div'); sym.className = 'vsym'; sym.setAttribute('aria-hidden', 'true'); sym.textContent = meta.sym;
+  const vb = document.createElement('div');
+  const vl = document.createElement('div'); vl.className = 'vlabel'; vl.textContent = meta.label;
+  vb.appendChild(vl);
+  if (sourceName) { const vf = document.createElement('div'); vf.className = 'vfile'; vf.textContent = sourceName; vb.appendChild(vf); }
+  verdict.appendChild(sym); verdict.appendChild(vb);
+  container.appendChild(verdict);
+
+  const tags = document.createElement('div'); tags.className = 'tagsrow';
+  tags.appendChild(tag('integrity: ' + report.state, meta.cls === 'v-ok' ? 'ok' : meta.cls === 'v-warn' ? 'warn' : meta.cls === 'v-bad' ? 'bad' : 'neutral'));
+  const confCls = report.conformance === 'valid' ? 'ok' : report.conformance === 'warnings' ? 'warn' : 'bad';
+  tags.appendChild(tag('conformance: ' + report.conformance, confCls));
+  if (report.body_verified) {
+    const bvCls = report.body_verified === 'yes' ? 'ok' : report.body_verified === 'modified' ? 'warn' : 'neutral';
+    tags.appendChild(tag('body: ' + report.body_verified, bvCls));
+  }
+  container.appendChild(tags);
+
+  const dl = document.createElement('dl'); dl.className = 'rgrid';
+  const title = report.payload && typeof report.payload.title === 'string' ? safe(report.payload.title, 160) : null;
+  if (title) rrow(dl, 'title', title, false);
+  if (report.stored) rrow(dl, 'stored hash', report.stored, true);
+  if (report.state === 'failed' && report.computed) rrow(dl, 'computed hash', report.computed, true);
+  if (report.multiple_blocks) rrow(dl, 'payload blocks', report.block_count + ' found; block ' + report.block_used + ' evaluated', false);
+  if (report.reason) rrow(dl, 'reason', report.reason, false);
+  if (dl.children.length) container.appendChild(dl);
+
+  if (report.conformance_issues && report.conformance_issues.length) {
+    const ul = document.createElement('ul'); ul.className = 'issues';
+    report.conformance_issues.forEach(issue => {
+      const li = document.createElement('li'); li.textContent = issue; ul.appendChild(li);
+    });
+    container.appendChild(ul);
+  }
+
+  const notes = document.createElement('div'); notes.className = 'notes';
+  const p1 = document.createElement('p');
+  p1.textContent = 'A verified result confirms integrity, not truth: the sealed record is unchanged, whether or not its contents are accurate.';
+  notes.appendChild(p1);
+  if ((report.conformance_issues || []).some(s => s.includes('bare numeric'))) {
+    const p2 = document.createElement('p');
+    p2.textContent = 'The in-page browser Lens declines a hash verdict for bare-numeric payloads; this verdict is computed with the same canonicalization as lens.py.';
+    notes.appendChild(p2);
+  }
+  container.appendChild(notes);
+
+  container.hidden = false;
+  container.focus();
+}
+
+// ---- input wiring helper (drop + choose + paste) ----
+function wireIntake(dropId, chooseId, fileId, toggleId, wrapId, areaId, goId, errId, onText) {
+  const drop = $(dropId);
+  const showErr = (msg) => { $(errId).textContent = msg; $(errId).hidden = false; };
+  const clearErr = () => { $(errId).hidden = true; };
+  const handleText = async (text, name) => {
+    clearErr();
+    try { await onText(text, name); }
+    catch (e) { showErr(e.message); }
+  };
+  drop.addEventListener('dragover', (e) => { e.preventDefault(); drop.classList.add('drag'); });
+  drop.addEventListener('dragleave', () => drop.classList.remove('drag'));
+  drop.addEventListener('drop', async (e) => {
+    e.preventDefault(); drop.classList.remove('drag');
+    const f = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (!f) return;
+    try { handleText(await readFileAsText(f), f.name); } catch (err) { showErr(err.message); }
+  });
+  $(chooseId).addEventListener('click', () => $(fileId).click());
+  $(fileId).addEventListener('change', async () => {
+    const f = $(fileId).files && $(fileId).files[0];
+    if (!f) return;
+    try { handleText(await readFileAsText(f), f.name); } catch (err) { showErr(err.message); }
+    $(fileId).value = '';
+  });
+  $(toggleId).addEventListener('click', () => {
+    const wrap = $(wrapId);
+    const open = wrap.classList.toggle('open');
+    $(toggleId).setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) $(areaId).focus();
+  });
+  $(goId).addEventListener('click', () => {
+    const text = $(areaId).value;
+    if (!text.trim()) { showErr('Paste the full text of a .knobe.md file first.'); return; }
+    handleText(text, 'pasted text');
+  });
+}
+
+// ---- verify panel ----
+wireIntake('vDrop', 'vChoose', 'vFile', 'vPasteToggle', 'vPasteWrap', 'vPasteArea', 'vPasteBtn', 'vErr',
+  async (text, name) => {
+    const report = await verify(text);
+    renderReport($('vResult'), report, name);
+  });
+
+// ---- transform panel ----
+let tOriginal = null;
+wireIntake('tDrop', 'tChoose', 'tFile', 'tPasteToggle', 'tPasteWrap', 'tPasteArea', 'tPasteBtn', 'tErr',
+  async (text, name) => {
+    const report = await verify(text);
+    if (report.state !== 'verified' && report.state !== 'verified-body-modified') {
+      $('tWork').hidden = true;
+      throw new Error('Cannot derive from this file (status: ' + report.state + '). The original must verify first.');
+    }
+    const rd = await read(text);
+    tOriginal = { text, report };
+    $('tOrigTitle').textContent = typeof report.payload.title === 'string' ? safe(report.payload.title, 160) : 'Untitled';
+    $('tOrigHash').textContent = 'payload_hash ' + report.stored;
+    const tagsEl = $('tOrigTags');
+    tagsEl.textContent = '';
+    tagsEl.appendChild(tag('integrity: ' + report.state, report.state === 'verified' ? 'ok' : 'warn'));
+    tagsEl.appendChild(tag('conformance: ' + report.conformance, report.conformance === 'valid' ? 'ok' : report.conformance === 'warnings' ? 'warn' : 'bad'));
+    const parentCount = Array.isArray(report.payload.parents) ? report.payload.parents.length : 0;
+    tagsEl.appendChild(tag('parents: ' + parentCount, 'neutral'));
+    const p = permits(report, 'transform');
+    const verdictWord = p.allowed === true ? 'allowed' : p.allowed === 'conditional' ? 'conditional' : 'not permitted';
+    let permitsLine = 'The sealed terms evaluate "transform" as ' + verdictWord + '.';
+    if (p.obligations && p.obligations.length) permitsLine += ' Obligations: ' + p.obligations.join('; ') + '.';
+    if (p.allowed === false) permitsLine += ' Studio will still seal a derivative; authorization is a matter of the sealed terms, not the tool.';
+    $('tOrigPermits').textContent = permitsLine;
+    $('tBody').value = (rd.body || '').replace(/^\n+/, '');
+    $('tLicense').value = typeof report.payload.license === 'string' ? report.payload.license : '';
+    if (typeof report.payload.privacy_level === 'string' && ['public','internal','sensitive','restricted'].includes(report.payload.privacy_level)) {
+      $('tPrivacy').value = report.payload.privacy_level;
+    }
+    $('tTitle').value = '';
+    $('tSummary').value = '';
+    $('tRes').hidden = true;
+    $('tSealErr').hidden = true;
+    $('tWork').hidden = false;
+    $('tBlockWarn').hidden = !$('tBody').value.includes(BEGIN);
+    $('tTitle').focus();
+  });
+
+$('tBody').addEventListener('input', () => { $('tBlockWarn').hidden = !$('tBody').value.includes(BEGIN); });
+
+let transformResult = null;
+$('tSealBtn').addEventListener('click', async () => {
+  if (!tOriginal) return;
+  $('tSealErr').hidden = true;
+  try {
+    const fields = {};
+    const title = line($('tTitle').value); if (title) fields.title = title;
+    const summary = $('tSummary').value.trim(); if (summary) fields.summary = summary;
+    fields.content_type = $('tType').value;
+    fields.created_date = localToday();
+    const lic = line($('tLicense').value); if (lic) fields.license = lic;
+    fields.privacy_level = $('tPrivacy').value;
+    const author = line($('tAuthor').value) || null;
+    transformResult = await transformKnobe(tOriginal.text, { fields, body: $('tBody').value, author });
+    const parents = transformResult.payload.parents || [];
+    const last = parents[parents.length - 1] || {};
+    const match = last.payload_hash === tOriginal.report.stored;
+    $('tResText').textContent = 'Sealed. Self-check: ' + transformResult.report.state + ' · ' + transformResult.report.conformance + '.';
+    $('tResHash').textContent = 'payload_hash ' + transformResult.payloadHash;
+    const chain = $('tResChain');
+    chain.textContent = '';
+    const lbl = document.createElement('span');
+    lbl.textContent = 'Declared parent: ';
+    const codeEl = document.createElement('code');
+    codeEl.textContent = String(last.payload_hash || '');
+    const mark = document.createElement('span');
+    mark.className = match ? 'cok' : 'cbad';
+    mark.textContent = match ? ' matches the loaded original.' : ' does not match the loaded original.';
+    chain.appendChild(lbl); chain.appendChild(codeEl); chain.appendChild(mark);
+    $('tFileName').value = slugify(transformResult.payload.title);
+    $('tRes').hidden = false;
+    $('tRes').focus();
+  } catch (e) {
+    $('tSealErr').textContent = 'Sealing did not complete: ' + e.message;
+    $('tSealErr').hidden = false;
+  }
+});
+$('tDownload').addEventListener('click', () => { if (transformResult) download(transformResult.text, line($('tFileName').value) || 'untitled.knobe.md'); });
+$('tCopy').addEventListener('click', (e) => { if (transformResult) copyText(transformResult.text, e.currentTarget); });
+
+// ---- init ----
+$('cDate').value = localToday();
+buildPreview();
+</script>
+</body>
+</html>
