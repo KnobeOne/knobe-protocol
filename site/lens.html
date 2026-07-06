@@ -865,7 +865,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     if (r.state === "verified" || r.state === "verified-body-modified"){
       var n1 = el('p');
       n1.appendChild(el('span','strong','Integrity verified. '));
-      n1.appendChild(document.createTextNode('A match proves the sealed record is unchanged, not that its contents are true, safe, or appropriate. Inspect before trusting.'));
+      n1.appendChild(document.createTextNode('See "What the verdict means" below for what this does and does not tell you. Inspect before trusting.'));
       notes.appendChild(n1);
     }
     if (r.state === "verified-body-modified"){

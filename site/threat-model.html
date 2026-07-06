@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNOBE — Threat model</title>
-<meta name="description" content="What KNOBE Protocol v1 defends against, what it does not, and the boundary between the two. A precise threat model articulation for security-focused audiences.">
+<meta name="description" content="What KNOBE Protocol v1 makes evident, what it does not, and the boundary between the two, for security-focused audiences.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -101,11 +101,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE — Threat model">
-<meta property="og:description" content="What KNOBE Protocol v1 defends against, what it does not, and the boundary between the two. A precise threat model for security-focused audiences.">
+<meta property="og:description" content="What KNOBE Protocol v1 makes evident, what it does not, and the boundary between the two, for security-focused audiences.">
 <meta property="og:url" content="https://knobe.org/threat-model">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE — Threat model">
-<meta name="twitter:description" content="What KNOBE Protocol v1 defends against, what it does not, and the boundary between the two. A precise threat model for security-focused audiences.">
+<meta name="twitter:description" content="What KNOBE Protocol v1 makes evident, what it does not, and the boundary between the two, for security-focused audiences.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -170,12 +170,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h2>Where KNOBE provides value</h2>
 
-    <p>The protocol's high-value domain is the space where most contemporary knowledge loss actually happens: not adversarial forgery, but <em class="kw">entropy</em>. Context is stripped away as artifacts move through pipelines, summarization tools, copy-paste workflows, and AI ingestion systems. The protocol's primary opponent is not a malicious actor; it is the loss of interpretive context that occurs automatically every time a document is reduced, restructured, or repurposed.</p>
+    <p>The protocol's high-value domain is context loss through <em class="kw">entropy</em>, not adversarial forgery. Context is stripped away as artifacts move through pipelines, summarization tools, copy-paste workflows, and AI ingestion systems. The protocol's primary opponent is not a malicious actor; it is the loss of interpretive context that occurs automatically every time a document is reduced, restructured, or repurposed.</p>
 
     <div class="scenario high">
       <div class="label">Maximally adversarial: high value</div>
       <h3>Entropy and the lossy middleman</h3>
-      <p>KNOBE v1.0 makes context stripping evident. The primary "adversary" is an automated pipeline: a RAG scraper that drops metadata, an LLM ingestion engine that summarizes without provenance, a corporate wiki that flattens attribution, a copy-paste action that detaches a document from its source. By sealing context (fidelity limits, attribution, quarantine status, accessibility lineage) and binding it to the text with a mathematical hash, KNOBE provides a tamper-evident horizon.</p>
+      <p>KNOBE v1.0 makes context stripping evident. The primary "adversary" is an automated pipeline: a RAG scraper that drops metadata, an LLM ingestion engine that summarizes without provenance, a corporate wiki that flattens attribution, a copy-paste action that detaches a document from its source. By sealing context (fidelity limits, attribution, quarantine status, accessibility lineage) and binding it to the text with a mathematical hash, KNOBE makes any subsequent tampering evident.</p>
       <p>It proves what context was attached to the text <em>at the moment of sealing</em>. Downstream actors who want to misuse the text must now actively strip the cryptographic block, leaving an auditable trail of destruction rather than passively benefiting from context that has already evaporated.</p>
     </div>
 
@@ -232,7 +232,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <ul>
       <li><strong>The identity forger.</strong> Anyone can declare any attribution and seal it. Identity verification requires a layer above the open protocol.</li>
       <li><strong>The original liar.</strong> A document sealed with a lie is sealed with a lie. The protocol preserves the lie exactly; it does not detect untruth.</li>
-      <li><strong>The metadata stripper or careless intermediary.</strong> A receiver who deletes the payload block (or a human who copy-pastes only the human-readable markdown body and leaves the Base64 block behind) produces ordinary text that no longer verifies. This is a property of any portable plain-text format. The defense is that the seal exists for anyone who chooses to check, including future AI agents that do. Automated pipelines that move whole files preserve the payload; manual GUI interactions that select only visible text do not.</li>
+      <li><strong>The metadata stripper or careless intermediary.</strong> A receiver who deletes the payload block (or a human who copy-pastes only the human-readable markdown body and leaves the Base64 block behind) produces ordinary text that no longer verifies. This is a property of any portable plain-text format. The seal itself is unaffected: it remains present and checkable by any tool, human, or future AI agent that looks for it. Automated pipelines that move whole files preserve the payload; manual GUI interactions that select only visible text do not.</li>
       <li><strong>The fail-open consumer.</strong> Most current consumers of <code>.knobe.md</code> files (text editors, LLMs, web tools) do not run the verifier. The seal does not enforce itself. Verification is the receiver's choice and responsibility.</li>
       <li><strong>The unverified parent claim.</strong> An adversary can list arbitrary strings as parent hashes. The lie is sealed and detectable on traversal, but the open protocol layer does not perform the traversal itself.</li>
     </ul>
@@ -247,7 +247,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>Identity verification requires a PKI. Timestamp proof requires anchoring. KNOBE v1 claims integrity of declared context, and no more. Receivers who need more can compose it with infrastructure that provides more; receivers who need only what it provides can use it alone.</p>
 
-    <p>For audiences accustomed to PKI-grounded hard security, this is a different category of tool. It is the right category for the problem most knowledge work actually has, which is not adversarial forgery but the silent erosion of interpretive context as artifacts move through systems that were not built to preserve it.</p>
+    <p>For audiences accustomed to PKI-grounded hard security, this is a different category of tool: one that verifies integrity of declared context rather than identity or truth.</p>
 
   </div>
 
