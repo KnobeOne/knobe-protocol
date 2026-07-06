@@ -161,11 +161,14 @@ footer a:hover{color:var(--moss)}
     <table class="tool-table">
       <tr><th>Tool</th><th>What it does</th></tr>
       <tr><td>knobe_verify</td><td>Integrity and conformance verdict for a file or pasted text: the protocol's four states, a separate conformance axis with each issue listed, both hashes, and <code>lens.py</code>'s exit code.</td></tr>
-      <tr><td>knobe_read</td><td>Parsed contents with the sealed conditions ahead of the body: quarantine status, privacy level, license, use conditions, fidelity limits, and namespaced extension terms, then attribution, metadata, and the markdown body.</td></tr>
+      <tr><td>knobe_read</td><td>An obligations-first read: the first content block is the sealed-context preamble (integrity verdict, provenance, license, trust posture, obligations), so an agent reads the conditions before the content. The second block carries the payload metadata and markdown body.</td></tr>
       <tr><td>knobe_create</td><td>Assemble and seal a new object from fields and a body. The sealed file self-verifies before it is returned, and can be written to a path.</td></tr>
       <tr><td>knobe_transform</td><td>Seal a derivative of a verified original. The derivative's <code>parents</code> field records the original's title and payload hash automatically; a broken seal cannot anchor a chain.</td></tr>
       <tr><td>knobe_permits</td><td>Evaluate a proposed action (summarize, excerpt, translate, train, redistribute, publish, ...) against the object's own sealed terms.</td></tr>
     </table>
+
+    <h2>Resources and a prompt</h2>
+    <p>The 31-fixture corpus ships with the package and is browsable as MCP resources: <code>knobe://examples/&#8230;</code> (sealed real-world KNOBEs), <code>knobe://vectors/&#8230;</code> (conformance and adversarial vectors with known verdicts), and <code>knobe://guide</code> (orientation for agents). A <code>knobe-guarded-summarize</code> prompt encodes the basic procedure: verify, consult the sealed terms, then act, qualify, or decline with a cited clause.</p>
 
     <h2>What knobe_permits returns</h2>
     <p>The evaluation reads the sealed record itself: quarantine status, privacy level, license posture, and any namespaced extension terms the author declared. The verdict is <code>true</code>, <code>false</code>, or <code>"conditional"</code>, with the obligations that apply and a <code>basis</code> list citing each sealed field that produced it:</p>

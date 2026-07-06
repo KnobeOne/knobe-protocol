@@ -1,9 +1,9 @@
 // Smoke test: full MCP client/server round-trip over the in-memory transport,
-// exercising all five tools against the published corpus. Exits non-zero on
-// any failure. Also fails if the vendored knobe-core.js drifts from the
-// repository copy.
+// exercising the five tools, the resource corpus, and the prompt. Exits
+// non-zero on any failure. Also fails if the vendored engine or fixtures
+// drift from the repository copies.
 import assert from "node:assert/strict";
-import { readFileSync, mkdtempSync, rmSync } from "node:fs";
+import { readFileSync, readdirSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { tmpdir } from "node:os";
@@ -12,7 +12,8 @@ import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import { buildServer } from "../server.mjs";
 
 const HERE = dirname(fileURLToPath(import.meta.url));
-const REPO = join(HERE, "..", "..");
+const PKG = join(HERE, "..");
+const REPO = join(PKG, "..");
 const VEC = (f) => join(REPO, "test-vectors", f);
 const SITE = (f) => join(REPO, "site", f);
 
@@ -23,21 +24,36 @@ function ok(label, cond) {
   console.log(`ok - ${label}`);
 }
 
-// --- engine drift gate ---
-const vendored = readFileSync(join(HERE, "..", "knobe-core.js"), "utf-8");
-const canonical = readFileSync(join(REPO, "knobe-core.js"), "utf-8");
-ok("vendored knobe-core.js is byte-identical to the repository copy", vendored === canonical);
+// --- drift gates: vendored engine + fixtures must match the repo ---
+ok("vendored knobe-core.js is byte-identical to the repository copy",
+  readFileSync(join(PKG, "knobe-core.js"), "utf-8") === readFileSync(join(REPO, "knobe-core.js"), "utf-8"));
+
+const fixturePairs = [
+  [join(PKG, "fixtures", "examples"), join(REPO, "examples")],
+  [join(PKG, "fixtures", "vectors"), join(REPO, "test-vectors")],
+  [join(PKG, "fixtures", "vectors", "adversarial"), join(REPO, "test-vectors", "adversarial")],
+];
+let fixtureCount = 0, fixtureDrift = 0;
+for (const [pkgDir, repoDir] of fixturePairs) {
+  for (const f of readdirSync(pkgDir)) {
+    if (!f.endsWith(".knobe.md")) continue;
+    fixtureCount += 1;
+    if (readFileSync(join(pkgDir, f), "utf-8") !== readFileSync(join(repoDir, f), "utf-8")) fixtureDrift += 1;
+  }
+}
+ok(`all ${fixtureCount} vendored fixtures are byte-identical to the repository corpus (31 expected)`,
+  fixtureCount === 31 && fixtureDrift === 0);
 
 // --- wire up client <-> server in memory ---
-const server = buildServer();
+const server = await buildServer();
 const client = new Client({ name: "smoke", version: "0.0.0" });
 const [ct, st] = InMemoryTransport.createLinkedPair();
 await Promise.all([server.connect(st), client.connect(ct)]);
 
 const call = async (name, args) => {
   const res = await client.callTool({ name, arguments: args });
-  const text = res.content[0].text;
-  return { isError: !!res.isError, data: res.isError ? text : JSON.parse(text) };
+  const blocks = res.content.map((c) => c.text);
+  return { isError: !!res.isError, blocks, json: () => JSON.parse(blocks[blocks.length - 1]) };
 };
 
 // --- tool listing ---
@@ -49,91 +65,137 @@ ok("five tools registered", JSON.stringify(names) ===
 // --- knobe_verify across corpus states ---
 let r = await call("knobe_verify", { file_path: VEC("minimal-valid.knobe.md") });
 ok("verify minimal-valid: verified/valid/exit 0",
-  r.data.state === "verified" && r.data.conformance === "valid" && r.data.lens_py_exit_code === 0);
+  r.json().state === "verified" && r.json().conformance === "valid" && r.json().exit_code === 0);
+ok("verify returns a human-readable verdict line first", r.blocks[0].startsWith("status: verified"));
 
 r = await call("knobe_verify", { file_path: VEC("body-modified.knobe.md") });
-ok("verify body-modified: verified-body-modified", r.data.state === "verified-body-modified" && r.data.body_verified === "modified");
+ok("verify body-modified: verified-body-modified",
+  r.json().state === "verified-body-modified" && r.json().body_verified === "modified");
 
 r = await call("knobe_verify", { file_path: VEC("payload-modified.knobe.md") });
 ok("verify payload-modified: failed with both hashes",
-  r.data.state === "failed" && r.data.stored_hash && r.data.computed_hash && r.data.lens_py_exit_code === 1);
+  r.json().state === "failed" && r.json().stored && r.json().computed && r.json().exit_code === 1);
 
 r = await call("knobe_verify", { file_path: VEC("unreadable.knobe.md") });
-ok("verify unreadable: unreadable/exit 2", r.data.state === "unreadable" && r.data.lens_py_exit_code === 2);
+ok("verify unreadable: unreadable/exit 2", r.json().state === "unreadable" && r.json().exit_code === 2);
 
 r = await call("knobe_verify", { file_path: VEC("numeric-violation.knobe.md") });
 ok("verify numeric-violation: real verdict + conformance invalid",
-  r.data.state === "verified" && r.data.conformance === "invalid");
+  r.json().state === "verified" && r.json().conformance === "invalid");
 
 r = await call("knobe_verify", { text: readFileSync(VEC("minimal-valid.knobe.md"), "utf-8") });
-ok("verify accepts text input", r.data.state === "verified");
+ok("verify accepts text input", r.json().state === "verified");
 
 r = await call("knobe_verify", {});
 ok("verify rejects zero inputs", r.isError);
 
-r = await call("knobe_verify", { file_path: VEC("minimal-valid.knobe.md"), text: "x" });
-ok("verify rejects two inputs", r.isError);
+r = await call("knobe_verify", { file_path: "/nonexistent/nowhere.knobe.md" });
+ok("verify on a missing file returns an unreadable report, not an error",
+  !r.isError && r.json().state === "unreadable");
 
-// --- knobe_read: conditions ahead of body ---
+// --- knobe_read: obligations preamble arrives first ---
 r = await call("knobe_read", { file_path: SITE("knobe-research-interview.knobe.md") });
-ok("read returns integrity + conditions + body",
-  r.data.integrity.state === "verified" && r.data.conditions && typeof r.data.body === "string");
-ok("read surfaces namespaced extension terms",
-  r.data.conditions.extension_terms && Object.keys(r.data.conditions.extension_terms).some((k) => k.startsWith("research:")));
+ok("read's first block is the sealed-context preamble",
+  r.blocks[0].startsWith("=== KNOBE SEALED CONTEXT"));
+ok("read preamble carries the trust posture", r.blocks[0].includes("quarantine_status:"));
+{
+  const data = r.json();
+  ok("read's second block carries verdict + metadata + body",
+    data.verdict.state === "verified" && data.metadata && typeof data.body === "string");
+}
 
-// --- knobe_create: seal, then verify the output through the tool chain ---
+// --- knobe_create ---
 const tmp = mkdtempSync(join(tmpdir(), "knobe-mcp-"));
 const outPath = join(tmp, "created.knobe.md");
 r = await call("knobe_create", {
+  title: "MCP smoke test object",
+  summary: "A fixture sealed through the MCP server's own tool chain.",
   body: "A paragraph sealed through the MCP server.",
-  fields: {
-    title: "MCP smoke test object",
-    license: "CC BY 4.0",
-    spec_version: "9.9",
-    fidelity_limits: { represents: "a test fixture", trust_as: "test data only", do_not_infer: ["anything beyond the test"] },
-  },
+  license: "CC BY 4.0",
+  fidelity_limits: { represents: "a test fixture", trust_as: "test data only", do_not_infer: ["anything beyond the test"] },
+  extra_fields: { spec_version: "9.9" },
   author: "Smoke Test",
   output_path: outPath,
 });
-ok("create seals verified/valid", r.data.self_check.state === "verified" && r.data.self_check.conformance === "valid");
-ok("create wrote the file", r.data.written_to === outPath);
+ok("create seals and reports the hash", !r.isError && r.blocks[0].includes("sealed. payload_hash:"));
+ok("create wrote the file", r.blocks[0].includes("written to:"));
 
 r = await call("knobe_verify", { file_path: outPath });
-ok("created file verifies", r.data.state === "verified" && r.data.conformance === "valid");
+ok("created file verifies as verified/valid", r.json().state === "verified" && r.json().conformance === "valid");
 {
   const raw = readFileSync(outPath, "utf-8");
   const b64 = raw.match(/-----BEGIN KNOBE B64-----\n([\s\S]*?)\n-----END KNOBE B64-----/)[1].replace(/\n/g, "");
   const sealedPayload = JSON.parse(Buffer.from(b64, "base64").toString("utf-8"));
-  ok("caller-supplied spec_version was discarded", sealedPayload.spec_version === "1.0");
+  ok("spec_version injected via extra_fields was discarded", sealedPayload.spec_version === "1.0");
 }
+
+r = await call("knobe_create", { title: "x", summary: "y", output_path: outPath });
+ok("create refuses to overwrite without overwrite: true",
+  r.isError && r.blocks[0].includes("refusing to overwrite"));
+
+r = await call("knobe_create", { title: "Line one\nline two", summary: "s", body: "b" });
+ok("newline in title is sanitized, file still seals", !r.isError && r.blocks[1].includes('title: "Line one line two"'));
 
 // --- knobe_transform: chain from the created file ---
 const derivPath = join(tmp, "derivative.knobe.md");
 r = await call("knobe_transform", {
-  original_file_path: outPath,
+  source_path: outPath,
+  title: "Summary of the smoke test object",
+  summary: "A compression derived through the MCP server.",
+  content_type: "compression",
   body: "A one-line summary of the smoke test object.",
-  fields: { title: "Summary of the smoke test object", content_type: "compression" },
   author: "Smoke Summarizer",
   output_path: derivPath,
 });
-ok("transform seals verified/valid", r.data.self_check.state === "verified" && r.data.self_check.conformance === "valid");
-const createdVerify = await call("knobe_verify", { file_path: outPath });
-ok("declared parent hash equals original stored hash", r.data.declared_parent.payload_hash === createdVerify.data.stored_hash);
+ok("transform seals a derivative", !r.isError && r.blocks[0].includes("sealed derivative"));
+{
+  const raw = readFileSync(derivPath, "utf-8");
+  const b64 = raw.match(/-----BEGIN KNOBE B64-----\n([\s\S]*?)\n-----END KNOBE B64-----/)[1].replace(/\n/g, "");
+  const payload = JSON.parse(Buffer.from(b64, "base64").toString("utf-8"));
+  const createdStored = (await call("knobe_verify", { file_path: outPath })).json().stored;
+  ok("derivative's parents[last] hash equals the original's stored hash",
+    payload.parents[payload.parents.length - 1].payload_hash === createdStored);
+}
 
-r = await call("knobe_transform", { original_file_path: VEC("payload-modified.knobe.md"), body: "x" });
-ok("transform refuses a broken original", r.isError && String(r.data).includes("unverified"));
+r = await call("knobe_transform", { source_path: VEC("payload-modified.knobe.md"), title: "x", summary: "y", body: "b" });
+ok("transform refuses a broken original", r.isError && r.blocks[0].includes("unverified"));
 
 // --- knobe_permits ---
 r = await call("knobe_permits", { file_path: SITE("knobe-research-interview.knobe.md"), action: "redistribute" });
 ok("permits: sensitive interview denies redistribute with cited basis",
-  r.data.allowed === false && Array.isArray(r.data.basis) && r.data.basis.length > 0);
+  r.blocks[0].startsWith("NOT PERMITTED") && r.json().allowed === false && r.json().basis.length > 0);
 
 r = await call("knobe_permits", { file_path: outPath, action: "summarize" });
-ok("permits: quarantined CC BY object evaluates summarize as conditional with obligations",
-  r.data.allowed === "conditional" && r.data.obligations.length > 0);
+ok("permits: quarantined CC BY object is conditional with obligations",
+  r.json().allowed === "conditional" && r.json().obligations.length > 0);
 
 r = await call("knobe_permits", { file_path: VEC("payload-modified.knobe.md"), action: "summarize" });
-ok("permits: failed seal permits nothing", r.data.allowed === false);
+ok("permits: failed seal permits nothing", r.json().allowed === false);
+
+// --- resources: the fixture corpus + guide ---
+const resources = await client.listResources();
+const uris = resources.resources.map((x) => x.uri);
+ok("32 resources registered (31 fixtures + guide)", uris.length === 32 && uris.includes("knobe://guide"));
+{
+  const one = uris.find((u) => u.startsWith("knobe://vectors/") && u.endsWith("minimal-valid.knobe.md"));
+  const res = await client.readResource({ uri: one });
+  ok("a corpus resource reads back the sealed file",
+    res.contents[0].text.includes("-----BEGIN KNOBE B64-----"));
+  const guide = await client.readResource({ uri: "knobe://guide" });
+  ok("the guide resource explains the tool order", guide.contents[0].text.includes("knobe_permits"));
+}
+
+// --- prompt ---
+const prompts = await client.listPrompts();
+ok("guarded-summarize prompt registered",
+  prompts.prompts.some((p) => p.name === "knobe-guarded-summarize"));
+{
+  const p = await client.getPrompt({ name: "knobe-guarded-summarize", arguments: { file_path: "/tmp/x.knobe.md" } });
+  ok("prompt encodes verify → permits → read with decline-and-cite",
+    p.messages[0].content.text.includes("knobe_verify") &&
+    p.messages[0].content.text.includes("knobe_permits") &&
+    p.messages[0].content.text.includes("DECLINE"));
+}
 
 rmSync(tmp, { recursive: true, force: true });
 await client.close();

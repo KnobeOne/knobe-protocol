@@ -2,23 +2,144 @@
 /**
  * knobe-mcp — MCP server for KNOBE Protocol v1.
  *
- * Exposes the knobe-core.js engine (verdict parity with lens.py across the
- * published corpus) as five tools: verify, read, create, transform, permits.
+ * A stdio adapter over knobe-core.js (verdict parity with lens.py across the
+ * published corpus). Five tools:
  *
- * Everything runs locally in this process. The server makes no network
- * requests, keeps no state, and logs nothing anywhere.
+ *   knobe_verify     integrity + conformance verdict (lens.py semantics)
+ *   knobe_read       obligations-FIRST read: the sealed use-conditions arrive
+ *                    as a preamble block before the content
+ *   knobe_create     author + seal a new KNOBE; self-verifies before returning
+ *   knobe_transform  derive with lineage (parents[] chain); refuses broken seals
+ *   knobe_permits    evaluate a proposed action against the SEALED governance
+ *                    fields, citing the clauses that produced the verdict
+ *
+ * Plus: the 31-fixture corpus as knobe:// resources, an orientation guide,
+ * and a guarded-summarize prompt encoding verify → permits → act-or-decline.
+ *
+ * Everything runs in this process. No network requests, no telemetry, no
+ * state between calls. stdout is the JSON-RPC channel; logging goes to stderr.
  */
 
-import { readFileSync, writeFileSync } from "node:fs";
-import { pathToFileURL } from "node:url";
+import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
+import { existsSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
+import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { z } from "zod";
-import { verify, read, createKnobe, transformKnobe, permits, exitCode } from "./knobe-core.js";
+import {
+  verify, read, exitCode, createKnobe, transformKnobe, permits, safe,
+} from "./knobe-core.js";
+
+const HERE = dirname(fileURLToPath(import.meta.url));
+const FIXTURES = join(HERE, "fixtures");
+const VERSION = "0.1.0";
 
 // ---------------------------------------------------------------------------
 // helpers
 // ---------------------------------------------------------------------------
+
+/** JSON.stringify that survives BigInt payload values. */
+const jsonSafe = (o, indent = 2) =>
+  JSON.stringify(o, (k, v) => (typeof v === "bigint" ? v.toString() : v), indent);
+
+const inputShape = {
+  file_path: z.string().optional()
+    .describe("Absolute path to a .knobe.md file"),
+  text: z.string().optional()
+    .describe("Raw .knobe.md content (alternative to file_path)"),
+};
+
+/** Resolve tool input to bytes/text, or a lens.py-style unreadable report. */
+async function loadInput({ file_path, text }) {
+  if (typeof text === "string" && text.length) {
+    return { ok: true, data: text, source: "(inline text)" };
+  }
+  if (!file_path) {
+    return { ok: false, error: "Provide either file_path or text." };
+  }
+  try {
+    return { ok: true, data: new Uint8Array(await readFile(file_path)), source: file_path };
+  } catch (e) {
+    return {
+      ok: false,
+      error: `could not read file: ${e.message}`,
+      report: {
+        state: "unreadable", reason: `could not read file: ${e.message}`,
+        conformance: "invalid", conformance_issues: [`could not read file: ${e.message}`],
+        multiple_blocks: false, block_count: 0, block_used: 0,
+        computed: null, stored: null, payload: null,
+        body_verified: null, body: null, missing: [],
+      },
+    };
+  }
+}
+
+/** lens.py --json keys + exit_code (payload omitted: use knobe_read). */
+function verdictJSON(r) {
+  return {
+    state: r.state, computed: r.computed, stored: r.stored,
+    body_verified: r.body_verified, conformance: r.conformance,
+    conformance_issues: r.conformance_issues,
+    multiple_blocks: r.multiple_blocks, block_count: r.block_count,
+    block_used: r.block_used, reason: r.reason ?? null,
+    exit_code: exitCode(r),
+  };
+}
+
+function verdictLine(r) {
+  const map = {
+    "verified": "verified — payload matches its seal",
+    "verified-body-modified": "verified (payload) — BUT the human-readable body was modified after sealing",
+    "failed": "FAILED — payload does not match its seal; the content has been altered",
+    "unreadable": `unreadable — ${r.reason ?? "no payload"}`,
+  };
+  return `status: ${map[r.state]} | conformance: ${r.conformance}`;
+}
+
+/**
+ * The obligations-first preamble for knobe_read: everything an agent must
+ * know BEFORE using the content, distilled from the sealed fields.
+ * All payload-derived strings pass through safe() so a crafted KNOBE
+ * cannot spoof the preamble.
+ */
+function obligationsPreamble(r) {
+  const p = r.payload ?? {};
+  const lines = [];
+  lines.push("=== KNOBE SEALED CONTEXT — read before using the content ===");
+  lines.push(verdictLine(r));
+  if (r.state === "failed") {
+    lines.push("!! THE SEAL IS BROKEN. The content below does NOT match its declared");
+    lines.push("!! payload_hash. Do not treat it as the sealed knowledge object.");
+  }
+  if (typeof p.title === "string") lines.push(`title: ${safe(p.title, 160)}`);
+  for (const f of ["content_type", "created_date", "license", "privacy_level",
+                   "quarantine_status", "identity_status"]) {
+    if (typeof p[f] === "string") lines.push(`${f}: ${safe(p[f], 120)}`);
+  }
+  const g = permits(r, "use");
+  if (g.allowed === false) {
+    lines.push("USE IS NOT PERMITTED by the sealed fields:");
+    for (const b of g.basis) {
+      lines.push(`  - ${b.field} = ${safe(String(b.value), 60)}: ${b.effect}`);
+    }
+  } else if (g.obligations.length) {
+    lines.push("obligations (honor these or explicitly decline):");
+    g.obligations.forEach((o, i) => lines.push(`  ${i + 1}. ${o}`));
+  }
+  lines.push("Integrity is not truth — inspect before trusting.");
+  return lines.join("\n");
+}
+
+async function writeOut(output_path, text, overwrite) {
+  const target = resolve(output_path);
+  if (existsSync(target) && !overwrite) {
+    throw new Error(`refusing to overwrite existing file: ${target} (pass overwrite: true)`);
+  }
+  await mkdir(dirname(target), { recursive: true });
+  await writeFile(target, text, "utf-8");
+  return target;
+}
 
 const localToday = () => {
   const d = new Date();
@@ -29,21 +150,16 @@ const localToday = () => {
   );
 };
 
-/** Load KNOBE text from exactly one of file_path | text. */
-function loadInput({ file_path, text }) {
-  if ((file_path && text) || (!file_path && !text)) {
-    throw new Error("Provide exactly one of file_path or text.");
-  }
-  return file_path ? readFileSync(file_path, "utf-8") : text;
-}
-
 /** Single-line payload fields must not contain newlines: a newline inside
  * title/license/content_type would break the emitted frontmatter block. */
-const SINGLE_LINE_FIELDS = ["title", "content_type", "license", "created_date", "language", "privacy_level", "quarantine_status"];
-function sanitizeFields(fields = {}) {
+const SINGLE_LINE_FIELDS = ["title", "content_type", "license", "created_date",
+                            "language", "privacy_level", "quarantine_status"];
+
+/** Final gate before the engine: strip fields callers must never set
+ * (spec_version would override the engine's "1.0"; the hashes are computed
+ * by seal()), sanitize single-line strings, default the date to local time. */
+function guardFields(fields) {
   const out = { ...fields };
-  // Never accept these from callers: spec_version would override the engine's
-  // "1.0"; the hashes are computed by seal() and must not be caller-supplied.
   delete out.spec_version;
   delete out.payload_hash;
   delete out.body_hash;
@@ -54,214 +170,308 @@ function sanitizeFields(fields = {}) {
   return out;
 }
 
-function reportSummary(r) {
-  return {
-    state: r.state,
-    conformance: r.conformance,
-    conformance_issues: r.conformance_issues,
-    body_verified: r.body_verified,
-    stored_hash: r.stored,
-    computed_hash: r.computed,
-    missing_required_fields: r.missing,
-    multiple_blocks: r.multiple_blocks,
-    block_count: r.block_count,
-    reason: r.reason,
-    lens_py_exit_code: exitCode(r),
-  };
-}
-
-const jsonContent = (obj) => ({ content: [{ type: "text", text: JSON.stringify(obj, null, 2) }] });
-const errContent = (e) => ({ content: [{ type: "text", text: `Error: ${e.message}` }], isError: true });
-
-const INPUT_SHAPE = {
-  file_path: z.string().optional().describe("Absolute path to a .knobe.md file. Provide this or text, not both."),
-  text: z.string().optional().describe("Full text of a .knobe.md file. Provide this or file_path, not both."),
-};
+const textBlocks = (...texts) => ({ content: texts.map((t) => ({ type: "text", text: t })) });
+const errorResult = (msg) => ({ content: [{ type: "text", text: msg }], isError: true });
 
 // ---------------------------------------------------------------------------
-// server
+// server + tools
 // ---------------------------------------------------------------------------
 
-/** Build the MCP server with all five tools registered. */
-export function buildServer() {
-const server = new McpServer({ name: "knobe-mcp", version: "0.1.0" });
+/** Build the MCP server with tools, resources, and the prompt registered. */
+export async function buildServer() {
+  const server = new McpServer(
+    { name: "knobe", version: VERSION },
+    {
+      instructions:
+        "KNOBE Protocol v1 tools. A KNOBE (.knobe.md) is a sealed knowledge object: "
+        + "its provenance, license, trust posture, and use-conditions travel inside the "
+        + "file, cryptographically sealed (SHA-256). Recommended order: knobe_verify "
+        + "(is the seal intact?) → knobe_permits (may I do X with it?) → knobe_read "
+        + "(obligations arrive before the content). Author new objects with "
+        + "knobe_create; derive with lineage via knobe_transform. A verified seal "
+        + "proves integrity, not truth — inspect before trusting.",
+    },
+  );
 
-server.registerTool(
-  "knobe_verify",
-  {
+  server.registerTool("knobe_verify", {
     title: "Verify a KNOBE",
     description:
-      "Check whether a sealed .knobe.md knowledge object is intact. Returns the protocol's " +
-      "four-state integrity verdict (verified, verified-body-modified, failed, unreadable), a " +
-      "separate conformance verdict (valid, warnings, invalid) with each issue listed, the " +
-      "stored and recomputed hashes, and lens.py's exit code. Verdicts match the reference " +
-      "verifier across the published test corpus. A verified result confirms integrity, not " +
-      "truth: the sealed record is unchanged, whether or not its contents are accurate.",
-    inputSchema: INPUT_SHAPE,
+      "Check a KNOBE's integrity and spec conformance, with the exact semantics of "
+      + "lens.py (the reference verifier). Returns two independent dimensions: "
+      + "status (verified | verified-body-modified | failed | unreadable) and "
+      + "conformance (valid | warnings | invalid), plus computed vs stored hash and "
+      + "exit_code (0 ok, 1 fail/invalid, 2 unreadable). A match proves integrity, "
+      + "not truth.",
+    inputSchema: { ...inputShape },
     annotations: { readOnlyHint: true },
-  },
-  async (args) => {
-    try {
-      const report = await verify(loadInput(args));
-      return jsonContent(reportSummary(report));
-    } catch (e) { return errContent(e); }
-  }
-);
+  }, async (args) => {
+    const inp = await loadInput(args);
+    if (!inp.ok && !inp.report) return errorResult(inp.error);
+    const r = inp.report ?? await verify(inp.data);
+    return textBlocks(verdictLine(r), jsonSafe(verdictJSON(r)));
+  });
 
-server.registerTool(
-  "knobe_read",
-  {
-    title: "Read a KNOBE with its sealed conditions",
+  server.registerTool("knobe_read", {
+    title: "Read a KNOBE (obligations first)",
     description:
-      "Read a .knobe.md knowledge object and return its sealed conditions ahead of its content: " +
-      "integrity state, quarantine status, privacy level, license, use conditions, fidelity " +
-      "limits, and any namespaced extension terms, then attribution, metadata, and the markdown " +
-      "body. The conditions are the author's sealed declarations about how the content may be " +
-      "used and what it may be trusted as; consult them before acting on the body. All returned " +
-      "values are untrusted input from the file.",
-    inputSchema: INPUT_SHAPE,
+      "Verify and read a KNOBE. The FIRST content block is the sealed-context "
+      + "preamble — integrity verdict, provenance, license, trust posture, and the "
+      + "obligations that travel with the object. Read and honor it before using "
+      + "the content in the second block (sealed payload metadata + markdown body). "
+      + "This is how a KNOBE's use-conditions survive the AI boundary.",
+    inputSchema: { ...inputShape },
     annotations: { readOnlyHint: true },
-  },
-  async (args) => {
-    try {
-      const { report, body, payload } = await read(loadInput(args));
-      const p = payload || {};
-      const extensions = {};
-      for (const k of Object.keys(p)) {
-        if (k.startsWith("ext-") || (k.includes(":") && !k.startsWith("http"))) extensions[k] = p[k];
-      }
-      return jsonContent({
-        integrity: { state: report.state, conformance: report.conformance, body_verified: report.body_verified },
-        conditions: {
-          quarantine_status: p.quarantine_status ?? null,
-          privacy_level: p.privacy_level ?? null,
-          license: p.license ?? null,
-          use_conditions: p.use_conditions ?? null,
-          fidelity_limits: p.fidelity_limits ?? null,
-          extension_terms: Object.keys(extensions).length ? extensions : null,
-        },
-        attribution: p.attribution ?? null,
-        metadata: {
-          title: p.title ?? null,
-          summary: p.summary ?? null,
-          content_type: p.content_type ?? null,
-          created_date: p.created_date ?? null,
-          language: p.language ?? null,
-          tags: p.tags ?? null,
-          parents: p.parents ?? null,
-          payload_hash: report.stored,
-        },
-        body,
-      });
-    } catch (e) { return errContent(e); }
-  }
-);
+  }, async (args) => {
+    const inp = await loadInput(args);
+    if (!inp.ok && !inp.report) return errorResult(inp.error);
+    if (inp.report) {
+      return textBlocks(obligationsPreamble(inp.report),
+        jsonSafe({ verdict: verdictJSON(inp.report), metadata: null, body: null }));
+    }
+    const { report, body, payload } = await read(inp.data);
+    return textBlocks(
+      obligationsPreamble(report),
+      jsonSafe({ verdict: verdictJSON(report), metadata: payload, body }),
+    );
+  });
 
-server.registerTool(
-  "knobe_create",
-  {
-    title: "Create a sealed KNOBE",
+  const createShape = {
+    title: z.string().describe("Title of the knowledge object"),
+    summary: z.string().describe("One-sentence summary of what this object is"),
+    body: z.string().optional()
+      .describe("Markdown body. When provided, its hash is sealed into the payload (body_hash), so later edits to the body are detectable."),
+    content_type: z.string().optional()
+      .describe("Canonical: original | synthesis | adaptation | compression | annotation | seed | collection | translation. Default: original."),
+    license: z.string().optional().describe("Default: CC BY 4.0"),
+    privacy_level: z.string().optional()
+      .describe("Canonical: public | internal | sensitive | restricted. Default: public."),
+    quarantine_status: z.string().optional()
+      .describe("Canonical: quarantine | trusted | rejected. Default: quarantine (new objects start untrusted)."),
+    author: z.string().optional().describe("Author name for attribution.sources[0]"),
+    contribution: z.string().optional().describe("What the author contributed. Default: author"),
+    sources: z.array(z.record(z.string(), z.any())).optional()
+      .describe("Full attribution.sources array (overrides author/contribution). Objects like {author, contribution, role, rights_bearing}. Values must be strings or booleans — bare numbers violate spec §5."),
+    fidelity_limits: z.record(z.string(), z.any()).optional()
+      .describe("Object with represents, trust_as, and do_not_infer[] — what this object is and is not to be trusted as."),
+    use_conditions: z.record(z.string(), z.any()).optional()
+      .describe("Object with permitted[], requested_preservations[], consent_note."),
+    tags: z.array(z.string()).optional(),
+    language: z.string().optional().describe("e.g. en"),
+    extra_fields: z.record(z.string(), z.any()).optional()
+      .describe("Additional payload fields. Namespace custom vocabulary with 'ext-' or 'domain:' prefixes per spec §8."),
+    output_path: z.string().optional()
+      .describe("Absolute path to write the sealed .knobe.md file"),
+    overwrite: z.boolean().optional().describe("Allow overwriting output_path if it exists"),
+  };
+
+  function buildCreateFields(a) {
+    const attribution = a.sources?.length
+      ? { sources: a.sources }
+      : a.author
+        ? { sources: [{ author: a.author, contribution: a.contribution ?? "author" }] }
+        : undefined;
+    return guardFields({
+      title: a.title,
+      summary: a.summary,
+      ...(a.content_type ? { content_type: a.content_type } : {}),
+      ...(a.license ? { license: a.license } : {}),
+      ...(a.privacy_level ? { privacy_level: a.privacy_level } : {}),
+      ...(a.quarantine_status ? { quarantine_status: a.quarantine_status } : {}),
+      ...(attribution ? { attribution } : {}),
+      ...(a.fidelity_limits ? { fidelity_limits: a.fidelity_limits } : {}),
+      ...(a.use_conditions ? { use_conditions: a.use_conditions } : {}),
+      ...(a.tags ? { tags: a.tags } : {}),
+      ...(a.language ? { language: a.language } : {}),
+      ...(a.extra_fields ?? {}),
+    });
+  }
+
+  server.registerTool("knobe_create", {
+    title: "Create and seal a KNOBE",
     description:
-      "Assemble and seal a new .knobe.md knowledge object. Required payload fields default " +
-      "sensibly (content_type original, license CC BY 4.0, privacy public, quarantine_status " +
-      "quarantine, today's date); pass fields to declare more: title, summary, content_type, " +
-      "license, privacy_level, quarantine_status, attribution {sources:[{author, contribution, " +
-      "role?, rights_bearing?}]}, fidelity_limits {represents, trust_as, do_not_infer[]}, " +
-      "use_conditions {permitted[], requested_preservations[], consent_note}, language, tags, " +
-      "parents. The sealed file self-verifies before it is returned. The seal records the " +
-      "declarations; it does not establish that they are true.",
-    inputSchema: {
-      body: z.string().optional().describe("Markdown body of the knowledge object. Sealed with its own body_hash."),
-      fields: z.record(z.string(), z.unknown()).optional().describe("Payload fields. Omitted required fields get engine defaults."),
-      author: z.string().optional().describe("Shortcut: recorded as attribution source 1 when no attribution field is given."),
-      output_path: z.string().optional().describe("Absolute path to write the sealed .knobe.md file to."),
-    },
-  },
-  async ({ body = "", fields = {}, author = null, output_path }) => {
+      "Author a new KNOBE: assemble the payload (spec v1 required fields with "
+      + "sensible defaults), compute the §5 canonical SHA-256 seal, and emit the "
+      + "complete .knobe.md file. The result is self-verified before it is "
+      + "returned — this tool cannot emit a file that fails verification. "
+      + "Optionally writes the file to output_path. The seal records the "
+      + "declarations; it does not establish that they are true.",
+    inputSchema: createShape,
+  }, async (a) => {
     try {
-      const r = await createKnobe({ fields: sanitizeFields(fields), body, author });
-      if (output_path) writeFileSync(output_path, r.text, "utf-8");
-      return jsonContent({
-        payload_hash: r.payloadHash,
-        self_check: { state: r.report.state, conformance: r.report.conformance },
-        written_to: output_path ?? null,
-        file_text: output_path ? undefined : r.text,
-      });
-    } catch (e) { return errContent(e); }
-  }
-);
+      const fields = buildCreateFields(a);
+      const { text, payloadHash, report } = await createKnobe({ fields, body: a.body ?? "" });
+      let where = "(not written to disk — pass output_path to save)";
+      if (a.output_path) where = "written to: " + await writeOut(a.output_path, text, a.overwrite);
+      return textBlocks(
+        `sealed. payload_hash: ${payloadHash}\n${verdictLine(report)}\n${where}`,
+        text,
+      );
+    } catch (e) {
+      return errorResult(`knobe_create failed: ${e.message}`);
+    }
+  });
 
-server.registerTool(
-  "knobe_transform",
-  {
-    title: "Derive a KNOBE from a verified original",
+  server.registerTool("knobe_transform", {
+    title: "Derive a KNOBE with lineage",
     description:
-      "Create a sealed derivative of an existing knowledge object: a summary, translation, " +
-      "annotation, or adaptation. The original must verify first; a broken seal cannot anchor a " +
-      "chain. The derivative's parents field records the original's title and payload hash " +
-      "automatically. content_type defaults to adaptation. Whether a derivative is authorized is " +
-      "governed by the original's sealed terms (check knobe_permits); this tool records lineage, " +
-      "it does not grant permission.",
+      "Create a derivative KNOBE from a verified original. The original's "
+      + "payload_hash is chained into parents[], so the transformation is part of "
+      + "the derivative's sealed provenance. The original MUST verify — you cannot "
+      + "chain from a broken seal. Declare what kind of transformation via "
+      + "content_type (adaptation | compression | translation | synthesis | "
+      + "annotation). Whether a derivative is authorized is governed by the "
+      + "original's sealed terms (check knobe_permits); this tool records lineage, "
+      + "it does not grant permission.",
     inputSchema: {
-      original_file_path: z.string().optional().describe("Absolute path to the original .knobe.md. Provide this or original_text."),
-      original_text: z.string().optional().describe("Full text of the original .knobe.md. Provide this or original_file_path."),
-      body: z.string().optional().describe("Markdown body of the derivative."),
-      fields: z.record(z.string(), z.unknown()).optional().describe("Payload fields for the derivative (title, summary, content_type, license, ...)."),
-      author: z.string().optional().describe("Author of the derivative, recorded in its attribution."),
-      output_path: z.string().optional().describe("Absolute path to write the sealed derivative to."),
+      source_path: z.string().optional().describe("Absolute path to the original .knobe.md"),
+      source_text: z.string().optional().describe("Raw original content (alternative to source_path)"),
+      ...createShape,
     },
-  },
-  async ({ original_file_path, original_text, body = "", fields = {}, author = null, output_path }) => {
+  }, async (a) => {
+    const inp = await loadInput({ file_path: a.source_path, text: a.source_text });
+    if (!inp.ok) return errorResult(inp.error ?? "provide source_path or source_text");
     try {
-      const original = loadInput({ file_path: original_file_path, text: original_text });
-      const r = await transformKnobe(original, { fields: sanitizeFields(fields), body, author });
-      const parents = r.payload.parents || [];
-      const parent = parents[parents.length - 1] || null;
-      if (output_path) writeFileSync(output_path, r.text, "utf-8");
-      return jsonContent({
-        payload_hash: r.payloadHash,
-        declared_parent: parent,
-        self_check: { state: r.report.state, conformance: r.report.conformance },
-        written_to: output_path ?? null,
-        file_text: output_path ? undefined : r.text,
-      });
-    } catch (e) { return errContent(e); }
-  }
-);
+      const fields = buildCreateFields(a);
+      if (a.content_type === undefined) fields.content_type = "adaptation";
+      const { text, payloadHash, report } = await transformKnobe(inp.data, { fields, body: a.body ?? "" });
+      let where = "(not written to disk — pass output_path to save)";
+      if (a.output_path) where = "written to: " + await writeOut(a.output_path, text, a.overwrite);
+      return textBlocks(
+        `sealed derivative. payload_hash: ${payloadHash}\nparent chained in parents[].\n${verdictLine(report)}\n${where}`,
+        text,
+      );
+    } catch (e) {
+      return errorResult(`knobe_transform failed: ${e.message}`);
+    }
+  });
 
-server.registerTool(
-  "knobe_permits",
-  {
+  server.registerTool("knobe_permits", {
     title: "Ask a KNOBE's sealed terms whether an action is permitted",
     description:
-      "Evaluate a proposed action (summarize, excerpt, translate, train, redistribute, publish, " +
-      "share, transform, annotate, ...) against a knowledge object's own sealed terms: its " +
-      "quarantine status, privacy level, license posture, and any namespaced extension terms. " +
-      "Returns allowed (true, false, or \"conditional\"), the obligations that apply, and a " +
-      "basis list citing each sealed field that produced the verdict, so a decision to act or " +
-      "decline can quote its source. Integrity gates the evaluation: a file whose seal fails " +
-      "verification permits nothing. The verdict reports what the object declares; enforcement " +
-      "belongs to the caller.",
+      "Evaluate whether a proposed action is permitted by the object's SEALED "
+      + "governance fields — integrity state, quarantine_status, privacy_level, "
+      + "license clauses, attribution, and namespaced extension obligations. "
+      + "Returns allowed: true | false | \"conditional\" with the citable clauses. "
+      + "Actions: read, summarize, excerpt, translate, transform, redistribute, "
+      + "publish, share, train, integrate. A file whose seal fails verification "
+      + "permits nothing. The verdict reports what the object declares; "
+      + "enforcement belongs to the caller, and this is not legal advice.",
     inputSchema: {
-      ...INPUT_SHAPE,
-      action: z.string().describe("The proposed action, e.g. summarize, excerpt, translate, train, redistribute, publish, transform."),
+      ...inputShape,
+      action: z.string().describe("The proposed action, e.g. summarize, train, redistribute"),
     },
     annotations: { readOnlyHint: true },
-  },
-  async ({ action, ...input }) => {
-    try {
-      const report = await verify(loadInput(input));
-      return jsonContent(permits(report, action));
-    } catch (e) { return errContent(e); }
-  }
-);
+  }, async (args) => {
+    const inp = await loadInput(args);
+    if (!inp.ok && !inp.report) return errorResult(inp.error);
+    const r = inp.report ?? await verify(inp.data);
+    const g = permits(r, args.action);
+    const head =
+      g.allowed === true ? `PERMITTED: "${g.action}" (no sealed obligations found)`
+      : g.allowed === "conditional" ? `PERMITTED WITH OBLIGATIONS: "${g.action}" — honor them or decline`
+      : `NOT PERMITTED: "${g.action}" — cited clauses below`;
+    return textBlocks(head, jsonSafe(g));
+  });
 
-return server;
+  // -------------------------------------------------------------------------
+  // resources: the vendored fixture corpus + an orientation guide
+  // -------------------------------------------------------------------------
+
+  const groups = [
+    ["examples", join(FIXTURES, "examples"),
+     "Sealed real-world KNOBE (verifies as verified/valid)"],
+    ["vectors", join(FIXTURES, "vectors"),
+     "Conformance test vector with a known expected verdict"],
+    ["vectors/adversarial", join(FIXTURES, "vectors", "adversarial"),
+     "Adversarial hardening vector with a known expected verdict"],
+  ];
+  for (const [prefix, dir, desc] of groups) {
+    let names = [];
+    try { names = (await readdir(dir)).sort(); } catch { continue; }
+    for (const f of names) {
+      if (!f.endsWith(".knobe.md")) continue;
+      const uri = `knobe://${prefix}/${f}`;
+      server.registerResource(
+        `${prefix}/${f}`, uri,
+        { title: f, description: desc, mimeType: "text/plain" },
+        async (u) => ({
+          contents: [{ uri: u.href, mimeType: "text/plain",
+                       text: await readFile(join(dir, f), "utf-8") }],
+        }),
+      );
+    }
+  }
+  server.registerResource(
+    "guide", "knobe://guide",
+    { title: "KNOBE orientation for agents",
+      description: "What a KNOBE is and how to use these tools", mimeType: "text/plain" },
+    async (u) => ({
+      contents: [{ uri: u.href, mimeType: "text/plain", text:
+`KNOBE Protocol v1 — orientation
+
+A KNOBE (.knobe.md) is a sealed knowledge object. It is plain markdown plus a
+Base64 JSON payload carrying the object's provenance, license, trust posture
+(quarantine_status), privacy level, and attribution — sealed with a SHA-256
+payload_hash (spec §5). The context travels WITH the object: no server, no
+blockchain, no PKI.
+
+Verdicts have two independent dimensions:
+  status:      verified | verified-body-modified | failed | unreadable
+  conformance: valid | warnings | invalid
+"verified-body-modified" means the sealed payload is intact but the
+human-readable body was edited after sealing.
+
+Recommended tool order:
+  1. knobe_verify   — is the seal intact?
+  2. knobe_permits  — may I do X? (cites sealed clauses)
+  3. knobe_read     — obligations preamble first, then content
+Author with knobe_create; derive with lineage via knobe_transform.
+
+A verified seal proves integrity, not truth — inspect before trusting.
+Spec + reference verifier: https://knobe.org` }],
+    }),
+  );
+
+  // -------------------------------------------------------------------------
+  // prompt: the procedure
+  // -------------------------------------------------------------------------
+
+  server.registerPrompt("knobe-guarded-summarize", {
+    title: "Summarize a KNOBE only if its sealed conditions permit",
+    description:
+      "The KNOBE procedure: verify integrity, consult the sealed use-conditions, "
+      + "then summarize only if permitted — honoring every obligation, or declining "
+      + "with the cited clause.",
+    argsSchema: { file_path: z.string().describe("Absolute path to the .knobe.md file") },
+  }, ({ file_path }) => ({
+    messages: [{
+      role: "user",
+      content: {
+        type: "text",
+        text:
+`You are handling a KNOBE — a sealed knowledge object whose context and
+use-conditions travel with it. File: ${file_path}
+
+Follow this procedure exactly:
+1. Call knobe_verify. If status is not "verified" or "verified-body-modified",
+   STOP: report the integrity failure instead of summarizing.
+2. Call knobe_permits with action "summarize". If allowed is false, DECLINE
+   and quote the cited clause(s) verbatim.
+3. If allowed (possibly with obligations), call knobe_read and produce the
+   summary from the sealed content — honoring every obligation (attribution,
+   quarantine caveats, privacy scope). End by listing the obligations you
+   honored.`,
+      },
+    }],
+  }));
+
+  return server;
 }
 
 // ---------------------------------------------------------------------------
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   const transport = new StdioServerTransport();
-  await buildServer().connect(transport);
+  await (await buildServer()).connect(transport);
+  console.error(`knobe-mcp ${VERSION} ready (stdio; engine parity with lens.py across the corpus)`);
 }

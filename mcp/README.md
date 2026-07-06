@@ -1,5 +1,7 @@
 # knobe-mcp
 
+Sealed knowledge objects, readable by agents.
+
 An MCP server for [KNOBE Protocol v1](https://knobe.org). It lets any MCP client
 (Claude Desktop, Claude Code, Cursor, Windsurf, or a custom agent) verify, read,
 create, and transform sealed `.knobe.md` knowledge objects, and ask what an
@@ -10,6 +12,10 @@ provenance, transformation history, fidelity limits, use conditions, and a
 SHA-256 integrity hash, all sealed inside the file and verifiable locally. The
 [specification](https://knobe.org/spec) is frozen at v1.0.
 
+The boundary is deliberate: `knobe-core.js` is the protocol engine; `knobe-mcp`
+is one surface over it. ([Studio](https://knobe.org/studio/) is another. Every
+future integration is a thin adapter over the same core.)
+
 Everything runs in the local server process. No network requests, no telemetry,
 no accounts, no state between calls.
 
@@ -18,10 +24,24 @@ no accounts, no state between calls.
 | Tool | What it does |
 |------|--------------|
 | `knobe_verify` | Integrity and conformance verdict for a file or pasted text: the protocol's four states (`verified`, `verified-body-modified`, `failed`, `unreadable`), a separate conformance axis with each issue listed, both hashes, and `lens.py`'s exit code. |
-| `knobe_read` | Parsed contents with the sealed conditions ahead of the body: quarantine status, privacy level, license, use conditions, fidelity limits, and namespaced extension terms, then attribution, metadata, and the markdown body. |
-| `knobe_create` | Assemble and seal a new object from fields and a body. Required fields default per the engine; the sealed file self-verifies before it is returned, and can be written to a path. |
+| `knobe_read` | An obligations-first read: the first content block is the sealed-context preamble (integrity verdict, provenance, license, trust posture, and the obligations that travel with the object), so an agent reads the conditions before the content. The second block carries the payload metadata and markdown body. |
+| `knobe_create` | Assemble and seal a new object from fields and a body. Required fields default per the engine; the sealed file self-verifies before it is returned, and can be written to a path (with an explicit `overwrite` flag guarding existing files). |
 | `knobe_transform` | Seal a derivative of a verified original. The derivative's `parents` field records the original's title and payload hash automatically; a broken seal cannot anchor a chain. |
 | `knobe_permits` | Evaluate a proposed action (`summarize`, `excerpt`, `translate`, `train`, `redistribute`, `publish`, `transform`, ...) against the object's own sealed terms. |
+
+## Resources and prompt
+
+The 31-fixture corpus ships with the package and is browsable as MCP resources:
+
+- `knobe://examples/…` — sealed real-world KNOBEs (verify as verified/valid)
+- `knobe://vectors/…` — conformance and adversarial vectors with known verdicts
+- `knobe://guide` — orientation for agents
+
+A `knobe-guarded-summarize` prompt encodes the basic KNOBE agent procedure:
+
+```text
+verify → permits → act, qualify, or decline with a cited clause
+```
 
 ## What `knobe_permits` returns
 
