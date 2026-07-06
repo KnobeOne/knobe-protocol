@@ -141,7 +141,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <header>
   <div class="wrap">
     <div class="eyebrow">Positioning</div>
-    <h1>Related work, and why not just use X?</h1>
+    <h1>Related standards, and when to use them instead</h1>
     <div class="meta">
       <span>Based on KNOBE Protocol v1.0</span>
       <span>2026-07-01</span>
@@ -183,7 +183,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>A knowledge graph is a <strong>centralized representation queried in place</strong>, powerful for linking and inference inside a system you control. KNOBE is what a node carries <em>when it leaves the graph</em>. The two are complementary by construction: a graph can ingest KNOBEs (their payloads are structured JSON) and can emit KNOBEs when knowledge exits its boundary. If your knowledge never leaves your platform, you may not need KNOBE. Much of it does.</p>
 
     <h2>Metadata and front-matter</h2>
-    <p>Front-matter metadata is the <em>content</em> of the solution; KNOBE's contribution is the <strong>transport guarantee</strong>. YAML front-matter alone is silently editable, routinely stripped, and carries no tamper evidence. KNOBE is metadata that survives: self-contained, hash-sealed, with defined <a href="/spec" class="inline">verification semantics</a>, published <a href="/test-vectors/" class="inline">test vectors</a>, and graceful degradation to readable text. If plain front-matter meets your needs, use it; KNOBE's YAML layer is deliberately compatible with that practice, so the upgrade path is short.</p>
+    <p>Front-matter metadata is the <em>content</em> of the solution; KNOBE's contribution is the <strong>transport guarantee</strong>. YAML front-matter alone is silently editable, routinely stripped, and carries no tamper evidence. KNOBE keeps that metadata attached and verifiable: self-contained, hash-sealed, with defined <a href="/spec" class="inline">verification semantics</a>, published <a href="/test-vectors/" class="inline">test vectors</a>, and graceful degradation to readable text. If plain front-matter meets your needs, use it; KNOBE's YAML layer is deliberately compatible with that practice, so the upgrade path is short.</p>
 
     <h2>Summary</h2>
     <table class="rw-table">
@@ -208,7 +208,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <div class="wrap"><nav class="fwd" aria-label="Where to go next">
     <p class="fwd-why">See KNOBE applied to a domain, or start building.</p>
     <a class="fwd-link" href="/education-profile">See domain-specific guidance →</a>
-    <a class="fwd-link" href="/spec">Ready to implement →</a>
+    <a class="fwd-link" href="/spec">Read the specification →</a>
     <a class="fwd-link" href="/implementations">The spec, built more than once →</a>
 </nav></div>
 
