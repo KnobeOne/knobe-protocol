@@ -264,7 +264,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .intent{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:8px}
 @media(max-width:760px){.intent{grid-template-columns:1fr}}
 .intent-card{border:1px solid var(--line);border-radius:10px;background:#fff;padding:18px 20px}
-.intent-q{font-family:Georgia,serif;font-style:italic;font-size:1.05rem;color:var(--moss-deep);margin:0 0 8px}
+.intent-q{font-family:-apple-system,system-ui,sans-serif;font-style:normal;font-weight:600;font-size:1rem;color:var(--ink);margin:0 0 8px}
 .intent-d{font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);margin:0 0 12px}
 .intent-card a{display:inline-block;font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);text-decoration:none;margin:0 14px 6px 0}
 .intent-card a:hover{text-decoration:underline}
@@ -344,7 +344,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p class="defn">KNOBE is a plain-text format for knowledge objects that need to keep their source, history, limits, and obligations attached as they move across tools, institutions, and AI systems.</p>
     <p class="sub">A KNOBE file can be read like ordinary Markdown. It also holds a sealed payload that records declared provenance, transformations, fidelity limits, use conditions, and an integrity hash. Verification shows whether that sealed record has changed.</p>
     <p class="sub">When a transcript, lesson, research note, accessibility adaptation, or AI-assisted summary leaves the system where it was created, its context can become hard to reconstruct. KNOBE helps selected context stay part of the file.</p>
-    <a class="pull" href="#problem">See a concrete example ↓</a>
+    <a class="pull" href="#problem">View an example</a>
   </div>
 </header>
 
@@ -352,7 +352,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <section id="problem">
   <div class="wrap">
-    <h2>What is lost when knowledge moves</h2>
+    <h2>When context separates from content</h2>
     <p class="lead">Knowledge objects move. The context that makes them interpretable usually doesn't.</p>
     <p>A graduate student records an oral history. The transcript carries consent terms, a do-not-quote request, and contextual notes. A semester later, an excerpt is pasted into an AI assistant to draft an abstract. The abstract is summarized for a newsletter. A sentence from the newsletter appears in a grant report.</p>
     <p class="vh">Illustration: as the material moves from the transcript to an AI abstract to a newsletter to a grant report, the interpretive conditions attached to it fall away. Four of four remain at the transcript, two at the AI abstract, and none at the newsletter or the grant report.</p>
@@ -363,16 +363,16 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <div class="chain-step"><div class="cs-title">grant report</div><div class="cs-dots"><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span><span class="cdot off"></span></div></div>
     </div>
     <p class="chain-caption">Every step was reasonable. By the fourth, the words still circulate, but the consent terms, the do-not-quote request, and the notes that governed them are gone, and no one downstream knows they ever existed. <button class="replay" id="chainReplay">Replay ↻</button></p>
-    <div class="credstrip" style="margin-top:18px"><div class="ct">What failed</div><div style="font-size:.92rem;color:var(--ink-soft);font-family:Georgia,serif">The words survived. The consent terms and interpretive conditions that governed them did not.</div></div>
+    <div class="credstrip" style="margin-top:18px"><div class="ct">What did not travel</div><div style="font-size:.92rem;color:var(--ink-soft);font-family:Georgia,serif">The words survived. The consent terms and interpretive conditions that governed them did not.</div></div>
     <div id="gap" style="margin-top:36px;padding-top:28px;border-top:1px solid var(--line)">
-      <div class="shead">The infrastructure gap</div>
+      <div class="shead">A file-level gap</div>
       <div style="display:flex;gap:24px;flex-wrap:wrap;margin-top:4px">
         <div style="flex:1;min-width:220px">
-          <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin-bottom:6px">Software has Git</div>
+          <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--moss);margin-bottom:6px">Software has version control</div>
           <p style="font-size:.95rem;margin:0">Software history is preserved through version control, commits, diffs, and inspectable change records.</p>
         </div>
         <div style="flex:1;min-width:220px">
-          <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:6px">Knowledge lacks an ordinary portable equivalent</div>
+          <div style="font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--amber);margin-bottom:6px">Knowledge materials often lack one</div>
           <p style="font-size:.95rem;margin:0">Knowledge work has no equally ordinary habit for carrying the history of an idea as it moves through systems.</p>
         </div>
         <div style="flex:1;min-width:220px">
@@ -381,7 +381,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         </div>
       </div>
     </div>
-    <p style="margin-top:26px;font-size:1.08rem"><strong>KNOBE keeps the context inside the file, so it travels with the work.</strong></p>
+    <p style="margin-top:26px;font-size:1.08rem"><strong>In a KNOBE, selected context is stored inside the file, so it can travel with the work.</strong></p>
   </div>
 </section>
 
@@ -391,7 +391,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <ul class="gains" role="list">
       <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context remains attached.</strong> Source, transformations, consent terms, fidelity limits, accessibility lineage, and any AI involvement can be recorded inside the file, alongside the readable text.</span></li>
       <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Use conditions are visible.</strong> A later reader, or a cooperating tool, can inspect the declared terms before reuse, quotation, transformation, publication, or AI processing. Whether to act on them stays with the reader or the tool.</span></li>
-      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>The file can leave the system.</strong> A KNOBE can carry selected provenance outside the database, repository, LMS, or platform where it was created, and the same file still opens in a plain-text editor or a screen reader. A repository preserves a dataset within a managed environment; a KNOBE helps a single object carry context when it leaves one.</span></li>
+      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>The file can leave the system.</strong> A KNOBE can carry selected provenance outside the database, repository, LMS, or platform where it was created, and the same file still opens in a plain-text editor or a screen reader. A repository preserves materials within a managed environment; a KNOBE helps an individual file carry selected context when it leaves one.</span></li>
       <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>Verification is advisory.</strong> The published verifier compares the file to its sealed payload and reports whether the record still matches. A mismatch is a reason to inspect the file, not a barrier to reading it, and the text stays readable either way.</span></li>
     </ul>
   </div>
@@ -432,7 +432,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <div class="gc-main">
         <div class="gc-kicker">Optional · learn by doing</div>
         <div class="gc-title">New to KNOBE? Walk the Grove</div>
-        <p class="gc-desc">A short, guided, no-AI journey that teaches the format by building one real sealed <code>.knobe.md</code> with you: no login, nothing to install. It's a friendly way to dig in and learn the idea, not the standard or fastest way to make a KNOBE. <strong>Note:</strong> Grove may take up to a minute to load on first visit.</p>
+        <p class="gc-desc">A short, guided path that teaches the format by building one real sealed <code>.knobe.md</code> with you: no login, nothing to install. It's a friendly way to dig in and learn the idea, not the standard or fastest way to make a KNOBE. <strong>Note:</strong> Grove may take up to a minute to load on first visit.</p>
       </div>
       <span class="gc-cta">Enter Grove →</span>
     </a>
@@ -441,20 +441,20 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <section id="sitemap">
   <div class="wrap wide">
-    <div class="shead">Where next?</div>
+    <div class="shead">Next steps</div>
     <div class="intent">
       <div class="intent-card">
-        <p class="intent-q">“I want to understand the design.”</p>
+        <p class="intent-q">Understand the design</p>
         <p class="intent-d">The full conceptual case, or a hands-on walk.</p>
         <a href="/white-paper">White paper →</a><a href="/grove/">Grove →</a>
       </div>
       <div class="intent-card">
-        <p class="intent-q">“I want to evaluate this for my context.”</p>
+        <p class="intent-q">Evaluate a use case</p>
         <p class="intent-d">Domain guidance, and the skeptic's pages.</p>
         <a href="/education-profile">Education →</a><a href="/enterprise-profile">Enterprise →</a><a href="/government-profile">Government →</a><a href="/research-profile">Research →</a><a href="/threat-model">Threat model →</a><a href="/related-work">Related work →</a>
       </div>
       <div class="intent-card">
-        <p class="intent-q">“I want to implement or integrate.”</p>
+        <p class="intent-q">Implement or integrate</p>
         <p class="intent-d">The normative rules, the verifiers, the corpus.</p>
         <a href="/spec">Spec →</a><a href="/lens">Lens →</a><a href="/test-vectors/">Test vectors →</a><a href="/implementations">Implementations →</a><a href="https://github.com/KnobeOne/knobe-protocol">GitHub →</a>
       </div>
