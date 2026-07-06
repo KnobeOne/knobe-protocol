@@ -18,6 +18,15 @@ KNOBE makes it harder for fragments to pass as whole objects. It carries interpr
 
 It is not DRM, not a truth machine, not an identity verification system, and not a replacement for institutional systems. It declares interpretive obligations; it does not enforce them. See the [specification](https://knobe.org/spec) §11 (Honest limits) and the [threat model](https://knobe.org/threat-model) for the precise account.
 
+## Tools
+
+All three run on the same engine and require no account.
+
+- **[Studio](https://knobe.org/studio/)** — a browser app to create, verify, and transform KNOBEs. Everything runs client-side; nothing is uploaded. The fastest way to seal a first object without touching the command line.
+- **[MCP server](https://knobe.org/mcp)** (`knobe-mcp` on npm) — exposes verify, read, create, transform, and a `permits` tool to any MCP client (Claude Desktop, Claude Code, Cursor, and others), so an AI agent can check a document's sealed terms before acting on it. Install with `npx -y knobe-mcp`; source in [`mcp/`](mcp/).
+- **[Grove](https://knobe.org/grove/)** — a guided, no-AI walkthrough that teaches the format by sealing one real KNOBE with you.
+- **[Lens](https://knobe.org/lens)** — a drag-and-drop browser verifier for a single file.
+
 ## Verifying a KNOBE
 
 ```bash
@@ -48,7 +57,9 @@ A `verified` result proves the payload is byte-identical to what was hashed at s
 ├── knobe-core.js          JavaScript sibling verifier and engine (Node ≥ 20.10 and browsers), no dependencies
 ├── knobe-core.selftest.mjs  Cross-checks knobe-core.js against lens.py over every vector and example
 ├── test-vectors/          Nine conformance vectors for testing implementations
-└── examples/              Sealed example KNOBEs (white paper, education chain, etc.)
+├── examples/              Sealed example KNOBEs (white paper, education chain, etc.)
+├── site/studio/           Studio browser app (served at knobe.org/studio)
+└── mcp/                   knobe-mcp MCP server (published to npm as knobe-mcp)
 ```
 
 ## Implementing a verifier
