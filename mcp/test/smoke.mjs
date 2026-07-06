@@ -199,4 +199,49 @@ ok("guarded-summarize prompt registered",
 
 rmSync(tmp, { recursive: true, force: true });
 await client.close();
+
+// --- CLI entry point via a symlink (regression test: npm's bin mechanism
+// installs node_modules/.bin/<name> as a symlink to server.mjs. process.argv[1]
+// is then the symlink path while import.meta.url is already resolved past it;
+// server.mjs must detect "am I the entry point" by comparing REAL paths, not
+// raw strings, or it silently exits with zero output and the server never
+// starts. This is invisible to every check above, since they all import
+// buildServer() directly rather than spawning the packaged CLI. ---
+{
+  const symlinkDir = mkdtempSync(join(tmpdir(), "knobe-mcp-cli-"));
+  const shim = join(symlinkDir, "knobe-mcp-shim.mjs");
+  const { symlinkSync } = await import("node:fs");
+  symlinkSync(join(PKG, "server.mjs"), shim);
+
+  const req = [
+    { jsonrpc: "2.0", id: 1, method: "initialize", params: { protocolVersion: "2024-11-05", capabilities: {}, clientInfo: { name: "cli-check", version: "0" } } },
+    { jsonrpc: "2.0", method: "notifications/initialized" },
+    { jsonrpc: "2.0", id: 2, method: "tools/list", params: {} },
+  ].map((r) => JSON.stringify(r)).join("\n") + "\n";
+
+  const { spawn } = await import("node:child_process");
+  const child = spawn(process.execPath, [shim], { stdio: ["pipe", "pipe", "pipe"] });
+  let stdout = "", stderr = "";
+  child.stdout.on("data", (d) => { stdout += d; });
+  child.stderr.on("data", (d) => { stderr += d; });
+  child.stdin.write(req);
+
+  await new Promise((resolve) => setTimeout(resolve, 1500));
+  child.kill();
+  await new Promise((resolve) => child.on("close", resolve));
+
+  const lines = stdout.split("\n").map((l) => l.trim()).filter(Boolean);
+  const initResult = lines.map((l) => { try { return JSON.parse(l); } catch { return null; } }).find((d) => d && d.id === 1);
+  const toolsResult = lines.map((l) => { try { return JSON.parse(l); } catch { return null; } }).find((d) => d && d.id === 2);
+
+  ok("CLI entry point starts when invoked through a bin-style symlink (not just via direct import)",
+    !!initResult && initResult.result.serverInfo.name === "knobe");
+  ok("CLI entry point serves all 5 tools when invoked through a symlink",
+    !!toolsResult && toolsResult.result.tools.length === 5);
+  ok("CLI entry point prints its ready message to stderr",
+    stderr.includes("ready"));
+
+  rmSync(symlinkDir, { recursive: true, force: true });
+}
+
 console.log(`\n${passed} checks passed`);
