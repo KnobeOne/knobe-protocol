@@ -122,6 +122,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <summary class="here">Build</summary>
         <div class="nav-menu">
           <a href="/lens">Lens</a>
+          <a href="/mcp">MCP server</a>
           <a href="/test-vectors/">Test vectors</a>
           <a href="/implementations" class="here" aria-current="page">Implementations</a>
           <a href="/downloads">Downloads</a>
@@ -153,7 +154,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h2>A JavaScript sibling engine</h2>
     <p><code>knobe-core.js</code> is a JavaScript sibling verifier: a single standalone file, with no dependencies, that runs in Node and in the browser. It was written by closely studying <code>lens.py</code>: a <em class="kw">sibling</em>, sharing no code but sharing lineage.</p>
-    <p>Unlike the in-page browser Lens, it reproduces <code>lens.py</code>'s verdicts <em>including</em> the bare-numeric case, and it goes beyond verification: it also seals, creates, and derives KNOBEs and evaluates their use conditions, using the same rules as the reference. It is the engine that <a class="inline" href="/studio/">Studio</a> and the agent-facing server are built on.</p>
+    <p>Unlike the in-page browser Lens, it reproduces <code>lens.py</code>'s verdicts <em>including</em> the bare-numeric case, and it goes beyond verification: it also seals, creates, and derives KNOBEs and evaluates their use conditions, using the same rules as the reference. It is the engine that <a class="inline" href="/studio/">Studio</a> and the <a class="inline" href="/mcp">MCP server</a> are built on.</p>
 
     <h2>What has been checked</h2>
     <p><code>knobe-core.js</code> and the reference verifier were run against the 31 published test files in this repository (the conformance vectors, the adversarial hardening set, and the sealed examples) and against roughly 61,000 additional, automatically generated adversarial inputs: malformed structure, Unicode edge cases, numeric formatting, oversized and deeply nested payloads, invalid encodings, and mutations of the fixtures.</p>
