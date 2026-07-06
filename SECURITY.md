@@ -18,7 +18,7 @@ See the full [threat model](https://knobe.org/threat-model) for the boundary bet
 
 ## Reporting
 
-Email **djkyle@ucdavis.edu** with subject line `KNOBE SECURITY`. Please do not open a public issue for verification-bypass reports until a fix or advisory is published.
+Email **david@knobe.org** with subject line `KNOBE SECURITY`. Please do not open a public issue for verification-bypass reports until a fix or advisory is published.
 
 - Acknowledgment within 7 days.
 - Coordinated disclosure target: 90 days.

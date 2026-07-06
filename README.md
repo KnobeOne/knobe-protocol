@@ -80,7 +80,7 @@ Errata, hostile test vectors, and independent verifier implementations are the m
 ## Steward
 
 David Kyle, author and steward · University of California, Davis
-djkyle@ucdavis.edu · [knobe.org](https://knobe.org)
+david@knobe.org · [knobe.org](https://knobe.org)
 
 ## Citation
 
