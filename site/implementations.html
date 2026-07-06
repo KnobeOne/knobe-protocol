@@ -158,7 +158,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p><code>knobe-core.js</code> and the reference verifier were run against the 31 published test files in this repository (the conformance vectors, the adversarial hardening set, and the sealed examples) and against roughly 61,000 additional, automatically generated adversarial inputs: malformed structure, Unicode edge cases, numeric formatting, oversized and deeply nested payloads, invalid encodings, and mutations of the fixtures.</p>
     <p>Across all of them, the two verifiers returned identical verdicts (status, conformance level, body result, computed and stored hash, block counts, and exit code) with no disagreements and no crashes within that generated set. An earlier run did surface a divergence: a floating-point value that the two languages formatted differently. It was traced, fixed, and re-checked clean.</p>
 
-    <h2>Check it yourself</h2>
+    <h2>Running the check yourself</h2>
     <p>Both verifiers ship in this repository. The parity check runs both over every vector and example and reports agreement. It needs Python 3 and Node present, because it is a cross-language check by design.</p>
     <div class="cmd"><span class="c"># from the repository root</span><br>node knobe-core.selftest.mjs</div>
 
@@ -169,7 +169,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 
 <div class="wrap"><nav class="fwd" aria-label="Where to go next">
-    <p class="fwd-why">Check the claim yourself, or build the next implementation.</p>
+    <p class="fwd-why">Run the check yourself, or build the next implementation.</p>
     <a class="fwd-link" href="/spec">The normative reference →</a>
     <a class="fwd-link" href="/test-vectors/">The conformance corpus →</a>
     <a class="fwd-link" href="https://github.com/KnobeOne/knobe-protocol">Source →</a>
