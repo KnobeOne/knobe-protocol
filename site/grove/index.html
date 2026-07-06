@@ -1084,11 +1084,11 @@ body {
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="Magic Grove — A Journey into KNOBE">
-<meta property="og:description" content="A guided, no-AI first encounter with KNOBE Protocol v1. Walk the Grove and seal a real .knobe.md file — no login, nothing to install.">
+<meta property="og:description" content="A guided, no-AI first encounter with KNOBE Protocol v1. Walk the Grove and seal a real .knobe.md file, with no login and nothing to install.">
 <meta property="og:url" content="https://knobe.org/grove/">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Magic Grove — A Journey into KNOBE">
-<meta name="twitter:description" content="A guided, no-AI first encounter with KNOBE Protocol v1. Walk the Grove and seal a real .knobe.md file — no login, nothing to install.">
+<meta name="twitter:description" content="A guided, no-AI first encounter with KNOBE Protocol v1. Walk the Grove and seal a real .knobe.md file, with no login and nothing to install.">
 </head>
 <body>
 
@@ -1396,7 +1396,7 @@ body {
     <div class="knobe-field-indicator">→ <span>KNOBE field:</span> Trust Network / Preservation Intent</div>
   </div>
 
-  <p class="narrative fade-in">A network that holds your record in common, that checks each node against the others, that has no single point of failure, is the answer to the platform problem. That is what the roots do. That is what KNOBE is building.</p>
+  <p class="narrative fade-in">A network that held your record in common, checking each node against the others, with no single point of failure, would answer the platform problem. That is what the roots represent: the part of KNOBE not yet built.</p>
 
   <div class="grove-key fade-in">
     <span class="key-label">Grove Key · Roots →</span> <span class="key-desc">Distributed verification network — the mycorrhizal layer that holds the record in common across nodes, with no single point of failure</span>
@@ -1515,7 +1515,7 @@ body {
     <button class="export-btn" style="flex-basis:100%;white-space:normal" onclick="downloadSeed()">Save as _Magic_Grove_Journey.knobe.md</button>
   </div>
 
-  <p class="narrative fade-in" style="font-size:0.85rem; color:var(--text-muted); margin-top:16px; text-align:center;">Your _Magic_Grove_Journey.knobe.md file is plain text. Open it in any text editor, paste it into any AI conversation, or submit it as your Knote. No login required. No account needed. No platform owns it. Learn more about the KNOBE Protocol at <a href="https://knobe.org" target="_blank" style="color:var(--sapwood);text-decoration:none;border-bottom:1px solid var(--sapwood)">knobe.org</a>.</p>
+  <p class="narrative fade-in" style="font-size:0.85rem; color:var(--text-muted); margin-top:16px; text-align:center;">Your _Magic_Grove_Journey.knobe.md file is plain text. Open it in any text editor, paste it into any AI conversation, or submit it as your Knote. The file works without logging in or creating an account, and it is not stored on a KNOBE server or owned by any platform: it is a plain text document that you keep. Learn more about the KNOBE Protocol at <a href="https://knobe.org" target="_blank" style="color:var(--sapwood);text-decoration:none;border-bottom:1px solid var(--sapwood)">knobe.org</a>.</p>
 
   <div class="nav-row fade-in" style="margin-top:40px;">
     <button class="nav-btn back" onclick="goTo('s-parting')">← Back</button>
@@ -1642,7 +1642,7 @@ function goTo(id) {
 function advanceFromQ1() {
   const val = (state.answers.project_description || '').trim();
   if (val.length < 10) {
-    showToast('The grove needs a bit more — tell us about your project.');
+    showToast('The grove needs a bit more. Tell us about your project.');
     document.getElementById('q1').focus();
     return;
   }
@@ -1867,47 +1867,47 @@ function generateKnobeMd() {
 
   // -- Threshold --
   md += `## 1. Threshold\n\n`;
-  md += `The grove asked what you are carrying \u2014 not a summary written for a grade, but something true about what you are actually trying to make.\n\n`;
+  md += `The grove asked what you are carrying: not a summary written for a grade, but something true about what you are actually trying to make.\n\n`;
   md += `**Project Description:** ${a.project_description || '\u2014'}\n\n`;
 
   // -- First Impressions --
   md += `## 2. First Impressions\n\n`;
-  md += `Before entering the grove, you were asked what you already know about the sequoias \u2014 the assumptions you carry in.\n\n`;
+  md += `Before entering the grove, you were asked what you already know about the sequoias: the assumptions you carry in.\n\n`;
   md += `**Prior Knowledge:** ${a.prior_knowledge || '\u2014'}\n\n`;
 
   // -- The Naming --
   md += `## 3. The Naming\n\n`;
-  md += `These trees carry the name *Sequoia*, likely honoring Sequoyah \u2014 a Cherokee man who built an entire syllabary from nothing, turning spoken language into portable, durable code. Knowledge needs encoding to travel. An idea without a structure is a fire without a cone.\n\n`;
+  md += `These trees carry the name *Sequoia*, likely honoring Sequoyah: a Cherokee man who built an entire syllabary from nothing, turning spoken language into portable, durable code. Knowledge needs encoding to travel. An idea without a structure is a fire without a cone.\n\n`;
 
   // -- The Bark --
-  md += `## 4. The Bark \u2014 Protection\n\n`;
-  md += `The bark is dead tissue two to three feet thick. It does not burn \u2014 it chars, turns the flame, and lets the tree use fire rather than fear it. Every scar is a record of what was tested and held.\n\n`;
+  md += `## 4. The Bark: Protection\n\n`;
+  md += `The bark is dead tissue two to three feet thick. It does not burn. It chars, turns the flame, and lets the tree use fire rather than fear it. Every scar is a record of what was tested and held.\n\n`;
   md += `**Breakpoint / Vulnerability:** ${a.breakpoint || '\u2014'}\n\n`;
 
   // -- Mother of the Forest --
   md += `## 5. Mother of the Forest\n\n`;
-  md += `In 1854, men stripped a two-thousand-year-old tree\u2019s bark and shipped it to London for exhibition. Without its verification layer, the living tree died. Knowledge without integrity \u2014 screenshots, decontextualized quotes, unattributed AI outputs \u2014 suffers the same fate.\n\n`;
+  md += `In 1854, men stripped a two-thousand-year-old tree\u2019s bark and shipped it to London for exhibition. Without its verification layer, the living tree died. Knowledge without integrity (screenshots, decontextualized quotes, unattributed AI outputs) suffers the same fate.\n\n`;
 
   // -- The Sapwood --
-  md += `## 6. The Sapwood \u2014 Process\n\n`;
-  md += `Between bark and heartwood lies the sapwood \u2014 the only living part of the trunk. It carries water, sugars, and signals through channels thinner than a hair. This is the invisible labor that moves meaning through a system.\n\n`;
+  md += `## 6. The Sapwood: Process\n\n`;
+  md += `Between bark and heartwood lies the sapwood: the only living part of the trunk. It carries water, sugars, and signals through channels thinner than a hair. This is the invisible labor that moves meaning through a system.\n\n`;
   md += `**Invisible Labor:** ${a.invisible_labor || '\u2014'}\n\n`;
   md += `**Dependencies / Flow Conditions:** ${a.dependencies || '\u2014'}\n\n`;
 
   // -- The Heartwood --
-  md += `## 7. The Heartwood \u2014 Record\n\n`;
-  md += `The sapwood hardens into heartwood \u2014 what was flowing becomes structure. Every year becomes a ring. This is the schema layer: the record that makes thinking readable across time, tools, and minds that have never met you.\n\n`;
+  md += `## 7. The Heartwood: Record\n\n`;
+  md += `The sapwood hardens into heartwood. What was flowing becomes structure. Every year becomes a ring. This is the schema layer: the record that makes thinking readable across time, tools, and minds that have never met you.\n\n`;
   md += `**Collaborators / Tools:** ${a.collaborators || '\u2014'}\n\n`;
   md += `**Authorship / Claimed Contribution:** ${a.authorship || '\u2014'}\n\n`;
 
   // -- The Roots --
-  md += `## 8. The Roots \u2014 Network\n\n`;
-  md += `Sequoias have shallow roots and no taproot. They survive by connecting \u2014 mycorrhizal networks link every tree in the grove. No single point of failure. No single source of truth. What no individual can hold, the network holds together.\n\n`;
+  md += `## 8. The Roots: Network\n\n`;
+  md += `Sequoias have shallow roots and no taproot. They survive by connecting: mycorrhizal networks link every tree in the grove. No single point of failure. No single source of truth. What no individual can hold, the network holds together.\n\n`;
   md += `**Preservation Intent:** ${a.preservation || '\u2014'}\n\n`;
 
   // -- The Cone --
-  md += `## 9. The Cone \u2014 Dispersal\n\n`;
-  md += `A serotinous cone stays sealed for decades, waiting not for rain but for fire. Each seed weighs almost nothing yet carries the complete instructions for the largest living thing on Earth. The seed is self-contained \u2014 it does not require the platform that produced it.\n\n`;
+  md += `## 9. The Cone: Dispersal\n\n`;
+  md += `A serotinous cone stays sealed for decades, waiting not for rain but for fire. Each seed weighs almost nothing yet carries the complete instructions for the largest living thing on Earth. The seed is self-contained. It does not require the platform that produced it.\n\n`;
   md += `**Release Conditions:** ${a.release_conditions || '\u2014'}\n\n`;
   md += `**Resource Needs:** ${a.resource_needs || '\u2014'}\n\n`;
 
@@ -1916,7 +1916,7 @@ function generateKnobeMd() {
   md += `The grove solved structure, durability, the record, and the network. But it cannot move or improvise. The KNOBE seed is the architecture; you are the musician. The seed does not play itself.\n\n`;
 
   // -- The Seed --
-  md += `## 11. The Seed \u2014 Departure\n\n`;
+  md += `## 11. The Seed: Departure\n\n`;
   md += `The smallest part of the largest living thing, carrying the complete instructions for everything in this journey.\n\n`;
   if (a.closing_vision) md += `**Closing Vision:** ${a.closing_vision}\n\n`;
 
