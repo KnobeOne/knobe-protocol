@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNOBE — Implementations</title>
-<meta name="description" content="KNOBE Protocol v1 has a Python reference verifier (lens.py) and two JavaScript verifiers — the in-page browser Lens and the sibling engine knobe-core.js — whose verdicts agree across the published test corpus, with one documented deferral.">
+<meta name="description" content="KNOBE Protocol v1 has a Python reference verifier (lens.py) and two JavaScript verifiers (the in-page browser Lens and the sibling engine knobe-core.js) whose verdicts agree across the published test corpus, with one documented deferral.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -148,22 +148,22 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p><code>lens.py</code> is the reference verifier: a single Python file that uses only the standard library, with no external dependencies. It defines correct behaviour for KNOBE Protocol v1. Where any implementation disagrees with <code>lens.py</code>, <code>lens.py</code> is right and the other is wrong.</p>
 
     <h2>The browser Lens</h2>
-    <p>The browser Lens (<a class="inline" href="/lens">knobe.org/lens</a>, <code>site/lens.html</code>) is a JavaScript verifier that runs entirely in the page: drop in a <code>.knobe.md</code> file and see the verdict, with nothing uploaded. It reproduces <code>lens.py</code>'s verdicts across the vectors, with one deliberate exception — in a browser, where numeric canonicalization cannot match Python's guarantees, it declines to issue a hash verdict on bare-numeric payloads (a §5 violation) and defers to <code>lens.py</code> as canonical for that case.</p>
+    <p>The browser Lens (<a class="inline" href="/lens">knobe.org/lens</a>, <code>site/lens.html</code>) is a JavaScript verifier that runs entirely in the page: drop in a <code>.knobe.md</code> file and see the verdict, with nothing uploaded. It reproduces <code>lens.py</code>'s verdicts across the vectors, with one deliberate exception: in a browser, where numeric canonicalization cannot match Python's guarantees, it declines to issue a hash verdict on bare-numeric payloads (a §5 violation) and defers to <code>lens.py</code> as canonical for that case.</p>
 
     <h2>A JavaScript sibling engine</h2>
-    <p><code>knobe-core.js</code> is a JavaScript sibling verifier: a single standalone file, with no dependencies, that runs in Node and in the browser. It was written by closely studying <code>lens.py</code> — a <em class="kw">sibling</em>, sharing no code but sharing lineage.</p>
+    <p><code>knobe-core.js</code> is a JavaScript sibling verifier: a single standalone file, with no dependencies, that runs in Node and in the browser. It was written by closely studying <code>lens.py</code>: a <em class="kw">sibling</em>, sharing no code but sharing lineage.</p>
     <p>Unlike the in-page browser Lens, it reproduces <code>lens.py</code>'s verdicts <em>including</em> the bare-numeric case, and it goes beyond verification: it also seals, creates, and derives KNOBEs and evaluates their use conditions, using the same rules as the reference. It is the engine that the Studio application and the agent-facing server are built on.</p>
 
     <h2>What has been checked</h2>
-    <p><code>knobe-core.js</code> and the reference verifier were run against the 31 published test files in this repository — the conformance vectors, the adversarial hardening set, and the sealed examples — and against roughly 61,000 additional, automatically generated adversarial inputs: malformed structure, Unicode edge cases, numeric formatting, oversized and deeply nested payloads, invalid encodings, and mutations of the fixtures.</p>
-    <p>Across all of them, the two verifiers returned identical verdicts — status, conformance level, body result, computed and stored hash, block counts, and exit code — with no disagreements and no crashes within that generated set. An earlier run did surface a divergence: a floating-point value that the two languages formatted differently. It was traced, fixed, and re-checked clean.</p>
+    <p><code>knobe-core.js</code> and the reference verifier were run against the 31 published test files in this repository (the conformance vectors, the adversarial hardening set, and the sealed examples) and against roughly 61,000 additional, automatically generated adversarial inputs: malformed structure, Unicode edge cases, numeric formatting, oversized and deeply nested payloads, invalid encodings, and mutations of the fixtures.</p>
+    <p>Across all of them, the two verifiers returned identical verdicts (status, conformance level, body result, computed and stored hash, block counts, and exit code) with no disagreements and no crashes within that generated set. An earlier run did surface a divergence: a floating-point value that the two languages formatted differently. It was traced, fixed, and re-checked clean.</p>
 
     <h2>Check it yourself</h2>
     <p>Both verifiers ship in this repository. The parity check runs both over every vector and example and reports agreement. It needs Python 3 and Node present, because it is a cross-language check by design.</p>
     <div class="cmd"><span class="c"># from the repository root</span><br>node knobe-core.selftest.mjs</div>
 
     <div class="note">
-      <p><strong>What this shows, and what it does not.</strong> This demonstrates that a second implementation, in a different language, reproduces the reference verifier's behaviour across the published corpus and the generated inputs above. It is not a claim of agreement on every possible input, it is not a formally ratified standard, and it does not replace the specification. <code>lens.py</code> remains the reference.</p>
+      <p><strong>What this shows, and what it does not.</strong> This demonstrates that a second implementation, in a different language, reproduces the reference verifier's behaviour across the published corpus and the generated inputs above. The scope is exactly that corpus and those inputs; KNOBE remains an open specification rather than a ratified standard, and <code>lens.py</code> remains the reference.</p>
     </div>
   </div>
 

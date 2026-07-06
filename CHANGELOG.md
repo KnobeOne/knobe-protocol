@@ -13,6 +13,13 @@ The protocol itself is frozen at v1.0 (see [GOVERNANCE.md](GOVERNANCE.md)); entr
 
 ### 2026-07-05
 
+- Sitewide tone pass: homepage demo strings, About governance and pilots
+  paragraphs, profile fidelity claims and forward links, implementations
+  scope note, related-work lead, downloads and white-paper metas. Claims
+  tied to mechanisms; solicitation phrasing and prose em dashes removed;
+  no technical limits removed. Frozen content (spec body, white-paper
+  body, sealed .knobe.md files, grove) untouched.
+
 - Research profile added at `/research-profile`: consent-aware research
   objects (materials keep their consent terms, source context, and derivation
   history as they move), with custody inversion (participant retains the

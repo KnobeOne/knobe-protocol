@@ -425,7 +425,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <div class="layer l3" data-layer="3"><div class="ll">layer 3 · base64 json payload</div><div class="ld">Attribution, source context, transformation history, fidelity limits, use conditions, accessibility lineage, and a SHA-256 integrity hash.</div></div>
     </div>
     <div class="demo" id="demo" hidden>
-      <div class="demo-head">Live — this is a real sealed KNOBE. Verify it right here.</div>
+      <div class="demo-head">A real sealed KNOBE. Verify it in place.</div>
       <pre class="demo-file fm" id="demoFm" aria-label="Layer 1: YAML frontmatter"></pre>
       <pre class="demo-file dbody" id="demoBody" aria-label="Layer 2: markdown body"></pre>
       <pre class="demo-file payload" id="demoPayload" aria-label="Layer 3: sealed payload"></pre>
@@ -435,7 +435,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <button class="demo-btn ghost" id="demoReset" type="button" hidden>Reset</button>
       </div>
       <div id="demoVerdict" class="demo-verdict" role="status" aria-live="polite" hidden></div>
-      <p class="demo-note">The check runs in your browser with <a class="inline" href="/knobe-core.js">knobe-core.js</a> — nothing is uploaded. A verified seal proves integrity, not truth.</p>
+      <p class="demo-note">The check runs in your browser with <a class="inline" href="/knobe-core.js">knobe-core.js</a>; nothing is uploaded. A verified seal proves integrity, not truth.</p>
     </div>
   </div>
 </section>
@@ -463,12 +463,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <div class="intent">
       <div class="intent-card">
         <p class="intent-q">“I want to understand the design.”</p>
-        <p class="intent-d">The full conceptual case — or a hands-on walk.</p>
+        <p class="intent-d">The full conceptual case, or a hands-on walk.</p>
         <a href="/white-paper">White paper →</a><a href="/grove/">Grove →</a>
       </div>
       <div class="intent-card">
         <p class="intent-q">“I want to evaluate this for my context.”</p>
-        <p class="intent-d">Domain guidance — and the skeptic's pages.</p>
+        <p class="intent-d">Domain guidance, and the skeptic's pages.</p>
         <a href="/education-profile">Education →</a><a href="/enterprise-profile">Enterprise →</a><a href="/government-profile">Government →</a><a href="/research-profile">Research →</a><a href="/threat-model">Threat model →</a><a href="/related-work">Related work →</a>
       </div>
       <div class="intent-card">
@@ -696,10 +696,10 @@ function split(t){const m=t.match(/^(---\n[\s\S]*?\n---\n)([\s\S]*?)(-----BEGIN 
 function render(){const L=split(displayed);$('#demoFm').textContent=L.fm.trim();$('#demoBody').textContent=L.body.trim();const p=L.payload.trim();$('#demoPayload').textContent=p.length>640?p.slice(0,640)+'\n… (truncated for display; the full block is what gets verified)':p;}
 function verdict(cls,text){const v=$('#demoVerdict');v.hidden=false;v.className='demo-verdict '+cls;v.textContent=text;}
 async function runVerify(){const r=await verify(displayed);
-  if(r.state==='verified'){verdict('pass','✓ Integrity verified — the payload matches its seal.');$('#demoTamper').hidden=false;}
-  else if(r.state==='verified-body-modified'){verdict('pass','✓ Payload seal intact — but the readable body was changed after sealing.');}
-  else if(r.state==='failed'){verdict('fail','✕ Modified since sealing — one character changed, and the seal caught it.');$('#demoReset').hidden=false;}
-  else{verdict('fail','✕ Unreadable — this file cannot be evaluated as a KNOBE.');$('#demoReset').hidden=false;}}
+  if(r.state==='verified'){verdict('pass','✓ Integrity verified: the payload matches its seal.');$('#demoTamper').hidden=false;}
+  else if(r.state==='verified-body-modified'){verdict('pass','✓ Payload seal intact: the readable body was changed after sealing.');}
+  else if(r.state==='failed'){verdict('fail','✕ Modified since sealing: the check detected the changed character.');$('#demoReset').hidden=false;}
+  else{verdict('fail','✕ Unreadable: this file cannot be evaluated as a KNOBE.');$('#demoReset').hidden=false;}}
 $('#demoVerify').addEventListener('click',runVerify);
 $('#demoTamper').addEventListener('click',async()=>{
   const m=displayed.match(/-----BEGIN KNOBE B64-----\n([\s\S]*?)\n-----END KNOBE B64-----/);if(!m)return;
