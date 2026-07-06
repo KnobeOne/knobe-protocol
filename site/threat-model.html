@@ -164,11 +164,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <main id="main">
   <div class="wrap">
 
-    <p class="lead">KNOBE is a context-survival protocol, not a hard security primitive. This page is for engineers, security reviewers, and adopters who want a precise account of where the protocol provides genuine value and where it does not. The boundary matters, and the protocol is honest about both sides of it.</p>
+    <p class="lead">KNOBE is a context-survival protocol, not a hard security primitive. This page is for engineers, security reviewers, and adopters: an account of where the protocol provides value and where it provides none.</p>
 
-    <p>The open layer of KNOBE v1 verifies <em class="kw">integrity, not truth</em>. A passing verification proves that a sealed object has not been altered since its hash was computed. It does not prove that the author is who they claim to be, that the content is accurate, that consent was actually obtained, or that the object is appropriate for any particular use. These distinctions are not evasions. They define the protocol's threat model precisely.</p>
+    <p>The open layer of KNOBE v1 verifies <em class="kw">integrity, not truth</em>. A passing verification proves that a sealed object has not been altered since its hash was computed. It does not prove that the author is who they claim to be, that the content is accurate, that consent was actually obtained, or that the object is appropriate for any particular use.</p>
 
-    <h2>Where KNOBE provides genuine value</h2>
+    <h2>Where KNOBE provides value</h2>
 
     <p>The protocol's high-value domain is the space where most contemporary knowledge loss actually happens: not adversarial forgery, but <em class="kw">entropy</em>. Context is stripped away as artifacts move through pipelines, summarization tools, copy-paste workflows, and AI ingestion systems. The protocol's primary opponent is not a malicious actor; it is the loss of interpretive context that occurs automatically every time a document is reduced, restructured, or repurposed.</p>
 
@@ -179,7 +179,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <p>It proves what context was attached to the text <em>at the moment of sealing</em>. Downstream actors who want to misuse the text must now actively strip the cryptographic block, leaving an auditable trail of destruction rather than passively benefiting from context that has already evaporated.</p>
     </div>
 
-    <p>This is the protocol's main job, and it does it well. Knowledge objects that traditionally lost their interpretive obligations in transit now carry them in plain text, verifiable without infrastructure, and visible to any tool or human downstream that chooses to look.</p>
+    <p>This is the protocol's main job. Knowledge objects that traditionally lost their interpretive obligations in transit now carry them in plain text, verifiable without infrastructure, and visible to any tool or human downstream that chooses to look.</p>
 
     <h2>Where KNOBE provides no value</h2>
 
@@ -192,7 +192,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       <p>If downstream human receivers conflate cryptographic <code>verified</code> (the file has not changed since sealing) with organizational <em>authentic</em> (the Provost actually wrote this), the protocol can actively harm the receiver by providing security theater. KNOBE fails as an identity-trust mechanism when deployed without a PKI overlay, an institutional signing tier, or a ledger anchor.</p>
     </div>
 
-    <h2>The boundary, stated precisely</h2>
+    <h2>The boundary</h2>
 
     <div class="boundary">
       <h3>What <code>status: verified</code> proves</h3>
@@ -243,9 +243,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
       Integrity is the substrate. Interpretive context is the point. Identity is a separable layer that adopters can build on top, where their trust model demands it.
     </div>
 
-    <p>The honest articulation of the protocol's value: KNOBE makes it harder for fragments to pass as whole objects, in a world where context is lost not through malice but through automation. It provides exactly what its name claims, a knowledge object boundary that survives transit, and it does not pretend to provide more.</p>
+    <p>KNOBE makes it harder for fragments to pass as whole objects, in a world where context is lost not through malice but through automation. It provides what its name says: a knowledge object boundary that survives transit.</p>
 
-    <p>A protocol that promised identity verification without a PKI would be lying. A protocol that promised timestamp proof without ledger anchoring would be lying. KNOBE v1 promises integrity of declared context, and that is what it delivers. Receivers who need more can compose it with infrastructure that provides more; receivers who need only what it provides can use it alone.</p>
+    <p>Identity verification requires a PKI. Timestamp proof requires anchoring. KNOBE v1 claims integrity of declared context, and no more. Receivers who need more can compose it with infrastructure that provides more; receivers who need only what it provides can use it alone.</p>
 
     <p>For audiences accustomed to PKI-grounded hard security, this is a different category of tool. It is the right category for the problem most knowledge work actually has, which is not adversarial forgery but the silent erosion of interpretive context as artifacts move through systems that were not built to preserve it.</p>
 
