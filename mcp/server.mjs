@@ -21,9 +21,9 @@
  */
 
 import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
-import { existsSync } from "node:fs";
+import { existsSync, realpathSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
-import { fileURLToPath, pathToFileURL } from "node:url";
+import { fileURLToPath } from "node:url";
 import { z } from "zod";
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
@@ -33,7 +33,7 @@ import {
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const FIXTURES = join(HERE, "fixtures");
-const VERSION = "0.1.0";
+const VERSION = "0.1.1";
 
 // ---------------------------------------------------------------------------
 // helpers
@@ -470,7 +470,21 @@ Follow this procedure exactly:
 
 // ---------------------------------------------------------------------------
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+/** Is this file the entry point node was invoked with? Compares real paths,
+ * not raw argv[1]/import.meta.url strings — npm's bin mechanism installs a
+ * SYMLINK (e.g. node_modules/.bin/knobe-mcp -> ../knobe-mcp/server.mjs), so
+ * process.argv[1] is the symlink while import.meta.url is already resolved
+ * past it; a raw string comparison never matches under npx/npm bin. */
+function isEntryPoint() {
+  if (!process.argv[1]) return false;
+  try {
+    return realpathSync(process.argv[1]) === fileURLToPath(import.meta.url);
+  } catch {
+    return false;
+  }
+}
+
+if (isEntryPoint()) {
   const transport = new StdioServerTransport();
   await (await buildServer()).connect(transport);
   console.error(`knobe-mcp ${VERSION} ready (stdio; engine parity with lens.py across the corpus)`);
