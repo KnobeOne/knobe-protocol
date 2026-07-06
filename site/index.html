@@ -87,13 +87,6 @@ h2{font-size:1.6rem;font-weight:normal;line-height:1.3;margin-bottom:18px;letter
 h3{font-size:1.1rem;font-weight:bold;margin:26px 0 9px}
 p{margin-bottom:16px}
 p.lead{font-size:1.1rem;color:var(--ink-soft)}
-.manifesto{max-width:660px;margin-bottom:0}
-.manifesto-line{font-size:1.5rem;font-family:-apple-system,system-ui,sans-serif;font-weight:400;line-height:1.4;margin-bottom:18px}
-.ml-1{color:var(--ink)}
-.ml-2{color:var(--amber)}
-.ml-3{color:#8a4f16}
-.ml-4{color:var(--moss)}
-.mn{margin-right:8px;opacity:0.5;font-variant-numeric:tabular-nums}
 a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 em.kw{font-style:italic;color:var(--moss-deep)}
 strong{font-weight:600;color:var(--ink)}
@@ -162,9 +155,8 @@ strong{font-weight:600;color:var(--ink)}
 .whofor div p{font-size:.86rem;color:var(--ink-soft);margin:2px 0 0}
 @media(max-width:560px){.whofor{grid-template-columns:1fr}}
 
-.gains{list-style:none;margin:24px 0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.gains li{display:flex;gap:13px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:15px 17px;color:var(--ink-soft);line-height:1.6;font-size:.92rem;transition:border-color .15s,box-shadow .15s,transform .15s}
-.gains li:hover{border-color:var(--moss);box-shadow:0 3px 12px rgba(31,42,38,.07);transform:translateY(-1px)}
+.gains{list-style:none;margin:24px 0;padding:0;display:grid;gap:12px}
+.gains li{display:flex;gap:14px;align-items:flex-start;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px 18px;color:var(--ink-soft);line-height:1.6;font-size:.94rem}
 .gains .gn{flex:none;width:25px;height:25px;border-radius:50%;background:var(--moss);color:#fff;font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;font-weight:600;display:flex;align-items:center;justify-content:center;margin-top:1px}
 .gains li strong{display:block;color:var(--ink);margin-bottom:3px}
 @media(max-width:560px){.gains{grid-template-columns:1fr}}
@@ -348,15 +340,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <header class="hero" id="main">
   <div class="wrap">
     <div class="eyebrow">Open protocol · Plain text · Local verification · v1 frozen</div>
-    <div class="manifesto" aria-label="KNOBE manifesto">
-      <p class="manifesto-line ml-1"><span class="mn">1.</span>Compressed knowledge now moves through AI.</p>
-      <p class="manifesto-line ml-2"><span class="mn">2.</span>Context does not automatically follow.</p>
-      <p class="manifesto-line ml-3"><span class="mn">3.</span>Transformations are not always visible.</p>
-      <p class="manifesto-line ml-4"><span class="mn">4.</span>The context has to travel with the object.</p>
-    </div>
-    <p class="sub" style="margin-top:28px">We're now in an era where knowledge moves continuously through humans and AI. AI has changed the scale and speed of knowledge movement so dramatically that we can no longer assume context will be reconstructed downstream as knowledge passes through multiple systems, people, and tools.</p>
-    <p class="defn">KNOBE is an open protocol for auditable plain-text knowledge objects that carry their source, history, limits, and obligations across human and AI systems.</p>
-    <a class="pull" href="#problem">Here is what happens without it ↓</a>
+    <h1 class="claim">Context that travels with the object.</h1>
+    <p class="defn">KNOBE is a plain-text format for knowledge objects that need to keep their source, history, limits, and obligations attached as they move across tools, institutions, and AI systems.</p>
+    <p class="sub">A KNOBE file can be read like ordinary Markdown. It also holds a sealed payload that records declared provenance, transformations, fidelity limits, use conditions, and an integrity hash. Verification shows whether that sealed record has changed.</p>
+    <p class="sub">When a transcript, lesson, research note, accessibility adaptation, or AI-assisted summary leaves the system where it was created, its context can become hard to reconstruct. KNOBE helps selected context stay part of the file.</p>
+    <a class="pull" href="#problem">See a concrete example ↓</a>
   </div>
 </header>
 
@@ -399,18 +387,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <section id="related">
   <div class="wrap">
-    <h2>What KNOBE changes</h2>
-    <p>Knowledge work is most fragile at handoff points: email, shared drives, LMS exports, AI assistants, accessibility adaptations, repositories, reports. The words may survive, but the conditions that make them responsible to use often do not.</p>
-    <p>KNOBE makes context portable. A <code>.knobe.md</code> carries its declared provenance, adaptations, fidelity limits, use conditions, accessibility lineage, and verification record in one readable file.</p>
+    <h2>What changes</h2>
     <ul class="gains" role="list">
-      <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context travels with the work.</strong> Every <code>.knobe.md</code> carries its source, transformations, consent, fidelity limits, and accessibility lineage inside the file.</span></li>
-      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Obligations show up where they are needed.</strong> The payload fields are written for the next receiver: what changed, what is safe to infer, what should not be done, and who adapted what.</span></li>
-      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>Share the object, not the system.</strong> Because the context lives inside the file, you can share a knowledge object with its full provenance without exposing the database, drive, or platform it came from.</span></li>
-      <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>The seal informs; it never locks.</strong> A broken or mismatched seal is a cue to inspect, not a barrier to reading. The file stays plain text for accessibility, education, and research use.</span></li>
-      <li><span class="gn" aria-hidden="true">5</span><span class="gt"><strong>Verify integrity locally.</strong> Anyone can check whether the sealed record is intact with <code>lens.py</code> or Lens: no account, registry, certificate authority, or server required.</span></li>
-      <li><span class="gn" aria-hidden="true">6</span><span class="gt"><strong>One object, many interfaces.</strong> The same KNOBE can move through screen readers, AI assistants, LMSes, repositories, local folders, and plain-text editors without losing its record.</span></li>
-      <li><span class="gn" aria-hidden="true">7</span><span class="gt"><strong>Built to outlast its tools.</strong> A KNOBE is plain text sealed against a frozen v1 specification, so it stays readable and verifiable years from now: no proprietary format to obsolesce, no vendor whose survival you depend on.</span></li>
-      <li><span class="gn" aria-hidden="true">8</span><span class="gt"><strong>Usable now, composable later.</strong> KNOBEs work in email, shared drives, and local folders today, and can later be indexed or composed inside Git, RO-Crate, FDO, OKF, or other infrastructure.</span></li>
+      <li><span class="gn" aria-hidden="true">1</span><span class="gt"><strong>Context remains attached.</strong> Source, transformations, consent terms, fidelity limits, accessibility lineage, and any AI involvement can be recorded inside the file, alongside the readable text.</span></li>
+      <li><span class="gn" aria-hidden="true">2</span><span class="gt"><strong>Use conditions are visible.</strong> A later reader, or a cooperating tool, can inspect the declared terms before reuse, quotation, transformation, publication, or AI processing. Whether to act on them stays with the reader or the tool.</span></li>
+      <li><span class="gn" aria-hidden="true">3</span><span class="gt"><strong>The file can leave the system.</strong> A KNOBE can carry selected provenance outside the database, repository, LMS, or platform where it was created, and the same file still opens in a plain-text editor or a screen reader. A repository preserves a dataset within a managed environment; a KNOBE helps a single object carry context when it leaves one.</span></li>
+      <li><span class="gn" aria-hidden="true">4</span><span class="gt"><strong>Verification is advisory.</strong> The published verifier compares the file to its sealed payload and reports whether the record still matches. A mismatch is a reason to inspect the file, not a barrier to reading it, and the text stays readable either way.</span></li>
     </ul>
   </div>
 </section>
