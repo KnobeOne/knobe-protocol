@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNOBE — About the protocol</title>
-<meta name="description" content="KNOBE Protocol v1 is authored by David Kyle, University of California, Davis, and released under CC BY 4.0. The protocol stands or falls on its specification, test vectors, reference verifier, and independent implementations.">
+<meta name="description" content="KNOBE Protocol v1 is an open specification for plain-text knowledge objects that carry source, history, limits, and obligations across tools, institutions, and AI systems. Authored by David Kyle, UC Davis, released under CC BY 4.0.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -51,9 +51,6 @@ em.kw{font-style:italic;color:var(--moss-deep)}
 strong{font-weight:600}
 a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
 
-.gov-block{background:var(--paper-warm);border-left:3px solid var(--moss);border-radius:0 6px 6px 0;padding:26px 30px 8px;margin:22px 0 0}
-.gov-block p{font-size:1.02rem;color:var(--ink-soft)}
-
 .closing-band{background:var(--moss-deep);text-align:center;padding:80px 28px 88px;margin-top:72px}
 .closing-band .cb-title{font-family:Georgia,'Times New Roman',serif;font-size:2rem;font-weight:normal;font-style:italic;color:var(--paper);letter-spacing:-.02em;margin-bottom:22px;line-height:1.25;max-width:640px;margin-left:auto;margin-right:auto}
 .closing-band .cb-text{font-family:-apple-system,system-ui,sans-serif;font-size:1rem;color:rgba(247,245,239,.72);max-width:460px;margin:0 auto 28px;line-height:1.65}
@@ -92,11 +89,11 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE — About the protocol">
-<meta property="og:description" content="KNOBE Protocol v1, authored and stewarded by David Kyle at UC Davis, released under CC BY 4.0. The protocol stands on its specification, test vectors, reference verifier, and independent implementations.">
+<meta property="og:description" content="An open specification for plain-text knowledge objects that carry source, history, limits, and obligations across tools, institutions, and AI systems. Authored by David Kyle, UC Davis, released under CC BY 4.0.">
 <meta property="og:url" content="https://knobe.org/about">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE — About the protocol">
-<meta name="twitter:description" content="KNOBE Protocol v1, authored and stewarded by David Kyle at UC Davis, released under CC BY 4.0. The protocol stands on its specification, test vectors, and reference verifier.">
+<meta name="twitter:description" content="An open specification for plain-text knowledge objects that carry source, history, limits, and obligations across tools, institutions, and AI systems.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -142,26 +139,35 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <header class="top">
   <div class="wrap">
-    <div class="eyebrow">About KNOBE</div>
-    <h1>Knowledge travels. The knowing that produced it often does not.</h1>
+    <h1>About KNOBE</h1>
   </div>
 </header>
 
 <main id="main">
   <div class="wrap">
-    <p>KNOBE Protocol v1 is authored by David Kyle, University of California, Davis, and released under CC BY 4.0. The protocol stands or falls on its specification, test vectors, reference verifier, and independent implementations. Institutional affiliation is provided for identification; KNOBE is an open protocol, not an official UC Davis standard.</p>
+    <p>KNOBE Protocol v1 is an open specification for plain-text knowledge objects that carry source, history, limits, and obligations across tools, institutions, and AI systems.</p>
 
-    <h2>Governance</h2>
+    <p>A KNOBE file remains readable as ordinary Markdown. Its sealed payload records declared provenance, transformation history, fidelity limits, use conditions, and an integrity hash that can be checked locally.</p>
 
-    <p>Until a formal advisory board is constituted, David Kyle is the sole steward of the KNOBE protocol. That is a transitional condition, not a design goal. Trust in an open protocol should not rest on who the steward is. It should rest on the constraints the steward accepts in public.</p>
+    <h2 class="section-gap">Authorship and status</h2>
 
-    <div class="gov-block">
-      <p>The protocol is open under CC BY 4.0 and will stay that way. It will not be enclosed, gated, or quietly converted into something people must pay to read or verify.</p>
-      <p>Verification is local by design: a sealed file and the published verifier are sufficient, with no server, account, or permission involved. The reference verifier is a single standard-library Python file with no external dependencies. That is a design constraint, not a feature that can be traded away.</p>
-      <p>The protocol will not be represented as doing more than it does. Integrity is not truth. KNOBE does not open the AI black box.</p>
-      <p>Where commercial tooling is built on top of the protocol, the boundary between the open layer and the application layer will be kept visible. The open protocol will never depend on any commercial implementation.</p>
-      <p>This comes from a research program, not a growth target. The measure of success is whether KNOBE stays useful and stays honest.</p>
-    </div>
+    <p>KNOBE Protocol v1 is authored by David Kyle, University of California, Davis. The affiliation identifies the author. KNOBE is an independent open protocol, not an official UC Davis standard, product, or endorsement.</p>
+
+    <h2 class="section-gap">What defines the protocol</h2>
+
+    <p>The protocol is defined by its specification, test vectors, reference verifier, and implementation corpus. Verification is local: a sealed file and the published verifier are sufficient to check whether the sealed record still matches the file. A match confirms integrity, not truth: the verifier does not evaluate whether the declared content is accurate.</p>
+
+    <p>The reference verifier is a single standard-library Python file with no external dependencies. Other <a class="inline" href="/implementations">implementations</a> can be checked against the same corpus.</p>
+
+    <h2 class="section-gap">License</h2>
+
+    <p>The specification and public documentation are released under CC BY 4.0. Reference code and implementation licenses are stated in their repositories.</p>
+
+    <h2 class="section-gap">Stewardship</h2>
+
+    <p>David Kyle is the current steward of the protocol. Governance will move toward an advisory structure as independent implementations and institutional uses develop.</p>
+
+    <p>Proposed changes, bug reports, and implementation questions are handled through the <a class="inline" href="https://github.com/KnobeOne/knobe-protocol">public source repository</a>. Substantive changes receive public discussion and documented decisions.</p>
 
     <h2 class="section-gap">v1 is frozen</h2>
 
@@ -171,29 +177,31 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>A verifier must apply the verification semantics of the spec version a file was sealed under. A future verifier may report additional advisory information, but must not reinterpret a previously valid KNOBE as failed.</p>
 
-    <h2 class="section-gap">How the spec changes</h2>
+    <h2 class="section-gap">Open protocol and application layers</h2>
 
-    <p>Proposed changes, bug reports, and implementation questions are submitted through the <a class="inline" href="https://github.com/KnobeOne/knobe-protocol">public source repository</a>. The steward reviews proposals, maintains a public comment period for substantive changes, and issues decisions with documented rationale.</p>
+    <p>Commercial, institutional, or experimental tools may be built around KNOBE. These tools belong to application layers. The open protocol remains separately specified and locally verifiable.</p>
 
-    <h2 class="section-gap">Team and advisory board</h2>
+    <p>Identity, credentialing, trusted time, hardware authentication, ledgers, payments, and institutional compliance are application-layer concerns. They are not requirements of the open protocol.</p>
 
-    <p>KNOBE is being developed in collaboration with colleagues and partners working across research, accessibility, software development, and education technology. Prospective advisory members are being identified; a formal advisory board will be constituted as the protocol reaches independent adoption, per the project's published governance. Relevant backgrounds include independent protocol implementation, educational technology, accessibility, open infrastructure, and institutional knowledge governance.</p>
+    <h2 class="section-gap">Inspect the artifacts</h2>
 
-    <p>Write to <a class="inline" href="mailto:djkyle@ucdavis.edu">djkyle@ucdavis.edu</a> with a brief note on your perspective and relevant work. There is no deadline.</p>
-
-    <h2 class="section-gap">Institutional pilots</h2>
-
-    <p>Institutional pilots are planned for large-scale university courses, including high-enrollment settings with strict privacy and accessibility requirements. A pilot can begin small: a single sealed reading or assignment chain is enough to evaluate the workflow.</p>
-
-    <p>Application-layer work is also exploring accessible credentialing, hardware authentication, and distributed-ledger options for institutional deployment. These are possible implementations built around KNOBE; they are not requirements of the open protocol.</p>
+    <p>The protocol is best evaluated through its artifacts:</p>
+    <ul>
+      <li>Specification</li>
+      <li>Test vectors</li>
+      <li>Reference verifier</li>
+      <li>Independent implementations</li>
+      <li>Example files</li>
+    </ul>
 
   </div>
 
 
 <div class="wrap"><nav class="fwd" aria-label="Where to go next">
-    <p class="fwd-why">The protocol stands on its artifacts. Inspect them.</p>
+    <p class="fwd-why">The protocol is best evaluated through its artifacts.</p>
     <a class="fwd-link" href="https://github.com/KnobeOne/knobe-protocol">See the code →</a>
-    <a class="fwd-link" href="/implementations">See the implementations →</a>
+    <a class="fwd-link" href="/implementations">Review the implementations →</a>
+    <a class="fwd-link" href="/lens">Verify an example →</a>
 </nav></div>
 
   <div class="closing-band">
