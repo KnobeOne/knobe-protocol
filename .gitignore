@@ -16,7 +16,6 @@ __pycache__/
 *.p12
 *.pdf
 # Exceptions: curated presentation PDFs for the public site
-!site/KNOBE-Two-Minute-Pitch-Deck.pdf
 !site/KNOBE-Technical-Intro-Deck.pdf
 *.docx
 *.xlsx

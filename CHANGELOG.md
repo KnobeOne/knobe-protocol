@@ -11,6 +11,14 @@ The protocol itself is frozen at v1.0 (see [GOVERNANCE.md](GOVERNANCE.md)); entr
 
 ## Post-freeze updates (non-normative)
 
+### 2026-07-06 – 2026-07-07
+
+- `GOVERNANCE.md`: "Name and mark use" section added, inviting anyone
+  building on KNOBE to name their tool freely with one firm boundary,
+  honesty about origin. `implementations.html` points readers there.
+- `.github/ISSUE_TEMPLATE/listing-request.md` added for the implementations
+  registry intake.
+
 ### 2026-07-05
 
 - Sitewide tone pass: homepage demo strings, About governance and pilots
