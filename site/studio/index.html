@@ -830,6 +830,35 @@ footer a:hover{color:var(--moss)}
           <button type="button" class="btn ghost" id="chChainView">Chain view</button>
           <button type="button" class="btn ghost" id="chClear">Clear</button>
         </div>
+        <details class="acc" id="chRcptBox">
+          <summary>Seal a cohort receipt</summary>
+          <div class="accbody">
+            <p class="jainote">The receipt seals what this table shows: at seal time, these files existed with these payload hashes and produced these verdicts. Verdicts and hashes only; student-declared names are not sealed in. Anchored anywhere with an independent timestamp, its one hash timestamps every listed submission.</p>
+            <div class="field">
+              <label for="chRcptName">Who is attesting</label>
+              <input type="text" id="chRcptName" autocomplete="name">
+              <div class="hint">Recorded as the receipt's attribution, role cohort_verifier.</div>
+            </div>
+            <div class="btnrow"><button type="button" class="btn" id="chRcptSealBtn">Seal the receipt</button></div>
+            <div class="errmsg" id="chRcptErr" role="alert" hidden></div>
+            <div class="sealres" id="chRcptRes" tabindex="-1" hidden>
+              <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="chRcptResText"></span></div>
+              <div class="sbody">
+                <div class="hashline" id="chRcptResHash"></div>
+                <div class="chainline" id="chRcptResChain"></div>
+                <div class="fname">
+                  <label for="chRcptFileName">File name</label>
+                  <input type="text" id="chRcptFileName" autocomplete="off" spellcheck="false">
+                </div>
+                <div class="btnrow">
+                  <button type="button" class="btn" id="chRcptDownload">Download .knobe.md</button>
+                  <button type="button" class="btn ghost" id="chRcptCopy">Copy file text</button>
+                </div>
+                <p class="jainote" style="margin:10px 0 0">To anchor the date externally, put the payload_hash above somewhere you do not control the timestamp of: an email, a gradebook note, a post. One hash anchors every listed submission.</p>
+              </div>
+            </div>
+          </div>
+        </details>
         <div class="chtablewrap">
           <table class="chtable" id="chTable">
             <thead><tr><th>File</th><th>Title</th><th>Author</th><th>Integrity</th><th>Conformance</th><th>AI disclosure</th><th>Chain</th><th>Review</th></tr></thead>
@@ -989,7 +1018,7 @@ const $ = (id) => document.getElementById(id);
 // ---- engine availability ----
 const engineOk = typeof crypto !== 'undefined' && !!crypto.subtle;
 if (engineOk) $('enginefail').remove();
-else { $('sealBtn').disabled = true; $('tSealBtn').disabled = true; $('aSealBtn').disabled = true; }
+else { $('sealBtn').disabled = true; $('tSealBtn').disabled = true; $('aSealBtn').disabled = true; $('jmSealBtn').disabled = true; $('chRcptSealBtn').disabled = true; }
 
 // ---- small utilities ----
 const line = (v) => String(v || '').replace(/[\r\n]+/g, ' ').trim();
@@ -1953,7 +1982,7 @@ async function chLoadExpectation(text) {
   const hashes = new Set([report.stored]);
   const j = report.payload && report.payload.journey;
   if (j && Array.isArray(j.steps)) j.steps.forEach(s => { if (typeof s.spec_hash === 'string' && s.spec_hash) hashes.add(s.spec_hash); });
-  chExpectation = { title: typeof report.payload.title === 'string' ? report.payload.title : 'Untitled', hashes };
+  chExpectation = { title: typeof report.payload.title === 'string' ? report.payload.title : 'Untitled', hashes, stored: report.stored };
   $('chExpBanner').textContent = 'Submissions will be checked against: ' + safe(chExpectation.title, 110) + ' (' + hashes.size + ' accepted hash' + (hashes.size === 1 ? '' : 'es') + ').';
   $('chExpBanner').hidden = false;
   if (chRows.length) renderCohort();
@@ -2068,6 +2097,7 @@ function renderCohort() {
     + (chExpectation ? ' · chain checked against "' + chExpectation.title + '"' : ' · no chain expectation loaded');
   $('chResults').hidden = false;
   $('chChain').hidden = true;
+  chHideReceipt(); // a displayed receipt must always match the visible table
 }
 
 const chDrop = $('chDrop');
@@ -2082,7 +2112,7 @@ $('chChooseFiles').addEventListener('click', () => $('chFiles').click());
 $('chChooseDir').addEventListener('click', () => $('chDir').click());
 $('chFiles').addEventListener('change', async () => { await chProcessFiles([...$('chFiles').files]); $('chFiles').value = ''; });
 $('chDir').addEventListener('change', async () => { await chProcessFiles([...$('chDir').files]); $('chDir').value = ''; });
-$('chClear').addEventListener('click', () => { chRows = []; $('chResults').hidden = true; $('chBody').textContent = ''; });
+$('chClear').addEventListener('click', () => { chRows = []; $('chResults').hidden = true; $('chBody').textContent = ''; chHideReceipt(); });
 
 $('chCsv').addEventListener('click', () => {
   const esc = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
@@ -2125,6 +2155,140 @@ $('chChainView').addEventListener('click', () => {
   rest.forEach(addItem);
   box.hidden = false;
 });
+
+// ---- cohort receipt: a sealed attestation of the table's verdicts ----
+let chRcptResult = null;
+
+function chReceiptRows() {
+  // one snapshot feeds both payload and body; dedupe exact (file, stored)
+  // duplicates from repeated drops, sort by codepoint so the sealed bytes are
+  // machine-independent (localeCompare is locale-dependent)
+  const seen = new Set();
+  const rows = [];
+  chRows.forEach(r => {
+    const key = r.file + ' ' + (r.stored || '');
+    if (seen.has(key)) return;
+    seen.add(key);
+    const v = chChainVerdict(r).text;
+    rows.push({
+      file: line(r.file),
+      stored: r.stored || null,
+      integrity: r.state,
+      conformance: r.conformance,
+      chain: !chExpectation ? 'not_checked' : (v === 'linked' ? 'linked' : 'no_link'),
+    });
+  });
+  rows.sort((a, b) => {
+    const ka = a.file + ' ' + (a.stored || ''), kb = b.file + ' ' + (b.stored || '');
+    return ka < kb ? -1 : ka > kb ? 1 : 0;
+  });
+  return rows;
+}
+
+function buildCohortReceipt(sealerName) {
+  const rows = chReceiptRows();
+  const today = localToday();
+  const ok = rows.filter(r => r.integrity === 'verified' || r.integrity === 'verified-body-modified').length;
+  const bad = rows.length - ok;
+  const scope = chExpectation ? chExpectation.title : 'an unnamed batch';
+  const title = 'Cohort check receipt: ' + scope + ', ' + today;
+
+  const block = {
+    checked_date: today,
+    engine: 'knobe-core.js via KNOBE Studio cohort check',
+    submission_count: String(rows.length),
+    verified_count: String(ok),
+    failed_or_unreadable_count: String(bad),
+    submissions: rows.map(r => {
+      const s = { file: r.file, integrity: r.integrity, conformance: r.conformance, chain: r.chain };
+      if (r.stored) s.payload_hash = r.stored;
+      return s;
+    }),
+  };
+  if (chExpectation) {
+    block.assignment = chExpectation.title;
+    block.expectation_hashes = [...chExpectation.hashes].sort();
+  }
+
+  const fields = {
+    title,
+    summary: 'Sealed record of a cohort integrity check: ' + rows.length + ' file' + (rows.length === 1 ? '' : 's') + ', ' + ok + ' verified, ' + bad + ' failed or unreadable.',
+    content_type: 'collection',
+    created_date: today,
+    license: 'All rights reserved',
+    privacy_level: 'internal',
+    quarantine_status: 'trusted',
+    attribution: {
+      good_faith_declaration: true,
+      sources: [{ author: sealerName, contribution: 'Ran the cohort check in KNOBE Studio and attested the listed verdicts at seal time.', rights_bearing: true, role: 'cohort_verifier' }],
+    },
+    fidelity_limits: {
+      represents: "the verdicts KNOBE Studio's cohort check produced for the listed files at seal time",
+      trust_as: 'the sealer' + "'" + 's attestation, on the stated date, that files with these payload hashes existed and produced these verdicts',
+      do_not_infer: [
+        'that created_date is machine-verified wall-clock time; it is the sealer' + "'" + 's declared date until the receipt hash is anchored externally',
+        'that a verified verdict establishes authorship, originality, or policy compliance for any submission',
+        'that this list is the complete set of submissions for the assignment',
+        'that file names identify students; authorship claims live in the submissions themselves',
+      ],
+    },
+    use_conditions: {
+      permitted: ['course records and grading workflow', 'academic integrity review', 'dispute resolution concerning a listed submission'],
+      requested_preservations: ['keep within course staff and institutional review processes', 'cite this receipt' + "'" + 's payload_hash when quoting any row'],
+      consent_note: 'File names come from the LMS export and may contain student names. FERPA applies.',
+    },
+    tags: ['cohort-receipt'],
+    'education:cohort_receipt': block,
+  };
+  if (chExpectation && chExpectation.stored) {
+    fields.parents = [{ payload_hash: chExpectation.stored, title: chExpectation.title, relationship: 'responds_to' }];
+  }
+
+  const L = ['# ' + title, ''];
+  L.push('Checked ' + today + ' by ' + sealerName + '. ' + rows.length + ' file' + (rows.length === 1 ? '' : 's') + ': ' + ok + ' verified, ' + bad + ' failed or unreadable.' + (chExpectation ? ' Chain checked against "' + chExpectation.title + '".' : ' No chain expectation was loaded.'));
+  L.push('');
+  L.push('This receipt attests that the sealer ran the check and saw these verdicts at seal time. It is not an independent wall-clock timestamp until its payload hash is anchored somewhere the sealer does not control.');
+  L.push('');
+  L.push('| File | Payload hash | Integrity | Conformance | Chain |');
+  L.push('|---|---|---|---|---|');
+  rows.forEach(r => {
+    const name = r.file.replace(/\|/g, '\\|');
+    L.push('| ' + name + ' | ' + (r.stored || '(unreadable)') + ' | ' + r.integrity + ' | ' + r.conformance + ' | ' + r.chain + ' |');
+  });
+  L.push('');
+  L.push('To use this receipt in a dispute: verify this file, verify the disputed submission, and confirm the submission' + "'" + 's recomputed payload hash appears in its row above. The attribution and date then attest the file existed with that content when the check ran.');
+  return { fields, body: L.join('\n') };
+}
+
+function chHideReceipt() {
+  $('chRcptRes').hidden = true;
+  $('chRcptErr').hidden = true;
+  chRcptResult = null;
+}
+
+$('chRcptSealBtn').addEventListener('click', async () => {
+  $('chRcptErr').hidden = true;
+  try {
+    if (!chRows.length) throw new Error('There is nothing to attest; run a check first.');
+    const name = line($('chRcptName').value);
+    if (!name) throw new Error('Name who is attesting; the credit is part of the record.');
+    const { fields, body } = buildCohortReceipt(name);
+    chRcptResult = await createKnobe({ fields, body });
+    $('chRcptResText').textContent = 'Sealed. Self-check: ' + chRcptResult.report.state + ' · ' + chRcptResult.report.conformance + '.';
+    $('chRcptResHash').textContent = 'payload_hash ' + chRcptResult.payloadHash;
+    $('chRcptResChain').textContent = chExpectation && chExpectation.stored
+      ? 'Anchored to "' + safe(chExpectation.title, 90) + '" as parents[0], payload_hash ' + chExpectation.stored + '.'
+      : 'No expectation loaded; the receipt records verdicts without a chain target.';
+    $('chRcptFileName').value = slugify(chRcptResult.payload.title);
+    $('chRcptRes').hidden = false;
+    $('chRcptRes').focus();
+  } catch (e) {
+    $('chRcptErr').textContent = 'Sealing did not complete: ' + e.message;
+    $('chRcptErr').hidden = false;
+  }
+});
+$('chRcptDownload').addEventListener('click', () => { if (chRcptResult) download(chRcptResult.text, line($('chRcptFileName').value) || 'untitled.knobe.md'); });
+$('chRcptCopy').addEventListener('click', (e) => { if (chRcptResult) copyText(chRcptResult.text, e.currentTarget); });
 
 // ============================================================
 // Adapt (accessibility adaptations with sealed lineage)
