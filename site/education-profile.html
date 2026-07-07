@@ -99,21 +99,25 @@ pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;
 .flow-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);max-width:230px}
 .flow-node .fk{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
 .flow-arrow{color:var(--ink-faint);font-size:1.1rem}
-.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin-bottom:14px}
+.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin-bottom:14px}
 @media(max-width:560px){.flow{flex-direction:column;align-items:flex-start}.flow li{flex-direction:column;align-items:flex-start}.flow-arrow{transform:rotate(90deg);margin-left:18px}}
 .launch{display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:20px 24px;text-decoration:none;color:inherit;margin:18px 0;transition:border-color .15s,box-shadow .15s}
 .launch:hover,.launch:focus-visible{border-color:var(--moss);box-shadow:0 2px 18px rgba(47,107,79,.13)}
 .launch-main{flex:1;min-width:240px}
-.launch-kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.launch-kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--moss);margin-bottom:6px}
 .launch-title{font-size:1.15rem;color:var(--moss-deep);margin-bottom:5px;letter-spacing:-.01em}
 .launch-desc{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft);margin:0}
 .launch-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
 .launch:hover .launch-cta{color:var(--moss-deep)}
+.launch:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
 details.fold{border:1px solid var(--line);border-radius:6px;margin:14px 0;background:#fff}
 .fold summary{list-style:none;cursor:pointer;padding:12px 16px;font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss-deep)}
 .fold summary::-webkit-details-marker{display:none}
 .fold summary::before{content:"\25B8  ";color:var(--moss)}
 .fold[open] summary::before{content:"\25BE  "}
+.fold summary::before{content:"\25B8  " / ""}
+.fold[open] summary::before{content:"\25BE  " / ""}
+.fold summary:focus-visible{outline:2px solid var(--moss);outline-offset:-2px}
 .fold .fold-body{padding:0 16px 14px}
 .fold .fold-body pre{margin-top:4px}
 

@@ -14,6 +14,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
 .wrap{max-width:680px;margin:0 auto;padding:0 28px}
 
@@ -109,16 +110,17 @@ dl.qa dd{margin:0 0 6px;font-size:1rem;color:var(--ink-soft)}
 .flow-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);max-width:230px}
 .flow-node .fk{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
 .flow-arrow{color:var(--ink-faint);font-size:1.1rem}
-.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin-bottom:14px}
+.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin-bottom:14px}
 @media(max-width:560px){.flow{flex-direction:column;align-items:flex-start}.flow li{flex-direction:column;align-items:flex-start}.flow-arrow{transform:rotate(90deg);margin-left:18px}}
 .launch{display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:20px 24px;text-decoration:none;color:inherit;margin:18px 0;transition:border-color .15s,box-shadow .15s}
 .launch:hover,.launch:focus-visible{border-color:var(--moss);box-shadow:0 2px 18px rgba(47,107,79,.13)}
 .launch-main{flex:1;min-width:240px}
-.launch-kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.launch-kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--moss);margin-bottom:6px}
 .launch-title{font-size:1.15rem;color:var(--moss-deep);margin-bottom:5px;letter-spacing:-.01em}
 .launch-desc{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft);margin:0}
 .launch-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
 .launch:hover .launch-cta{color:var(--moss-deep)}
+.launch:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
 
 
 footer{border-top:1px solid var(--line);margin-top:40px;padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}

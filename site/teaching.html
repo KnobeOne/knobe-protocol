@@ -14,6 +14,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
 .wrap{max-width:680px;margin:0 auto;padding:0 28px}
 
@@ -76,6 +77,9 @@ li{margin-bottom:6px}
 input.vh:checked + .role-card{border-color:var(--moss);box-shadow:inset 3px 0 0 var(--moss)}
 input.vh:checked + .role-card .role-name::before{content:"\2713  ";color:var(--moss-deep)}
 input.vh:focus-visible + .role-card{outline:2px solid var(--moss);outline-offset:2px}
+.role-name::before{content:"\25CB  " / ""}
+input.vh:checked + .role-card .role-name::before{content:"\2713  " / "";color:var(--moss-deep)}
+.btn:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
 .role-panel{margin-top:6px}
 @supports selector(:has(*)){
   .roles-wrap:has(#r-instructor:checked) .role-panel{display:none}
@@ -102,7 +106,7 @@ input.vh:focus-visible + .role-card{outline:2px solid var(--moss);outline-offset
 .flow-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);max-width:230px}
 .flow-node .fk{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
 .flow-arrow{color:var(--ink-faint);font-size:1.1rem}
-.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin-bottom:14px}
+.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin-bottom:14px}
 @media(max-width:560px){.flow{flex-direction:column;align-items:flex-start}.flow li{flex-direction:column;align-items:flex-start}.flow-arrow{transform:rotate(90deg);margin-left:18px}}
 
 /* ---- callouts and folds ---- */
@@ -112,6 +116,9 @@ details.fold{border:1px solid var(--line);border-radius:6px;margin:14px 0;backgr
 .fold summary::-webkit-details-marker{display:none}
 .fold summary::before{content:"\25B8  ";color:var(--moss)}
 .fold[open] summary::before{content:"\25BE  "}
+.fold summary::before{content:"\25B8  " / ""}
+.fold[open] summary::before{content:"\25BE  " / ""}
+.fold summary:focus-visible{outline:2px solid var(--moss);outline-offset:-2px}
 .fold .fold-body{padding:0 16px 14px}
 .fold .fold-body ul{margin-top:0}
 .fold .fold-body p:last-child{margin-bottom:0}
@@ -230,6 +237,7 @@ footer a:hover{color:var(--moss)}
           <label class="role-card" for="r-access"><span class="role-name">Accessibility staff</span><span class="role-hint">Seal alternate formats</span></label>
         </div>
       </fieldset>
+      <p class="vh" id="roleStatus" role="status" aria-live="polite"></p>
 
       <div class="role-panels">
 
@@ -373,6 +381,8 @@ footer a:hover{color:var(--moss)}
     </details>
 
   </div>
+
+<script>/* announce role-panel changes to assistive tech; page works without this */(function(){var s=document.getElementById('roleStatus');if(!s)return;var names={'r-instructor':'the instructor path','r-student':'the student path','r-ta':'the TA path','r-access':'the accessibility path'};document.querySelectorAll('input[name="role"]').forEach(function(r){r.addEventListener('change',function(){if(r.checked&&names[r.id])s.textContent='Showing '+names[r.id]+'.';});});})();</script>
 
 <div class="wrap"><nav class="fwd" aria-label="Where to go next">
     <p class="fwd-why">The tools, and the field vocabulary behind them:</p>
