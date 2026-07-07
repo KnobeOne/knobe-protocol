@@ -34,7 +34,7 @@ nav .inner{max-width:920px;margin:0 auto;padding:14px 28px;display:flex;align-it
 .nav-menu a{padding:7px 10px;border-radius:4px;white-space:nowrap;border-bottom:none}
 .nav-menu a:hover{background:var(--paper-warm);color:var(--moss)}
 .nav-menu a.here{color:var(--moss);border-bottom:none}
-@media(max-width:680px){nav .inner{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}.field-table,.label-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+@media(max-width:760px){nav .inner{flex-wrap:wrap;row-gap:6px}.navlinks{width:100%;flex-wrap:wrap;justify-content:flex-start;gap:8px 14px;font-size:.78rem}.field-table,.label-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
 
 header{padding:64px 0 36px;border-bottom:1px solid var(--line)}
 .eyebrow{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--moss);margin-bottom:18px}
@@ -89,6 +89,38 @@ pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;
 .btn{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;font-weight:500;text-decoration:none;padding:9px 18px;border-radius:3px;background:var(--moss-deep);color:var(--paper);display:inline-block;transition:background .15s}
 .btn:hover{background:var(--moss)}
 
+/* ---- visual kit: chips, flow strip, launch card, folds ---- */
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:10px 0 12px;padding:0}
+.chips li{margin:0}
+.chip{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--paper);color:var(--ink-soft)}
+.flow{list-style:none;display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:16px 0 6px;padding:0}
+.flow li{display:flex;align-items:center;gap:10px;margin:0}
+.flow-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);max-width:230px}
+.flow-node .fk{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
+.flow-arrow{color:var(--ink-faint);font-size:1.1rem}
+.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);margin-bottom:14px}
+@media(max-width:560px){.flow{flex-direction:column;align-items:flex-start}.flow li{flex-direction:column;align-items:flex-start}.flow-arrow{transform:rotate(90deg);margin-left:18px}}
+.launch{display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:20px 24px;text-decoration:none;color:inherit;margin:18px 0;transition:border-color .15s,box-shadow .15s}
+.launch:hover,.launch:focus-visible{border-color:var(--moss);box-shadow:0 2px 18px rgba(47,107,79,.13)}
+.launch-main{flex:1;min-width:240px}
+.launch-kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--moss);margin-bottom:6px}
+.launch-title{font-size:1.15rem;color:var(--moss-deep);margin-bottom:5px;letter-spacing:-.01em}
+.launch-desc{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft);margin:0}
+.launch-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
+.launch:hover .launch-cta{color:var(--moss-deep)}
+.launch:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
+details.fold{border:1px solid var(--line);border-radius:6px;margin:14px 0;background:#fff}
+.fold summary{list-style:none;cursor:pointer;padding:12px 16px;font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss-deep)}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::before{content:"\25B8  ";color:var(--moss)}
+.fold[open] summary::before{content:"\25BE  "}
+.fold summary::before{content:"\25B8  " / ""}
+.fold[open] summary::before{content:"\25BE  " / ""}
+.fold summary:focus-visible{outline:2px solid var(--moss);outline-offset:-2px}
+.fold .fold-body{padding:0 16px 14px}
+.fold .fold-body pre{margin-top:4px}
+
 footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:var(--ink-soft);text-decoration:none}
@@ -135,6 +167,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <a href="/" class="brand">KNOBE <span class="v">Protocol v1</span></a>
     <div class="navlinks">
       <a href="/studio/">Studio</a>
+      <a href="/teaching">Teaching</a>
       <a href="/spec">Spec</a>
       <a href="/white-paper">White paper</a>
       <details class="nav-uses">
@@ -148,7 +181,6 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <summary class="here">Uses</summary>
         <div class="nav-menu">
           <a href="/education-profile" class="here" aria-current="page">Education</a>
-          <a href="/teaching">Teaching</a>
           <a href="/government-profile">Government</a>
           <a href="/enterprise-profile">Enterprise</a>
           <a href="/research-profile">Research</a>
@@ -190,8 +222,34 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p class="lead">This page is non-normative guidance for using KNOBE in educational settings. Nothing here changes the protocol. If this document conflicts with the <a class="inline" href="/spec">normative specification</a>, the specification governs.</p>
 
     <div class="nonnorm">
-      <strong>Who this is for.</strong> Instructors, students, ed-tech builders, librarians, and course designers who want to use KNOBE to document student work, course materials, AI use disclosure, and accessibility adaptations. The first KNOBE instructional pilots are being planned with collaborators at UC Davis for large courses with a range of AI use policies; none are yet active. KNOBE is an independent open protocol, not an official UC Davis standard or product.
+      <strong>Who this is for.</strong>
+      <ul class="chips" role="list">
+        <li class="chip">Instructors</li>
+        <li class="chip">Students</li>
+        <li class="chip">Ed-tech builders</li>
+        <li class="chip">Librarians</li>
+        <li class="chip">Course designers</li>
+      </ul>
+      For documenting student work, course materials, AI use disclosure, and accessibility adaptations. The first KNOBE instructional pilots are being planned with collaborators at UC Davis for large courses with a range of AI use policies; none are yet active. KNOBE is an independent open protocol, not an official UC Davis standard or product.
     </div>
+
+    <p class="vh">The course loop this profile documents: the instructor seals the reading and the assignment spec; student work chains to them by hash; a TA batch-checks the cohort; the sealed record survives the term.</p>
+    <ol class="flow" role="list">
+      <li><div class="flow-node"><span class="fk">Instructor</span>seals the reading and the spec</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">Student</span>work chains to them by hash</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">TA</span>batch-checks the cohort</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">The record</span>survives the term, platform to platform</div></li>
+    </ol>
+    <p class="flow-cap">Every arrow is a payload hash: each artifact names exactly what it builds on.</p>
+
+    <a class="launch" href="/teaching">
+      <div class="launch-main">
+        <div class="launch-kicker">Run this in a course</div>
+        <div class="launch-title">The instructor toolkit</div>
+        <p class="launch-desc">Role-based paths for instructors, students, and TAs: build a sealed assignment sequence, collect sealed submissions through Canvas, and check a whole batch in the browser.</p>
+      </div>
+      <span class="launch-cta">Open the teaching page →</span>
+    </a>
 
     <div class="toc">
       <div class="toc-title">Contents</div>
@@ -292,7 +350,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The <code>fidelity_limits</code> field is the most educationally important optional field. It tells a reader what the artifact is fit for and what must not be inferred from it. In a course context, it makes the difference visible between a summary and the reading it compresses, between a draft and finished work, and between AI-assisted notes and independent comprehension.</p>
 
-    <h4>Template: student reflection or essay</h4>
+    <details class="fold">
+      <summary>Template: student reflection or essay</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "a course reflection / first draft / final essay",
@@ -304,8 +364,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: reading summary or compression</h4>
+    <details class="fold">
+      <summary>Template: reading summary or compression</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "a compression of [source title], approximately [X]% of original length",
@@ -317,8 +381,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: AI-generated or AI-assisted material</h4>
+    <details class="fold">
+      <summary>Template: AI-generated or AI-assisted material</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "material [drafted / assisted / reviewed] with AI contribution as described in attribution",
@@ -330,12 +398,16 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
     <h2 id="use"><span class="sec">§6</span>Use condition templates</h2>
 
     <p>The <code>use_conditions</code> field carries the originator's declared terms for how the next person may use the object. In a course, this is where instructors and students can set expectations about redistribution, citation, and sharing, without those expectations being separated from the artifact as it moves.</p>
 
-    <h4>Template: student work (course-private)</h4>
+    <details class="fold">
+      <summary>Template: student work (course-private)</summary>
+      <div class="fold-body">
 <pre>{
   "use_conditions": {
     "license": "All rights reserved",
@@ -351,8 +423,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     "consent_note": "FERPA applies. This is student work submitted under course privacy expectations."
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: open educational resource</h4>
+    <details class="fold">
+      <summary>Template: open educational resource</summary>
+      <div class="fold-body">
 <pre>{
   "use_conditions": {
     "license": "CC BY 4.0",
@@ -367,6 +443,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
     <h2 id="labels"><span class="sec">§7</span>UI label translations</h2>
 
@@ -422,6 +500,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>Two profile-specific payload fields appear in the assignment and reflection examples. These are not part of the core v1 protocol but are recommended for educational tools building on KNOBE.</p>
 
     <p><strong><code>assignment_context</code></strong>, carried by the student reflection, links the submission to its course and assignment specification:</p>
+    <details class="fold">
+      <summary>The assignment_context shape</summary>
+      <div class="fold-body">
 <pre>{
   "assignment_context": {
     "course": "SOC 150: Knowledge in the AI Era",
@@ -430,14 +511,21 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     "ai_policy": "limited_with_disclosure"
   }
 }</pre>
+      </div>
+    </details>
 
     <p><strong><code>education_review</code></strong> tracks submission and review status separately from the protocol's <code>quarantine_status</code>, which handles receiver trust rather than workflow state:</p>
+    <details class="fold">
+      <summary>The education_review shape</summary>
+      <div class="fold-body">
 <pre>{
   "education_review": {
     "submission_status": "submitted",
     "review_status": "pending_instructor_review"
   }
 }</pre>
+      </div>
+    </details>
 
     <p><strong><code>assignment_context</code></strong> inside the instructor assignment KNOBE carries AI policy at the source, so that any student reflection which references the assignment by hash inherits a verifiable record of what policy applied when the work was done.</p>
 
