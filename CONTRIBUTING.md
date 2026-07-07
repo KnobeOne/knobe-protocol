@@ -35,6 +35,10 @@ By contributing, you agree your contribution is licensed under the project's ter
 
 All pull-request commits must be signed off (`git commit -s`), certifying the [Developer Certificate of Origin](https://developercertificate.org/): that you wrote the contribution or otherwise have the right to submit it under these licenses. No CLA is required.
 
+## AI assistance in commits
+
+Commits in this repository are written with AI assistance, directed and reviewed by the steward. From July 2026 they carry an `Assisted-By:` trailer naming the model. That trailer is a disclosure of assistance, not an authorship claim: authorship and responsibility remain with the named human author, the same distinction the sealed white paper draws for the protocol itself. Commits before that date carry `Co-Authored-By:` trailers, the default convention of the tooling then in use; read those the same way. Contributors are welcome to disclose their own AI assistance with the same trailer.
+
 ## One integrity rule
 
 Sealed `.knobe.md` files are never edited in place — a sealed file whose payload changes is, by definition, a different object. To update a sealed example, produce and seal a new file and update references.
