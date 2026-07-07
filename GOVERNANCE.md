@@ -22,6 +22,20 @@ The steward **may not**:
 
 The steward asserts no patents covering KNOBE Protocol v1 and will not assert any patent against conformant implementations of it. KNOBE is published as open specification and reference code precisely so that it stays free to implement; no patent is sought or held over the protocol.
 
+## Name and mark use
+
+KNOBE is an open protocol, and its name is open with it. Anyone may use "KNOBE" truthfully to describe what their work is or does. No permission, license, or fee is required, and nothing in this section lets anyone stop a conforming implementation from saying what it is. These are good-faith guidelines with one purpose: to keep the ecosystem legible for the students, instructors, and readers who rely on knowing which tool is which.
+
+**Use it freely, no permission needed.** Describe your work as *built on KNOBE*, *KNOBE-compatible*, *for KNOBE*, *a KNOBE verifier*, or *implements KNOBE Protocol v1*; say that a tool *reads and writes `.knobe.md` files*. Accurate, descriptive use is what an open protocol is for.
+
+**Conformance is a claim you earn.** Call an implementation a *conformant KNOBE Protocol v1 verifier* only once it reproduces every published test vector (see [CONTRIBUTING.md](CONTRIBUTING.md)). Until then, *KNOBE-compatible* or *built on KNOBE* is the honest description. The claim that matters to a user is the one the vectors back.
+
+**Qualify the reference names.** *KNOBE Studio*, *KNOBE Lens* (and `lens.py`, the reference verifier), *knobe-mcp*, and *KNOBE Grove* name the reference implementations the steward publishes at knobe.org. A separate tool that offers similar functions should qualify its name by its surface or its author, so people are not misled about which tool they are using: *KNOBE Studio for Obsidian*, *a KNOBE verifier for VS Code*, *Acme KNOBE Lens*. Do not present an unqualified reference name, or a project as the official or reference KNOBE implementation, when it is a separate work.
+
+**Naming is not endorsement.** Using the KNOBE name does not mean the steward built, reviewed, sponsors, or vouches for your work, and you should not imply that it does. A listing on knobe.org/implementations is a factual registry entry, not an endorsement and not a grant of these names.
+
+**This is coordination, not a trademark claim.** The steward holds and asserts no trademark over KNOBE and will not use names to restrict conformant implementations, exactly as no patent is asserted against them. To propose a name, coordinate a release, or ask anything here, open an issue or contact the steward; the answer is meant to help you ship.
+
 ## Transition to shared governance
 
 An advisory group will be formed when **any** of the following occurs, whichever is first:
