@@ -189,6 +189,21 @@ pre.filepre{max-height:340px;overflow:auto;font-family:'SF Mono',ui-monospace,Me
 #chChain .chainitem:last-child{border-bottom:none}
 #chChain .chainlink{font-size:.78rem;color:var(--ink-faint);padding-left:18px}
 
+/* ---- journey map ---- */
+.jmap{list-style:none;display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:14px 0 4px;padding:0}
+.jmap li{display:flex;align-items:center;gap:10px;margin:0}
+.jmap-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;
+  font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);max-width:230px}
+.jmap-node.is-here{border:2px solid var(--moss);background:#eef2ec;padding:9px 13px}
+.jmap-here{display:block;font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--moss-deep);margin-bottom:4px}
+.jmap-k{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
+.jmap-t{display:block;font-weight:600;color:var(--ink)}
+.jmap-ai{display:block;font-size:.74rem;color:var(--ink-faint);margin-top:3px}
+.jmap-builds{display:block;font-size:.72rem;color:var(--ink-faint);margin-top:2px}
+.jmap-badge{display:inline-block;font-size:.7rem;font-weight:600;color:var(--moss-deep);border:1px solid var(--moss);border-radius:3px;padding:1px 6px;margin-top:6px;background:#eef2ec}
+.jmap-arrow{color:var(--ink-faint);font-size:1.1rem}
+@media(max-width:560px){.jmap{flex-direction:column;align-items:flex-start}.jmap li{flex-direction:column;align-items:flex-start}.jmap-arrow{transform:rotate(90deg);margin-left:18px}}
+
 /* ---- dropzones ---- */
 .drop{margin:6px 0 8px;border:2px dashed var(--line);border-radius:10px;background:var(--paper-warm);
   padding:34px 26px;text-align:center;transition:border-color .15s,background .15s}
@@ -386,6 +401,7 @@ footer a:hover{color:var(--moss)}
           <div id="jsPickerBtns" class="btnrow"></div>
         </div>
         <div id="jsBanner" class="jbanner" aria-live="polite" hidden></div>
+        <div id="jsMap" hidden></div>
       </div>
 
       <div class="jaiblock" id="jsAiWrap" hidden>
@@ -759,6 +775,8 @@ footer a:hover{color:var(--moss)}
       <span class="subhead">Steps</span>
       <div id="jmSteps"></div>
       <div class="rowbtns"><button type="button" class="linkbtn" id="jmAddStep">Add a step</button></div>
+
+      <div id="jmMap" hidden></div>
 
       <details class="preview" id="jmPreviewBox">
         <summary>Syllabus preview</summary>
@@ -1236,6 +1254,8 @@ function resetCreateForm() {
   $('cErr').hidden = true;
   journeyCtx = null;
   $('jsBanner').hidden = true;
+  $('jsMap').hidden = true;
+  $('jsMap').textContent = '';
   $('jsAiWrap').hidden = true;
   $('jsAiName').value = '';
   $('jsAiWhat').value = '';
@@ -1547,6 +1567,73 @@ const JPOLICIES = {
 };
 const JSEALERS = { instructor: 'Instructor', student: 'Student', ta: 'TA', peer: 'Peer reviewer' };
 
+// ---- journey map (shared by the Create intake and the Journey Maker) ----
+function renderJourneyMap(steps, opts) {
+  const container = opts.container;
+  const currentIdx = typeof opts.currentIdx === 'number' ? opts.currentIdx : null;
+  container.textContent = '';
+  if (!Array.isArray(steps) || !steps.length) { container.hidden = true; return; }
+  const desc = document.createElement('p');
+  desc.className = 'visually-hidden';
+  desc.textContent = 'The journey as a sequence of ' + steps.length + ' step' + (steps.length === 1 ? '' : 's') + (currentIdx !== null ? '; the current step is marked' : '') + '.';
+  container.appendChild(desc);
+  const ol = document.createElement('ol');
+  ol.className = 'jmap';
+  // list-style:none strips list semantics in Safari/VoiceOver; the role restores them
+  ol.setAttribute('role', 'list');
+  steps.forEach((s, i) => {
+    const li = document.createElement('li');
+    const node = document.createElement('div');
+    node.className = 'jmap-node';
+    if (i === currentIdx) {
+      li.setAttribute('aria-current', 'step');
+      node.classList.add('is-here');
+      const here = document.createElement('span');
+      here.className = 'jmap-here';
+      here.textContent = 'You are here';
+      node.appendChild(here);
+    }
+    const k = document.createElement('span');
+    k.className = 'jmap-k';
+    k.textContent = 'Step ' + (i + 1) + ' \u00b7 ' + (JSEALERS[s.sealer] || safe(String(s.sealer || 'unassigned'), 20));
+    node.appendChild(k);
+    const tt = document.createElement('span');
+    tt.className = 'jmap-t';
+    tt.textContent = safe(typeof s.title === 'string' && s.title ? s.title : 'Untitled step', 60);
+    node.appendChild(tt);
+    const ai = document.createElement('span');
+    ai.className = 'jmap-ai';
+    ai.textContent = (JPOLICIES[s.ai_policy] || JPOLICIES.not_applicable).label;
+    node.appendChild(ai);
+    const builds = (Array.isArray(s.builds_on) ? s.builds_on : [])
+      .map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= steps.length && n !== i + 1);
+    if (builds.length) {
+      const b = document.createElement('span');
+      b.className = 'jmap-builds';
+      b.textContent = 'Builds on step ' + builds.join(', ');
+      node.appendChild(b);
+    }
+    if (typeof s.spec_hash === 'string' && s.spec_hash) {
+      const badge = document.createElement('span');
+      badge.className = 'jmap-badge';
+      badge.title = s.spec_hash;
+      badge.textContent = 'sealed, hash-anchored';
+      node.appendChild(badge);
+    }
+    li.appendChild(node);
+    if (i < steps.length - 1) {
+      const ar = document.createElement('span');
+      ar.className = 'jmap-arrow';
+      ar.setAttribute('aria-hidden', 'true');
+      ar.textContent = '\u2192';
+      li.appendChild(ar);
+    }
+    ol.appendChild(li);
+  });
+  container.appendChild(ol);
+  container.hidden = false;
+}
+
 // ---- Journey Maker state ----
 const jm = { steps: [] };
 let jmLoadedFrom = null;   // {hash, title} when revising an existing journey
@@ -1690,7 +1777,7 @@ function buildJourneyBody() {
   return L.join('\n');
 }
 
-const scheduleJmPreview = debounce(() => { $('jmPreview').textContent = buildJourneyBody(); }, 300);
+const scheduleJmPreview = debounce(() => { $('jmPreview').textContent = buildJourneyBody(); renderJourneyMap(journeyPayloadSteps(), { container: $('jmMap') }); }, 300);
 ['jmCourse','jmTerm','jmTitle','jmInstructor'].forEach(id => $(id).addEventListener('input', scheduleJmPreview));
 $('jmAddStep').addEventListener('click', () => { jm.steps.push(jmNewStep()); renderSteps(); scheduleJmPreview(); });
 $('jmResetBtn').addEventListener('click', () => {
@@ -1848,15 +1935,18 @@ function sealStepInCreate(i) {
   sealForStepIdx = i;
   $('jsBanner').textContent = 'Sealing journey step ' + (i + 1) + ': ' + (s.title || 'Untitled step') + '. The sealed hash will flow back into the journey.';
   $('jsBanner').hidden = false;
+  renderJourneyMap(journeyPayloadSteps(), { container: $('jsMap'), currentIdx: i });
   selectTab($('tab-create'));
   schedulePreview();
 }
 
 function onCreateSealed(r) {
   if (sealForStepIdx !== null && jm.steps[sealForStepIdx]) {
-    jm.steps[sealForStepIdx].spec_hash = r.payloadHash;
+    const sealedIdx = sealForStepIdx;
+    jm.steps[sealedIdx].spec_hash = r.payloadHash;
     sealForStepIdx = null;
     renderSteps(); scheduleJmPreview();
+    renderJourneyMap(journeyPayloadSteps(), { container: $('jsMap'), currentIdx: sealedIdx });
     $('jsBanner').textContent = 'Step sealed and its hash recorded in the journey. Return to the Journey tab to continue.';
     $('jsBanner').hidden = false;
   }
@@ -1886,6 +1976,7 @@ async function loadJourneyForCreate(text, name) {
     btns.appendChild(b);
   });
   $('jsPicker').hidden = false;
+  renderJourneyMap(j.steps, { container: $('jsMap') });
 }
 
 function applyJourneyStep(p, idx) {
@@ -1936,6 +2027,7 @@ function applyJourneyStep(p, idx) {
     + safe(step.title || 'Untitled step', 90) + ' · ' + policy.label + '.';
   $('jsBanner').hidden = false;
   $('jsPicker').hidden = true;
+  renderJourneyMap(p.journey.steps, { container: $('jsMap'), currentIdx: idx });
 
   if (policy.ui === 'disclose') {
     $('jsAiWrap').hidden = false;
