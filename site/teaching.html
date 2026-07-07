@@ -93,6 +93,7 @@ input.vh:checked + .role-card .role-name::before{content:"\2713  " / "";color:va
 }
 
 /* ---- stepper ---- */
+/* list-style:none strips list semantics in Safari/VoiceOver; the ols carry role="list" and the visible .path-num spans are the step enumeration */
 .path{list-style:none;margin:18px 0 8px;padding:0}
 .path li{display:grid;grid-template-columns:32px 1fr;gap:0 14px;padding:14px 0;border-bottom:1px solid var(--line);margin:0}
 .path li:last-child{border-bottom:none}
@@ -237,75 +238,75 @@ footer a:hover{color:var(--moss)}
           <label class="role-card" for="r-access"><span class="role-name">Accessibility Work</span><span class="role-hint">Seal alternate formats</span></label>
         </div>
       </fieldset>
-      <p class="vh" id="roleStatus" role="status" aria-live="polite"></p>
+      <p class="vh" id="roleStatus" role="status"></p>
 
       <div class="role-panels">
 
-        <section class="role-panel" id="p-instructor" aria-labelledby="h-instructor">
+        <section class="role-panel" id="p-instructor">
           <h2 id="h-instructor">The instructor path</h2>
           <p>Once per assignment sequence, on a card-based form. No JSON appears at any point, and nothing installs.</p>
-          <ol class="path">
-            <li><span class="path-num" aria-hidden="true">1</span><div>
+          <ol class="path" role="list">
+            <li><span class="path-num">1</span><div>
               <p class="path-what">Build the sequence: each step names who seals it, the kind of work, and its AI policy.</p>
               <a class="btn" href="/studio/?tab=journey">Open the Journey builder</a>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">2</span><div>
+            <li><span class="path-num">2</span><div>
               <p class="path-what">Seal your own steps (a reading, the assignment spec) when Studio offers it, so student work chains to them exactly.</p>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">3</span><div>
+            <li><span class="path-num">3</span><div>
               <p class="path-what">Post the journey file and its description to the Canvas assignment.</p>
               <a class="btn ghost" href="/kits/education/instructor-quick-start.md">Read the one-page quick-start</a>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">4</span><div>
+            <li><span class="path-num">4</span><div>
               <p class="path-what">Want to see a finished sequence first? Load a complete example into Studio.</p>
               <a class="btn ghost" href="/studio/?journey=/kits/education/journey-example-ai-disclosed.knobe.md">Open an example journey</a>
             </div></li>
           </ol>
           <h3>Posting to Canvas</h3>
-          <ol class="path">
-            <li><span class="path-num" aria-hidden="true">1</span><div><p class="path-what">Attach the sealed journey file and paste its description into the assignment.</p></div></li>
-            <li><span class="path-num" aria-hidden="true">2</span><div>
+          <ol class="path" role="list">
+            <li><span class="path-num">1</span><div><p class="path-what">Attach the sealed journey file and paste its description into the assignment.</p></div></li>
+            <li><span class="path-num">2</span><div>
               <p class="path-what">Set the submission type to <strong>File Uploads</strong>.</p>
               <div class="gotcha">If you restrict allowed file types, the list must include <code>md</code>, or Canvas rejects every submission. This is the most common setup failure.</div>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">3</span><div><p class="path-what">Collect with <strong>Download Submissions</strong>: one zip of every student's file.</p></div></li>
-            <li><span class="path-num" aria-hidden="true">4</span><div><p class="path-what">Grade in SpeedGrader as usual; a sealed file is plain text and displays there.</p></div></li>
+            <li><span class="path-num">3</span><div><p class="path-what">Collect with <strong>Download Submissions</strong>: one zip of every student's file.</p></div></li>
+            <li><span class="path-num">4</span><div><p class="path-what">Grade in SpeedGrader as usual; a sealed file is plain text and displays there.</p></div></li>
           </ol>
         </section>
 
-        <section class="role-panel" id="p-student" aria-labelledby="h-student">
+        <section class="role-panel" id="p-student">
           <h2 id="h-student">The student path</h2>
           <p>About two minutes of overhead per assignment: the form fills itself from the journey, and the AI question matches the policy your instructor set.</p>
-          <ol class="path">
-            <li><span class="path-num" aria-hidden="true">1</span><div>
+          <ol class="path" role="list">
+            <li><span class="path-num">1</span><div>
               <p class="path-what">Download the journey file attached to the Canvas assignment (it ends in <code>.knobe.md</code>).</p>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">2</span><div>
+            <li><span class="path-num">2</span><div>
               <p class="path-what">Load it in Studio, pick your step, write, and seal.</p>
               <a class="btn" href="/studio/?tab=create">Open Create</a>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">3</span><div>
+            <li><span class="path-num">3</span><div>
               <p class="path-what">Upload the downloaded sealed file to Canvas like any other file.</p>
             </div></li>
           </ol>
           <p>The <a class="inline" href="/kits/education/student-handout.md">student handout</a> covers this on one page, including how to write a specific AI disclosure.</p>
         </section>
 
-        <section class="role-panel" id="p-ta" aria-labelledby="h-ta">
+        <section class="role-panel" id="p-ta">
           <h2 id="h-ta">The TA path</h2>
           <p>One table for the whole batch; anomalies sort to the top, and the clean majority needs no attention. Grading itself stays in SpeedGrader.</p>
-          <ol class="path">
-            <li><span class="path-num" aria-hidden="true">1</span><div>
+          <ol class="path" role="list">
+            <li><span class="path-num">1</span><div>
               <p class="path-what">Use <strong>Download Submissions</strong> in Canvas and unzip the batch.</p>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">2</span><div>
+            <li><span class="path-num">2</span><div>
               <p class="path-what">Load the journey as the expectation, then drag the unzipped folder in.</p>
               <a class="btn" href="/studio/?tab=cohort">Open Cohort check</a>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">3</span><div>
+            <li><span class="path-num">3</span><div>
               <p class="path-what">Read the table, then export the CSV for gradebook cross-reference. For one student's history across the term, use the chain view.</p>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">4</span><div>
+            <li><span class="path-num">4</span><div>
               <p class="path-what">Optional: run the same checks from an AI agent with <code>knobe-mcp</code>; it runs locally, so the privacy posture is unchanged.</p>
               <a class="btn ghost" href="/mcp">About the MCP server</a>
             </div></li>
@@ -313,18 +314,18 @@ footer a:hover{color:var(--moss)}
           <p>The <a class="inline" href="/kits/education/ta-guide.md">TA guide</a> explains each table column and what an anomaly row means.</p>
         </section>
 
-        <section class="role-panel" id="p-access" aria-labelledby="h-access">
+        <section class="role-panel" id="p-access">
           <h2 id="h-access">The accessibility path</h2>
           <p>A plain-language version, translation, transcript, or description seals as its own file: bound to the exact source by hash, credited to the adapter and any reviewer, and honest about what it preserves and omits.</p>
-          <ol class="path">
-            <li><span class="path-num" aria-hidden="true">1</span><div>
+          <ol class="path" role="list">
+            <li><span class="path-num">1</span><div>
               <p class="path-what">Get the sealed source file you are adapting.</p>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">2</span><div>
+            <li><span class="path-num">2</span><div>
               <p class="path-what">Produce the adaptation, then seal it with its lineage and credit.</p>
               <a class="btn" href="/studio/?tab=adapt">Open Adapt</a>
             </div></li>
-            <li><span class="path-num" aria-hidden="true">3</span><div>
+            <li><span class="path-num">3</span><div>
               <p class="path-what">Distribute the sealed file the way you distribute any accommodation document.</p>
             </div></li>
           </ol>

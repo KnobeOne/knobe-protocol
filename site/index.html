@@ -413,7 +413,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
         <button class="demo-btn ghost" id="demoTamper" type="button" hidden>Tamper &amp; re-verify</button>
         <button class="demo-btn ghost" id="demoReset" type="button" hidden>Reset</button>
       </div>
-      <div id="demoVerdict" class="demo-verdict" role="status" aria-live="polite" hidden></div>
+      <div id="demoVerdict" class="demo-verdict" role="status" hidden></div>
       <p class="demo-note">The check runs in your browser with <a class="inline" href="/knobe-core.js">knobe-core.js</a>; nothing is uploaded. A verified seal proves integrity, not truth.</p>
     </div>
   </div>
@@ -425,10 +425,10 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
 <section id="grove">
   <div class="wrap">
-    <a class="grove-callout" href="/grove/" aria-label="Enter Grove, an optional guided way to learn KNOBE by building one">
+    <a class="grove-callout" href="/grove/" aria-labelledby="gcTitle">
       <div class="gc-main">
         <div class="gc-kicker">Optional · learn by doing</div>
-        <div class="gc-title">New to KNOBE? Walk the Grove</div>
+        <div class="gc-title" id="gcTitle">New to KNOBE? Walk the Grove</div>
         <p class="gc-desc">A short, guided path that teaches the format by building one real sealed <code>.knobe.md</code> with you: no login, nothing to install. It's a friendly way to dig in and learn the idea, not the standard or fastest way to make a KNOBE. <strong>Note:</strong> Grove may take up to a minute to load on first visit.</p>
       </div>
       <span class="gc-cta">Enter Grove →</span>

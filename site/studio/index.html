@@ -370,11 +370,11 @@ footer a:hover{color:var(--moss)}
         <span>Working from a course journey?</span>
         <button type="button" class="linkbtn" id="jsIntakeToggle" aria-expanded="false" aria-controls="jsIntakeWrap">Load the journey file</button>
         <div id="jsIntakeWrap" class="pastewrap">
-          <div id="jsDrop" class="drop" style="padding:22px 20px;margin-top:10px" aria-label="Drop the journey .knobe.md file here">
+          <div id="jsDrop" class="drop" style="padding:22px 20px;margin-top:10px">
             <div class="dmain">Drag the journey <code>.knobe.md</code> here</div>
             <div class="dhint">Your instructor posted it with the assignment. It is read in this page and goes nowhere else.</div>
             <button type="button" id="jsChoose" class="btn choosebtn">Choose the file</button>
-            <input type="file" tabindex="-1" aria-hidden="true" id="jsFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file">
+            <input type="file" tabindex="-1" aria-hidden="true" id="jsFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
           </div>
           <label for="jsPasteArea" class="visually-hidden">Paste journey file text</label>
           <textarea id="jsPasteArea" placeholder="Or paste the full text of the journey file." spellcheck="false"></textarea>
@@ -578,7 +578,7 @@ footer a:hover{color:var(--moss)}
       </div>
       <div class="errmsg" id="cErr" role="alert" hidden></div>
 
-      <div class="sealres" id="cRes" tabindex="-1" aria-live="polite" hidden>
+      <div class="sealres" id="cRes" tabindex="-1" hidden>
         <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="cResText"></span></div>
         <div class="sbody">
           <div class="hashline" id="cResHash"></div>
@@ -596,12 +596,12 @@ footer a:hover{color:var(--moss)}
 
     <!-- ================= VERIFY ================= -->
     <section class="panel" id="panel-verify" role="tabpanel" aria-labelledby="tab-verify" hidden>
-      <div id="vDrop" class="drop" aria-label="Drop a .knobe.md file here to verify it">
+      <div id="vDrop" class="drop">
         <div class="dicon" aria-hidden="true">&#9671;</div>
         <div class="dmain">Drag a <code>.knobe.md</code> file here</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="vChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" tabindex="-1" aria-hidden="true" id="vFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a .knobe.md file to verify">
+        <input type="file" tabindex="-1" aria-hidden="true" id="vFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
       </div>
       <div class="altrow">No file handy? <button type="button" id="vPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="vPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="vPasteWrap" class="pastewrap">
@@ -610,18 +610,18 @@ footer a:hover{color:var(--moss)}
         <div class="btnrow"><button type="button" id="vPasteBtn" class="btn">Verify pasted text</button></div>
       </div>
       <div class="errmsg" id="vErr" role="alert" hidden></div>
-      <section id="vResult" class="result" tabindex="-1" aria-live="polite" aria-label="Verification result" hidden></section>
+      <section id="vResult" class="result" tabindex="-1" aria-label="Verification result" hidden></section>
     </section>
 
     <!-- ================= TRANSFORM ================= -->
     <section class="panel" id="panel-transform" role="tabpanel" aria-labelledby="tab-transform" hidden>
       <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">A derivative declares its parent: the new object's <code>parents</code> entry records the original's title and payload hash. The original must verify first; a broken seal cannot anchor a chain.</p>
-      <div id="tDrop" class="drop" aria-label="Drop a sealed .knobe.md file here to derive from it">
+      <div id="tDrop" class="drop">
         <div class="dicon" aria-hidden="true">&#9671;</div>
         <div class="dmain">Drag a sealed <code>.knobe.md</code> here to derive from it</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="tChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" tabindex="-1" aria-hidden="true" id="tFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to derive from">
+        <input type="file" tabindex="-1" aria-hidden="true" id="tFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
       </div>
       <div class="altrow">No file handy? <button type="button" id="tPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="tPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="tPasteWrap" class="pastewrap">
@@ -697,7 +697,7 @@ footer a:hover{color:var(--moss)}
         </div>
         <div class="errmsg" id="tSealErr" role="alert" hidden></div>
 
-        <div class="sealres" id="tRes" tabindex="-1" aria-live="polite" hidden>
+        <div class="sealres" id="tRes" tabindex="-1" hidden>
           <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="tResText"></span></div>
           <div class="sbody">
             <div class="hashline" id="tResHash"></div>
@@ -728,7 +728,7 @@ footer a:hover{color:var(--moss)}
           <div class="btnrow">
             <button type="button" id="jmPasteBtn" class="btn">Load pasted text</button>
             <button type="button" id="jmChoose" class="btn ghost">Choose a file</button>
-            <input type="file" tabindex="-1" aria-hidden="true" id="jmFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file to edit">
+            <input type="file" tabindex="-1" aria-hidden="true" id="jmFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
           </div>
         </div>
         <div class="errmsg" id="jmLoadErr" role="alert" hidden></div>
@@ -772,7 +772,7 @@ footer a:hover{color:var(--moss)}
       </div>
       <div class="errmsg" id="jmErr" role="alert" hidden></div>
 
-      <div class="sealres" id="jmRes" tabindex="-1" aria-live="polite" hidden>
+      <div class="sealres" id="jmRes" tabindex="-1" hidden>
         <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="jmResText"></span></div>
         <div class="sbody">
           <div class="hashline" id="jmResHash"></div>
@@ -803,14 +803,14 @@ footer a:hover{color:var(--moss)}
           <div class="btnrow">
             <button type="button" id="chExpPasteBtn" class="btn">Load pasted text</button>
             <button type="button" id="chExpChoose" class="btn ghost">Choose a file</button>
-            <input type="file" tabindex="-1" aria-hidden="true" id="chExpFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey or spec file">
+            <input type="file" tabindex="-1" aria-hidden="true" id="chExpFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
           </div>
         </div>
         <div id="chExpBanner" class="jbanner" hidden></div>
         <div class="errmsg" id="chExpErr" role="alert" hidden></div>
       </div>
 
-      <div id="chDrop" class="drop" aria-label="Drop submission files or a folder here">
+      <div id="chDrop" class="drop">
         <div class="dicon" aria-hidden="true">&#9671;</div>
         <div class="dmain">Drag submission files, or a whole folder, here</div>
         <div class="dhint">Files are read in this page and go nowhere else.</div>
@@ -818,8 +818,8 @@ footer a:hover{color:var(--moss)}
           <button type="button" id="chChooseFiles" class="btn choosebtn" style="margin-top:0">Choose files</button>
           <button type="button" id="chChooseDir" class="btn ghost" style="margin-top:0">Choose a folder</button>
         </div>
-        <input type="file" tabindex="-1" aria-hidden="true" id="chFiles" class="visually-hidden" multiple accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose submission files">
-        <input type="file" tabindex="-1" aria-hidden="true" id="chDir" class="visually-hidden" webkitdirectory aria-label="Choose a submissions folder">
+        <input type="file" tabindex="-1" aria-hidden="true" id="chFiles" class="visually-hidden" multiple accept=".md,.knobe,.txt,text/markdown,text/plain">
+        <input type="file" tabindex="-1" aria-hidden="true" id="chDir" class="visually-hidden" webkitdirectory>
       </div>
       <div class="errmsg" id="chErr" role="alert" hidden></div>
 
@@ -843,12 +843,12 @@ footer a:hover{color:var(--moss)}
     <!-- ================= ADAPT ================= -->
     <section class="panel" id="panel-adapt" role="tabpanel" aria-labelledby="tab-adapt" hidden>
       <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">An accessibility adaptation (plain language, translation, captions, description) is sealed as its own object: it chains to the source by hash, credits the adapter, and states honestly what it preserves and what it omits. The source work remains authoritative.</p>
-      <div id="aDrop" class="drop" aria-label="Drop a sealed .knobe.md file here to adapt it">
+      <div id="aDrop" class="drop">
         <div class="dicon" aria-hidden="true">&#9671;</div>
         <div class="dmain">Drag a sealed <code>.knobe.md</code> here to adapt it</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="aChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" tabindex="-1" aria-hidden="true" id="aFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to adapt">
+        <input type="file" tabindex="-1" aria-hidden="true" id="aFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
       </div>
       <div class="altrow">No file handy? <button type="button" id="aPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="aPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="aPasteWrap" class="pastewrap">
@@ -935,7 +935,7 @@ footer a:hover{color:var(--moss)}
         </div>
         <div class="errmsg" id="aSealErr" role="alert" hidden></div>
 
-        <div class="sealres" id="aRes" tabindex="-1" aria-live="polite" hidden>
+        <div class="sealres" id="aRes" tabindex="-1" hidden>
           <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="aResText"></span></div>
           <div class="sbody">
             <div class="hashline" id="aResHash"></div>
