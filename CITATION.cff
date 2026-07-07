@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "If you use or cite the KNOBE Protocol, cite it as below."
+title: "KNOBE Protocol v1: A Context Protocol for Responsible Knowledge Movement"
+authors:
+  - family-names: Kyle
+    given-names: David
+    affiliation: "University of California, Davis"
+type: software
+version: 1.0.0
+date-released: 2026-06-28
+url: "https://knobe.org"
+repository-code: "https://github.com/KnobeOne/knobe-protocol"
+license:
+  - CC-BY-4.0
+  - Apache-2.0
+abstract: >-
+  An open, plain-text protocol for knowledge objects that keep their context
+  when they move. A KNOBE is a single markdown file carrying its readable
+  content together with a machine-legible, hash-sealed record of attribution,
+  transformation history, fidelity limits, and use conditions.
+keywords:
+  - provenance
+  - knowledge-objects
+  - open-specification
+  - mcp
+  - integrity

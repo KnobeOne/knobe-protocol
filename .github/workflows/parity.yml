@@ -1,0 +1,49 @@
+# Runs the cross-language parity selftest (knobe-core.js vs lens.py over every
+# vector and example) and the MCP server smoke test on every push to main and
+# on every pull request. The parity check is the repository's conformance
+# gate: if the two verifiers disagree on any file, the build fails.
+name: parity
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  selftest:
+    name: Verifier parity (knobe-core.js vs lens.py)
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Cross-language parity selftest
+        run: node knobe-core.selftest.mjs
+
+  mcp-smoke:
+    name: MCP server smoke test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20, 24]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+          cache-dependency-path: mcp/package-lock.json
+      - name: Install dependencies
+        run: npm ci
+        working-directory: mcp
+      - name: Client/server round-trip over in-memory transport
+        run: npm test
+        working-directory: mcp
