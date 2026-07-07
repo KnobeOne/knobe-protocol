@@ -77,17 +77,17 @@ pre .n{color:#8fb8e8}
 .norm p{margin-bottom:0;font-size:.95rem}
 
 .field-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0}
-.field-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
-.field-table td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.field-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
+.field-table td,.field-table tbody th{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .field-table tr:last-child td{border-bottom:none}
-.field-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
+.field-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
 .field-table td:nth-child(2){font-family:-apple-system,system-ui,sans-serif;color:var(--ink-faint);font-size:.8rem}
 
 .state-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0}
-.state-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
-.state-table td{padding:11px 16px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.state-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.state-table td,.state-table tbody th{padding:11px 16px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .state-table tr:last-child td{border-bottom:none}
-.state-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.82rem;color:var(--moss-deep);font-weight:500;white-space:nowrap}
+.state-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.82rem;color:var(--moss-deep);font-weight:500;white-space:nowrap}
 
 .algo{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;line-height:1.9;color:#9bb5a4}
 .algo .step{display:flex;gap:14px}
@@ -131,6 +131,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.field-table tbody th{font-weight:normal;text-align:left}
+.state-table tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -297,19 +300,19 @@ spec_version: "1.0"
 
     <p>The following ten fields <span class="must">MUST</span> be present in the payload. A payload missing any of them is invalid at the protocol layer regardless of whether its hash matches.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Field</th><th>Type</th><th>Notes</th></tr></thead>
+    <table class="field-table"><caption>Required fields</caption>
+      <thead><tr><th scope="col">Field</th><th scope="col">Type</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>spec_version</td><td>string</td><td>The protocol version under which this file was sealed. <code>"1.0"</code> for this specification.</td></tr>
-        <tr><td>title</td><td>string</td><td>Human-readable title of the knowledge object.</td></tr>
-        <tr><td>summary</td><td>string</td><td>One-paragraph description of the object's content and purpose.</td></tr>
-        <tr><td>content_type</td><td>string</td><td>Declared content category. See §8 for open vocabulary.</td></tr>
-        <tr><td>created_date</td><td>string</td><td>ISO 8601 date of original creation (<code>YYYY-MM-DD</code>).</td></tr>
-        <tr><td>license</td><td>string</td><td>Declared license identifier (e.g. <code>"CC BY 4.0"</code>).</td></tr>
-        <tr><td>privacy_level</td><td>string</td><td>Declared privacy posture. See §8.</td></tr>
-        <tr><td>quarantine_status</td><td>string</td><td>Declared trust posture. See §8. New/external KNOBEs SHOULD default to <code>"quarantine"</code>.</td></tr>
-        <tr><td>attribution</td><td>object</td><td>Must contain a <code>sources</code> array with at least one entry. Each source entry SHOULD include <code>author</code> and <code>contribution</code>. AI contributors SHOULD carry <code>"rights_bearing": false</code>.</td></tr>
-        <tr><td>payload_hash</td><td>string</td><td>SHA-256 hex digest of the canonical JSON payload (excluding this field). Format: exactly 64 lowercase hexadecimal characters. See §5.</td></tr>
+        <tr><th scope="row">spec_version</th><td>string</td><td>The protocol version under which this file was sealed. <code>"1.0"</code> for this specification.</td></tr>
+        <tr><th scope="row">title</th><td>string</td><td>Human-readable title of the knowledge object.</td></tr>
+        <tr><th scope="row">summary</th><td>string</td><td>One-paragraph description of the object's content and purpose.</td></tr>
+        <tr><th scope="row">content_type</th><td>string</td><td>Declared content category. See §8 for open vocabulary.</td></tr>
+        <tr><th scope="row">created_date</th><td>string</td><td>ISO 8601 date of original creation (<code>YYYY-MM-DD</code>).</td></tr>
+        <tr><th scope="row">license</th><td>string</td><td>Declared license identifier (e.g. <code>"CC BY 4.0"</code>).</td></tr>
+        <tr><th scope="row">privacy_level</th><td>string</td><td>Declared privacy posture. See §8.</td></tr>
+        <tr><th scope="row">quarantine_status</th><td>string</td><td>Declared trust posture. See §8. New/external KNOBEs SHOULD default to <code>"quarantine"</code>.</td></tr>
+        <tr><th scope="row">attribution</th><td>object</td><td>Must contain a <code>sources</code> array with at least one entry. Each source entry SHOULD include <code>author</code> and <code>contribution</code>. AI contributors SHOULD carry <code>"rights_bearing": false</code>.</td></tr>
+        <tr><th scope="row">payload_hash</th><td>string</td><td>SHA-256 hex digest of the canonical JSON payload (excluding this field). Format: exactly 64 lowercase hexadecimal characters. See §5.</td></tr>
       </tbody>
     </table>
 
@@ -317,34 +320,34 @@ spec_version: "1.0"
 
     <p>These optional fields carry interpretive context written for the receiver: the next human or agent to encounter the object. They are not required for validity but are central to the protocol's purpose.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Field</th><th>Notes</th></tr></thead>
+    <table class="field-table"><caption>Receiver-facing optional fields</caption>
+      <thead><tr><th scope="col">Field</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>fidelity_limits</td><td>How far the object may be trusted as a representation of its source. Suggested sub-fields: <code>represents</code>, <code>trust_as</code>, <code>do_not_infer</code> (array).</td></tr>
-        <tr><td>use_conditions</td><td>Originator-declared terms for downstream use. Suggested sub-fields: <code>license</code>, <code>permitted</code> (array), <code>requested_preservations</code> (array), <code>consent_note</code>.</td></tr>
-        <tr><td>accessibility</td><td>Adaptation lineage. Each entry SHOULD include <code>adapted_from</code> (source payload_hash), <code>adaptation_type</code>, <code>adaptation_contributor</code>, <code>review_date</code>.</td></tr>
+        <tr><th scope="row">fidelity_limits</th><td>How far the object may be trusted as a representation of its source. Suggested sub-fields: <code>represents</code>, <code>trust_as</code>, <code>do_not_infer</code> (array).</td></tr>
+        <tr><th scope="row">use_conditions</th><td>Originator-declared terms for downstream use. Suggested sub-fields: <code>license</code>, <code>permitted</code> (array), <code>requested_preservations</code> (array), <code>consent_note</code>.</td></tr>
+        <tr><th scope="row">accessibility</th><td>Adaptation lineage. Each entry SHOULD include <code>adapted_from</code> (source payload_hash), <code>adaptation_type</code>, <code>adaptation_contributor</code>, <code>review_date</code>.</td></tr>
       </tbody>
     </table>
 
     <h3>4.3 Additional optional fields</h3>
 
-    <table class="field-table">
-      <thead><tr><th>Field</th><th>Notes</th></tr></thead>
+    <table class="field-table"><caption>Additional optional fields</caption>
+      <thead><tr><th scope="col">Field</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>body_hash</td><td>SHA-256 of the normalized body text. See §6.</td></tr>
-        <tr><td>parents</td><td>Array of objects linking to source KNOBEs by payload_hash. Each entry SHOULD include <code>payload_hash</code>, <code>title</code>, and <code>relationship</code>. Any <code>payload_hash</code> value MUST follow the format constraint in §4.1: exactly 64 lowercase hexadecimal characters.</td></tr>
-        <tr><td>transformation_history</td><td>Array of transformation receipts. Each entry SHOULD include <code>date</code>, <code>who</code>, <code>strategy</code>, <code>notes</code>.</td></tr>
-        <tr><td>identity_status</td><td>Declared identity posture. See §8. <code>"declared"</code> means attribution is self-reported; <code>"signed"</code> is a forward placeholder for cryptographic signing in future tiers.</td></tr>
-        <tr><td>key_concepts</td><td>Array of <code>{"name": "...", "definition": "..."}</code> objects.</td></tr>
-        <tr><td>version_history</td><td>Array of <code>{"version": "...", "date": "...", "notes": "..."}</code> objects.</td></tr>
-        <tr><td>is_seed</td><td>Boolean. <code>true</code> indicates this KNOBE is intended as a teaching or bootstrapping artifact.</td></tr>
-        <tr><td>language</td><td>BCP 47 language tag (e.g. <code>"en"</code>).</td></tr>
-        <tr><td>tags</td><td>Array of lowercase strings.</td></tr>
-        <tr><td>subtitle</td><td>String. Secondary title.</td></tr>
-        <tr><td>id</td><td>String. Stable local identifier for this object.</td></tr>
-        <tr><td>canonical_url</td><td>String. Authoritative URL if published.</td></tr>
-        <tr><td>license_url</td><td>String. URL to the full license text.</td></tr>
-        <tr><td>build_recipes</td><td>Array of instructions for constructing derivative KNOBEs. Informative only in v1; not normative.</td></tr>
+        <tr><th scope="row">body_hash</th><td>SHA-256 of the normalized body text. See §6.</td></tr>
+        <tr><th scope="row">parents</th><td>Array of objects linking to source KNOBEs by payload_hash. Each entry SHOULD include <code>payload_hash</code>, <code>title</code>, and <code>relationship</code>. Any <code>payload_hash</code> value MUST follow the format constraint in §4.1: exactly 64 lowercase hexadecimal characters.</td></tr>
+        <tr><th scope="row">transformation_history</th><td>Array of transformation receipts. Each entry SHOULD include <code>date</code>, <code>who</code>, <code>strategy</code>, <code>notes</code>.</td></tr>
+        <tr><th scope="row">identity_status</th><td>Declared identity posture. See §8. <code>"declared"</code> means attribution is self-reported; <code>"signed"</code> is a forward placeholder for cryptographic signing in future tiers.</td></tr>
+        <tr><th scope="row">key_concepts</th><td>Array of <code>{"name": "...", "definition": "..."}</code> objects.</td></tr>
+        <tr><th scope="row">version_history</th><td>Array of <code>{"version": "...", "date": "...", "notes": "..."}</code> objects.</td></tr>
+        <tr><th scope="row">is_seed</th><td>Boolean. <code>true</code> indicates this KNOBE is intended as a teaching or bootstrapping artifact.</td></tr>
+        <tr><th scope="row">language</th><td>BCP 47 language tag (e.g. <code>"en"</code>).</td></tr>
+        <tr><th scope="row">tags</th><td>Array of lowercase strings.</td></tr>
+        <tr><th scope="row">subtitle</th><td>String. Secondary title.</td></tr>
+        <tr><th scope="row">id</th><td>String. Stable local identifier for this object.</td></tr>
+        <tr><th scope="row">canonical_url</th><td>String. Authoritative URL if published.</td></tr>
+        <tr><th scope="row">license_url</th><td>String. URL to the full license text.</td></tr>
+        <tr><th scope="row">build_recipes</th><td>Array of instructions for constructing derivative KNOBEs. Informative only in v1; not normative.</td></tr>
       </tbody>
     </table>
 
@@ -451,26 +454,26 @@ const canon = canonicalize(nfc(rest));
 
     <p>A conforming verifier <span class="must">MUST</span> report exactly one of the following four states.</p>
 
-    <table class="state-table">
-      <thead><tr><th>State</th><th>Conditions</th><th>Meaning</th></tr></thead>
+    <table class="state-table"><caption>Verification states</caption>
+      <thead><tr><th scope="col">State</th><th scope="col">Conditions</th><th scope="col">Meaning</th></tr></thead>
       <tbody>
         <tr>
-          <td>verified</td>
+          <th scope="row">verified</th>
           <td>Payload decodes and parses. All required fields present. <code>payload_hash</code> matches computed hash. <code>body_hash</code> absent or matching.</td>
           <td>The sealed payload record is intact. If a body hash was present, the body is also intact.</td>
         </tr>
         <tr>
-          <td>verified-body-modified</td>
+          <th scope="row">verified-body-modified</th>
           <td>Payload hash matches. <code>body_hash</code> is present and does not match the normalized body.</td>
           <td>The structured payload record is intact. The markdown body has changed since sealing. This is not automatically a sign of tampering; bodies are often legitimately edited. Inspect before relying.</td>
         </tr>
         <tr>
-          <td>failed</td>
+          <th scope="row">failed</th>
           <td>Payload decodes and parses, but the computed canonical hash does not match <code>payload_hash</code>.</td>
           <td>The structured record has been altered since sealing.</td>
         </tr>
         <tr>
-          <td>unreadable</td>
+          <th scope="row">unreadable</th>
           <td>No payload block found, or the block cannot be decoded or parsed as JSON.</td>
           <td>The file does not contain a verifiable KNOBE payload.</td>
         </tr>

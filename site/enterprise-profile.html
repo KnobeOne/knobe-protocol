@@ -67,18 +67,18 @@ pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;
 .nonnorm{border-left:3px solid var(--amber);background:#fdf8f0;padding:14px 18px;margin:16px 0;border-radius:0 4px 4px 0;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
 
 .field-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0}
-.field-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
-.field-table td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.field-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
+.field-table td,.field-table tbody th{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .field-table tr:last-child td{border-bottom:none}
-.field-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
+.field-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
 .field-table td:nth-child(2){font-size:.88rem}
 .field-table td:nth-child(3){font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint)}
 
 .label-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0}
-.label-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
-.label-table td{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.label-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.label-table td,.label-table tbody th{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .label-table tr:last-child td{border-bottom:none}
-.label-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep)}
+.label-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep)}
 .label-table td:nth-child(2){font-weight:600;color:var(--ink);font-family:-apple-system,system-ui,sans-serif}
 .label-table td:nth-child(3){color:var(--ink-soft);font-family:-apple-system,system-ui,sans-serif;font-size:.88rem}
 
@@ -140,6 +140,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.field-table tbody th{font-weight:normal;text-align:left}
+.label-table tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -276,28 +279,28 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h2 id="defaults"><span class="sec">§2</span>Recommended field defaults for pipeline use</h2>
 
-    <table class="field-table">
-      <thead><tr><th>Field</th><th>Recommended default</th><th>Notes</th></tr></thead>
+    <table class="field-table"><caption>Recommended field defaults for pipeline use</caption>
+      <thead><tr><th scope="col">Field</th><th scope="col">Recommended default</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>quarantine_status</td><td><code>"quarantine"</code></td><td>Default for all model- and agent-generated artifacts. Promotion to <code>trusted</code> is an explicit, governed review step.</td></tr>
-        <tr><td>privacy_level</td><td><code>"internal"</code></td><td>For most enterprise material. See §3 for the classification map.</td></tr>
-        <tr><td>identity_status</td><td><code>"declared"</code></td><td>Correct for v1. Attribution is self-reported; signatures arrive later.</td></tr>
-        <tr><td>license</td><td><code>"All rights reserved"</code></td><td>Default for proprietary internal material. Use explicit terms for shared or partner artifacts.</td></tr>
-        <tr><td>content_type</td><td>See below</td><td>Match to the artifact's role in the pipeline.</td></tr>
+        <tr><th scope="row">quarantine_status</th><td><code>"quarantine"</code></td><td>Default for all model- and agent-generated artifacts. Promotion to <code>trusted</code> is an explicit, governed review step.</td></tr>
+        <tr><th scope="row">privacy_level</th><td><code>"internal"</code></td><td>For most enterprise material. See §3 for the classification map.</td></tr>
+        <tr><th scope="row">identity_status</th><td><code>"declared"</code></td><td>Correct for v1. Attribution is self-reported; signatures arrive later.</td></tr>
+        <tr><th scope="row">license</th><td><code>"All rights reserved"</code></td><td>Default for proprietary internal material. Use explicit terms for shared or partner artifacts.</td></tr>
+        <tr><th scope="row">content_type</th><td>See below</td><td>Match to the artifact's role in the pipeline.</td></tr>
       </tbody>
     </table>
 
     <h4>Recommended content_type values for pipeline artifacts</h4>
-    <table class="field-table">
-      <thead><tr><th>Artifact</th><th>content_type</th></tr></thead>
+    <table class="field-table"><caption>Recommended content_type values for pipeline artifacts</caption>
+      <thead><tr><th scope="col">Artifact</th><th scope="col">content_type</th></tr></thead>
       <tbody>
-        <tr><td>Human-authored source or reference document</td><td><code>original</code></td></tr>
-        <tr><td>Retrieval-augmented synthesis over multiple sources</td><td><code>synthesis</code></td></tr>
-        <tr><td>Summary or condensed version of a source</td><td><code>compression</code></td></tr>
-        <tr><td>Tool or model output annotating a document</td><td><code>annotation</code></td></tr>
-        <tr><td>Pipeline bundle assembling several artifacts</td><td><code>collection</code></td></tr>
-        <tr><td>Machine or human translation</td><td><code>translation</code></td></tr>
-        <tr><td>Reformatted or restructured rendering of a source</td><td><code>adaptation</code></td></tr>
+        <tr><th scope="row">Human-authored source or reference document</th><td><code>original</code></td></tr>
+        <tr><th scope="row">Retrieval-augmented synthesis over multiple sources</th><td><code>synthesis</code></td></tr>
+        <tr><th scope="row">Summary or condensed version of a source</th><td><code>compression</code></td></tr>
+        <tr><th scope="row">Tool or model output annotating a document</th><td><code>annotation</code></td></tr>
+        <tr><th scope="row">Pipeline bundle assembling several artifacts</th><td><code>collection</code></td></tr>
+        <tr><th scope="row">Machine or human translation</th><td><code>translation</code></td></tr>
+        <tr><th scope="row">Reformatted or restructured rendering of a source</th><td><code>adaptation</code></td></tr>
       </tbody>
     </table>
 
@@ -305,13 +308,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The protocol's open vocabulary for <code>privacy_level</code> is: <code>public</code>, <code>internal</code>, <code>sensitive</code>, <code>restricted</code>. Most enterprises already run a classification scheme; the field declares the artifact's class so it travels with the object, and complements, rather than replaces, existing data-loss-prevention and classification controls.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Value</th><th>Typical enterprise class</th><th>Examples</th></tr></thead>
+    <table class="field-table"><caption>Data-classification mapping</caption>
+      <thead><tr><th scope="col">Value</th><th scope="col">Typical enterprise class</th><th scope="col">Examples</th></tr></thead>
       <tbody>
-        <tr><td><code>public</code></td><td>Public / cleared for external release.</td><td>Published docs, marketing material, open datasets.</td></tr>
-        <tr><td><code>internal</code></td><td>Internal / company-confidential general.</td><td>Internal references, working documents, most KB content.</td></tr>
-        <tr><td><code>sensitive</code></td><td>Confidential: contains PII, secrets, or regulated data.</td><td>Customer records, credentials-adjacent content, regulated datasets.</td></tr>
-        <tr><td><code>restricted</code></td><td>Highly restricted: need-to-know, contractual, or legal hold.</td><td>Material under NDA, litigation hold, or board-confidential.</td></tr>
+        <tr><th scope="row"><code>public</code></th><td>Public / cleared for external release.</td><td>Published docs, marketing material, open datasets.</td></tr>
+        <tr><th scope="row"><code>internal</code></th><td>Internal / company-confidential general.</td><td>Internal references, working documents, most KB content.</td></tr>
+        <tr><th scope="row"><code>sensitive</code></th><td>Confidential: contains PII, secrets, or regulated data.</td><td>Customer records, credentials-adjacent content, regulated datasets.</td></tr>
+        <tr><th scope="row"><code>restricted</code></th><td>Highly restricted: need-to-know, contractual, or legal hold.</td><td>Material under NDA, litigation hold, or board-confidential.</td></tr>
       </tbody>
     </table>
 
@@ -323,17 +326,17 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The protocol requires an <code>attribution.sources</code> array with at least one entry, each with <code>author</code> and <code>contribution</code>. Adding a <code>role</code> makes provenance records interoperable across pipeline stages and tools. The following roles are recommended for enterprise workflows.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Role value</th><th>Meaning</th></tr></thead>
+    <table class="field-table"><caption>Pipeline and attribution roles</caption>
+      <thead><tr><th scope="col">Role value</th><th scope="col">Meaning</th></tr></thead>
       <tbody>
-        <tr><td><code>human_author</code></td><td>A person who authored or owns the source content. Rights-bearing.</td></tr>
-        <tr><td><code>source_system</code></td><td>A system of record or knowledge base that produced the canonical source.</td></tr>
-        <tr><td><code>ai_assistant</code></td><td>A model or agent that generated or transformed content. Always <code>"rights_bearing": false</code>. State the model, version or release, and what it did.</td></tr>
-        <tr><td><code>retrieval_source</code></td><td>A document or record retrieved and used as input. Use <code>parents</code> to link by hash when it is itself a KNOBE.</td></tr>
-        <tr><td><code>tool_output</code></td><td>Output from a non-model tool (parser, extractor, API) incorporated into the artifact.</td></tr>
-        <tr><td><code>pipeline_stage</code></td><td>A named stage that transformed the artifact, for lineage across a multi-step pipeline.</td></tr>
-        <tr><td><code>reviewer</code></td><td>A human who reviewed the artifact. Typically the party that promotes <code>quarantine</code> to <code>trusted</code>.</td></tr>
-        <tr><td><code>data_steward</code></td><td>The owner accountable for the artifact's classification and handling.</td></tr>
+        <tr><th scope="row"><code>human_author</code></th><td>A person who authored or owns the source content. Rights-bearing.</td></tr>
+        <tr><th scope="row"><code>source_system</code></th><td>A system of record or knowledge base that produced the canonical source.</td></tr>
+        <tr><th scope="row"><code>ai_assistant</code></th><td>A model or agent that generated or transformed content. Always <code>"rights_bearing": false</code>. State the model, version or release, and what it did.</td></tr>
+        <tr><th scope="row"><code>retrieval_source</code></th><td>A document or record retrieved and used as input. Use <code>parents</code> to link by hash when it is itself a KNOBE.</td></tr>
+        <tr><th scope="row"><code>tool_output</code></th><td>Output from a non-model tool (parser, extractor, API) incorporated into the artifact.</td></tr>
+        <tr><th scope="row"><code>pipeline_stage</code></th><td>A named stage that transformed the artifact, for lineage across a multi-step pipeline.</td></tr>
+        <tr><th scope="row"><code>reviewer</code></th><td>A human who reviewed the artifact. Typically the party that promotes <code>quarantine</code> to <code>trusted</code>.</td></tr>
+        <tr><th scope="row"><code>data_steward</code></th><td>The owner accountable for the artifact's classification and handling.</td></tr>
       </tbody>
     </table>
 
@@ -441,19 +444,19 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>Protocol field names are precise but not always the right language for an operator- or developer-facing interface. The following translations are recommended for enterprise tools. The protocol field names remain unchanged in the payload; these labels apply only at the display layer.</p>
 
-    <table class="label-table">
-      <thead><tr><th>Protocol field</th><th>Operator-facing label</th><th>Notes</th></tr></thead>
+    <table class="label-table"><caption>UI label translations</caption>
+      <thead><tr><th scope="col">Protocol field</th><th scope="col">Operator-facing label</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>quarantine_status: quarantine</td><td>Unverified: needs review</td><td>Default state of model and agent output.</td></tr>
-        <tr><td>quarantine_status: trusted</td><td>Approved for internal use</td><td>Set by a reviewer or governed promotion step.</td></tr>
-        <tr><td>fidelity_limits</td><td>Fit-for-use limits</td><td>Or: "What this can and can't be used for."</td></tr>
-        <tr><td>use_conditions</td><td>Usage terms</td><td>Or: "Reuse and sharing terms."</td></tr>
-        <tr><td>transformation_history</td><td>Pipeline lineage</td><td>Or: "Processing history."</td></tr>
-        <tr><td>parents</td><td>Upstream artifacts</td><td>Or: "Inputs / sources."</td></tr>
-        <tr><td>attribution.sources</td><td>Contributors and inputs</td><td>Show model contributors clearly with their role.</td></tr>
-        <tr><td>privacy_level: sensitive</td><td>Confidential</td><td>Contains PII, secrets, or regulated data.</td></tr>
-        <tr><td>payload_hash: verified</td><td>Payload intact</td><td>Follow with "Integrity is not the same as accuracy."</td></tr>
-        <tr><td>payload_hash: failed</td><td>Payload changed, inspect</td><td>Avoid "tampered"; changes may be legitimate. Prompt review.</td></tr>
+        <tr><th scope="row">quarantine_status: quarantine</th><td>Unverified: needs review</td><td>Default state of model and agent output.</td></tr>
+        <tr><th scope="row">quarantine_status: trusted</th><td>Approved for internal use</td><td>Set by a reviewer or governed promotion step.</td></tr>
+        <tr><th scope="row">fidelity_limits</th><td>Fit-for-use limits</td><td>Or: "What this can and can't be used for."</td></tr>
+        <tr><th scope="row">use_conditions</th><td>Usage terms</td><td>Or: "Reuse and sharing terms."</td></tr>
+        <tr><th scope="row">transformation_history</th><td>Pipeline lineage</td><td>Or: "Processing history."</td></tr>
+        <tr><th scope="row">parents</th><td>Upstream artifacts</td><td>Or: "Inputs / sources."</td></tr>
+        <tr><th scope="row">attribution.sources</th><td>Contributors and inputs</td><td>Show model contributors clearly with their role.</td></tr>
+        <tr><th scope="row">privacy_level: sensitive</th><td>Confidential</td><td>Contains PII, secrets, or regulated data.</td></tr>
+        <tr><th scope="row">payload_hash: verified</th><td>Payload intact</td><td>Follow with "Integrity is not the same as accuracy."</td></tr>
+        <tr><th scope="row">payload_hash: failed</th><td>Payload changed, inspect</td><td>Avoid "tampered"; changes may be legitimate. Prompt review.</td></tr>
       </tbody>
     </table>
 
@@ -461,12 +464,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>KNOBE is a plain-text object with a stable, hashable payload, which makes it straightforward to carry alongside, or reference from, the open packaging and identifier standards an enterprise may already use. The mappings below are non-normative and describe complementary use, not equivalence.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Standard</th><th>Complementary use with KNOBE</th></tr></thead>
+    <table class="field-table"><caption>Interoperability</caption>
+      <thead><tr><th scope="col">Standard</th><th scope="col">Complementary use with KNOBE</th></tr></thead>
       <tbody>
-        <tr><td>RO-Crate</td><td>A KNOBE can travel as a file within an RO-Crate, with its <code>attribution</code>, <code>parents</code>, and <code>license</code> mapping onto the crate's metadata graph. The KNOBE keeps the hash-sealed, self-verifying record; the crate provides the surrounding package description.</td></tr>
-        <tr><td>FDO (FAIR Digital Objects)</td><td>A KNOBE's <code>payload_hash</code> and <code>parents</code> give an object a content-addressed identity and typed relations that fit the FDO model. A persistent identifier can resolve to a KNOBE as the object's self-describing, verifiable body.</td></tr>
-        <tr><td>Open Knowledge Foundation practice</td><td>KNOBE's plain-text, tool-independent, openly licensed form aligns with open-data norms: no proprietary client is required to read, verify, or preserve an artifact.</td></tr>
+        <tr><th scope="row">RO-Crate</th><td>A KNOBE can travel as a file within an RO-Crate, with its <code>attribution</code>, <code>parents</code>, and <code>license</code> mapping onto the crate's metadata graph. The KNOBE keeps the hash-sealed, self-verifying record; the crate provides the surrounding package description.</td></tr>
+        <tr><th scope="row">FDO (FAIR Digital Objects)</th><td>A KNOBE's <code>payload_hash</code> and <code>parents</code> give an object a content-addressed identity and typed relations that fit the FDO model. A persistent identifier can resolve to a KNOBE as the object's self-describing, verifiable body.</td></tr>
+        <tr><th scope="row">Open Knowledge Foundation practice</th><td>KNOBE's plain-text, tool-independent, openly licensed form aligns with open-data norms: no proprietary client is required to read, verify, or preserve an artifact.</td></tr>
       </tbody>
     </table>
 

@@ -61,10 +61,10 @@ pre{background:var(--code-bg);border-radius:6px;padding:18px 22px;margin:14px 0 
 pre .c{color:#7fb79a}
 
 .tool-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0 20px}
-.tool-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
-.tool-table td{padding:11px 16px 11px 0;border-bottom:1px solid var(--line);vertical-align:top;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
+.tool-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.tool-table td,.tool-table tbody th{padding:11px 16px 11px 0;border-bottom:1px solid var(--line);vertical-align:top;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
 .tool-table tr:last-child td{border-bottom:none}
-.tool-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
+.tool-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
 
 .fwd{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 10px}
 .fwd-why{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
@@ -81,6 +81,8 @@ footer a:hover{color:var(--moss)}
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.tool-table tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -161,13 +163,13 @@ footer a:hover{color:var(--moss)}
   <div class="wrap">
 
     <h2>The five tools</h2>
-    <table class="tool-table">
-      <tr><th>Tool</th><th>What it does</th></tr>
-      <tr><td>knobe_verify</td><td>Integrity and conformance verdict for a file or pasted text: the protocol's four states, a separate conformance axis with each issue listed, both hashes, and <code>lens.py</code>'s exit code.</td></tr>
-      <tr><td>knobe_read</td><td>An obligations-first read: the first content block is the sealed-context preamble (integrity verdict, provenance, license, trust posture, obligations), so an agent reads the conditions before the content. The second block carries the payload metadata and markdown body.</td></tr>
-      <tr><td>knobe_create</td><td>Assemble and seal a new object from fields and a body. The sealed file self-verifies before it is returned, and can be written to a path.</td></tr>
-      <tr><td>knobe_transform</td><td>Seal a derivative of a verified original. The derivative's <code>parents</code> field records the original's title and payload hash automatically; a broken seal cannot anchor a chain.</td></tr>
-      <tr><td>knobe_permits</td><td>Evaluate a proposed action (summarize, excerpt, translate, train, redistribute, publish, ...) against the object's own sealed terms.</td></tr>
+    <table class="tool-table"><caption>The five tools</caption>
+      <tr><th scope="col">Tool</th><th scope="col">What it does</th></tr>
+      <tr><th scope="row">knobe_verify</th><td>Integrity and conformance verdict for a file or pasted text: the protocol's four states, a separate conformance axis with each issue listed, both hashes, and <code>lens.py</code>'s exit code.</td></tr>
+      <tr><th scope="row">knobe_read</th><td>An obligations-first read: the first content block is the sealed-context preamble (integrity verdict, provenance, license, trust posture, obligations), so an agent reads the conditions before the content. The second block carries the payload metadata and markdown body.</td></tr>
+      <tr><th scope="row">knobe_create</th><td>Assemble and seal a new object from fields and a body. The sealed file self-verifies before it is returned, and can be written to a path.</td></tr>
+      <tr><th scope="row">knobe_transform</th><td>Seal a derivative of a verified original. The derivative's <code>parents</code> field records the original's title and payload hash automatically; a broken seal cannot anchor a chain.</td></tr>
+      <tr><th scope="row">knobe_permits</th><td>Evaluate a proposed action (summarize, excerpt, translate, train, redistribute, publish, ...) against the object's own sealed terms.</td></tr>
     </table>
 
     <h2>Resources and a prompt</h2>

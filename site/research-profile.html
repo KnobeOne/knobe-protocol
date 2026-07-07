@@ -79,9 +79,9 @@ ol.flow li:last-child::after{display:none}
 .hash{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.7rem;word-break:break-all;color:var(--ink-faint);display:block;margin:4px 0 0}
 
 table.ladder{width:100%;border-collapse:collapse;margin:18px 0 24px;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem}
-table.ladder th{text-align:left;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
-table.ladder td{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft)}
-table.ladder td:first-child{color:var(--ink)}
+table.ladder thead th{text-align:left;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line)}
+table.ladder td,.ladder tbody th{padding:10px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft)}
+table.ladder tbody th{color:var(--ink)}
 table.ladder .st{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
 table.ladder .st.now{color:var(--moss)}
 table.ladder .st.plan{color:var(--amber)}
@@ -131,6 +131,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.ladder tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -345,13 +347,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>A preprint DOI will be added when available.</p>
 
     <h2 id="ladder">What is built, and what is proposed</h2>
-    <table class="ladder">
-      <thead><tr><th>Layer</th><th>Status</th><th>What it is</th></tr></thead>
+    <table class="ladder"><caption>What is built, and what is proposed</caption>
+      <thead><tr><th scope="col">Layer</th><th scope="col">Status</th><th scope="col">What it is</th></tr></thead>
       <tbody>
-        <tr><td>Portability, lineage, local verification, legible terms</td><td class="st now">Protocol, today</td><td>v1 is frozen; verify it on this site</td></tr>
-        <tr><td>Consent-aware creation, reading, and permission checks</td><td class="st now">Tooling, working</td><td>the same engine that verifies on this page</td></tr>
-        <tr><td>Identity, enforcement, markets, trusted time</td><td class="st plan">Credentialed layer, planned</td><td>application-layer work; not the open protocol</td></tr>
-        <tr><td>Personal corpora as a cognitive commons</td><td class="st agenda">Research agenda</td><td>an open research question</td></tr>
+        <tr><th scope="row">Portability, lineage, local verification, legible terms</th><td class="st now">Protocol, today</td><td>v1 is frozen; verify it on this site</td></tr>
+        <tr><th scope="row">Consent-aware creation, reading, and permission checks</th><td class="st now">Tooling, working</td><td>the same engine that verifies on this page</td></tr>
+        <tr><th scope="row">Identity, enforcement, markets, trusted time</th><td class="st plan">Credentialed layer, planned</td><td>application-layer work; not the open protocol</td></tr>
+        <tr><th scope="row">Personal corpora as a cognitive commons</th><td class="st agenda">Research agenda</td><td>an open research question</td></tr>
       </tbody>
     </table>
 

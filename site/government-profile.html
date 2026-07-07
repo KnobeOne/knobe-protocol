@@ -67,18 +67,18 @@ pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;
 .nonnorm{border-left:3px solid var(--amber);background:#fdf8f0;padding:14px 18px;margin:16px 0;border-radius:0 4px 4px 0;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
 
 .field-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0}
-.field-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
-.field-table td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.field-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
+.field-table td,.field-table tbody th{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .field-table tr:last-child td{border-bottom:none}
-.field-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
+.field-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
 .field-table td:nth-child(2){font-size:.88rem}
 .field-table td:nth-child(3){font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint)}
 
 .label-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0}
-.label-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
-.label-table td{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.label-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.label-table td,.label-table tbody th{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .label-table tr:last-child td{border-bottom:none}
-.label-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep)}
+.label-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep)}
 .label-table td:nth-child(2){font-weight:600;color:var(--ink);font-family:-apple-system,system-ui,sans-serif}
 .label-table td:nth-child(3){color:var(--ink-soft);font-family:-apple-system,system-ui,sans-serif;font-size:.88rem}
 
@@ -140,6 +140,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.field-table tbody th{font-weight:normal;text-align:left}
+.label-table tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -280,14 +283,14 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h2 id="defaults"><span class="sec">§2</span>Recommended field defaults for government use</h2>
 
-    <table class="field-table">
-      <thead><tr><th>Field</th><th>Recommended default</th><th>Notes</th></tr></thead>
+    <table class="field-table"><caption>Recommended field defaults for government use</caption>
+      <thead><tr><th scope="col">Field</th><th scope="col">Recommended default</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>quarantine_status</td><td><code>"quarantine"</code></td><td>Default for incoming and working material. A records officer or governed system marks <code>trusted</code> after review.</td></tr>
-        <tr><td>privacy_level</td><td><code>"internal"</code></td><td>For most working records. See §3 for the full handling map.</td></tr>
-        <tr><td>identity_status</td><td><code>"declared"</code></td><td>Correct for v1. Attribution is self-reported; signatures arrive in a later revision.</td></tr>
-        <tr><td>license</td><td>See below</td><td>U.S. federal works are generally public domain; state, local, and contractor works vary.</td></tr>
-        <tr><td>content_type</td><td>See below</td><td>Match to the artifact's role in the records lifecycle.</td></tr>
+        <tr><th scope="row">quarantine_status</th><td><code>"quarantine"</code></td><td>Default for incoming and working material. A records officer or governed system marks <code>trusted</code> after review.</td></tr>
+        <tr><th scope="row">privacy_level</th><td><code>"internal"</code></td><td>For most working records. See §3 for the full handling map.</td></tr>
+        <tr><th scope="row">identity_status</th><td><code>"declared"</code></td><td>Correct for v1. Attribution is self-reported; signatures arrive in a later revision.</td></tr>
+        <tr><th scope="row">license</th><td>See below</td><td>U.S. federal works are generally public domain; state, local, and contractor works vary.</td></tr>
+        <tr><th scope="row">content_type</th><td>See below</td><td>Match to the artifact's role in the records lifecycle.</td></tr>
       </tbody>
     </table>
 
@@ -296,17 +299,17 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     </div>
 
     <h4>Recommended content_type values for government artifacts</h4>
-    <table class="field-table">
-      <thead><tr><th>Artifact</th><th>content_type</th></tr></thead>
+    <table class="field-table"><caption>Recommended content_type values for government artifacts</caption>
+      <thead><tr><th scope="col">Artifact</th><th scope="col">content_type</th></tr></thead>
       <tbody>
-        <tr><td>Published notice, report, memo, or record of authority</td><td><code>original</code></td></tr>
-        <tr><td>Redacted release of an underlying record</td><td><code>adaptation</code></td></tr>
-        <tr><td>Summary or briefing derived from records</td><td><code>compression</code></td></tr>
-        <tr><td>Analytic product synthesizing multiple records</td><td><code>synthesis</code></td></tr>
-        <tr><td>FOIA production or release package (multiple items)</td><td><code>collection</code></td></tr>
-        <tr><td>Annotated exhibit or marked-up primary source</td><td><code>annotation</code></td></tr>
-        <tr><td>Official translation of a public notice</td><td><code>translation</code></td></tr>
-        <tr><td>Accessibility adaptation (alt text, plain-language, captions)</td><td><code>adaptation</code></td></tr>
+        <tr><th scope="row">Published notice, report, memo, or record of authority</th><td><code>original</code></td></tr>
+        <tr><th scope="row">Redacted release of an underlying record</th><td><code>adaptation</code></td></tr>
+        <tr><th scope="row">Summary or briefing derived from records</th><td><code>compression</code></td></tr>
+        <tr><th scope="row">Analytic product synthesizing multiple records</th><td><code>synthesis</code></td></tr>
+        <tr><th scope="row">FOIA production or release package (multiple items)</th><td><code>collection</code></td></tr>
+        <tr><th scope="row">Annotated exhibit or marked-up primary source</th><td><code>annotation</code></td></tr>
+        <tr><th scope="row">Official translation of a public notice</th><td><code>translation</code></td></tr>
+        <tr><th scope="row">Accessibility adaptation (alt text, plain-language, captions)</th><td><code>adaptation</code></td></tr>
       </tbody>
     </table>
 
@@ -314,13 +317,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The protocol's open vocabulary for <code>privacy_level</code> is: <code>public</code>, <code>internal</code>, <code>sensitive</code>, <code>restricted</code>. In government contexts these declare handling <em>intent</em> and travel with the artifact; they do not replace an agency's marking systems or governing authorities.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Value</th><th>Handling meaning</th><th>Examples</th></tr></thead>
+    <table class="field-table"><caption>Sensitivity and handling guidance</caption>
+      <thead><tr><th scope="col">Value</th><th scope="col">Handling meaning</th><th scope="col">Examples</th></tr></thead>
       <tbody>
-        <tr><td><code>public</code></td><td>Releasable to the public, or already published.</td><td>Published notice, cleared FOIA release, open dataset, public report.</td></tr>
-        <tr><td><code>internal</code></td><td>Agency-internal working material; not yet cleared for release.</td><td>Draft memo, working file, pre-decisional analysis.</td></tr>
-        <tr><td><code>sensitive</code></td><td>Controlled Unclassified Information (CUI), PII, or law-enforcement sensitive. Handle per governing policy.</td><td>Record with personal data, investigative material, security-relevant operational detail.</td></tr>
-        <tr><td><code>restricted</code></td><td>Statutorily protected, under legal hold, or otherwise not releasable in its current form.</td><td>Record under litigation hold, sealed material, statutorily exempt content.</td></tr>
+        <tr><th scope="row"><code>public</code></th><td>Releasable to the public, or already published.</td><td>Published notice, cleared FOIA release, open dataset, public report.</td></tr>
+        <tr><th scope="row"><code>internal</code></th><td>Agency-internal working material; not yet cleared for release.</td><td>Draft memo, working file, pre-decisional analysis.</td></tr>
+        <tr><th scope="row"><code>sensitive</code></th><td>Controlled Unclassified Information (CUI), PII, or law-enforcement sensitive. Handle per governing policy.</td><td>Record with personal data, investigative material, security-relevant operational detail.</td></tr>
+        <tr><th scope="row"><code>restricted</code></th><td>Statutorily protected, under legal hold, or otherwise not releasable in its current form.</td><td>Record under litigation hold, sealed material, statutorily exempt content.</td></tr>
       </tbody>
     </table>
 
@@ -336,18 +339,18 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The protocol requires an <code>attribution.sources</code> array with at least one entry. Each source should include <code>author</code> and <code>contribution</code>. Adding a <code>role</code> to each entry makes custody records interoperable across tools. The following roles are recommended for government workflows.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Role value</th><th>Meaning</th></tr></thead>
+    <table class="field-table"><caption>Custody and attribution roles</caption>
+      <thead><tr><th scope="col">Role value</th><th scope="col">Meaning</th></tr></thead>
       <tbody>
-        <tr><td><code>record_originator</code></td><td>The office or official that created and originated the record.</td></tr>
-        <tr><td><code>records_officer</code></td><td>The records manager who reviewed, certified, or scheduled the record. Typically the party that sets <code>quarantine_status: trusted</code>.</td></tr>
-        <tr><td><code>releasing_official</code></td><td>The official who authorized public release of a record or production.</td></tr>
-        <tr><td><code>redacting_official</code></td><td>The person who applied redactions and identified the governing exemption or authority.</td></tr>
-        <tr><td><code>authorizing_authority</code></td><td>The statute, order, or delegation under which an action was taken. Name it explicitly.</td></tr>
-        <tr><td><code>accessibility_adapter</code></td><td>A person who produced a Section 508 / WCAG adaptation (alt text, plain-language, captions, translation).</td></tr>
-        <tr><td><code>accessibility_reviewer</code></td><td>A person who reviewed or approved an adaptation for accuracy and conformance.</td></tr>
-        <tr><td><code>ai_assistant</code></td><td>An AI model that contributed to a briefing, summary, or draft. Always <code>"rights_bearing": false</code>. Contribution should state specifically what the model did.</td></tr>
-        <tr><td><code>source_record</code></td><td>An upstream record a derivative draws on. Use <code>parents</code> to link by hash when the source is itself a KNOBE.</td></tr>
+        <tr><th scope="row"><code>record_originator</code></th><td>The office or official that created and originated the record.</td></tr>
+        <tr><th scope="row"><code>records_officer</code></th><td>The records manager who reviewed, certified, or scheduled the record. Typically the party that sets <code>quarantine_status: trusted</code>.</td></tr>
+        <tr><th scope="row"><code>releasing_official</code></th><td>The official who authorized public release of a record or production.</td></tr>
+        <tr><th scope="row"><code>redacting_official</code></th><td>The person who applied redactions and identified the governing exemption or authority.</td></tr>
+        <tr><th scope="row"><code>authorizing_authority</code></th><td>The statute, order, or delegation under which an action was taken. Name it explicitly.</td></tr>
+        <tr><th scope="row"><code>accessibility_adapter</code></th><td>A person who produced a Section 508 / WCAG adaptation (alt text, plain-language, captions, translation).</td></tr>
+        <tr><th scope="row"><code>accessibility_reviewer</code></th><td>A person who reviewed or approved an adaptation for accuracy and conformance.</td></tr>
+        <tr><th scope="row"><code>ai_assistant</code></th><td>An AI model that contributed to a briefing, summary, or draft. Always <code>"rights_bearing": false</code>. Contribution should state specifically what the model did.</td></tr>
+        <tr><th scope="row"><code>source_record</code></th><td>An upstream record a derivative draws on. Use <code>parents</code> to link by hash when the source is itself a KNOBE.</td></tr>
       </tbody>
     </table>
 
@@ -451,19 +454,19 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>Protocol field names are precise but not always the right language for a records-facing interface. The following translations are recommended for government tools. The protocol field names remain unchanged in the payload; these labels apply only at the display layer.</p>
 
-    <table class="label-table">
-      <thead><tr><th>Protocol field</th><th>Records-facing label</th><th>Notes</th></tr></thead>
+    <table class="label-table"><caption>UI label translations</caption>
+      <thead><tr><th scope="col">Protocol field</th><th scope="col">Records-facing label</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>quarantine_status: quarantine</td><td>Pending records review</td><td>Neutral workflow language for material not yet certified.</td></tr>
-        <tr><td>quarantine_status: trusted</td><td>Certified record</td><td>Set by a records officer or governed system after review.</td></tr>
-        <tr><td>fidelity_limits</td><td>What this record is and is not</td><td>Or: "Read-before-relying notes."</td></tr>
-        <tr><td>use_conditions</td><td>Handling and release terms</td><td>Or: "Release and reuse terms."</td></tr>
-        <tr><td>transformation_history</td><td>Custody and change log</td><td>Or: "Chain of custody."</td></tr>
-        <tr><td>parents</td><td>Source records</td><td>Or: "Derived from."</td></tr>
-        <tr><td>privacy_level: sensitive</td><td>Controlled: handle per policy</td><td>CUI / PII / law-enforcement sensitive.</td></tr>
-        <tr><td>privacy_level: restricted</td><td>Restricted: not for release</td><td>Under hold, sealed, or statutorily exempt.</td></tr>
-        <tr><td>payload_hash: verified</td><td>Record integrity intact</td><td>Follow with "Integrity is not the same as accuracy or authority."</td></tr>
-        <tr><td>payload_hash: failed</td><td>Record may have changed, inspect</td><td>Avoid "tampered"; changes may be legitimate. Prompt review.</td></tr>
+        <tr><th scope="row">quarantine_status: quarantine</th><td>Pending records review</td><td>Neutral workflow language for material not yet certified.</td></tr>
+        <tr><th scope="row">quarantine_status: trusted</th><td>Certified record</td><td>Set by a records officer or governed system after review.</td></tr>
+        <tr><th scope="row">fidelity_limits</th><td>What this record is and is not</td><td>Or: "Read-before-relying notes."</td></tr>
+        <tr><th scope="row">use_conditions</th><td>Handling and release terms</td><td>Or: "Release and reuse terms."</td></tr>
+        <tr><th scope="row">transformation_history</th><td>Custody and change log</td><td>Or: "Chain of custody."</td></tr>
+        <tr><th scope="row">parents</th><td>Source records</td><td>Or: "Derived from."</td></tr>
+        <tr><th scope="row">privacy_level: sensitive</th><td>Controlled: handle per policy</td><td>CUI / PII / law-enforcement sensitive.</td></tr>
+        <tr><th scope="row">privacy_level: restricted</th><td>Restricted: not for release</td><td>Under hold, sealed, or statutorily exempt.</td></tr>
+        <tr><th scope="row">payload_hash: verified</th><td>Record integrity intact</td><td>Follow with "Integrity is not the same as accuracy or authority."</td></tr>
+        <tr><th scope="row">payload_hash: failed</th><td>Record may have changed, inspect</td><td>Avoid "tampered"; changes may be legitimate. Prompt review.</td></tr>
       </tbody>
     </table>
 

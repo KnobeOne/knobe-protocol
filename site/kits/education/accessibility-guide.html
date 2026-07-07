@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<!-- Generated from accessibility-guide.md by build-guides.py; edit the .md and regenerate. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Accessibility adaptations — KNOBE instructor kit</title>
+<meta name="description" content="Accessibility adaptations: seal an alternate format with lineage and credit.">
+<style>
+:root{--ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;--paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;--moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+.page{max-width:720px;margin:0 auto;padding:0 28px 60px}
+.bar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:18px 0 12px;margin-bottom:8px;font-family:-apple-system,system-ui,sans-serif}
+.kb{font-weight:bold;font-size:1rem;color:var(--ink);text-decoration:none}
+.kb span{color:var(--ink-faint);font-weight:normal}
+.bar .right{display:flex;gap:16px;align-items:center;font-size:.82rem}
+.bar .right a{color:var(--ink-soft);text-decoration:none}
+.bar .right a:hover{color:var(--moss)}
+.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;font-weight:500;background:var(--moss-deep);color:var(--paper);border:none;border-radius:3px;padding:7px 14px;cursor:pointer}
+.btn:hover{background:var(--moss)}
+.btn:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
+main{padding-top:14px}
+h1{font-size:1.9rem;font-weight:normal;letter-spacing:-.01em;line-height:1.25;margin:8px 0 14px}
+h2{font-family:-apple-system,system-ui,sans-serif;font-size:1.05rem;font-weight:600;color:var(--moss-deep);margin:30px 0 8px}
+h3{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;font-weight:600;color:var(--moss-deep);margin:22px 0 6px}
+p{margin:0 0 15px}
+ul,ol{margin:0 0 15px 24px}
+li{margin-bottom:7px}
+li ul{margin:7px 0 4px 22px}
+strong{font-weight:600}
+em{font-style:italic;color:var(--moss-deep)}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.86em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
+a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint)}
+footer a{color:var(--ink-soft);text-decoration:none}footer a:hover{color:var(--moss)}
+@media print{@page{margin:16mm}.noprint{display:none}body{background:#fff}.bar{border-color:#ccc}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="bar">
+    <a class="kb" href="https://knobe.org/teaching">KNOBE <span>· Instructor kit</span></a>
+    <div class="right">
+      <a href="https://knobe.org/teaching">&#8592; All guides</a>
+      <button type="button" class="btn noprint" onclick="window.print()">Print</button>
+    </div>
+  </div>
+  <main>
+    <h1>Accessibility adaptations: a one-page guide</h1>
+    <p>For disability-services staff, TAs handling accommodations, and instructors producing alternate formats. The Adapt tool seals an adaptation as its own file that names its source by exact fingerprint, credits whoever made it, and states honestly what it preserves and what it omits.</p>
+    <h2>Why seal an adaptation</h2>
+    <p>An alternate format usually circulates as a bare file: no link to the original, no credit to the person who made it, no record of what was simplified away. Sealing fixes all three. The adaptation carries a verifiable pointer to the exact version it was made from, the adapter&#x27;s name travels with the work, and the stated limits keep a plain-language version from being mistaken for the full text.</p>
+    <h2>The steps</h2>
+    <ol>
+    <li>Open <strong><a class="inline" href="https://knobe.org/studio/">knobe.org/studio</a></strong> and choose the <strong>Adapt</strong> tab.</li>
+    <li>Drag in the sealed source file (or paste its text). The tool verifies it first; an altered source is refused, because a broken seal cannot anchor a chain.</li>
+    <li>Pick the kind of adaptation: plain language, translation, transcript or captions, alt-text or description, or a multimodal version.</li>
+    <li>Replace the body with your adaptation. The <strong>Clean pasted text</strong> button normalizes smart quotes, stray HTML, and odd whitespace from wherever you drafted.</li>
+    <li>Fill in the two honesty fields: what this adaptation preserves, and what it omits or changes. Both are sealed into the record; they are what make the adaptation trustworthy.</li>
+    <li>Name who made it. If an AI tool drafted any of it, name the tool and say what it did; the record separates direction from drafting. If someone reviewed it, name them too; reviewer credit is part of the record.</li>
+    <li>Seal and download. Distribute the file the same way you distribute any accommodation document.</li>
+    </ol>
+    <h2>What the sealed record carries</h2>
+    <ul>
+    <li>A parent entry binding the adaptation to the source by payload hash, marked <code>adaptation_of</code>.</li>
+    <li>An accessibility entry: the adaptation type, the source fingerprint, who contributed, and the preserves-and-omits note.</li>
+    <li>Attribution rows for the source author, the adapter, any AI assistance (never rights-bearing), and any reviewer.</li>
+    <li>Fidelity limits stating that the source work remains authoritative.</li>
+    </ul>
+    <h2>Two cautions</h2>
+    <p>The tool adapts text it is given; it does not convert file formats, generate captions from audio, or write alt-text from images. Produce the adaptation with whatever workflow you use, then seal it here so the lineage and credit survive distribution. And an adaptation of a student&#x27;s work is still that student&#x27;s work: FERPA and your campus&#x27;s accommodation-privacy rules apply to the file exactly as they applied to the original.</p>
+  </main>
+  <footer>
+    Part of the KNOBE instructor kit. Every tool it describes runs in the browser page; nothing is uploaded. <a href="https://knobe.org/teaching">knobe.org/teaching</a>
+  </footer>
+</div>
+</body>
+</html>
