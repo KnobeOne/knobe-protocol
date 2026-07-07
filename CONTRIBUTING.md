@@ -28,12 +28,12 @@ By contributing, you agree your contribution is licensed under the project's ter
 | Material | License |
 |----------|---------|
 | Specification and prose (including profiles and site copy) | [CC BY 4.0](LICENSE) |
-| Verifier code (`lens.py`, the browser Lens in `site/lens.html`) | [Apache-2.0](LICENSE-CODE) |
+| Verifier code (`lens.py`, `knobe-core.js`, `knobe-core.selftest.mjs`, the browser Lens in `site/lens.html`) | [Apache-2.0](LICENSE-CODE) |
 | Test vectors (`test-vectors/`) | [CC0-1.0](test-vectors/LICENSE) |
 
 ## Sign-off (DCO)
 
-All commits must be signed off (`git commit -s`), certifying the [Developer Certificate of Origin](https://developercertificate.org/): that you wrote the contribution or otherwise have the right to submit it under these licenses. No CLA is required.
+All pull-request commits must be signed off (`git commit -s`), certifying the [Developer Certificate of Origin](https://developercertificate.org/): that you wrote the contribution or otherwise have the right to submit it under these licenses. No CLA is required.
 
 ## One integrity rule
 
