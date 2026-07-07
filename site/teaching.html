@@ -142,10 +142,10 @@ details.fold{border:1px solid var(--line);border-radius:6px;margin:14px 0;backgr
 .a3{background:#eef2ec}.a3 .al{color:var(--moss-deep)}
 
 .kit-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0 20px}
-.kit-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
-.kit-table td{padding:11px 16px 11px 0;border-bottom:1px solid var(--line);vertical-align:top;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
+.kit-table th[scope="col"]{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.kit-table td,.kit-table tbody th{padding:11px 16px 11px 0;border-bottom:1px solid var(--line);vertical-align:top;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
 .kit-table tr:last-child td{border-bottom:none}
-.kit-table td:first-child{white-space:nowrap}
+.kit-table tbody th{white-space:nowrap}
 
 .fwd{border-top:1px solid var(--line);margin-top:56px;padding:26px 0 10px}
 .fwd-why{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;color:var(--ink-soft);margin:0 0 12px}
@@ -162,6 +162,8 @@ footer a:hover{color:var(--moss)}
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.kit-table tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -407,16 +409,16 @@ footer a:hover{color:var(--moss)}
 
     <h2>The kit</h2>
     <p>One page per role, an accessibility guide, and two complete example journeys you can load into Studio unchanged. The examples are sealed KNOBEs and verify like any other.</p>
-    <table class="kit-table">
-      <tr><th>File</th><th>What it is</th></tr>
-      <tr><td><a class="inline" href="/kits/education/instructor-quick-start.html">Instructor quick-start</a></td><td>One page: build a journey, seal the spec, post to Canvas.</td></tr>
-      <tr><td><a class="inline" href="/kits/education/ta-guide.html">TA guide</a></td><td>One page: download, unzip, drag, read the table, export the CSV.</td></tr>
-      <tr><td><a class="inline" href="/kits/education/student-handout.html">Student handout</a></td><td>One page to attach to the assignment: load the journey, seal your step, upload one file.</td></tr>
-      <tr><td><a class="inline" href="/kits/education/accessibility-guide.html">Accessibility guide</a></td><td>One page: seal a plain-language version, translation, transcript, or description with lineage and credit.</td></tr>
-      <tr><td><a class="inline" href="/kits/education/loop-on-one-page.html">The loop on one page</a></td><td>A printable visual guide: the cycle, the three paths, the file-type gotcha, and the file anatomy.</td></tr>
-      <tr><td><a class="inline" href="/kits/education/journey-example-ai-disclosed.html">Example journey: AI disclosed</a></td><td>A sealed three-step sequence for a course that allows AI with disclosure. <a class="inline" href="/studio/?journey=/kits/education/journey-example-ai-disclosed.knobe.md">Open it in Studio</a>.</td></tr>
-      <tr><td><a class="inline" href="/kits/education/journey-example-ai-prohibited.html">Example journey: AI prohibited</a></td><td>The same sequence for a course that prohibits AI. <a class="inline" href="/studio/?journey=/kits/education/journey-example-ai-prohibited.knobe.md">Open it in Studio</a>.</td></tr>
-      <tr><td><a class="inline" href="/kits/education/knobe-instructor-kit.zip">Everything as a zip</a></td><td>All seven files, for posting to a course shell.</td></tr>
+    <table class="kit-table"><caption>The kit</caption>
+      <tr><th scope="col">File</th><th scope="col">What it is</th></tr>
+      <tr><th scope="row"><a class="inline" href="/kits/education/instructor-quick-start.html">Instructor quick-start</a></th><td>One page: build a journey, seal the spec, post to Canvas.</td></tr>
+      <tr><th scope="row"><a class="inline" href="/kits/education/ta-guide.html">TA guide</a></th><td>One page: download, unzip, drag, read the table, export the CSV.</td></tr>
+      <tr><th scope="row"><a class="inline" href="/kits/education/student-handout.html">Student handout</a></th><td>One page to attach to the assignment: load the journey, seal your step, upload one file.</td></tr>
+      <tr><th scope="row"><a class="inline" href="/kits/education/accessibility-guide.html">Accessibility guide</a></th><td>One page: seal a plain-language version, translation, transcript, or description with lineage and credit.</td></tr>
+      <tr><th scope="row"><a class="inline" href="/kits/education/loop-on-one-page.html">The loop on one page</a></th><td>A printable visual guide: the cycle, the three paths, the file-type gotcha, and the file anatomy.</td></tr>
+      <tr><th scope="row"><a class="inline" href="/kits/education/journey-example-ai-disclosed.html">Example journey: AI disclosed</a></th><td>A sealed three-step sequence for a course that allows AI with disclosure. <a class="inline" href="/studio/?journey=/kits/education/journey-example-ai-disclosed.knobe.md">Open it in Studio</a>.</td></tr>
+      <tr><th scope="row"><a class="inline" href="/kits/education/journey-example-ai-prohibited.html">Example journey: AI prohibited</a></th><td>The same sequence for a course that prohibits AI. <a class="inline" href="/studio/?journey=/kits/education/journey-example-ai-prohibited.knobe.md">Open it in Studio</a>.</td></tr>
+      <tr><th scope="row"><a class="inline" href="/kits/education/knobe-instructor-kit.zip">Everything as a zip</a></th><td>All seven files, for posting to a course shell.</td></tr>
     </table>
     <p>The field shapes these tools write are the ones published in the <a class="inline" href="/education-profile">education profile</a>, and the profile's sealed corpus examples (a reading, an assignment spec, a student submission) are the reference implementations of the same loop.</p>
 

@@ -67,18 +67,18 @@ pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;
 .nonnorm{border-left:3px solid var(--amber);background:#fdf8f0;padding:14px 18px;margin:16px 0;border-radius:0 4px 4px 0;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
 
 .field-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:14px 0}
-.field-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
-.field-table td{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.field-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 12px 6px 0;border-bottom:2px solid var(--line)}
+.field-table td,.field-table tbody th{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .field-table tr:last-child td{border-bottom:none}
-.field-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
+.field-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep);white-space:nowrap}
 .field-table td:nth-child(2){font-size:.88rem}
 .field-table td:nth-child(3){font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint)}
 
 .label-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0}
-.label-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
-.label-table td{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.label-table thead th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
+.label-table td,.label-table tbody th{padding:10px 16px 10px 0;border-bottom:1px solid var(--line);vertical-align:top}
 .label-table tr:last-child td{border-bottom:none}
-.label-table td:first-child{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep)}
+.label-table tbody th{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem;color:var(--moss-deep)}
 .label-table td:nth-child(2){font-weight:600;color:var(--ink);font-family:-apple-system,system-ui,sans-serif}
 .label-table td:nth-child(3){color:var(--ink-soft);font-family:-apple-system,system-ui,sans-serif;font-size:.88rem}
 
@@ -140,6 +140,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.field-table tbody th{font-weight:normal;text-align:left}
+.label-table tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -275,29 +278,29 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <h2 id="defaults"><span class="sec">§2</span>Recommended field defaults for course use</h2>
 
-    <table class="field-table">
-      <thead><tr><th>Field</th><th>Recommended default</th><th>Notes</th></tr></thead>
+    <table class="field-table"><caption>Recommended field defaults for course use</caption>
+      <thead><tr><th scope="col">Field</th><th scope="col">Recommended default</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>quarantine_status</td><td><code>"quarantine"</code></td><td>Always the default. Instructors or systems mark trusted after review.</td></tr>
-        <tr><td>privacy_level</td><td><code>"internal"</code></td><td>For most student work. See §3 for full guidance.</td></tr>
-        <tr><td>identity_status</td><td><code>"declared"</code></td><td>Correct for v1. Attribution is self-reported.</td></tr>
-        <tr><td>license</td><td><code>"All rights reserved"</code></td><td>Default for student work. Instructors may use CC licenses for OERs.</td></tr>
-        <tr><td>content_type</td><td>See below</td><td>Match to the artifact type.</td></tr>
+        <tr><th scope="row">quarantine_status</th><td><code>"quarantine"</code></td><td>Always the default. Instructors or systems mark trusted after review.</td></tr>
+        <tr><th scope="row">privacy_level</th><td><code>"internal"</code></td><td>For most student work. See §3 for full guidance.</td></tr>
+        <tr><th scope="row">identity_status</th><td><code>"declared"</code></td><td>Correct for v1. Attribution is self-reported.</td></tr>
+        <tr><th scope="row">license</th><td><code>"All rights reserved"</code></td><td>Default for student work. Instructors may use CC licenses for OERs.</td></tr>
+        <tr><th scope="row">content_type</th><td>See below</td><td>Match to the artifact type.</td></tr>
       </tbody>
     </table>
 
     <h4>Recommended content_type values for course artifacts</h4>
-    <table class="field-table">
-      <thead><tr><th>Artifact</th><th>content_type</th></tr></thead>
+    <table class="field-table"><caption>Recommended content_type values for course artifacts</caption>
+      <thead><tr><th scope="col">Artifact</th><th scope="col">content_type</th></tr></thead>
       <tbody>
-        <tr><td>Student essay, project, reflection</td><td><code>original</code></td></tr>
-        <tr><td>Course reader, curated collection</td><td><code>collection</code></td></tr>
-        <tr><td>Summary or condensed version of a reading</td><td><code>compression</code></td></tr>
-        <tr><td>Plain-language or simplified adaptation</td><td><code>adaptation</code></td></tr>
-        <tr><td>Caption, transcript, or translation</td><td><code>adaptation</code></td></tr>
-        <tr><td>Instructor notes synthesizing multiple sources</td><td><code>synthesis</code></td></tr>
-        <tr><td>Annotated primary source</td><td><code>annotation</code></td></tr>
-        <tr><td>Teaching or bootstrapping artifact</td><td><code>seed</code></td></tr>
+        <tr><th scope="row">Student essay, project, reflection</th><td><code>original</code></td></tr>
+        <tr><th scope="row">Course reader, curated collection</th><td><code>collection</code></td></tr>
+        <tr><th scope="row">Summary or condensed version of a reading</th><td><code>compression</code></td></tr>
+        <tr><th scope="row">Plain-language or simplified adaptation</th><td><code>adaptation</code></td></tr>
+        <tr><th scope="row">Caption, transcript, or translation</th><td><code>adaptation</code></td></tr>
+        <tr><th scope="row">Instructor notes synthesizing multiple sources</th><td><code>synthesis</code></td></tr>
+        <tr><th scope="row">Annotated primary source</th><td><code>annotation</code></td></tr>
+        <tr><th scope="row">Teaching or bootstrapping artifact</th><td><code>seed</code></td></tr>
       </tbody>
     </table>
 
@@ -305,13 +308,13 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The protocol's open vocabulary for <code>privacy_level</code> is: <code>public</code>, <code>internal</code>, <code>sensitive</code>, <code>restricted</code>. In educational contexts, these map as follows.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Value</th><th>Course meaning</th><th>Examples</th></tr></thead>
+    <table class="field-table"><caption>Privacy level guidance</caption>
+      <thead><tr><th scope="col">Value</th><th scope="col">Course meaning</th><th scope="col">Examples</th></tr></thead>
       <tbody>
-        <tr><td><code>public</code></td><td>Open educational resource; intended for circulation beyond the course.</td><td>Public syllabus, OER reading, published course note.</td></tr>
-        <tr><td><code>internal</code></td><td>Course-only material; not for redistribution outside the enrolled group.</td><td>Most student assignments, instructor notes, draft readings.</td></tr>
-        <tr><td><code>sensitive</code></td><td>Contains personal reflection, identifiable detail, or sensitive context. Handle with care even within the course.</td><td>Student personal reflection, peer-review comment, accessibility accommodation context, interview excerpt.</td></tr>
-        <tr><td><code>restricted</code></td><td>FERPA-protected, IRB-governed, or institutionally confidential. Do not share without explicit authorization.</td><td>Identifiable student record, IRB-governed research data, confidential advising note.</td></tr>
+        <tr><th scope="row"><code>public</code></th><td>Open educational resource; intended for circulation beyond the course.</td><td>Public syllabus, OER reading, published course note.</td></tr>
+        <tr><th scope="row"><code>internal</code></th><td>Course-only material; not for redistribution outside the enrolled group.</td><td>Most student assignments, instructor notes, draft readings.</td></tr>
+        <tr><th scope="row"><code>sensitive</code></th><td>Contains personal reflection, identifiable detail, or sensitive context. Handle with care even within the course.</td><td>Student personal reflection, peer-review comment, accessibility accommodation context, interview excerpt.</td></tr>
+        <tr><th scope="row"><code>restricted</code></th><td>FERPA-protected, IRB-governed, or institutionally confidential. Do not share without explicit authorization.</td><td>Identifiable student record, IRB-governed research data, confidential advising note.</td></tr>
       </tbody>
     </table>
 
@@ -327,16 +330,16 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The protocol requires an <code>attribution.sources</code> array with at least one entry. Each source should include <code>author</code> and <code>contribution</code>. For educational workflows, adding a <code>role</code> field to each source entry makes attribution records interoperable across tools. The following roles are recommended for course use.</p>
 
-    <table class="field-table">
-      <thead><tr><th>Role value</th><th>Meaning</th></tr></thead>
+    <table class="field-table"><caption>Attribution roles</caption>
+      <thead><tr><th scope="col">Role value</th><th scope="col">Meaning</th></tr></thead>
       <tbody>
-        <tr><td><code>student_author</code></td><td>The student who wrote the work. Primary rights-bearing contributor.</td></tr>
-        <tr><td><code>instructor_prompt</code></td><td>The instructor who designed the assignment or provided the framing prompt. Rights-bearing for the prompt itself; not for the student's response.</td></tr>
-        <tr><td><code>ai_assistant</code></td><td>An AI model that contributed to the work. Always <code>"rights_bearing": false</code>. Contribution should describe specifically what the model did and did not do.</td></tr>
-        <tr><td><code>peer_feedback</code></td><td>A peer reviewer or editor whose input shaped the work.</td></tr>
-        <tr><td><code>source_text</code></td><td>A reading, dataset, or primary source the work draws on. Use <code>parents</code> to link by hash when the source is itself a KNOBE.</td></tr>
-        <tr><td><code>adapter</code></td><td>A person who produced an accessibility adaptation (caption, simplification, translation). Combine with the <code>accessibility</code> field.</td></tr>
-        <tr><td><code>accessibility_reviewer</code></td><td>A person who reviewed or approved an adaptation for quality and accuracy.</td></tr>
+        <tr><th scope="row"><code>student_author</code></th><td>The student who wrote the work. Primary rights-bearing contributor.</td></tr>
+        <tr><th scope="row"><code>instructor_prompt</code></th><td>The instructor who designed the assignment or provided the framing prompt. Rights-bearing for the prompt itself; not for the student's response.</td></tr>
+        <tr><th scope="row"><code>ai_assistant</code></th><td>An AI model that contributed to the work. Always <code>"rights_bearing": false</code>. Contribution should describe specifically what the model did and did not do.</td></tr>
+        <tr><th scope="row"><code>peer_feedback</code></th><td>A peer reviewer or editor whose input shaped the work.</td></tr>
+        <tr><th scope="row"><code>source_text</code></th><td>A reading, dataset, or primary source the work draws on. Use <code>parents</code> to link by hash when the source is itself a KNOBE.</td></tr>
+        <tr><th scope="row"><code>adapter</code></th><td>A person who produced an accessibility adaptation (caption, simplification, translation). Combine with the <code>accessibility</code> field.</td></tr>
+        <tr><th scope="row"><code>accessibility_reviewer</code></th><td>A person who reviewed or approved an adaptation for quality and accuracy.</td></tr>
       </tbody>
     </table>
 
@@ -450,21 +453,21 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>Protocol field names are precise but not always the right language for a student or instructor interface. The following translations are recommended for education-facing tools. The protocol field names remain unchanged in the payload; these labels apply only at the display layer.</p>
 
-    <table class="label-table">
-      <thead><tr><th>Protocol field</th><th>Student / instructor label</th><th>Notes</th></tr></thead>
+    <table class="label-table"><caption>UI label translations</caption>
+      <thead><tr><th scope="col">Protocol field</th><th scope="col">Student / instructor label</th><th scope="col">Notes</th></tr></thead>
       <tbody>
-        <tr><td>quarantine_status: quarantine</td><td>Needs review</td><td>"Quarantine" can sound punitive in a classroom context.</td></tr>
-        <tr><td>quarantine_status: trusted</td><td>Reviewed and trusted</td><td>Set by instructor or governed system after review.</td></tr>
-        <tr><td>fidelity_limits</td><td>What this can and cannot be used for</td><td>Or: "What to know before reusing this."</td></tr>
-        <tr><td>use_conditions</td><td>Rules for reuse</td><td>Or: "Sharing and citation terms."</td></tr>
-        <tr><td>transformation_history</td><td>What changed, and when</td><td>Or: "Edit history."</td></tr>
-        <tr><td>parents</td><td>What this came from</td><td>Or: "Source materials."</td></tr>
-        <tr><td>accessibility</td><td>Adaptation record</td><td>Or: "Accessibility versions."</td></tr>
-        <tr><td>attribution.sources</td><td>Who contributed, and how</td><td>Show AI contributors clearly with their role.</td></tr>
-        <tr><td>privacy_level: internal</td><td>Course only</td><td>Not for redistribution outside the enrolled group.</td></tr>
-        <tr><td>privacy_level: sensitive</td><td>Handle with care</td><td>Contains personal or sensitive content.</td></tr>
-        <tr><td>payload_hash: verified</td><td>Record intact</td><td>Follow with "Integrity is not the same as accuracy; read carefully."</td></tr>
-        <tr><td>payload_hash: failed</td><td>Record may have changed</td><td>Avoid "tampered"; changes may be legitimate. Prompt inspection.</td></tr>
+        <tr><th scope="row">quarantine_status: quarantine</th><td>Needs review</td><td>"Quarantine" can sound punitive in a classroom context.</td></tr>
+        <tr><th scope="row">quarantine_status: trusted</th><td>Reviewed and trusted</td><td>Set by instructor or governed system after review.</td></tr>
+        <tr><th scope="row">fidelity_limits</th><td>What this can and cannot be used for</td><td>Or: "What to know before reusing this."</td></tr>
+        <tr><th scope="row">use_conditions</th><td>Rules for reuse</td><td>Or: "Sharing and citation terms."</td></tr>
+        <tr><th scope="row">transformation_history</th><td>What changed, and when</td><td>Or: "Edit history."</td></tr>
+        <tr><th scope="row">parents</th><td>What this came from</td><td>Or: "Source materials."</td></tr>
+        <tr><th scope="row">accessibility</th><td>Adaptation record</td><td>Or: "Accessibility versions."</td></tr>
+        <tr><th scope="row">attribution.sources</th><td>Who contributed, and how</td><td>Show AI contributors clearly with their role.</td></tr>
+        <tr><th scope="row">privacy_level: internal</th><td>Course only</td><td>Not for redistribution outside the enrolled group.</td></tr>
+        <tr><th scope="row">privacy_level: sensitive</th><td>Handle with care</td><td>Contains personal or sensitive content.</td></tr>
+        <tr><th scope="row">payload_hash: verified</th><td>Record intact</td><td>Follow with "Integrity is not the same as accuracy; read carefully."</td></tr>
+        <tr><th scope="row">payload_hash: failed</th><td>Record may have changed</td><td>Avoid "tampered"; changes may be legitimate. Prompt inspection.</td></tr>
       </tbody>
     </table>
 

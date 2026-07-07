@@ -57,8 +57,8 @@ code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.87em;backgrou
 .defer .dlabel{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:4px}
 
 .rw-table{width:100%;border-collapse:collapse;font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;margin:20px 0}
-.rw-table th,.rw-table td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
-.rw-table th{background:var(--paper-warm);font-weight:600}
+.rw-table th,.rw-table td,.rw-table tbody th{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+.rw-table thead th{background:var(--paper-warm);font-weight:600}
 @media(max-width:680px){.rw-table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
 
 footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
@@ -77,6 +77,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.rw-table tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -189,18 +191,18 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p>Front-matter metadata is the <em>content</em> of the solution; KNOBE's contribution is the <strong>transport guarantee</strong>. YAML front-matter alone is silently editable, routinely stripped, and carries no tamper evidence. KNOBE keeps that metadata attached and verifiable: self-contained, hash-sealed, with defined <a href="/spec" class="inline">verification semantics</a>, published <a href="/test-vectors/" class="inline">test vectors</a>, and graceful degradation to readable text. If plain front-matter meets your needs, use it; KNOBE's YAML layer is deliberately compatible with that practice, so the upgrade path is short.</p>
 
     <h2>Summary</h2>
-    <table class="rw-table">
+    <table class="rw-table"><caption>Related standards and how KNOBE differs from each</caption>
       <thead>
-        <tr><th>Standard</th><th>Best at</th><th>KNOBE's difference</th><th>When to defer to it</th></tr>
+        <tr><th scope="col">Standard</th><th scope="col">Best at</th><th scope="col">KNOBE's difference</th><th scope="col">When to defer to it</th></tr>
       </thead>
       <tbody>
-        <tr><td>Git</td><td>In-repo version history</td><td>Context that travels <em>with</em> the file after it leaves</td><td>Development history</td></tr>
-        <tr><td>C2PA</td><td>Signed media provenance</td><td>Plain text, no PKI, human-readable degradation</td><td>Images, video, audio</td></tr>
-        <tr><td>Verifiable Credentials</td><td>Identity-backed claims</td><td>Context without requiring identity</td><td>"Who asserts this?"</td></tr>
-        <tr><td>W3C PROV</td><td>Rich provenance vocabulary</td><td>Sealed single-file transport</td><td>Queryable provenance graphs</td></tr>
-        <tr><td>RO-Crate</td><td>Research data packaging</td><td>One human-first document, sealing semantics</td><td>Datasets, repository deposit</td></tr>
-        <tr><td>Dublin Core</td><td>Shared field names</td><td>Tamper evidence, obligations, survival</td><td>Descriptive naming (map to it)</td></tr>
-        <tr><td>Knowledge graphs</td><td>Linked knowledge in place</td><td>The node's passport when it exits</td><td>Inside one platform</td></tr>
+        <tr><th scope="row">Git</th><td>In-repo version history</td><td>Context that travels <em>with</em> the file after it leaves</td><td>Development history</td></tr>
+        <tr><th scope="row">C2PA</th><td>Signed media provenance</td><td>Plain text, no PKI, human-readable degradation</td><td>Images, video, audio</td></tr>
+        <tr><th scope="row">Verifiable Credentials</th><td>Identity-backed claims</td><td>Context without requiring identity</td><td>"Who asserts this?"</td></tr>
+        <tr><th scope="row">W3C PROV</th><td>Rich provenance vocabulary</td><td>Sealed single-file transport</td><td>Queryable provenance graphs</td></tr>
+        <tr><th scope="row">RO-Crate</th><td>Research data packaging</td><td>One human-first document, sealing semantics</td><td>Datasets, repository deposit</td></tr>
+        <tr><th scope="row">Dublin Core</th><td>Shared field names</td><td>Tamper evidence, obligations, survival</td><td>Descriptive naming (map to it)</td></tr>
+        <tr><th scope="row">Knowledge graphs</th><td>Linked knowledge in place</td><td>The node's passport when it exits</td><td>Inside one platform</td></tr>
       </tbody>
     </table>
 

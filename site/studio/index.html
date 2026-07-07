@@ -174,11 +174,12 @@ pre.filepre{max-height:340px;overflow:auto;font-family:'SF Mono',ui-monospace,Me
 .chsummary{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink);margin:14px 0 6px}
 .chtablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:8px;background:#fff}
 .chtable{width:100%;border-collapse:collapse;font-family:-apple-system,system-ui,sans-serif;font-size:.8rem}
-.chtable th{text-align:left;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
+.chtable thead th{text-align:left;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);
   padding:9px 12px;border-bottom:2px solid var(--line);white-space:nowrap}
-.chtable td{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);max-width:260px}
+.chtable td,.chtable tbody th{padding:8px 12px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink-soft);max-width:260px}
 .chtable tr:last-child td{border-bottom:none}
-.chtable td.mono{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;word-break:break-all}
+.chtable tbody th{font-weight:normal;text-align:left}
+.chtable td.mono,.chtable tbody th.mono{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;word-break:break-all}
 .chtable .cok{color:var(--moss-deep);font-weight:600}
 .chtable .cwarn{color:var(--amber);font-weight:600}
 .chtable .cbad{color:var(--alert);font-weight:600}
@@ -881,7 +882,8 @@ footer a:hover{color:var(--moss)}
         </details>
         <div class="chtablewrap">
           <table class="chtable" id="chTable">
-            <thead><tr><th>File</th><th>Title</th><th>Author</th><th>Integrity</th><th>Conformance</th><th>AI disclosure</th><th>Chain</th><th>Review</th></tr></thead>
+            <caption class="visually-hidden">Submission verdicts for the loaded cohort</caption>
+            <thead><tr><th scope="col">File</th><th scope="col">Title</th><th scope="col">Author</th><th scope="col">Integrity</th><th scope="col">Conformance</th><th scope="col">AI disclosure</th><th scope="col">Chain</th><th scope="col">Review</th></tr></thead>
             <tbody id="chBody"></tbody>
           </table>
         </div>
@@ -2187,7 +2189,7 @@ function renderCohort() {
   chRows.forEach(row => {
     const tr = document.createElement('tr');
     const td = (text, cls) => { const d = document.createElement('td'); d.textContent = text; if (cls) d.className = cls; tr.appendChild(d); };
-    td(row.file, 'mono');
+    const rh = document.createElement('th'); rh.setAttribute('scope', 'row'); rh.className = 'mono'; rh.textContent = row.file; tr.appendChild(rh);
     td(row.title);
     td(row.author);
     td(row.state, chStateCls(row.state));

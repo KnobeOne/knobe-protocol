@@ -50,8 +50,8 @@ a.inline{color:var(--moss);text-decoration:underline;text-underline-offset:2px}
 code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.87em;background:var(--paper-warm);padding:1px 5px;border-radius:3px;color:var(--moss-deep)}
 
 .tv-table{width:100%;border-collapse:collapse;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;margin:20px 0}
-.tv-table th,.tv-table td{border:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
-.tv-table th{background:var(--paper-warm);font-weight:600;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
+.tv-table th,.tv-table td,.tv-table tbody th{border:1px solid var(--line);padding:10px 14px;text-align:left;vertical-align:top}
+.tv-table thead th{background:var(--paper-warm);font-weight:600;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-faint)}
 .tv-table td:first-child a{color:var(--moss-deep);text-decoration:none;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.85em}
 .tv-table td:first-child a:hover{text-decoration:underline}
 .tv-table .desc{color:var(--ink-faint);font-size:.92em}
@@ -75,6 +75,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.tv-table tbody th{font-weight:normal;text-align:left}
 </style>
 <link rel="icon" type="image/x-icon" href="/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -158,66 +160,66 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>Reference verifier: <a href="/lens.py" class="inline">lens.py</a> (<code>python3 lens.py &lt;file&gt;</code>). An implementation that reproduces all nine expected results is canonically compatible with KNOBE Protocol v1. A further ten <a href="adversarial/README.md" class="inline">adversarial hardening vectors</a> exercise hostile input beyond the conformance bar.</p>
 
-    <table class="tv-table">
+    <table class="tv-table"><caption>Conformance test vectors and their expected outcomes</caption>
       <thead>
         <tr>
-          <th>File</th>
-          <th>Expected outcome</th>
-          <th>What it tests</th>
+          <th scope="col">File</th>
+          <th scope="col">Expected outcome</th>
+          <th scope="col">What it tests</th>
         </tr>
       </thead>
       <tbody>
 
         <tr>
-          <td><a href="full-valid.knobe.md">full-valid.knobe.md</a></td>
+          <th scope="row"><a href="full-valid.knobe.md">full-valid.knobe.md</a></th>
           <td><span class="pass">verified · body_verified yes · conformance valid</span></td>
           <td class="desc">Complete, fully populated valid KNOBE</td>
         </tr>
 
         <tr>
-          <td><a href="minimal-valid.knobe.md">minimal-valid.knobe.md</a></td>
+          <th scope="row"><a href="minimal-valid.knobe.md">minimal-valid.knobe.md</a></th>
           <td><span class="pass">verified · body_verified omitted · conformance valid</span></td>
           <td class="desc">Minimum required fields only; no <code>body_hash</code></td>
         </tr>
 
         <tr>
-          <td><a href="unicode-valid.knobe.md">unicode-valid.knobe.md</a></td>
+          <th scope="row"><a href="unicode-valid.knobe.md">unicode-valid.knobe.md</a></th>
           <td><span class="pass">verified · body_verified yes · conformance valid</span></td>
           <td class="desc">Unicode content in body and payload; verifier must apply NFC normalization to the payload before hashing</td>
         </tr>
 
         <tr>
-          <td><a href="multi-block.knobe.md">multi-block.knobe.md</a></td>
+          <th scope="row"><a href="multi-block.knobe.md">multi-block.knobe.md</a></th>
           <td><span class="pass">verified · body_verified omitted · conformance warnings</span></td>
           <td class="desc">Multiple <code>BEGIN KNOBE B64</code> blocks present; verifier must use the <em>last</em> block and surface a warning</td>
         </tr>
 
         <tr>
-          <td><a href="omitted-body-hash.knobe.md">omitted-body-hash.knobe.md</a></td>
+          <th scope="row"><a href="omitted-body-hash.knobe.md">omitted-body-hash.knobe.md</a></th>
           <td><span class="pass">verified · body_verified omitted · conformance valid</span></td>
           <td class="desc">Payload verifies; no <code>body_hash</code> field, so body verification is intentionally skipped</td>
         </tr>
 
         <tr>
-          <td><a href="numeric-violation.knobe.md">numeric-violation.knobe.md</a></td>
+          <th scope="row"><a href="numeric-violation.knobe.md">numeric-violation.knobe.md</a></th>
           <td><span class="caution">verified · body_verified yes · conformance invalid</span></td>
           <td class="desc">Hashes intact; a numeric field violates a conformance rule, so the verifier must flag conformance as invalid while still reporting verified</td>
         </tr>
 
         <tr>
-          <td><a href="body-modified.knobe.md">body-modified.knobe.md</a></td>
+          <th scope="row"><a href="body-modified.knobe.md">body-modified.knobe.md</a></th>
           <td><span class="caution">verified-body-modified · body_verified modified · conformance valid</span></td>
           <td class="desc">Payload hash intact; body text altered after sealing, so the verifier reports a distinct body-modified status</td>
         </tr>
 
         <tr>
-          <td><a href="payload-modified.knobe.md">payload-modified.knobe.md</a></td>
+          <th scope="row"><a href="payload-modified.knobe.md">payload-modified.knobe.md</a></th>
           <td><span class="fail">failed · conformance valid</span></td>
           <td class="desc">Payload JSON altered after sealing; payload hash mismatch, so the verifier must report failed</td>
         </tr>
 
         <tr>
-          <td><a href="unreadable.knobe.md">unreadable.knobe.md</a></td>
+          <th scope="row"><a href="unreadable.knobe.md">unreadable.knobe.md</a></th>
           <td><span class="fail">unreadable · conformance invalid</span></td>
           <td class="desc">Malformed Base64 block; verifier must report unreadable without crashing</td>
         </tr>
