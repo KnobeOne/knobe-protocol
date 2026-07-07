@@ -72,6 +72,7 @@ input[type=text],input[type=date],select,textarea{width:100%;font-family:-apple-
 textarea{resize:vertical;line-height:1.55}
 textarea.mono{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.8rem}
 input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid var(--moss);outline-offset:1px}
+input[list]:focus{outline:3px solid var(--moss);outline-offset:1px}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}
 @media(max-width:560px){.row2{grid-template-columns:1fr}}
 .checkline{display:flex;align-items:baseline;gap:8px;font-family:-apple-system,system-ui,sans-serif;font-size:.86rem;color:var(--ink-soft);margin:0 0 14px}
@@ -373,7 +374,7 @@ footer a:hover{color:var(--moss)}
             <div class="dmain">Drag the journey <code>.knobe.md</code> here</div>
             <div class="dhint">Your instructor posted it with the assignment. It is read in this page and goes nowhere else.</div>
             <button type="button" id="jsChoose" class="btn choosebtn">Choose the file</button>
-            <input type="file" id="jsFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file">
+            <input type="file" tabindex="-1" aria-hidden="true" id="jsFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file">
           </div>
           <label for="jsPasteArea" class="visually-hidden">Paste journey file text</label>
           <textarea id="jsPasteArea" placeholder="Or paste the full text of the journey file." spellcheck="false"></textarea>
@@ -600,7 +601,7 @@ footer a:hover{color:var(--moss)}
         <div class="dmain">Drag a <code>.knobe.md</code> file here</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="vChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" id="vFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a .knobe.md file to verify">
+        <input type="file" tabindex="-1" aria-hidden="true" id="vFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a .knobe.md file to verify">
       </div>
       <div class="altrow">No file handy? <button type="button" id="vPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="vPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="vPasteWrap" class="pastewrap">
@@ -620,7 +621,7 @@ footer a:hover{color:var(--moss)}
         <div class="dmain">Drag a sealed <code>.knobe.md</code> here to derive from it</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="tChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" id="tFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to derive from">
+        <input type="file" tabindex="-1" aria-hidden="true" id="tFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to derive from">
       </div>
       <div class="altrow">No file handy? <button type="button" id="tPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="tPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="tPasteWrap" class="pastewrap">
@@ -727,7 +728,7 @@ footer a:hover{color:var(--moss)}
           <div class="btnrow">
             <button type="button" id="jmPasteBtn" class="btn">Load pasted text</button>
             <button type="button" id="jmChoose" class="btn ghost">Choose a file</button>
-            <input type="file" id="jmFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file to edit">
+            <input type="file" tabindex="-1" aria-hidden="true" id="jmFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file to edit">
           </div>
         </div>
         <div class="errmsg" id="jmLoadErr" role="alert" hidden></div>
@@ -802,7 +803,7 @@ footer a:hover{color:var(--moss)}
           <div class="btnrow">
             <button type="button" id="chExpPasteBtn" class="btn">Load pasted text</button>
             <button type="button" id="chExpChoose" class="btn ghost">Choose a file</button>
-            <input type="file" id="chExpFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey or spec file">
+            <input type="file" tabindex="-1" aria-hidden="true" id="chExpFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey or spec file">
           </div>
         </div>
         <div id="chExpBanner" class="jbanner" hidden></div>
@@ -817,8 +818,8 @@ footer a:hover{color:var(--moss)}
           <button type="button" id="chChooseFiles" class="btn choosebtn" style="margin-top:0">Choose files</button>
           <button type="button" id="chChooseDir" class="btn ghost" style="margin-top:0">Choose a folder</button>
         </div>
-        <input type="file" id="chFiles" class="visually-hidden" multiple accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose submission files">
-        <input type="file" id="chDir" class="visually-hidden" webkitdirectory aria-label="Choose a submissions folder">
+        <input type="file" tabindex="-1" aria-hidden="true" id="chFiles" class="visually-hidden" multiple accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose submission files">
+        <input type="file" tabindex="-1" aria-hidden="true" id="chDir" class="visually-hidden" webkitdirectory aria-label="Choose a submissions folder">
       </div>
       <div class="errmsg" id="chErr" role="alert" hidden></div>
 
@@ -847,7 +848,7 @@ footer a:hover{color:var(--moss)}
         <div class="dmain">Drag a sealed <code>.knobe.md</code> here to adapt it</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="aChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" id="aFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to adapt">
+        <input type="file" tabindex="-1" aria-hidden="true" id="aFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to adapt">
       </div>
       <div class="altrow">No file handy? <button type="button" id="aPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="aPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="aPasteWrap" class="pastewrap">
