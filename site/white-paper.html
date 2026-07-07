@@ -72,7 +72,7 @@ h3{font-size:1.05rem;font-weight:bold;margin:28px 0 9px;color:var(--ink)}
 p{margin-bottom:16px}
 ul{margin:8px 0 16px 1.5rem}
 li{margin-bottom:6px}
-blockquote{border-left:3px solid var(--line);margin:16px 0;padding:4px 18px;color:var(--ink-soft);font-style:italic}
+.wp-aphorism{border-left:3px solid var(--line);margin:16px 0;padding:4px 18px;color:var(--ink-soft);font-style:italic}
 code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.85em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
 pre{background:var(--paper-warm);border-left:3px solid var(--line);padding:16px 20px;overflow-x:auto;margin:16px 0}
 pre code{background:none;padding:0;font-size:.83em}
@@ -218,7 +218,7 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <p>Handed to a human with no tooling, it remains a readable document whose obligations can be stated in plain language.</p>
 <p>Handed to a capable AI system with no prior knowledge of KNOBE, it remains readable markdown, and the file can often reveal its own structure: frontmatter, body, payload markers, and explanatory text all remain visible. In practice, capable naive readers can often infer that the Base64 block is part of the object&#x27;s structured record. This is discoverability, however, not verification.</p>
 <p>Deterministic verification requires KNOBE-aware tooling. Handed to such a tool, the same file becomes a verifiable structured object with machine-legible provenance and inspectable payload fields. That distinction is central:</p>
-<blockquote><p>KNOBE is discoverable to capable readers and models, but verifiable only through deterministic tooling.</p></blockquote>
+<p class="wp-aphorism">KNOBE is discoverable to capable readers and models, but verifiable only through deterministic tooling.</p>
 <h3>Why these design choices</h3>
 <p>Each layer reflects a choice with a reason behind it:</p>
 <ul>
@@ -249,20 +249,20 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 <p>When a verifier shows a green check, exactly one thing has been established: the sealed payload is the same payload that was present when the artifact was sealed. The SHA-256 comparison (NIST, 2015) is a tamper-evidence mechanism, and a strong one. It is not, and cannot be, a truth mechanism.</p>
 <p>A KNOBE can verify perfectly and still be wrong, outdated, plagiarized, misattributed, misleading, or malicious. A liar can seal a lie; the seal then faithfully proves that the lie has not been edited since. Conversely, a mismatch does not prove malice: a well-meaning edit, a line-ending conversion, or a copy-paste accident breaks a hash just as surely as tampering does.</p>
 <p>The hash answers one question:</p>
-<blockquote><p>Is this the sealed payload?</p></blockquote>
+<p class="wp-aphorism">Is this the sealed payload?</p>
 <p>It refuses every other. KNOBE&#x27;s hash is tamper-evidence, not a cryptographic signature binding the artifact to a verified identity; content-provenance standards such as C2PA (2025) provide that complementary guarantee for signed media, and v1&#x27;s <code>identity_status: signed</code> anticipates such an extension without yet providing it.</p>
 <p>This restraint is a design feature, not a limitation to be apologized for. Systems that conflate integrity with trust train their users to stop inspecting; the lock icon becomes a substitute for judgment rather than a precondition for it. KNOBE pushes the other way. Verification is cheap and automatic precisely so that human judgment can be spent where it is actually needed: on the claims, the attribution, the use conditions, the fidelity limits, and the fit between the object and its intended use. The green check is where inspection begins, not where it ends.</p>
 <h3>Language models are not verification environments</h3>
 <p>This failure has an LLM-specific variant. A language model tasked with verifying a KNOBE natively does not perform a cryptographic computation; it performs a textual prediction. Once a plausible hash-token sequence has been generated, the structural logic of a verification narrative strongly predicts that the next sequence should match and declare success. The model satisfies the narrative arc of the prompt rather than executing the operation, a textual performance of verification rather than verification itself. This is the <strong>probabilistic verification fallacy</strong>.</p>
 <p>The failure was observed directly, in a documented field test during protocol development (June 2026): a language model confabulated a perfectly matched hash pair that bore no relation to the file&#x27;s actual sealed payload. The recursion is what makes it instructive: in the same session, the model diagnosed the failure with precision and then committed it again in the next generation, embedding a hallucinated hash into a provenance record as if it were real. The diagnosis lived in the text; no persistent state existed to let it constrain the next token sequence. That gap (between correct reasoning about verification and the ability to enforce that reasoning across one&#x27;s own next generation) is what &quot;architectural boundary&quot; means. A language model is not incapable of reasoning about verification; it is incapable of being the environment that performs it.</p>
 <p>Hash verification requires a deterministic runtime. For that reason, KNOBE ships with a reference verifier, <code>lens.py</code>, not as a convenience but as that boundary. The rule is simple:</p>
-<blockquote><p>Models can help understand verification. Code must perform verification.</p></blockquote>
+<p class="wp-aphorism">Models can help understand verification. Code must perform verification.</p>
 <h2 id="s7">6. Quarantine-First</h2>
 <p>New or external KNOBEs should be treated as quarantined until a local human or governed system marks them trusted. This is the local half of that stance, and it inverts the usual default of circulation systems, which treat arrival as implicit endorsement.</p>
 <p>This matters because a KNOBE may arrive declaring itself <code>trusted</code>. Receiving systems should not automatically inherit that declaration; local trust is a receiving-system decision. The field <code>quarantine_status</code> records the review posture the object declares, but receiving environments should maintain their own review layer. An external KNOBE may be valid, readable, and hash-verified while still remaining untrusted locally.</p>
 <p>Quarantine-first has three practical consequences. First, inspection precedes action: tools that consume KNOBEs surface quarantine status prominently and do not act on quarantined build recipes or transformations without explicit human or governed approval. Second, trust becomes a recorded decision rather than an ambient assumption: someone, or some governed process, changes the status, and that decision belongs to the object&#x27;s history. Third, the posture scales in both directions: a single reader applying personal judgment and an institution applying a formal review workflow use the same field, with different governance behind it.</p>
 <p>Quarantine is not an accusation. It is the honest starting point for any object whose provenance has not yet been examined, which is every object, on arrival.</p>
-<blockquote><p>A verified KNOBE is not necessarily trusted. A trusted KNOBE is not necessarily true. A true claim still requires interpretation. The seal reports; the human decides.</p></blockquote>
+<p class="wp-aphorism">A verified KNOBE is not necessarily trusted. A trusted KNOBE is not necessarily true. A true claim still requires interpretation. The seal reports; the human decides.</p>
 <h2 id="s8">7. A System of Context, Not a System of Record</h2>
 <p>The predictable institutional objection arrives early: <em>we already have systems.</em> The objection is correct, and it misses the point.</p>
 <p>Course systems keep grades. Ethics review keeps approvals. Repositories keep deposits. Archives keep accession records. Publishers keep formal publication metadata. Human resources systems keep employment records. Compliance systems keep official decisions. Each is a system of record, and each should remain. KNOBE replaces none of them.</p>
