@@ -4,12 +4,12 @@ Thank you for your interest. KNOBE is small on purpose; contributions that keep 
 
 ## What we're looking for
 
-- **Errata** — errors or ambiguities in the specification text.
-- **Test vectors** — especially hostile cases: canonicalization edge cases, Unicode normalization traps, malformed payloads that should fail cleanly.
-- **Independent implementations** — verifiers in any language. An implementation that reproduces all published test-vector results is the single most useful contribution KNOBE can receive. Open an issue so it can be listed.
-- **Applications and integrations** — tools that build on the protocol (editors, plugins, pipelines, agents). To be listed on the implementations page: a named maintainer, public source, test-vector results if it verifies, and a plain statement of what it does and does not do. Open a listing-request issue.
-- **Vocabulary proposals** — new canonical values for the open vocabularies (`content_type`, `quarantine_status`, `privacy_level`), with namespace-prefixed use in the wild preferred as evidence.
-- **Profile feedback** — corrections and additions to the Education, Government, Enterprise, and Accessibility profiles from practitioners in those fields.
+- **Errata**: errors or ambiguities in the specification text.
+- **Test vectors**: especially hostile cases: canonicalization edge cases, Unicode normalization traps, malformed payloads that should fail cleanly.
+- **Independent implementations**: verifiers in any language. An implementation that reproduces all published test-vector results is the single most useful contribution KNOBE can receive. Open an issue so it can be listed.
+- **Applications and integrations**: tools that build on the protocol (editors, plugins, pipelines, agents). To be listed on the implementations page: a named maintainer, public source, test-vector results if it verifies, and a plain statement of what it does and does not do. Open a listing-request issue.
+- **Vocabulary proposals**: new canonical values for the open vocabularies (`content_type`, `quarantine_status`, `privacy_level`), with namespace-prefixed use in the wild preferred as evidence.
+- **Profile feedback**: corrections and additions to the Education, Government, Enterprise, and Accessibility profiles from practitioners in those fields.
 
 ## What will not change
 
@@ -41,7 +41,7 @@ Commits in this repository are written with AI assistance, directed and reviewed
 
 ## One integrity rule
 
-Sealed `.knobe.md` files are never edited in place — a sealed file whose payload changes is, by definition, a different object. To update a sealed example, produce and seal a new file and update references.
+Sealed `.knobe.md` files are never edited in place: a sealed file whose payload changes is, by definition, a different object. To update a sealed example, produce and seal a new file and update references.
 
 ## Conduct
 
