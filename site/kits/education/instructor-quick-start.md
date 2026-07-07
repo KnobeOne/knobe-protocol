@@ -33,6 +33,6 @@ Load your existing journey file into the Journey tab, edit, and reseal. The new 
 
 ## The rest of the kit
 
-The TA guide covers batch checking. The student handout is written to be attached to the assignment as-is. Two sealed example journeys, one AI-disclosed and one AI-prohibited, load into Studio unchanged if you want to start from a working sequence.
+The TA guide covers batch checking. The student handout is written to be attached to the assignment as-is. Two sealed example journeys, one AI-disclosed and one AI-prohibited, load into Studio unchanged if you want to start from a working sequence. The loop on one page (loop-on-one-page.html) is a printable visual guide to the whole cycle; it works as a workshop handout or a syllabus insert.
 
 Everything runs inside the browser page. Student work is never transmitted to any server, including ours.

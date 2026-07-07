@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The KNOBE classroom loop, on one page</title>
+<meta name="description" content="A printable one-page visual guide to the KNOBE classroom loop: the cycle, the instructor, student, and TA paths, the Canvas file-type gotcha, and what a sealed file is.">
+<style>
+:root{
+  --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
+  --paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;
+  --moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,system-ui,sans-serif;background:var(--paper);color:var(--ink);line-height:1.5;-webkit-font-smoothing:antialiased}
+.page{max-width:760px;margin:0 auto;padding:28px}
+header.bar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:2px solid var(--moss);padding-bottom:10px;margin-bottom:18px}
+h1{font-family:Georgia,'Times New Roman',serif;font-size:1.5rem;font-weight:normal;letter-spacing:-.01em}
+.site{font-size:.8rem;color:var(--ink-faint)}
+.btn{font-size:.84rem;font-weight:500;background:var(--moss-deep);color:var(--paper);border:none;border-radius:3px;padding:9px 16px;cursor:pointer}
+.btn:hover{background:var(--moss)}
+.btn:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
+h2{font-family:Georgia,serif;font-size:1.05rem;font-weight:normal;color:var(--moss-deep);margin:20px 0 8px}
+
+/* the loop as a ring: DOM order is the cycle order; grid areas place it as a ring */
+.ringcap{font-size:.82rem;color:var(--ink-soft);margin-bottom:10px}
+.ring{display:grid;grid-template-areas:"a b" "d c";gap:12px;max-width:640px}
+.ring > div{position:relative;border:1.5px solid var(--line);border-radius:8px;background:#fff;padding:12px 14px 12px 16px}
+.ring .rk{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);font-weight:600;margin-bottom:2px}
+.ring .rt{display:block;font-size:.84rem;color:var(--ink-soft)}
+.ring .r1{grid-area:a}.ring .r2{grid-area:b}.ring .r3{grid-area:c}.ring .r4{grid-area:d}
+.rarrow{position:absolute;color:var(--moss);font-size:1.05rem;line-height:1}
+.r1 .rarrow{right:-13px;top:50%;transform:translateY(-50%)}
+.r2 .rarrow{bottom:-16px;left:50%;transform:translateX(-50%)}
+.r3 .rarrow{left:-13px;top:50%;transform:translateY(-50%)}
+.r4 .rarrow{top:-16px;left:50%;transform:translateX(-50%)}
+@media(max-width:520px){.ring{grid-template-areas:"a" "b" "c" "d"}.rarrow{display:none}}
+
+.paths{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:4px}
+.path h3{font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--moss-deep);border-bottom:1px solid var(--line);padding-bottom:4px;margin-bottom:6px}
+.path ol{margin:0 0 0 20px;font-size:.84rem;color:var(--ink-soft)}
+.path li{margin-bottom:5px}
+.path li::marker{color:var(--moss);font-weight:600}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.9em;background:var(--paper-warm);padding:0 4px;border-radius:3px}
+
+.gotcha{border:1px solid var(--line);border-left:3px solid var(--amber);background:#fdf8f0;border-radius:6px;padding:10px 14px;margin:14px 0;font-size:.84rem;color:var(--ink-soft)}
+
+.anatomy{border:1px solid var(--line);border-radius:8px;overflow:hidden;margin:8px 0}
+.alayer{padding:9px 14px}
+.alayer + .alayer{border-top:1px solid var(--line)}
+.alayer .al{display:inline;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;font-weight:600;margin-right:8px}
+.alayer .ad{display:inline;font-size:.82rem;color:var(--ink-soft)}
+.a1 .al{color:var(--amber)}.a2 .al{color:var(--moss)}.a3 .al{color:var(--moss-deep)}
+
+footer{margin-top:18px;padding-top:10px;border-top:1px solid var(--line);font-size:.78rem;color:var(--ink-faint);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+@media print{
+  @page{margin:12mm}
+  body{background:#fff;font-size:9.5pt}
+  .page{max-width:none;padding:0}
+  .noprint{display:none}
+  h1{font-size:15pt}
+  h2{font-size:11pt;margin:10pt 0 4pt}
+  .ring{gap:9pt}
+  .paths{grid-template-columns:1fr 1fr 1fr;gap:10pt}
+  .ring > div,.anatomy,.gotcha{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<header class="bar">
+  <h1>The KNOBE classroom loop, on one page</h1>
+  <span class="site">knobe.org/teaching</span>
+  <button type="button" class="btn noprint" onclick="window.print()">Print this page</button>
+</header>
+
+<h2>The loop</h2>
+<p class="ringcap">The instructor designs and seals the sequence; students seal their steps against it; the TA checks the batch; disputes return to the instructor with a sealed record. Every arrow is a payload hash.</p>
+<div class="ring">
+  <div class="r1"><span class="rk">1 · Instructor</span><span class="rt">designs and seals the sequence</span><span class="rarrow" aria-hidden="true">&#8594;</span></div>
+  <div class="r2"><span class="rk">2 · Students</span><span class="rt">seal their steps against it</span><span class="rarrow" aria-hidden="true">&#8595;</span></div>
+  <div class="r3"><span class="rk">3 · TA</span><span class="rt">checks the batch in one table</span><span class="rarrow" aria-hidden="true">&#8592;</span></div>
+  <div class="r4"><span class="rk">4 · Back to the instructor</span><span class="rt">disputes work from the sealed record</span><span class="rarrow" aria-hidden="true">&#8593;</span></div>
+</div>
+
+<h2>Three paths</h2>
+<div class="paths">
+  <div class="path">
+    <h3>Instructor</h3>
+    <ol>
+      <li>Build and seal the sequence at knobe.org/studio (Journey tab).</li>
+      <li>Post the journey file and its description to the Canvas assignment.</li>
+      <li>Set the submission type to File Uploads.</li>
+    </ol>
+  </div>
+  <div class="path">
+    <h3>Student</h3>
+    <ol>
+      <li>Download the journey file attached to the assignment.</li>
+      <li>Load it at knobe.org/studio, pick your step, write, and seal.</li>
+      <li>Upload the sealed file to Canvas like any other file.</li>
+    </ol>
+  </div>
+  <div class="path">
+    <h3>TA</h3>
+    <ol>
+      <li>Download Submissions in Canvas and unzip.</li>
+      <li>Drag the folder into Cohort check with the journey loaded.</li>
+      <li>Read the table; export the CSV for the gradebook.</li>
+    </ol>
+  </div>
+</div>
+
+<p class="gotcha">If the assignment restricts file types, the allowed list must include <code>md</code>, or Canvas rejects every submission. This is the most common setup failure.</p>
+
+<h2>What the file is</h2>
+<div class="anatomy">
+  <div class="alayer a1"><span class="al">Readable header</span><span class="ad">title, date, license: scannable by anyone</span></div>
+  <div class="alayer a2"><span class="al">The work itself</span><span class="ad">the student's own writing, readable anywhere, no app needed</span></div>
+  <div class="alayer a3"><span class="al">Sealed record</span><span class="ad">who made it, what it builds on, the AI declaration, and the hash that proves nothing changed</span></div>
+</div>
+
+<footer>
+  <span>Guides, examples, and the full kit: knobe.org/teaching</span>
+  <span>Every tool runs in the browser page; nothing is uploaded.</span>
+</footer>
+
+</div>
+</body>
+</html>
