@@ -189,6 +189,21 @@ pre.filepre{max-height:340px;overflow:auto;font-family:'SF Mono',ui-monospace,Me
 #chChain .chainitem:last-child{border-bottom:none}
 #chChain .chainlink{font-size:.78rem;color:var(--ink-faint);padding-left:18px}
 
+/* ---- journey map ---- */
+.jmap{list-style:none;display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:14px 0 4px;padding:0}
+.jmap li{display:flex;align-items:center;gap:10px;margin:0}
+.jmap-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;
+  font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-soft);max-width:230px}
+.jmap-node.is-here{border:2px solid var(--moss);background:#eef2ec;padding:9px 13px}
+.jmap-here{display:block;font-size:.66rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--moss-deep);margin-bottom:4px}
+.jmap-k{display:block;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
+.jmap-t{display:block;font-weight:600;color:var(--ink)}
+.jmap-ai{display:block;font-size:.74rem;color:var(--ink-faint);margin-top:3px}
+.jmap-builds{display:block;font-size:.72rem;color:var(--ink-faint);margin-top:2px}
+.jmap-badge{display:inline-block;font-size:.7rem;font-weight:600;color:var(--moss-deep);border:1px solid var(--moss);border-radius:3px;padding:1px 6px;margin-top:6px;background:#eef2ec}
+.jmap-arrow{color:var(--ink-faint);font-size:1.1rem}
+@media(max-width:560px){.jmap{flex-direction:column;align-items:flex-start}.jmap li{flex-direction:column;align-items:flex-start}.jmap-arrow{transform:rotate(90deg);margin-left:18px}}
+
 /* ---- dropzones ---- */
 .drop{margin:6px 0 8px;border:2px dashed var(--line);border-radius:10px;background:var(--paper-warm);
   padding:34px 26px;text-align:center;transition:border-color .15s,background .15s}
@@ -370,11 +385,11 @@ footer a:hover{color:var(--moss)}
         <span>Working from a course journey?</span>
         <button type="button" class="linkbtn" id="jsIntakeToggle" aria-expanded="false" aria-controls="jsIntakeWrap">Load the journey file</button>
         <div id="jsIntakeWrap" class="pastewrap">
-          <div id="jsDrop" class="drop" style="padding:22px 20px;margin-top:10px" aria-label="Drop the journey .knobe.md file here">
+          <div id="jsDrop" class="drop" style="padding:22px 20px;margin-top:10px">
             <div class="dmain">Drag the journey <code>.knobe.md</code> here</div>
             <div class="dhint">Your instructor posted it with the assignment. It is read in this page and goes nowhere else.</div>
             <button type="button" id="jsChoose" class="btn choosebtn">Choose the file</button>
-            <input type="file" tabindex="-1" aria-hidden="true" id="jsFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file">
+            <input type="file" tabindex="-1" aria-hidden="true" id="jsFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
           </div>
           <label for="jsPasteArea" class="visually-hidden">Paste journey file text</label>
           <textarea id="jsPasteArea" placeholder="Or paste the full text of the journey file." spellcheck="false"></textarea>
@@ -386,6 +401,7 @@ footer a:hover{color:var(--moss)}
           <div id="jsPickerBtns" class="btnrow"></div>
         </div>
         <div id="jsBanner" class="jbanner" aria-live="polite" hidden></div>
+        <div id="jsMap" hidden></div>
       </div>
 
       <div class="jaiblock" id="jsAiWrap" hidden>
@@ -578,7 +594,7 @@ footer a:hover{color:var(--moss)}
       </div>
       <div class="errmsg" id="cErr" role="alert" hidden></div>
 
-      <div class="sealres" id="cRes" tabindex="-1" aria-live="polite" hidden>
+      <div class="sealres" id="cRes" tabindex="-1" hidden>
         <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="cResText"></span></div>
         <div class="sbody">
           <div class="hashline" id="cResHash"></div>
@@ -596,12 +612,12 @@ footer a:hover{color:var(--moss)}
 
     <!-- ================= VERIFY ================= -->
     <section class="panel" id="panel-verify" role="tabpanel" aria-labelledby="tab-verify" hidden>
-      <div id="vDrop" class="drop" aria-label="Drop a .knobe.md file here to verify it">
+      <div id="vDrop" class="drop">
         <div class="dicon" aria-hidden="true">&#9671;</div>
         <div class="dmain">Drag a <code>.knobe.md</code> file here</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="vChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" tabindex="-1" aria-hidden="true" id="vFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a .knobe.md file to verify">
+        <input type="file" tabindex="-1" aria-hidden="true" id="vFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
       </div>
       <div class="altrow">No file handy? <button type="button" id="vPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="vPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="vPasteWrap" class="pastewrap">
@@ -610,18 +626,18 @@ footer a:hover{color:var(--moss)}
         <div class="btnrow"><button type="button" id="vPasteBtn" class="btn">Verify pasted text</button></div>
       </div>
       <div class="errmsg" id="vErr" role="alert" hidden></div>
-      <section id="vResult" class="result" tabindex="-1" aria-live="polite" aria-label="Verification result" hidden></section>
+      <section id="vResult" class="result" tabindex="-1" aria-label="Verification result" hidden></section>
     </section>
 
     <!-- ================= TRANSFORM ================= -->
     <section class="panel" id="panel-transform" role="tabpanel" aria-labelledby="tab-transform" hidden>
       <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">A derivative declares its parent: the new object's <code>parents</code> entry records the original's title and payload hash. The original must verify first; a broken seal cannot anchor a chain.</p>
-      <div id="tDrop" class="drop" aria-label="Drop a sealed .knobe.md file here to derive from it">
+      <div id="tDrop" class="drop">
         <div class="dicon" aria-hidden="true">&#9671;</div>
         <div class="dmain">Drag a sealed <code>.knobe.md</code> here to derive from it</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="tChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" tabindex="-1" aria-hidden="true" id="tFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to derive from">
+        <input type="file" tabindex="-1" aria-hidden="true" id="tFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
       </div>
       <div class="altrow">No file handy? <button type="button" id="tPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="tPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="tPasteWrap" class="pastewrap">
@@ -697,7 +713,7 @@ footer a:hover{color:var(--moss)}
         </div>
         <div class="errmsg" id="tSealErr" role="alert" hidden></div>
 
-        <div class="sealres" id="tRes" tabindex="-1" aria-live="polite" hidden>
+        <div class="sealres" id="tRes" tabindex="-1" hidden>
           <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="tResText"></span></div>
           <div class="sbody">
             <div class="hashline" id="tResHash"></div>
@@ -728,7 +744,7 @@ footer a:hover{color:var(--moss)}
           <div class="btnrow">
             <button type="button" id="jmPasteBtn" class="btn">Load pasted text</button>
             <button type="button" id="jmChoose" class="btn ghost">Choose a file</button>
-            <input type="file" tabindex="-1" aria-hidden="true" id="jmFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey file to edit">
+            <input type="file" tabindex="-1" aria-hidden="true" id="jmFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
           </div>
         </div>
         <div class="errmsg" id="jmLoadErr" role="alert" hidden></div>
@@ -760,6 +776,8 @@ footer a:hover{color:var(--moss)}
       <div id="jmSteps"></div>
       <div class="rowbtns"><button type="button" class="linkbtn" id="jmAddStep">Add a step</button></div>
 
+      <div id="jmMap" hidden></div>
+
       <details class="preview" id="jmPreviewBox">
         <summary>Syllabus preview</summary>
         <pre class="filepre" id="jmPreview"></pre>
@@ -772,7 +790,7 @@ footer a:hover{color:var(--moss)}
       </div>
       <div class="errmsg" id="jmErr" role="alert" hidden></div>
 
-      <div class="sealres" id="jmRes" tabindex="-1" aria-live="polite" hidden>
+      <div class="sealres" id="jmRes" tabindex="-1" hidden>
         <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="jmResText"></span></div>
         <div class="sbody">
           <div class="hashline" id="jmResHash"></div>
@@ -803,14 +821,14 @@ footer a:hover{color:var(--moss)}
           <div class="btnrow">
             <button type="button" id="chExpPasteBtn" class="btn">Load pasted text</button>
             <button type="button" id="chExpChoose" class="btn ghost">Choose a file</button>
-            <input type="file" tabindex="-1" aria-hidden="true" id="chExpFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose the journey or spec file">
+            <input type="file" tabindex="-1" aria-hidden="true" id="chExpFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
           </div>
         </div>
         <div id="chExpBanner" class="jbanner" hidden></div>
         <div class="errmsg" id="chExpErr" role="alert" hidden></div>
       </div>
 
-      <div id="chDrop" class="drop" aria-label="Drop submission files or a folder here">
+      <div id="chDrop" class="drop">
         <div class="dicon" aria-hidden="true">&#9671;</div>
         <div class="dmain">Drag submission files, or a whole folder, here</div>
         <div class="dhint">Files are read in this page and go nowhere else.</div>
@@ -818,8 +836,8 @@ footer a:hover{color:var(--moss)}
           <button type="button" id="chChooseFiles" class="btn choosebtn" style="margin-top:0">Choose files</button>
           <button type="button" id="chChooseDir" class="btn ghost" style="margin-top:0">Choose a folder</button>
         </div>
-        <input type="file" tabindex="-1" aria-hidden="true" id="chFiles" class="visually-hidden" multiple accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose submission files">
-        <input type="file" tabindex="-1" aria-hidden="true" id="chDir" class="visually-hidden" webkitdirectory aria-label="Choose a submissions folder">
+        <input type="file" tabindex="-1" aria-hidden="true" id="chFiles" class="visually-hidden" multiple accept=".md,.knobe,.txt,text/markdown,text/plain">
+        <input type="file" tabindex="-1" aria-hidden="true" id="chDir" class="visually-hidden" webkitdirectory>
       </div>
       <div class="errmsg" id="chErr" role="alert" hidden></div>
 
@@ -830,6 +848,35 @@ footer a:hover{color:var(--moss)}
           <button type="button" class="btn ghost" id="chChainView">Chain view</button>
           <button type="button" class="btn ghost" id="chClear">Clear</button>
         </div>
+        <details class="acc" id="chRcptBox">
+          <summary>Seal a cohort receipt</summary>
+          <div class="accbody">
+            <p class="jainote">The receipt seals what this table shows: at seal time, these files existed with these payload hashes and produced these verdicts. Verdicts and hashes only; student-declared names are not sealed in. Anchored anywhere with an independent timestamp, its one hash timestamps every listed submission.</p>
+            <div class="field">
+              <label for="chRcptName">Who is attesting</label>
+              <input type="text" id="chRcptName" autocomplete="name">
+              <div class="hint">Recorded as the receipt's attribution, role cohort_verifier.</div>
+            </div>
+            <div class="btnrow"><button type="button" class="btn" id="chRcptSealBtn">Seal the receipt</button></div>
+            <div class="errmsg" id="chRcptErr" role="alert" hidden></div>
+            <div class="sealres" id="chRcptRes" tabindex="-1" hidden>
+              <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="chRcptResText"></span></div>
+              <div class="sbody">
+                <div class="hashline" id="chRcptResHash"></div>
+                <div class="chainline" id="chRcptResChain"></div>
+                <div class="fname">
+                  <label for="chRcptFileName">File name</label>
+                  <input type="text" id="chRcptFileName" autocomplete="off" spellcheck="false">
+                </div>
+                <div class="btnrow">
+                  <button type="button" class="btn" id="chRcptDownload">Download .knobe.md</button>
+                  <button type="button" class="btn ghost" id="chRcptCopy">Copy file text</button>
+                </div>
+                <p class="jainote" style="margin:10px 0 0">To anchor the date externally, put the payload_hash above somewhere you do not control the timestamp of: an email, a gradebook note, a post. One hash anchors every listed submission.</p>
+              </div>
+            </div>
+          </div>
+        </details>
         <div class="chtablewrap">
           <table class="chtable" id="chTable">
             <thead><tr><th>File</th><th>Title</th><th>Author</th><th>Integrity</th><th>Conformance</th><th>AI disclosure</th><th>Chain</th><th>Review</th></tr></thead>
@@ -843,12 +890,12 @@ footer a:hover{color:var(--moss)}
     <!-- ================= ADAPT ================= -->
     <section class="panel" id="panel-adapt" role="tabpanel" aria-labelledby="tab-adapt" hidden>
       <p style="font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;color:var(--ink-soft)">An accessibility adaptation (plain language, translation, captions, description) is sealed as its own object: it chains to the source by hash, credits the adapter, and states honestly what it preserves and what it omits. The source work remains authoritative.</p>
-      <div id="aDrop" class="drop" aria-label="Drop a sealed .knobe.md file here to adapt it">
+      <div id="aDrop" class="drop">
         <div class="dicon" aria-hidden="true">&#9671;</div>
         <div class="dmain">Drag a sealed <code>.knobe.md</code> here to adapt it</div>
         <div class="dhint">The file is read in this page and goes nowhere else.</div>
         <button type="button" id="aChoose" class="btn choosebtn">Choose a file</button>
-        <input type="file" tabindex="-1" aria-hidden="true" id="aFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain" aria-label="Choose a sealed .knobe.md file to adapt">
+        <input type="file" tabindex="-1" aria-hidden="true" id="aFile" class="visually-hidden" accept=".md,.knobe,.txt,text/markdown,text/plain">
       </div>
       <div class="altrow">No file handy? <button type="button" id="aPasteToggle" class="linkbtn" aria-expanded="false" aria-controls="aPasteWrap">Paste the text of a KNOBE instead</button></div>
       <div id="aPasteWrap" class="pastewrap">
@@ -935,7 +982,7 @@ footer a:hover{color:var(--moss)}
         </div>
         <div class="errmsg" id="aSealErr" role="alert" hidden></div>
 
-        <div class="sealres" id="aRes" tabindex="-1" aria-live="polite" hidden>
+        <div class="sealres" id="aRes" tabindex="-1" hidden>
           <div class="shead"><span class="ssym" aria-hidden="true">&#10003;</span><span class="stext" id="aResText"></span></div>
           <div class="sbody">
             <div class="hashline" id="aResHash"></div>
@@ -989,7 +1036,7 @@ const $ = (id) => document.getElementById(id);
 // ---- engine availability ----
 const engineOk = typeof crypto !== 'undefined' && !!crypto.subtle;
 if (engineOk) $('enginefail').remove();
-else { $('sealBtn').disabled = true; $('tSealBtn').disabled = true; $('aSealBtn').disabled = true; }
+else { $('sealBtn').disabled = true; $('tSealBtn').disabled = true; $('aSealBtn').disabled = true; $('jmSealBtn').disabled = true; $('chRcptSealBtn').disabled = true; }
 
 // ---- small utilities ----
 const line = (v) => String(v || '').replace(/[\r\n]+/g, ' ').trim();
@@ -1207,6 +1254,8 @@ function resetCreateForm() {
   $('cErr').hidden = true;
   journeyCtx = null;
   $('jsBanner').hidden = true;
+  $('jsMap').hidden = true;
+  $('jsMap').textContent = '';
   $('jsAiWrap').hidden = true;
   $('jsAiName').value = '';
   $('jsAiWhat').value = '';
@@ -1518,6 +1567,73 @@ const JPOLICIES = {
 };
 const JSEALERS = { instructor: 'Instructor', student: 'Student', ta: 'TA', peer: 'Peer reviewer' };
 
+// ---- journey map (shared by the Create intake and the Journey Maker) ----
+function renderJourneyMap(steps, opts) {
+  const container = opts.container;
+  const currentIdx = typeof opts.currentIdx === 'number' ? opts.currentIdx : null;
+  container.textContent = '';
+  if (!Array.isArray(steps) || !steps.length) { container.hidden = true; return; }
+  const desc = document.createElement('p');
+  desc.className = 'visually-hidden';
+  desc.textContent = 'The journey as a sequence of ' + steps.length + ' step' + (steps.length === 1 ? '' : 's') + (currentIdx !== null ? '; the current step is marked' : '') + '.';
+  container.appendChild(desc);
+  const ol = document.createElement('ol');
+  ol.className = 'jmap';
+  // list-style:none strips list semantics in Safari/VoiceOver; the role restores them
+  ol.setAttribute('role', 'list');
+  steps.forEach((s, i) => {
+    const li = document.createElement('li');
+    const node = document.createElement('div');
+    node.className = 'jmap-node';
+    if (i === currentIdx) {
+      li.setAttribute('aria-current', 'step');
+      node.classList.add('is-here');
+      const here = document.createElement('span');
+      here.className = 'jmap-here';
+      here.textContent = 'You are here';
+      node.appendChild(here);
+    }
+    const k = document.createElement('span');
+    k.className = 'jmap-k';
+    k.textContent = 'Step ' + (i + 1) + ' \u00b7 ' + (JSEALERS[s.sealer] || safe(String(s.sealer || 'unassigned'), 20));
+    node.appendChild(k);
+    const tt = document.createElement('span');
+    tt.className = 'jmap-t';
+    tt.textContent = safe(typeof s.title === 'string' && s.title ? s.title : 'Untitled step', 60);
+    node.appendChild(tt);
+    const ai = document.createElement('span');
+    ai.className = 'jmap-ai';
+    ai.textContent = (JPOLICIES[s.ai_policy] || JPOLICIES.not_applicable).label;
+    node.appendChild(ai);
+    const builds = (Array.isArray(s.builds_on) ? s.builds_on : [])
+      .map(Number).filter(n => Number.isInteger(n) && n >= 1 && n <= steps.length && n !== i + 1);
+    if (builds.length) {
+      const b = document.createElement('span');
+      b.className = 'jmap-builds';
+      b.textContent = 'Builds on step ' + builds.join(', ');
+      node.appendChild(b);
+    }
+    if (typeof s.spec_hash === 'string' && s.spec_hash) {
+      const badge = document.createElement('span');
+      badge.className = 'jmap-badge';
+      badge.title = s.spec_hash;
+      badge.textContent = 'sealed, hash-anchored';
+      node.appendChild(badge);
+    }
+    li.appendChild(node);
+    if (i < steps.length - 1) {
+      const ar = document.createElement('span');
+      ar.className = 'jmap-arrow';
+      ar.setAttribute('aria-hidden', 'true');
+      ar.textContent = '\u2192';
+      li.appendChild(ar);
+    }
+    ol.appendChild(li);
+  });
+  container.appendChild(ol);
+  container.hidden = false;
+}
+
 // ---- Journey Maker state ----
 const jm = { steps: [] };
 let jmLoadedFrom = null;   // {hash, title} when revising an existing journey
@@ -1661,7 +1777,7 @@ function buildJourneyBody() {
   return L.join('\n');
 }
 
-const scheduleJmPreview = debounce(() => { $('jmPreview').textContent = buildJourneyBody(); }, 300);
+const scheduleJmPreview = debounce(() => { $('jmPreview').textContent = buildJourneyBody(); renderJourneyMap(journeyPayloadSteps(), { container: $('jmMap') }); }, 300);
 ['jmCourse','jmTerm','jmTitle','jmInstructor'].forEach(id => $(id).addEventListener('input', scheduleJmPreview));
 $('jmAddStep').addEventListener('click', () => { jm.steps.push(jmNewStep()); renderSteps(); scheduleJmPreview(); });
 $('jmResetBtn').addEventListener('click', () => {
@@ -1819,15 +1935,18 @@ function sealStepInCreate(i) {
   sealForStepIdx = i;
   $('jsBanner').textContent = 'Sealing journey step ' + (i + 1) + ': ' + (s.title || 'Untitled step') + '. The sealed hash will flow back into the journey.';
   $('jsBanner').hidden = false;
+  renderJourneyMap(journeyPayloadSteps(), { container: $('jsMap'), currentIdx: i });
   selectTab($('tab-create'));
   schedulePreview();
 }
 
 function onCreateSealed(r) {
   if (sealForStepIdx !== null && jm.steps[sealForStepIdx]) {
-    jm.steps[sealForStepIdx].spec_hash = r.payloadHash;
+    const sealedIdx = sealForStepIdx;
+    jm.steps[sealedIdx].spec_hash = r.payloadHash;
     sealForStepIdx = null;
     renderSteps(); scheduleJmPreview();
+    renderJourneyMap(journeyPayloadSteps(), { container: $('jsMap'), currentIdx: sealedIdx });
     $('jsBanner').textContent = 'Step sealed and its hash recorded in the journey. Return to the Journey tab to continue.';
     $('jsBanner').hidden = false;
   }
@@ -1857,6 +1976,7 @@ async function loadJourneyForCreate(text, name) {
     btns.appendChild(b);
   });
   $('jsPicker').hidden = false;
+  renderJourneyMap(j.steps, { container: $('jsMap') });
 }
 
 function applyJourneyStep(p, idx) {
@@ -1907,6 +2027,7 @@ function applyJourneyStep(p, idx) {
     + safe(step.title || 'Untitled step', 90) + ' · ' + policy.label + '.';
   $('jsBanner').hidden = false;
   $('jsPicker').hidden = true;
+  renderJourneyMap(p.journey.steps, { container: $('jsMap'), currentIdx: idx });
 
   if (policy.ui === 'disclose') {
     $('jsAiWrap').hidden = false;
@@ -1953,7 +2074,7 @@ async function chLoadExpectation(text) {
   const hashes = new Set([report.stored]);
   const j = report.payload && report.payload.journey;
   if (j && Array.isArray(j.steps)) j.steps.forEach(s => { if (typeof s.spec_hash === 'string' && s.spec_hash) hashes.add(s.spec_hash); });
-  chExpectation = { title: typeof report.payload.title === 'string' ? report.payload.title : 'Untitled', hashes };
+  chExpectation = { title: typeof report.payload.title === 'string' ? report.payload.title : 'Untitled', hashes, stored: report.stored };
   $('chExpBanner').textContent = 'Submissions will be checked against: ' + safe(chExpectation.title, 110) + ' (' + hashes.size + ' accepted hash' + (hashes.size === 1 ? '' : 'es') + ').';
   $('chExpBanner').hidden = false;
   if (chRows.length) renderCohort();
@@ -2068,6 +2189,7 @@ function renderCohort() {
     + (chExpectation ? ' · chain checked against "' + chExpectation.title + '"' : ' · no chain expectation loaded');
   $('chResults').hidden = false;
   $('chChain').hidden = true;
+  chHideReceipt(); // a displayed receipt must always match the visible table
 }
 
 const chDrop = $('chDrop');
@@ -2082,7 +2204,7 @@ $('chChooseFiles').addEventListener('click', () => $('chFiles').click());
 $('chChooseDir').addEventListener('click', () => $('chDir').click());
 $('chFiles').addEventListener('change', async () => { await chProcessFiles([...$('chFiles').files]); $('chFiles').value = ''; });
 $('chDir').addEventListener('change', async () => { await chProcessFiles([...$('chDir').files]); $('chDir').value = ''; });
-$('chClear').addEventListener('click', () => { chRows = []; $('chResults').hidden = true; $('chBody').textContent = ''; });
+$('chClear').addEventListener('click', () => { chRows = []; $('chResults').hidden = true; $('chBody').textContent = ''; chHideReceipt(); });
 
 $('chCsv').addEventListener('click', () => {
   const esc = (v) => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
@@ -2125,6 +2247,140 @@ $('chChainView').addEventListener('click', () => {
   rest.forEach(addItem);
   box.hidden = false;
 });
+
+// ---- cohort receipt: a sealed attestation of the table's verdicts ----
+let chRcptResult = null;
+
+function chReceiptRows() {
+  // one snapshot feeds both payload and body; dedupe exact (file, stored)
+  // duplicates from repeated drops, sort by codepoint so the sealed bytes are
+  // machine-independent (localeCompare is locale-dependent)
+  const seen = new Set();
+  const rows = [];
+  chRows.forEach(r => {
+    const key = r.file + ' ' + (r.stored || '');
+    if (seen.has(key)) return;
+    seen.add(key);
+    const v = chChainVerdict(r).text;
+    rows.push({
+      file: line(r.file),
+      stored: r.stored || null,
+      integrity: r.state,
+      conformance: r.conformance,
+      chain: !chExpectation ? 'not_checked' : (v === 'linked' ? 'linked' : 'no_link'),
+    });
+  });
+  rows.sort((a, b) => {
+    const ka = a.file + ' ' + (a.stored || ''), kb = b.file + ' ' + (b.stored || '');
+    return ka < kb ? -1 : ka > kb ? 1 : 0;
+  });
+  return rows;
+}
+
+function buildCohortReceipt(sealerName) {
+  const rows = chReceiptRows();
+  const today = localToday();
+  const ok = rows.filter(r => r.integrity === 'verified' || r.integrity === 'verified-body-modified').length;
+  const bad = rows.length - ok;
+  const scope = chExpectation ? chExpectation.title : 'an unnamed batch';
+  const title = 'Cohort check receipt: ' + scope + ', ' + today;
+
+  const block = {
+    checked_date: today,
+    engine: 'knobe-core.js via KNOBE Studio cohort check',
+    submission_count: String(rows.length),
+    verified_count: String(ok),
+    failed_or_unreadable_count: String(bad),
+    submissions: rows.map(r => {
+      const s = { file: r.file, integrity: r.integrity, conformance: r.conformance, chain: r.chain };
+      if (r.stored) s.payload_hash = r.stored;
+      return s;
+    }),
+  };
+  if (chExpectation) {
+    block.assignment = chExpectation.title;
+    block.expectation_hashes = [...chExpectation.hashes].sort();
+  }
+
+  const fields = {
+    title,
+    summary: 'Sealed record of a cohort integrity check: ' + rows.length + ' file' + (rows.length === 1 ? '' : 's') + ', ' + ok + ' verified, ' + bad + ' failed or unreadable.',
+    content_type: 'collection',
+    created_date: today,
+    license: 'All rights reserved',
+    privacy_level: 'internal',
+    quarantine_status: 'trusted',
+    attribution: {
+      good_faith_declaration: true,
+      sources: [{ author: sealerName, contribution: 'Ran the cohort check in KNOBE Studio and attested the listed verdicts at seal time.', rights_bearing: true, role: 'cohort_verifier' }],
+    },
+    fidelity_limits: {
+      represents: "the verdicts KNOBE Studio's cohort check produced for the listed files at seal time",
+      trust_as: 'the sealer' + "'" + 's attestation, on the stated date, that files with these payload hashes existed and produced these verdicts',
+      do_not_infer: [
+        'that created_date is machine-verified wall-clock time; it is the sealer' + "'" + 's declared date until the receipt hash is anchored externally',
+        'that a verified verdict establishes authorship, originality, or policy compliance for any submission',
+        'that this list is the complete set of submissions for the assignment',
+        'that file names identify students; authorship claims live in the submissions themselves',
+      ],
+    },
+    use_conditions: {
+      permitted: ['course records and grading workflow', 'academic integrity review', 'dispute resolution concerning a listed submission'],
+      requested_preservations: ['keep within course staff and institutional review processes', 'cite this receipt' + "'" + 's payload_hash when quoting any row'],
+      consent_note: 'File names come from the LMS export and may contain student names. FERPA applies.',
+    },
+    tags: ['cohort-receipt'],
+    'education:cohort_receipt': block,
+  };
+  if (chExpectation && chExpectation.stored) {
+    fields.parents = [{ payload_hash: chExpectation.stored, title: chExpectation.title, relationship: 'responds_to' }];
+  }
+
+  const L = ['# ' + title, ''];
+  L.push('Checked ' + today + ' by ' + sealerName + '. ' + rows.length + ' file' + (rows.length === 1 ? '' : 's') + ': ' + ok + ' verified, ' + bad + ' failed or unreadable.' + (chExpectation ? ' Chain checked against "' + chExpectation.title + '".' : ' No chain expectation was loaded.'));
+  L.push('');
+  L.push('This receipt attests that the sealer ran the check and saw these verdicts at seal time. It is not an independent wall-clock timestamp until its payload hash is anchored somewhere the sealer does not control.');
+  L.push('');
+  L.push('| File | Payload hash | Integrity | Conformance | Chain |');
+  L.push('|---|---|---|---|---|');
+  rows.forEach(r => {
+    const name = r.file.replace(/\|/g, '\\|');
+    L.push('| ' + name + ' | ' + (r.stored || '(unreadable)') + ' | ' + r.integrity + ' | ' + r.conformance + ' | ' + r.chain + ' |');
+  });
+  L.push('');
+  L.push('To use this receipt in a dispute: verify this file, verify the disputed submission, and confirm the submission' + "'" + 's recomputed payload hash appears in its row above. The attribution and date then attest the file existed with that content when the check ran.');
+  return { fields, body: L.join('\n') };
+}
+
+function chHideReceipt() {
+  $('chRcptRes').hidden = true;
+  $('chRcptErr').hidden = true;
+  chRcptResult = null;
+}
+
+$('chRcptSealBtn').addEventListener('click', async () => {
+  $('chRcptErr').hidden = true;
+  try {
+    if (!chRows.length) throw new Error('There is nothing to attest; run a check first.');
+    const name = line($('chRcptName').value);
+    if (!name) throw new Error('Name who is attesting; the credit is part of the record.');
+    const { fields, body } = buildCohortReceipt(name);
+    chRcptResult = await createKnobe({ fields, body });
+    $('chRcptResText').textContent = 'Sealed. Self-check: ' + chRcptResult.report.state + ' · ' + chRcptResult.report.conformance + '.';
+    $('chRcptResHash').textContent = 'payload_hash ' + chRcptResult.payloadHash;
+    $('chRcptResChain').textContent = chExpectation && chExpectation.stored
+      ? 'Anchored to "' + safe(chExpectation.title, 90) + '" as parents[0], payload_hash ' + chExpectation.stored + '.'
+      : 'No expectation loaded; the receipt records verdicts without a chain target.';
+    $('chRcptFileName').value = slugify(chRcptResult.payload.title);
+    $('chRcptRes').hidden = false;
+    $('chRcptRes').focus();
+  } catch (e) {
+    $('chRcptErr').textContent = 'Sealing did not complete: ' + e.message;
+    $('chRcptErr').hidden = false;
+  }
+});
+$('chRcptDownload').addEventListener('click', () => { if (chRcptResult) download(chRcptResult.text, line($('chRcptFileName').value) || 'untitled.knobe.md'); });
+$('chRcptCopy').addEventListener('click', (e) => { if (chRcptResult) copyText(chRcptResult.text, e.currentTarget); });
 
 // ============================================================
 // Adapt (accessibility adaptations with sealed lineage)
