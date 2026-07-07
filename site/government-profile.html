@@ -89,6 +89,34 @@ pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;
 .btn{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;font-weight:500;text-decoration:none;padding:9px 18px;border-radius:3px;background:var(--moss-deep);color:var(--paper);display:inline-block;transition:background .15s}
 .btn:hover{background:var(--moss)}
 
+/* ---- visual kit: chips, flow strip, launch card, folds ---- */
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:10px 0 12px;padding:0}
+.chips li{margin:0}
+.chip{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--paper);color:var(--ink-soft)}
+.flow{list-style:none;display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:16px 0 6px;padding:0}
+.flow li{display:flex;align-items:center;gap:10px;margin:0}
+.flow-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);max-width:230px}
+.flow-node .fk{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
+.flow-arrow{color:var(--ink-faint);font-size:1.1rem}
+.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin-bottom:14px}
+@media(max-width:560px){.flow{flex-direction:column;align-items:flex-start}.flow li{flex-direction:column;align-items:flex-start}.flow-arrow{transform:rotate(90deg);margin-left:18px}}
+.launch{display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:20px 24px;text-decoration:none;color:inherit;margin:18px 0;transition:border-color .15s,box-shadow .15s}
+.launch:hover,.launch:focus-visible{border-color:var(--moss);box-shadow:0 2px 18px rgba(47,107,79,.13)}
+.launch-main{flex:1;min-width:240px}
+.launch-kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.launch-title{font-size:1.15rem;color:var(--moss-deep);margin-bottom:5px;letter-spacing:-.01em}
+.launch-desc{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft);margin:0}
+.launch-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
+.launch:hover .launch-cta{color:var(--moss-deep)}
+details.fold{border:1px solid var(--line);border-radius:6px;margin:14px 0;background:#fff}
+.fold summary{list-style:none;cursor:pointer;padding:12px 16px;font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss-deep)}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::before{content:"\25B8  ";color:var(--moss)}
+.fold[open] summary::before{content:"\25BE  "}
+.fold .fold-body{padding:0 16px 14px}
+.fold .fold-body pre{margin-top:4px}
+
 footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:var(--ink-soft);text-decoration:none}
@@ -190,12 +218,39 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p class="lead">This page is non-normative guidance for using KNOBE in public-sector records work. Nothing here changes the protocol. If this document conflicts with the <a class="inline" href="/spec">normative specification</a>, the specification governs.</p>
 
     <div class="nonnorm">
-      <strong>Who this is for.</strong> Records managers, archivists, FOIA and public-records officers, digital-preservation staff, Section 508 and accessibility compliance officers, agency counsel, and public-sector data stewards who want records, releases, and adaptations to carry their own provenance, handling terms, and interpretive limits as they move between systems and across administrations. Companion profiles cover <a class="inline" href="/education-profile">education</a> and <a class="inline" href="/enterprise-profile">enterprise</a> use. KNOBE is an independent open protocol; it is not an official standard, product, or endorsed service of any government agency or of UC Davis.
+      <strong>Who this is for.</strong>
+      <ul class="chips" role="list">
+        <li class="chip">Records managers</li>
+        <li class="chip">Archivists</li>
+        <li class="chip">FOIA officers</li>
+        <li class="chip">Preservation staff</li>
+        <li class="chip">508 compliance officers</li>
+        <li class="chip">Agency counsel</li>
+        <li class="chip">Data stewards</li>
+      </ul>
+      For records, releases, and adaptations that carry their own provenance, handling terms, and interpretive limits as they move between systems and across administrations. Companion profiles cover <a class="inline" href="/education-profile">education</a> and <a class="inline" href="/enterprise-profile">enterprise</a> use. KNOBE is an independent open protocol; it is not an official standard, product, or endorsed service of any government agency or of UC Davis.
     </div>
 
     <div class="nonnorm">
       <strong>Scope caveat: unclassified systems only.</strong> KNOBE is plain-text tooling for unclassified information. Do not use it to mark, carry, or move classified national-security information; that is governed by separate systems and authorities. The <code>privacy_level</code> field declares handling intent; it is not a classification authority and does not substitute for CUI marking, agency policy, or statute.
     </div>
+
+    <p class="vh">The record loop this profile documents: a record is sealed at creation; a redaction is sealed as a transform of it; the public release verifies against that lineage.</p>
+    <ol class="flow" role="list">
+      <li><div class="flow-node"><span class="fk">Record</span>sealed at creation</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">Redaction</span>sealed as a transform of it</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">Release</span>verifies against its lineage</div></li>
+    </ol>
+    <p class="flow-cap">Each link is a payload hash: the release names exactly which record and which redaction it came from.</p>
+
+    <a class="launch" href="/studio/?tab=create">
+      <div class="launch-main">
+        <div class="launch-kicker">Try it now</div>
+        <div class="launch-title">Seal a record</div>
+        <p class="launch-desc">Assemble the fields, seal, and download one plain-text file that verifies anywhere. Runs in the browser; nothing is uploaded.</p>
+      </div>
+      <span class="launch-cta">Open Studio Create →</span>
+    </a>
 
     <div class="toc">
       <div class="toc-title">Contents</div>
@@ -296,7 +351,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The <code>fidelity_limits</code> field tells a recipient what an artifact is fit for and what must not be inferred from it. In records work it makes the difference visible between a redacted release and a complete record, between a briefing and its underlying evidence, and between an AI-assisted summary and verified content.</p>
 
-    <h4>Template: redacted public release</h4>
+    <details class="fold">
+      <summary>Template: redacted public release</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "the redacted public version of [record] as released under [authority]",
@@ -308,8 +365,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: record of authority (published notice, report)</h4>
+    <details class="fold">
+      <summary>Template: record of authority (published notice, report)</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "the authoritative published version of [notice/report] as issued",
@@ -320,8 +381,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: AI-assisted briefing or summary</h4>
+    <details class="fold">
+      <summary>Template: AI-assisted briefing or summary</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "a summary of [records] assisted by AI as described in attribution",
@@ -333,12 +398,16 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
     <h2 id="use"><span class="sec">§6</span>Use condition and release templates</h2>
 
     <p>The <code>use_conditions</code> field carries the originator's declared terms for how the next person may use the artifact, terms that otherwise get separated from the record as it moves.</p>
 
-    <h4>Template: public-domain release (U.S. federal work)</h4>
+    <details class="fold">
+      <summary>Template: public-domain release (U.S. federal work)</summary>
+      <div class="fold-body">
 <pre>{
   "use_conditions": {
     "license": "Public domain (U.S. Government work)",
@@ -352,8 +421,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: restricted / controlled handling</h4>
+    <details class="fold">
+      <summary>Template: restricted / controlled handling</summary>
+      <div class="fold-body">
 <pre>{
   "use_conditions": {
     "license": "Not for public release",
@@ -367,6 +440,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     "consent_note": "Controlled handling. Contains material subject to [CUI category / statute / legal hold]."
   }
 }</pre>
+      </div>
+    </details>
 
     <h2 id="labels"><span class="sec">§7</span>UI label translations</h2>
 

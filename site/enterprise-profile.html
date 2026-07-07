@@ -89,6 +89,34 @@ pre{background:var(--code-bg);border-radius:6px;padding:20px 24px;margin:16px 0;
 .btn{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;font-weight:500;text-decoration:none;padding:9px 18px;border-radius:3px;background:var(--moss-deep);color:var(--paper);display:inline-block;transition:background .15s}
 .btn:hover{background:var(--moss)}
 
+/* ---- visual kit: chips, flow strip, launch card, folds ---- */
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:10px 0 12px;padding:0}
+.chips li{margin:0}
+.chip{font-family:-apple-system,system-ui,sans-serif;font-size:.78rem;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--paper);color:var(--ink-soft)}
+.flow{list-style:none;display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:16px 0 6px;padding:0}
+.flow li{display:flex;align-items:center;gap:10px;margin:0}
+.flow-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);max-width:230px}
+.flow-node .fk{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
+.flow-arrow{color:var(--ink-faint);font-size:1.1rem}
+.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin-bottom:14px}
+@media(max-width:560px){.flow{flex-direction:column;align-items:flex-start}.flow li{flex-direction:column;align-items:flex-start}.flow-arrow{transform:rotate(90deg);margin-left:18px}}
+.launch{display:flex;align-items:center;gap:18px 24px;flex-wrap:wrap;background:#eef2ec;border:1px solid var(--line);border-left:3px solid var(--moss);border-radius:6px;padding:20px 24px;text-decoration:none;color:inherit;margin:18px 0;transition:border-color .15s,box-shadow .15s}
+.launch:hover,.launch:focus-visible{border-color:var(--moss);box-shadow:0 2px 18px rgba(47,107,79,.13)}
+.launch-main{flex:1;min-width:240px}
+.launch-kicker{font-family:-apple-system,system-ui,sans-serif;font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--amber);margin-bottom:6px}
+.launch-title{font-size:1.15rem;color:var(--moss-deep);margin-bottom:5px;letter-spacing:-.01em}
+.launch-desc{font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft);margin:0}
+.launch-cta{font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss);white-space:nowrap}
+.launch:hover .launch-cta{color:var(--moss-deep)}
+details.fold{border:1px solid var(--line);border-radius:6px;margin:14px 0;background:#fff}
+.fold summary{list-style:none;cursor:pointer;padding:12px 16px;font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss-deep)}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::before{content:"\25B8  ";color:var(--moss)}
+.fold[open] summary::before{content:"\25BE  "}
+.fold .fold-body{padding:0 16px 14px}
+.fold .fold-body pre{margin-top:4px}
+
 footer{border-top:1px solid var(--line);padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
 footer a{color:var(--ink-soft);text-decoration:none}
@@ -190,8 +218,34 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     <p class="lead">This page is non-normative guidance for using KNOBE in enterprise AI pipelines and knowledge management. Nothing here changes the protocol. If this document conflicts with the <a class="inline" href="/spec">normative specification</a>, the specification governs.</p>
 
     <div class="nonnorm">
-      <strong>Who this is for.</strong> Platform, ML, and data engineers building agent and retrieval pipelines; data-governance, knowledge-management, and compliance teams; and enterprise architects who want artifacts to carry their own provenance, fit-for-use limits, and trust state as they move between models, tools, and systems. Companion profiles cover <a class="inline" href="/education-profile">education</a> and <a class="inline" href="/government-profile">government</a> use.
+      <strong>Who this is for.</strong>
+      <ul class="chips" role="list">
+        <li class="chip">Platform engineers</li>
+        <li class="chip">ML engineers</li>
+        <li class="chip">Data-governance teams</li>
+        <li class="chip">Knowledge-management teams</li>
+        <li class="chip">Compliance teams</li>
+        <li class="chip">Enterprise architects</li>
+      </ul>
+      For artifacts that carry their own provenance, fit-for-use limits, and trust state as they move between models, tools, and systems. Companion profiles cover <a class="inline" href="/education-profile">education</a> and <a class="inline" href="/government-profile">government</a> use.
     </div>
+
+    <p class="vh">The pipeline loop this profile documents: a source is sealed with its terms; agent output chains to the source by hash; a gate verifies the chain before the output is used.</p>
+    <ol class="flow" role="list">
+      <li><div class="flow-node"><span class="fk">Source</span>sealed with its terms</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">Agent output</span>chains to the source by hash</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">Gate</span>verifies before use</div></li>
+    </ol>
+    <p class="flow-cap">A broken seal cannot anchor a chain; the gate reads the verdict before anything downstream consumes the artifact.</p>
+
+    <a class="launch" href="/studio/?tab=verify">
+      <div class="launch-main">
+        <div class="launch-kicker">Try it now</div>
+        <div class="launch-title">Verify a sealed object</div>
+        <p class="launch-desc">Drop any .knobe.md and read the integrity verdict, the conformance axis, and the sealed terms. Runs in the browser; nothing is uploaded.</p>
+      </div>
+      <span class="launch-cta">Open Studio Verify →</span>
+    </a>
 
     <div class="toc">
       <div class="toc-title">Contents</div>
@@ -287,7 +341,9 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 
     <p>The <code>fidelity_limits</code> field states what an artifact is fit for and what must not be inferred from it. In a pipeline this keeps a synthesis from being treated as a verified source, a draft from being shipped as final, and a compression from standing in for the document it condensed.</p>
 
-    <h4>Template: retrieval-augmented synthesis</h4>
+    <details class="fold">
+      <summary>Template: retrieval-augmented synthesis</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "a synthesis over [N] retrieved sources as listed in attribution",
@@ -299,8 +355,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: agent-generated draft</h4>
+    <details class="fold">
+      <summary>Template: agent-generated draft</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "an agent-generated draft, unreviewed at time of sealing",
@@ -312,8 +372,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: corpus compression / summary</h4>
+    <details class="fold">
+      <summary>Template: corpus compression / summary</summary>
+      <div class="fold-body">
 <pre>{
   "fidelity_limits": {
     "represents": "a compression of [source], approximately [X]% of original length",
@@ -324,12 +388,16 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     ]
   }
 }</pre>
+      </div>
+    </details>
 
     <h2 id="use"><span class="sec">§6</span>Use condition templates</h2>
 
     <p>The <code>use_conditions</code> field carries the originator's declared terms for downstream use, terms that would otherwise be lost as the artifact crosses pipeline boundaries.</p>
 
-    <h4>Template: internal proprietary</h4>
+    <details class="fold">
+      <summary>Template: internal proprietary</summary>
+      <div class="fold-body">
 <pre>{
   "use_conditions": {
     "license": "All rights reserved",
@@ -343,8 +411,12 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     "consent_note": "Internal use only. Not for external distribution."
   }
 }</pre>
+      </div>
+    </details>
 
-    <h4>Template: shared with a partner under terms</h4>
+    <details class="fold">
+      <summary>Template: shared with a partner under terms</summary>
+      <div class="fold-body">
 <pre>{
   "use_conditions": {
     "license": "Shared under agreement",
@@ -358,6 +430,8 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
     "consent_note": "Shared under [agreement reference]. Handling per that agreement."
   }
 }</pre>
+      </div>
+    </details>
 
     <h2 id="labels"><span class="sec">§7</span>UI label translations</h2>
 
