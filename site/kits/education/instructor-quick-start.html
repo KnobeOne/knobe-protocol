@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!-- Generated from instructor-quick-start.md by build-guides.py; edit the .md and regenerate. -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Instructor quick-start — KNOBE instructor kit</title>
+<meta name="description" content="Instructor quick-start: build a journey, seal it, and post it to Canvas.">
+<style>
+:root{--ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;--paper:#f7f5ef;--paper-warm:#efece2;--line:#d8d3c4;--moss:#2f6b4f;--moss-deep:#1d4733;--amber:#b06a1c}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:Georgia,'Times New Roman',serif;background:var(--paper);color:var(--ink);line-height:1.7;-webkit-font-smoothing:antialiased}
+.page{max-width:720px;margin:0 auto;padding:0 28px 60px}
+.bar{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding:18px 0 12px;margin-bottom:8px;font-family:-apple-system,system-ui,sans-serif}
+.kb{font-weight:bold;font-size:1rem;color:var(--ink);text-decoration:none}
+.kb span{color:var(--ink-faint);font-weight:normal}
+.bar .right{display:flex;gap:16px;align-items:center;font-size:.82rem}
+.bar .right a{color:var(--ink-soft);text-decoration:none}
+.bar .right a:hover{color:var(--moss)}
+.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;font-weight:500;background:var(--moss-deep);color:var(--paper);border:none;border-radius:3px;padding:7px 14px;cursor:pointer}
+.btn:hover{background:var(--moss)}
+.btn:focus-visible{outline:2px solid var(--moss);outline-offset:2px}
+main{padding-top:14px}
+h1{font-size:1.9rem;font-weight:normal;letter-spacing:-.01em;line-height:1.25;margin:8px 0 14px}
+h2{font-family:-apple-system,system-ui,sans-serif;font-size:1.05rem;font-weight:600;color:var(--moss-deep);margin:30px 0 8px}
+h3{font-family:-apple-system,system-ui,sans-serif;font-size:.95rem;font-weight:600;color:var(--moss-deep);margin:22px 0 6px}
+p{margin:0 0 15px}
+ul,ol{margin:0 0 15px 24px}
+li{margin-bottom:7px}
+li ul{margin:7px 0 4px 22px}
+strong{font-weight:600}
+em{font-style:italic;color:var(--moss-deep)}
+code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.86em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
+a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+footer{margin-top:36px;padding-top:14px;border-top:1px solid var(--line);font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-faint)}
+footer a{color:var(--ink-soft);text-decoration:none}footer a:hover{color:var(--moss)}
+@media print{@page{margin:16mm}.noprint{display:none}body{background:#fff}.bar{border-color:#ccc}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="bar">
+    <a class="kb" href="https://knobe.org/teaching">KNOBE <span>· Instructor kit</span></a>
+    <div class="right">
+      <a href="https://knobe.org/teaching">&#8592; All guides</a>
+      <button type="button" class="btn noprint" onclick="window.print()">Print</button>
+    </div>
+  </div>
+  <main>
+    <h1>Instructor quick-start</h1>
+    <p>One page: define an assignment sequence, seal it, and post it to Canvas. No installation, no account, no JSON. Time: about five minutes for a three-step sequence.</p>
+    <h2>What you are making</h2>
+    <p>One plain-text file, called a journey. Its readable half is a syllabus-ready description of your assignment sequence. Its sealed half carries the same steps in machine-readable form, so a student who loads the file gets a submission form already set up with your policies. The file verifies: anyone can check that it is byte-identical to what you sealed.</p>
+    <h2>Build the journey</h2>
+    <ol>
+    <li>Open <strong><a class="inline" href="https://knobe.org/studio/">knobe.org/studio</a></strong> in any browser and choose the <strong>Journey</strong> tab.</li>
+    <li>Fill in the course name, term, and your name.</li>
+    <li>Add a step for each stage of the assignment. For each step, set:<ul><li><strong>Who seals it</strong>: you, the student, a TA, or a peer reviewer.</li><li><strong>Kind of work</strong>: reading, assignment spec, student writing, feedback, revision, and so on.</li><li><strong>AI policy</strong>: not allowed, allowed with disclosure, required with disclosure, or not applicable. Add detail in your own words; students see it verbatim.</li><li><strong>Builds on</strong>: check the earlier steps this one draws from.</li></ul></li>
+    <li>Watch the preview below the form. That text is what students will read.</li>
+    </ol>
+    <h2>Seal your own steps first (recommended)</h2>
+    <p>For steps you author, such as a reading or the assignment spec, use <strong>Seal this step now</strong>. Studio walks you through sealing that file, then records its fingerprint (a hash) inside the journey. Student submissions will chain to it exactly, and the TA&#x27;s batch check can verify the chain. You can skip this; steps referenced by title only still work, with title-matching instead of hash-matching.</p>
+    <h2>Seal and post</h2>
+    <ol>
+    <li>Press <strong>Seal the journey</strong> and download the file.</li>
+    <li>In Canvas, create the assignment. Attach the journey file and paste the description (Studio gives you a copy button for it).</li>
+    <li>Set the submission type to <strong>File Uploads</strong>. If you restrict file types, the allowed list must include <code>md</code>. This is the one setup detail that fails silently if missed.</li>
+    </ol>
+    <h2>Changing the sequence mid-term</h2>
+    <p>Load your existing journey file into the Journey tab, edit, and reseal. The new file records that it supersedes the old one. Submissions students already made still chain to the version that was actually assigned to them; that is the record behaving correctly.</p>
+    <h2>The rest of the kit</h2>
+    <p>The TA guide covers batch checking. The student handout is written to be attached to the assignment as-is. Two sealed example journeys, one AI-disclosed and one AI-prohibited, load into Studio unchanged if you want to start from a working sequence. The loop on one page (loop-on-one-page.html) is a printable visual guide to the whole cycle; it works as a workshop handout or a syllabus insert.</p>
+    <p>Everything runs inside the browser page. Student work is never transmitted to any server, including ours.</p>
+  </main>
+  <footer>
+    Part of the KNOBE instructor kit. Every tool it describes runs in the browser page; nothing is uploaded. <a href="https://knobe.org/teaching">knobe.org/teaching</a>
+  </footer>
+</div>
+</body>
+</html>
