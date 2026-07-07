@@ -377,6 +377,7 @@ footer a:hover{color:var(--moss)}
       <button class="tab" id="tab-cohort" role="tab" aria-selected="false" aria-controls="panel-cohort" tabindex="-1">Cohort check</button>
       <button class="tab" id="tab-adapt" role="tab" aria-selected="false" aria-controls="panel-adapt" tabindex="-1">Adapt</button>
     </div>
+    <p id="tabStatus" class="visually-hidden" role="status"></p>
 
     <!-- ================= CREATE ================= -->
     <section class="panel" id="panel-create" role="tabpanel" aria-labelledby="tab-create">
@@ -774,6 +775,7 @@ footer a:hover{color:var(--moss)}
 
       <span class="subhead">Steps</span>
       <div id="jmSteps"></div>
+      <p id="jmStatus" class="visually-hidden" role="status"></p>
       <div class="rowbtns"><button type="button" class="linkbtn" id="jmAddStep">Add a step</button></div>
 
       <div id="jmMap" hidden></div>
@@ -1090,9 +1092,10 @@ function selectTab(tab, opts) {
   });
   if (opts && opts.silent) return;
   tab.focus();
-  const p = new URLSearchParams(location.search);
-  p.set('tab', tab.id.slice(4));
-  history.replaceState(null, '', location.pathname + '?' + p);
+  const q = new URLSearchParams(location.search);
+  q.set('tab', tab.id.slice(4));
+  history.replaceState(null, '', location.pathname + '?' + q);
+  const st = $('tabStatus'); if (st) st.textContent = tab.textContent.trim() + ' workspace shown.';
 }
 tabs.forEach(t => {
   t.addEventListener('click', () => selectTab(t));
@@ -1673,23 +1676,36 @@ function jmTextInput(value, onInput, labelText, idAttr, textarea, placeholder) {
   return wrap;
 }
 
+function jmAnnounce(msg) { const s = $('jmStatus'); if (s) s.textContent = msg; }
+function jmRefocus(idx, prefer) {
+  const b = $('jmStep' + idx + prefer);
+  if (b && !b.disabled) { b.focus(); return; }
+  const alt = $('jmStep' + idx + (prefer === 'Up' ? 'Down' : 'Up'));
+  if (alt && !alt.disabled) alt.focus();
+}
 function renderSteps() {
   const box = $('jmSteps');
   box.textContent = '';
   jm.steps.forEach((s, i) => {
     const card = document.createElement('div'); card.className = 'jstep';
+    // each step is a named group so its form fields are uniquely identified by
+    // step number; renderSteps rebuilds on every reorder, so the number tracks.
+    card.setAttribute('role', 'group');
+    card.setAttribute('aria-labelledby', 'jmStepLbl' + i);
 
     const head = document.createElement('div'); head.className = 'jstephead';
-    const num = document.createElement('span'); num.className = 'jstepnum'; num.textContent = 'Step ' + (i + 1);
+    const num = document.createElement('span'); num.className = 'jstepnum'; num.id = 'jmStepLbl' + i; num.textContent = 'Step ' + (i + 1);
     const btns = document.createElement('div'); btns.className = 'jstepbtns';
     const mk = (label, fn, disabled) => {
       const b = document.createElement('button'); b.type = 'button'; b.className = 'linkbtn';
-      b.textContent = label; b.disabled = !!disabled;
+      b.id = 'jmStep' + i + label; b.textContent = label; b.disabled = !!disabled;
+      b.setAttribute('aria-label', label + ' step ' + (i + 1));
       b.addEventListener('click', fn); btns.appendChild(b);
     };
-    mk('Up', () => { if (i > 0) { [jm.steps[i-1], jm.steps[i]] = [jm.steps[i], jm.steps[i-1]]; jmRemapBuilds(i, i-1); renderSteps(); scheduleJmPreview(); } }, i === 0);
-    mk('Down', () => { if (i < jm.steps.length - 1) { [jm.steps[i+1], jm.steps[i]] = [jm.steps[i], jm.steps[i+1]]; jmRemapBuilds(i, i+1); renderSteps(); scheduleJmPreview(); } }, i === jm.steps.length - 1);
-    mk('Remove', () => { jm.steps.splice(i, 1); jm.steps.forEach(t => { t.builds_on = t.builds_on.filter(n => n !== i).map(n => n > i ? n - 1 : n); }); renderSteps(); scheduleJmPreview(); });
+    const total = jm.steps.length;
+    mk('Up', () => { if (i > 0) { [jm.steps[i-1], jm.steps[i]] = [jm.steps[i], jm.steps[i-1]]; jmRemapBuilds(i, i-1); renderSteps(); scheduleJmPreview(); jmAnnounce('Step moved up to position ' + i + ' of ' + total + '.'); jmRefocus(i - 1, 'Up'); } }, i === 0);
+    mk('Down', () => { if (i < jm.steps.length - 1) { [jm.steps[i+1], jm.steps[i]] = [jm.steps[i], jm.steps[i+1]]; jmRemapBuilds(i, i+1); renderSteps(); scheduleJmPreview(); jmAnnounce('Step moved down to position ' + (i + 2) + ' of ' + total + '.'); jmRefocus(i + 1, 'Down'); } }, i === jm.steps.length - 1);
+    mk('Remove', () => { jm.steps.splice(i, 1); jm.steps.forEach(t => { t.builds_on = t.builds_on.filter(n => n !== i).map(n => n > i ? n - 1 : n); }); renderSteps(); scheduleJmPreview(); jmAnnounce('Removed step ' + (i + 1) + '. ' + jm.steps.length + ' step' + (jm.steps.length === 1 ? '' : 's') + ' remaining.'); }, false);
     head.appendChild(num); head.appendChild(btns);
     card.appendChild(head);
 
@@ -1779,7 +1795,7 @@ function buildJourneyBody() {
 
 const scheduleJmPreview = debounce(() => { $('jmPreview').textContent = buildJourneyBody(); renderJourneyMap(journeyPayloadSteps(), { container: $('jmMap') }); }, 300);
 ['jmCourse','jmTerm','jmTitle','jmInstructor'].forEach(id => $(id).addEventListener('input', scheduleJmPreview));
-$('jmAddStep').addEventListener('click', () => { jm.steps.push(jmNewStep()); renderSteps(); scheduleJmPreview(); });
+$('jmAddStep').addEventListener('click', () => { jm.steps.push(jmNewStep()); renderSteps(); scheduleJmPreview(); jmAnnounce('Added step ' + jm.steps.length + '.'); const b = $('jmStep' + (jm.steps.length - 1) + 'Remove'); if (b) b.focus(); });
 $('jmResetBtn').addEventListener('click', () => {
   jm.steps = []; jmLoadedFrom = null; jmResult = null;
   ['jmCourse','jmTerm','jmTitle','jmInstructor'].forEach(id => { $(id).value = ''; });
