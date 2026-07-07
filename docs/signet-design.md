@@ -15,6 +15,16 @@ is this the same person who submitted the earlier work? The signet answers
 that question with continuity: every submission in a chain is signed by the
 same locally held key, and one anchoring event binds that key to a person.
 
+## When to use it, and when not to
+
+The signet is for high-assurance settings: comprehensive exams, dissertations,
+professional certifications, and any course whose stakes justify a key
+ceremony. It is not a default for every section. Students lose key files, and
+every loss means a re-enrollment event that costs real staff time; at the
+scale of a 500-seat course, that cost is the dominant design constraint. Most
+courses get what they need from the time sandwich and the cohort receipt, and
+should start there.
+
 ## What it is
 
 - Studio generates an ECDSA P-256 keypair with WebCrypto, in the page,

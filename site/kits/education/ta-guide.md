@@ -25,6 +25,12 @@ A `failed` or `no link` row is a conversation, not a verdict. The table tells yo
 
 **Download the table as CSV** gives you the same rows for gradebook cross-reference. The CSV contains only what students declared inside their files; no Canvas data enters the page. Grading itself stays in SpeedGrader, where a sealed file displays as plain text.
 
+## Seal a cohort receipt
+
+After a check, **Seal a cohort receipt** (under the table) seals a KNOBE attesting that these files, with these payload hashes, produced these verdicts when you ran the check. Keep it with the course records; in a dispute, it fixes what existed at grading time, and anchoring its single payload hash anywhere with an independent timestamp (an email to yourself, a gradebook note) timestamps the whole batch.
+
+Two things that are normal, not anomalies. Large cohorts produce large receipts: a 500-file check seals in about a second to a file of roughly 200 KB, which is fine for the protocol and for storage. And a resubmission that Canvas renamed (the same bytes as `essay1.knobe.md` arriving again as `essay1-1.knobe.md`) appears as two rows with different file names and identical payload hashes; identical bytes under the identical name are merged into one row.
+
 ## One student's history
 
 Drop a single student's files from across the term and press **Chain view**. Each file lists what it builds on and whether the fingerprints match, which is the record you want in a regrade or integrity conversation.
