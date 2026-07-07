@@ -22,6 +22,20 @@ The steward **may not**:
 
 The steward asserts no patents covering KNOBE Protocol v1 and will not assert any patent against conformant implementations of it. KNOBE is published as open specification and reference code precisely so that it stays free to implement; no patent is sought or held over the protocol.
 
+## Name and mark use
+
+KNOBE is an open protocol, and its name is open with it. We want people to build on KNOBE, ship real tools, and say plainly that they did. What follows is an invitation and a set of shared expectations, written so the ecosystem stays legible for the students, instructors, and readers who need to know which tool they are holding. It is coordination, not a trademark claim: the steward holds no trademark over KNOBE and will not use names to restrict conformant implementations, exactly as no patent is asserted against them.
+
+**Say what you built, freely.** Describe your work as *built on KNOBE*, *KNOBE-compatible*, *for KNOBE*, *a KNOBE verifier*, or *implements KNOBE Protocol v1*, and tell people it *reads and writes `.knobe.md` files*. Accurate, descriptive use is what an open protocol is for, and it needs no permission.
+
+**Earn the conformance claim, then make it.** When your verifier reproduces every published test vector (see [CONTRIBUTING.md](CONTRIBUTING.md)), call it a *conformant KNOBE Protocol v1 verifier* and mean it. That is the claim a user can rely on, so it is worth earning; until then, *KNOBE-compatible* says exactly what is true.
+
+**Give your tool its own name.** The reference implementations the steward publishes at knobe.org carry the plain names *KNOBE Studio*, *KNOBE Lens* (with `lens.py`, the reference verifier), *knobe-mcp*, and *KNOBE Grove*. Your own tool reads best when its name says whose it is or where it runs: *KNOBE Studio for Obsidian*, *Acme KNOBE Lens*, *a KNOBE verifier for VS Code*. A distinct name helps people find you, credits your work, and keeps everyone oriented as the ecosystem grows.
+
+**Let the work stand in your name.** Build your reputation as the maker of your own tool: credit yourself, name your team, link real source, and let the track record speak. The one firm boundary is ordinary honesty about origin: claim or imply that a project is the steward's official or reference implementation, or that the steward built, endorsed, or reviewed it, only when that is true. Everything else, an accurate account of what you made, is exactly the credit an open ecosystem runs on.
+
+**A listing is a fact, not a favor.** When your tool is public, open an issue and it joins knobe.org/implementations with your name on it: a named maintainer, public source, vector results if it verifies, and a plain word on what it does and does not do. The listing records what exists; it is not an endorsement, and not a grant of these names. To propose a name, coordinate a release, or ask anything here, reach the steward; the answer is meant to help you ship.
+
 ## Transition to shared governance
 
 An advisory group will be formed when **any** of the following occurs, whichever is first:
