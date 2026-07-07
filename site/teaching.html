@@ -393,6 +393,18 @@ footer a:hover{color:var(--moss)}
     <h2>AI policy, in either direction</h2>
     <p>The toolkit takes no position on whether AI belongs in your course. It records the position you take. A step sealed under a prohibition carries the student's sole-authorship declaration. A step sealed under a disclosure policy carries a named AI contributor, marked non-rights-bearing, with the student's own account of what the AI did and what they did. The seal does not detect AI use, and nothing here is a detector. It replaces detection with declaration: a signed, hash-anchored statement the student makes at submission time, against the policy you set.</p>
 
+    <h2>Time and identity, without a server</h2>
+    <p>The seal proves content, not wall-clock time or legal identity; the <a class="inline" href="/threat-model">threat model</a> states both limits and the application-layer paths that close them. Three patterns give a course most of what it needs with nothing installed.</p>
+
+    <h3>The time sandwich</h3>
+    <p>A journey-linked submission carries the journey and spec hashes inside its sealed record, so it provably was sealed after the assignment existed. The Canvas submission receipt bounds the other side. A file resealed after the deadline is a different file, byte for byte, from what Canvas holds, and Cohort check shows the mismatch. Not proved: the wall-clock moment of sealing between those two bounds.</p>
+
+    <h3>The cohort receipt</h3>
+    <p>After a batch check, Cohort check can seal a receipt: one KNOBE attesting that the listed files, with the listed payload hashes, produced the listed verdicts at seal time. Canvas timestamps rot when the course shell is deleted; the receipt is a plain file that survives. Anchor its single hash anywhere with an independent timestamp (an email, a gradebook note) and every listed submission is timestamped at once. Not proved: anything about files it does not list.</p>
+
+    <h3>The signet, designed and arriving next</h3>
+    <p>Continuity of authorship: Studio will generate a keypair that lives in a file the student keeps, and each submission will carry a signature made with it. One anchoring event (in person, or recorded in an enrollment receipt) binds the key fingerprint to the roster; from then on, every signed submission proves the same key holder authored the chain, across a term or a dissertation. The specification reserves <code>identity_status: "signed"</code> for exactly this. Not proved: legal identity; a shared key fails the same way a shared Canvas login does. The design charter is public in the repository, and the hardware-credential direction explored with Joshua Hori is the institutional-grade extension of the same path.</p>
+
     <h2>The kit</h2>
     <p>One page per role, an accessibility guide, and two complete example journeys you can load into Studio unchanged. The examples are sealed KNOBEs and verify like any other.</p>
     <table class="kit-table">
