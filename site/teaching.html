@@ -53,11 +53,68 @@ h2{font-size:1.3rem;font-weight:normal;color:var(--moss-deep);margin:40px 0 12px
 h3{font-size:1.02rem;font-weight:600;color:var(--moss-deep);margin:26px 0 8px;font-family:-apple-system,system-ui,sans-serif}
 code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.88em;background:var(--paper-warm);padding:1px 5px;border-radius:3px}
 a.inline{color:var(--moss);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
-em.kw{font-style:italic;color:var(--moss-deep)}
 strong{font-weight:600}
 ul,ol{margin:10px 0 16px 22px}
 li{margin-bottom:6px}
-pre{background:var(--code-bg);border-radius:6px;padding:18px 22px;margin:14px 0 20px;overflow-x:auto;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.78rem;line-height:1.6;color:var(--code-ink)}
+
+.vh{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+.btn{font-family:-apple-system,system-ui,sans-serif;font-size:.84rem;font-weight:500;text-decoration:none;padding:9px 16px;border-radius:3px;display:inline-block;background:var(--moss-deep);color:var(--paper);transition:background .15s,border-color .15s,color .15s}
+.btn:hover{background:var(--moss)}
+.btn.ghost{background:transparent;border:1px solid var(--line);color:var(--ink-soft)}
+.btn.ghost:hover{border-color:var(--moss);color:var(--moss)}
+
+/* ---- role picker ---- */
+.roles{border:0;padding:0;margin:30px 0 0}
+.roles legend{font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:12px}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+.role-card{display:block;background:#fff;border:1px solid var(--line);border-radius:10px;padding:13px 15px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.role-card:hover{border-color:var(--moss)}
+.role-name{display:block;font-family:-apple-system,system-ui,sans-serif;font-weight:600;font-size:.94rem;color:var(--ink)}
+.role-name::before{content:"\25CB  ";color:var(--ink-faint);font-weight:normal}
+.role-hint{display:block;font-family:-apple-system,system-ui,sans-serif;font-size:.8rem;color:var(--ink-soft);margin-top:3px}
+input.vh:checked + .role-card{border-color:var(--moss);box-shadow:inset 3px 0 0 var(--moss)}
+input.vh:checked + .role-card .role-name::before{content:"\2713  ";color:var(--moss-deep)}
+input.vh:focus-visible + .role-card{outline:2px solid var(--moss);outline-offset:2px}
+.role-panel{margin-top:6px}
+@supports selector(:has(*)){
+  .roles-wrap:has(#r-instructor:checked) .role-panel{display:none}
+  .roles-wrap:has(#r-instructor:checked) #p-instructor{display:block}
+  .roles-wrap:has(#r-student:checked) .role-panel{display:none}
+  .roles-wrap:has(#r-student:checked) #p-student{display:block}
+  .roles-wrap:has(#r-ta:checked) .role-panel{display:none}
+  .roles-wrap:has(#r-ta:checked) #p-ta{display:block}
+  .roles-wrap:has(#r-access:checked) .role-panel{display:none}
+  .roles-wrap:has(#r-access:checked) #p-access{display:block}
+}
+
+/* ---- stepper ---- */
+.path{list-style:none;margin:18px 0 8px;padding:0}
+.path li{display:grid;grid-template-columns:32px 1fr;gap:0 14px;padding:14px 0;border-bottom:1px solid var(--line);margin:0}
+.path li:last-child{border-bottom:none}
+.path-num{width:26px;height:26px;border:1.5px solid var(--moss);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--moss);margin-top:2px}
+.path-what{margin:0 0 8px}
+.path .path-what:last-child{margin-bottom:0}
+
+/* ---- flow strip ---- */
+.flow{list-style:none;display:flex;flex-wrap:wrap;gap:10px;align-items:stretch;margin:16px 0 6px;padding:0}
+.flow li{display:flex;align-items:center;gap:10px;margin:0}
+.flow-node{background:var(--paper-warm);border:1px solid var(--line);border-radius:6px;padding:10px 14px;font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;color:var(--ink-soft);max-width:230px}
+.flow-node .fk{display:block;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--moss);margin-bottom:3px}
+.flow-arrow{color:var(--ink-faint);font-size:1.1rem}
+.flow-cap{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint);margin-bottom:14px}
+@media(max-width:560px){.flow{flex-direction:column;align-items:flex-start}.flow li{flex-direction:column;align-items:flex-start}.flow-arrow{transform:rotate(90deg);margin-left:18px}}
+
+/* ---- callouts and folds ---- */
+.gotcha{border:1px solid var(--line);border-left:3px solid var(--amber);background:#fdf8f0;border-radius:6px;padding:12px 16px;margin:10px 0 4px;font-family:-apple-system,system-ui,sans-serif;font-size:.88rem;color:var(--ink-soft)}
+details.fold{border:1px solid var(--line);border-radius:6px;margin:14px 0;background:#fff}
+.fold summary{list-style:none;cursor:pointer;padding:12px 16px;font-family:-apple-system,system-ui,sans-serif;font-size:.9rem;font-weight:600;color:var(--moss-deep)}
+.fold summary::-webkit-details-marker{display:none}
+.fold summary::before{content:"\25B8  ";color:var(--moss)}
+.fold[open] summary::before{content:"\25BE  "}
+.fold .fold-body{padding:0 16px 14px}
+.fold .fold-body ul{margin-top:0}
+.fold .fold-body p:last-child{margin-bottom:0}
 
 .kit-table{width:100%;border-collapse:collapse;font-size:.9rem;margin:14px 0 20px}
 .kit-table th{text-align:left;font-family:-apple-system,system-ui,sans-serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);padding:6px 16px 6px 0;border-bottom:2px solid var(--line)}
@@ -148,7 +205,7 @@ footer a:hover{color:var(--moss)}
   <div class="wrap">
     <div class="eyebrow">Instructor toolkit</div>
     <h1>A sealed record of coursework, from syllabus to <em>submission</em>.</h1>
-    <p class="sub">Three browser tools on one engine: an instructor defines an assignment sequence once, each student seals their step against it, and a TA checks a whole batch at once. Every artifact is a plain-text <code>.knobe.md</code> file that records who made it, what it builds on, and the AI policy it was made under. Works with or without AI in the course, and rides Canvas features that already exist.</p>
+    <p class="sub">An instructor defines the assignment sequence once, students seal their work against it, and a TA checks the whole batch. Every file records who made it, what it builds on, and the AI policy it was made under.</p>
     <div class="assurance">
       <span class="lock" aria-hidden="true">&#9679;</span>
       <span>Every tool on this page runs inside the browser page. Student work is never transmitted anywhere, to us or anyone else. That matters under FERPA: no third party processes the submissions.</span>
@@ -159,47 +216,128 @@ footer a:hover{color:var(--moss)}
 <main id="main">
   <div class="wrap">
 
+    <div class="roles-wrap">
+      <fieldset class="roles">
+        <legend>Pick your role</legend>
+        <div class="role-grid">
+          <input type="radio" class="vh" name="role" id="r-instructor" checked>
+          <label class="role-card" for="r-instructor"><span class="role-name">Instructor</span><span class="role-hint">Design the sequence once</span></label>
+          <input type="radio" class="vh" name="role" id="r-student">
+          <label class="role-card" for="r-student"><span class="role-name">Student</span><span class="role-hint">Seal and submit your work</span></label>
+          <input type="radio" class="vh" name="role" id="r-ta">
+          <label class="role-card" for="r-ta"><span class="role-name">TA</span><span class="role-hint">Check a whole batch</span></label>
+          <input type="radio" class="vh" name="role" id="r-access">
+          <label class="role-card" for="r-access"><span class="role-name">Accessibility staff</span><span class="role-hint">Seal alternate formats</span></label>
+        </div>
+      </fieldset>
+
+      <div class="role-panels">
+
+        <section class="role-panel" id="p-instructor" aria-labelledby="h-instructor">
+          <h2 id="h-instructor">The instructor path</h2>
+          <p>Once per assignment sequence, on a card-based form. No JSON appears at any point, and nothing installs.</p>
+          <ol class="path">
+            <li><span class="path-num" aria-hidden="true">1</span><div>
+              <p class="path-what">Build the sequence: each step names who seals it, the kind of work, and its AI policy.</p>
+              <a class="btn" href="/studio/?tab=journey">Open the Journey builder</a>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">2</span><div>
+              <p class="path-what">Seal your own steps (a reading, the assignment spec) when Studio offers it, so student work chains to them exactly.</p>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">3</span><div>
+              <p class="path-what">Post the journey file and its description to the Canvas assignment.</p>
+              <a class="btn ghost" href="/kits/education/instructor-quick-start.md">Read the one-page quick-start</a>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">4</span><div>
+              <p class="path-what">Want to see a finished sequence first? Load a complete example into Studio.</p>
+              <a class="btn ghost" href="/studio/?journey=/kits/education/journey-example-ai-disclosed.knobe.md">Open an example journey</a>
+            </div></li>
+          </ol>
+          <h3>Posting to Canvas</h3>
+          <ol class="path">
+            <li><span class="path-num" aria-hidden="true">1</span><div><p class="path-what">Attach the sealed journey file and paste its description into the assignment.</p></div></li>
+            <li><span class="path-num" aria-hidden="true">2</span><div>
+              <p class="path-what">Set the submission type to <strong>File Uploads</strong>.</p>
+              <div class="gotcha">If you restrict allowed file types, the list must include <code>md</code>, or Canvas rejects every submission. This is the most common setup failure.</div>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">3</span><div><p class="path-what">Collect with <strong>Download Submissions</strong>: one zip of every student's file.</p></div></li>
+            <li><span class="path-num" aria-hidden="true">4</span><div><p class="path-what">Grade in SpeedGrader as usual; a sealed file is plain text and displays there.</p></div></li>
+          </ol>
+        </section>
+
+        <section class="role-panel" id="p-student" aria-labelledby="h-student">
+          <h2 id="h-student">The student path</h2>
+          <p>About two minutes of overhead per assignment: the form fills itself from the journey, and the AI question matches the policy your instructor set.</p>
+          <ol class="path">
+            <li><span class="path-num" aria-hidden="true">1</span><div>
+              <p class="path-what">Download the journey file attached to the Canvas assignment (it ends in <code>.knobe.md</code>).</p>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">2</span><div>
+              <p class="path-what">Load it in Studio, pick your step, write, and seal.</p>
+              <a class="btn" href="/studio/?tab=create">Open Create</a>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">3</span><div>
+              <p class="path-what">Upload the downloaded sealed file to Canvas like any other file.</p>
+            </div></li>
+          </ol>
+          <p>The <a class="inline" href="/kits/education/student-handout.md">student handout</a> covers this on one page, including how to write a specific AI disclosure.</p>
+        </section>
+
+        <section class="role-panel" id="p-ta" aria-labelledby="h-ta">
+          <h2 id="h-ta">The TA path</h2>
+          <p>One table for the whole batch; anomalies sort to the top, and the clean majority needs no attention. Grading itself stays in SpeedGrader.</p>
+          <ol class="path">
+            <li><span class="path-num" aria-hidden="true">1</span><div>
+              <p class="path-what">Use <strong>Download Submissions</strong> in Canvas and unzip the batch.</p>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">2</span><div>
+              <p class="path-what">Load the journey as the expectation, then drag the unzipped folder in.</p>
+              <a class="btn" href="/studio/?tab=cohort">Open Cohort check</a>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">3</span><div>
+              <p class="path-what">Read the table, then export the CSV for gradebook cross-reference. For one student's history across the term, use the chain view.</p>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">4</span><div>
+              <p class="path-what">Optional: run the same checks from an AI agent with <code>knobe-mcp</code>; it runs locally, so the privacy posture is unchanged.</p>
+              <a class="btn ghost" href="/mcp">About the MCP server</a>
+            </div></li>
+          </ol>
+          <p>The <a class="inline" href="/kits/education/ta-guide.md">TA guide</a> explains each table column and what an anomaly row means.</p>
+        </section>
+
+        <section class="role-panel" id="p-access" aria-labelledby="h-access">
+          <h2 id="h-access">The accessibility path</h2>
+          <p>A plain-language version, translation, transcript, or description seals as its own file: bound to the exact source by hash, credited to the adapter and any reviewer, and honest about what it preserves and omits.</p>
+          <ol class="path">
+            <li><span class="path-num" aria-hidden="true">1</span><div>
+              <p class="path-what">Get the sealed source file you are adapting.</p>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">2</span><div>
+              <p class="path-what">Produce the adaptation, then seal it with its lineage and credit.</p>
+              <a class="btn" href="/studio/?tab=adapt">Open Adapt</a>
+            </div></li>
+            <li><span class="path-num" aria-hidden="true">3</span><div>
+              <p class="path-what">Distribute the sealed file the way you distribute any accommodation document.</p>
+            </div></li>
+          </ol>
+          <p>One page for disability-services staff and TAs: the <a class="inline" href="/kits/education/accessibility-guide.md">accessibility guide</a>. The design behind it is on the <a class="inline" href="/accessibility">accessibility page</a>.</p>
+        </section>
+
+      </div>
+    </div>
+
     <h2>The loop</h2>
-    <p>A large course runs on a loop: the instructor designs, students submit, TAs grade, and disputes come back to the instructor. Each tool below serves one position in that loop. All three are tabs in <a class="inline" href="/studio/">Studio</a>.</p>
-
-    <h3>Instructor, once per assignment sequence</h3>
-    <p>The <strong>Journey</strong> tab builds a sequence on a card-based form: each step names who seals it, what kind of work it is, what it builds on, and the AI policy it runs under. Sealing produces one journey file whose markdown body is a syllabus-ready description and whose payload carries the machine-readable steps. Instructor-authored steps (a reading, an assignment spec) can be sealed on the spot; their hashes flow back into the journey so student work can chain to them byte-exactly. Post the journey file to the Canvas assignment and paste the body into the description. No JSON appears at any point.</p>
-
-    <h3>Student, per assignment</h3>
-    <p>The student opens Studio's <strong>Create</strong> tab, loads the journey file from the assignment, and picks their step. The form fills itself: the right content type, the parent hashes, the course context, and the review status. The step's AI policy drives what the form asks for. A no-AI step asks for a sole-authorship declaration; a disclosure step adds a row for naming the AI and stating what it did and did not do. The student writes, seals, downloads one file, and uploads it to Canvas like any other file. The overhead is a form, not a workflow.</p>
-
-    <h3>TA, per batch</h3>
-    <p>Canvas's <em>Download Submissions</em> produces a zip. Unzip it and drag the folder into Studio's <strong>Cohort check</strong> tab, with the journey file loaded as the expectation. The result is one table: integrity verdict, declared author, AI disclosure, and whether each file chains to the assigned spec. Anomalies sort to the top; the clean majority needs no attention. The table exports as CSV for gradebook cross-reference. Grading itself stays in SpeedGrader.</p>
-
-    <h3>End of term, and disputes</h3>
-    <p>Drop one student's files into Cohort check and open the chain view: each file lists what it builds on and whether the hashes match. In a regrade or an academic-integrity dispute, both sides work from the same sealed record of what was submitted and what was declared, at the time it was sealed.</p>
-
-    <h2>Canvas, step by step</h2>
-    <p>The whole flow rides four Canvas features that already exist. Nothing installs, and no administrator is involved.</p>
-    <ol>
-      <li><strong>Post the assignment.</strong> Attach the sealed journey file and paste the journey body into the assignment description.</li>
-      <li><strong>Set the submission type</strong> to <em>File Uploads</em>. One gotcha: if you restrict allowed file types, the list must include <code>md</code>, or Canvas will reject every submission. This is the single most common setup failure.</li>
-      <li><strong>Collect</strong> with <em>Download Submissions</em> on the assignment page. Canvas hands back one zip of every student's file.</li>
-      <li><strong>Grade in SpeedGrader</strong> as usual. A <code>.knobe.md</code> file is plain text; SpeedGrader displays it. The Cohort check table runs alongside, not instead.</li>
+    <p class="vh">The cycle: the instructor designs and seals the sequence; students seal their steps against it; the TA checks the batch in one table; disputes return to the instructor and work from the sealed record; the loop repeats each assignment.</p>
+    <ol class="flow" role="list">
+      <li><div class="flow-node"><span class="fk">Instructor</span>designs and seals the sequence</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">Students</span>seal their steps against it</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">TA</span>checks the batch in one table</div><span class="flow-arrow" aria-hidden="true">&#8594;</span></li>
+      <li><div class="flow-node"><span class="fk">Back to the instructor</span>disputes work from the sealed record &#10226;</div></li>
     </ol>
-    <p>Studio can also load a journey from a link (<code>/studio/?journey=&lt;url&gt;</code>) when the journey file is hosted openly, as the kit examples below are. Canvas attachments require a login, so a browser page cannot fetch them directly; for Canvas-hosted journeys, downloading and dragging the file in is the path that works, and it is the one the student handout teaches.</p>
+    <p class="flow-cap">Each assignment runs the same cycle, and every artifact in it verifies against the ones before.</p>
 
     <h2>AI policy, in either direction</h2>
     <p>The toolkit takes no position on whether AI belongs in your course. It records the position you take. A step sealed under a prohibition carries the student's sole-authorship declaration. A step sealed under a disclosure policy carries a named AI contributor, marked non-rights-bearing, with the student's own account of what the AI did and what they did. The seal does not detect AI use, and nothing here is a detector. It replaces detection with declaration: a signed, hash-anchored statement the student makes at submission time, against the policy you set.</p>
-
-    <h2>Accessibility adaptations</h2>
-    <p>Alternate formats are part of the same loop. Studio's <strong>Adapt</strong> tab seals a plain-language version, translation, transcript, or description as its own file: bound to the exact source by hash, credited to the adapter and any reviewer, with an honest statement of what was preserved and what was omitted. Disability-services staff get provenance and credit that survive distribution; students get an alternate format that cannot be mistaken for the full text. The <a class="inline" href="/kits/education/accessibility-guide.md">accessibility guide</a> in the kit covers it in one page, and the design behind it is on the <a class="inline" href="/accessibility">accessibility page</a>.</p>
-
-    <h2>For TAs who run an agent</h2>
-    <p>The same checks run agentically. A TA with Claude Desktop or any MCP client can install <a class="inline" href="/mcp"><code>knobe-mcp</code></a>, point it at the unzipped submissions folder, and ask the agent to verify the batch and tabulate the declarations. The server runs locally and has no network code, so the FERPA posture is unchanged.</p>
-
-    <h2>What this does not do</h2>
-    <ul>
-      <li>It does not detect AI writing, plagiarism, or contract cheating. It records declarations and verifies integrity; a false declaration remains a conduct matter, now with a signed record of exactly what was declared.</li>
-      <li>It does not enforce anything inside Canvas. A student can still upload a plain file with no seal; the Cohort check table shows that as an unreadable row, and your syllabus decides what that means.</li>
-      <li>It does not integrate with Canvas beyond files. An LTI 1.3 tool with one-click seal-and-submit would need a server and a Canvas administrator's install. The protocol supports building one; this site does not ship one.</li>
-      <li>If you reseal a journey mid-term, earlier submissions still chain to the spec hash that was actually assigned to them. That is the record working correctly, not drifting.</li>
-    </ul>
 
     <h2>The kit</h2>
     <p>One page per role, an accessibility guide, and two complete example journeys you can load into Studio unchanged. The examples are sealed KNOBEs and verify like any other.</p>
@@ -214,6 +352,25 @@ footer a:hover{color:var(--moss)}
       <tr><td><a class="inline" href="/kits/education/knobe-instructor-kit.zip">Everything as a zip</a></td><td>All six files, for posting to a course shell.</td></tr>
     </table>
     <p>The field shapes these tools write are the ones published in the <a class="inline" href="/education-profile">education profile</a>, and the profile's sealed corpus examples (a reading, an assignment spec, a student submission) are the reference implementations of the same loop.</p>
+
+    <details class="fold">
+      <summary>Limits, stated plainly</summary>
+      <div class="fold-body">
+        <ul>
+          <li>It does not detect AI writing, plagiarism, or contract cheating. It records declarations and verifies integrity; a false declaration remains a conduct matter, now with a signed record of exactly what was declared.</li>
+          <li>It does not enforce anything inside Canvas. A student can still upload a plain file with no seal; the Cohort check table shows that as an unreadable row, and your syllabus decides what that means.</li>
+          <li>It does not integrate with Canvas beyond files. An LTI 1.3 tool with one-click seal-and-submit would need a server and a Canvas administrator's install. The protocol supports building one; this site does not ship one.</li>
+          <li>If you reseal a journey mid-term, earlier submissions still chain to the spec hash that was actually assigned to them. That is the record working correctly, not drifting.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details class="fold">
+      <summary>Hosting a journey at a link</summary>
+      <div class="fold-body">
+        <p>Studio can load a journey from a link (<code>/studio/?journey=&lt;url&gt;</code>) when the journey file is hosted openly, as the kit examples are. Canvas attachments require a login, so a browser page cannot fetch them directly; for Canvas-hosted journeys, downloading and dragging the file in is the path that works, and it is the one the student handout teaches.</p>
+      </div>
+    </details>
 
   </div>
 
