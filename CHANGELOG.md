@@ -5,6 +5,7 @@ The protocol itself is frozen at v1.0 (see [GOVERNANCE.md](GOVERNANCE.md)); entr
 ## v1.0.0 — 2026-06-21
 
 - KNOBE Protocol v1.0 specification frozen: three-layer file format, ten required payload fields, canonical hash rule (§5), optional body hash, four verification states with independent `body_verified` and `conformance` dimensions, versioning contract.
+- Public release: 2026-06-28 (the date cited in `CITATION.cff` and the README BibTeX).
 - Reference verifier `lens.py` published — single file, Python standard library only.
 - Nine conformance test vectors with expected results.
 - Sealed examples: white paper, education chain, government record + FOIA release lineage, enterprise synthesis chain.
