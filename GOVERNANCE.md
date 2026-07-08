@@ -36,6 +36,18 @@ KNOBE is an open protocol, and its name is open with it. We want people to build
 
 **A listing is a fact, not a favor.** When your tool is public, open an issue and it joins knobe.org/implementations with your name on it: a named maintainer, public source, vector results if it verifies, and a plain word on what it does and does not do. The listing records what exists; it is not an endorsement, and not a grant of these names. To propose a name, coordinate a release, or ask anything here, reach the steward; the answer is meant to help you ship.
 
+## What counts as an independent implementation
+
+The transition triggers below turn on independent implementations, and AI-assisted development changes what the useful definition is, so the term is defined here.
+
+An implementation is independent when a person other than the steward is responsible for it: they read the specification, made or reviewed its interpretive decisions, answer for its behavior under their own name, and maintain it. AI assistance does not disqualify an implementation, for the same reason it does not disqualify the steward's own work; what matters is that a responsible human other than the steward validated the interpretation against the specification and the published vectors.
+
+Not independent, whatever the tooling: an implementation the steward writes or commissions, and an AI-generated implementation with no responsible human behind it. Models trained on overlapping corpora can converge on the same misreading, so agreement between two of them is weak evidence that the specification is buildable from its text. The diversity that counts is human interpretive responsibility, not model or codebase diversity.
+
+Consulting the reference implementations to confirm behavior in an ambiguous case is reasonable and should be disclosed. The published test vectors and their expected results are the arbiter of conformance. Where they leave a detail undecided, `lens.py` is canonical for serialization ambiguity under spec §5, and rulings for everything else are documented in [ERRATA.md](ERRATA.md); where observed reference behavior conflicts with explicit normative text, the ruling follows the specification and records the conflict.
+
+For transition trigger 1 below, passing the full conformance vectors means reproducing the published expected results across all published sets: the nine core vectors, the adversarial set, and the interpretation set.
+
 ## Transition to shared governance
 
 An advisory group will be formed when **any** of the following occurs, whichever is first:

@@ -12,6 +12,27 @@ The protocol itself is frozen at v1.0 (see [GOVERNANCE.md](GOVERNANCE.md)); entr
 
 ## Post-freeze updates (non-normative)
 
+### 2026-07-08
+
+- `ERRATA.md` added: eleven documented interpretations of questions
+  raised in real implementation work, each with an authoritative ruling
+  and, where practical, a pinning test vector. The questions came from
+  a third verifier (Go) built from the specification text; running it
+  against both reference implementations also surfaced an inconsistent
+  spelling in the reference's own JSON output (the string `omitted` for
+  failed files, `null` for unreadable ones, both spellings of the same
+  spec §7 mandate), resolved by erratum E11 accepting either.
+- Interpretation vector set added at `test-vectors/interpretation/`:
+  six files pinning marker line-anchoring, frontmatter/payload
+  `spec_version` disagreement, booleans and null, Base64 padding,
+  missing-`attribution` issue granularity, and astral-plane literal
+  serialization. Both reference verifiers agree on all six; the
+  cross-language corpus grows from 31 to 37 files. The canonical
+  conformance bar remains the nine core vectors.
+- `GOVERNANCE.md`: defined what counts as an independent implementation
+  now that AI assistance is ordinary, and named the arbiter order
+  (published vectors, then `lens.py`, with rulings in `ERRATA.md`).
+
 ### 2026-07-06 – 2026-07-07
 
 - `GOVERNANCE.md`: "Name and mark use" section added, inviting anyone
