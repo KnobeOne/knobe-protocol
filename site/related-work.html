@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNOBE — Related work</title>
-<meta name="description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
+<meta name="description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -92,11 +92,11 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE — Related work">
-<meta property="og:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
+<meta property="og:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
 <meta property="og:url" content="https://knobe.org/related-work">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE — Related work">
-<meta name="twitter:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
+<meta name="twitter:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -181,6 +181,10 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
     <p>RO-Crate packages <strong>research data</strong> (datasets, code, and their metadata) as a directory with a JSON-LD manifest, aimed at repositories and machine actionability. It is the right answer for datasets. KNOBE is one file, human-first, aimed at <em>documents and knowledge artifacts</em> rather than data packages, and it defines sealing and verification semantics RO-Crate does not.</p>
     <div class="defer"><span class="dlabel">Defer to RO-Crate</span>For research-data packaging and repository deposit. If your object is a dataset, use RO-Crate; if it is a memo, transcript, adaptation, summary, or piece of student work, KNOBE fits.</div>
 
+    <h2>BagIt</h2>
+    <p>BagIt is a preservation and transfer format from the Library of Congress and the California Digital Library, standardized as IETF RFC 8493. A <em>bag</em> is a directory: a <code>data/</code> payload beside plain-text manifests (<code>manifest-sha256.txt</code> and kin) that checksum every file, so a repository can confirm nothing was lost or altered in storage or transit. It is the right answer for moving <strong>collections of files</strong> with fixity, and of the neighbors here its plain-text, checksum-based, no-server design sits closest to KNOBE's. Two differences mark the corner KNOBE keeps: a bag is a multi-file directory, where a KNOBE is one self-contained file that still reads as ordinary markdown with no tooling; and BagIt secures fixity plus conventional descriptive metadata (the free-form key-value pairs of <code>bag-info.txt</code>), where KNOBE seals a <strong>structured context record</strong> with defined semantics, attribution, transformation history, fidelity limits, and use conditions, under a canonical hash. BagIt asks "are these the same bytes I packaged?"; KNOBE asks "what is this, and what may travel with it?" The two compose: seal knowledge objects as KNOBEs, then bag the collection for archival transfer.</p>
+    <div class="defer"><span class="dlabel">Defer to BagIt</span>For fixity-checked storage and transfer of file collections in a repository or archive.</div>
+
     <h2>Dublin Core (and metadata standards generally)</h2>
     <p>Dublin Core gives shared <em>names</em> for descriptive fields: creator, date, rights. KNOBE's problem is not naming but <strong>survival and accountability</strong>: ordinary metadata is exactly what pipelines strip, and nothing in Dublin Core detects that the description was altered or separated from its object. KNOBE adds the envelope: sealed payload, integrity hash, verification states, transformation history, fidelity limits, use conditions. Where sensible, KNOBE vocabulary stays mappable to Dublin Core terms rather than competing with them.</p>
 
@@ -201,6 +205,7 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
         <tr><th scope="row">Verifiable Credentials</th><td>Identity-backed claims</td><td>Context without requiring identity</td><td>"Who asserts this?"</td></tr>
         <tr><th scope="row">W3C PROV</th><td>Rich provenance vocabulary</td><td>Sealed single-file transport</td><td>Queryable provenance graphs</td></tr>
         <tr><th scope="row">RO-Crate</th><td>Research data packaging</td><td>One human-first document, sealing semantics</td><td>Datasets, repository deposit</td></tr>
+        <tr><th scope="row">BagIt</th><td>Checksummed file packaging</td><td>Sealed structured context, not just file fixity</td><td>Archival storage and transfer</td></tr>
         <tr><th scope="row">Dublin Core</th><td>Shared field names</td><td>Tamper evidence, obligations, survival</td><td>Descriptive naming (map to it)</td></tr>
         <tr><th scope="row">Knowledge graphs</th><td>Linked knowledge in place</td><td>The node's passport when it exits</td><td>Inside one platform</td></tr>
       </tbody>
