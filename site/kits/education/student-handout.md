@@ -1,6 +1,6 @@
 # Submitting sealed work: student handout
 
-Your instructor is collecting this assignment as a sealed KNOBE file. A sealed file is plain text that records, in a verifiable way, who wrote it, what it responds to, and what you declared about AI use. Sealing adds about two minutes to your normal workflow.
+Your instructor is collecting this assignment as a sealed KNOBE file. A sealed file is plain text that records, in a verifiable way, who wrote it, what it responds to, and what you declared about AI use. Sealing adds about two minutes to your normal workflow. The sealed file is yours: it stays valid wherever you take it, and proving what you declared never requires an account, a platform, or the course itself.
 
 ## The steps
 
