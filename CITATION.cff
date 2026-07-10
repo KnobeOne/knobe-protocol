@@ -10,6 +10,10 @@ version: 1.0.0
 date-released: 2026-06-28
 url: "https://knobe.org"
 repository-code: "https://github.com/KnobeOne/knobe-protocol"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21298913"
+    description: "Zenodo archive of the KNOBE Protocol v1 white paper"
 license:
   - CC-BY-4.0
   - Apache-2.0

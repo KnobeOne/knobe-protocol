@@ -2,6 +2,7 @@
 
 [![Verifier parity](https://github.com/KnobeOne/knobe-protocol/actions/workflows/parity.yml/badge.svg)](https://github.com/KnobeOne/knobe-protocol/actions/workflows/parity.yml)
 [![knobe-mcp on npm](https://img.shields.io/npm/v/knobe-mcp?label=knobe-mcp)](https://www.npmjs.com/package/knobe-mcp)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21298913.svg)](https://doi.org/10.5281/zenodo.21298913)
 
 **An open, plain-text protocol for knowledge objects that keep their context when they move.**
 
@@ -137,7 +138,9 @@ david@knobe.org · [knobe.org](https://knobe.org)
   year         = {2026},
   month        = {jun},
   note         = {Published 28 June 2026},
-  url          = {https://knobe.org}
+  publisher    = {Zenodo},
+  doi          = {10.5281/zenodo.21298913},
+  url          = {https://doi.org/10.5281/zenodo.21298913}
 }
 ```
 
