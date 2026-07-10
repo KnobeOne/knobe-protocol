@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNOBE — Related work</title>
-<meta name="description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
+<meta name="description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, and llms.txt: where it complements them, where it differs, and when to use them instead.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -92,11 +92,11 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE — Related work">
-<meta property="og:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
+<meta property="og:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, and llms.txt: where it complements them, where it differs, and when to use them instead.">
 <meta property="og:url" content="https://knobe.org/related-work">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE — Related work">
-<meta name="twitter:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, and knowledge graphs: where it complements them, where it differs, and when to use them instead.">
+<meta name="twitter:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, and llms.txt: where it complements them, where it differs, and when to use them instead.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -194,6 +194,10 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
     <h2>Metadata and front-matter</h2>
     <p>Front-matter metadata is the <em>content</em> of the solution; KNOBE's contribution is the <strong>transport guarantee</strong>. YAML front-matter alone is silently editable, routinely stripped, and carries no tamper evidence. KNOBE keeps that metadata attached and verifiable: self-contained, hash-sealed, with defined <a href="/spec" class="inline">verification semantics</a>, published <a href="/test-vectors/" class="inline">test vectors</a>, and graceful degradation to readable text. If plain front-matter meets your needs, use it; KNOBE's YAML layer is deliberately compatible with that practice, so the upgrade path is short.</p>
 
+    <h2>llms.txt</h2>
+    <p>llms.txt is a site-level convention proposed by Jeremy Howard (Answer.AI) in September 2024: a plain-text index at a site's root, <code>/llms.txt</code>, pointing a model at the pages worth reading and offering markdown versions of them so it does not have to parse HTML. It answers a real, narrow question: context windows are too small for a whole site, so a curated reading list helps a model find the right pages before it reads anything. It carries no hash, no integrity check, and makes no claim about what happens after those pages are fetched. KNOBE sits downstream of that moment rather than upstream of it: it does not index a site, it travels with one document wherever that document is copied, pasted, summarized, or ingested, and it can be checked for tampering after the fact. llms.txt is a reading list; KNOBE is a seal. The two compose rather than compete: a site's llms.txt could point at sealed KNOBE files instead of plain markdown, so a model finds the right document and that document still carries its own verifiable terms once found. Both are plain text, both avoid a server to read, and both bet that a small convention beats a platform; llms.txt already has real adoption, through the fast.ai and Answer.AI network and a growing directory of sites, worth studying for how a lightweight text convention spreads by attaching itself to an existing community rather than building one from zero.</p>
+    <div class="defer"><span class="dlabel">Defer to llms.txt</span>For helping a model find the right pages on a site before it reads any of them.</div>
+
     <h2>Summary</h2>
     <table class="rw-table"><caption>Related standards and how KNOBE differs from each</caption>
       <thead>
@@ -208,6 +212,7 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
         <tr><th scope="row">BagIt</th><td>Checksummed file packaging</td><td>Sealed structured context, not just file fixity</td><td>Archival storage and transfer</td></tr>
         <tr><th scope="row">Dublin Core</th><td>Shared field names</td><td>Tamper evidence, obligations, survival</td><td>Descriptive naming (map to it)</td></tr>
         <tr><th scope="row">Knowledge graphs</th><td>Linked knowledge in place</td><td>The node's passport when it exits</td><td>Inside one platform</td></tr>
+        <tr><th scope="row">llms.txt</th><td>Helping a model find the right pages</td><td>Travels with one document, verifiable after the fact</td><td>Site-level discovery, before reading</td></tr>
       </tbody>
     </table>
 
