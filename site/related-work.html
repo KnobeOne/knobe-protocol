@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>KNOBE — Related work</title>
-<meta name="description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, and llms.txt: where it complements them, where it differs, and when to use them instead.">
+<meta name="description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, llms.txt, and JSON-LD/the semantic web: where it complements them, where it differs, and when to use them instead.">
 <style>
 :root{
   --ink:#1a2820;--ink-soft:#3d5447;--ink-faint:#6b8276;
@@ -92,11 +92,11 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="KNOBE Protocol">
 <meta property="og:title" content="KNOBE — Related work">
-<meta property="og:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, and llms.txt: where it complements them, where it differs, and when to use them instead.">
+<meta property="og:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, llms.txt, and JSON-LD/the semantic web: where it complements them, where it differs, and when to use them instead.">
 <meta property="og:url" content="https://knobe.org/related-work">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KNOBE — Related work">
-<meta name="twitter:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, and llms.txt: where it complements them, where it differs, and when to use them instead.">
+<meta name="twitter:description" content="How KNOBE relates to Git, C2PA, Verifiable Credentials, W3C PROV, RO-Crate, BagIt, Dublin Core, knowledge graphs, llms.txt, and JSON-LD/the semantic web: where it complements them, where it differs, and when to use them instead.">
 </head>
 <body>
 <a href="#main" class="skip">Skip to content</a>
@@ -191,6 +191,12 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
     <h2>Knowledge graphs</h2>
     <p>A knowledge graph is a <strong>centralized representation queried in place</strong>, powerful for linking and inference inside a system you control. KNOBE is what a node carries <em>when it leaves the graph</em>. The two are complementary by construction: a graph can ingest KNOBEs (their payloads are structured JSON) and can emit KNOBEs when knowledge exits its boundary. If your knowledge never leaves your platform, you may not need KNOBE. Much of it does.</p>
 
+    <h2>JSON-LD and the semantic web</h2>
+    <p>The semantic web, in Tim Berners-Lee's original "Web 3.0" sense, is a vision of machine-readable meaning: RDF triples, shared ontologies, data that link across systems without a central index. JSON-LD is its practical serialization, plain JSON with an added <code>@context</code> that maps keys to shared vocabulary terms so a graph database or reasoner can treat the file as linked data rather than opaque JSON. RO-Crate, above, builds on exactly this: a JSON-LD manifest aimed at repositories and machine actionability.</p>
+    <p>KNOBE's payload is plain JSON, not JSON-LD, and the gap is deliberate. The <a href="/spec" class="inline">canonical hash rule</a> (spec &sect;5) is already a bespoke departure from the general-purpose JSON canonicalization standard, RFC 8785 (JCS): keys sorted at every nesting depth, Unicode NFC normalization of keys and string values, and every numeric payload value written as a JSON string so that <code>json.dumps(1.0)</code> in Python and <code>JSON.stringify(1.0)</code> in JavaScript can never diverge. JCS does not perform NFC normalization and does not resolve that numeric-formatting gap; KNOBE needed both, so it wrote its own rule instead of adopting JCS wholesale. JSON-LD's own canonicalization, RDF Dataset Canonicalization (formerly URDNA2015, now RDFC-1.0), is heavier again: blank-node labeling, N-Quads serialization, graph isomorphism. Adopting it would trade away three things the spec treats as load-bearing: a reference verifier that stays inside Python's standard library with no external dependency, a hash rule simple enough for a single implementer to build a conforming verifier from the spec text alone (the <a href="/implementations" class="inline">Go implementation</a> is the case in point), and no implicit network dependency, since resolving a real <code>@context</code> is often a remote fetch, which cuts against verifying a file with nothing but a text editor and a hash function.</p>
+    <p>None of that closes the door on linked data; the spec leaves an explicit hallway open. Unrecognized payload fields must be preserved and must not fail verification (spec &sect;4.3), so a namespaced extension block, <code>semantic:context</code>, <code>semantic:type</code>, <code>semantic:sameAs</code>, can carry JSON-LD-shaped terms inside a KNOBE payload today. KNOBE's own canonicalization treats those keys like any other JSON keys: sorted, NFC-normalized, hashed, with no RDF-specific handling required. A separate JSON-LD processor can pick that block up downstream for its own graph work; KNOBE's seal does not need to understand RDF for the extension to travel intact and verifiably. The same hallway is how <code>identity_status: "signed"</code>, a forward placeholder in the current spec, and <a href="/threat-model" class="inline">ledger anchoring</a> reach toward the other sense of "Web3", decentralized identity and timestamp anchoring, without requiring a blockchain or a DID resolver to use KNOBE at all. Both are optional composition points, not dependencies.</p>
+    <div class="defer"><span class="dlabel">Defer to JSON-LD / RDF</span>When you need standards-based linked data, queryable across many systems. Carry that data inside a KNOBE's namespaced extension fields if the object also needs to travel intact and verifiable outside the graph.</div>
+
     <h2>Metadata and front-matter</h2>
     <p>Front-matter metadata is the <em>content</em> of the solution; KNOBE's contribution is the <strong>transport guarantee</strong>. YAML front-matter alone is silently editable, routinely stripped, and carries no tamper evidence. KNOBE keeps that metadata attached and verifiable: self-contained, hash-sealed, with defined <a href="/spec" class="inline">verification semantics</a>, published <a href="/test-vectors/" class="inline">test vectors</a>, and graceful degradation to readable text. If plain front-matter meets your needs, use it; KNOBE's YAML layer is deliberately compatible with that practice, so the upgrade path is short.</p>
 
@@ -213,6 +219,7 @@ caption{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hi
         <tr><th scope="row">Dublin Core</th><td>Shared field names</td><td>Tamper evidence, obligations, survival</td><td>Descriptive naming (map to it)</td></tr>
         <tr><th scope="row">Knowledge graphs</th><td>Linked knowledge in place</td><td>The node's passport when it exits</td><td>Inside one platform</td></tr>
         <tr><th scope="row">llms.txt</th><td>Helping a model find the right pages</td><td>Travels with one document, verifiable after the fact</td><td>Site-level discovery, before reading</td></tr>
+        <tr><th scope="row">JSON-LD / RDF</th><td>Standards-based linked data</td><td>Bespoke, dependency-free, network-free canonical hash</td><td>Cross-system linked-data queries</td></tr>
       </tbody>
     </table>
 
