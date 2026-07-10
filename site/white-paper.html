@@ -98,6 +98,26 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
 .skip{position:absolute;left:-9999px;top:0;background:var(--moss-deep);color:var(--paper);
   font-family:-apple-system,system-ui,sans-serif;font-size:.85rem;padding:10px 16px;border-radius:0 0 4px 0;z-index:100}
 .skip:focus{left:0}
+
+/* ---- print: clean citation PDF (nav/footer/forward chrome removed; hash bar kept) ---- */
+@media print{
+  @page{margin:22mm 18mm}
+  nav,.skip,.wp-bar-links,.fwd,footer{display:none !important}
+  body{background:#fff;color:#111;font-size:11pt;line-height:1.5}
+  .wrap{max-width:none;margin:0;padding:0}
+  .wp-bar{background:none;border-bottom:1px solid #999;padding:0 0 8px;margin-bottom:6px}
+  .wp-bar .inner{max-width:none;padding:0}
+  .wp-bar-label,.wp-bar-hash{color:#333}
+  main{padding:14px 0 0}
+  h1{font-size:18pt}
+  h2{border-top:1px solid #bbb;margin-top:22px;break-after:avoid}
+  h3{break-after:avoid}
+  p,li{orphans:3;widows:3}
+  pre,.wp-aphorism,li,figure{break-inside:avoid}
+  code,pre{background:#f2f2f2}
+  pre{border-left:2px solid #999}
+  a{color:#111}
+}
 </style>
 </head>
 <body>
