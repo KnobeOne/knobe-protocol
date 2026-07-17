@@ -57,7 +57,8 @@ code{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.88em;backgrou
 .dl-hash{font-family:'SF Mono',ui-monospace,Menlo,monospace;font-size:.72rem;color:var(--ink-faint);margin-top:6px}
 .dl-btn{font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;font-weight:500;text-decoration:none;padding:9px 18px;border-radius:3px;border:1px solid var(--line);color:var(--ink-soft);background:transparent;white-space:nowrap;transition:all .15s;flex-shrink:0}
 .dl-btn:hover{border-color:var(--moss);color:var(--moss)}
-@media(max-width:560px){.dl-item{grid-template-columns:1fr}.dl-btn{align-self:start;width:fit-content}}
+.dl-btns{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+@media(max-width:560px){.dl-item{grid-template-columns:1fr}.dl-btn{align-self:start;width:fit-content}.dl-btns{justify-content:flex-start}}
 
 footer{border-top:1px solid var(--line);margin-top:40px;padding:34px 0 60px;font-family:-apple-system,system-ui,sans-serif;font-size:.82rem;color:var(--ink-faint)}
 footer .frow{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
@@ -160,7 +161,10 @@ footer .fclaim{font-family:Georgia,serif;font-style:italic;color:var(--moss-deep
           <p class="dl-desc">KNOBE Protocol v1: the full argument and specification. Human-readable body; sealed payload carries provenance, fidelity limits, and integrity hash.</p>
           <div class="dl-hash">payload_hash: 2120d38329e1ab22…</div>
         </div>
-        <a href="/knobe-v1-white-paper.knobe.md" class="dl-btn" download>↓ .knobe.md</a>
+        <div class="dl-btns">
+          <a href="/knobe-v1-white-paper.knobe.md" class="dl-btn" download>↓ .knobe.md</a>
+          <a href="/knobe-v1-white-paper.pdf" class="dl-btn" download>↓ PDF</a>
+        </div>
       </div>
       <div class="dl-item">
         <div class="dl-meta">
