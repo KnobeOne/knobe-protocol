@@ -17,6 +17,7 @@ __pycache__/
 *.pdf
 # Exceptions: curated presentation PDFs for the public site
 !site/KNOBE-Technical-Intro-Deck.pdf
+!site/knobe-v1-white-paper.pdf
 *.docx
 *.xlsx
 *.csv
