@@ -1,5 +1,11 @@
 # The signet: continuity-of-authorship signatures for KNOBE files
 
+Status: DEFERRED INDEFINITELY as of 2026-08-28 under
+docs/repositioning-2026.md. Person-bound key continuity, even opt-in, sits
+on the wrong side of the artifact-level-not-person-level principle for the
+education context this was designed for. The charter remains as a design
+record; no build proceeds under current doctrine. Original status follows.
+
 Status: design charter, non-normative. Nothing here changes KNOBE Protocol v1;
 everything rides on ordinary payload fields, which the specification requires
 verifiers to preserve (spec §4.3). The specification reserves
