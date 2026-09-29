@@ -827,17 +827,19 @@ body {
 }
 
 .nav-btn.back {
-  background: transparent;
-  border: 1px solid var(--input-border);
-  color: var(--text-muted);
+  background: rgba(20, 24, 16, 0.72);
+  border: 1px solid var(--text-secondary);
+  color: var(--text-secondary);
   font-size: 0.9rem;
   padding: 10px 20px;
 }
 .nav-btn.back:hover {
-  border-color: var(--text-secondary);
-  color: var(--text-secondary);
-  background: transparent;
+  border-color: var(--sapwood-glow);
+  color: var(--text-primary);
+  background: rgba(20, 24, 16, 0.9);
 }
+/* Nav buttons must be reachable immediately — exempt from the staggered reveal */
+.nav-row.fade-in { opacity: 1 !important; transform: none !important; animation: none !important; }
 </style>
 <style id="grove-bg-images">
 #s-entry {
@@ -958,9 +960,10 @@ body {
 <!-- Back to main site -->
 <a id="grove-back" href="/">← knobe.org</a>
 
-<!-- Audio: no track loaded. Drop a file at assets/grove-theme.mp3 and add
-     <source src="assets/grove-theme.mp3" type="audio/mpeg"> below to re-enable. -->
-<audio id="grove-audio" loop preload="none"></audio>
+<!-- Audio: grove-theme.mp3 in assets/. Autoplays on entry (Enter click = user gesture); toggle via the speaker control. -->
+<audio id="grove-audio" loop preload="none">
+  <source src="assets/grove-theme.mp3" type="audio/mpeg">
+</audio>
 
 <!-- Progress bar -->
 <div id="progress-bar" style="width: 0%"></div>
@@ -1018,7 +1021,7 @@ body {
   <p class="narrative fade-in">They predate the printing press. They were already ancient when the settlers named the continent.</p>
   <p class="narrative fade-in">They remember everything.</p>
   <p class="narrative fade-in">Do you?</p>
-  <p class="narrative fade-in">The grove is curious about what you are carrying. Before you go any further, tell us what you are working on.</p>
+  <p class="narrative fade-in">The grove is curious about what you're making. Before you go any further, tell us about the work you keep returning to.</p>
   <p class="narrative fade-in emphasis">Not a summary written for a grade. Something true about what you are actually trying to make.</p>
 
   <div class="question-block fade-in">
@@ -1043,7 +1046,7 @@ body {
   <h1 class="section-title fade-in">First Impressions</h1>
   <div class="section-subtitle fade-in">Visitor Center</div>
 
-  <p class="narrative fade-in">Welcome, <span class="player-name"></span>. Before you enter the grove, we'd like to know what you already carry about us.</p>
+  <p class="narrative fade-in">Welcome, <span class="player-name"></span>. Before you enter the grove, we'd like to hear what you already know about us.</p>
 
   <div class="question-block fade-in">
     <div class="question-label">Q2 · Optional</div>
@@ -1104,16 +1107,30 @@ body {
   <p class="narrative fade-in">But it does one thing nothing else in the forest can do.</p>
   <p class="narrative fade-in">Fire is not our enemy. We evolved with it. The bark, two to three feet thick at the base of the oldest trees, contains almost no resin. It does not burn. It chars. It turns the flame. While other trees fall, we stand. Fire clears the competition, opens the cones, feeds the soil. Our protection was not built to prevent fire. It was built to survive it, and to use it.</p>
   <p class="narrative fade-in">Every scar on this bark is a record of what was tested and held.</p>
-  <p class="narrative fade-in">Before we go deeper into the living layers beneath, the bark asks you something about the work you described.</p>
+  <p class="narrative fade-in">Before we go deeper into the living layers beneath, the bark asks you to design its own. You are shaping the protective layer of your project before the project itself is finished: deciding what it guards, where it is still thin, and how it will meet the fires ahead.</p>
 
   <div class="question-block fade-in">
     <div class="question-label">Q3</div>
-    <div class="question-text">Where do you imagine this work as planned could be vulnerable to an honest challenge? Where is the bark thinnest?</div>
-    <textarea id="q3" data-field="breakpoint" placeholder="Every living thing has a place where the bark is thinner. The grove is not judging."></textarea>
-    <div class="knobe-field-indicator">→ <span>KNOBE field:</span> Breakpoint / Acknowledged Vulnerability</div>
+    <div class="question-text">What is this work deliberately <em>not</em> trying to do? Naming the edges, the questions you are leaving for another day, is how bark decides what to protect.</div>
+    <textarea id="q3" data-field="bounded_focus" placeholder="The boundary is not a weakness. It is the shape of the protection."></textarea>
+    <div class="knobe-field-indicator">→ <span>KNOBE field:</span> Bounded Focus / Scope</div>
   </div>
 
-  <p class="narrative fade-in">That honesty is itself a form of protection. A system that can name its own limits is harder to break than one that cannot.</p>
+  <div class="question-block fade-in">
+    <div class="question-label">Q3 · continued</div>
+    <div class="question-text">Where is the bark still thin? Name the limits and feasibility constraints you can already see: what might not hold under weight, and what you are not yet sure is possible.</div>
+    <textarea id="q3b" data-field="breakpoint" placeholder="Every living thing has a place where the bark is thinner. The grove is not judging."></textarea>
+    <div class="knobe-field-indicator">→ <span>KNOBE field:</span> Known Limits / Feasibility</div>
+  </div>
+
+  <div class="question-block fade-in">
+    <div class="question-label">Q3 · continued</div>
+    <div class="question-text">The bark does not fear fire; it meets it and keeps the scar as a record. What challenge do you expect this work to face, and how will it survive that fire and record what it learned?</div>
+    <textarea id="q3c" data-field="resilience" placeholder="What tests are coming, and how will the work be stronger for having met them?"></textarea>
+    <div class="knobe-field-indicator">→ <span>KNOBE field:</span> Resilience / Recorded Adaptation</div>
+  </div>
+
+  <p class="narrative fade-in">That clarity is itself a form of protection. A system that can name its own limits, and plan for the fires it will meet, is harder to break than one that cannot.</p>
   <p class="narrative fade-in">The bark seals what lies beneath. In a moment, you will see what it protects. But first, a warning about what happens when it is taken away.</p>
 
   <div class="grove-key fade-in">
@@ -1213,7 +1230,7 @@ body {
 
   <div class="question-block fade-in">
     <div class="question-label">Q6</div>
-    <div class="question-text">Who or what is helping you carry or co-create this work? Key human supporters and collaborators, or machine tools such as productivity apps or AI models?</div>
+    <div class="question-text">Who or what is helping you make or co-create this work? Key human supporters and collaborators, or machine tools such as productivity apps or AI models?</div>
     <textarea id="q6" data-field="collaborators" placeholder="Human and machine collaborators..."></textarea>
     <div class="knobe-field-indicator">→ <span>KNOBE field:</span> Collaborators / Tools</div>
   </div>
@@ -1579,7 +1596,9 @@ function updateKnobe() {
   const fields = [
     { label: 'project_description:', value: a.project_description, append: a.closing_vision ? `\n\n[closing vision] ${a.closing_vision}` : '' },
     { label: 'prior_knowledge:', value: a.prior_knowledge },
+    { label: 'bounded_focus:', value: a.bounded_focus },
     { label: 'breakpoint:', value: a.breakpoint },
+    { label: 'resilience:', value: a.resilience },
     { label: 'invisible_labor:', value: a.invisible_labor },
     { label: 'dependencies:', value: a.dependencies },
     { label: 'collaborators:', value: a.collaborators },
@@ -1729,7 +1748,7 @@ function generateKnobeMd() {
 
   // -- Threshold --
   md += `## 1. Threshold\n\n`;
-  md += `The grove asked what you are carrying: not a summary written for a grade, but something true about what you are actually trying to make.\n\n`;
+  md += `The grove asked about the work you keep returning to: not a summary written for a grade, but something true about what you are actually trying to make.\n\n`;
   md += `**Project Description:** ${a.project_description || '\u2014'}\n\n`;
 
   // -- First Impressions --
@@ -1743,8 +1762,10 @@ function generateKnobeMd() {
 
   // -- The Bark --
   md += `## 4. The Bark: Protection\n\n`;
-  md += `The bark is dead tissue two to three feet thick. It does not burn. It chars, turns the flame, and lets the tree use fire rather than fear it. Every scar is a record of what was tested and held.\n\n`;
-  md += `**Breakpoint / Vulnerability:** ${a.breakpoint || '\u2014'}\n\n`;
+  md += `The bark is dead tissue two to three feet thick. It does not burn. It chars, turns the flame, and lets the tree use fire rather than fear it. Every scar is a record of what was tested and held. Here you design your own bark: what the work protects, where it is still thin, and how it will meet the fires ahead.\n\n`;
+  md += `**Bounded Focus / Scope:** ${a.bounded_focus || '\u2014'}\n\n`;
+  md += `**Known Limits / Feasibility:** ${a.breakpoint || '\u2014'}\n\n`;
+  md += `**Resilience / Recorded Adaptation:** ${a.resilience || '\u2014'}\n\n`;
 
   // -- Mother of the Forest --
   md += `## 5. Mother of the Forest\n\n`;
@@ -1801,7 +1822,9 @@ function generateKnobeMd() {
     fields: {
       project_description: a.project_description || '',
       prior_knowledge: a.prior_knowledge || '',
+      bounded_focus: a.bounded_focus || '',
       breakpoint: a.breakpoint || '',
+      resilience: a.resilience || '',
       invisible_labor: a.invisible_labor || '',
       dependencies: a.dependencies || '',
       collaborators: a.collaborators || '',
@@ -1972,7 +1995,7 @@ updateKnobe();
     // Build popup HTML
     var popup = document.createElement('div');
     popup.id = 'sapwood-popup';
-    popup.innerHTML = '<div class="sp-header"><div class="sp-sup">The Magic Grove · Sapwood Study</div><div class="sp-title">The Invisible Layer</div><div class="sp-sub">The layer you cannot see from outside the tree, and yet without it, nothing outside exists.</div></div><div class="sp-tabs"><button class="sp-tab active" onclick="spGo(0)">Overview</button><button class="sp-tab" onclick="spGo(1)">Sap Flow</button><button class="sp-tab" onclick="spGo(2)">Molecular</button><button class="sp-tab" onclick="spGo(3)">Genetic</button></div><div class="sp-body"><div class="sp-beat active"><p class="sp-prose">Between the heartwood and the bark lies the sapwood, a living sleeve no thicker than your hand, and the only part of the trunk that is truly alive.</p><p class="sp-prose2">Every nutrient the tree has ever absorbed moves through here, in a continuous flow that never stops while the tree lives.</p><div class="sp-quote">This is the layer you can never see from outside the tree. And yet without it, nothing outside exists.</div><div class="sp-close-row"><button class="sp-close-btn" onclick="spGo(1)">Begin →</button></div></div><div class="sp-beat"><p class="sp-prose">Right now, sap is moving upward through the xylem. Pulled by the sky, pushed by the roots.</p><canvas id="sp-sap-canvas" class="sp-canvas"></canvas><div class="sp-close-row"><button class="sp-close-btn" onclick="spGo(2)">What's in the sap? →</button></div></div><div class="sp-beat"><p class="sp-prose">If you could look through a microscope at a droplet of sap, you would find a solution more complex than blood.</p><canvas id="sp-mol-canvas" class="sp-canvas"></canvas><div class="sp-close-row"><button class="sp-close-btn" onclick="spGo(3)">Go deeper →</button></div></div><div class="sp-beat"><p class="sp-prose" style="text-align:center;">Beneath the chemistry is code. The sap exists because genes are expressed, proteins fold, channels open.</p><canvas id="sp-gene-canvas" class="sp-canvas" style="height:220px;"></canvas></div></div><div class="sp-close-row" style="border-top:1px solid rgba(80,120,80,0.15);margin:0;padding:1.2rem;"><button class="sp-close-btn" onclick="closeSapwoodPopup()">Close ×</button></div>';
+    popup.innerHTML = '<div class="sp-header"><div class="sp-sup">The Magic Grove · Sapwood Study</div><div class="sp-title">The Invisible Layer</div><div class="sp-sub">The layer you cannot see from outside the tree, and yet without it, nothing outside exists.</div></div><div class="sp-tabs"><button class="sp-tab active" onclick="spGo(0)">Overview</button><button class="sp-tab" onclick="spGo(1)">Sap Flow</button><button class="sp-tab" onclick="spGo(2)">Molecular</button><button class="sp-tab" onclick="spGo(3)">Genetic</button></div><div class="sp-body"><div class="sp-beat active"><p class="sp-prose">Between the heartwood and the bark lies the sapwood, a living sleeve no thicker than your hand, and the only part of the trunk that is truly alive.</p><p class="sp-prose2">Every nutrient the tree has ever absorbed moves through here, in a continuous flow that never stops while the tree lives.</p><div class="sp-quote">This is the layer you can never see from outside the tree. And yet without it, nothing outside exists.</div><div class="sp-close-row"><button class="sp-close-btn" onclick="spGo(1)">Begin →</button></div></div><div class="sp-beat"><p class="sp-prose">Right now, sap is moving upward through the xylem. Pulled by the sky, pushed by the roots.</p><canvas id="sp-sap-canvas" class="sp-canvas"></canvas><div class="sp-close-row"><button class="sp-close-btn" onclick="spGo(2)">What\'s in the sap? →</button></div></div><div class="sp-beat"><p class="sp-prose">If you could look through a microscope at a droplet of sap, you would find a solution more complex than blood.</p><canvas id="sp-mol-canvas" class="sp-canvas"></canvas><div class="sp-close-row"><button class="sp-close-btn" onclick="spGo(3)">Go deeper →</button></div></div><div class="sp-beat"><p class="sp-prose" style="text-align:center;">Beneath the chemistry is code. The sap exists because genes are expressed, proteins fold, channels open.</p><canvas id="sp-gene-canvas" class="sp-canvas" style="height:220px;"></canvas></div></div><div class="sp-close-row" style="border-top:1px solid rgba(80,120,80,0.15);margin:0;padding:1.2rem;"><button class="sp-close-btn" onclick="closeSapwoodPopup()">Close ×</button></div>';
     document.body.appendChild(popup);
 
     // Inject trigger button into the sapwood section nav area
