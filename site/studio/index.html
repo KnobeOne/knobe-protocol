@@ -442,7 +442,7 @@ footer a:hover{color:var(--moss)}
             <span class="tdesc">A condensed summary sealed in quarantine: an orientation aid, not the policy, until review clears it.</span></label>
           <label class="tpl"><input type="radio" name="tpl" value="blank" checked>
             <span class="tname">Blank</span>
-            <span class="tdesc">Engine defaults only. A single paragraph and a Seal click produce a valid object.</span></label>
+            <span class="tdesc">Engine defaults for every field but the license, which you choose. A paragraph, a license and a Seal click produce a valid object.</span></label>
         </div>
       </fieldset>
 
@@ -460,6 +460,20 @@ footer a:hover{color:var(--moss)}
         <label for="cAuthor">Author</label>
         <input type="text" id="cAuthor" autocomplete="name">
         <div class="hint">Recorded in the sealed attribution as source 1.</div>
+      </div>
+      <div class="field">
+        <label for="cLicense">License</label>
+        <input type="text" id="cLicense" list="licenseList" autocomplete="off" required>
+        <datalist id="licenseList">
+          <option value="CC BY 4.0"></option>
+          <option value="CC BY-SA 4.0"></option>
+          <option value="CC BY-NC 4.0"></option>
+          <option value="CC BY-ND 4.0"></option>
+          <option value="CC0 1.0"></option>
+          <option value="All rights reserved"></option>
+          <option value="MIT"></option>
+        </datalist>
+        <div class="hint">Required. Choose from the list or type your own, such as CC BY 4.0, CC0 1.0 or All rights reserved. A template or journey step may fill one in; check it before you seal. Studio never seals without a license.</div>
       </div>
 
       <details class="acc" id="accFields">
@@ -489,20 +503,6 @@ footer a:hover{color:var(--moss)}
             </div>
           </div>
           <div class="row2">
-            <div class="field">
-              <label for="cLicense">License</label>
-              <input type="text" id="cLicense" list="licenseList" autocomplete="off">
-              <datalist id="licenseList">
-                <option value="CC BY 4.0"></option>
-                <option value="CC BY-SA 4.0"></option>
-                <option value="CC BY-NC 4.0"></option>
-                <option value="CC BY-ND 4.0"></option>
-                <option value="CC0 1.0"></option>
-                <option value="All rights reserved"></option>
-                <option value="MIT"></option>
-              </datalist>
-              <div class="hint">Blank uses the engine default, CC BY 4.0.</div>
-            </div>
             <div class="field">
               <label for="cPrivacy">Privacy level</label>
               <select id="cPrivacy">
@@ -698,8 +698,8 @@ footer a:hover{color:var(--moss)}
         <div class="row2">
           <div class="field">
             <label for="tLicense">License</label>
-            <input type="text" id="tLicense" list="licenseList" autocomplete="off">
-            <div class="hint">Prefilled from the original. The original's license governs whether a derivative is authorized; the seal does not grant it.</div>
+            <input type="text" id="tLicense" list="licenseList" autocomplete="off" required>
+            <div class="hint">Required. Prefilled from the original. The original's license governs whether a derivative is authorized; the seal does not grant it.</div>
           </div>
           <div class="field">
             <label for="tPrivacy">Privacy level</label>
@@ -773,6 +773,13 @@ footer a:hover{color:var(--moss)}
         <div class="field">
           <label for="jmInstructor">Instructor</label>
           <input type="text" id="jmInstructor" autocomplete="name">
+        </div>
+      </div>
+      <div class="row2">
+        <div class="field">
+          <label for="jmLicense">License</label>
+          <input type="text" id="jmLicense" list="licenseList" autocomplete="off" required>
+          <div class="hint">Required. Choose from the list or type your own, such as CC BY 4.0, CC0 1.0 or All rights reserved. Loading a journey for editing fills in its license. Studio records the license you choose; it never picks one for you.</div>
         </div>
       </div>
 
@@ -861,6 +868,11 @@ footer a:hover{color:var(--moss)}
               <label for="chRcptName">Who is attesting</label>
               <input type="text" id="chRcptName" autocomplete="name">
               <div class="hint">Recorded as the receipt's attribution, role cohort_verifier.</div>
+            </div>
+            <div class="field">
+              <label for="chRcptLicense">License</label>
+              <input type="text" id="chRcptLicense" list="licenseList" autocomplete="off" required>
+              <div class="hint">Required. Choose from the list or type your own, such as CC BY 4.0, CC0 1.0 or All rights reserved. Studio records the license you choose; it never picks one for you.</div>
             </div>
             <div class="btnrow"><button type="button" class="btn" id="chRcptSealBtn">Seal the receipt</button></div>
             <div class="errmsg" id="chRcptErr" role="alert" hidden></div>
@@ -978,8 +990,8 @@ footer a:hover{color:var(--moss)}
           </div>
           <div class="field">
             <label for="aLicense">License</label>
-            <input type="text" id="aLicense" list="licenseList" autocomplete="off">
-            <div class="hint">Prefilled from the source. The source's license governs whether an adaptation is authorized; the seal does not grant it.</div>
+            <input type="text" id="aLicense" list="licenseList" autocomplete="off" required>
+            <div class="hint">Required. Prefilled from the source. The source's license governs whether an adaptation is authorized; the seal does not grant it.</div>
           </div>
         </div>
 
@@ -1802,7 +1814,7 @@ const scheduleJmPreview = debounce(() => { $('jmPreview').textContent = buildJou
 $('jmAddStep').addEventListener('click', () => { jm.steps.push(jmNewStep()); renderSteps(); scheduleJmPreview(); jmAnnounce('Added step ' + jm.steps.length + '.'); const b = $('jmStep' + (jm.steps.length - 1) + 'Remove'); if (b) b.focus(); });
 $('jmResetBtn').addEventListener('click', () => {
   jm.steps = []; jmLoadedFrom = null; jmResult = null;
-  ['jmCourse','jmTerm','jmTitle','jmInstructor'].forEach(id => { $(id).value = ''; });
+  ['jmCourse','jmTerm','jmTitle','jmInstructor','jmLicense'].forEach(id => { $(id).value = ''; });
   $('jmRevisionNote').hidden = true; $('jmRes').hidden = true; $('jmErr').hidden = true;
   renderSteps(); scheduleJmPreview();
 });
@@ -1839,7 +1851,7 @@ $('jmSealBtn').addEventListener('click', async () => {
       summary: 'Journey specification: ' + jm.steps.length + ' steps for ' + course + '.',
       content_type: 'seed',
       created_date: localToday(),
-      license: 'All rights reserved',
+      license: line($('jmLicense').value),
       privacy_level: 'internal',
       quarantine_status: 'trusted',
       attribution: {
@@ -1902,6 +1914,7 @@ async function jmLoad(text) {
   $('jmTitle').value = typeof j.title === 'string' ? j.title : '';
   const src = report.payload.attribution && report.payload.attribution.sources && report.payload.attribution.sources[0];
   $('jmInstructor').value = src && typeof src.author === 'string' ? src.author : '';
+  $('jmLicense').value = typeof report.payload.license === 'string' ? report.payload.license : '';
   jm.steps = j.steps.map(s => ({
     title: typeof s.title === 'string' ? s.title : '',
     sealer: JSEALERS[s.sealer] ? s.sealer : 'student',
@@ -2297,7 +2310,7 @@ function chReceiptRows() {
   return rows;
 }
 
-function buildCohortReceipt(sealerName) {
+function buildCohortReceipt(sealerName, license) {
   const rows = chReceiptRows();
   const today = localToday();
   const ok = rows.filter(r => r.integrity === 'verified' || r.integrity === 'verified-body-modified').length;
@@ -2327,7 +2340,7 @@ function buildCohortReceipt(sealerName) {
     summary: 'Sealed record of a cohort integrity check: ' + rows.length + ' file' + (rows.length === 1 ? '' : 's') + ', ' + ok + ' verified, ' + bad + ' failed or unreadable.',
     content_type: 'collection',
     created_date: today,
-    license: 'All rights reserved',
+    license,
     privacy_level: 'internal',
     quarantine_status: 'trusted',
     attribution: {
@@ -2384,7 +2397,7 @@ $('chRcptSealBtn').addEventListener('click', async () => {
     if (!chRows.length) throw new Error('There is nothing to attest; run a check first.');
     const name = line($('chRcptName').value);
     if (!name) throw new Error('Name who is attesting; the credit is part of the record.');
-    const { fields, body } = buildCohortReceipt(name);
+    const { fields, body } = buildCohortReceipt(name, line($('chRcptLicense').value));
     chRcptResult = await createKnobe({ fields, body });
     $('chRcptResText').textContent = 'Sealed. Self-check: ' + chRcptResult.report.state + ' · ' + chRcptResult.report.conformance + '.';
     $('chRcptResHash').textContent = 'payload_hash ' + chRcptResult.payloadHash;

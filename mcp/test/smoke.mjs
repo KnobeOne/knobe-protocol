@@ -61,6 +61,9 @@ const tools = await client.listTools();
 const names = tools.tools.map((t) => t.name).sort();
 ok("five tools registered", JSON.stringify(names) ===
   JSON.stringify(["knobe_create", "knobe_permits", "knobe_read", "knobe_transform", "knobe_verify"]));
+ok("create and transform list license as a required input",
+  ["knobe_create", "knobe_transform"].every((n) =>
+    (tools.tools.find((t) => t.name === n).inputSchema.required || []).includes("license")));
 
 // --- knobe_verify across corpus states ---
 let r = await call("knobe_verify", { file_path: VEC("minimal-valid.knobe.md") });
@@ -129,12 +132,29 @@ ok("created file verifies as verified/valid", r.json().state === "verified" && r
   ok("spec_version injected via extra_fields was discarded", sealedPayload.spec_version === "1.0");
 }
 
-r = await call("knobe_create", { title: "x", summary: "y", output_path: outPath });
+r = await call("knobe_create", { title: "x", summary: "y", license: "CC BY 4.0", output_path: outPath });
 ok("create refuses to overwrite without overwrite: true",
   r.isError && r.blocks[0].includes("refusing to overwrite"));
 
-r = await call("knobe_create", { title: "Line one\nline two", summary: "s", body: "b" });
+r = await call("knobe_create", { title: "Line one\nline two", summary: "s", body: "b", license: "CC BY 4.0" });
 ok("newline in title is sanitized, file still seals", !r.isError && r.blocks[1].includes('title: "Line one line two"'));
+
+// --- license: required, never chosen by the server or the engine ---
+{
+  // Input validation may come back as an error result or a thrown error,
+  // depending on the SDK version; either way nothing is sealed.
+  let failed, text;
+  try {
+    r = await call("knobe_create", { title: "x", summary: "y", body: "b" });
+    failed = r.isError; text = r.blocks.join("\n");
+  } catch (e) {
+    failed = true; text = String(e.message);
+  }
+  ok("create without a license fails, naming the license", failed && /license/i.test(text));
+}
+r = await call("knobe_create", { title: "x", summary: "y", body: "b", license: "   " });
+ok("create with a blank license fails, naming the license",
+  r.isError && r.blocks[0].includes("a license is required"));
 
 // --- knobe_transform: chain from the created file ---
 const derivPath = join(tmp, "derivative.knobe.md");
@@ -144,6 +164,7 @@ r = await call("knobe_transform", {
   summary: "A compression derived through the MCP server.",
   content_type: "compression",
   body: "A one-line summary of the smoke test object.",
+  license: "CC BY 4.0",
   author: "Smoke Summarizer",
   output_path: derivPath,
 });
@@ -157,8 +178,13 @@ ok("transform seals a derivative", !r.isError && r.blocks[0].includes("sealed de
     payload.parents[payload.parents.length - 1].payload_hash === createdStored);
 }
 
-r = await call("knobe_transform", { source_path: VEC("payload-modified.knobe.md"), title: "x", summary: "y", body: "b" });
+r = await call("knobe_transform", { source_path: VEC("payload-modified.knobe.md"), title: "x", summary: "y", body: "b", license: "CC BY 4.0" });
 ok("transform refuses a broken original", r.isError && r.blocks[0].includes("unverified"));
+
+r = await call("knobe_transform", { source_path: outPath, title: "x", summary: "y", body: "b", license: "   " });
+ok("transform with a blank license fails, naming the original's license",
+  r.isError && r.blocks[0].includes("a license is required for the derivative")
+  && r.blocks[0].includes('"CC BY 4.0"'));
 
 // --- knobe_permits ---
 r = await call("knobe_permits", { file_path: SITE("knobe-research-interview.knobe.md"), action: "redistribute" });

@@ -921,12 +921,26 @@ function storedPayloadJSON(sealedPayload) {
   return canonicalize(sealedPayload);
 }
 
+/** Is this a declared license: a string with something other than whitespace? */
+const hasLicense = (v) => typeof v === "string" && v.trim() !== "";
+
+/** A payload's license for display: a string as itself (through safe()),
+ * anything else named by what it is, e.g. "(missing)" or "(not a string: number)". */
+function licenseShown(v) {
+  if (typeof v === "string") return safe(v, 120);
+  if (v === undefined) return "(missing)";
+  const type = v === null ? "null" : Array.isArray(v) ? "array"
+    : v instanceof KFloat || typeof v === "bigint" ? "number" : typeof v;
+  return `(not a string: ${type})`;
+}
+
 /**
  * Create a complete .knobe.md file.
  *
  * fields: payload fields. Required (defaults in parentheses if omitted):
  *   title, summary, content_type ("original"), created_date (today),
- *   license ("CC BY 4.0"), privacy_level ("public"),
+ *   license (no default: a non-blank string, sealed exactly as given;
+ *   createKnobe throws without one), privacy_level ("public"),
  *   quarantine_status ("quarantine"), attribution ({sources:[{author,contribution}]}).
  * body: markdown body (optional; if provided, body_hash is sealed in).
  *
@@ -936,6 +950,11 @@ function storedPayloadJSON(sealedPayload) {
  * fails its own Lens).
  */
 export async function createKnobe({ fields = {}, body = "", author = null } = {}) {
+  // The license is the author's declaration; the engine never supplies one.
+  if (!hasLicense(fields.license)) {
+    throw new Error('a license is required: declare one explicitly (for example "CC BY 4.0", '
+      + '"CC0 1.0" or "All rights reserved"); the engine does not choose one for you');
+  }
   const today = new Date().toISOString().slice(0, 10);
   const payload = {
     spec_version: "1.0",
@@ -943,7 +962,7 @@ export async function createKnobe({ fields = {}, body = "", author = null } = {}
     summary: fields.summary ?? "",
     content_type: fields.content_type ?? "original",
     created_date: fields.created_date ?? today,
-    license: fields.license ?? "CC BY 4.0",
+    license: fields.license,
     privacy_level: fields.privacy_level ?? "public",
     quarantine_status: fields.quarantine_status ?? "quarantine",
     identity_status: fields.identity_status ?? "declared",
@@ -995,11 +1014,21 @@ export async function createKnobe({ fields = {}, body = "", author = null } = {}
  * parents[{title, payload_hash}] lineage, a declared content_type for the
  * transformation, and the derivative's own body/payload.
  * The original MUST verify first — you cannot chain from a broken seal.
+ * The derivative's license MUST be declared in fields.license: it is not
+ * inherited from the original, whose license governs whether the derivative
+ * is authorized at all.
  */
 export async function transformKnobe(originalInput, { fields = {}, body = "", author = null } = {}) {
   const orig = await verify(originalInput);
   if (orig.state !== "verified" && orig.state !== "verified-body-modified") {
     throw new Error(`cannot derive from an unverified KNOBE (status: ${orig.state})`);
+  }
+  if (!hasLicense(fields.license)) {
+    const parentLicense = typeof orig.payload.license === "string"
+      ? `"${licenseShown(orig.payload.license)}"` : licenseShown(orig.payload.license);
+    throw new Error(`a license is required for the derivative: the original's sealed license is ${parentLicense}, `
+      + "and the original's license governs whether this derivative is authorized; declare the "
+      + "derivative's license explicitly (the engine does not inherit or choose one)");
   }
   const parentEntry = {
     title: typeof orig.payload.title === "string" ? orig.payload.title : "Untitled",
@@ -1027,8 +1056,9 @@ const DERIVATIVE_ACTIONS = new Set(["transform","adapt","remix","summarize","tra
  * so permits() never waves through distribution of "All rights reserved",
  * "Proprietary", or an unknown license string. Recognized-permissive (CC,
  * CC0 / public domain, common OSS) grant redistribution; a CC NoDerivatives
- * term blocks derivative works. This is deliberately conservative: a false
- * denial is safe, a false permit is not.
+ * term blocks derivative works. A permissive name that is negated ("Not in
+ * the public domain") grants nothing. This is deliberately conservative: a
+ * false denial is safe, a false permit is not.
  */
 function licensePosture(lic) {
   const L = (lic || "").trim();
@@ -1036,15 +1066,57 @@ function licensePosture(lic) {
   const U = L.toUpperCase();
   if (/ALL RIGHTS RESERVED|PROPRIETARY|CONFIDENTIAL/i.test(L) || U === "UNLICENSED")
     return { known: true, redistribute: false, derive: false, note: "rights reserved" };
+  if (negatesPermissiveName(L))
+    return { known: false, redistribute: false, derive: false, note: "negated license wording — no permission assumed" };
   if (/\bCC0\b/i.test(L) || /PUBLIC DOMAIN/i.test(L))
     return { known: true, redistribute: true, derive: true, note: "public domain / CC0" };
   if (/\bCC\b|CREATIVE ?COMMONS/i.test(L)) {
-    const nd = /\bND\b/i.test(L);
+    // ND (an underscore counts as a boundary), NoDerivatives, NoDerivs, Non-Derivative
+    const nd = /(?:^|[^A-Z0-9])ND(?![A-Z0-9])/i.test(L) || /NON?[\s_-]?DERIV/i.test(L);
     return { known: true, redistribute: true, derive: !nd, note: nd ? "CC NoDerivatives" : "Creative Commons" };
   }
   if (/\b(MIT|BSD|APACHE|ISC|MPL|L?GPL|AGPL|ZLIB|UNLICENSE)\b/i.test(L) && U !== "UNLICENSED")
     return { known: true, redistribute: true, derive: true, note: "permissive open-source license" };
   return { known: false, redistribute: false, derive: false, note: "unrecognized license — no permission assumed" };
+}
+
+// The permissive names licensePosture recognizes, and the words that negate
+// one when they come shortly before it in the same clause: "Not in the public
+// domain", "not licensed under Creative Commons", "isn't MIT". "no" and "non"
+// count only directly before the name ("no CC license", "non-CC"), so CC terms
+// such as NonCommercial or No Derivatives are never read as negations.
+const PERMISSIVE_NAMES = /\bCC0\b|PUBLIC DOMAIN|\bCC\b|CREATIVE ?COMMONS|\b(?:MIT|BSD|APACHE|ISC|MPL|L?GPL|AGPL|ZLIB|UNLICENSE)\b/gi;
+const NEGATION_WORDS = new Set(["not", "never", "nor", "without", "isnt", "arent", "cannot"]);
+const NEGATION_WINDOW = 4;   // words before a name in which a negation counts
+const WORD = /[\p{L}\p{N}'’]+/gu;
+
+/** Does the license text negate any permissive name it contains? Clauses
+ * split at . ; : ! ? and line breaks; a dot before a digit ("4.0") does not
+ * split, since a version number is not a clause boundary. Each clause is
+ * split into words once, so the check stays linear in the license's length. */
+function negatesPermissiveName(L) {
+  for (const clause of L.split(/[;:!?\r\n]|\.(?!\d)/)) {
+    const tokens = [...clause.matchAll(WORD)];
+    let t = 0;                                    // tokens[0..t) start before the name
+    for (const m of clause.matchAll(PERMISSIVE_NAMES)) {
+      while (t < tokens.length && tokens[t].index < m.index) t++;
+      // The last few words before the name. A word that runs into the name
+      // stops where the name starts: "nonpublic domain" gives "non".
+      const words = [];
+      for (let k = Math.max(0, t - NEGATION_WINDOW - 1); k < t; k++) {
+        const w = tokens[k][0].slice(0, m.index - tokens[k].index).toLowerCase();
+        for (const part of w.match(WORD) || []) words.push(part.replace(/^['’]+|['’]+$/g, ""));
+      }
+      const last = words.length - 1;
+      for (let i = Math.max(0, words.length - NEGATION_WINDOW); i <= last; i++) {
+        const w = words[i];
+        if (NEGATION_WORDS.has(w) || /n['’]t$/.test(w)) return true;      // not, isn't, doesn't ...
+        if ((w === "no" || w === "non") && i === last) return true;       // "no CC license", "non-CC"
+        if (w === "longer" && words[i - 1] === "no") return true;         // "no longer"
+      }
+    }
+  }
+  return false;
 }
 
 /**
@@ -1127,35 +1199,40 @@ export function permits(report, action) {
 
   // license — default-deny: cite the clause, and forbid distribution or
   // derivation the license does not actually grant (unknown = no permission).
+  // A missing or non-string license is evaluated as no license declared, never
+  // skipped, so it cannot permit more than a declared one.
   const lic = typeof p.license === "string" ? p.license : null;
-  if (lic !== null) {
-    const pos = licensePosture(lic);
-    if (DISTRIBUTION_ACTIONS.has(act) && !pos.redistribute) {
-      allowed = false;
-      basis.push({ field: "license", value: lic, effect: `${pos.note}: redistribution is not licensed` });
-    } else if (DERIVATIVE_ACTIONS.has(act) && !pos.derive) {
-      allowed = false;
-      basis.push({ field: "license", value: lic, effect: `${pos.note}: derivative works are not licensed` });
-    } else {
-      const U = lic.toUpperCase();
-      if (/\bBY\b/.test(U)) {
-        obligations.push(`license ${lic}: attribution to the sealed sources is required`);
-        if (allowed === true) allowed = "conditional";
-      }
-      if (/\bNC\b/.test(U)) {
-        obligations.push(`license ${lic}: commercial use is not licensed`);
-        if (allowed === true) allowed = "conditional";
-      }
-      if (/\bSA\b/.test(U)) {
-        obligations.push(`license ${lic}: derivatives must carry the same license`);
-        if (allowed === true) allowed = "conditional";
-      }
-      if (!pos.known) {
-        obligations.push(`license ${lic}: unrecognized — assume no permission beyond inspection`);
-        if (allowed === true) allowed = "conditional";
-      }
-      basis.push({ field: "license", value: lic, effect: "sealed license clause" });
+  const shown = lic ?? licenseShown(p.license);
+  const pos = licensePosture(lic);
+  if (DISTRIBUTION_ACTIONS.has(act) && !pos.redistribute) {
+    allowed = false;
+    basis.push({ field: "license", value: shown, effect: `${pos.note}: redistribution is not licensed` });
+  } else if (DERIVATIVE_ACTIONS.has(act) && !pos.derive) {
+    allowed = false;
+    basis.push({ field: "license", value: shown, effect: `${pos.note}: derivative works are not licensed` });
+  } else {
+    // Abbreviated or spelled-out terms; an underscore counts as a word boundary.
+    const U = (lic ?? "").toUpperCase();
+    if (/(?:^|[^A-Z0-9])(?:BY|ATTRIBUTION)(?![A-Z0-9])/.test(U)) {
+      obligations.push(`license ${lic}: attribution to the sealed sources is required`);
+      if (allowed === true) allowed = "conditional";
     }
+    if (/(?:^|[^A-Z0-9])NC(?![A-Z0-9])/.test(U) || /NON[\s_-]?COMMERCIAL/.test(U)) {
+      obligations.push(`license ${lic}: commercial use is not licensed`);
+      if (allowed === true) allowed = "conditional";
+    }
+    if (/(?:^|[^A-Z0-9])SA(?![A-Z0-9])/.test(U) || /SHARE[\s_-]?ALIKE/.test(U)) {
+      obligations.push(`license ${lic}: derivatives must carry the same license`);
+      if (allowed === true) allowed = "conditional";
+    }
+    if (!pos.known) {
+      obligations.push(lic === null
+        ? `license ${shown}: no license declared — assume no permission beyond inspection`
+        : `license ${lic}: unrecognized — assume no permission beyond inspection`);
+      if (allowed === true) allowed = "conditional";
+    }
+    basis.push({ field: "license", value: shown,
+      effect: lic === null ? "no license declared" : "sealed license clause" });
   }
 
   // Namespaced extension fields — surfaced verbatim; the caller must honor

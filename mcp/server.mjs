@@ -242,7 +242,8 @@ export async function buildServer() {
       .describe("Markdown body. When provided, its hash is sealed into the payload (body_hash), so later edits to the body are detectable."),
     content_type: z.string().optional()
       .describe("Canonical: original | synthesis | adaptation | compression | annotation | seed | collection | translation. Default: original."),
-    license: z.string().optional().describe("Default: CC BY 4.0"),
+    license: z.string()
+      .describe('Required. The license this object is released under, e.g. "CC BY 4.0", "CC0 1.0" or "All rights reserved". KNOBE records it; it does not choose one. For knobe_transform, the original\'s license governs whether the derivative is authorized: check knobe_permits first.'),
     privacy_level: z.string().optional()
       .describe("Canonical: public | internal | sensitive | restricted. Default: public."),
     quarantine_status: z.string().optional()
@@ -274,7 +275,7 @@ export async function buildServer() {
       title: a.title,
       summary: a.summary,
       ...(a.content_type ? { content_type: a.content_type } : {}),
-      ...(a.license ? { license: a.license } : {}),
+      license: a.license,   // passed as given: the engine refuses a blank one
       ...(a.privacy_level ? { privacy_level: a.privacy_level } : {}),
       ...(a.quarantine_status ? { quarantine_status: a.quarantine_status } : {}),
       ...(attribution ? { attribution } : {}),
@@ -289,10 +290,11 @@ export async function buildServer() {
   server.registerTool("knobe_create", {
     title: "Create and seal a KNOBE",
     description:
-      "Author a new KNOBE: assemble the payload (spec v1 required fields with "
-      + "sensible defaults), compute the §5 canonical SHA-256 seal, and emit the "
-      + "complete .knobe.md file. The result is self-verified before it is "
-      + "returned — this tool cannot emit a file that fails verification. "
+      "Author a new KNOBE: assemble the payload (you supply title, summary and "
+      + "license; every other spec v1 required field has a default, and KNOBE "
+      + "never chooses a license), compute the §5 canonical SHA-256 seal, and "
+      + "emit the complete .knobe.md file. The result is self-verified before "
+      + "it is returned — this tool cannot emit a file that fails verification. "
       + "Optionally writes the file to output_path. The seal records the "
       + "declarations; it does not establish that they are true.",
     inputSchema: createShape,
@@ -319,7 +321,8 @@ export async function buildServer() {
       + "the derivative's sealed provenance. The original MUST verify — you cannot "
       + "chain from a broken seal. Declare what kind of transformation via "
       + "content_type (adaptation | compression | translation | synthesis | "
-      + "annotation). Whether a derivative is authorized is governed by the "
+      + "annotation). The derivative's license is required and is not inherited "
+      + "from the original. Whether a derivative is authorized is governed by the "
       + "original's sealed terms (check knobe_permits); this tool records lineage, "
       + "it does not grant permission.",
     inputSchema: {

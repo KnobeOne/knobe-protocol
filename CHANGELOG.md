@@ -12,6 +12,42 @@ The protocol itself is frozen at v1.0 (see [GOVERNANCE.md](GOVERNANCE.md)); entr
 
 ## Post-freeze updates (non-normative)
 
+### Unreleased
+
+- A license is now required to create or derive an object; the engine
+  no longer chooses one. `createKnobe()` sealed `CC BY 4.0` whenever no
+  license was given, and `transformKnobe()` passed none on, so a
+  derivative of an "All rights reserved" original was sealed as
+  `CC BY 4.0`. Both now refuse a missing, non-string or blank license.
+  `transformKnobe()` does not inherit the original's license: its
+  refusal names the original's sealed license, which governs whether
+  the derivative is authorized, and asks for the derivative's own. An
+  explicit license is sealed exactly as before, byte for byte.
+  `knobe-mcp`: `license` is a required input of `knobe_create` and
+  `knobe_transform`. Studio: the license field is required in Create
+  (now shown outside "All fields"), Transform and Adapt; Journey and the
+  cohort receipt, which sealed "All rights reserved" without asking, now
+  ask for a license (loading a journey for editing fills in its sealed
+  license). The instructor quick-start and TA guide name the new field;
+  the downloadable `knobe-instructor-kit.zip` still carries the earlier
+  guides.
+- `permits()` closes three false permits. Spelled-out Creative Commons
+  names carry their terms: NoDerivatives (or NoDerivs, Non-Derivative,
+  or ND beside an underscore) blocks derivation, and Attribution,
+  NonCommercial and ShareAlike add the same obligations as BY, NC and
+  SA. A negated permissive name ("Not in the public domain", "not
+  licensed under Creative Commons", "non-CC") grants nothing; the check
+  is linear in the license's length, so a long license cannot stall a
+  reader. A missing or non-string license is evaluated as no license
+  declared instead of being skipped. Each change makes an answer equal
+  or stricter, never looser. No verification result changes, and no
+  published file's answer loosens: a check of every tracked `.knobe.md`
+  file found no `permits()` answer that changed.
+- `knobe-core.licence.selftest.mjs` added and run in CI: each bug case
+  before and after the fix, the license wordings whose answers must not
+  change, a byte-for-byte check of an explicitly licensed file, and a
+  time limit on `permits()` for a 200,000-character license.
+
 ### 2026-11-10
 
 - `knobe-core.js` (all three copies) and the browser Lens no longer use
