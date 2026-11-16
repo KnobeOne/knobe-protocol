@@ -9,7 +9,7 @@ One plain-text file, called a journey. Its readable half is a syllabus-ready des
 ## Build the journey
 
 1. Open **knobe.org/studio** in any browser and choose the **Journey** tab.
-2. Fill in the course name, term, and your name.
+2. Fill in the course name, term, your name, and the license for the journey (for example All rights reserved or CC BY 4.0).
 3. Add a step for each stage of the assignment. For each step, set:
    - **Who seals it**: you, the student, a TA, or a peer reviewer.
    - **Kind of work**: reading, assignment spec, student writing, feedback, revision, and so on.

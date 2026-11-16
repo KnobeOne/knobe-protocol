@@ -25,8 +25,8 @@ no accounts, no state between calls.
 |------|--------------|
 | `knobe_verify` | Integrity and conformance verdict for a file or pasted text: the protocol's four states (`verified`, `verified-body-modified`, `failed`, `unreadable`), a separate conformance axis with each issue listed, both hashes, and `lens.py`'s exit code. |
 | `knobe_read` | An obligations-first read: the first content block is the sealed-context preamble (integrity verdict, provenance, license, trust posture, and the obligations that travel with the object), so an agent reads the conditions before the content. The second block carries the payload metadata and markdown body. |
-| `knobe_create` | Assemble and seal a new object from fields and a body. Required fields default per the engine; the sealed file self-verifies before it is returned, and can be written to a path (with an explicit `overwrite` flag guarding existing files). |
-| `knobe_transform` | Seal a derivative of a verified original. The derivative's `parents` field records the original's title and payload hash automatically; a broken seal cannot anchor a chain. |
+| `knobe_create` | Assemble and seal a new object from fields and a body. The caller supplies `title`, `summary` and `license`; every other required field defaults per the engine (KNOBE records a license; it does not choose one). The sealed file self-verifies before it is returned, and can be written to a path (with an explicit `overwrite` flag guarding existing files). |
+| `knobe_transform` | Seal a derivative of a verified original. The derivative's `parents` field records the original's title and payload hash automatically; a broken seal cannot anchor a chain. The derivative's `license` must be declared; it is not inherited from the original, whose license governs whether the derivative is authorized. |
 | `knobe_permits` | Evaluate a proposed action (`summarize`, `excerpt`, `translate`, `train`, `redistribute`, `publish`, `transform`, ...) against the object's own sealed terms. |
 
 ## Resources and prompt

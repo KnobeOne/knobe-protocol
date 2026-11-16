@@ -92,6 +92,7 @@ A `verified` result proves the payload is byte-identical to what was hashed at s
 ├── lens.py                Python reference verifier, no external dependencies
 ├── knobe-core.js          JavaScript sibling verifier and engine (Node ≥ 20.10 and browsers), no dependencies
 ├── knobe-core.selftest.mjs  Cross-checks knobe-core.js against lens.py over every vector and example
+├── knobe-core.licence.selftest.mjs  Checks license handling in createKnobe, transformKnobe and permits
 ├── test-vectors/          Nine conformance vectors, seventeen adversarial, seven interpretation
 ├── examples/              Sealed example KNOBEs (white paper, education chain, etc.)
 ├── site/studio/           Studio browser app (served at knobe.org/studio)
