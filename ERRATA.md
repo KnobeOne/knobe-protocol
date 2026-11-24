@@ -2,7 +2,7 @@
 
 KNOBE Protocol v1 is frozen: nothing here changes the file format, the required fields, the canonical hash rule, or the verification semantics. Under [GOVERNANCE.md](https://github.com/KnobeOne/knobe-protocol/blob/main/GOVERNANCE.md), the steward may publish errata, meaning clarifications that do not change the behavior of any conforming file or verifier. This document is that record.
 
-Each entry states a question raised in real implementation work, the authoritative answer, and where the answer is pinned by a published test vector. The questions behind E1 to E11 came from a verifier in Go built in July 2026 with an AI coding agent at the steward's direction, from the specification text, with lens.py consulted for ambiguous edge cases. It is steward-commissioned work, so not independent as GOVERNANCE.md defines independence. The questions were reported by the steward, and several were confirmed or refined by running that implementation against the reference verifiers. E12 was proposed in PR #12. Where a ruling is pinned by a vector in [`test-vectors/interpretation/`](https://github.com/KnobeOne/knobe-protocol/tree/main/test-vectors/interpretation), both reference implementations (`lens.py` and `knobe-core.js`) produced the expected result in agreement before the vector was published.
+Each entry states a question raised in real implementation work, the authoritative answer, and where the answer is pinned by a published test vector. The questions behind E1 to E11 came from a verifier in Go built in July 2026 with an AI coding agent at the steward's direction, from the specification text, with lens.py consulted for ambiguous edge cases. It is steward-commissioned work, so not independent as GOVERNANCE.md defines independence. The questions were reported by the steward, and several were confirmed or refined by running that implementation against the reference verifiers. E12 was proposed in PR #12. E13 and E14 were proposed in issue #22, from the two places where knobe-rs followed the specification text rather than `lens.py`. Where a ruling is pinned by a vector in [`test-vectors/interpretation/`](https://github.com/KnobeOne/knobe-protocol/tree/main/test-vectors/interpretation), both reference implementations (`lens.py` and `knobe-core.js`) produced the expected result in agreement before the vector was published.
 
 The rulings below are authoritative for v1. The published test vectors and their expected results are the arbiter of conformance. Where they leave a detail undecided, `lens.py` is canonical for serialization ambiguity under spec §5, and rulings for everything else are documented here; where observed reference behavior conflicts with explicit normative text, the ruling follows the specification and records the conflict.
 
@@ -114,6 +114,98 @@ under this ruling, checked across all 37 published files.
 
 **Pinned by:** `test-vectors/interpretation/nel-block-whitespace.knobe.md`
 (expected: unreadable · invalid).
+
+## E13. The frontmatter must declare `spec_version`
+
+**Question:** §3.1 says "At minimum, spec_version MUST appear in the
+frontmatter", and §10 requires a conforming file to "Begin with a YAML
+frontmatter block including spec_version." `lens.py` and `knobe-core.js`
+did not check this: a frontmatter with no `spec_version` line was
+`valid`, and an empty value was reported as an E5 mismatch against `''`.
+knobe-rs reported both as `invalid`.
+
+**Ruling:** The text is explicit, so the ruling follows it. This
+clarifies existing text and adds no rule. A frontmatter block that does
+not declare a non-empty `spec_version` makes the file nonconforming:
+`conformance: invalid`, with one issue saying the frontmatter does not
+declare `spec_version`. In detail:
+
+- A missing line, or an empty or whitespace-only value, quoted or not,
+  counts as not declared. It is reported once, with no E5 warning on top.
+- Quote characters around the value are stripped, so `spec_version: '1.0'`
+  and `spec_version: 1.0` both declare `1.0`.
+- The key must be written bare. A quoted key (`"spec_version": "1.0"`) is
+  valid YAML but does not count, so every verifier can use the same
+  line match. Its cost to the author is conformance only, never
+  integrity.
+
+This is a conformance check, not added verification. `status` and
+`body_verified` are unaffected, and the sealed payload's `spec_version`
+stays authoritative for verification semantics (E5).
+
+**Effect:** No file that verifies today stops verifying. Only the
+conformance result changes, from `valid` or `warnings` to `invalid`, and
+with it the exit code: `lens.py` exits 0 only for a verified file whose
+conformance is `valid` or `warnings`, so such a file now exits 1. No
+published vector or sealed example changes verdict. `lens.py`,
+`knobe-core.js` and the browser Lens gained the check. knobe-rs already
+behaved this way.
+
+**Pinned by:** `test-vectors/interpretation/frontmatter-no-spec-version.knobe.md`
+(expected: verified · omitted · invalid).
+
+## E14. Where the body starts
+
+**Question:** §6 defines the body as "the text immediately following the
+second line containing exactly --- (the closing delimiter of the YAML
+frontmatter)". `lens.py` requires the first line to be the opening `---`.
+knobe-rs counted `---` lines from the start of the file, whatever the
+first line was. So for a file with a line of text above its frontmatter,
+or with no frontmatter at all, knobe-rs took horizontal rules in the body
+for the frontmatter's delimiters and could report the body as modified
+when nobody had changed it.
+
+A related question was ruled with it. Both reference engines skipped one leading U+FEFF and trailing CRs when checking that
+frontmatter exists, but not when locating the body. So a byte-order mark
+before line 1, or an opening line of `---` followed by CRs, left a file
+verified and valid when it sealed no `body_hash` and unreadable when it
+did.
+
+**Ruling:** The opening delimiter is line 1. The closing delimiter is
+the next line that is exactly `---`. No verifier searches elsewhere. §6
+names the second line "the closing delimiter of the YAML frontmatter",
+and §3.1 requires the file to begin with that frontmatter. If line 1 is
+not the opening delimiter, the file has no frontmatter: `conformance` is
+`invalid`, and the file is `unreadable` only when the payload seals a
+`body_hash`, because there is no closing delimiter to locate the body
+from (§6). A file without a `body_hash` still verifies, as
+`adversarial/no-frontmatter-valid-payload.knobe.md` pins. A `---`
+horizontal rule after the closing delimiter is body content and is never
+taken for a delimiter.
+
+Frontmatter detection and body location apply the same test. One
+leading U+FEFF is skipped, and a delimiter line is `---` once its
+trailing CRs are removed. A file whose body is unchanged since sealing
+then verifies with `body_verified: yes`, whether or not it starts with a
+byte-order mark or carries trailing CRs on its delimiter lines.
+
+**Effect:** For line 1, `lens.py`, `knobe-core.js` and the browser Lens
+already located the body this way. knobe-rs changes to match. The BOM and
+trailing-CR tolerance changes one verdict, in the reference engines and
+the browser Lens: a file with a leading byte-order mark or a CR-terminated
+opening line that seals a `body_hash` is no longer `unreadable`. It is
+`verified` with `body_verified: yes` when its body is unchanged, and
+`verified-body-modified` when the body changed after sealing. No file
+that verifies today stops verifying, and no published vector or sealed
+example changes verdict.
+
+**Pinned by:** `test-vectors/interpretation/body-after-preamble.knobe.md`
+(expected: unreadable · — · invalid), and the positive control
+`test-vectors/interpretation/body-horizontal-rules.knobe.md` (expected:
+verified · yes · valid). The tolerance is pinned by
+`test-vectors/interpretation/leading-bom-body-hash.knobe.md` and
+`test-vectors/interpretation/opening-delimiter-trailing-cr.knobe.md`
+(expected for both: verified · yes · valid).
 
 ---
 

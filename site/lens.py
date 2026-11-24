@@ -221,10 +221,14 @@ def _find_body_start(pre):
     """Given the text before the last BEGIN marker, return the offset where the
     body begins: immediately after the closing '---' frontmatter line. Line-
     exact (a '---' must occupy its own line), so a '---' substring inside a
-    value is not mistaken for the delimiter. Returns None if no frontmatter."""
-    if not (pre.startswith('---\n') or pre.startswith('---\r\n')):
+    value is not mistaken for the delimiter. Returns None if no frontmatter.
+    One leading U+FEFF is skipped and trailing CRs on the opening line are
+    ignored, the same test parse_frontmatter applies (ERRATA E14)."""
+    off = 1 if pre.startswith('\ufeff') else 0
+    nl0 = pre.find('\n', off)
+    if nl0 == -1 or pre[off:nl0].rstrip('\r') != '---':
         return None
-    idx = pre.index('\n') + 1            # start of line 2
+    idx = nl0 + 1                        # start of line 2
     while True:
         nl = pre.find('\n', idx)
         line = pre[idx:nl] if nl != -1 else pre[idx:]
@@ -253,7 +257,12 @@ def check_conformance(payload, missing, fm_ok, fm_reason, fm_spec, block_count):
     #    frontmatter block; without it the file is not a conformant KNOBE.
     if not fm_ok:
         errors.append(f"YAML frontmatter missing or malformed: {fm_reason}")
-    elif (fm_spec is not None and isinstance(payload.get("spec_version"), str)
+    elif not fm_spec or not fm_spec.strip():
+        # E13: §3.1 requires the frontmatter to declare spec_version. A missing
+        # line, an empty or whitespace-only value (quoted or not), or a quoted
+        # key counts as not declared: one issue, and no E5 warning on top.
+        errors.append("YAML frontmatter does not declare spec_version (spec §3.1)")
+    elif (isinstance(payload.get("spec_version"), str)
           and fm_spec != payload.get("spec_version")):
         warnings.append(f"frontmatter spec_version {fm_spec!r} does not match "
                         f"sealed payload spec_version {payload.get('spec_version')!r}")

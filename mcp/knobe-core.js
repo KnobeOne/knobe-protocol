@@ -490,8 +490,12 @@ export function parseFrontmatter(raw) {
  * Line-exact. Returns null if no frontmatter. Port of _find_body_start().
  */
 function findBodyStart(pre) {
-  if (!(pre.startsWith("---\n") || pre.startsWith("---\r\n"))) return null;
-  let idx = pre.indexOf("\n") + 1; // start of line 2
+  // One leading U+FEFF is skipped and trailing CRs on the opening line are
+  // ignored, the same test parseFrontmatter applies (ERRATA E14).
+  const off = pre.startsWith("\ufeff") ? 1 : 0;
+  const nl0 = pre.indexOf("\n", off);
+  if (nl0 === -1 || pre.slice(off, nl0).replace(/\r+$/, "") !== "---") return null;
+  let idx = nl0 + 1; // start of line 2
   for (;;) {
     const nl = pre.indexOf("\n", idx);
     const line = nl !== -1 ? pre.slice(idx, nl) : pre.slice(idx);
@@ -589,7 +593,12 @@ function checkConformance(payload, missing, fmOk, fmReason, fmSpec, blockCount) 
   // 1. Frontmatter presence (independent of body_hash).
   if (!fmOk) {
     errors.push(`YAML frontmatter missing or malformed: ${fmReason}`);
-  } else if (fmSpec !== null && typeof payload.spec_version === "string"
+  } else if (!fmSpec || !fmSpec.trim()) {
+    // E13: §3.1 requires the frontmatter to declare spec_version. A missing
+    // line, an empty or whitespace-only value (quoted or not), or a quoted
+    // key counts as not declared: one issue, and no E5 warning on top.
+    errors.push("YAML frontmatter does not declare spec_version (spec §3.1)");
+  } else if (typeof payload.spec_version === "string"
              && fmSpec !== payload.spec_version) {
     warnings.push(`frontmatter spec_version ${pyRepr(fmSpec)} does not match `
                 + `sealed payload spec_version ${pyRepr(payload.spec_version)}`);

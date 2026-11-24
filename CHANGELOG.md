@@ -12,6 +12,47 @@ The protocol itself is frozen at v1.0 (see [GOVERNANCE.md](GOVERNANCE.md)); entr
 
 ## Post-freeze updates (non-normative)
 
+### 2026-11-23
+
+- E13 and E14 (#22): five interpretation vectors, the E13 check, and
+  BOM and trailing-CR tolerance in body location.
+  - `interpretation/frontmatter-no-spec-version.knobe.md` (verified ·
+    omitted · invalid) pins E13: the frontmatter must declare a
+    non-empty `spec_version`, written as a bare key.
+    `interpretation/body-after-preamble.knobe.md` (unreadable · — ·
+    invalid) pins E14: the opening delimiter is line 1 and nowhere else.
+    `interpretation/body-horizontal-rules.knobe.md` (verified · yes ·
+    valid) is E14's positive control: `---` rules in the body are body
+    content. `interpretation/leading-bom-body-hash.knobe.md` and
+    `interpretation/opening-delimiter-trailing-cr.knobe.md` (both
+    verified · yes · valid) pin the tolerance ruled with E14.
+  - `lens.py`, `knobe-core.js` (all three copies) and the browser Lens
+    report a frontmatter that does not declare `spec_version` as one
+    conformance issue, `YAML frontmatter does not declare spec_version
+    (spec §3.1)`. A missing line, an empty or whitespace-only value
+    (quoted or not) and a quoted key all count as not declared, with no
+    E5 mismatch warning on top. The browser Lens now strips every
+    surrounding quote character from the value, as `lens.py` and
+    `knobe-core.js` do. Only conformance changes, so such a file stays `verified`
+    but exits 1 instead of 0. No published vector or sealed example
+    changes verdict (checked across all 137 tracked `.knobe.md` files).
+    E14's line-1 rule needs no engine change: the reference engines
+    already locate the body from line 1.
+  - Body location in `lens.py`, `knobe-core.js` and the browser Lens now
+    applies the frontmatter check's test: one leading U+FEFF is skipped
+    and trailing CRs on the opening line are ignored. A file that seals
+    a `body_hash` and starts with a byte-order mark, or has `---` plus
+    CRs on line 1, is no longer unreadable. The browser Lens also strips
+    every trailing CR from delimiter lines, as the other two do. Across
+    all 140 tracked `.knobe.md` files this changes only the two demo
+    files made for it; no published vector or sealed example changes.
+  - `demo/e13-e14/`: eleven demo files showing each case where the
+    engines disagreed, the scripts that build them and the vectors, and
+    a table of results across `lens.py`, `knobe-core.js`, knobe-go and
+    knobe-rs.
+  - The cross-language corpus grows to 50 files; counts on the README,
+    `/lens`, `/implementations`, `/test-vectors` and `/mcp` updated.
+
 ### 2026-11-21
 
 - Site and documentation wording, and site tooling. No engine, verdict
